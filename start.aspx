@@ -15,7 +15,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="js/default.js"></script>
 <script>
-    // メニュークリック時の画面遷移  test
+    // メニュークリック時の画面遷移
     $(function () {
         $('ul li').off("click").on("click", function () {
             var arr = $(this).data('id');
