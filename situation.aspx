@@ -86,32 +86,38 @@
 
 <section>
 
-<h2>ＥＸＬ概況(工事中)</h2>
+<!-- 以下担当者は2022/1/18現在 -->
+<h2>ＥＸＬ概況</h2>
 <table class="ta2">
 <tr>
+    <!-- 担当：西浦SM -->
     <th data-id='["home","./booking_situation.aspx"]'><a href="#">コンテナ確保状況</a></th>
     <td><asp:Literal ID="Literal1" runat="server"></asp:Literal></td>
     <td><asp:Literal ID="Literal2" runat="server"></asp:Literal></td>
 </tr>
 <tr>
+    <!-- 担当：田邊G、尼嵜TL -->
     <th data-id='["home","./van_result.aspx"]'><a href="#">本社バンニング</a></th>
     <td><asp:Literal ID="Literal3" runat="server"></asp:Literal></td>
     <td><asp:Literal ID="Literal4" runat="server"></asp:Literal></td>
 </tr>
 <tr>
+    <!-- 担当：尼嵜TL -->
     <th data-id='["home","./4f_floor.aspx"]'><a href="#">４Ｆフロア状況</a></th>
     <td><asp:Literal ID="Literal5" runat="server"></asp:Literal></td>
     <td><asp:Literal ID="Literal6" runat="server"></asp:Literal></td>
 </tr>
 <tr>
+    <!-- 担当：名村TL -->
+    <th data-id='["home","./3f_konpo.aspx"]'><a href="#">３Ｆ梱包進捗状況</a></th>
+    <td><asp:Literal ID="Literal9" runat="server"></asp:Literal></td>
+    <td><asp:Literal ID="Literal10" runat="server"></asp:Literal></td>
+</tr>
+<tr>
+    <!-- 担当：田邊G -->
     <th data-id='["home","./eed.aspx"]'><a href="#">EED即納状況</a></th>
     <td><asp:Literal ID="Literal7" runat="server"></asp:Literal></td>
     <td><asp:Literal ID="Literal8" runat="server"></asp:Literal></td>
-</tr>
-<tr>
-    <th>　</th>
-    <td>　</td>
-    <td>　</td>
 </tr>
 <tr>
     <th>　</th>
@@ -129,7 +135,6 @@
 
 <div class="box1">
     <h2 class="mb10">ＥＸＬ概況</h2>
-    <!-- <asp:Label class="lblSituation" runat="server" Text="No Good" ></asp:Label>　-->
     <asp:Image class="imgOKNG" runat="server" src="images/NGtouka.png" style="margin-top:8px;margin-left:70px;" />
 </div>
 

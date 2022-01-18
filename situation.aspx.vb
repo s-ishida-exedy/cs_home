@@ -46,6 +46,8 @@ Partial Class cs_home
             Literal6.Text = "更新日時：" + dataread("UPDTIME_FLOOR")
             Literal7.Text = Trim(StrConv(dataread("EED"), VbStrConv.Wide))
             Literal8.Text = "更新日時：" + dataread("UPDTIME_EED")
+            Literal9.Text = Trim(StrConv(dataread("THIRD_KONPO"), VbStrConv.Wide))
+            Literal10.Text = "更新日時：" + dataread("UPDTIME_KONPO")
         End While
 
         'クローズ処理 
