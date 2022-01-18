@@ -26,7 +26,6 @@
                     return false;
                 }
             } else {
-                //window.alert('koko3');
                 window.location.href = './test.aspx?id=' + encodeURIComponent(arr[1]);
                 return false;
             };
