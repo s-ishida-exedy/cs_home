@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+
+<status>
+<status value="01" text="未" />
+<status value="02" text="済" />
+<status value="03" text="対象ﾅｼ" />
+<status value="04" text="ｷｬﾝｾﾙ" />
+<status value="09" text="再発給" />
+</status>
