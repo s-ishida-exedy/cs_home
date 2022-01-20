@@ -71,9 +71,9 @@ Partial Class cs_home
 
 
 
-                e.Row.Cells(5).Text = wday2
+                e.Row.Cells(6).Text = wday2
 
-                Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
+                Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
                 Dim ts1 As New TimeSpan(cno, 0, 0, 0)
                 Dim dt2 As DateTime = dt1 + ts1
 
@@ -84,11 +84,11 @@ Partial Class cs_home
 
                     e.Row.BackColor = Drawing.Color.Salmon
 
-                    If (e.Row.Cells(10).Text.Length = 6) And dt3 < dt2 Then
+                    If (e.Row.Cells(11).Text.Length = 6) And dt3 < dt2 Then
 
-                        e.Row.Cells(10).Text = "AC要"
-                        e.Row.Cells(10).BackColor = Drawing.Color.Red
-                        e.Row.Cells(10).ForeColor = Drawing.Color.White
+                        e.Row.Cells(11).Text = "AC要"
+                        e.Row.Cells(11).BackColor = Drawing.Color.Red
+                        e.Row.Cells(11).ForeColor = Drawing.Color.White
 
                     End If
 
@@ -96,7 +96,7 @@ Partial Class cs_home
                 End If
 
 
-                e.Row.Cells(5).Text = e.Row.Cells(5).Text & " (" & dt3.ToString("ddd") & ")"
+                e.Row.Cells(6).Text = e.Row.Cells(6).Text & " (" & dt3.ToString("ddd") & ")"
 
 
             End If
@@ -110,7 +110,7 @@ Partial Class cs_home
 
 
 
-        strSQL = "SELECT LCLFIN_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLFIN_INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
+        strSQL = "SELECT LCLFIN_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLFIN_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -124,7 +124,7 @@ Partial Class cs_home
 
 
             '出荷手配状況
-            If Left(e.Row.Cells(3).Text, 4) = strinv Then
+            If Left(e.Row.Cells(4).Text, 4) = strinv Then
                 e.Row.BackColor = Drawing.Color.LightBlue
             End If
 
@@ -136,7 +136,7 @@ Partial Class cs_home
 
 
 
-        strSQL = "SELECT LCLARGD_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLARGD_INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
+        strSQL = "SELECT LCLARGD_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLARGD_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
 
 
         'ＳＱＬコマンド作成 
@@ -150,10 +150,10 @@ Partial Class cs_home
             strinv += dataread("LCLARGD_INVNO")
 
             '書類作成状況
-            If Left(e.Row.Cells(3).Text, 4) = strinv Then
+            If Left(e.Row.Cells(4).Text, 4) = strinv Then
 
-                If e.Row.Cells(10).Text = "AC要" Then
-                    e.Row.Cells(10).Text = " Booking依頼済み"
+                If e.Row.Cells(11).Text = "AC要" Then
+                    e.Row.Cells(11).Text = " Booking依頼済み"
                 End If
 
             End If
@@ -164,7 +164,7 @@ Partial Class cs_home
         dataread.Close()
         dbcmd.Dispose()
 
-        strSQL = "SELECT DOCFIN_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
+        strSQL = "SELECT DOCFIN_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
 
 
         'ＳＱＬコマンド作成 
@@ -178,7 +178,7 @@ Partial Class cs_home
             strinv += dataread("DOCFIN_INVNO")
 
             '書類作成状況
-            If Left(e.Row.Cells(3).Text, 4) = strinv Then
+            If Left(e.Row.Cells(4).Text, 4) = strinv Then
                 e.Row.BackColor = Drawing.Color.DarkGray
             End If
 
@@ -245,6 +245,8 @@ Partial Class cs_home
 
 
     End Sub
+
+
 
 
 End Class

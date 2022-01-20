@@ -23,12 +23,6 @@
         body {
             background-color: #ffffff;
         }
-        .auto-style4 {
-            text-align: left;
-            font-size:xx-large;
-            font-weight : 700;
-            width: 403px;
-        }
         A.sample1:link { color: blue;}
         A.sample1:visited { color: blue;}
         A.sample1:active { color: blue;}
@@ -36,6 +30,147 @@
         .auto-style6 {
             margin-right: 7px;
         }
+
+
+        table{
+          width: 100%;
+        }
+        th {
+          position: sticky;
+          top: 0;
+          z-index: 0;
+          background-color: #FFFFFF;
+          color: #000000;
+        }
+        .wrapper {
+          overflow: scroll;
+          height: 450px;
+        }
+
+
+
+
+
+        h2 {
+          position: relative;
+          overflow: hidden;
+          padding: 1.5rem 2rem 1.5rem 130px;
+          border: 2px solid #000;
+        }
+
+        h2:before {
+          position: absolute;
+          top: -150%;
+          left: -100px;
+          width: 200px;
+          height: 300%;
+          content: '';
+          -webkit-transform: rotate(25deg);
+          transform: rotate(25deg);
+          background: #000;
+        }
+
+        h2 span {
+          font-size: 40px;
+          font-size: 4rem;
+          position: absolute;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          display: block;
+          padding-top: 3px;
+          padding-left: 16px;
+          color: #fff;
+        }
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+
+a.btn--yellow.btn--border-dotted {
+  border: 3px dotted #000;
+}
+
+
+
+section {
+  max-width: 140px;
+  margin: 0 auto;
+}
+a.btn_07 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  padding: 0 25px;
+  color: #000;
+  font-size: 16px;
+  text-align: left;
+  text-decoration: none;
+  position: relative;
+  transition-duration: 0.2s;
+}
+a.btn_07:hover {
+  background: #000;
+  border: 1px solid #000;
+  color: #fff;
+}
+a.btn_07:before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 40px 50px;
+  border-color: transparent transparent #000 transparent;
+}
+a.btn_07 span {
+    position: absolute;
+    bottom: 12px;
+    right: 20px;
+    display: inline-block;
+}
+a.btn_07 span:before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -8px;
+}
+a.btn_07 span:after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border: 0;
+    border-top: 2px solid #000;
+    border-right: 2px solid #000;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    margin-top: -3px;
+}
+
     </style>
 <script>
     $(document).ready(function () {
@@ -77,12 +212,18 @@
     <div class="auto-style8">
         <table class="auto-style1" >
             <tr>
-                <td>
+
+    <td width="300" border="1" >
 
                     <font size="6"  >
-                    　 <b>LCL出荷準備進捗&nbsp;&nbsp;&nbsp;</b>
-                      </font>
+<%--        <h2><span>01</span>出荷案件管理</h2>--%>
+<b>LCL出荷準備進捗
+
+    </font>
                         </td>
+
+
+
 
                 <td>
 
@@ -98,21 +239,54 @@
 
                 </td>
 
-               <td>
+<td width="200">
 
-                </td>
+<font size="4"  >
+
+
+    <section>
+<a href="lcl_notcomfirmed.aspx?id={0}" class="btn_07">未確定案件<span></span></a>
+</section>
+
+
+</td>
 
             </tr>
 
         </table>
 
+
+
             <font size="2">
+
+
+                <div class="wrapper">
+<table class="sticky">
+<thead class="fixed">
+
+</thead>
+
+
+
+
+<tbody>
+
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="1300px" BackColor="White" BorderColor="#555555" BorderStyle="none" BorderWidth="3px" CellPadding="3" GridLines="Both">
 
 
-                <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="White"  />
+
+<HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
+<HeaderStyle CssClass="Freezing"></HeaderStyle>
 
                 <Columns>
+
+                                                        <asp:TemplateField>
+                    <ItemTemplate>
+
+                        <asp:CheckBox ID="cb" Checked="false" runat="server"  />
+
+                    </ItemTemplate>
+                </asp:TemplateField>
 
 
                     <asp:BoundField DataField="CONSIGNEE" HeaderText="客先" SortExpression="CONSIGNEE" />
@@ -139,12 +313,13 @@
                 <SortedDescendingHeaderStyle BackColor="#000065" />
             </asp:GridView>
 
+    </tbody>
+</table>
+</div>
         </font>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CONSIGNEE], [CUST_CD], [DESTINATION], [INVOICE_NO], [CUT_DATE], [CUT_DATE]AS CUT_DATE2, [ETD], [ETA], [LCL_QTY], [OFFICIAL_QUOT],[BOOKING_NO] FROM [T_BOOKING] WHERE [LCL_QTY] like '%M3%' AND [CUT_DATE] <>'' AND [CUT_DATE] > GETDATE()-1 AND [CUT_DATE] < GETDATE()+45  ORDER BY [CUT_DATE]  "></asp:SqlDataSource>
-    
-        <br />
-    
+
     </div>
         
 
