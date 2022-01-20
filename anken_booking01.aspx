@@ -315,11 +315,16 @@ a.btn_07 span {
         </font>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN]  ORDER BY CUT_DATE"></asp:SqlDataSource>
-    
-        <br />
+
 
     </div>
                                  </asp:Panel>   
+
+    <!--/#contents2-->
+
+<!--ページの上部に戻る「↑」ボタン-->
+<p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
+
     </form>
 
 </body>
