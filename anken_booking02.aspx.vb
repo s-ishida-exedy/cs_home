@@ -188,5 +188,9 @@ Partial Class yuusen
 
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
+                GridView1.DataBind()
+
+    End Sub
 End Class

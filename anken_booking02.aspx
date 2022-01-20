@@ -197,13 +197,17 @@ a.btn_07 span {
                         </td>
 
 
-                <td width="200" border="1" >
+<td width="100" border="1" >
 
+<asp:Button class="btn-radius-gradient-wrap"  ID="Button2" runat="server" Text="登録" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+   
+</td>
 
-             <asp:Button class="btn-radius-gradient-wrap"  ID="Button2" runat="server" Text="登録" Width="150px" Height="40px" AutoPostBack="True" Font-Size="13px" />
-    </td>
+<td width="100" border="1" >
 
+<asp:Button class="btn-radius-gradient-wrap"  ID="Button1" runat="server" Text="画面更新" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
+</td>
                 <td width="500">
 
 
@@ -347,11 +351,15 @@ a.btn_07 span {
         </font>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE FLG01 = '1' ORDER BY CUT_DATE"></asp:SqlDataSource>
-    
-        <br />
+
 
     </div>
                                  </asp:Panel>   
+
+    <!--/#contents2-->
+
+<!--ページの上部に戻る「↑」ボタン-->
+<p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
     </form>
 
 </body>
