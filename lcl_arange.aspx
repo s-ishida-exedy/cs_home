@@ -239,10 +239,20 @@ a.btn_07 span:after {
 
                 </td>
 
+
+                    <td width="100" border="1" >
+
+<asp:Button class="btn-radius-gradient-wrap"  ID="Button1" runat="server" Text="追加" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+
+</td>
+
 <td width="200">
 
 <font size="4"  >
 
+        <section>
+<a href="lcl_tenkai.aspx?id={0}" class="btn_07">展開済案件<span></span></a>
+</section>
 
     <section>
 <a href="lcl_notcomfirmed.aspx?id={0}" class="btn_07">未確定案件<span></span></a>
@@ -271,7 +281,7 @@ a.btn_07 span:after {
 
 <tbody>
 
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="1300px" BackColor="White" BorderColor="#555555" BorderStyle="none" BorderWidth="3px" CellPadding="3" GridLines="Both">
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="1500px" BackColor="White" BorderColor="#555555" BorderStyle="none" BorderWidth="3px" CellPadding="3" GridLines="Both">
 
 
 
