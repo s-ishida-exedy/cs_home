@@ -192,6 +192,28 @@ Partial Class cs_home
         'cnn.Close()
         'cnn.Dispose()
 
+        e.Row.Cells(0).Width = 50
+        e.Row.Cells(1).Width = 70
+        e.Row.Cells(2).Width = 100
+        e.Row.Cells(3).Width = 70
+        e.Row.Cells(4).Width = 70
+        e.Row.Cells(5).Width = 70
+        e.Row.Cells(6).Width = 70
+        e.Row.Cells(7).Width = 70
+        e.Row.Cells(8).Width = 50
+        e.Row.Cells(9).Width = 60
+        e.Row.Cells(10).Width = 60
+        e.Row.Cells(11).Width = 120
+        e.Row.Cells(12).Width = 10
+        e.Row.Cells(13).Width = 120
+        e.Row.Cells(14).Width = 10
+        e.Row.Cells(15).Width = 150
+        e.Row.Cells(15).Width = 300
+
+
+
+
+
     End Sub
 
     Protected Sub GridView1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.SelectedIndexChanged
@@ -241,6 +263,10 @@ Partial Class cs_home
         ''最終更新年月日を表示
         'Me.Label2.Text = Left(strDate, 4) & "/" & Mid(strDate, 5, 2) & "/" & Mid(strDate, 7, 2) _
         '     & " " & Mid(strDate, 9, 2) & ":" & Mid(strDate, 11, 2) & ":" & Mid(strDate, 13, 2) & " 更新"
+
+
+
+
 
 
 

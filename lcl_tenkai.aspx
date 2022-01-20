@@ -217,7 +217,8 @@ a.btn_07 span:after {
 
 <font size="6"  >
 <%--        <h2><span>01</span>出荷案件管理</h2>--%>
-LCL出荷-展開用-
+
+<b>LCL出荷-展開用</b>
 
 </font>
 </td>
@@ -245,7 +246,7 @@ LCL出荷-展開用-
 
 
 <section>
-<a href="lcl_notcomfirmed.aspx?id={0}" class="btn_07">未確定案件<span></span></a>
+<a href="lcl_arange.aspx?id={0}" class="btn_07">手配状況<span></span></a>
 </section>
 
 
@@ -271,7 +272,7 @@ LCL出荷-展開用-
 
 <tbody>
 
-<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" width="2000" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width = "3200px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
 
 
 
@@ -295,9 +296,9 @@ LCL出荷-展開用-
 
 <%--<asp:BoundField DataField="CONSIGNEE" HeaderText="CONSIGNEE" SortExpression="CONSIGNEE" />
 <asp:BoundField DataField="DESTINATION" HeaderText="DESTINATION" SortExpression="DESTINATION" />--%>
-<asp:BoundField DataField="CUST" HeaderText="客先" SortExpression="CUST" />
+<asp:BoundField DataField="CUST" HeaderText="客先" SortExpression="CUST"　 />
 <asp:BoundField DataField="INVOICE_NO" HeaderText="IN_NO" SortExpression="INVOICE_NO" />
-<asp:BoundField DataField="BOOKING_NO" HeaderText="BKG_NO" SortExpression="BOOKING_NO" />
+<asp:BoundField DataField="BOOKING_NO" HeaderText="BKG_NO" SortExpression="BOOKING_NO" ReadOnly="true" />
 <asp:BoundField DataField="OFFICIAL_QUOT" HeaderText="TATENE" SortExpression="OFFICIAL_QUOT"  ReadOnly="true" />
 <asp:BoundField DataField="CUT_DATE" HeaderText="カット日" SortExpression="CUT_DATE" ReadOnly="true" />
 <asp:BoundField DataField="ETD" HeaderText="出港日" SortExpression="ETD" ReadOnly="true" />
@@ -305,12 +306,12 @@ LCL出荷-展開用-
 <asp:BoundField DataField="LCL_SIZE" HeaderText="M3" SortExpression="LCL_SIZE" ReadOnly="true" />
 <asp:BoundField DataField="WEIGHT" HeaderText="重量" SortExpression="WEIGHT" />
 <asp:BoundField DataField="QTY" HeaderText="荷量" SortExpression="QTY" />
-<asp:BoundField DataField="PICKUP01" HeaderText="引取日" SortExpression="PICKUP01" />
-<asp:BoundField DataField="PICKUP02" HeaderText="" SortExpression="PICKUP02" />
-<asp:BoundField DataField="MOVEIN01" HeaderText="搬入日" SortExpression="MOVEIN01" />
-<asp:BoundField DataField="MOVEIN02" HeaderText="" SortExpression="MOVEIN02" />
+<asp:BoundField DataField="PICKUP01" HeaderText="引取希望日" SortExpression="PICKUP01"  ReadOnly="true"/>
+<asp:BoundField DataField="PICKUP02" HeaderText="" SortExpression="PICKUP02" ReadOnly="true" />
+<asp:BoundField DataField="MOVEIN01" HeaderText="搬入希望日" SortExpression="MOVEIN01"  ReadOnly="true"/>
+<asp:BoundField DataField="MOVEIN02" HeaderText="" SortExpression="MOVEIN02"  ReadOnly="true"/>
 <asp:BoundField DataField="OTHERS01" HeaderText="備考" SortExpression="OTHERS01" />
-<asp:BoundField DataField="PICKINPLACE" HeaderText="搬入先" SortExpression="PICKINPLACE" />
+<asp:BoundField DataField="PICKINPLACE" HeaderText="搬入先" SortExpression="PICKINPLACE" ReadOnly="true" />
 <%--<asp:BoundField DataField="FLG01" HeaderText="搬入先" SortExpression="FLG01" />--%>
 <%--<asp:BoundField DataField="FLG02" HeaderText="FLG02" SortExpression="FLG02" />
 <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
@@ -337,8 +338,8 @@ LCL出荷-展開用-
 </div>
 </font>
 
-<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CONSIGNEE], [DESTINATION], [CUST], [INVOICE_NO], [BOOKING_NO], [OFFICIAL_QUOT], [CUT_DATE], [ETD], [ETA], [LCL_SIZE], [WEIGHT], [QTY], [PICKUP01], [PICKUP02], [MOVEIN01], [MOVEIN02], [OTHERS01], [FLG01], [FLG02], [FLG03], [FLG04], [FLG05],[PICKINPLACE] FROM [T_EXL_LCLTENKAI]"
-    UpdateCommand="UPDATE T_EXL_LCLTENKAI SET [CUST]=@CUST, [INVOICE_NO]=@INVOICE_NO, [BOOKING_NO]=@BOOKING_NO, [WEIGHT]=@WEIGHT, [QTY]=@QTY, [PICKUP01]=@PICKUP01, [PICKUP02]=@PICKUP02, [MOVEIN01]=@MOVEIN01, [MOVEIN02]=@MOVEIN02, [OTHERS01]=@OTHERS01, [PICKINPLACE]=@PICKINPLACE WHERE BOOKING_NO=@BOOKING_NO"
+<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CONSIGNEE], [DESTINATION], [CUST], [INVOICE_NO], [BOOKING_NO], [OFFICIAL_QUOT], [CUT_DATE], [ETD], [ETA], [LCL_SIZE], [WEIGHT], [QTY], [PICKUP01], [PICKUP02], [MOVEIN01], [MOVEIN02], [OTHERS01], [FLG01], [FLG02], [FLG03], [FLG04], [FLG05],[PICKINPLACE] FROM [T_EXL_LCLTENKAI] WHERE FLG03 = '1'"
+    UpdateCommand="UPDATE T_EXL_LCLTENKAI SET [CUST]=@CUST, [INVOICE_NO]=@INVOICE_NO, [WEIGHT]=@WEIGHT, [QTY]=@QTY, [OTHERS01]=@OTHERS01 WHERE BOOKING_NO=@BOOKING_NO"
     ></asp:SqlDataSource>
     
     
