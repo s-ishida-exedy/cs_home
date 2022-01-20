@@ -469,6 +469,11 @@ a.btn_07 span {
         </asp:SqlDataSource>
     
     </div>
+    
+    <!--/#contents2-->
+
+<!--ページの上部に戻る「↑」ボタン-->
+<p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
         
     </form>
 
