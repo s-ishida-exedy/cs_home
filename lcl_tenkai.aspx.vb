@@ -8,17 +8,17 @@ Partial Class cs_home
 
     Private Sub GridView1_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
 
-        ''最終更新年月日取得
-        'Dim dataread As SqlDataReader
-        'Dim dbcmd As SqlCommand
-        'Dim strSQL As String
-        'Dim strinv As String
-        'Dim cno As Long
-        'Dim wno As Long
-        'Dim wday As String
-        'Dim wday2 As String
+        '最終更新年月日取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String
+        Dim strinv As String
+        Dim cno As Long
+        Dim wno As Long
+        Dim wday As String
+        Dim wday2 As String
 
-        'Dim dt1 As DateTime = DateTime.Now
+        Dim dt1 As DateTime = DateTime.Now.ToShortDateString
 
 
 
@@ -67,46 +67,49 @@ Partial Class cs_home
 
 
 
-        '    If e.Row.RowType = DataControlRowType.DataRow Then
+        If e.Row.RowType = DataControlRowType.DataRow Then
 
 
 
-        '        e.Row.Cells(6).Text = wday2
+            '        e.Row.Cells(6).Text = wday2
 
-        '        Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
-        '        Dim ts1 As New TimeSpan(cno, 0, 0, 0)
-        '        Dim dt2 As DateTime = dt1 + ts1
-
-
-        '        If dt3 < dt2 Then
+            '        Dim ts1 As New TimeSpan(cno, 0, 0, 0)
+            '        Dim dt2 As DateTime = dt1 + ts1
 
 
+            If e.Row.Cells(1).Text = dt1.ToShortDateString Then
 
-        '            e.Row.BackColor = Drawing.Color.Salmon
+                e.Row.Cells(1).BackColor = Drawing.Color.Salmon
+                e.Row.Cells(2).BackColor = Drawing.Color.Salmon
 
-        '            If (e.Row.Cells(11).Text.Length = 6) And dt3 < dt2 Then
-
-        '                e.Row.Cells(11).Text = "AC要"
-        '                e.Row.Cells(11).BackColor = Drawing.Color.Red
-        '                e.Row.Cells(11).ForeColor = Drawing.Color.White
-
-        '            End If
+            End If
 
 
-        '        End If
+            '            e.Row.BackColor = Drawing.Color.Salmon
+
+            '            If (e.Row.Cells(11).Text.Length = 6) And dt3 < dt2 Then
+
+            '                e.Row.Cells(11).Text = "AC要"
+            '                e.Row.Cells(11).BackColor = Drawing.Color.Red
+            '                e.Row.Cells(11).ForeColor = Drawing.Color.White
+
+            '            End If
 
 
-        '        e.Row.Cells(6).Text = e.Row.Cells(6).Text & " (" & dt3.ToString("ddd") & ")"
+            '        End If
 
 
-        '    End If
+            '        e.Row.Cells(6).Text = e.Row.Cells(6).Text & " (" & dt3.ToString("ddd") & ")"
 
 
-        '    'クローズ処理 
-        '    dataread.Close()
-        '    dbcmd.Dispose()
+            '    End If
 
-        'End If
+
+            '    'クローズ処理 
+            '    dataread.Close()
+            '    dbcmd.Dispose()
+
+        End If
 
 
 
@@ -194,24 +197,28 @@ Partial Class cs_home
 
         e.Row.Cells(0).Width = 50
         e.Row.Cells(1).Width = 70
-        e.Row.Cells(2).Width = 100
+        e.Row.Cells(3).Width = 120
         e.Row.Cells(3).Width = 70
-        e.Row.Cells(4).Width = 70
+        e.Row.Cells(4).Width = 100
         e.Row.Cells(5).Width = 70
         e.Row.Cells(6).Width = 70
         e.Row.Cells(7).Width = 70
-        e.Row.Cells(8).Width = 50
-        e.Row.Cells(9).Width = 60
-        e.Row.Cells(10).Width = 60
-        e.Row.Cells(11).Width = 120
-        e.Row.Cells(12).Width = 10
+        e.Row.Cells(8).Width = 70
+        e.Row.Cells(9).Width = 70
+        e.Row.Cells(10).Width = 50
+        e.Row.Cells(11).Width = 60
+        e.Row.Cells(12).Width = 60
         e.Row.Cells(13).Width = 120
         e.Row.Cells(14).Width = 10
-        e.Row.Cells(15).Width = 150
-        e.Row.Cells(15).Width = 300
+        e.Row.Cells(15).Width = 120
+        e.Row.Cells(16).Width = 10
+        e.Row.Cells(17).Width = 120
 
 
 
+        e.Row.Cells(5).Visible = False
+        e.Row.Cells(6).Visible = False
+        e.Row.Cells(9).Visible = False
 
 
     End Sub

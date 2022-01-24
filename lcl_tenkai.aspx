@@ -34,20 +34,22 @@
 
         table{
           width: 100%;
+
+
+
         }
         th {
           position: sticky;
+          text-align:left;
           top: 0;
           z-index: 0;
-          background-color: #FFFFFF;
+          background-color: #B0E0E6;
           color: #000000;
         }
         .wrapper {
           overflow: scroll;
           height: 450px;
         }
-
-
 
 
 
@@ -83,92 +85,57 @@
           color: #fff;
         }
 
-*,
-*:before,
-*:after {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
+        .simple_square_btn4 {
+	display: block;
+	position: relative;
+	width: 160px;
+	padding: 0.1em;
+	text-align: center;
+	text-decoration: none;
+	color: #1B1B1B;
+	background: #fff;
+	border-radius: 30px;
+	border:1px solid #1B1B1B;
+	-webkit-backface-visibility: hidden; 
+	-moz-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
-
-html {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  font-size: 62.5%;
+.simple_square_btn4:hover {
+	 cursor: pointer;
+	 text-decoration: none;
+	-webkit-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	-moz-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
-
-
-a.btn--yellow.btn--border-dotted {
-  border: 3px dotted #000;
+@-webkit-keyframes simple_square_btn4{
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(0.85);
+            transform: scale(0.85);
+  }
 }
-
-
-
-section {
-  max-width: 140px;
-  margin: 0 auto;
+@-moz-keyframes simple_square_btn4{
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(0.85);
+            transform: scale(0.85);
+  }
 }
-a.btn_07 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  border: 1px solid #000;
-  box-sizing: border-box;
-  width: 100%;
-  height: 40px;
-  padding: 0 25px;
-  color: #000;
-  font-size: 16px;
-  text-align: left;
-  text-decoration: none;
-  position: relative;
-  transition-duration: 0.2s;
-}
-a.btn_07:hover {
-  background: #000;
-  border: 1px solid #000;
-  color: #fff;
-}
-a.btn_07:before {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 0 40px 50px;
-  border-color: transparent transparent #000 transparent;
-}
-a.btn_07 span {
-    position: absolute;
-    bottom: 12px;
-    right: 20px;
-    display: inline-block;
-}
-a.btn_07 span:before {
-    content: '';
-    width: 16px;
-    height: 16px;
-    background: #ffffff;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    margin-top: -8px;
-}
-a.btn_07 span:after {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border: 0;
-    border-top: 2px solid #000;
-    border-right: 2px solid #000;
-    transform: rotate(45deg);
-    position: absolute;
-    top: 50%;
-    left: 4px;
-    margin-top: -3px;
+@keyframes simple_square_btn4 {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(0.85);
+            transform: scale(0.85);
+  }
 }
 
     </style>
@@ -209,57 +176,40 @@ a.btn_07 span:after {
  <!-- #Include File="header.html" -->
        
 <div id="contents2" class="inner2">
-<div class="auto-style8">
+<div >
 <table class="auto-style1" >
 <tr>
 
 <td width="300" border="1" >
 
 <font size="6"  >
-<%--        <h2><span>01</span>出荷案件管理</h2>--%>
-
 <b>LCL出荷-展開用</b>
 
 </font>
 </td>
 
-
-
-
 <td>
-
-<%--                    <font size="2" style="background-color:DarkGray" Color="White" ><b>・グレー:書類作成済み（書類を作成し海貨業者へ送付済み）</b><br></font>
-<font size="2" style="background-color:LightBlue"   ><b>・ブルー:手配依頼済み（引取り手配などが済んでいる）</b><br></font>
-<font size="2" style="background-color:Salmon"  ><b>・レッド:これから手配が必要（当日～1週先の金曜日）</b></font><font size="2"> </font><br>--%>
 
 </td>
 
 <td>
-
-<%--                    <font size="2" style="background-color:red" Color="White" ><b>・AC要:BOOKING未確定のため海貨御者に連絡する必要あり<br><br><br></b></font>--%>
 
 </td>
 
 <td width="200">
 
-<font size="4"  >
+<font size="2"  >
 
+<a href="lcl_arange.aspx?id={0}" class="simple_square_btn4">全案件へ</a>
 
-<section>
-<a href="lcl_arange.aspx?id={0}" class="btn_07">手配状況<span></span></a>
-</section>
-
-
+</font>
 </td>
 
 </tr>
 
 </table>
 
-
-
 <font size="2">
-
 
 <div class="wrapper">
 <table class="sticky">
@@ -268,36 +218,34 @@ a.btn_07 span:after {
 </thead>
 
 
-
-
 <tbody>
 
-<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width = "3200px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
-
-
+<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width = "2300px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
 
 <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
 
 
 <Columns>
 
-            <asp:TemplateField HeaderText="EDITMENU">
-          <ItemTemplate>
-            <asp:Button runat="server" CommandName="Edit" Text="編集" />
-          </ItemTemplate>
+<asp:TemplateField HeaderText="EDITMENU">
+<ItemTemplate>
+<asp:Button runat="server" CommandName="Edit" Text="編集" />
+</ItemTemplate>
 
-                          <EditItemTemplate>
-                                          <asp:Button runat="server" CommandName="Update" Text="保存" />
-              <asp:Button runat="server" CommandName="Cancel" Text="戻る" />
+<EditItemTemplate>
+<asp:Button runat="server" CommandName="Update" Text="保存" />
+<asp:Button runat="server" CommandName="Cancel" Text="戻る" />
 
-          </EditItemTemplate>
-        </asp:TemplateField>
+</EditItemTemplate>
+</asp:TemplateField>
 
 
 <%--<asp:BoundField DataField="CONSIGNEE" HeaderText="CONSIGNEE" SortExpression="CONSIGNEE" />
 <asp:BoundField DataField="DESTINATION" HeaderText="DESTINATION" SortExpression="DESTINATION" />--%>
+<asp:BoundField DataField="FLG05" HeaderText="更新日" SortExpression="FLG05" ReadOnly="true" />
+<asp:BoundField DataField="FLG04" HeaderText="更新メモ" SortExpression="FLG04"　ReadOnly="true" />
 <asp:BoundField DataField="CUST" HeaderText="客先" SortExpression="CUST"　 />
-<asp:BoundField DataField="INVOICE_NO" HeaderText="IN_NO" SortExpression="INVOICE_NO" />
+<asp:BoundField DataField="INVOICE_NO" HeaderText="IN_NO" SortExpression="INVOICE_NO" ReadOnly="true" />
 <asp:BoundField DataField="BOOKING_NO" HeaderText="BKG_NO" SortExpression="BOOKING_NO" ReadOnly="true" />
 <asp:BoundField DataField="OFFICIAL_QUOT" HeaderText="TATENE" SortExpression="OFFICIAL_QUOT"  ReadOnly="true" />
 <asp:BoundField DataField="CUT_DATE" HeaderText="カット日" SortExpression="CUT_DATE" ReadOnly="true" />
@@ -310,16 +258,11 @@ a.btn_07 span:after {
 <asp:BoundField DataField="PICKUP02" HeaderText="" SortExpression="PICKUP02" ReadOnly="true" />
 <asp:BoundField DataField="MOVEIN01" HeaderText="搬入希望日" SortExpression="MOVEIN01"  ReadOnly="true"/>
 <asp:BoundField DataField="MOVEIN02" HeaderText="" SortExpression="MOVEIN02"  ReadOnly="true"/>
-<asp:BoundField DataField="OTHERS01" HeaderText="備考" SortExpression="OTHERS01" />
+<asp:BoundField DataField="OTHERS01" HeaderText="完了報告希望" SortExpression="OTHERS01" ReadOnly="true" />
 <asp:BoundField DataField="PICKINPLACE" HeaderText="搬入先" SortExpression="PICKINPLACE" ReadOnly="true" />
 <%--<asp:BoundField DataField="FLG01" HeaderText="搬入先" SortExpression="FLG01" />--%>
 <%--<asp:BoundField DataField="FLG02" HeaderText="FLG02" SortExpression="FLG02" />
-<asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
-<asp:BoundField DataField="FLG04" HeaderText="FLG04" SortExpression="FLG04" />
-<asp:BoundField DataField="FLG05" HeaderText="FLG05" SortExpression="FLG05" />--%>
-
-
-
+<asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />--%>
 
 
 </Columns>
@@ -339,9 +282,9 @@ a.btn_07 span:after {
 </font>
 
 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CONSIGNEE], [DESTINATION], [CUST], [INVOICE_NO], [BOOKING_NO], [OFFICIAL_QUOT], [CUT_DATE], [ETD], [ETA], [LCL_SIZE], [WEIGHT], [QTY], [PICKUP01], [PICKUP02], [MOVEIN01], [MOVEIN02], [OTHERS01], [FLG01], [FLG02], [FLG03], [FLG04], [FLG05],[PICKINPLACE] FROM [T_EXL_LCLTENKAI] WHERE FLG03 = '1'"
-    UpdateCommand="UPDATE T_EXL_LCLTENKAI SET [CUST]=@CUST, [INVOICE_NO]=@INVOICE_NO, [WEIGHT]=@WEIGHT, [QTY]=@QTY, [OTHERS01]=@OTHERS01 WHERE BOOKING_NO=@BOOKING_NO"
-    ></asp:SqlDataSource>
-    
+UpdateCommand="UPDATE T_EXL_LCLTENKAI SET [CUST]=@CUST, [WEIGHT]=@WEIGHT, [QTY]=@QTY  WHERE BOOKING_NO=@BOOKING_NO"
+></asp:SqlDataSource>
+ 
     
 </div>
         
