@@ -99,58 +99,6 @@ Partial Class yuusen
     End Sub
 
 
-    Protected Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
-
-        '接続文字列の作成
-        Dim ConnectionString As String = String.Empty
-        'SQL Server認証
-        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
-        'SqlConnectionクラスの新しいインスタンスを初期化
-        Dim cnn = New SqlConnection(ConnectionString)
-        Dim Command = cnn.CreateCommand
-        Dim strSQL As String = ""
-        Dim ivno As String = ""
-
-
-
-        'データベース接続を開く
-        cnn.Open()
-
-
-
-
-
-        Dim I As Integer
-        For I = 0 To GridView1.Rows.Count - 1
-            If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
-
-
-                'FIN_FLGを更新
-                strSQL = ""
-                strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG02 ='1' "
-                strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView1.Rows(I).Cells(9).Text & "'"
-
-                Command.CommandText = strSQL
-                ' SQLの実行
-                Command.ExecuteNonQuery()
-
-                '            Response.Redirect("anken_booking02.aspx")
-
-
-
-            Else
-
-
-
-            End If
-        Next
-
-
-        GridView1.DataBind()
-
-
-    End Sub
 
 
     Private Sub itaku(bkgno As String)
@@ -191,6 +139,61 @@ Partial Class yuusen
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
                 GridView1.DataBind()
+
+    End Sub
+
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+
+
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+
+        Dim I As Integer
+        For I = 0 To GridView1.Rows.Count - 1
+            If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
+
+
+                'FIN_FLGを更新
+                strSQL = ""
+                strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG02 ='1' "
+                strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView1.Rows(I).Cells(9).Text & "'"
+
+                Command.CommandText = strSQL
+                ' SQLの実行
+                Command.ExecuteNonQuery()
+
+
+            Else
+
+
+
+            End If
+        Next
+
+
+
+        GridView1.DataBind()
+
+
+
+
+
+
 
     End Sub
 End Class
