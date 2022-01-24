@@ -83,7 +83,7 @@
             </tr>
         </table>
 <div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:solid 1px;">
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="2100px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" DataKeyNames="BLDATE,INV">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="1800px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" DataKeyNames="BLDATE,INV">
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
             <Columns>
@@ -156,6 +156,7 @@ SelectCommand="SELECT
   , CUSTCODE 
   , CASE SALESFLG
   		WHEN '1' THEN '済'
+        ELSE ''
 	END AS SALESFLG
   , SHIPPEDPER 
   , ETA 

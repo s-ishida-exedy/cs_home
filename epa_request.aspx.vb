@@ -19,9 +19,9 @@ Partial Class cs_home
             If Not (dltButton Is Nothing) Then
                 dltButton.CommandArgument = e.Row.RowIndex.ToString()
             End If
-
-
         End If
+
+        'CType(e.Row(1).FindControl("Label1"), String).Text = Left(CType(GridView2.Row(1).FindControl("Label1"), String).Text, 10)
 
     End Sub
 
@@ -54,7 +54,7 @@ Partial Class cs_home
             Dim data3 = Me.GridView1.Rows(index).Cells(5).Text
             Dim data4 = Me.GridView1.Rows(index).Cells(1).Text
 
-            Session("strEtd") = data1
+            Session("strEtd") = Format(data1, "yyyy/mm/dd")
             Session("strIvno") = data2
             Session("strCust") = data3
             Session("strStatus") = data4
