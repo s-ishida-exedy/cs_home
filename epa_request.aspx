@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>ポータルサイト(BOOKING SHEET)</title>
+<title>ポータルサイト(EPA申請状況)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -75,10 +75,10 @@
                     <asp:Label ID="Label3" runat="server" Text="【EPA発給申請管理】" ></asp:Label>    
                 </td>
                 <td class="auto-style7">
-                    
+                    <asp:Button ID="Button2" runat="server" Text="追加登録" style="width:164px" />
                 </td>
                 <td class="auto-style2">
-                    <asp:Label ID="Label2" runat="server" Text="Labe2" ></asp:Label>
+                    <a href="#" onclick="window.history.back(); return false;">前のページに戻る</a>
                 </td>
             </tr>
         </table>
@@ -88,29 +88,15 @@
             <AlternatingRowStyle BackColor="#DCDCDC" />
             <Columns>
                 <asp:TemplateField ShowHeader="False">
-                    <EditItemTemplate>
-                        <asp:Button ID="Button2" runat="server" CommandName="Update" Text="更新" />
-                        <asp:Button ID="Button3" runat="server" CommandName="Cancel" Text="ｷｬﾝｾﾙ" />
-                        <asp:Button ID="Button4" runat="server" CommandName="Delete" Text="削除" />
-                    </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="Edit" Text="編集" />
+                        <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="edt" Text="編集" />
                     </ItemTemplate>
-                    <HeaderStyle Width="200px" />
+                    <HeaderStyle Width="60px" />
                     <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
-                <asp:BoundField DataField="STATUS" HeaderText="STATUS" SortExpression="STATUS" />
-                <asp:TemplateField HeaderText="状態" SortExpression="STATUS">
-                    <EditItemTemplate>
-                        <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="XmlDataSource1" DataTextField="text" DataValueField="value" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" AutoPostBack="True">
-                        </asp:DropDownList>
-                        <asp:XmlDataSource ID="XmlDataSource1" runat="server" DataFile="~/App_Code/status.xml"></asp:XmlDataSource>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("STATUS") %>'></asp:Label>
-                    </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" />
-                </asp:TemplateField>
+                <asp:BoundField DataField="STATUS" HeaderText="状態" SortExpression="STATUS" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
                 <asp:BoundField DataField="BLDATE" HeaderText="ETD" SortExpression="BLDATE"  ReadOnly="true">
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
@@ -128,87 +114,26 @@
                 </asp:BoundField>
                 <asp:BoundField DataField="SHIPPEDPER" HeaderText="船名" SortExpression="SHIPPEDPER" >
                 </asp:BoundField>
-                <asp:TemplateField HeaderText="ETA" SortExpression="ETA">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox1" runat="server" Width="100px" Height="20px" Text='<%# Bind("ETA") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("ETA") %>'></asp:Label>
-                    </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" />
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="ｶｯﾄ日" SortExpression="CUTDATE">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox2" runat="server" Width="100px" Height="20px" Text='<%# Bind("CUTDATE") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("CUTDATE") %>'></asp:Label>
-                    </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" />
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="VoyNO" SortExpression="VOYAGENO">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox7" runat="server" Width="80px" Height="20px" Text='<%# Bind("VOYAGENO") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label8" runat="server" Text='<%# Bind("VOYAGENO") %>'></asp:Label>
-                    </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" />
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="受付番号" SortExpression="RECEIPT_NUMBER">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox9" runat="server" Width="110px" Height="20px" Text='<%# Bind("RECEIPT_NUMBER") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label10" runat="server" Text='<%# Bind("RECEIPT_NUMBER") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
+                <asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" >
+                </asp:BoundField>
+                <asp:BoundField DataField="CUTDATE" HeaderText="ｶｯﾄ日" SortExpression="CUTDATE" >
+                </asp:BoundField>
+                <asp:BoundField DataField="VOYAGENO" HeaderText="VoyNO" SortExpression="VOYAGENO" >
+                </asp:BoundField>
+                <asp:BoundField DataField="RECEIPT_NUMBER" HeaderText="受付番号" SortExpression="RECEIPT_NUMBER" >
+                </asp:BoundField>
                 <asp:BoundField DataField="IVNO_FULL" HeaderText="IVNO" SortExpression="IVNO_FULL" >
                 </asp:BoundField>
-                <asp:TemplateField HeaderText="申請日" SortExpression="APPLICATION_DATE">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox3" runat="server" Width="100px" Height="20px" Text='<%# Bind("APPLICATION_DATE") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("APPLICATION_DATE") %>'></asp:Label>
-                    </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" />
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="送付依頼日" SortExpression="SENDING_REQ_DATE">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox4" runat="server" Width="100px" Height="20px" Text='<%# Bind("SENDING_REQ_DATE") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("SENDING_REQ_DATE") %>'></asp:Label>
-                    </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" />
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="受領日" SortExpression="RECEIPT_DATE">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox5" runat="server" Width="100px" Height="20px" Text='<%# Bind("RECEIPT_DATE") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("RECEIPT_DATE") %>'></asp:Label>
-                    </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" />
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="EPA送付日" SortExpression="EPA_SEND_DATE">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox6" runat="server" Width="100px" Height="20px" Text='<%# Bind("EPA_SEND_DATE") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label7" runat="server" Text='<%# Bind("EPA_SEND_DATE") %>'></asp:Label>
-                    </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" />
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="TRK#" SortExpression="TRK_NO">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox8" runat="server" Width="140px" Height="20px" Text='<%# Bind("TRK_NO") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label9" runat="server" Text='<%# Bind("TRK_NO") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
+                <asp:BoundField DataField="APPLICATION_DATE" HeaderText="申請日" SortExpression="APPLICATION_DATE" >
+                </asp:BoundField>
+                <asp:BoundField DataField="SENDING_REQ_DATE" HeaderText="送付依頼日" SortExpression="SENDING_REQ_DATE" >
+                </asp:BoundField>
+                <asp:BoundField DataField="RECEIPT_DATE" HeaderText="受領日" SortExpression="RECEIPT_DATE" >
+                </asp:BoundField>
+                <asp:BoundField DataField="EPA_SEND_DATE" HeaderText="EPA送付日" SortExpression="EPA_SEND_DATE" >
+                </asp:BoundField>
+                <asp:BoundField DataField="TRK_NO" HeaderText="TRK#" SortExpression="TRK_NO" >
+                </asp:BoundField>
             </Columns>
             <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
@@ -244,37 +169,7 @@ SelectCommand="SELECT
   , EPA_SEND_DATE 
   , TRK_NO 
 FROM T_EXL_EPA_KANRI
-ORDER BY BLDATE, INV" 
-UpdateCommand="UPDATE T_EXL_EPA_KANRI 
-SET
-  STATUS = @STATUS
-  , SHIPPEDPER = @SHIPPEDPER
-  , ETA = @ETA
-  , CUTDATE = @CUTDATE
-  , VOYAGENO = @VOYAGENO
-  , RECEIPT_NUMBER = @RECEIPT_NUMBER
-  , IVNO_FULL = @IVNO_FULL
-  , APPLICATION_DATE = @APPLICATION_DATE
-  , SENDING_REQ_DATE = @SENDING_REQ_DATE
-  , RECEIPT_DATE = @RECEIPT_DATE
-  , EPA_SEND_DATE = @EPA_SEND_DATE
-  , TRK_NO = @TRK_NO
-WHERE STATUS = @STATUS AND BLDATE = @BLDATE">
-            <UpdateParameters>
-                <asp:Parameter Name="STATUS" />
-                <asp:Parameter Name="SHIPPEDPER" />
-                <asp:Parameter Name="ETA" />
-                <asp:Parameter Name="CUTDATE" />
-                <asp:Parameter Name="VOYAGENO" />
-                <asp:Parameter Name="RECEIPT_NUMBER" />
-                <asp:Parameter Name="IVNO_FULL" />
-                <asp:Parameter Name="APPLICATION_DATE" />
-                <asp:Parameter Name="SENDING_REQ_DATE" />
-                <asp:Parameter Name="RECEIPT_DATE" />
-                <asp:Parameter Name="EPA_SEND_DATE" />
-                <asp:Parameter Name="TRK_NO" />
-                <asp:Parameter Name="BLDATE" />
-            </UpdateParameters>
+ORDER BY BLDATE, INV">
         </asp:SqlDataSource>
     
         <br />

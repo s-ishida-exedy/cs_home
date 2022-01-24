@@ -38,7 +38,9 @@ img {border-style: none;
     vertical-align: middle;
     width: 121px;
 }
-table {border-collapse:collapse;font-size: 100%;border-spacing: 0;}
+table {border-collapse:collapse;font-size: 100%;border-spacing: 0;
+    margin-top: 2px;
+}
 iframe {width: 100%;}
 video,audio {max-width: 100%;}
 
@@ -485,7 +487,38 @@ footer .pr {display: block;font-size: 80%;}
 .ta2 td {
 	text-align: center;	/*センタリング*/
 }
-
+/*ta3設定*/
+/*テーブル１行目に入った見出し部分（※caption）*/
+.ta3 caption {
+	border: 1px solid #ccc;	/*テーブルの枠線の幅、線種、色*/
+	border-bottom: none;	/*下線だけ消す*/
+	text-align:center;		/*文字を左寄せ*/
+	background: #eee;		/*背景色*/
+	color: #666;			/*文字色*/
+	font-weight: bold;		/*太字に*/
+	padding: 10px;			/*ボックス内の余白*/
+}
+.ta3 {
+	table-layout: fixed;
+	width: 1280px;
+	margin: 0 auto 20px;
+	background: #fff;	/*背景色*/
+	color: #666;		/*文字色*/
+}
+.ta3, .ta3 td, .ta3 th {
+	word-break: break-all;
+	border: 1px solid #ccc;	/*テーブルの枠線の幅、線種、色*/
+	padding: 10px;	/*ボックス内の余白*/
+}
+/*ta3の左側ボックス*/
+.ta3 th {
+	width: 140px;		/*幅*/
+	text-align: center;	/*センタリング*/
+}
+/*ta3のOK/NGのボックス*/
+.ta3 td {
+	text-align: center;	/*センタリング*/
+}
 
 /*btn（inputタグ用）
 ---------------------------------------------------------------------------*/
@@ -917,6 +950,18 @@ a.btn {
 .ta2 th {
 	width: 100px;
 }
+
+/*テーブル(ta3)
+---------------------------------------------------------------------------*/
+/*余白の上書き*/
+.ta3 caption,.ta3 th,.ta3 td {
+	padding: 5px;
+}
+/*テーブル内の左側*/
+.ta3 th {
+	width: 100px;
+}
+
 /*ul.disc,olタグ
 ---------------------------------------------------------------------------*/
 ul.disc {
