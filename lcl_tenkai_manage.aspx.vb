@@ -192,26 +192,38 @@ Partial Class cs_home
         'cnn.Close()
         'cnn.Dispose()
 
+        If e.Row.Cells(20).Text = "1" Then
+            e.Row.BackColor = Drawing.Color.DarkGray
+        End If
+
+
         e.Row.Cells(0).Width = 10
         e.Row.Cells(1).Width = 120
         e.Row.Cells(2).Width = 50
-        e.Row.Cells(3).Width = 70
-        e.Row.Cells(4).Width = 100
-        e.Row.Cells(5).Width = 110
-        e.Row.Cells(6).Width = 70
+        e.Row.Cells(4).Width = 70
+        e.Row.Cells(5).Width = 100
+        e.Row.Cells(6).Width = 110
         e.Row.Cells(7).Width = 70
         e.Row.Cells(8).Width = 70
         e.Row.Cells(9).Width = 70
-        e.Row.Cells(10).Width = 50
-        e.Row.Cells(11).Width = 60
+        e.Row.Cells(10).Width = 70
+        e.Row.Cells(11).Width = 50
         e.Row.Cells(12).Width = 60
-        e.Row.Cells(13).Width = 120
-        e.Row.Cells(14).Width = 10
-        e.Row.Cells(15).Width = 120
-        e.Row.Cells(16).Width = 10
-        e.Row.Cells(17).Width = 150
+        e.Row.Cells(13).Width = 60
+        e.Row.Cells(14).Width = 120
+        e.Row.Cells(15).Width = 10
+        e.Row.Cells(16).Width = 120
+        e.Row.Cells(17).Width = 10
+        e.Row.Cells(18).Width = 150
 
+        e.Row.Cells(6).Visible = False
+        e.Row.Cells(7).Visible = False
+        e.Row.Cells(10).Visible = False
+        e.Row.Cells(11).Visible = False
+        e.Row.Cells(12).Visible = False
+        e.Row.Cells(13).Visible = False
 
+        e.Row.Cells(20).Visible = False
 
 
 
@@ -305,7 +317,7 @@ Partial Class cs_home
                 'FIN_FLGを更新
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET FLG03 ='1' "
-                strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView1.Rows(I).Cells(5).Text & "'"
+                strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView1.Rows(I).Cells(6).Text & "'"
 
                 Command.CommandText = strSQL
                 ' SQLの実行
@@ -313,7 +325,7 @@ Partial Class cs_home
 
                 '            Response.Redirect("anken_booking02.aspx")
 
-                Call GET_IVDATA(GridView1.Rows(I).Cells(5).Text)
+                Call GET_IVDATA(GridView1.Rows(I).Cells(6).Text)
 
             Else
 
@@ -361,7 +373,7 @@ Partial Class cs_home
 
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET FLG03 ='' "
-                strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView1.Rows(I).Cells(5).Text & "'"
+                strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView1.Rows(I).Cells(6).Text & "'"
 
                 Command.CommandText = strSQL
                 ' SQLの実行
