@@ -192,6 +192,10 @@ Partial Class cs_home
         cnn.Close()
         cnn.Dispose()
 
+
+        e.Row.Cells(5).Visible = False
+        e.Row.Cells(9).Visible = False
+
     End Sub
 
     Protected Sub GridView1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.SelectedIndexChanged
@@ -281,7 +285,7 @@ Partial Class cs_home
         Dim FLG04 As String
         Dim FLG05 As String
         Dim PICKINPLACE As String
-
+        Dim bkgno01 As String
 
 
 
@@ -300,7 +304,7 @@ Partial Class cs_home
         For I = 0 To GridView1.Rows.Count - 1
             If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
 
-
+                bkgno01 = ""
 
 
                 '対象の日付以下の日付の最大値を取得
@@ -327,20 +331,24 @@ Partial Class cs_home
 
                 wday2 = wday2 & " (" & dt3.ToString("ddd") & ")"
 
-
-
-
                 'クローズ処理 
                 dataread.Close()
                 dbcmd.Dispose()
 
+                If Convert.ToString(GridView1.Rows(I).Cells(11).Text) = "AC要" Or GridView1.Rows(I).Cells(11).Text = "Booking依頼済み" Then
 
+                    bkgno01 = Left(Convert.ToString(GridView1.Rows(I).Cells(3).Text), 4) & Convert.ToString(GridView1.Rows(I).Cells(8).Text)
 
+                Else
+
+                    bkgno01 = GridView1.Rows(I).Cells(11).Text
+
+                End If
 
 
                 strSQL = ""
                 strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_LCLTENKAI WHERE "
-                strSQL = strSQL & "T_EXL_LCLTENKAI.BOOKING_NO = '" & GridView1.Rows(I).Cells(11).Text & "' "
+                strSQL = strSQL & "T_EXL_LCLTENKAI.BOOKING_NO = '" & bkgno01 & "' "
 
 
                 'ＳＱＬコマンド作成 
@@ -369,7 +377,7 @@ Partial Class cs_home
 
                     strSQL = ""
                     strSQL = strSQL & "SELECT * FROM T_EXL_LCLTENKAI WHERE "
-                    strSQL = strSQL & "T_EXL_LCLTENKAI.BOOKING_NO = '" & GridView1.Rows(I).Cells(11).Text & "' "
+                    strSQL = strSQL & "T_EXL_LCLTENKAI.BOOKING_NO = '" & bkgno01 & "' "
 
 
                     'ＳＱＬコマンド作成 
@@ -405,14 +413,14 @@ Partial Class cs_home
                     strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET "
                     strSQL = strSQL & "CONSIGNEE = '" & GridView1.Rows(I).Cells(1).Text & "', "
                     strSQL = strSQL & "DESTINATION = '" & GridView1.Rows(I).Cells(2).Text & "', "
-                    strSQL = strSQL & "CUST = '" & GridView1.Rows(I).Cells(3).Text & "', "
-                    strSQL = strSQL & "INVOICE_NO = '" & GridView1.Rows(I).Cells(4).Text & "', "
-                    strSQL = strSQL & "BOOKING_NO = '" & GridView1.Rows(I).Cells(11).Text & "', "
+                    strSQL = strSQL & "CUST = '" & Left(GridView1.Rows(I).Cells(3).Text, 4) & "', "
+                    strSQL = strSQL & "INVOICE_NO = '" & Replace(Convert.ToString(GridView1.Rows(I).Cells(4).Text), "&nbsp;", "") & "', "
+                    strSQL = strSQL & "BOOKING_NO = '" & bkgno01 & "', "
 
                     strSQL = strSQL & "OFFICIAL_QUOT = '" & GridView1.Rows(I).Cells(5).Text & "', "
                     strSQL = strSQL & "CUT_DATE = '" & GridView1.Rows(I).Cells(7).Text & "', "
                     strSQL = strSQL & "ETD = '" & GridView1.Rows(I).Cells(8).Text & "', "
-                    strSQL = strSQL & "ETA = '" & GridView1.Rows(I).Cells(9).Text & "', "
+                    strSQL = strSQL & "ETA = '" & Replace(GridView1.Rows(I).Cells(9).Text, "&nbsp;", "") & "', "
                     strSQL = strSQL & "LCL_SIZE = '" & GridView1.Rows(I).Cells(10).Text & "', "
 
 
@@ -431,17 +439,19 @@ Partial Class cs_home
                     strSQL = strSQL & "FLG05 = '" & FLG05 & "', "
                     strSQL = strSQL & "PICKINPLACE = '" & PICKINPLACE & "' "
 
-                    strSQL = strSQL & "WHERE BOOKING_NO ='" & GridView1.Rows(I).Cells(11).Text & "' "
+                    strSQL = strSQL & "WHERE BOOKING_NO ='" & bkgno01 & "' "
 
                 Else
 
 
 
+
+
                     strSQL = ""
-                    strSQL = strSQL & "INSERT INTO T_EXL_LCLTENKAI VALUES('" & GridView1.Rows(I).Cells(1).Text & "','" & GridView1.Rows(I).Cells(2).Text & "','" & GridView1.Rows(I).Cells(3).Text
-                    strSQL = strSQL & "','" & GridView1.Rows(I).Cells(4).Text & "','" & GridView1.Rows(I).Cells(11).Text
+                    strSQL = strSQL & "INSERT INTO T_EXL_LCLTENKAI VALUES('" & GridView1.Rows(I).Cells(1).Text & "','" & GridView1.Rows(I).Cells(2).Text & "','" & Left(GridView1.Rows(I).Cells(3).Text, 4)
+                    strSQL = strSQL & "','" & Replace(Convert.ToString(GridView1.Rows(I).Cells(4).Text), "&nbsp;", "") & "','" & bkgno01
                     strSQL = strSQL & "','" & GridView1.Rows(I).Cells(5).Text & "','" & GridView1.Rows(I).Cells(7).Text
-                    strSQL = strSQL & "','" & GridView1.Rows(I).Cells(8).Text & "','" & GridView1.Rows(I).Cells(9).Text & "','" & GridView1.Rows(I).Cells(10).Text
+                    strSQL = strSQL & "','" & GridView1.Rows(I).Cells(8).Text & "','" & Replace(GridView1.Rows(I).Cells(9).Text, "&nbsp;", "") & "','" & GridView1.Rows(I).Cells(10).Text
                     strSQL = strSQL & "','','',' " & wday2 & " ','AM',' " & wday2 & "','PM','','','','','','','')"
 
 
