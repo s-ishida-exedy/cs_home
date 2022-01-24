@@ -81,7 +81,7 @@
                 <asp:Button ID="Button2" runat="server" Text="詳細表示" />
             </td>
             <td class="auto-style2">
-                <asp:Label ID="Label2" runat="server" Text="Labe2" ></asp:Label>
+                <a href="#" onclick="window.history.back(); return false;">前のページに戻る</a>
             </td>
         </tr>
     </table>
