@@ -6,7 +6,6 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title> 案件抽出</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -16,8 +15,9 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="js/default.js"></script>
 
+
     <style type="text/css">
-        #form1
+       #form1
         {
             background-color : #ffffff;
             color : #000000;
@@ -94,6 +94,8 @@ h2 span {
 	-moz-backface-visibility: hidden;
     backface-visibility: hidden;
 }
+
+
 .simple_square_btn4:hover {
 	 cursor: pointer;
 	 text-decoration: none;
@@ -134,7 +136,7 @@ h2 span {
 
 
     </style>
-<script>
+   <script>
     $(document).ready(function () {
         var text = getParam('id');
         $('.result').text(text);
@@ -161,10 +163,13 @@ h2 span {
             };
         });
     });
+
+
 </script>
 
+
 </head>
-<body class="c2>
+<body class="c2">
 <form id="form1" runat="server">
 
 
@@ -189,7 +194,7 @@ h2 span {
 </font>
 </td>
 
-    <td width="100" border="1" >
+    <td width="100"  >
 
 <asp:Button ID="Button3" runat="server" Text="登録" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
@@ -197,9 +202,15 @@ h2 span {
 
 </td>
 
+   <td width="100"  >
+
+<asp:Button ID="Button2" runat="server" Text="解除" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
 
-<td width="100" border="1" >
+
+</td>
+
+<td width="100"  >
 
 <asp:Button ID="Button1" runat="server" Text="画面更新" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
@@ -220,7 +231,7 @@ h2 span {
 
 </td>
 
-<td width="200">
+<td width="150">
 
 <font size="3"  >
 
@@ -232,7 +243,7 @@ h2 span {
 
 
 </td>
-<td width="200">
+<td width="150">
 
 
 <section>
