@@ -174,6 +174,10 @@ Partial Class cs_home
         cnn.Close()
         cnn.Dispose()
 
+
+        e.Row.Cells(4).Visible = False
+        e.Row.Cells(8).Visible = False
+
     End Sub
 
     Protected Sub GridView1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.SelectedIndexChanged

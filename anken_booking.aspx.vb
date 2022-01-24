@@ -8,10 +8,207 @@ Partial Class yuusen
     Public strRow As String
     Public strProcess As String
 
-
-
-
     Private Sub GridView1_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
+
+        '最終更新年月日取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String
+        Dim strinv As String
+        Dim strbkg As String
+        Dim cno As Long
+        Dim wno As Long
+        Dim wday As String
+        Dim wday2 As String
+        Dim wday3 As String
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim Kaika00 As String
+
+
+        If e.Row.RowType = DataControlRowType.DataRow Then
+
+
+            '接続文字列の作成
+            Dim ConnectionString As String = String.Empty
+            'SQL Server認証
+            ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+            'SqlConnectionクラスの新しいインスタンスを初期化
+            Dim cnn = New SqlConnection(ConnectionString)
+            Dim Command = cnn.CreateCommand
+
+            'データベース接続を開く
+            cnn.Open()
+
+
+            strSQL = "SELECT DOCFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+
+
+            'ＳＱＬコマンド作成
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行
+            dataread = dbcmd.ExecuteReader()
+
+            strbkg = ""
+            '結果を取り出す
+            While (dataread.Read())
+                strbkg += dataread("DOCFIN_BKGNO")
+
+                '書類作成状況
+                If Trim(e.Row.Cells(26).Text) = strbkg Then
+
+                    e.Row.BackColor = Drawing.Color.DarkSalmon
+                    e.Row.Cells(1).Text = e.Row.Cells(1).Text & " " & "書類済"
+
+                End If
+
+            End While
+
+            'クローズ処理
+            dataread.Close()
+            dbcmd.Dispose()
+
+
+
+            strSQL = "SELECT DECFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DECFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+
+
+            'ＳＱＬコマンド作成
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行
+            dataread = dbcmd.ExecuteReader()
+
+            strinv = ""
+            '結果を取り出す
+            While (dataread.Read())
+                strbkg += dataread("DECFIN_BKGNO")
+
+                '書類作成状況
+                If Trim(e.Row.Cells(26).Text) = strbkg Then
+
+                    e.Row.BackColor = Drawing.Color.DarkGray
+                    e.Row.Cells(1).Text = "通関済"
+
+                End If
+
+            End While
+
+            'クローズ処理
+            dataread.Close()
+            dbcmd.Dispose()
+
+
+            If e.Row.Cells(12).Text = "LCL" Then
+
+                e.Row.BackColor = Drawing.Color.DarkGray
+                e.Row.Cells(13).Text = "LCL"
+
+            End If
+
+
+
+            strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+
+
+            'ＳＱＬコマンド作成
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行
+            dataread = dbcmd.ExecuteReader()
+
+            strinv = ""
+            '結果を取り出す
+            While (dataread.Read())
+                strbkg += dataread("ITK_BKGNO")
+
+                '書類作成状況
+                If Trim(e.Row.Cells(26).Text) = strbkg Then
+
+                    e.Row.BackColor = Drawing.Color.DarkGray
+                    e.Row.Cells(1).Text = "通関委託"
+
+                    'Call itaku(e.Row.Cells(25).Text)
+
+
+                End If
+
+            End While
+
+            'クローズ処理
+            dataread.Close()
+            dbcmd.Dispose()
+
+            cnn.Close()
+            cnn.Dispose()
+
+
+
+            If e.Row.Cells(1).Text = "当日必須" Then
+
+                e.Row.BackColor = Drawing.Color.LightGreen
+
+
+            End If
+
+
+            If e.Row.Cells(1).Text = "EXDCUT" Then
+
+
+                e.Row.BackColor = Drawing.Color.LightBlue
+
+            End If
+
+            If e.Row.Cells(36).Text = "1" Then
+
+
+                e.Row.Cells(0).BackColor = Drawing.Color.YellowGreen
+
+
+            End If
+
+
+
+        End If
+
+        '不要行非表示
+
+
+        e.Row.Cells(10).Visible = False
+        e.Row.Cells(11).Visible = False
+        e.Row.Cells(12).Visible = False
+
+
+
+        e.Row.Cells(14).Visible = False
+        e.Row.Cells(15).Visible = False
+        e.Row.Cells(16).Visible = False
+        e.Row.Cells(17).Visible = False
+        e.Row.Cells(18).Visible = False
+        e.Row.Cells(19).Visible = False
+        e.Row.Cells(20).Visible = False
+        e.Row.Cells(21).Visible = False
+        e.Row.Cells(22).Visible = False
+        e.Row.Cells(23).Visible = False
+        e.Row.Cells(24).Visible = False
+
+        e.Row.Cells(27).Visible = False
+        e.Row.Cells(30).Visible = False
+        e.Row.Cells(32).Visible = False
+
+
+        e.Row.Cells(34).Visible = False
+        e.Row.Cells(35).Visible = False
+        e.Row.Cells(36).Visible = False
+        e.Row.Cells(37).Visible = False
+
+    End Sub
+
+
+
+
+
+    Private Sub GridView3_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView3.RowDataBound
+
 
         '最終更新年月日取得
         Dim dataread As SqlDataReader
@@ -49,7 +246,7 @@ Partial Class yuusen
 
 
 
-            strSQL = "SELECT DOCFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_BKGNO = '" & Trim(e.Row.Cells(25).Text) & "' "
+            strSQL = "SELECT DOCFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
 
 
             'ＳＱＬコマンド作成
@@ -63,10 +260,10 @@ Partial Class yuusen
                 strbkg += dataread("DOCFIN_BKGNO")
 
                 '書類作成状況
-                If Trim(e.Row.Cells(25).Text) = strbkg Then
+                If Trim(e.Row.Cells(26).Text) = strbkg Then
 
                     e.Row.BackColor = Drawing.Color.DarkSalmon
-                    e.Row.Cells(0).Text = e.Row.Cells(0).Text & " " & "書類済"
+                    e.Row.Cells(1).Text = e.Row.Cells(1).Text & " " & "書類済"
 
                 End If
 
@@ -78,7 +275,7 @@ Partial Class yuusen
 
 
 
-            strSQL = "SELECT DECFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DECFIN_BKGNO = '" & Trim(e.Row.Cells(25).Text) & "' "
+            strSQL = "SELECT DECFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DECFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
 
 
             'ＳＱＬコマンド作成
@@ -92,10 +289,10 @@ Partial Class yuusen
                 strbkg += dataread("DECFIN_BKGNO")
 
                 '書類作成状況
-                If Trim(e.Row.Cells(25).Text) = strbkg Then
+                If Trim(e.Row.Cells(26).Text) = strbkg Then
 
                     e.Row.BackColor = Drawing.Color.DarkGray
-                    e.Row.Cells(0).Text = "通関済"
+                    e.Row.Cells(1).Text = "通関済"
 
                 End If
 
@@ -106,15 +303,16 @@ Partial Class yuusen
             dbcmd.Dispose()
 
 
-            If e.Row.Cells(0).Text = "LCL" Then
+            If e.Row.Cells(12).Text = "LCL" Then
 
                 e.Row.BackColor = Drawing.Color.DarkGray
+                e.Row.Cells(13).Text = "LCL"
 
             End If
 
 
 
-            strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(25).Text) & "' "
+            strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
 
 
             'ＳＱＬコマンド作成
@@ -128,10 +326,10 @@ Partial Class yuusen
                 strbkg += dataread("ITK_BKGNO")
 
                 '書類作成状況
-                If Trim(e.Row.Cells(25).Text) = strbkg Then
+                If Trim(e.Row.Cells(26).Text) = strbkg Then
 
                     e.Row.BackColor = Drawing.Color.DarkGray
-                    e.Row.Cells(0).Text = "通関委託"
+                    e.Row.Cells(1).Text = "通関委託"
 
                     'Call itaku(e.Row.Cells(25).Text)
 
@@ -149,7 +347,7 @@ Partial Class yuusen
 
 
 
-            If e.Row.Cells(0).Text = "当日必須" Then
+            If e.Row.Cells(1).Text = "当日必須" Then
 
                 e.Row.BackColor = Drawing.Color.LightGreen
 
@@ -157,7 +355,7 @@ Partial Class yuusen
             End If
 
 
-            If e.Row.Cells(0).Text = "EXDCUT" Then
+            If e.Row.Cells(1).Text = "EXDCUT" Then
 
 
                 e.Row.BackColor = Drawing.Color.LightBlue
@@ -165,19 +363,26 @@ Partial Class yuusen
             End If
 
 
+            If e.Row.Cells(36).Text = "1" Then
+
+
+                e.Row.Cells(0).BackColor = Drawing.Color.Yellow
+
+            End If
+
 
 
         End If
 
         '不要行非表示
 
-        e.Row.Cells(9).Visible = False
+
         e.Row.Cells(10).Visible = False
         e.Row.Cells(11).Visible = False
+        e.Row.Cells(12).Visible = False
 
 
 
-        e.Row.Cells(13).Visible = False
         e.Row.Cells(14).Visible = False
         e.Row.Cells(15).Visible = False
         e.Row.Cells(16).Visible = False
@@ -188,15 +393,17 @@ Partial Class yuusen
         e.Row.Cells(21).Visible = False
         e.Row.Cells(22).Visible = False
         e.Row.Cells(23).Visible = False
+        e.Row.Cells(24).Visible = False
 
-        e.Row.Cells(26).Visible = False
-        e.Row.Cells(29).Visible = False
-        e.Row.Cells(31).Visible = False
+        e.Row.Cells(27).Visible = False
+        e.Row.Cells(30).Visible = False
+        e.Row.Cells(32).Visible = False
 
-        e.Row.Cells(33).Visible = False
+
         e.Row.Cells(34).Visible = False
         e.Row.Cells(35).Visible = False
         e.Row.Cells(36).Visible = False
+        e.Row.Cells(37).Visible = False
 
     End Sub
 
@@ -293,193 +500,6 @@ Partial Class yuusen
     End Sub
 
 
-
-
-
-
-    Private Sub GridView3_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView3.RowDataBound
-
-        '最終更新年月日取得
-        Dim dataread As SqlDataReader
-        Dim dbcmd As SqlCommand
-        Dim strSQL As String
-        Dim strinv As String
-        Dim strbkg As String
-        Dim cno As Long
-        Dim wno As Long
-        Dim wday As String
-        Dim wday2 As String
-        Dim wday3 As String
-
-        Dim dt1 As DateTime = DateTime.Now
-
-        Dim Kaika00 As String
-
-
-        If e.Row.RowType = DataControlRowType.DataRow Then
-
-
-            '接続文字列の作成
-            Dim ConnectionString As String = String.Empty
-            'SQL Server認証
-            ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
-            'SqlConnectionクラスの新しいインスタンスを初期化
-            Dim cnn = New SqlConnection(ConnectionString)
-
-            'データベース接続を開く
-            cnn.Open()
-
-
-
-            strSQL = "SELECT DOCFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_BKGNO = '" & Trim(e.Row.Cells(25).Text) & "' "
-
-
-            'ＳＱＬコマンド作成
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行
-            dataread = dbcmd.ExecuteReader()
-
-            strbkg = ""
-            '結果を取り出す
-            While (dataread.Read())
-                strbkg += dataread("DOCFIN_BKGNO")
-
-                '書類作成状況
-                If Trim(e.Row.Cells(25).Text) = strbkg Then
-
-                    e.Row.BackColor = Drawing.Color.DarkSalmon
-                    e.Row.Cells(0).Text = e.Row.Cells(0).Text & " " & "書類済"
-
-                End If
-
-            End While
-
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
-
-
-
-            strSQL = "SELECT DECFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DECFIN_BKGNO = '" & Trim(e.Row.Cells(25).Text) & "' "
-
-
-            'ＳＱＬコマンド作成
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行
-            dataread = dbcmd.ExecuteReader()
-
-            strinv = ""
-            '結果を取り出す
-            While (dataread.Read())
-                strbkg += dataread("DECFIN_BKGNO")
-
-                '書類作成状況
-                If Trim(e.Row.Cells(25).Text) = strbkg Then
-
-                    e.Row.BackColor = Drawing.Color.DarkGray
-                    e.Row.Cells(0).Text = "通関済"
-
-                End If
-
-            End While
-
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
-
-
-            If e.Row.Cells(0).Text = "LCL" Then
-
-                e.Row.BackColor = Drawing.Color.DarkGray
-
-            End If
-
-
-
-            strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(25).Text) & "' "
-
-
-            'ＳＱＬコマンド作成
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行
-            dataread = dbcmd.ExecuteReader()
-
-            strinv = ""
-            '結果を取り出す
-            While (dataread.Read())
-                strbkg += dataread("ITK_BKGNO")
-
-                '書類作成状況
-                If Trim(e.Row.Cells(25).Text) = strbkg Then
-
-                    e.Row.BackColor = Drawing.Color.DarkGray
-                    e.Row.Cells(0).Text = "通関委託"
-
-                End If
-
-            End While
-
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
-
-            cnn.Close()
-            cnn.Dispose()
-
-
-
-            If e.Row.Cells(0).Text = "当日必須" Then
-
-                e.Row.BackColor = Drawing.Color.LightGreen
-
-
-            End If
-
-
-            If e.Row.Cells(0).Text = "EXDCUT" Then
-
-
-                e.Row.BackColor = Drawing.Color.LightBlue
-
-            End If
-
-
-
-
-        End If
-
-        '不要行非表示
-
-        e.Row.Cells(9).Visible = False
-        e.Row.Cells(10).Visible = False
-        e.Row.Cells(11).Visible = False
-
-
-
-        e.Row.Cells(13).Visible = False
-        e.Row.Cells(14).Visible = False
-        e.Row.Cells(15).Visible = False
-        e.Row.Cells(16).Visible = False
-        e.Row.Cells(17).Visible = False
-        e.Row.Cells(18).Visible = False
-        e.Row.Cells(19).Visible = False
-        e.Row.Cells(20).Visible = False
-        e.Row.Cells(21).Visible = False
-        e.Row.Cells(22).Visible = False
-        e.Row.Cells(23).Visible = False
-
-        e.Row.Cells(26).Visible = False
-        e.Row.Cells(29).Visible = False
-        e.Row.Cells(31).Visible = False
-
-        e.Row.Cells(33).Visible = False
-        e.Row.Cells(34).Visible = False
-        e.Row.Cells(35).Visible = False
-        e.Row.Cells(36).Visible = False
-
-    End Sub
-
-
     Private Sub itaku(bkgno As String)
         '確認完了ボタン押下時
 
@@ -514,5 +534,65 @@ Partial Class yuusen
 
     End Sub
 
+
+    Protected Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+
+
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+
+        Dim I As Integer
+        For I = 0 To GridView1.Rows.Count - 1
+            If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
+
+
+                If GridView1.Rows(I).Cells(26).Text = "&nbsp;" Or GridView1.Rows(I).Cells(6).Text = "&nbsp;" Then
+
+                    MsgBox("未確定のためフォルダを作成できません。" & vbCrLf & "客先:" & GridView1.Rows(I).Cells(4).Text & vbCrLf & "ETD:" & vbCrLf & GridView1.Rows(I).Cells(8).Text)
+
+                Else
+
+
+
+                    'FIN_FLGを更新
+                    strSQL = ""
+                    strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG03 ='1' "
+                    strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView1.Rows(I).Cells(26).Text & "'"
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                    '            Response.Redirect("anken_booking02.aspx")
+
+
+                End If
+
+            Else
+
+
+
+                End If
+        Next
+
+
+        GridView1.DataBind()
+
+
+    End Sub
 
 End Class

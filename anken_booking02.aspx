@@ -6,7 +6,6 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title> 案件抽出</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -16,8 +15,9 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="js/default.js"></script>
 
+
     <style type="text/css">
-        #form1
+       #form1
         {
             background-color : #ffffff;
             color : #000000;
@@ -79,75 +79,64 @@ h2 span {
   padding-left: 16px;
   color: #fff;
 }
-
-*,
-*:before,
-*:after {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-}
-
-html {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  font-size: 62.5%;
-}
-
-
-a.btn--yellow.btn--border-dotted {
-  border: 3px dotted #000;
+     .simple_square_btn4 {
+	display: block;
+	position: relative;
+	width: 160px;
+	padding: 0.1em;
+	text-align: center;
+	text-decoration: none;
+	color: #1B1B1B;
+	background: #fff;
+	border-radius: 30px;
+	border:1px solid #1B1B1B;
+	-webkit-backface-visibility: hidden; 
+	-moz-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 
-
-section {
-  max-width: 140px;
-  margin: 0 auto;
+.simple_square_btn4:hover {
+	 cursor: pointer;
+	 text-decoration: none;
+	-webkit-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	-moz-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
-a.btn_07 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  border: 1px solid #000;
-  box-sizing: border-box;
-  width: 100%;
-  height: 40px;
-  padding: 0 25px;
-  color: #000;
-  font-size: 16px;
-  text-align: left;
-  text-decoration: none;
-  position: relative;
-  transition-duration: 0.2s;
+@-webkit-keyframes simple_square_btn4{
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(0.85);
+            transform: scale(0.85);
+  }
 }
-a.btn_07:hover {
-  background: #000;
-  border: 1px solid #000;
-  color: #fff;
+@-moz-keyframes simple_square_btn4{
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(0.85);
+            transform: scale(0.85);
+  }
 }
-a.btn_07:before {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 0 40px 50px;
-  border-color: transparent transparent #000 transparent;
+@keyframes simple_square_btn4 {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(0.85);
+            transform: scale(0.85);
+  }
 }
-a.btn_07 span {
-    position: absolute;
-    bottom: 12px;
-    right: 20px;
-    display: inline-block;
-}
-
 
 
     </style>
-<script>
+   <script>
     $(document).ready(function () {
         var text = getParam('id');
         $('.result').text(text);
@@ -174,192 +163,184 @@ a.btn_07 span {
             };
         });
     });
+
+
 </script>
 
+
 </head>
-<body class="c2>
+<body class="c2">
 <form id="form1" runat="server">
+
 
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.htmlで行う -->
  <!-- #Include File="header.html" -->
+
+
 <div id="contents2" class="inner2">
-        <table >
-            <tr>
-                <td width="200" border="1" >
-
-                    <font size="6"  >
-
-<%--                        <h2><span>03</span>出荷案件管理 - 案件抽出</h2>--%>
-                                                  案件抽出
-                      </font>
-                        </td>
 
 
-<td width="100" border="1" >
 
-<asp:Button class="btn-radius-gradient-wrap"  ID="Button2" runat="server" Text="登録" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
-   
+<table >
+
+<tr>
+
+<td width="200" border="1" >
+
+<font size="6"  >
+        案件抽出
+</font>
 </td>
 
-<td width="100" border="1" >
+    <td width="100"  >
 
-<asp:Button class="btn-radius-gradient-wrap"  ID="Button1" runat="server" Text="画面更新" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+<asp:Button ID="Button3" runat="server" Text="登録" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+
+
 
 </td>
-                <td width="500">
+
+   <td width="100"  >
+
+<asp:Button ID="Button2" runat="server" Text="解除" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
 
 
-                                       <font size="2"  >
+</td>
 
-       <asp:Label ID="Label1" runat="server" Text="１．ＬＳ７、９（限定・試作）が同梱されている案件にチェックを入れる。"></asp:Label><br>
-                                           <asp:Label ID="Label2" runat="server" Text="２．登録ボタンを押す。"></asp:Label><br>
+<td width="100"  >
 
-                    </font>
+<asp:Button ID="Button1" runat="server" Text="画面更新" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
-
-
-
-         <td>
+</td>
 
 
 
+<td width="500">
 
-                </td>
+<font size="2"  >
 
-
-
-                               <td width="200">
-
-                                       <font size="4"  >
-
-
-
-                                           <section>
-  <a href="anken_booking01.aspx?id={0}" class="btn_07">当日案件へ<span></span></a>
-</section>
-
-
-                   </td>
-                               <td width="200">
-
-
-        <section class="auto-style13">
-  <a href="anken_booking.aspx?id={0}" class="btn_07">全案件へ<span></span></a>
-</section>
+<asp:Label ID="Label1" runat="server" Text="１．ＬＳ７、９（限定・試作）が同梱されている案件にチェックを入れる。"></asp:Label><br>
+<asp:Label ID="Label2" runat="server" Text="２．登録ボタンを押す。"></asp:Label><br>
 
 </font>
-                   </td>
+
+<td>
+
+</td>
+
+<td width="150">
+
+<font size="3"  >
 
 
-            </tr>
 
-        </table>
+<section>
+<a href="anken_booking01.aspx?id={0}" class="simple_square_btn4">当日案件へ<span></span></a>
+</section>
 
-            <font size="2">
-             <asp:Panel ID="Panel1" runat="server">
 
-  <div >
-    <table class="sticky">
-      <thead class="fixed">
+</td>
+<td width="150">
 
-      </thead>
 
-      <tbody>
+<section>
+<a href="anken_booking.aspx?id={0}" class="simple_square_btn4">全案件へ<span></span></a>
+</section>
+
+
+</td>
+</font>
+
+</tr>
+
+</table>
+
+<font size="2">
+<asp:Panel ID="Panel1" runat="server">
+
+<div >
+<table class="sticky">
+<thead class="fixed">
+
+</thead>
+
+<tbody>
                                  
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="927px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" AllowSorting="True">
+<font size="2">
+<asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" CssClass="auto-style6" DataSourceID="SqlDataSource1" Width="927px">
+<HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK" />
+<HeaderStyle CssClass="Freezing" />
+<Columns>
 
-                 
-<HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
-<HeaderStyle CssClass="Freezing"></HeaderStyle>
+<asp:TemplateField>
 
-                <Columns>
+<ItemTemplate>
+<asp:CheckBox ID="cb" runat="server" Checked="false"  />
+</ItemTemplate>
 
+</asp:TemplateField>
 
-
-                                    <asp:TemplateField>
-                    <ItemTemplate>
-
-                        <asp:CheckBox ID="cb" Checked="false" runat="server"  />
-
-                    </ItemTemplate>
-                </asp:TemplateField>
-                                        <asp:BoundField DataField="FLG02" HeaderText="状況" SortExpression="FLG02" />
-                    <asp:BoundField DataField="FORWARDER" HeaderText="シート" SortExpression="FORWARDER" />
-                    <asp:BoundField DataField="FORWARDER02" HeaderText="海貨業者" SortExpression="FORWARDER02" />
-                    <asp:BoundField DataField="CUST" HeaderText="客先コード" SortExpression="CUST" />
-                    <asp:BoundField DataField="INVOICE" HeaderText="INVOICE" SortExpression="INVOICE" />
-
-
-
-                    <asp:BoundField DataField="STATUS" HeaderText="進捗状況" SortExpression="STATUS" />
+<asp:BoundField DataField="FLG02" HeaderText="状況" SortExpression="FLG02" />
+<asp:BoundField DataField="FORWARDER" HeaderText="シート" SortExpression="FORWARDER" />
+<asp:BoundField DataField="FORWARDER02" HeaderText="海貨業者" SortExpression="FORWARDER02" />
+<asp:BoundField DataField="CUST" HeaderText="客先コード" SortExpression="CUST" />
+<asp:BoundField DataField="INVOICE" HeaderText="INVOICE" SortExpression="INVOICE" />
+<asp:BoundField DataField="STATUS" HeaderText="進捗状況" SortExpression="STATUS" />
 <%--                    <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" />--%>
-                    <asp:BoundField DataField="CUT_DATE" HeaderText="CUT" SortExpression="CUT_DATE" />
-                    <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" />
-<%--                    <asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" />--%>
-
-<%--                    <asp:BoundField DataField="TWENTY_FEET" HeaderText="20Ft" SortExpression="TWENTY_FEET" />
-                     <asp:BoundField DataField="FOURTY_FEET" HeaderText="40Ft" SortExpression="FOURTY_FEET" />
-                    <asp:BoundField DataField="LCL_QTY" HeaderText="LCL/40Ft" SortExpression="LCL_QTY" />--%>
-<%--                    <asp:BoundField DataField="CONTAINER" HeaderText="コンテナ" SortExpression="CONTAINER" />--%>
+<asp:BoundField DataField="CUT_DATE" HeaderText="CUT" SortExpression="CUT_DATE" />
+<asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" />
+<%--                    <asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" />--%><%--                    <asp:BoundField DataField="TWENTY_FEET" HeaderText="20Ft" SortExpression="TWENTY_FEET" />
+<asp:BoundField DataField="FOURTY_FEET" HeaderText="40Ft" SortExpression="FOURTY_FEET" />
+<asp:BoundField DataField="LCL_QTY" HeaderText="LCL/40Ft" SortExpression="LCL_QTY" />--%><%--                    <asp:BoundField DataField="CONTAINER" HeaderText="コンテナ" SortExpression="CONTAINER" />--%>
 <%--                    <asp:BoundField DataField="DAY01" HeaderText="VAN01" SortExpression="DAY01" />
-                    <asp:BoundField DataField="DAY02" HeaderText="VAN02" SortExpression="DAY02" />
-                    <asp:BoundField DataField="DAY03" HeaderText="VAN03" SortExpression="DAY03" />
-                    <asp:BoundField DataField="DAY04" HeaderText="VAN04" SortExpression="DAY04" />
-                    <asp:BoundField DataField="DAY05" HeaderText="VAN05" SortExpression="DAY05" />
-                    <asp:BoundField DataField="DAY06" HeaderText="VAN06" SortExpression="DAY06" />
-                    <asp:BoundField DataField="DAY07" HeaderText="VAN07" SortExpression="DAY07" />
-                    <asp:BoundField DataField="DAY08" HeaderText="VAN08" SortExpression="DAY08" />
-                    <asp:BoundField DataField="DAY09" HeaderText="VAN09" SortExpression="DAY09" />
-                    <asp:BoundField DataField="DAY10" HeaderText="VAN10" SortExpression="DAY10" />
-                    <asp:BoundField DataField="DAY11" HeaderText="VAN11" SortExpression="DAY11" />
-                    <asp:BoundField DataField="FINALVANDATE" HeaderText="最終バン日" SortExpression="FINALVANDATE" />--%>
-                    <asp:BoundField DataField="BOOKING_NO" HeaderText="BOOKING_NO" SortExpression="BOOKING_NO" />
-<%--                    <asp:BoundField DataField="BOOK_TO" HeaderText="BOOK_TO" SortExpression="BOOK_TO" />--%>
-<%--                    <asp:BoundField DataField="VESSEL_NAME" HeaderText="船名" SortExpression="VESSEL_NAME" />
-                    <asp:BoundField DataField="VOYAGE_NO" HeaderText="VOYAGE_NO" SortExpression="VOYAGE_NO" />--%>
-<%--                    <asp:BoundField DataField="PLACE_OF_RECEIPT" HeaderText="荷受港" SortExpression="PLACE_OF_RECEIPT" />--%>
-<%--                    <asp:BoundField DataField="LOADING_PORT" HeaderText="積出港" SortExpression="LOADING_PORT" />--%>
-<%--                    <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="揚港" SortExpression="DISCHARGING_PORT" />--%>
-<%--                    <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="配送先" SortExpression="PLACE_OF_DELIVERY" />--%>
-<%--                    <asp:BoundField DataField="FLG01" HeaderText="FLG01" SortExpression="FLG01" />--%>
-
-<%--                    <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
-                    <asp:BoundField DataField="FLG04" HeaderText="FLG04" SortExpression="FLG04" />--%>
-
-
-
-                </Columns>
-                <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                <RowStyle BackColor="#FFFFFF" ForeColor="Black" />
-                <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-                  <SortedAscendingHeaderStyle BackColor="#0000A9" />
-            </asp:GridView>
+<asp:BoundField DataField="DAY02" HeaderText="VAN02" SortExpression="DAY02" />
+<asp:BoundField DataField="DAY03" HeaderText="VAN03" SortExpression="DAY03" />
+<asp:BoundField DataField="DAY04" HeaderText="VAN04" SortExpression="DAY04" />
+<asp:BoundField DataField="DAY05" HeaderText="VAN05" SortExpression="DAY05" />
+<asp:BoundField DataField="DAY06" HeaderText="VAN06" SortExpression="DAY06" />
+<asp:BoundField DataField="DAY07" HeaderText="VAN07" SortExpression="DAY07" />
+<asp:BoundField DataField="DAY08" HeaderText="VAN08" SortExpression="DAY08" />
+<asp:BoundField DataField="DAY09" HeaderText="VAN09" SortExpression="DAY09" />
+<asp:BoundField DataField="DAY10" HeaderText="VAN10" SortExpression="DAY10" />
+<asp:BoundField DataField="DAY11" HeaderText="VAN11" SortExpression="DAY11" />
+<asp:BoundField DataField="FINALVANDATE" HeaderText="最終バン日" SortExpression="FINALVANDATE" />--%>
+<asp:BoundField DataField="BOOKING_NO" HeaderText="BOOKING_NO" SortExpression="BOOKING_NO" />
+<%--                    <asp:BoundField DataField="BOOK_TO" HeaderText="BOOK_TO" SortExpression="BOOK_TO" />--%><%--                    <asp:BoundField DataField="VESSEL_NAME" HeaderText="船名" SortExpression="VESSEL_NAME" />
+<asp:BoundField DataField="VOYAGE_NO" HeaderText="VOYAGE_NO" SortExpression="VOYAGE_NO" />--%><%--                    <asp:BoundField DataField="PLACE_OF_RECEIPT" HeaderText="荷受港" SortExpression="PLACE_OF_RECEIPT" />--%><%--                    <asp:BoundField DataField="LOADING_PORT" HeaderText="積出港" SortExpression="LOADING_PORT" />--%><%--                    <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="揚港" SortExpression="DISCHARGING_PORT" />--%><%--                    <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="配送先" SortExpression="PLACE_OF_DELIVERY" />--%><%--                    <asp:BoundField DataField="FLG01" HeaderText="FLG01" SortExpression="FLG01" />--%><%--                    <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
+<asp:BoundField DataField="FLG04" HeaderText="FLG04" SortExpression="FLG04" />--%>
+</Columns>
+<FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+<PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+<RowStyle BackColor="#FFFFFF" ForeColor="Black" />
+<SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+<SortedAscendingHeaderStyle BackColor="#0000A9" />
+</asp:GridView>
+</font>
 
 
+</tbody>
+</table>
+</div>
+
+<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE FLG01 = '1' ORDER BY CUT_DATE"></asp:SqlDataSource>
 
 
-                          </tbody>
-    </table>
-  </div>
+</div>
+</asp:Panel>   
+
+</font>
 
 
-
-        </font>
-
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE FLG01 = '1' ORDER BY CUT_DATE"></asp:SqlDataSource>
-
-
-    </div>
-                                 </asp:Panel>   
 
     <!--/#contents2-->
 
 <!--ページの上部に戻る「↑」ボタン-->
 <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
+    </form>
+
     </form>
 
 </body>
