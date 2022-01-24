@@ -191,9 +191,7 @@ Partial Class yuusen
 
 
 
-
-
-
-
     End Sub
+
+
 End Class
