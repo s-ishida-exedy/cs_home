@@ -50,19 +50,15 @@ Partial Class cs_home
         'ＳＱＬ文実行 
         dataread = dbcmd.ExecuteReader()
 
+        '初期値セット
         strStatus = "OK"
 
+        '１件でもNGあればNGを返す
         While (dataread.Read())
             If Trim(dataread("DATA_OKNG")) = "NG" Then
                 strStatus = "NG"
                 Exit While
             End If
-            'If Trim(dataread("CONTAINER")) = "OK" And Trim(dataread("VANNING")) = "OK" And
-            '    Trim(dataread("FORTH_FLOOR")) = "OK" And Trim(dataread("EED")) = "OK" Then
-            '    strStatus = "OK"
-            'Else
-            '    strStatus = "NG"
-            'End If
         End While
 
         'クローズ処理 

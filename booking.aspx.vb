@@ -39,7 +39,7 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
-        strSQL = "SELECT FINAL_DATE FROM t_booking_update01"
+        strSQL = "SELECT DATA_UPD FROM T_EXL_DATA_UPD WHERE DATA_CD = '008'"
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
         'ＳＱＬ文実行 
@@ -48,7 +48,7 @@ Partial Class yuusen
         strDate = ""
         '結果を取り出す 
         While (dataread.Read())
-            strDate += dataread("FINAL_DATE")
+            strDate += dataread("DATA_UPD")
         End While
 
         'クローズ処理 
@@ -58,8 +58,7 @@ Partial Class yuusen
         cnn.Dispose()
 
         '最終更新年月日を表示
-        Me.Label2.Text = Left(strDate, 4) & "/" & Mid(strDate, 5, 2) & "/" & Mid(strDate, 7, 2) _
-             & " " & Mid(strDate, 9, 2) & ":" & Mid(strDate, 11, 2) & ":" & Mid(strDate, 13, 2) & " 更新"
+        Me.Label2.Text = strDate & " 更新"
 
     End Sub
 
