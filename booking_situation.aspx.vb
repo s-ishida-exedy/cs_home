@@ -5,7 +5,7 @@ Imports System.IO
 
 Partial Class cs_home
     Inherits System.Web.UI.Page
-    Private Const strPath As String = "C:\express\cs_home\files\"       'サーバー上ファイルのフルパス
+    Private Const strPath As String = "C:\exp\cs_home\files\"       'サーバー上ファイルのフルパス
 
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load

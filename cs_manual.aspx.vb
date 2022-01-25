@@ -8,7 +8,6 @@ Partial Class cs_home
 
     Public strRow As String
     Public strProcess As String
-    Private Const strPath As String = "C:\express\cs_home\files\"       'サーバー上ファイルのフルパス
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 
