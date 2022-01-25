@@ -42,21 +42,27 @@ Partial Class cs_home
         cnn.Open()
 
         strSQL = ""
-        strSQL = strSQL & "SELECT CONTAINER, VANNING, FORTH_FLOOR, EED  "
-        strSQL = strSQL & "FROM T_EXL_PORTAL_STATUS "
+        strSQL = strSQL & "SELECT *  "
+        strSQL = strSQL & "FROM T_EXL_POR_STATUS "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
         'ＳＱＬ文実行 
         dataread = dbcmd.ExecuteReader()
 
+        strStatus = "OK"
+
         While (dataread.Read())
-            If Trim(dataread("CONTAINER")) = "OK" And Trim(dataread("VANNING")) = "OK" And
-                Trim(dataread("FORTH_FLOOR")) = "OK" And Trim(dataread("EED")) = "OK" Then
-                strStatus = "OK"
-            Else
+            If Trim(dataread("DATA_OKNG")) = "NG" Then
                 strStatus = "NG"
+                Exit While
             End If
+            'If Trim(dataread("CONTAINER")) = "OK" And Trim(dataread("VANNING")) = "OK" And
+            '    Trim(dataread("FORTH_FLOOR")) = "OK" And Trim(dataread("EED")) = "OK" Then
+            '    strStatus = "OK"
+            'Else
+            '    strStatus = "NG"
+            'End If
         End While
 
         'クローズ処理 

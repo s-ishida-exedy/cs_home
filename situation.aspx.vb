@@ -30,7 +30,7 @@ Partial Class cs_home
         cnn.Open()
 
         strSQL = ""
-        strSQL = strSQL & "SELECT * FROM T_EXL_PORTAL_STATUS "
+        strSQL = strSQL & "SELECT * FROM T_EXL_POR_STATUS "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -38,16 +38,23 @@ Partial Class cs_home
         dataread = dbcmd.ExecuteReader()
 
         While (dataread.Read())
-            Literal1.Text = Trim(StrConv(dataread("CONTAINER"), VbStrConv.Wide))
-            Literal2.Text = "更新日時：" + dataread("UPDTIME_CONTAINER")
-            Literal3.Text = Trim(StrConv(dataread("VANNING"), VbStrConv.Wide))
-            Literal4.Text = "更新日時：" + dataread("UPDTIME_VANNING")
-            Literal5.Text = Trim(StrConv(dataread("FORTH_FLOOR"), VbStrConv.Wide))
-            Literal6.Text = "更新日時：" + dataread("UPDTIME_FLOOR")
-            Literal7.Text = Trim(StrConv(dataread("EED"), VbStrConv.Wide))
-            Literal8.Text = "更新日時：" + dataread("UPDTIME_EED")
-            Literal9.Text = Trim(StrConv(dataread("THIRD_KONPO"), VbStrConv.Wide))
-            Literal10.Text = "更新日時：" + dataread("UPDTIME_KONPO")
+            Select Case dataread("DATA_CD")
+                Case "001"
+                    Literal1.Text = Trim(StrConv(dataread("DATA_OKNG"), VbStrConv.Wide))
+                    Literal2.Text = "更新日時：" + dataread("DATA_UPD")
+                Case "002"
+                    Literal3.Text = Trim(StrConv(dataread("DATA_OKNG"), VbStrConv.Wide))
+                    Literal4.Text = "更新日時：" + dataread("DATA_UPD")
+                Case "003"
+                    Literal5.Text = Trim(StrConv(dataread("DATA_OKNG"), VbStrConv.Wide))
+                    Literal6.Text = "更新日時：" + dataread("DATA_UPD")
+                Case "004"
+                    Literal7.Text = Trim(StrConv(dataread("DATA_OKNG"), VbStrConv.Wide))
+                    Literal8.Text = "更新日時：" + dataread("DATA_UPD")
+                Case "005"
+                    Literal9.Text = Trim(StrConv(dataread("DATA_OKNG"), VbStrConv.Wide))
+                    Literal10.Text = "更新日時：" + dataread("DATA_UPD")
+            End Select
         End While
 
         'クローズ処理 
