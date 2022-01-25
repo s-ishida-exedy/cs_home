@@ -73,6 +73,17 @@ Partial Class cs_home
         Dim dbcmd As SqlCommand
         Dim strSQL As String = ""
 
+        Dim lngHAll As Long = 0
+        Dim lngHAf As Long = 0
+        Dim lngHKd As Long = 0
+        Dim lngHAll2 As Long = 0
+        Dim lngHAf2 As Long = 0
+        Dim lngHKd2 As Long = 0
+        Dim lngU As Long = 0
+        Dim lngU2 As Long = 0
+        Dim lngAir As Long = 0
+        Dim lngAir2 As Long = 0
+
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
@@ -84,7 +95,7 @@ Partial Class cs_home
         cnn.Open()
 
         strSQL = ""
-        strSQL = strSQL & "SELECT * FROM T_EXL_VAN_SCH "
+        strSQL = strSQL & "SELECT * FROM T_EXL_POR_CNT ORDER BY DATA_CD "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -92,17 +103,40 @@ Partial Class cs_home
         dataread = dbcmd.ExecuteReader()
 
         While (dataread.Read())
-            Literal1.Text = StrConv(dataread("H_T_ALL"), VbStrConv.Wide) + "件（ＡＦ" +
-                            StrConv(dataread("H_T_AF"), VbStrConv.Wide) + "件、ＫＤ" +
-                            StrConv(dataread("H_T_KD"), VbStrConv.Wide) + "件）／　" +
-                            StrConv(dataread("H_N_ALL"), VbStrConv.Wide) + "件（ＡＦ" +
-                            StrConv(dataread("H_N_AF"), VbStrConv.Wide) + "件、ＫＤ" +
-                            StrConv(dataread("H_N_KD"), VbStrConv.Wide) + "件）"
-            Literal2.Text = StrConv(dataread("U_T_ALL"), VbStrConv.Wide) + "件　／　" +
-                            StrConv(dataread("U_N_ALL"), VbStrConv.Wide) + "件"
-            Literal3.Text = StrConv(dataread("A_T_ALL"), VbStrConv.Wide) + "件　／　" +
-                            StrConv(dataread("A_N_ALL"), VbStrConv.Wide) + "件"
+            Select Case dataread("DATA_CD")
+                Case "001"
+                    lngHAll = dataread("DATA_CNT")
+                Case "002"
+                    lngHAf = dataread("DATA_CNT")
+                Case "003"
+                    lngHKd = dataread("DATA_CNT")
+                Case "004"
+                    lngHAll2 = dataread("DATA_CNT")
+                Case "005"
+                    lngHAf2 = dataread("DATA_CNT")
+                Case "006"
+                    lngHKd2 = dataread("DATA_CNT")
+                Case "007"
+                    lngU = dataread("DATA_CNT")
+                Case "008"
+                    lngU2 = dataread("DATA_CNT")
+                Case "009"
+                    lngAir = dataread("DATA_CNT")
+                Case "010"
+                    lngAir2 = dataread("DATA_CNT")
+            End Select
         End While
+
+        Literal1.Text = StrConv(lngHAll, VbStrConv.Wide) + "件（ＡＦ" +
+                        StrConv(lngHAf, VbStrConv.Wide) + "件、ＫＤ" +
+                        StrConv(lngHKd, VbStrConv.Wide) + "件）／　" +
+                        StrConv(lngHAll2, VbStrConv.Wide) + "件（ＡＦ" +
+                        StrConv(lngHAf2, VbStrConv.Wide) + "件、ＫＤ" +
+                        StrConv(lngHKd2, VbStrConv.Wide) + "件）"
+        Literal2.Text = StrConv(lngU, VbStrConv.Wide) + "件　／　" +
+                        StrConv(lngU2, VbStrConv.Wide) + "件"
+        Literal3.Text = StrConv(lngAir, VbStrConv.Wide) + "件　／　" +
+                        StrConv(lngAir2, VbStrConv.Wide) + "件"
 
         'クローズ処理 
         dataread.Close()

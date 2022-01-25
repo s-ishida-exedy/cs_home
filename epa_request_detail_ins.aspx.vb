@@ -110,8 +110,7 @@ Partial Class cs_home
         Button7.Attributes.Add("onclick", "return confirm('登録します。よろしいですか？');")
     End Sub
 
-
-    Private Sub DB_access(strMode As String)
+    Private Sub DB_access()
         '画面入力情報をテーブルへ登録
         Dim strSQL As String
         Dim dbcmd As SqlCommand
@@ -255,7 +254,7 @@ Partial Class cs_home
         End If
 
         '更新
-        Call DB_access("01")        '更新モード
+        Call DB_access()
 
         '元の画面に戻る
         Response.Redirect("epa_request.aspx")
