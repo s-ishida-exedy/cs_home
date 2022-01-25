@@ -8,6 +8,7 @@ Partial Class cs_home
 
     Public strRow As String
     Public strProcess As String
+    Public strPath As String = "C:\exp\cs_home\files"
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         Me.Label2.Text = ""
