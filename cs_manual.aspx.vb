@@ -29,4 +29,34 @@ Partial Class cs_home
         GridView1.DataBind()
 
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        '詳細表示ボタン押下
+        If Trim(TextBox1.Text) = "" Then
+            MsgBox("表示する客先コードを入力してください。")
+            Return
+        End If
+
+        '入力された客先コードをセッションへ
+        Session("strCust") = Trim(TextBox1.Text)
+        Session("strMode") = "01"       '更新モード
+
+        '画面遷移
+        Response.Redirect("cs_manual_detail.aspx")
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        '新規登録ボタン押下
+        If Trim(TextBox1.Text) = "" Then
+            MsgBox("ベースとなる客先コードを入力してください。")
+            Return
+        End If
+
+        '入力された客先コードをセッションへ
+        Session("strCust") = Trim(TextBox1.Text)
+        Session("strMode") = "02"       '登録モード
+
+        '画面遷移
+        Response.Redirect("cs_manual_detail.aspx")
+    End Sub
 End Class
