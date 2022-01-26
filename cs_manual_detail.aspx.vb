@@ -239,7 +239,8 @@ Partial Class cs_home
             strSQL = strSQL & "  , FTA =  '" & DropDownList14.SelectedValue & "' "
             strSQL = strSQL & "  , CERTIFICATE_OF_CONFORMITY =  '" & DropDownList15.SelectedValue & "' "
             strSQL = strSQL & "  , DOC_OF_EGYPT =  '" & DropDownList16.SelectedValue & "' "
-            strSQL = strSQL & "WHERE "            strSQL = strSQL & "  NEW_CODE =  '" & strCust & "' "
+            strSQL = strSQL & "WHERE "
+            strSQL = strSQL & "  NEW_CODE =  '" & strCust & "' "
         Else
             strSQL = ""
             strSQL = strSQL & "INSERT INTO T_EXL_CSMANUAL "
@@ -316,7 +317,8 @@ Partial Class cs_home
             strSQL = strSQL & "  , '" & DropDownList14.SelectedValue & "' "
             strSQL = strSQL & "  , '" & DropDownList15.SelectedValue & "' "
             strSQL = strSQL & "  , '" & DropDownList16.SelectedValue & "' "
-            strSQL = strSQL & ") "        End If
+            strSQL = strSQL & ") "
+        End If
 
         Command.CommandText = strSQL
         ' SQLの実行
