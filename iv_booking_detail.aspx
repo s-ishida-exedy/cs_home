@@ -123,7 +123,7 @@
                     
                 </td>
                 <td class="auto-style2">
-                    <a href="#" onclick="window.history.back(); return false;">前のページに戻る</a>
+                    <a href ="./iv_booking.aspx">前のページに戻る</a>
                 </td>
             </tr>
             <tr>
