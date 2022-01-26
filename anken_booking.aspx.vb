@@ -586,7 +586,7 @@ Partial Class yuusen
 
 
 
-                End If
+            End If
         Next
 
 
@@ -595,4 +595,10 @@ Partial Class yuusen
 
     End Sub
 
+    Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
+
+        Panel1.Visible = True
+        Panel2.Visible = False
+
+    End Sub
 End Class

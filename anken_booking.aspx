@@ -45,94 +45,153 @@
         }
         .wrapper {
           overflow: scroll;
-          height: 450px;
+          height: 400px;
         }
 
-         h2 {
+h2 {
+  padding-left: 45px;
   position: relative;
-  overflow: hidden;
-  padding: 1.5rem 2rem 1.5rem 130px;
-  border: 2px solid #000;
+  border-radius: 10px; /* 角を丸くする */
 }
-
 h2:before {
+  content: "";
+  background-color: #6fbfd1;
+  border-radius: 50%;
+  opacity: 0.5;
+  width: 35px;
+  height: 35px;
+  left: 5px;
+  top: 0px;
   position: absolute;
-  top: -150%;
-  left: -100px;
-  width: 200px;
-  height: 300%;
+}
+h2:after{
+  content: "";
+  background-color: #6fbfd1;
+  border-radius: 50%;
+  opacity: 0.5;
+  width: 20px;
+  height: 20px;
+  left: 25px;
+  top:15px;
+  position: absolute;
+}
+
+
+ .button03 a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0.5em 2em;
+  width: 80px;
+  color: #696969;
+  font-size: 13px;
+  font-weight: 700;
+
+}
+
+.button03 a::after {
   content: '';
-  -webkit-transform: rotate(25deg);
-  transform: rotate(25deg);
-  background: #000;
+  width: 5px;
+  height: 5px;
+  border-top: 1px solid #696969;
+  border-right: 1px solid #696969;
+  transform: rotate(45deg);
 }
 
-h2 span {
-  font-size: 40px;
-  font-size: 4rem;
+.button03 a:hover {
+
+  text-decoration: none;
+  border-width: 4px;
+  text-align: center
+
+}
+
+
+
+
+
+.DropDown
+{
+background-color: #ffffff;
+border-color: #000000;
+border-style: solid;
+border: none;
+ color: #000000;
+      text-align: center;
+      border-bottom: inset 2px #ffffff;
+}
+
+
+
+.DropDown:hover {
+
+
+  text-align: center;
+  border-bottom: inset 2px #000000;
+}
+
+
+
+.button01
+{
+background-color: #ffffff;
+border:none;
+      color: #000000;
+      border-bottom: inset 2px #ffffff;
+}
+
+.button01:hover {
+
+
+  text-align: center;
+      border-bottom: inset 2px #000000;
+}
+
+.table01
+{
+
+/*background:linear-gradient(transparent 90%, #6fbfd1 0%);*/
+  background: -webkit-gradient(linear, left top, right bottom,
+    from(rgba(255,153,0,1)),
+    color-stop(50%, rgba(255,153,0,1)),
+    to(rgba(255,255,255,1)));
+  background: -moz-linear-gradient(left,
+    #6fbfd1,
+    #6fbfd1 50%,
+    #ffffff);
+  background: linear-gradient(transparent 10%, to right,
+    #6fbfd1,
+    #6fbfd1 50%,
+    #ffffff );
+   color: #ffffff;
+
+}
+
+h1 {
+  position: relative;
+  display: inline-block;
+  padding: 0 143px;
+  text-align: center;
+}
+
+h1:before, h1:after {
+  content: '';
   position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  display: block;
-  padding-top: 3px;
-  padding-left: 16px;
-  color: #fff;
-}
-     .simple_square_btn4 {
-	display: block;
-	position: relative;
-	width: 160px;
-	padding: 0.1em;
-	text-align: center;
-	text-decoration: none;
-	color: #1B1B1B;
-	background: #fff;
-	border-radius: 30px;
-	border:1px solid #1B1B1B;
-	-webkit-backface-visibility: hidden; 
-	-moz-backface-visibility: hidden;
-    backface-visibility: hidden;
+  top: 50%;
+  display: inline-block;
+  width: 130px;
+  height: 2px;
+  background-color: black;
 }
 
+h1:before {
+  left:0;
+}
+h1:after {
+  right: 0;
+}
 
-.simple_square_btn4:hover {
-	 cursor: pointer;
-	 text-decoration: none;
-	-webkit-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	-moz-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-@-webkit-keyframes simple_square_btn4{
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
-}
-@-moz-keyframes simple_square_btn4{
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
-}
-@keyframes simple_square_btn4 {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
-}
 
     </style>
     <script>
@@ -173,45 +232,55 @@ h2 span {
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.htmlで行う -->
  <!-- #Include File="header.html" -->
-       
+  
+
+  
+
+
 <div id="contents2" class="inner2">
 
-<div class="auto-style8">
+<div>
 
-<table class="auto-style1" >
+<table height ="10">
+
+
 
 <tr>
 
-<td width="220" border="1" >
+<td width="250" >
 
 <font size="6"  >
-出荷案件管理
+
+
+    <h2>
+        出荷案件管理
+    </h2>
+
+
+
+
 </font>
 
 </td>
 
-<td width="250" >
 
-<asp:Button class="btn-radius-gradient-wrap"  ID="Button2" runat="server" Text="フォルダ作成登録" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> <br>
- 
-<font size="1"  >
-チェックをしてボタンを押す。<br>※チェックボックスが緑のものはフォルダ作成可能
-</font>
 
+
+    <td width="100"  >
 </td>
 
 <td width="550">
 
 <div>
 
-<font size="3"  >
 
-<asp:Label ID="Label1" runat="server" Text="フィルタ:"></asp:Label>
+    <h1>
+        <font size="2">フィルタ</font>
+    </h1><p>
+</p>
 
-</font>
 
-
-<asp:DropDownList ID="DropDownList1" runat="server" Width="120px" Height="40px"  CssClass="ddl" Font-Size="12px" AutoPostBack="True" >
+<asp:DropDownList ID="DropDownList1" runat="server" Width="100px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" >
 <asp:ListItem>--Select--</asp:ListItem>
 <asp:ListItem>進捗状況</asp:ListItem>
 <asp:ListItem>シート</asp:ListItem>
@@ -221,11 +290,12 @@ h2 span {
 
 <font size="3"  >
 
-<asp:DropDownList ID="DropDownList2" runat="server" Width="150px" Height="40px"  CssClass="ddl" Font-Size="12px" AutoPostBack="True" >
+<asp:DropDownList ID="DropDownList2" runat="server" Width="140px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" >
 </asp:DropDownList>
 
-<asp:Button class="btn-radius-gradient-wrap"  ID="Button1" runat="server" Text="全件表示" Width="150px" Height="40px" AutoPostBack="True" Font-Size="13px" /></font>
-   
+<asp:Button CssClass ="button01" ID="Button1" runat="server" Text="全件表示" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+
+
 </font>
 
 </td>
@@ -233,35 +303,61 @@ h2 span {
 <font size="4"  >
 <td width="150">
 
-<section>
-<a href="anken_booking01.aspx?id={0}" class="simple_square_btn4">当日案件へ<span></span></a>
-</section>
+<div class="button03">
+<a href="anken_booking01.aspx?id={0}">当日案件へ</a>
+</div>
+
 
 
 </td>
 <td width="150">
 
 
-<section>
-<a href="anken_booking02.aspx?id={0}" class="simple_square_btn4">案件抽出<span></span></a>
-</section>
+<div class="button03">
+<a href="anken_booking02.aspx?id={0}">案件抽出</a>
+</div>
+
+
 
 </font>
 
 </td>
 
 
+
 </tr>
 
 </table>
 
-<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [STATUS] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
-<asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [FORWARDER] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
-<asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [FORWARDER02] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
-<asp:SqlDataSource ID="SqlDataSource8" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [CUST] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
- 
-<font size="2">
 
+<table height ="10">
+<tr>
+<td width="1500">
+
+<asp:Button class="btn-radius-gradient-wrap"  ID="Button2" runat="server" Text="フォルダ作成登録" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
+<font size="2"  >
+<p>※チェック後にボタンを押す。(チェックボックスが緑のものはフォルダ作成可能)</p>
+</font>
+
+</td>
+
+
+ 
+
+
+
+</tr>
+
+
+
+
+
+
+
+</table>
+
+
+<font size="2">
 <asp:Panel ID="Panel1" runat="server">
 
 <div class="wrapper">
@@ -272,7 +368,7 @@ h2 span {
 
 <tbody>
 
-<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource7" Width="2000px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
+<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource7" Width="2000px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
 
 
 <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
@@ -340,20 +436,22 @@ h2 span {
 </table>
 </div>
 
-</font>
-
-<asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN]  ORDER BY CUT_DATE"></asp:SqlDataSource>
-    
-<br />
+ 
 </asp:Panel>
                             
 
 <asp:Panel ID="Panel2" runat="server">
 
-<div id="freezingDiv" style="OVERFLOW: auto; WIDTH: 1300px; HEIGHT: 500px" >
+    <div class="wrapper">
+<table class="sticky">
+<thead class="fixed">
 
-<asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" CssClass="auto-style6" Width="2000px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" AllowSorting="True">
+</thead>
 
+<tbody>
+
+
+<asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False"  Width="2000px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" AllowSorting="True">
 
 <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
 <HeaderStyle CssClass="Freezing"></HeaderStyle>
@@ -413,12 +511,38 @@ h2 span {
 <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
 <SortedAscendingHeaderStyle BackColor="#0000A9" />
 </asp:GridView>
-</div>
-</asp:Panel>
 
+    </tbody>
+</table>
+</div>
+
+</asp:Panel>
 
 </font>
 
+    <table Height="50px">
+    </table>
+
+
+    
+<footer>
+
+<div id="footermenu" class="inner">
+
+</div>
+<!--/footermenu-->
+
+<div id="copyright">
+</div>
+
+</footer>
+
+    <!--/#contents2-->
+
+<!--ページの上部に戻る「↑」ボタン-->
+<p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
+        
+    
     
     
 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([STATUS] = @STATUS)">
@@ -444,14 +568,17 @@ h2 span {
 <asp:ControlParameter ControlID="DropDownList2" Name="CUST" PropertyName="SelectedValue" Type="String" />
 </SelectParameters>
 </asp:SqlDataSource>
+   
     
-</div>
-    
-    <!--/#contents2-->
 
-<!--ページの上部に戻る「↑」ボタン-->
-<p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
-        
+<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [STATUS] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [FORWARDER] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [FORWARDER02] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource8" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [CUST] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN]  ORDER BY CUT_DATE"></asp:SqlDataSource>
+   
+     
+
     </form>
 
 </body>
