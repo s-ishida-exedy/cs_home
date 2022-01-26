@@ -163,4 +163,46 @@ Public Class DBAccess
         Return Ds
     End Function
 
+    Public Function GET_RESULT_VAN_SCH(strDate As String, strPlace As String) As DataSet
+        'バンニングスケジュール絞り込み
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  CASE PLACE  "
+        StrSQL = StrSQL & "    WHEN '0H' THEN '本社'  "
+        StrSQL = StrSQL & "    WHEN '1U' THEN '上野'  "
+        StrSQL = StrSQL & "    WHEN '2A' THEN 'AIR'  "
+        StrSQL = StrSQL & "    END AS 場所 "
+        StrSQL = StrSQL & "  , CUST_NM AS 客先名 "
+        StrSQL = StrSQL & "  , VAN_DATE AS VAN日 "
+        StrSQL = StrSQL & "  , VAN_TIME AS ｽﾀｰﾄ "
+        StrSQL = StrSQL & "  , CON_SIZE AS コンテナサイズ "
+        StrSQL = StrSQL & "  , IVNO AS インボイスNO "
+        StrSQL = StrSQL & "  , CUT_DATE AS カット日 "
+        StrSQL = StrSQL & "  , ETD AS ＥＴＤ  "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "  T_EXL_VAN_SCH_DETAIL  "
+        If strDate <> "" And strPlace <> "" Then
+            StrSQL = StrSQL & "WHERE "
+            StrSQL = StrSQL & " PLACE = '" & strPlace & "' "
+            StrSQL = StrSQL & " AND VAN_DATE = '" & strDate & "' "
+        ElseIf strDate <> "" And strPlace = "" Then
+            StrSQL = StrSQL & "WHERE "
+            StrSQL = StrSQL & " VAN_DATE = '" & strDate & "' "
+        ElseIf strDate = "" And strPlace <> "" Then
+            StrSQL = StrSQL & "WHERE "
+            StrSQL = StrSQL & " PLACE = '" & strPlace & "' "
+        End If
+        StrSQL = StrSQL & "ORDER BY "
+        StrSQL = StrSQL & "  PLACE "
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class
