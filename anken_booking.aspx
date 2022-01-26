@@ -247,7 +247,7 @@ h1:after {
 
 <tr>
 
-<td width="250" >
+<td width="250">
 
 <font size="6"  >
 
@@ -537,7 +537,11 @@ h1:after {
 
 </footer>
 
-    <!--/#contents2-->
+</div>
+<!--/#main2-->
+
+</div>
+<!--/#contents2-->
 
 <!--ページの上部に戻る「↑」ボタン-->
 <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
