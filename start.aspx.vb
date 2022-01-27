@@ -85,6 +85,9 @@ Partial Class cs_home
         Dim lngU2 As Long = 0
         Dim lngAir As Long = 0
         Dim lngAir2 As Long = 0
+        Dim lngJishT As Long = 0
+        Dim lngJishT2 As Long = 0
+        Dim lngTsukI As Long = 0
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -126,6 +129,12 @@ Partial Class cs_home
                     lngAir = dataread("DATA_CNT")
                 Case "010"
                     lngAir2 = dataread("DATA_CNT")
+                Case "011"
+                    lngJishT = dataread("DATA_CNT")
+                Case "012"
+                    lngJishT2 = dataread("DATA_CNT")
+                Case "013"
+                    lngTsukI = dataread("DATA_CNT")
             End Select
         End While
 
@@ -139,6 +148,9 @@ Partial Class cs_home
                         StrConv(lngU2, VbStrConv.Wide) + "件"
         Literal3.Text = StrConv(lngAir, VbStrConv.Wide) + "件　／　" +
                         StrConv(lngAir2, VbStrConv.Wide) + "件"
+        Literal4.Text = StrConv(lngJishT, VbStrConv.Wide) + "件　／　" +
+                        StrConv(lngJishT2, VbStrConv.Wide) + "件"
+        Literal5.Text = StrConv(lngTsukI, VbStrConv.Wide) + "件"
 
         'クローズ処理 
         dataread.Close()

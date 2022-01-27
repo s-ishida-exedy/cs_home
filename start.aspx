@@ -88,11 +88,15 @@
 </tr>
 <tr>
     <th>自社通関</th>
-    <td>○○件　／　○○件(工事中)</td>
+    <td>
+        <asp:Literal ID="Literal4" runat="server"></asp:Literal>
+    </td>
 </tr>
 <tr>
     <th>通関委託</th>
-    <td>○○件(工事中)</td>
+    <td>
+        <asp:Literal ID="Literal5" runat="server"></asp:Literal>
+    </td>
 </tr>
 </table>
 

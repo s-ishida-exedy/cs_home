@@ -54,7 +54,7 @@ Partial Class cs_home
             Dim data3 = Me.GridView1.Rows(index).Cells(5).Text
             Dim data4 = Me.GridView1.Rows(index).Cells(1).Text
 
-            Session("strEtd") = Format(data1, "yyyy/mm/dd")
+            Session("strEtd") = data1
             Session("strIvno") = data2
             Session("strCust") = data3
             Session("strStatus") = data4

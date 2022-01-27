@@ -19,17 +19,17 @@
             width: 1280px;
         }
         .auto-style2 {
-            width: 400px;
+            width: 200px;
             text-align:right;
         }
         .auto-style4 {
             text-align:left;
             font-size:larger;
             font-weight : 700;
-            width: 400px;
+            width: 200px;
         }
         .auto-style7 {
-            width: 480px;
+            width: 880px;
         }   
 </style>
 <script>
@@ -78,7 +78,9 @@
                 <asp:Label ID="Label4" runat="server" Text="客先CD："></asp:Label>
                 <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>&nbsp;
                 <asp:Button ID="Button1" runat="server" Text="表示" />&nbsp;
-                <asp:Button ID="Button2" runat="server" Text="詳細表示" />
+                <asp:Button ID="Button2" runat="server" Text="詳細表示" />&nbsp;
+                <asp:Button ID="Button3" runat="server" Text="新規登録" />&nbsp;
+                <asp:Label ID="Label1" runat="server" Text="※新規登録時はﾍﾞｰｽの客先CDを入力してください。"></asp:Label>
             </td>
             <td class="auto-style2">
                 <a href="#" onclick="window.history.back(); return false;">前のページに戻る</a>

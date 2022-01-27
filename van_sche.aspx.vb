@@ -13,6 +13,13 @@ Partial Class cs_home
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         Me.Label2.Text = ""
 
+        If IsPostBack Then
+            ' そうでない時処理
+        Else
+            Me.DropDownList2.Items.Insert(0, "") '先頭に空白行追加（日付）
+            Me.DropDownList1.Items.Insert(0, "") '先頭に空白行追加（場所）
+        End If
+
         '最終更新年月日取得
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
@@ -79,5 +86,55 @@ Partial Class cs_home
         'ダウンロード実行
         Response.Flush()
         Response.End()
+    End Sub
+
+    Private Sub DropDownList1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList1.SelectedIndexChanged
+        Dim Dataobj As New DBAccess
+        Dim strDate As String = DropDownList2.SelectedValue
+        Dim strPlace As String = ""
+
+        Select Case DropDownList1.SelectedValue
+            Case "01:本社"
+                strPlace = "0H"
+            Case "02:上野"
+                strPlace = "1U"
+            Case "03:AIR"
+                strPlace = "2A"
+        End Select
+
+        Dim ds As DataSet = Dataobj.GET_RESULT_VAN_SCH(strDate, strPlace)
+        If ds.Tables.Count > 0 Then
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = ds
+            Session("data") = ds
+        End If
+
+        'Grid再表示
+        GridView1.DataBind()
+    End Sub
+
+    Private Sub DropDownList2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList2.SelectedIndexChanged
+        Dim Dataobj As New DBAccess
+        Dim strDate As String = DropDownList2.SelectedValue
+        Dim strPlace As String = ""
+
+        Select Case DropDownList1.SelectedValue
+            Case "01:本社"
+                strPlace = "0H"
+            Case "02:上野"
+                strPlace = "1U"
+            Case "03:AIR"
+                strPlace = "2A"
+        End Select
+
+        Dim ds As DataSet = Dataobj.GET_RESULT_VAN_SCH(strDate, strPlace)
+        If ds.Tables.Count > 0 Then
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = ds
+            Session("data") = ds
+        End If
+
+        'Grid再表示
+        GridView1.DataBind()
     End Sub
 End Class

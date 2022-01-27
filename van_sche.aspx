@@ -19,17 +19,17 @@
             width: 1280px;
         }
         .auto-style2 {
-            width: 400px;
+            width: 300px;
             text-align:right;
         }
         .auto-style4 {
             text-align:left;
             font-size:larger;
             font-weight : 700;
-            width: 400px;
+            width: 300px;
         }
         .auto-style7 {
-            width: 480px;
+            width: 680px;
         }   
 </style>
 <script>
@@ -75,7 +75,10 @@
                 <asp:Label ID="Label3" runat="server" Text="【バンニングスケジュール】" ></asp:Label>    
             </td>
             <td class="auto-style7">
-                <asp:Button ID="Button1" runat="server" Text="ファイルダウンロード" />
+                <asp:Button ID="Button1" runat="server" Text="ファイルダウンロード" />&nbsp;
+                <asp:Label ID="Label1" runat="server" Text="絞り込み："></asp:Label>
+                <asp:DropDownList ID="DropDownList2" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="164px" DataSourceID="SqlDataSource3" DataTextField="VAN_DATE" DataValueField="VAN_DATE"></asp:DropDownList>
+                <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="164px" DataSourceID="SqlDataSource2" DataTextField="場所" DataValueField="場所"></asp:DropDownList>
             </td>
             <td class="auto-style2">
                 <asp:Label ID="Label2" runat="server" Text="Labe2" ></asp:Label>
@@ -121,6 +124,17 @@
 FROM
   T_EXL_VAN_SCH_DETAIL
 ORDER BY PLACE"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT
+  CASE PLACE
+  	WHEN '0H' THEN '01:本社'
+  	WHEN '1U' THEN '02:上野'
+  	WHEN '2A' THEN '03:AIR'
+  END AS 場所
+FROM
+  T_EXL_VAN_SCH_DETAIL
+ORDER BY 場所"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT VAN_DATE FROM T_EXL_VAN_SCH_DETAIL
+ORDER BY VAN_DATE"></asp:SqlDataSource>
 </div>
 <!--/#main2-->
 
