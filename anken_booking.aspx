@@ -29,10 +29,7 @@
         A.sample1:visited { color: blue;}
         A.sample1:active { color: blue;}
         A.sample1:hover { color: blue;}
-        .auto-style6 {
-            margin-right: 7px;
-        }
-
+        
         table{
           width: 100%;
         }
@@ -223,7 +220,25 @@ h1:after {
     });
 
 
+
 </script>
+
+
+    <script  type="text/javascript">
+
+        function Button3_onclick() {
+
+            var xlApp = new ActiveXObject("Excel.Application");
+            xlApp.DisplayAlerts = false;
+            xlApp.Visible = true;
+            xlApp.Workbooks.Open("\\\\server\\App\\App_Data\\test.xls", 0, false);
+
+
+
+        }
+    </script>
+
+
 
 </head>
 <body class="c2">
@@ -318,6 +333,8 @@ h1:after {
                 <p></p>
                  <asp:Label ID="Label1" runat="server" Text="※チェック後にボタンを押す。(チェックボックスが緑のものはフォルダ作成可能)"  Font-Size="10px"></asp:Label>
 
+
+
             </td>
         </tr>
     </table>
@@ -334,6 +351,8 @@ h1:after {
                     <tbody>
 
                         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource7" Width="2000px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
+
+
 
                         <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
                         <HeaderStyle CssClass="Freezing"></HeaderStyle>
@@ -414,7 +433,10 @@ h1:after {
                     <tbody>
 
 
-                        <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False"  Width="2000px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" AllowSorting="True">
+<%--                        <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False"  Width="2000px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" AllowSorting="True">
+
+   --%>                     <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False"  Width="2000px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
+
 
                         <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
                         <HeaderStyle CssClass="Freezing"></HeaderStyle>
