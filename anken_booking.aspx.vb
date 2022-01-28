@@ -22,6 +22,8 @@ Partial Class yuusen
         Dim wday2 As String
         Dim wday3 As String
 
+
+
         Dim dt1 As DateTime = DateTime.Now
 
         Dim Kaika00 As String
@@ -79,7 +81,7 @@ Partial Class yuusen
             'ＳＱＬ文実行
             dataread = dbcmd.ExecuteReader()
 
-            strinv = ""
+            strbkg = ""
             '結果を取り出す
             While (dataread.Read())
                 strbkg += dataread("DECFIN_BKGNO")
@@ -116,7 +118,7 @@ Partial Class yuusen
             'ＳＱＬ文実行
             dataread = dbcmd.ExecuteReader()
 
-            strinv = ""
+            strbkg = ""
             '結果を取り出す
             While (dataread.Read())
                 strbkg += dataread("ITK_BKGNO")
@@ -167,7 +169,6 @@ Partial Class yuusen
             End If
 
 
-
         End If
 
         '不要行非表示
@@ -200,6 +201,12 @@ Partial Class yuusen
         e.Row.Cells(35).Visible = False
         e.Row.Cells(36).Visible = False
         e.Row.Cells(37).Visible = False
+
+
+
+        Panel1.Visible = True
+        Panel2.Visible = False
+
 
     End Sub
 
@@ -283,7 +290,7 @@ Partial Class yuusen
             'ＳＱＬ文実行
             dataread = dbcmd.ExecuteReader()
 
-            strinv = ""
+            strbkg = ""
             '結果を取り出す
             While (dataread.Read())
                 strbkg += dataread("DECFIN_BKGNO")
@@ -320,7 +327,7 @@ Partial Class yuusen
             'ＳＱＬ文実行
             dataread = dbcmd.ExecuteReader()
 
-            strinv = ""
+            strbkg = ""
             '結果を取り出す
             While (dataread.Read())
                 strbkg += dataread("ITK_BKGNO")
@@ -366,7 +373,7 @@ Partial Class yuusen
             If e.Row.Cells(36).Text = "1" Then
 
 
-                e.Row.Cells(0).BackColor = Drawing.Color.Yellow
+                e.Row.Cells(0).BackColor = Drawing.Color.YellowGreen
 
             End If
 
@@ -556,13 +563,56 @@ Partial Class yuusen
 
 
         Dim I As Integer
-        For I = 0 To GridView1.Rows.Count - 1
-            If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
+
+        If Panel2.Visible = False Then
 
 
-                If GridView1.Rows(I).Cells(26).Text = "&nbsp;" Or GridView1.Rows(I).Cells(6).Text = "&nbsp;" Then
 
-                    MsgBox("未確定のためフォルダを作成できません。" & vbCrLf & "客先:" & GridView1.Rows(I).Cells(4).Text & vbCrLf & "ETD:" & vbCrLf & GridView1.Rows(I).Cells(8).Text)
+            For I = 0 To GridView1.Rows.Count - 1
+                If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
+
+
+                    If GridView1.Rows(I).Cells(26).Text = "&nbsp;" Or GridView1.Rows(I).Cells(6).Text = "&nbsp;" Then
+
+                        MsgBox("未確定のためフォルダを作成できません。" & vbCrLf & "客先:" & GridView1.Rows(I).Cells(4).Text & vbCrLf & "ETD:" & vbCrLf & GridView1.Rows(I).Cells(8).Text)
+
+                    Else
+
+
+
+                        'FIN_FLGを更新
+                        strSQL = ""
+                        strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG03 ='1' "
+                        strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView1.Rows(I).Cells(26).Text & "'"
+
+                        Command.CommandText = strSQL
+                        ' SQLの実行
+                        Command.ExecuteNonQuery()
+
+                        '            Response.Redirect("anken_booking02.aspx")
+
+
+                    End If
+
+                Else
+
+
+
+                End If
+            Next
+
+
+            GridView1.DataBind()
+
+        Else
+
+            For I = 0 To GridView3.Rows.Count - 1
+            If CType(GridView3.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
+
+
+                If GridView3.Rows(I).Cells(26).Text = "&nbsp;" Or GridView3.Rows(I).Cells(6).Text = "&nbsp;" Then
+
+                    MsgBox("未確定のためフォルダを作成できません。" & vbCrLf & "客先:" & GridView3.Rows(I).Cells(4).Text & vbCrLf & "ETD:" & vbCrLf & GridView3.Rows(I).Cells(8).Text)
 
                 Else
 
@@ -571,7 +621,7 @@ Partial Class yuusen
                     'FIN_FLGを更新
                     strSQL = ""
                     strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG03 ='1' "
-                    strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView1.Rows(I).Cells(26).Text & "'"
+                    strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView3.Rows(I).Cells(26).Text & "'"
 
                     Command.CommandText = strSQL
                     ' SQLの実行
@@ -590,15 +640,45 @@ Partial Class yuusen
         Next
 
 
-        GridView1.DataBind()
+            If DropDownList1.Text = "進捗状況" Then
+
+                GridView3.DataSource = SqlDataSource1
+                GridView3.DataBind()
+
+
+            ElseIf DropDownList1.Text = "シート" Then
+
+                GridView3.DataSource = SqlDataSource5
+                GridView3.DataBind()
+
+            ElseIf DropDownList1.Text = "海貨業者" Then
+
+                GridView3.DataSource = SqlDataSource6
+                GridView3.DataBind()
+
+            ElseIf DropDownList1.Text = "客先コード" Then
+
+                GridView3.DataSource = SqlDataSource9
+                GridView3.DataBind()
+
+            End If
+
+
+        End If
 
 
     End Sub
 
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 
-        Panel1.Visible = True
-        Panel2.Visible = False
+        'Panel1.Visible = True
+        'Panel2.Visible = False
+
 
     End Sub
+
+
+
+
+
 End Class

@@ -200,6 +200,7 @@ Partial Class cs_home
         e.Row.Cells(0).Width = 10
         e.Row.Cells(1).Width = 120
         e.Row.Cells(2).Width = 50
+        e.Row.Cells(3).Width = 100
         e.Row.Cells(4).Width = 70
         e.Row.Cells(5).Width = 100
         e.Row.Cells(6).Width = 110

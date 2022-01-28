@@ -29,9 +29,6 @@
         A.sample1:visited { color: blue;}
         A.sample1:active { color: blue;}
         A.sample1:hover { color: blue;}
-        .auto-style6 {
-            margin-right: 7px;
-        }
 
         table{
           width: 100%;
@@ -180,7 +177,7 @@ h1:before, h1:after {
   position: absolute;
   top: 50%;
   display: inline-block;
-  width: 130px;
+  width:100px;
   height: 2px;
   background-color: black;
 }
@@ -223,7 +220,25 @@ h1:after {
     });
 
 
+
 </script>
+
+
+    <script  type="text/javascript">
+
+        function Button3_onclick() {
+
+            var xlApp = new ActiveXObject("Excel.Application");
+            xlApp.DisplayAlerts = false;
+            xlApp.Visible = true;
+            xlApp.Workbooks.Open("\\\\server\\App\\App_Data\\test.xls", 0, false);
+
+
+
+        }
+    </script>
+
+
 
 </head>
 <body class="c2">
@@ -239,44 +254,33 @@ h1:after {
 
 <div id="contents2" class="inner2">
 
-<div>
 
-<table height ="10">
-
+    <table style="height:10px;">
 
 
 <tr>
 
-<td width="250">
-
-<font size="6"  >
-
+<td width="250" >
 
     <h2>
         出荷案件管理
     </h2>
 
-
-
-
-</font>
-
 </td>
 
 
 
 
-    <td width="100"  >
+            <td style="width:100px;" >
 </td>
 
-<td width="550">
 
-<div>
-
+            <td style="width:550px;">
 
     <h1>
-        <font size="2">フィルタ</font>
-    </h1><p>
+                    フィルタ
+                </h1>
+                <p>
 </p>
 
 
@@ -288,29 +292,23 @@ h1:after {
 <asp:ListItem>客先コード</asp:ListItem>
 </asp:DropDownList>
 
-<font size="3"  >
-
-<asp:DropDownList ID="DropDownList2" runat="server" Width="140px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" >
-</asp:DropDownList>
+                <asp:DropDownList ID="DropDownList2" runat="server" Width="140px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" ></asp:DropDownList>
 
 <asp:Button CssClass ="button01" ID="Button1" runat="server" Text="全件表示" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
 
-</font>
+            </td>
 
-</td>
 
-<font size="4"  >
-<td width="150">
+            <td style="font-size:40px; width:150px;" >
 
 <div class="button03">
 <a href="anken_booking01.aspx?id={0}">当日案件へ</a>
 </div>
 
-
-
 </td>
-<td width="150">
+
+            <td style="font-size:40px; width:150px;" >
 
 
 <div class="button03">
@@ -318,11 +316,7 @@ h1:after {
 </div>
 
 
-
-</font>
-
 </td>
-
 
 
 </tr>
@@ -330,35 +324,23 @@ h1:after {
 </table>
 
 
-<table height ="10">
+    <table style="height:10px;">
 <tr>
-<td width="1500">
+            <td style="width:1500px;" >
 
 <asp:Button class="btn-radius-gradient-wrap"  ID="Button2" runat="server" Text="フォルダ作成登録" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
-<font size="2"  >
-<p>※チェック後にボタンを押す。(チェックボックスが緑のものはフォルダ作成可能)</p>
-</font>
-
-</td>
-
-
  
+                <p></p>
+                 <asp:Label ID="Label1" runat="server" Text="※チェック後にボタンを押す。(チェックボックスが緑のものはフォルダ作成可能)"  Font-Size="10px"></asp:Label>
 
 
 
+            </td>
 </tr>
-
-
-
-
-
-
-
 </table>
 
 
-<font size="2">
-<asp:Panel ID="Panel1" runat="server">
+            <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
 <div class="wrapper">
 <table class="sticky">
@@ -371,10 +353,10 @@ h1:after {
 <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource7" Width="2000px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
 
 
+
 <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
 <HeaderStyle CssClass="Freezing"></HeaderStyle>
                     
-
 <Columns>
 
 <asp:TemplateField>
@@ -440,7 +422,7 @@ h1:after {
 </asp:Panel>
                             
 
-<asp:Panel ID="Panel2" runat="server">
+            <asp:Panel ID="Panel2" runat="server"  Font-Size="12px">
 
     <div class="wrapper">
 <table class="sticky">
@@ -451,7 +433,10 @@ h1:after {
 <tbody>
 
 
-<asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False"  Width="2000px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" AllowSorting="True">
+<%--                        <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False"  Width="2000px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" AllowSorting="True">
+
+   --%>                     <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False"  Width="2000px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
+
 
 <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
 <HeaderStyle CssClass="Freezing"></HeaderStyle>
@@ -518,9 +503,9 @@ h1:after {
 
 </asp:Panel>
 
-</font>
 
-    <table Height="50px">
+
+            <table style="height:10px;">
     </table>
 
 
@@ -537,11 +522,7 @@ h1:after {
 
 </footer>
 
-</div>
-<!--/#main2-->
-
-</div>
-<!--/#contents2-->
+    <!--/#contents2-->
 
 <!--ページの上部に戻る「↑」ボタン-->
 <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
@@ -582,7 +563,6 @@ h1:after {
 <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN]  ORDER BY CUT_DATE"></asp:SqlDataSource>
    
      
-
     </form>
 
 </body>
