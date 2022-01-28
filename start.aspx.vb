@@ -88,6 +88,11 @@ Partial Class cs_home
         Dim lngJishT As Long = 0
         Dim lngJishT2 As Long = 0
         Dim lngTsukI As Long = 0
+        Dim StrH As String = ""
+        Dim StrU As String = ""
+        Dim StrA As String = ""
+        Dim StrJ As String = ""
+        Dim StrT As String = ""
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -138,19 +143,58 @@ Partial Class cs_home
             End Select
         End While
 
-        Literal1.Text = StrConv(lngHAll, VbStrConv.Wide) + "件（ＡＦ" +
-                        StrConv(lngHAf, VbStrConv.Wide) + "件、ＫＤ" +
-                        StrConv(lngHKd, VbStrConv.Wide) + "件）／　" +
-                        StrConv(lngHAll2, VbStrConv.Wide) + "件（ＡＦ" +
-                        StrConv(lngHAf2, VbStrConv.Wide) + "件、ＫＤ" +
-                        StrConv(lngHKd2, VbStrConv.Wide) + "件）"
-        Literal2.Text = StrConv(lngU, VbStrConv.Wide) + "件　／　" +
-                        StrConv(lngU2, VbStrConv.Wide) + "件"
-        Literal3.Text = StrConv(lngAir, VbStrConv.Wide) + "件　／　" +
-                        StrConv(lngAir2, VbStrConv.Wide) + "件"
-        Literal4.Text = StrConv(lngJishT, VbStrConv.Wide) + "件　／　" +
-                        StrConv(lngJishT2, VbStrConv.Wide) + "件"
+        Literal1.Text = StrConv(lngHAf, VbStrConv.Wide) + "件"
+        Literal6.Text = StrConv(lngHAf2, VbStrConv.Wide) + "件"
+
+        Literal16.Text = StrConv(lngHKd, VbStrConv.Wide) + "件"
+        Literal17.Text = StrConv(lngHKd2, VbStrConv.Wide) + "件"
+
+        Literal2.Text = StrConv(lngU, VbStrConv.Wide) + "件"
+        Literal8.Text = StrConv(lngU2, VbStrConv.Wide) + "件"
+
+        Literal3.Text = StrConv(lngAir, VbStrConv.Wide) + "件"
+        Literal10.Text = StrConv(lngAir2, VbStrConv.Wide) + "件"
+
+        Literal4.Text = StrConv(lngJishT, VbStrConv.Wide) + "件"
+        Literal12.Text = StrConv(lngJishT2, VbStrConv.Wide) + "件"
+
         Literal5.Text = StrConv(lngTsukI, VbStrConv.Wide) + "件"
+        Literal14.Text = StrConv(lngTsukI, VbStrConv.Wide) + "件"
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT * FROM T_EXL_DATA_UPD ORDER BY DATA_CD "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            Select Case dataread("DATA_CD")
+                Case "001"
+                    StrH = dataread("DATA_UPD")
+                Case "002"
+                    StrU = dataread("DATA_UPD")
+                Case "003"
+                    StrA = dataread("DATA_UPD")
+                Case "004"
+                    StrJ = dataread("DATA_UPD")
+                Case "005"
+                    StrT = dataread("DATA_UPD")
+            End Select
+        End While
+
+        Literal7.Text = StrH
+        Literal18.Text = StrH
+        Literal9.Text = StrU
+        Literal11.Text = StrA
+        Literal13.Text = StrJ
+        Literal15.Text = StrT
 
         'クローズ処理 
         dataread.Close()

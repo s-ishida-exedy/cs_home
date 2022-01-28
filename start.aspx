@@ -46,6 +46,9 @@
             background: linear-gradient(#9d9980, #8c876c);
             cursor :pointer;
         }
+        td{
+            	text-align: center ;		/*文字を左寄せ*/
+        }
 </style>
 </head>
 
@@ -67,11 +70,43 @@
 
 <h2>お知らせ</h2>
 <table class="ta1">
-<caption>本日の業務予定 ／ 翌営業日の業務予定</caption>
+<!-- <caption>本日の業務予定 ／ 翌営業日の業務予定</caption> -->
+<tr style="background-color: #eee;text-align: center;color: #666;font-weight: bold; ">
+    <td>
+        業務
+    </td>
+    <td>
+        本日の予定
+    </td>
+    <td>
+        翌営業日の予定
+    </td>
+    <td>
+        更新日時
+    </td>
+</tr>
 <tr>
-    <th>ＶＡＮ（本社）</th>
+    <th>ＶＡＮ（本社　ＡＦ）</th>
     <td>
         <asp:Literal ID="Literal1" runat="server"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal6" runat="server"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal7" runat="server"></asp:Literal>
+    </td>
+</tr>
+<tr>
+    <th>ＶＡＮ（本社　ＫＤ）</th>
+    <td>
+        <asp:Literal ID="Literal16" runat="server"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal17" runat="server"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal18" runat="server"></asp:Literal>
     </td>
 </tr>
 <tr>
@@ -79,11 +114,23 @@
     <td>
         <asp:Literal ID="Literal2" runat="server"></asp:Literal>
     </td>
+    <td>
+        <asp:Literal ID="Literal8" runat="server"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal9" runat="server"></asp:Literal>
+    </td>
 </tr>
 <tr>
     <th>ＡＩＲ</th>
     <td>
         <asp:Literal ID="Literal3" runat="server"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal10" runat="server"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal11" runat="server"></asp:Literal>
     </td>
 </tr>
 <tr>
@@ -91,11 +138,23 @@
     <td>
         <asp:Literal ID="Literal4" runat="server"></asp:Literal>
     </td>
+    <td>
+        <asp:Literal ID="Literal12" runat="server"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal13" runat="server"></asp:Literal>
+    </td>
 </tr>
 <tr>
     <th>通関委託</th>
     <td>
         <asp:Literal ID="Literal5" runat="server"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal14" runat="server"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal15" runat="server"></asp:Literal>
     </td>
 </tr>
 </table>
