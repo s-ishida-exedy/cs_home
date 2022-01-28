@@ -224,19 +224,7 @@ h1:after {
 </script>
 
 
-    <script  type="text/javascript">
 
-        function Button3_onclick() {
-
-            var xlApp = new ActiveXObject("Excel.Application");
-            xlApp.DisplayAlerts = false;
-            xlApp.Visible = true;
-            xlApp.Workbooks.Open("\\\\server\\App\\App_Data\\test.xls", 0, false);
-
-
-
-        }
-    </script>
 
 
 
