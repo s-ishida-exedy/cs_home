@@ -285,7 +285,7 @@ h1:after {
                 </td>
 
 
-                <td style="font-size:40px; width:150px;" >
+    <%--            <td style="font-size:40px; width:150px;" >
 
                     <div class="button03">
                     <a href="anken_booking01.aspx?id={0}">当日案件へ</a>
@@ -299,7 +299,7 @@ h1:after {
                     <a href="anken_booking02.aspx?id={0}">案件抽出</a>
                     </div>
 
-                </td>
+                </td>--%>
 
         </tr>
 
@@ -313,13 +313,47 @@ h1:after {
                 <asp:Button class="btn-radius-gradient-wrap"  ID="Button1" runat="server" Text="更新" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
                  <asp:Button class="btn-radius-gradient-wrap"  ID="Button3" runat="server" Text="編集メニュ" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
                   <asp:Button class="btn-radius-gradient-wrap"  ID="Button4" runat="server" Text="エクセル出力" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
- 
+
+
                 <p></p>
 
 
             </td>
+
+
+
+
+
+            <td>
+
+                <asp:CheckBox ID="CheckBox1" runat="server" />
+                <asp:Button ID="Button5" runat="server" Text="期間指定" />
+                <asp:TextBox ID="TextBox1" runat="server"  type="date"></asp:TextBox>
+                <asp:TextBox ID="TextBox2" runat="server"  type="date"></asp:TextBox>
+
+                </td>
+
+
+
+
+
+
+
         </tr>
+
     </table>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
@@ -620,25 +654,25 @@ h1:after {
         
             
     
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT CUSTCODE,CUSTNAME,INVOICE_NO,ETD,MEMOFLG,SIFLG,DATE_GETBL,SHIP_TYPE,DATE_ONBL,ETA,REV_SALESDATE,REV_STATUS,BOOKING_NO,VOY_NO,IV_BLDATE,KIN_GAIKA,RATE,KIN_JPY,VESSEL,LOADING_PORT,RECEIVED_PORT,SHIP_PLACE,CHECKFLG,REV_ETD,REV_ETA,FLG01,FLG02,FLG03,FLG04,FLG05 FROM [T_EXL_SHIPPINGMEMOLIST] WHERE ETD > GETDATE()-40 AND CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530') ORDER BY ETD "
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT CUSTCODE,CUSTNAME,INVOICE_NO,ETD,MEMOFLG,SIFLG,DATE_GETBL,SHIP_TYPE,DATE_ONBL,ETA,REV_SALESDATE,REV_STATUS,BOOKING_NO,VOY_NO,IV_BLDATE,KIN_GAIKA,RATE,KIN_JPY,VESSEL,LOADING_PORT,RECEIVED_PORT,SHIP_PLACE,CHECKFLG,REV_ETD,REV_ETA,FLG01,FLG02,FLG03,FLG04,FLG05 FROM [T_EXL_SHIPPINGMEMOLIST] WHERE CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530') ORDER BY ETD "
             ></asp:SqlDataSource>
 
             <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [DATE_GETBL] FROM [T_EXL_SHIPPINGMEMOLIST]"></asp:SqlDataSource>
             <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [REV_STATUS] FROM [T_EXL_SHIPPINGMEMOLIST] WHERE REV_STATUS <>''"></asp:SqlDataSource>
 
-            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_SHIPPINGMEMOLIST] WHERE ETD > GETDATE()-40 AND [DATE_GETBL] ='' AND [REV_STATUS] <>'出港済み' AND CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530' )  ORDER BY ETD  ">
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_SHIPPINGMEMOLIST] WHERE [DATE_GETBL] ='' AND [REV_STATUS] <>'出港済み' AND CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530' )  ORDER BY ETD  ">
             <SelectParameters>
             <asp:Parameter DefaultValue="&amp;nbsp;" Name="DATE_GETBL" Type="String" />
             </SelectParameters>
             </asp:SqlDataSource>
 
-            <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_SHIPPINGMEMOLIST] WHERE  ETD > GETDATE()-40 AND ([REV_STATUS] = @REV_STATUS) AND CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530')  ORDER BY ETD ">
+            <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_SHIPPINGMEMOLIST] WHERE ([REV_STATUS] = @REV_STATUS) AND CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530')  ORDER BY ETD ">
             <SelectParameters>
             <asp:ControlParameter ControlID="DropDownList2" Name="REV_STATUS" PropertyName="SelectedValue" Type="String" />
             </SelectParameters>
             </asp:SqlDataSource>
     
-                <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT CUSTCODE,CUSTNAME,INVOICE_NO,ETD,MEMOFLG,SIFLG,DATE_GETBL,SHIP_TYPE,DATE_ONBL,ETA,REV_SALESDATE,REV_STATUS,BOOKING_NO,VOY_NO,IV_BLDATE,KIN_GAIKA,RATE,KIN_JPY,VESSEL,LOADING_PORT,RECEIVED_PORT,SHIP_PLACE,CHECKFLG,REV_ETD,REV_ETA,FLG01,FLG02,FLG03,FLG04,FLG05 FROM [T_EXL_SHIPPINGMEMOLIST] WHERE ETD > GETDATE()-40 AND CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530') ORDER BY ETD "
+                <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT CUSTCODE,CUSTNAME,INVOICE_NO,ETD,MEMOFLG,SIFLG,DATE_GETBL,SHIP_TYPE,DATE_ONBL,ETA,REV_SALESDATE,REV_STATUS,BOOKING_NO,VOY_NO,IV_BLDATE,KIN_GAIKA,RATE,KIN_JPY,VESSEL,LOADING_PORT,RECEIVED_PORT,SHIP_PLACE,CHECKFLG,REV_ETD,REV_ETA,FLG01,FLG02,FLG03,FLG04,FLG05 FROM [T_EXL_SHIPPINGMEMOLIST] WHERE CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530') ORDER BY ETD "
             UpdateCommand="UPDATE T_EXL_SHIPPINGMEMOLIST SET [DATE_GETBL]=@DATE_GETBL, [DATE_ONBL]=@DATE_ONBL, [REV_SALESDATE]=@REV_SALESDATE, [REV_STATUS]=@REV_STATUS WHERE INVOICE_NO=@INVOICE_NO"
             ></asp:SqlDataSource>    
 
