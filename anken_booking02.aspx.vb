@@ -28,25 +28,27 @@ Partial Class yuusen
 
         Dim dt1 As DateTime = DateTime.Now
 
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
 
+        'データベース接続を開く
+        cnn.Open()
 
 
 
         If e.Row.RowType = DataControlRowType.DataRow Then
 
-            '接続文字列の作成
-            Dim ConnectionString As String = String.Empty
-            'SQL Server認証
-            ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
-            'SqlConnectionクラスの新しいインスタンスを初期化
-            Dim cnn = New SqlConnection(ConnectionString)
-            Dim Command = cnn.CreateCommand
 
-            'データベース接続を開く
-            cnn.Open()
+
 
 
             strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(9).Text) & "' "
+
 
 
             'ＳＱＬコマンド作成
@@ -73,8 +75,7 @@ Partial Class yuusen
             dataread.Close()
             dbcmd.Dispose()
 
-            cnn.Close()
-            cnn.Dispose()
+
 
 
 
@@ -84,7 +85,29 @@ Partial Class yuusen
 
         If e.Row.RowType = DataControlRowType.DataRow Then
 
-            If e.Row.Cells(1).Text = "1" Then
+
+
+            strSQL = "SELECT FLG02 FROM [T_EXL_CSANKEN] WHERE [T_EXL_CSANKEN].BOOKING_NO = '" & Trim(e.Row.Cells(9).Text) & "' "
+
+            'ＳＱＬコマンド作成
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行
+            dataread = dbcmd.ExecuteReader()
+
+
+            strbkg = ""
+            '結果を取り出す
+            While (dataread.Read())
+                strbkg += dataread("FLG02")
+
+            End While
+
+
+
+
+
+
+            If strbkg = "1" Then
 
                 e.Row.Cells(1).Text = "委託登録済"
                 e.Row.BackColor = Drawing.Color.DarkSalmon
@@ -95,6 +118,8 @@ Partial Class yuusen
         End If
 
 
+        cnn.Close()
+        cnn.Dispose()
 
     End Sub
 
@@ -138,9 +163,11 @@ Partial Class yuusen
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-                GridView1.DataBind()
+        GridView1.DataBind()
 
     End Sub
+
+
 
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
