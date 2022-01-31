@@ -499,9 +499,13 @@ Partial Class yuusen
         Dim i As Integer
         'フォーマットを指定する場合
         For i = 0 To GridView1.Rows.Count - 1
-            Me.GridView3.Rows(i).Cells(1).Style.Add(“mso-number-format”, “\@”)
-            Me.GridView1.Rows(i).Cells(2).Style.Add(“mso-number-format”, “\@”)
-            Me.GridView1.Rows(i).Cells(3).Style.Add(“mso-number-format”, “\@”)
+            Me.GridView1.Rows(i).Cells(4).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+            Me.GridView1.Rows(i).Cells(5).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+            Me.GridView1.Rows(i).Cells(6).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+            Me.GridView1.Rows(i).Cells(3).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+            Me.GridView1.Rows(i).Cells(8).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+            Me.GridView1.Rows(i).Cells(9).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+
         Next
 
         ' Set the content type to Excel.
