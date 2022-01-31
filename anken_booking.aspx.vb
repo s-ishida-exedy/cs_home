@@ -61,7 +61,7 @@ Partial Class yuusen
                 If Trim(e.Row.Cells(26).Text) = strbkg Then
 
                     e.Row.BackColor = Drawing.Color.DarkSalmon
-                    e.Row.Cells(1).Text = e.Row.Cells(1).Text & " " & "書類済A"
+                    e.Row.Cells(1).Text = e.Row.Cells(1).Text & " " & "書類済"
 
                 End If
 
@@ -90,7 +90,7 @@ Partial Class yuusen
                 If Trim(e.Row.Cells(26).Text) = strbkg Then
 
                     e.Row.BackColor = Drawing.Color.DarkGray
-                    e.Row.Cells(1).Text = "通関済A"
+                    e.Row.Cells(1).Text = "通関済"
 
                 End If
 
