@@ -16,8 +16,8 @@
 <script src="js/default.js"></script>
 
 
-    <style type="text/css">
-       #form1
+   <style type="text/css">
+        #form1
         {
             background-color : #ffffff;
             color : #000000;
@@ -29,9 +29,6 @@
         A.sample1:visited { color: blue;}
         A.sample1:active { color: blue;}
         A.sample1:hover { color: blue;}
-        .auto-style6 {
-            margin-right: 7px;
-        }
 
         table{
           width: 100%;
@@ -45,95 +42,80 @@
         }
         .wrapper {
           overflow: scroll;
-          height: 450px;
+          height: 400px;
         }
 
-         h2 {
+
+h2 {
+  padding-left: 45px;
   position: relative;
-  overflow: hidden;
-  padding: 1.5rem 2rem 1.5rem 130px;
-  border: 2px solid #000;
+  border-radius: 10px; /* 角を丸くする */
 }
-
 h2:before {
+  content: "";
+  background-color: #6fbfd1;
+  border-radius: 50%;
+  opacity: 0.5;
+  width: 35px;
+  height: 35px;
+  left: 5px;
+  top: 0px;
   position: absolute;
-  top: -150%;
-  left: -100px;
-  width: 200px;
-  height: 300%;
+}
+h2:after{
+  content: "";
+  background-color: #6fbfd1;
+  border-radius: 50%;
+  opacity: 0.5;
+  width: 20px;
+  height: 20px;
+  left: 25px;
+  top:15px;
+  position: absolute;
+}
+
+
+
+
+.button04 a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0.5em 1em;
+  width: 100px;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 200;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.1s;
+}
+
+.button04 a::after {
   content: '';
-  -webkit-transform: rotate(25deg);
-  transform: rotate(25deg);
-  background: #000;
+  width: 5px;
+  height: 5px;
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
+  transform: rotate(45deg);
+
 }
 
-h2 span {
-  font-size: 40px;
-  font-size: 4rem;
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  display: block;
-  padding-top: 3px;
-  padding-left: 16px;
-  color: #fff;
-}
-     .simple_square_btn4 {
-	display: block;
-	position: relative;
-	width: 160px;
-	padding: 0.1em;
-	text-align: center;
-	text-decoration: none;
-	color: #1B1B1B;
-	background: #fff;
-	border-radius: 30px;
-	border:1px solid #1B1B1B;
-	-webkit-backface-visibility: hidden; 
-	-moz-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
+.button04 a:hover {
+  color: #000000;
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 2px solid #000000;
 
 
-.simple_square_btn4:hover {
-	 cursor: pointer;
-	 text-decoration: none;
-	-webkit-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	-moz-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-@-webkit-keyframes simple_square_btn4{
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
-}
-@-moz-keyframes simple_square_btn4{
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
-}
-@keyframes simple_square_btn4 {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
 }
 
+.button04 a:hover::after {
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
+}
 
     </style>
    <script>
@@ -176,92 +158,73 @@ h2 span {
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.htmlで行う -->
- <!-- #Include File="header.html" -->
+<!-- #Include File="header.html" -->
 
 
 <div id="contents2" class="inner2">
-
-
 
 <table >
 
 <tr>
 
-<td width="200" border="1" >
+                <td style="width:250px;Font-Size:25px;" >
 
-<font size="6"  >
-        案件抽出
-</font>
-</td>
+                    <h2>案件抽出</h2>
 
-    <td width="100"  >
+                </td>
+
+
+<td style="width:100px;" >
 
 <asp:Button ID="Button3" runat="server" Text="登録" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
-
-
 </td>
 
-   <td width="100"  >
+<td style="width:100px;" >
 
 <asp:Button ID="Button2" runat="server" Text="解除" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
-
-
 </td>
 
-<td width="100"  >
+<td style="width:100px;" >
 
 <asp:Button ID="Button1" runat="server" Text="画面更新" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
 </td>
 
 
-
-<td width="500">
-
-<font size="2"  >
+<td style="width:500px; font-size:10px;" >
 
 <asp:Label ID="Label1" runat="server" Text="１．ＬＳ７、９（限定・試作）が同梱されている案件にチェックを入れる。"></asp:Label><br>
 <asp:Label ID="Label2" runat="server" Text="２．登録ボタンを押す。"></asp:Label><br>
 
-</font>
+</td>
 
-<td>
+<td style="width:80px;" >
+
+
+<div class="button04">
+<a href="anken_booking01.aspx?id={0}">当日案件へ</a>
+</div>
 
 </td>
 
-<td width="150">
+<td style="width:80px;" >
 
-<font size="3"  >
-
-
-
-<section>
-<a href="anken_booking01.aspx?id={0}" class="simple_square_btn4">当日案件へ<span></span></a>
-</section>
-
+<div class="button04">
+<a href="anken_booking.aspx?id={0}">全案件へ</a>
+</div>
 
 </td>
-<td width="150">
 
-
-<section>
-<a href="anken_booking.aspx?id={0}" class="simple_square_btn4">全案件へ<span></span></a>
-</section>
-
-
-</td>
-</font>
 
 </tr>
 
 </table>
 
-<font size="2">
-<asp:Panel ID="Panel1" runat="server">
+<asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
-<div >
+<div class="wrapper">
 <table class="sticky">
 <thead class="fixed">
 
@@ -269,7 +232,6 @@ h2 span {
 
 <tbody>
                                  
-<font size="2">
 <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" CssClass="auto-style6" DataSourceID="SqlDataSource1" Width="927px">
 <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK" />
 <HeaderStyle CssClass="Freezing" />
@@ -318,30 +280,25 @@ h2 span {
 <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
 <SortedAscendingHeaderStyle BackColor="#0000A9" />
 </asp:GridView>
-</font>
-
 
 </tbody>
 </table>
-</div>
+
 
 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE FLG01 = '1' ORDER BY CUT_DATE"></asp:SqlDataSource>
 
-
 </div>
+
 </asp:Panel>   
-
-</font>
-
+</div>
 
 
-    <!--/#contents2-->
+<!--/#contents2-->
 
 <!--ページの上部に戻る「↑」ボタン-->
 <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
-    </form>
+</form>
 
-    </form>
 
 </body>
 </html>

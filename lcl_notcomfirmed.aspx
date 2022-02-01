@@ -48,92 +48,74 @@
         }
 
 
-
-
-
-        h2 {
-          position: relative;
-          overflow: hidden;
-          padding: 1.5rem 2rem 1.5rem 130px;
-          border: 2px solid #000;
-        }
-
-        h2:before {
-          position: absolute;
-          top: -150%;
-          left: -100px;
-          width: 200px;
-          height: 300%;
-          content: '';
-          -webkit-transform: rotate(25deg);
-          transform: rotate(25deg);
-          background: #000;
-        }
-
-        h2 span {
-          font-size: 40px;
-          font-size: 4rem;
-          position: absolute;
-          z-index: 1;
-          top: 0;
-          left: 0;
-          display: block;
-          padding-top: 3px;
-          padding-left: 16px;
-          color: #fff;
-        }
-
-        .simple_square_btn4 {
-	display: block;
-	position: relative;
-	width: 160px;
-	padding: 0.1em;
-	text-align: center;
-	text-decoration: none;
-	color: #1B1B1B;
-	background: #fff;
-	border-radius: 30px;
-	border:1px solid #1B1B1B;
-	-webkit-backface-visibility: hidden; 
-	-moz-backface-visibility: hidden;
-    backface-visibility: hidden;
+        
+h2 {
+  padding-left: 45px;
+  position: relative;
+  border-radius: 10px; /* 角を丸くする */
 }
-.simple_square_btn4:hover {
-	 cursor: pointer;
-	 text-decoration: none;
-	-webkit-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	-moz-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+h2:before {
+  content: "";
+  background-color: #6fbfd1;
+  border-radius: 50%;
+  opacity: 0.5;
+  width: 35px;
+  height: 35px;
+  left: 5px;
+  top: 0px;
+  position: absolute;
 }
-@-webkit-keyframes simple_square_btn4{
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
+h2:after{
+  content: "";
+  background-color: #6fbfd1;
+  border-radius: 50%;
+  opacity: 0.5;
+  width: 20px;
+  height: 20px;
+  left: 25px;
+  top:15px;
+  position: absolute;
 }
-@-moz-keyframes simple_square_btn4{
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
+
+
+.button04 a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0.5em 1em;
+  width: 100px;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 200;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.1s;
 }
-@keyframes simple_square_btn4 {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
+
+.button04 a::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
+  transform: rotate(45deg);
+
+}
+
+.button04 a:hover {
+  color: #000000;
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+
+
+}
+
+.button04 a:hover::after {
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
 }
 
     </style>
@@ -182,17 +164,16 @@
 
 <tr>
 
-<td width="300" border="1" >
 
+<td style="width:250px;Font-Size:25px;" >
 
-<font size="6"  >
-<b>LCL未確定案件</b>
+<h2>LCL未確定案件</h2>
 
-</font>
 </td>
+
                     
-<td width="500">
-<font size="4"  >
+<td style="width:500px;Font-Size:15px;" >
+
 <asp:Label id="Label1" Text="＜ラベル＞" runat="server"></asp:Label>
 </font>
 
@@ -203,13 +184,13 @@
 
 </td>
 
-<td width="200">
 
-<font size="2"  >
-<section>
-<a href="lcl_arange.aspx?id={0}" class="simple_square_btn4">手配状況<span></span></a>
-</section>
-</font>
+<td style="width:80px;" >
+
+<div class="button04">
+  <a href="lcl_arange.aspx?id={0}">手配状況</a>
+</div>
+
 
 </td>
 
@@ -217,7 +198,7 @@
 
 </table>
 
-<font size="2">
+<asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
 <div class="wrapper">
 <table class="sticky">
@@ -261,7 +242,7 @@
 </table>
 </div>
 
-</font>
+</asp:Panel>
 
 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CONSIGNEE], [CUST_CD], [DESTINATION], [INVOICE_NO], [CUT_DATE], [CUT_DATE]AS CUT_DATE2, [ETD], [ETA], [LCL_QTY], [OFFICIAL_QUOT],[BOOKING_NO] FROM [T_BOOKING] WHERE [LCL_QTY] like '%M3%' AND [CUT_DATE] ='' AND [ETD] < GETDATE()+45   ORDER BY [ETD]  "></asp:SqlDataSource>
     

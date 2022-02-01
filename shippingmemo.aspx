@@ -168,7 +168,7 @@ border:none;
 h1 {
   position: relative;
   display: inline-block;
-  padding: 0 143px;
+  padding: 0 110px;
   text-align: center;
 }
 
@@ -177,7 +177,7 @@ h1:before, h1:after {
   position: absolute;
   top: 50%;
   display: inline-block;
-  width:100px;
+  width:80px;
   height: 2px;
   background-color: black;
 }
@@ -247,15 +247,12 @@ h1:after {
 
         <tr>
 
-            <td width="400" >
 
-                <h2>
-                    シッピングメモ記録（BL回収チェック）
-                </h2>
+            <td style="width:500px;Font-Size:25px;" >
+
+            <h2>シッピングメモ記録（BL回収チェック）</h2>
 
             </td>
-
-
 
 
                 <td style="width:100px;" >
@@ -265,7 +262,7 @@ h1:after {
               <td style="width:550px;">
 
                     <h1>
-                        フィルタ
+                        <asp:Label ID="Label1" runat="server" Text="フィルタ"></asp:Label>
                     </h1>
                     <p>
                     </p>
@@ -285,22 +282,6 @@ h1:after {
                 </td>
 
 
-    <%--            <td style="font-size:40px; width:150px;" >
-
-                    <div class="button03">
-                    <a href="anken_booking01.aspx?id={0}">当日案件へ</a>
-                    </div>
-
-                </td>
-
-                <td style="font-size:40px; width:150px;" >
-
-                    <div class="button03">
-                    <a href="anken_booking02.aspx?id={0}">案件抽出</a>
-                    </div>
-
-                </td>--%>
-
         </tr>
 
     </table>
@@ -308,11 +289,11 @@ h1:after {
 
     <table style="height:10px;">
         <tr>
-            <td style="width:1500px;" >
+            <td style="width:550px;" >
 
-                <asp:Button class="btn-radius-gradient-wrap"  ID="Button1" runat="server" Text="更新" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
-                 <asp:Button class="btn-radius-gradient-wrap"  ID="Button3" runat="server" Text="編集メニュ" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
-                  <asp:Button class="btn-radius-gradient-wrap"  ID="Button4" runat="server" Text="エクセル出力" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
+                <asp:Button class="button01"  ID="Button1" runat="server" Text="更新" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
+                 <asp:Button class="button01"  ID="Button3" runat="server" Text="編集メニュ" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
+                  <asp:Button class="button01"  ID="Button4" runat="server" Text="エクセル出力" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
 
 
                 <p></p>
@@ -322,16 +303,15 @@ h1:after {
 
 
 
+            <td style="width:500px;Font-Size:15px;" >
 
+            <asp:Button class="button01"  ID="Button5" runat="server" Text="期間指定" Width="70px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
+            <asp:CheckBox class="button01"  ID="CheckBox1" runat="server" Height="30px" AutoPostBack="True" Font-Size="13px" />
 
-            <td>
+            <asp:TextBox class="button01"  ID="TextBox1" runat="server"  type="date" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
+            <asp:TextBox class="button01"  ID="TextBox2" runat="server"  type="date" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
 
-                <asp:CheckBox ID="CheckBox1" runat="server" />
-                <asp:Button ID="Button5" runat="server" Text="期間指定" />
-                <asp:TextBox ID="TextBox1" runat="server"  type="date"></asp:TextBox>
-                <asp:TextBox ID="TextBox2" runat="server"  type="date"></asp:TextBox>
-
-                </td>
+            </td>
 
 
 
@@ -374,21 +354,6 @@ h1:after {
                     <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
                     <AlternatingRowStyle BackColor="#DCDCDC" />
                     <Columns>
-
-
-            
-<%--                    <asp:TemplateField HeaderText="EDITMENU">
-                    <ItemTemplate>
-                    <asp:Button runat="server" CommandName="Edit" Text="編集" />
-                    </ItemTemplate>
-
-                    <EditItemTemplate>
-                                            <asp:Button runat="server" CommandName="Update" Text="保存" />
-                    <asp:Button runat="server" CommandName="Cancel" Text="戻る" />
-
-                    </EditItemTemplate>
-                    </asp:TemplateField>--%>
-
 
 
                     <asp:BoundField DataField="CUSTCODE" HeaderText="客先コード" SortExpression="CUSTCODE" ReadOnly="true" ></asp:BoundField>
@@ -466,7 +431,7 @@ h1:after {
 
 
             
-                    <asp:TemplateField HeaderText="EDITMENU">
+<%--                    <asp:TemplateField HeaderText="EDITMENU">
                     <ItemTemplate>
                     <asp:Button runat="server" CommandName="Edit" Text="編集" />
                     </ItemTemplate>
@@ -476,7 +441,7 @@ h1:after {
                     <asp:Button runat="server" CommandName="Cancel" Text="戻る" />
 
                     </EditItemTemplate>
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
 
 
 
