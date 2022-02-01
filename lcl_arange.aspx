@@ -57,91 +57,76 @@
 
 
 
+h2 {
+  padding-left: 45px;
+  position: relative;
+  border-radius: 10px; /* 角を丸くする */
+}
+h2:before {
+  content: "";
+  background-color: #6fbfd1;
+  border-radius: 50%;
+  opacity: 0.5;
+  width: 35px;
+  height: 35px;
+  left: 5px;
+  top: 0px;
+  position: absolute;
+}
+h2:after{
+  content: "";
+  background-color: #6fbfd1;
+  border-radius: 50%;
+  opacity: 0.5;
+  width: 20px;
+  height: 20px;
+  left: 25px;
+  top:15px;
+  position: absolute;
+}
 
-        h2 {
-          position: relative;
-          overflow: hidden;
-          padding: 1.5rem 2rem 1.5rem 130px;
-          border: 2px solid #000;
-        }
 
-        h2:before {
-          position: absolute;
-          top: -150%;
-          left: -100px;
-          width: 200px;
-          height: 300%;
-          content: '';
-          -webkit-transform: rotate(25deg);
-          transform: rotate(25deg);
-          background: #000;
-        }
 
-        h2 span {
-          font-size: 40px;
-          font-size: 4rem;
-          position: absolute;
-          z-index: 1;
-          top: 0;
-          left: 0;
-          display: block;
-          padding-top: 3px;
-          padding-left: 16px;
-          color: #fff;
-        }
+.button04 a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0.5em 1em;
+  width: 100px;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 200;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.1s;
+}
 
-        .simple_square_btn4 {
-	display: block;
-	position: relative;
-	width: 160px;
-	padding: 0.1em;
-	text-align: center;
-	text-decoration: none;
-	color: #1B1B1B;
-	background: #fff;
-	border-radius: 30px;
-	border:1px solid #1B1B1B;
-	-webkit-backface-visibility: hidden; 
-	-moz-backface-visibility: hidden;
-    backface-visibility: hidden;
+.button04 a::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
+  transform: rotate(45deg);
+
 }
-.simple_square_btn4:hover {
-	 cursor: pointer;
-	 text-decoration: none;
-	-webkit-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	-moz-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+.button04 a:hover {
+  color: #000000;
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+
+
 }
-@-webkit-keyframes simple_square_btn4{
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
+
+.button04 a:hover::after {
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
 }
-@-moz-keyframes simple_square_btn4{
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
-}
-@keyframes simple_square_btn4 {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
-}
+
 
     </style>
 <script>
@@ -182,61 +167,71 @@
        
 <div id="contents2" class="inner2">
 
-<div>
 <table >
 <tr>
 
-<td width="200" border="1" >
 
-<font size="6"  >
-<b>LCL出荷準備進捗
 
-</font>
+<td style="width:250px;Font-Size:25px;" >
+
+<h2>LCL出荷準備進捗</h2>
+
 </td>
 
-<td width="120" border="1" >
+<td style="width:120px;" >
 
 <asp:Button class="btn-radius-gradient-wrap"  ID="Button1" runat="server" Text="追加" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
 </td>
 
 
-<td width="130">
+<td style="width:150px;Font-Size:12px;" >
 
-<font size="2" style="background-color:DarkGray"  >・グレー:書類作成済<br></font>
-<font size="2" style="background-color:LightBlue" >・ブルー:手配依頼済</font>
+
+<div style="background-color:DarkGray;">
+<p>・グレー:書類作成済</p>
+</div>
+
+<div style="background-color:LightBlue;">
+<p>・ブルー:手配依頼済</p>
+</div>
+
 </td>
 
-<td width="140">
+<td style="width:150px;Font-Size:12px;" >
 
-<font size="2" style="background-color:Salmon"  >・レッド:これから手配が必要</font><font size="2"> </font><br>
-<font size="2" style="background-color:red" Color="White" >・AC要:BOOKING未確定</font>
+<div style="background-color:Salmon;">
+<p>・レッド:これから手配が必要</p>
+</div>
+
+<div style="background-color:red;color:White;">
+<p>・AC要:BOOKING未確定</p>
+</div>
 
 </td>
 
-<td width="100">
+<td style="width:80px;" >
 
+<div class="button04">
+  <a href="lcl_tenkai.aspx?id={0}">展開済案件</a>
+</div>
 
-
-    
-
-
-
-<section>
-<font size="2"  >
-<a href="lcl_tenkai.aspx?id={0}" class="simple_square_btn4">展開済案件<span></span></a>
-</section>
-    
-</font>
 </td>
 
-<td width="100">
-<section>
-<font size="2"  >
-<a href="lcl_notcomfirmed.aspx?id={0}" class="simple_square_btn4">未確定案件<span></span></a>
-                        
-</font>
-</section>
+<td style="width:80px;" >
+
+<div class="button04">
+  <a href="lcl_notcomfirmed.aspx?id={0}">未確定案件</a>
+</div>          
+
+</td>
+
+<td style="width:80px;" >
+
+<div class="button04">
+  <a href="lcl_tenkai_manage.aspx?id={0}">作業メニュー</a>
+</div>          
+              
 
 </td>
 
@@ -244,9 +239,10 @@
 
 </table>
 
-<font size="2">
 
 
+<asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
+    
 <div class="wrapper">
 <table class="sticky">
 <thead class="fixed">
@@ -299,11 +295,11 @@
 </tbody>
 </table>
 </div>
-</font>
+
+</asp:Panel>
 
 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CONSIGNEE], [CUST_CD], [DESTINATION], [INVOICE_NO], [CUT_DATE], [CUT_DATE]AS CUT_DATE2, [ETD], [ETA], [LCL_QTY], [OFFICIAL_QUOT],[BOOKING_NO] FROM [T_BOOKING] WHERE [LCL_QTY] like '%M3%' AND [CUT_DATE] <>'' AND [CUT_DATE] > GETDATE()-3 AND [CUT_DATE] < GETDATE()+45  ORDER BY [CUT_DATE]  "></asp:SqlDataSource>
 
-</div>  
 
 </div>
 
