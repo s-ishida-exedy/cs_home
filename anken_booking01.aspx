@@ -50,93 +50,78 @@
           height: 450px;
         }
 
-         h2 {
+ 
+h2 {
+  padding-left: 45px;
   position: relative;
-  overflow: hidden;
-  padding: 1.5rem 2rem 1.5rem 130px;
-  border: 2px solid #000;
+  border-radius: 10px; /* 角を丸くする */
 }
-
 h2:before {
+  content: "";
+  background-color: #6fbfd1;
+  border-radius: 50%;
+  opacity: 0.5;
+  width: 35px;
+  height: 35px;
+  left: 5px;
+  top: 0px;
   position: absolute;
-  top: -150%;
-  left: -100px;
-  width: 200px;
-  height: 300%;
+}
+h2:after{
+  content: "";
+  background-color: #6fbfd1;
+  border-radius: 50%;
+  opacity: 0.5;
+  width: 20px;
+  height: 20px;
+  left: 25px;
+  top:15px;
+  position: absolute;
+}
+
+
+
+
+
+.button04 a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0.5em 1em;
+  width: 100px;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 200;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.1s;
+}
+
+.button04 a::after {
   content: '';
-  -webkit-transform: rotate(25deg);
-  transform: rotate(25deg);
-  background: #000;
+  width: 5px;
+  height: 5px;
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
+  transform: rotate(45deg);
+
 }
 
-h2 span {
-  font-size: 40px;
-  font-size: 4rem;
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  display: block;
-  padding-top: 3px;
-  padding-left: 16px;
-  color: #fff;
-}
-
-     .simple_square_btn4 {
-	display: block;
-	position: relative;
-	width: 160px;
-	padding: 0.1em;
-	text-align: center;
-	text-decoration: none;
-	color: #1B1B1B;
-	background: #fff;
-	border-radius: 30px;
-	border:1px solid #1B1B1B;
-	-webkit-backface-visibility: hidden; 
-	-moz-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
+.button04 a:hover {
+  color: #000000;
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 2px solid #000000;
 
 
-.simple_square_btn4:hover {
-	 cursor: pointer;
-	 text-decoration: none;
-	-webkit-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	-moz-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-@-webkit-keyframes simple_square_btn4{
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
-}
-@-moz-keyframes simple_square_btn4{
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
-}
-@keyframes simple_square_btn4 {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
 }
 
+.button04 a:hover::after {
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
+}
 
 
     </style>
@@ -169,7 +154,9 @@ h2 span {
     });
 </script>
 </head>
-<body class="c2>
+
+<body class="c2">
+
 <form id="form1" runat="server">
 
 <!--PC用（901px以上端末）メニュー-->
@@ -180,49 +167,46 @@ h2 span {
 
 
 <div id="contents2" class="inner2">
-<table class="auto-style1" >
-<tr>
-<td width="500" border="1" >
 
-<font size="6"  >
-当日案件&書類作成済み
-</font>
+    <table style="height:10px;">
 
-</td>
-
-<td width="500">
+        <tr>
 
 
-</td>
 
-<td width="200">
+            <td style="width:250px;Font-Size:25px;" >
 
-<font size="3"  >
+                <h2>当日案件&書類作成済み</h2>
 
-<section >
-<a href="anken_booking.aspx" class="simple_square_btn4">全案件へ</a>
-</section>
+            </td>
+
+            <td style="width:500px;" >
+            </td>
+
+            <td style="width:80px;" >
+
+                <div class="button04">
+                <a href="anken_booking.aspx?id={0}">全案件へ</a>
+                </div>
+
+            </td>
+
+            <td style="width:80px;" >
+
+                <div class="button04">
+                <a href="anken_booking02.aspx?id={0}">案件抽出</a>
+                </div>
+
+            </td>
+
+        </tr>
+
+    </table>
 
 
-</td>
-<td width="200">
 
 
-<section>
-<a href="anken_booking02.aspx?id={0}" class="simple_square_btn4">案件抽出</a>
-</section>
-
-</td>
-
-</font>
-
-</tr>
-
-</table>
-
-<font size="2">
-
-<asp:Panel ID="Panel1" runat="server">
+<asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
 <div class="wrapper">
 <table class="sticky">
@@ -291,24 +275,21 @@ h2 span {
 
 </tbody>
 </table>
-</div>
-
-
-
-</font>
-
-<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN]  ORDER BY CUT_DATE"></asp:SqlDataSource>
 
 
 </div>
 </asp:Panel>   
+</div>
 
-    <!--/#contents2-->
+<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN]  ORDER BY CUT_DATE"></asp:SqlDataSource>
+
+
+<!--/#contents2-->
 
 <!--ページの上部に戻る「↑」ボタン-->
 <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
 
-    </form>
+</form>
 
 </body>
 </html>
