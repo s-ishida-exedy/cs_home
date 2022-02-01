@@ -214,7 +214,8 @@ Public Class DBAccess
             StrSQL = StrSQL & " PLACE = '" & strPlace & "' "
         End If
         StrSQL = StrSQL & "ORDER BY "
-        StrSQL = StrSQL & "  PLACE "
+        StrSQL = StrSQL & "  PLACE "
+
         Cmd.CommandText = StrSQL
 
         Da = Factroy.CreateDataAdapter()
@@ -298,4 +299,48 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
+    Public Function GET_RESULT_SALES(strDate1 As String, strDate2 As String, strCode As String) As DataSet
+        'バンニングスケジュール絞り込み
+        Conn = Me.Dbconnect2
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  FORMAT(T_INV_HD_TB.BLDATE,'yyyy/MM/dd') AS BLDATE "
+        StrSQL = StrSQL & "  , T_INV_HD_TB.OLD_INVNO "
+        StrSQL = StrSQL & "  , T_INV_HD_TB.CUSTNAME "
+        StrSQL = StrSQL & "  , T_INV_HD_TB.REGPERSON "
+        StrSQL = StrSQL & "  , '' AS REGNAME "
+        StrSQL = StrSQL & "  , FORMAT(T_INV_HD_TB.CUTDATE,'yyyy/MM/dd') AS CUTDATE "
+        StrSQL = StrSQL & "  , T_INV_HD_TB.ALLOUTSTAMP "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "    T_INV_HD_TB  "
+        StrSQL = StrSQL & "    INNER JOIN T_INV_BD_TB  "
+        StrSQL = StrSQL & "    ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
+        StrSQL = StrSQL & "GROUP BY "
+        StrSQL = StrSQL & "  T_INV_HD_TB.BLDATE "
+        StrSQL = StrSQL & "  , T_INV_HD_TB.OLD_INVNO "
+        StrSQL = StrSQL & "  , T_INV_HD_TB.CUSTCODE "
+        StrSQL = StrSQL & "  , T_INV_HD_TB.CUSTNAME "
+        StrSQL = StrSQL & "  , T_INV_HD_TB.REGPERSON "
+        StrSQL = StrSQL & "  , T_INV_HD_TB.CUTDATE "
+        StrSQL = StrSQL & "  , T_INV_HD_TB.ALLOUTSTAMP "
+        StrSQL = StrSQL & "  , T_INV_HD_TB.SALESFLG  "
+        StrSQL = StrSQL & "HAVING "
+        StrSQL = StrSQL & "    T_INV_HD_TB.BLDATE >= '" & strDate1 & "' And T_INV_HD_TB.BLDATE <= '" & strDate2 & "' "
+        StrSQL = StrSQL & "    AND T_INV_HD_TB.CUSTCODE <> '111' And T_INV_HD_TB.CUSTCODE <> 'A121' "
+        StrSQL = StrSQL & "    AND T_INV_HD_TB.REGPERSON IN (" & strCode & ") "
+        StrSQL = StrSQL & "    AND T_INV_HD_TB.SALESFLG Is Null "
+        StrSQL = StrSQL & "ORDER BY  T_INV_HD_TB.BLDATE "
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
+
 End Class
