@@ -223,4 +223,79 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
+
+
+    Public Function GET_CS_RESULT_SHIPPINGMEMO(strstart As String, strend As String, strd1 As String, strd2 As String) As DataSet
+        'CSマニュアルデータ取得時
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  CUSTCODE "
+        StrSQL = StrSQL & ", CUSTNAME "
+        StrSQL = StrSQL & ", INVOICE_NO "
+        StrSQL = StrSQL & ", ETD "
+        StrSQL = StrSQL & ", MEMOFLG "
+        StrSQL = StrSQL & ", SIFLG "
+        StrSQL = StrSQL & ", DATE_GETBL "
+        StrSQL = StrSQL & ", SHIP_TYPE "
+        StrSQL = StrSQL & ", DATE_ONBL "
+        StrSQL = StrSQL & ", ETA "
+        StrSQL = StrSQL & ", REV_SALESDATE "
+        StrSQL = StrSQL & ", REV_STATUS "
+        StrSQL = StrSQL & ", BOOKING_NO "
+        StrSQL = StrSQL & ", VOY_NO "
+        StrSQL = StrSQL & ", IV_BLDATE "
+        StrSQL = StrSQL & ", KIN_GAIKA "
+        StrSQL = StrSQL & ", RATE "
+        StrSQL = StrSQL & ", KIN_JPY "
+        StrSQL = StrSQL & ", VESSEL "
+        StrSQL = StrSQL & ", LOADING_PORT "
+        StrSQL = StrSQL & ", RECEIVED_PORT "
+        StrSQL = StrSQL & ", SHIP_PLACE "
+        StrSQL = StrSQL & ", CHECKFLG "
+        StrSQL = StrSQL & ", REV_ETD "
+        StrSQL = StrSQL & ", REV_ETA "
+        StrSQL = StrSQL & ", FLG01 "
+        StrSQL = StrSQL & ", FLG02 "
+        StrSQL = StrSQL & ", FLG03 "
+        StrSQL = StrSQL & ", FLG04 "
+        StrSQL = StrSQL & ", FLG05 "
+
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "  [T_EXL_SHIPPINGMEMOLIST] "
+
+        StrSQL = StrSQL & "WHERE ETD BETWEEN '" & strstart & "' AND '" & strend & "' "
+        StrSQL = StrSQL & "AND CUSTCODE Not In ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530') "
+
+        If strd1 = "未回収" Then
+
+            StrSQL = StrSQL & "AND DATE_GETBL ='' "
+
+        End If
+
+        If strd2 <> "" And strd2 <> "--Select--" Then
+
+            StrSQL = StrSQL & "AND REV_STATUS = '" & strd2 & "' "
+
+
+        End If
+
+
+
+
+        StrSQL = StrSQL & "ORDER BY ETD "
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class
