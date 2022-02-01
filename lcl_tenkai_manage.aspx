@@ -49,92 +49,75 @@
         }
 
 
-
-
-
-        h2 {
-          position: relative;
-          overflow: hidden;
-          padding: 1.5rem 2rem 1.5rem 130px;
-          border: 2px solid #000;
-        }
-
-        h2:before {
-          position: absolute;
-          top: -150%;
-          left: -100px;
-          width: 200px;
-          height: 300%;
-          content: '';
-          -webkit-transform: rotate(25deg);
-          transform: rotate(25deg);
-          background: #000;
-        }
-
-        h2 span {
-          font-size: 40px;
-          font-size: 4rem;
-          position: absolute;
-          z-index: 1;
-          top: 0;
-          left: 0;
-          display: block;
-          padding-top: 3px;
-          padding-left: 16px;
-          color: #fff;
-        }
-
-        .simple_square_btn4 {
-	display: block;
-	position: relative;
-	width: 160px;
-	padding: 0.1em;
-	text-align: center;
-	text-decoration: none;
-	color: #1B1B1B;
-	background: #fff;
-	border-radius: 30px;
-	border:1px solid #1B1B1B;
-	-webkit-backface-visibility: hidden; 
-	-moz-backface-visibility: hidden;
-    backface-visibility: hidden;
+        
+h2 {
+  padding-left: 45px;
+  position: relative;
+  border-radius: 10px; /* 角を丸くする */
 }
-.simple_square_btn4:hover {
-	 cursor: pointer;
-	 text-decoration: none;
-	-webkit-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	-moz-animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: simple_square_btn4 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+h2:before {
+  content: "";
+  background-color: #6fbfd1;
+  border-radius: 50%;
+  opacity: 0.5;
+  width: 35px;
+  height: 35px;
+  left: 5px;
+  top: 0px;
+  position: absolute;
 }
-@-webkit-keyframes simple_square_btn4{
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
+h2:after{
+  content: "";
+  background-color: #6fbfd1;
+  border-radius: 50%;
+  opacity: 0.5;
+  width: 20px;
+  height: 20px;
+  left: 25px;
+  top:15px;
+  position: absolute;
 }
-@-moz-keyframes simple_square_btn4{
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
+
+
+
+.button04 a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0.5em 1em;
+  width: 100px;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 200;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.1s;
 }
-@keyframes simple_square_btn4 {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-  }
+
+.button04 a::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
+  transform: rotate(45deg);
+
+}
+
+.button04 a:hover {
+  color: #000000;
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+
+
+}
+
+.button04 a:hover::after {
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
 }
 
     </style>
@@ -179,17 +162,13 @@
 <table>
 <tr>
 
-<td width="300" border="1" >
+<td style="width:250px;Font-Size:25px;" >
 
-<font size="6"  >
-<b>LCL出荷-編集用</b>
+<h2>LCL出荷-編集用</h2>
 
-</font>
 </td>
 
-
 <td>
-
 
 </td>
 
@@ -198,23 +177,48 @@
 </td>
 
 
-<font size="2"  >
+<td style="width:100px;Font-Size:25px;" >
 
-<td width="100" border="1" >
-
-<asp:Button class="simple_square_btn4"  ID="Button1" runat="server" Text="表示" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+<asp:Button ID="Button1" runat="server" Text="表示" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
 </td>
 
-<td width="100" border="1" >
+<td style="width:100px;Font-Size:25px;" >
 
-<asp:Button class="simple_square_btn4"  ID="Button2" runat="server" Text="非表示" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+<asp:Button ID="Button2" runat="server" Text="非表示" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
 </td>
 
-<td width="200">
 
-</font>
+<td style="width:400px;Font-Size:25px;" >
+
+</td>
+
+<td style="width:100px;Font-Size:25px;" >
+
+<div class="button04">
+  <a href="lcl_tenkai.aspx?id={0}">展開済案件</a>
+</div>
+
+</td>
+
+<td style="width:100px;Font-Size:25px;" >
+
+    
+<div class="button04">
+  <a href="lcl_notcomfirmed.aspx?id={0}">未確定案件</a>
+</div>          
+              
+
+</td>
+
+<td style="width:100px;Font-Size:25px;" >
+
+
+<div class="button04">
+  <a href="lcl_arange.aspx?id={0}">手配状況</a>
+</div>          
+
 
 </td>
 
@@ -222,8 +226,8 @@
 
 </table>
 
-<font size="2">
 
+<asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
 <div class="wrapper">
 <table class="sticky">
@@ -304,13 +308,14 @@
 </tbody>
 </table>
 </div>
-</font>
+
 
 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CONSIGNEE], [DESTINATION], [CUST], [INVOICE_NO], [BOOKING_NO], [OFFICIAL_QUOT], [CUT_DATE], [ETD], [ETA], [LCL_SIZE], [WEIGHT], [QTY], [PICKUP01], [PICKUP02], [MOVEIN01], [MOVEIN02], [OTHERS01], [FLG01], [FLG02], [FLG03], [FLG04], [FLG05],[PICKINPLACE] FROM [T_EXL_LCLTENKAI]"
 UpdateCommand="UPDATE T_EXL_LCLTENKAI SET [CUST]=@CUST, [INVOICE_NO]=@INVOICE_NO,[OFFICIAL_QUOT]=@OFFICIAL_QUOT, [CUT_DATE]=@CUT_DATE, [ETD]=@ETD, [ETA]=@WEIGHT, [LCL_SIZE]=@LCL_SIZE, [WEIGHT]=@WEIGHT, [QTY]=@QTY, [PICKUP01]=@PICKUP01, [PICKUP02]=@PICKUP02, [MOVEIN01]=@MOVEIN01, [MOVEIN02]=@MOVEIN02, [OTHERS01]=@OTHERS01, [PICKINPLACE]=@PICKINPLACE,[FLG04]=@FLG04, [FLG05]=format(GETDATE(),'yyyy/MM/dd') WHERE BOOKING_NO=@BOOKING_NO"
 DeleteCommand="DELETE FROM T_EXL_LCLTENKAI WHERE BOOKING_NO=@BOOKING_NO"></asp:SqlDataSource>
-    
-    
+
+</asp:Panel>    
+
 </div>
         
 
