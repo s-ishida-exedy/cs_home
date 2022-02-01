@@ -392,15 +392,26 @@ Partial Class yuusen
 
         If DropDownList1.Text = "未回収" Then
 
-            GridView2.DataSource = SqlDataSource2
-            GridView2.DataBind()
 
-            DropDownList2.Items.Clear()
-            DropDownList2.Items.Insert(0, "--Select--")
+            If CheckBox1.Checked = True Then
 
-            Panel1.Visible = False
-            Panel2.Visible = True
-            Panel3.Visible = False
+
+            Else
+
+                GridView2.DataSource = SqlDataSource2
+                GridView2.DataBind()
+
+                DropDownList2.Items.Clear()
+                DropDownList2.Items.Insert(0, "--Select--")
+
+                Panel1.Visible = False
+                Panel2.Visible = True
+                Panel3.Visible = False
+
+
+
+
+            End If
 
         ElseIf DropDownList1.Text = "修正状況" Then
 
@@ -420,19 +431,28 @@ Partial Class yuusen
     End Sub
     Protected Sub DropDownList2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList2.SelectedIndexChanged
 
+        If CheckBox1.Checked = True Then
 
-        If DropDownList1.Text = "修正状況" Then
 
-            GridView2.DataSource = SqlDataSource3
-            GridView2.DataBind()
+        Else
+
+
+            If DropDownList1.Text = "修正状況" Then
+
+                GridView2.DataSource = SqlDataSource3
+                GridView2.DataBind()
+
+
+
+            End If
+
+            Panel1.Visible = False
+            Panel2.Visible = True
+            Panel3.Visible = False
 
 
 
         End If
-
-        Panel1.Visible = False
-        Panel2.Visible = True
-        Panel3.Visible = False
 
     End Sub
 
@@ -479,9 +499,13 @@ Partial Class yuusen
         Dim i As Integer
         'フォーマットを指定する場合
         For i = 0 To GridView1.Rows.Count - 1
-            Me.GridView3.Rows(i).Cells(1).Style.Add(“mso-number-format”, “\@”)
-            Me.GridView1.Rows(i).Cells(2).Style.Add(“mso-number-format”, “\@”)
-            Me.GridView1.Rows(i).Cells(3).Style.Add(“mso-number-format”, “\@”)
+            Me.GridView1.Rows(i).Cells(4).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+            Me.GridView1.Rows(i).Cells(5).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+            Me.GridView1.Rows(i).Cells(6).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+            Me.GridView1.Rows(i).Cells(3).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+            Me.GridView1.Rows(i).Cells(8).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+            Me.GridView1.Rows(i).Cells(9).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+
         Next
 
         ' Set the content type to Excel.
@@ -509,5 +533,69 @@ Partial Class yuusen
         ' 「GridViewのコントロールGridView1は、runat=server を含む
         '  form タグの内側に置かなければ成りません」    
     End Sub
+
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        '表示ボタン押下処理
+        Dim Dataobj As New DBAccess
+        Dim strCUST As String = TextBox1.Text
+        Dim strstart As Date
+        Dim strend As Date
+        Dim strstart2 As String
+        Dim strend2 As String
+
+
+        Dim strd1 As String
+        Dim strd2 As String
+
+
+        If IsDate(TextBox1.Text) = True And IsDate(TextBox2.Text) = True Then
+
+
+
+            If CheckBox1.Checked = True Then
+
+                'MsgBox("")
+
+                strd1 = DropDownList1.Text
+                strd2 = DropDownList2.Text
+
+            End If
+
+
+
+            strstart = TextBox1.Text
+
+            strstart2 = strstart.ToString("yyyy/M/d")
+
+            strend = TextBox2.Text
+
+            strend2 = strend.ToString("yyyy/M/d")
+
+            Dim ds As DataSet = Dataobj.GET_CS_RESULT_SHIPPINGMEMO(strstart2, strend2, strd1, strd2)
+            If ds.Tables.Count > 0 Then
+                GridView3.DataSourceID = ""
+                GridView3.DataSource = ds
+                Session("data") = ds
+            End If
+
+            'Grid再表示
+            GridView3.DataBind()
+            Panel1.Visible = False
+            Panel2.Visible = False
+            Panel3.Visible = True
+
+        Else
+
+            MsgBox("日付を指定してください。")
+
+        End If
+
+
+    End Sub
+
+
+
+
 
 End Class
