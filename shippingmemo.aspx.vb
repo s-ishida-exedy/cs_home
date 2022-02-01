@@ -395,6 +395,8 @@ Partial Class yuusen
 
             If CheckBox1.Checked = True Then
 
+                DropDownList2.Items.Clear()
+                DropDownList2.Items.Insert(0, "--Select--")
 
             Else
 
@@ -422,6 +424,11 @@ Partial Class yuusen
             DropDownList2.DataBind()
 
 
+            DropDownList2.Items.Insert(0, "--Select--")
+
+        ElseIf DropDownList1.Text = "--Select--" Then
+
+            DropDownList2.Items.Clear()
             DropDownList2.Items.Insert(0, "--Select--")
 
 
@@ -457,18 +464,97 @@ Partial Class yuusen
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Panel1.Visible = True
-        Panel2.Visible = False
-        Panel3.Visible = False
+
+
+        If CheckBox1.Checked = True Then
+
+            Dim Dataobj As New DBAccess
+            Dim strCUST As String = TextBox1.Text
+            Dim strstart As Date
+            Dim strend As Date
+            Dim strstart2 As String
+            Dim strend2 As String
+
+
+            Dim strd1 As String
+            Dim strd2 As String
+
+
+            If IsDate(TextBox1.Text) = True And IsDate(TextBox2.Text) = True Then
+
+
+
+                If CheckBox1.Checked = True Then
+
+                    'MsgBox("")
+
+                    strd1 = ""
+                    strd2 = ""
+
+                End If
+
+
+
+                strstart = TextBox1.Text
+
+                strstart2 = strstart.ToString("yyyy/M/d")
+
+                strend = TextBox2.Text
+
+                strend2 = strend.ToString("yyyy/M/d")
+
+                Dim ds As DataSet = Dataobj.GET_CS_RESULT_SHIPPINGMEMO(strstart2, strend2, strd1, strd2)
+                If ds.Tables.Count > 0 Then
+                    GridView2.DataSourceID = ""
+                    GridView2.DataSource = ds
+                    Session("data") = ds
+                End If
+
+                'Grid再表示
+                GridView2.DataBind()
+                Panel1.Visible = False
+                Panel2.Visible = True
+                Panel3.Visible = False
+
+            Else
+
+                MsgBox("日付を指定してください。")
+
+            End If
+
+        Else
+
+
+            Panel1.Visible = True
+            Panel2.Visible = False
+            Panel3.Visible = False
+
+
+        End If
+
+
 
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
-        Panel1.Visible = False
-        Panel2.Visible = False
-        Panel3.Visible = True
 
+        If Panel3.Visible = True Then
+
+            Panel1.Visible = True
+            Panel2.Visible = True
+            Panel3.Visible = False
+
+
+        Else
+
+
+            Panel1.Visible = False
+            Panel2.Visible = False
+            Panel3.Visible = True
+
+
+        End If
 
 
     End Sub
@@ -574,16 +660,16 @@ Partial Class yuusen
 
             Dim ds As DataSet = Dataobj.GET_CS_RESULT_SHIPPINGMEMO(strstart2, strend2, strd1, strd2)
             If ds.Tables.Count > 0 Then
-                GridView3.DataSourceID = ""
-                GridView3.DataSource = ds
+                GridView2.DataSourceID = ""
+                GridView2.DataSource = ds
                 Session("data") = ds
             End If
 
             'Grid再表示
-            GridView3.DataBind()
+            GridView2.DataBind()
             Panel1.Visible = False
-            Panel2.Visible = False
-            Panel3.Visible = True
+            Panel2.Visible = True
+            Panel3.Visible = False
 
         Else
 
@@ -596,6 +682,35 @@ Partial Class yuusen
 
 
 
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+
+        If CheckBox1.Checked = True Then
+
+            Label1.Text = "フィルタ 期間指定"
+
+        Else
 
 
+            Label1.Text = "フィルタ 全案件"
+
+        End If
+
+
+
+    End Sub
+
+    Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
+
+        If CheckBox1.Checked = True Then
+
+            Label1.Text = "フィルタ 期間指定"
+
+        Else
+
+
+            Label1.Text = "フィルタ 全案件"
+
+        End If
+
+    End Sub
 End Class
