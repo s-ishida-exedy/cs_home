@@ -137,4 +137,88 @@ Partial Class cs_home
         'Grid再表示
         GridView1.DataBind()
     End Sub
+
+    Private Sub GridView1_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles GridView1.RowDataBound
+        '書類の最終状況を取得
+
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            'インボイス番号取得
+            Dim drv As DataRowView = CType(e.Row.DataItem, DataRowView)
+            Dim strCode As String = Mid(Trim(drv("インボイスNO").ToString()), 4, 4)
+
+            Dim dataread As SqlDataReader
+            Dim dbcmd As SqlCommand
+            Dim strSQL As String = ""
+            Dim strDate As String = Format(Now, "yyyy/MM/dd")
+
+            '接続文字列の作成
+            Dim ConnectionString As String = String.Empty
+            'SQL Server認証
+            ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+            'SqlConnectionクラスの新しいインスタンスを初期化
+            Dim cnn = New SqlConnection(ConnectionString)
+
+            'データベース接続を開く
+            cnn.Open()
+
+            strSQL = strSQL & "SELECT DISTINCT VSD.* "
+            strSQL = strSQL & "FROM T_EXL_VAN_SCH_DETAIL VSD "
+            strSQL = strSQL & "INNER JOIN "
+            strSQL = strSQL & "(SELECT AA.* "
+            strSQL = strSQL & "FROM "
+            strSQL = strSQL & "(SELECT "
+            strSQL = strSQL & "  CUST_CD "
+            strSQL = strSQL & "  , INVOICE_NO "
+            strSQL = strSQL & "  , MAX(VAN_DATE) AS FINAL_VAN "
+            strSQL = strSQL & "FROM "
+            strSQL = strSQL & "  ( SELECT CUST_CD, INVOICE_NO, DAY01 AS VAN_DATE FROM T_BOOKING  "
+            strSQL = strSQL & "    UNION ALL  "
+            strSQL = strSQL & "    SELECT CUST_CD, INVOICE_NO, DAY02 AS VAN_DATE FROM T_BOOKING  "
+            strSQL = strSQL & "    UNION ALL  "
+            strSQL = strSQL & "    SELECT CUST_CD, INVOICE_NO, DAY03 AS VAN_DATE FROM T_BOOKING "
+            strSQL = strSQL & "    UNION ALL  "
+            strSQL = strSQL & "    SELECT CUST_CD, INVOICE_NO, DAY04 AS VAN_DATE FROM T_BOOKING "
+            strSQL = strSQL & "    UNION ALL  "
+            strSQL = strSQL & "    SELECT CUST_CD, INVOICE_NO, DAY05 AS VAN_DATE FROM T_BOOKING "
+            strSQL = strSQL & "    UNION ALL  "
+            strSQL = strSQL & "    SELECT CUST_CD, INVOICE_NO, DAY06 AS VAN_DATE FROM T_BOOKING "
+            strSQL = strSQL & "    UNION ALL  "
+            strSQL = strSQL & "    SELECT CUST_CD, INVOICE_NO, DAY07 AS VAN_DATE FROM T_BOOKING "
+            strSQL = strSQL & "    UNION ALL  "
+            strSQL = strSQL & "    SELECT CUST_CD, INVOICE_NO, DAY08 AS VAN_DATE FROM T_BOOKING "
+            strSQL = strSQL & "    UNION ALL  "
+            strSQL = strSQL & "    SELECT CUST_CD, INVOICE_NO, DAY09 AS VAN_DATE FROM T_BOOKING "
+            strSQL = strSQL & "    UNION ALL  "
+            strSQL = strSQL & "    SELECT CUST_CD, INVOICE_NO, DAY10 AS VAN_DATE FROM T_BOOKING "
+            strSQL = strSQL & "    UNION ALL  "
+            strSQL = strSQL & "    SELECT CUST_CD, INVOICE_NO, DAY11 AS VAN_DATE FROM T_BOOKING) AS TBL  "
+            strSQL = strSQL & "WHERE "
+            strSQL = strSQL & "  INVOICE_NO <> ''  "
+            strSQL = strSQL & "  AND VAN_DATE <> '' "
+            strSQL = strSQL & "GROUP BY "
+            strSQL = strSQL & "  CUST_CD , INVOICE_NO)AA "
+            strSQL = strSQL & "WHERE AA.FINAL_VAN = '" & strDate & "') AAA "
+            strSQL = strSQL & "ON VSD.IVNO LIKE '%' + LEFT(AAA.INVOICE_NO,4) + '%' "
+            strSQL = strSQL & "WHERE VSD.IVNO LIKE '%" & strCode & "%' "
+            strSQL = strSQL & "ORDER BY PLACE, VAN_DATE, VAN_TIME "
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+            strDate = ""
+            '結果を取り出す 
+            While (dataread.Read())
+                '最終列に値セット
+                e.Row.Cells(8).Text = "★"
+            End While
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+            cnn.Close()
+            cnn.Dispose()
+        End If
+    End Sub
 End Class
