@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="cs_manual_detail.aspx.vb" Inherits="cs_home" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="cs_manual_detail.aspx.vb" Inherits="cs_home" ValidateRequest="false"%>
 
 <!DOCTYPE html>
 
