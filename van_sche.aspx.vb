@@ -221,4 +221,23 @@ Partial Class cs_home
             cnn.Dispose()
         End If
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        'リストの選択状態をリセット
+        DropDownList1.SelectedIndex = 0     '場所
+        DropDownList2.SelectedIndex = 0     '日付
+
+        'データ再取得
+        Dim Dataobj As New DBAccess
+        Dim ds As DataSet = Dataobj.GET_RESULT_VAN_SCH("", "")
+        If ds.Tables.Count > 0 Then
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = ds
+            Session("data") = ds
+        End If
+
+        'Grid再表示
+        GridView1.DataBind()
+
+    End Sub
 End Class
