@@ -98,6 +98,9 @@
             <asp:BoundField DataField="インボイスNO" HeaderText="インボイスNO" SortExpression="インボイスNO" />
             <asp:BoundField DataField="カット日" HeaderText="カット日" SortExpression="カット日" />
             <asp:BoundField DataField="ＥＴＤ" HeaderText="ＥＴＤ" SortExpression="ＥＴＤ" />
+            <asp:BoundField DataField="最終" HeaderText="最終" SortExpression="最終">
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
         </Columns>
             <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
@@ -121,6 +124,7 @@
   , IVNO AS インボイスNO
   , CUT_DATE AS カット日
   , ETD AS ＥＴＤ
+  , '' AS 最終
 FROM
   T_EXL_VAN_SCH_DETAIL
 ORDER BY PLACE"></asp:SqlDataSource>

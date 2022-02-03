@@ -200,6 +200,7 @@ Public Class DBAccess
         StrSQL = StrSQL & "  , IVNO AS インボイスNO "
         StrSQL = StrSQL & "  , CUT_DATE AS カット日 "
         StrSQL = StrSQL & "  , ETD AS ＥＴＤ  "
+        StrSQL = StrSQL & "  , '' AS 最終  "
         StrSQL = StrSQL & "FROM "
         StrSQL = StrSQL & "  T_EXL_VAN_SCH_DETAIL  "
         If strDate <> "" And strPlace <> "" Then
@@ -225,14 +226,10 @@ Public Class DBAccess
         Return Ds
     End Function
 
-
-
     Public Function GET_CS_RESULT_SHIPPINGMEMO(strstart As String, strend As String, strd1 As String, strd2 As String) As DataSet
-        'CSマニュアルデータ取得時
+        'シッピングメモデータ取得時
         Conn = Me.Dbconnect
         Cmd = Conn.CreateCommand
-
-
 
         StrSQL = StrSQL & ""
         StrSQL = StrSQL & "SELECT "
@@ -274,20 +271,12 @@ Public Class DBAccess
         StrSQL = StrSQL & "AND CUSTCODE Not In ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530') "
 
         If strd1 = "未回収" Then
-
             StrSQL = StrSQL & "AND DATE_GETBL ='' "
-
         End If
 
         If strd2 <> "" And strd2 <> "--Select--" Then
-
             StrSQL = StrSQL & "AND REV_STATUS = '" & strd2 & "' "
-
-
         End If
-
-
-
 
         StrSQL = StrSQL & "ORDER BY ETD "
 
