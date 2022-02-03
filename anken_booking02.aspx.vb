@@ -163,7 +163,10 @@ Partial Class yuusen
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        GridView1.DataBind()
+        Dim p As New System.Diagnostics.Process
+        p.StartInfo.FileName = “C:\Users\T43529\OneDrive - 株式会社エクセディ\デスクトップ\新ツール\通関フォルダ作成_委託メール作成.xls”
+        p.Start()
+
 
     End Sub
 
