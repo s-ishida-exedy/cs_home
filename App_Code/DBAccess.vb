@@ -267,7 +267,7 @@ Public Class DBAccess
         StrSQL = StrSQL & "FROM "
         StrSQL = StrSQL & "  [T_EXL_SHIPPINGMEMOLIST] "
 
-        StrSQL = StrSQL & "WHERE ETD BETWEEN '" & strstart & "' AND '" & strend & "' "
+        StrSQL = StrSQL & "WHERE FORMAT(ETD,'yyyy/MM/dd') BETWEEN '" & strstart & "' AND '" & strend & "' "
         StrSQL = StrSQL & "AND CUSTCODE Not In ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530') "
 
         If strd1 = "未回収" Then
