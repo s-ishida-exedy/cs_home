@@ -6,7 +6,7 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <title>出荷案件進捗</title>
+    <title>マスタ変更_委託案件登録</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -176,7 +176,15 @@ h2:after{
 <td style="width:200px;Font-Size:15px;" >
 
 
-<asp:TextBox ID="TextBox1" runat="server"  Width="150px" Height="35px" AutoPostBack="True" Font-Size="13px" MaxLength="4">Input</asp:TextBox>
+<%--<asp:TextBox ID="TextBox1" runat="server"  Width="150px" Height="35px" AutoPostBack="True" Font-Size="13px" MaxLength="4">Input</asp:TextBox>--%>
+
+
+<asp:DropDownList ID="DropDownList6" runat="server" Width="150px" Height="40px"  CssClass="ddl" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource7" DataTextField="C" DataValueField="C" AppendDataBoundItems="true">
+
+<asp:ListItem Text="Please select" Value="" />
+</asp:DropDownList>
+
+
 <asp:Button class="btn-radius-gradient-wrap"  ID="Button1" runat="server" Text="登録" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" ></asp:Button>
 
 
@@ -216,7 +224,7 @@ h2:after{
 
 <td style="width:200px;Font-Size:15px;" >
 
-<asp:DropDownList ID="DropDownList4" runat="server" Width="150px" Height="40px"  CssClass="ddl" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource4" DataTextField="C" DataValueField="C" AppendDataBoundItems="true">
+<asp:DropDownList ID="DropDownList4" runat="server" Width="150px" Height="40px"  CssClass="ddl" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource6" DataTextField="C" DataValueField="C" AppendDataBoundItems="true">
 
 <asp:ListItem Text="Please select" Value="" />
 </asp:DropDownList>
@@ -272,6 +280,35 @@ h2:after{
 </td>
 
 </tr>
+
+
+
+<tr>
+
+<td style="width:200px;Font-Size:15px;text-align:left;" >
+
+4.カレンダマスタ更新&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+
+</td>
+
+<td style="width:200px;Font-Size:15px;" >
+
+
+<asp:Button class="btn-radius-gradient-wrap"  ID="Button7" runat="server" Text="ファイルを開く" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" ></asp:Button>
+
+
+</td>
+
+<td style="width:200px;Font-Size:12px;" >
+
+※半年に1回程度カレンダマスタを更新する。
+
+</td>
+
+
+</tr>
+
+
 </table>
 
 </div>
@@ -284,12 +321,16 @@ h2:after{
 <a href="#">↑</a></p>   
 
 
-<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [ITK_INVNO] FROM [T_EXL_CSWORKSTATUS] WHERE ITK_INVNO <>'' AND ITK_REGDATE > GETDATE()-60 "></asp:SqlDataSource>
-<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CUST_CD] FROM [T_EXL_ITAKU] WHERE CUST_CD <>'' "></asp:SqlDataSource>
-<asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [FORWARDER] FROM [T_EXL_ITAKU] WHERE FORWARDER <>'' "></asp:SqlDataSource>
-<asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT left([CUST_CD],4) AS C FROM [T_BOOKING]"></asp:SqlDataSource>
-<asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [FORWARDER02] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [ITK_INVNO] FROM [T_EXL_CSWORKSTATUS] WHERE ITK_INVNO <>'' AND ITK_REGDATE > GETDATE()-60 ORDER BY [ITK_INVNO] "></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CUST_CD] FROM [T_EXL_ITAKU] WHERE CUST_CD <>'' ORDER BY CUST_CD "></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [FORWARDER] FROM [T_EXL_ITAKU] WHERE FORWARDER <>'' ORDER BY [FORWARDER] "></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT left([CUST_CD],4) AS C FROM [T_BOOKING] ORDER BY C" ></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [FORWARDER02] FROM [T_EXL_CSANKEN] ORDER BY [FORWARDER02]"></asp:SqlDataSource>
  
+    <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:KBHWPA85ConnectionString %>" SelectCommand="SELECT DISTINCT [CUSTCODE] AS C FROM [T_SN_HD_TB] WHERE [NOKIYMD] > GETDATE()-360 ORDER BY C "></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:KBHWPA85ConnectionString %>" SelectCommand="SELECT DISTINCT [OLD_INVNO] AS C FROM [T_INV_HD_TB]  WHERE [BLDATE] BETWEEN GETDATE()-5 AND GETDATE()+60 ORDER BY C "></asp:SqlDataSource>
+
+
 </form>
 </body>
 

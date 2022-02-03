@@ -134,15 +134,16 @@ border: none;
 {
 background-color: #ffffff;
 border:none;
-      color: #000000;
-      border-bottom: inset 2px #ffffff;
+color: #000000;
+border-bottom: inset 2px #ffffff;
+
 }
 
+
+
 .button01:hover {
-
-
-  text-align: center;
-      border-bottom: inset 2px #000000;
+text-align: center;
+border-bottom: inset 2px #000000;
 }
 
 .table01
@@ -187,6 +188,26 @@ h1:before {
 }
 h1:after {
   right: 0;
+}
+
+
+
+.design02 {
+ width: 65%;
+ text-align: center;
+ border-collapse: collapse;
+ border-spacing: 0;
+ border: solid 1px #778ca3;
+}
+.design02 tr {
+ border-top: dashed 1px #778ca3;
+}
+.design02 th {
+ padding: 10px;
+ background: #e9faf9;
+}
+.design02 td {
+ padding: 10px;
 }
 
 
@@ -248,9 +269,9 @@ h1:after {
         <tr>
 
 
-            <td style="width:500px;Font-Size:25px;" >
+            <td style="width:300px;Font-Size:25px;" >
 
-            <h2>シッピングメモ記録（BL回収チェック）</h2>
+            <h2>シッピングメモ記録</h2>
 
             </td>
 
@@ -259,7 +280,7 @@ h1:after {
                 </td>
 
 
-              <td style="width:550px;">
+              <td style="width:270px;">
 
                     <h1>
                         <asp:Label ID="Label1" runat="server" Text="フィルタ"></asp:Label>
@@ -279,7 +300,22 @@ h1:after {
                     <asp:Button CssClass ="button01" ID="Button2" runat="server" Text="全件表示" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
 
+
                 </td>
+
+
+             <td class ="design02"  style="width:270px;Font-Size:15px;text-align:left;" >
+
+            <asp:Button class="button01"  ID="Button5" runat="server" Text="期間指定" Width="70px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
+            <asp:CheckBox class="button01"  ID="CheckBox1" runat="server" Height="30px" AutoPostBack="True" Font-Size="13px" />
+
+            <asp:TextBox class="button01"  ID="TextBox1" runat="server"  type="date" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
+            <asp:TextBox class="button01"  ID="TextBox2" runat="server"  type="date" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
+
+
+             <p> &nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Font-Size="8" Text="※チェックを入れている間は期間指定が有効"></asp:Label></p>
+             <p> &nbsp;&nbsp;<asp:Label ID="Label3" runat="server" Font-Size="8" Text=" ※表示の際は期間指定を都度クリック"></asp:Label></p>                                
+            </td>
 
 
         </tr>
@@ -289,7 +325,7 @@ h1:after {
 
     <table style="height:10px;">
         <tr>
-            <td style="width:550px;" >
+            <td style="width:300px;" >
 
                 <asp:Button class="button01"  ID="Button1" runat="server" Text="更新" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
                  <asp:Button class="button01"  ID="Button3" runat="server" Text="編集メニュ" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
@@ -299,22 +335,18 @@ h1:after {
                 <p></p>
 
 
-            </td>
 
-
-
-            <td style="width:500px;Font-Size:15px;" >
-
-            <asp:Button class="button01"  ID="Button5" runat="server" Text="期間指定" Width="70px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
-            <asp:CheckBox class="button01"  ID="CheckBox1" runat="server" Height="30px" AutoPostBack="True" Font-Size="13px" />
-
-            <asp:TextBox class="button01"  ID="TextBox1" runat="server"  type="date" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
-            <asp:TextBox class="button01"  ID="TextBox2" runat="server"  type="date" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
 
             </td>
 
+                <td style="width:150px;" >
+                </td>
+       
 
 
+
+                <td style="width:180px;" >
+                </td>
 
 
 
@@ -352,7 +384,7 @@ h1:after {
 
 
                     <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
-                    <AlternatingRowStyle BackColor="#DCDCDC" />
+<%--                    <AlternatingRowStyle BackColor="#DCDCDC" />--%>
                     <Columns>
 
 
@@ -393,14 +425,14 @@ h1:after {
                     <asp:BoundField DataField="FLG05" HeaderText="FLG05" SortExpression="FLG05" ReadOnly="true" ></asp:BoundField>--%>
 
                     </Columns>
-                    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+<%--                    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
                     <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
                     <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
                     <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
                     <SortedAscendingCellStyle BackColor="#F1F1F1" />
                     <SortedAscendingHeaderStyle BackColor="#0000A9" />
                     <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                    <SortedDescendingHeaderStyle BackColor="#000065" />
+                    <SortedDescendingHeaderStyle BackColor="#000065" />--%>
                     </asp:GridView>
 
                     </tbody>
@@ -426,7 +458,7 @@ h1:after {
 
 
                     <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
-                    <AlternatingRowStyle BackColor="#DCDCDC" />
+<%--                    <AlternatingRowStyle BackColor="#DCDCDC" />--%>
                     <Columns>
 
 
@@ -482,14 +514,14 @@ h1:after {
                     <asp:BoundField DataField="FLG05" HeaderText="FLG05" SortExpression="FLG05" ReadOnly="true" ></asp:BoundField>--%>
 
                     </Columns>
-                    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+<%--                    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
                     <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
                     <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
                     <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
                     <SortedAscendingCellStyle BackColor="#F1F1F1" />
                     <SortedAscendingHeaderStyle BackColor="#0000A9" />
                     <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                    <SortedDescendingHeaderStyle BackColor="#000065" />
+                    <SortedDescendingHeaderStyle BackColor="#000065" />--%>
                     </asp:GridView>
 
 
@@ -518,7 +550,7 @@ h1:after {
 
 
                     <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
-                    <AlternatingRowStyle BackColor="#DCDCDC" />
+<%--                    <AlternatingRowStyle BackColor="#DCDCDC" />--%>
                     <Columns>
 
 
@@ -574,14 +606,14 @@ h1:after {
                     <asp:BoundField DataField="FLG05" HeaderText="FLG05" SortExpression="FLG05" ReadOnly="true" ></asp:BoundField>--%>
 
                     </Columns>
-                    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+<%--                    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
                     <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
                     <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
                     <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
                     <SortedAscendingCellStyle BackColor="#F1F1F1" />
                     <SortedAscendingHeaderStyle BackColor="#0000A9" />
                     <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                    <SortedDescendingHeaderStyle BackColor="#000065" />
+                    <SortedDescendingHeaderStyle BackColor="#000065" />--%>
                     </asp:GridView>
 
                     </tbody>

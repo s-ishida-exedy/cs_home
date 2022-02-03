@@ -6,7 +6,7 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <title>出荷案件進捗</title>
+    <title>出荷案件管理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -266,8 +266,6 @@ h1:after {
 
 
 
-
-
 </head>
 
 
@@ -353,8 +351,9 @@ h1:after {
             <tr>
                 <td style="width:1500px;" >
 
-                <asp:Button class="btn-radius-gradient-wrap"  ID="Button2" runat="server" Text="フォルダ作成登録" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
- 
+                <asp:Button  ID="Button2" runat="server" Text="フォルダ作成登録" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
+                <asp:Button  ID="Button3" runat="server" Text="フォルダ作成" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
+  
                 <p></p>
                 <asp:Label ID="Label1" runat="server" Text="※チェック後にボタンを押す。(チェックボックスが緑のものはフォルダ作成可能)"  Font-Size="10px"></asp:Label>
 

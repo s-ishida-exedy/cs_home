@@ -8,6 +8,7 @@ Partial Class yuusen
     Public strRow As String
     Public strProcess As String
 
+
     Private Sub GridView1_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
 
         '最終更新年月日取得
@@ -677,8 +678,14 @@ Partial Class yuusen
 
     End Sub
 
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+        'Dim p As New System.Diagnostics.Process
+        'p.StartInfo.FileName = “C:\Users\T43529\OneDrive - 株式会社エクセディ\デスクトップ\新ツール\通関フォルダ作成_委託メール作成.xls”
+        'p.Start()
 
 
+        Response.Redirect("通関フォルダ作成_委託メール作成.xls")
 
-
+    End Sub
 End Class
