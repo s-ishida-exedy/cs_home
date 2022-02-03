@@ -19,7 +19,7 @@
             width: 1280px;
         }
         .auto-style2 {
-            width: 300px;
+            width: 250px;
             text-align:right;
         }
         .auto-style4 {
@@ -29,7 +29,7 @@
             width: 300px;
         }
         .auto-style7 {
-            width: 680px;
+            width: 730px;
         }   
 </style>
 <script>
@@ -78,7 +78,8 @@
                 <asp:Button ID="Button1" runat="server" Text="ファイルダウンロード" />&nbsp;
                 <asp:Label ID="Label1" runat="server" Text="絞り込み："></asp:Label>
                 <asp:DropDownList ID="DropDownList2" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="164px" DataSourceID="SqlDataSource3" DataTextField="VAN_DATE" DataValueField="VAN_DATE"></asp:DropDownList>
-                <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="164px" DataSourceID="SqlDataSource2" DataTextField="場所" DataValueField="場所"></asp:DropDownList>
+                <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="164px" DataSourceID="SqlDataSource2" DataTextField="場所" DataValueField="場所"></asp:DropDownList>&nbsp;
+                <asp:Button ID="Button2" runat="server" Text="ﾘｾｯﾄ" />
             </td>
             <td class="auto-style2">
                 <asp:Label ID="Label2" runat="server" Text="Labe2" ></asp:Label>
