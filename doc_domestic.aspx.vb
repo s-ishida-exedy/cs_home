@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
+
 Partial Class cs_home
     Inherits System.Web.UI.Page
 
@@ -78,9 +80,23 @@ Partial Class cs_home
         Dim lnkbutton = CType(sender, LinkButton)
 
         'ID（ファイル名）を引数にファイルオープン処理
-        Dim p As New System.Diagnostics.Process
-        p.StartInfo.FileName = strMainPath & lnkbutton.ID   'フルパス指定
-        p.Start()
+        'Dim p As New System.Diagnostics.Process
+        'p.StartInfo.FileName = strMainPath & lnkbutton.ID   'フルパス指定
+        'p.Start()
+
+        'Dim attributes = File.GetAttributes(strMainPath & lnkbutton.ID)
+
+        'File.SetAttributes(strMainPath & lnkbutton.ID, attributes Or FileAttributes.ReadOnly)
+
+        'System.Diagnostics.Process.Start(strMainPath & lnkbutton.ID)
+
+        'File.SetAttributes(strMainPath & lnkbutton.ID, attributes)
+
+        'Response.Redirect("./manual/手順書_【国内】A042」LS1 帳票出力.xlsx")
+
+        'WEBサーバーの「\\kbhwpm01\exp\cs_home\manual」に配置されたファイルのみ起動可能
+        Response.Redirect("./manual/" & lnkbutton.ID)       'フルパス指定
+
     End Sub
 
 End Class

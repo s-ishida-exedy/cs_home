@@ -77,10 +77,14 @@ Partial Class cs_home
         'クリックされたリンクボタンを取得
         Dim lnkbutton = CType(sender, LinkButton)
 
-        'ID（ファイル名）を引数にファイルオープン処理
-        Dim p As New System.Diagnostics.Process
-        p.StartInfo.FileName = strMainPath & lnkbutton.ID   'フルパス指定
-        p.Start()
+        ''ID（ファイル名）を引数にファイルオープン処理
+        'Dim p As New System.Diagnostics.Process
+        'p.StartInfo.FileName = strMainPath & lnkbutton.ID   'フルパス指定
+        'p.Start()
+
+        'WEBサーバーの「\\kbhwpm01\exp\cs_home\manual」に配置されたファイルのみ起動可能
+        Response.Redirect("./manual/" & lnkbutton.ID)       'フルパス指定
+
     End Sub
 
 End Class
