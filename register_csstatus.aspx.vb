@@ -12,16 +12,21 @@ Partial Class yuusen
 
     Protected Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        Dim strtxt As String = TextBox1.Text
+        'Dim strtxt As String = TextBox1.Text
+        Dim strdrp As String = DropDownList6.Text
         Dim strbkgno As String
 
-        Call GET_BKGNO(strtxt, strbkgno, "1")
+        Call GET_BKGNO(strdrp, strbkgno, "1")
 
-        TextBox1.Text = "Input"
+        'TextBox1.Text = "Input"
 
         DropDownList1.Items.Clear()
         DropDownList1.DataBind()
         DropDownList1.Items.Insert(0, "Please select")
+
+        DropDownList6.Items.Clear()
+        DropDownList6.DataBind()
+        DropDownList6.Items.Insert(0, "Please select")
 
     End Sub
     Protected Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -34,6 +39,10 @@ Partial Class yuusen
         DropDownList1.Items.Clear()
         DropDownList1.DataBind()
         DropDownList1.Items.Insert(0, "Please select")
+
+        DropDownList6.Items.Clear()
+        DropDownList6.DataBind()
+        DropDownList6.Items.Insert(0, "Please select")
 
 
     End Sub
@@ -602,5 +611,14 @@ Partial Class yuusen
 
     End Sub
 
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
 
+        Dim p As New System.Diagnostics.Process
+        p.StartInfo.FileName = “\\kbhwpm01\exp\登録用_T_EXL_CSWORKSTATUS.xls”
+        p.Start()
+
+
+
+
+    End Sub
 End Class
