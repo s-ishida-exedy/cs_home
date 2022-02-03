@@ -440,17 +440,41 @@ Partial Class yuusen
 
     Protected Sub DropDownList1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList1.SelectedIndexChanged
 
-        If DropDownList1.Text = "未回収" Then
+        Dim strstart As Date
+        Dim strend As Date
+        Dim strstart2 As String
+        Dim strend2 As String
+
+        Dim Dataobj As New DBAccess
+        Dim strd1 As String
+        Dim strd2 As String
+
+        If CheckBox1.Checked = True Then
+
+            If DropDownList1.Text = "未回収" Then
 
 
-            If CheckBox1.Checked = True Then
 
-                DropDownList2.Items.Clear()
-                DropDownList2.Items.Insert(0, "--Select--")
+                strd1 = DropDownList1.Text
+                strd2 = DropDownList2.Text
 
-            Else
 
-                GridView2.DataSource = SqlDataSource2
+                strstart = TextBox1.Text
+
+                strstart2 = strstart.ToString("yyyy/MM/dd")
+
+                strend = TextBox2.Text
+
+                strend2 = strend.ToString("yyyy/MM/dd")
+
+                Dim ds As DataSet = Dataobj.GET_CS_RESULT_SHIPPINGMEMO(strstart2, strend2, strd1, strd2)
+                If ds.Tables.Count > 0 Then
+                    GridView2.DataSourceID = ""
+                    GridView2.DataSource = ds
+                    Session("data") = ds
+                End If
+
+                'Grid再表示
                 GridView2.DataBind()
 
                 DropDownList2.Items.Clear()
@@ -461,43 +485,123 @@ Partial Class yuusen
                 Panel3.Visible = False
 
 
+            ElseIf DropDownList1.Text = "修正状況" Then
+
+                DropDownList2.Items.Clear()
+                DropDownList2.DataSource = SqlDataSource5
+                DropDownList2.DataTextField = "REV_STATUS"
+                DropDownList2.DataValueField = "REV_STATUS"
+                DropDownList2.DataBind()
+
+
+                DropDownList2.Items.Insert(0, "--Select--")
+
+            ElseIf DropDownList1.Text = "--Select--" Then
+
+                DropDownList2.Items.Clear()
+                DropDownList2.Items.Insert(0, "--Select--")
 
 
             End If
 
-        ElseIf DropDownList1.Text = "修正状況" Then
-
-            DropDownList2.Items.Clear()
-            DropDownList2.DataSource = SqlDataSource5
-            DropDownList2.DataTextField = "REV_STATUS"
-            DropDownList2.DataValueField = "REV_STATUS"
-            DropDownList2.DataBind()
+        Else
 
 
-            DropDownList2.Items.Insert(0, "--Select--")
+            If DropDownList1.Text = "未回収" Then
 
-        ElseIf DropDownList1.Text = "--Select--" Then
 
-            DropDownList2.Items.Clear()
-            DropDownList2.Items.Insert(0, "--Select--")
 
+                GridView2.DataSource = SqlDataSource2
+                    GridView2.DataBind()
+
+                    DropDownList2.Items.Clear()
+                    DropDownList2.Items.Insert(0, "--Select--")
+
+                    Panel1.Visible = False
+                    Panel2.Visible = True
+                    Panel3.Visible = False
+
+
+
+            ElseIf DropDownList1.Text = "修正状況" Then
+
+                DropDownList2.Items.Clear()
+                DropDownList2.DataSource = SqlDataSource5
+                DropDownList2.DataTextField = "REV_STATUS"
+                DropDownList2.DataValueField = "REV_STATUS"
+                DropDownList2.DataBind()
+
+
+                DropDownList2.Items.Insert(0, "--Select--")
+
+            ElseIf DropDownList1.Text = "--Select--" Then
+
+                DropDownList2.Items.Clear()
+                DropDownList2.Items.Insert(0, "--Select--")
+
+
+            End If
 
         End If
+
+
+
 
 
     End Sub
     Protected Sub DropDownList2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList2.SelectedIndexChanged
 
+        Dim Dataobj As New DBAccess
+        Dim strstart As Date
+        Dim strend As Date
+        Dim strstart2 As String
+        Dim strend2 As String
+
+
+        Dim strd1 As String
+        Dim strd2 As String
+
+
         If CheckBox1.Checked = True Then
-
-
-        Else
 
 
             If DropDownList1.Text = "修正状況" Then
 
+
+                strd1 = DropDownList1.Text
+                strd2 = DropDownList2.Text
+
+
+                strstart = TextBox1.Text
+
+                strstart2 = strstart.ToString("yyyy/MM/dd")
+
+                strend = TextBox2.Text
+
+                strend2 = strend.ToString("yyyy/MM/dd")
+
+                Dim ds As DataSet = Dataobj.GET_CS_RESULT_SHIPPINGMEMO(strstart2, strend2, strd1, strd2)
+                If ds.Tables.Count > 0 Then
+                    GridView2.DataSourceID = ""
+                    GridView2.DataSource = ds
+                    Session("data") = ds
+                End If
+
+                'Grid再表示
+                GridView2.DataBind()
+
+                DropDownList2.Items.Clear()
+                DropDownList2.Items.Insert(0, "--Select--")
+
+
+
+            Else
+
                 GridView2.DataSource = SqlDataSource3
                 GridView2.DataBind()
+
+                DropDownList2.Items.Clear()
+                DropDownList2.Items.Insert(0, "--Select--")
 
 
 
@@ -518,6 +622,7 @@ Partial Class yuusen
 
         If CheckBox1.Checked = True Then
 
+
             Dim Dataobj As New DBAccess
             Dim strCUST As String = TextBox1.Text
             Dim strstart As Date
@@ -526,51 +631,35 @@ Partial Class yuusen
             Dim strend2 As String
 
 
+
             Dim strd1 As String
             Dim strd2 As String
 
+            strd1 = ""
+            strd2 = ""
 
-            If IsDate(TextBox1.Text) = True And IsDate(TextBox2.Text) = True Then
+            strstart = TextBox1.Text
 
+            strstart2 = strstart.ToString("yyyy/MM/dd")
 
+            strend = TextBox2.Text
 
-                If CheckBox1.Checked = True Then
+            strend2 = strend.ToString("yyyy/MM/dd")
 
-                    'MsgBox("")
-
-                    strd1 = ""
-                    strd2 = ""
-
-                End If
-
-
-
-                strstart = TextBox1.Text
-
-                strstart2 = strstart.ToString("yyyy/M/d")
-
-                strend = TextBox2.Text
-
-                strend2 = strend.ToString("yyyy/M/d")
-
-                Dim ds As DataSet = Dataobj.GET_CS_RESULT_SHIPPINGMEMO(strstart2, strend2, strd1, strd2)
-                If ds.Tables.Count > 0 Then
-                    GridView2.DataSourceID = ""
-                    GridView2.DataSource = ds
-                    Session("data") = ds
-                End If
-
-                'Grid再表示
-                GridView2.DataBind()
-                Panel1.Visible = False
-                Panel2.Visible = True
-                Panel3.Visible = False
-
-            Else
-
-                MsgBox("日付を指定してください。")
-
+            Dim ds As DataSet = Dataobj.GET_CS_RESULT_SHIPPINGMEMO(strstart2, strend2, strd1, strd2)
+            If ds.Tables.Count > 0 Then
+                GridView2.DataSourceID = ""
+                GridView2.DataSource = ds
+                Session("data") = ds
             End If
+
+            'Grid再表示
+            GridView2.DataBind()
+            Panel1.Visible = False
+            Panel2.Visible = True
+            Panel3.Visible = False
+
+
 
         Else
 
@@ -671,88 +760,110 @@ Partial Class yuusen
     End Sub
 
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        '表示ボタン押下処理
-        Dim Dataobj As New DBAccess
-        Dim strCUST As String = TextBox1.Text
-        Dim strstart As Date
-        Dim strend As Date
-        Dim strstart2 As String
-        Dim strend2 As String
+    'Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+    '    '表示ボタン押下処理
+    '    Dim Dataobj As New DBAccess
+    '    Dim strCUST As String = TextBox1.Text
+    '    Dim strstart As Date
+    '    Dim strend As Date
+    '    Dim strstart2 As String
+    '    Dim strend2 As String
 
 
-        Dim strd1 As String
-        Dim strd2 As String
+    '    Dim strd1 As String
+    '    Dim strd2 As String
 
-        If CheckBox1.Checked = True Then
+    '    If CheckBox1.Checked = True Then
 
-            If IsDate(TextBox1.Text) = True And IsDate(TextBox2.Text) = True Then
-
-
-
-
-
-                If CheckBox1.Checked = True Then
-
-                    'MsgBox("")
-
-                    strd1 = DropDownList1.Text
-                    strd2 = DropDownList2.Text
-
-                End If
+    '        If IsDate(TextBox1.Text) = True And IsDate(TextBox2.Text) = True Then
 
 
 
-                strstart = TextBox1.Text
+    '            If CheckBox1.Checked = True Then
 
-                strstart2 = strstart.ToString("yyyy/MM/dd")
+    '                'MsgBox("")
 
-                strend = TextBox2.Text
+    '                strd1 = DropDownList1.Text
+    '                strd2 = DropDownList2.Text
 
-                strend2 = strend.ToString("yyyy/MM/dd")
-
-                Dim ds As DataSet = Dataobj.GET_CS_RESULT_SHIPPINGMEMO(strstart2, strend2, strd1, strd2)
-                If ds.Tables.Count > 0 Then
-                    GridView2.DataSourceID = ""
-                    GridView2.DataSource = ds
-                    Session("data") = ds
-                End If
-
-                'Grid再表示
-                GridView2.DataBind()
-                Panel1.Visible = False
-                Panel2.Visible = True
-                Panel3.Visible = False
-
-            Else
-
-                MsgBox("日付を指定してください。")
+    '            End If
 
 
-            End If
 
-        Else
+    '            strstart = TextBox1.Text
 
-            MsgBox("チェックを付けてください。")
+    '            strstart2 = strstart.ToString("yyyy/MM/dd")
 
-        End If
+    '            strend = TextBox2.Text
 
-    End Sub
+    '            strend2 = strend.ToString("yyyy/MM/dd")
+
+    '            Dim ds As DataSet = Dataobj.GET_CS_RESULT_SHIPPINGMEMO(strstart2, strend2, strd1, strd2)
+    '            If ds.Tables.Count > 0 Then
+    '                GridView2.DataSourceID = ""
+    '                GridView2.DataSource = ds
+    '                Session("data") = ds
+    '            End If
+
+    '            'Grid再表示
+    '            GridView2.DataBind()
+    '            Panel1.Visible = False
+    '            Panel2.Visible = True
+    '            Panel3.Visible = False
+
+    '        Else
+
+    '            MsgBox("日付を指定してください。")
+
+
+    '        End If
+
+    '    Else
+
+    '        MsgBox("チェックを付けてください。")
+
+    '    End If
+
+    'End Sub
 
 
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
 
+
+
         If CheckBox1.Checked = True Then
 
-            Label1.Text = "フィルタ 期間指定"
+
+
+            If TextBox1.text = "" Or TextBox2.text = "" Then
+
+                CheckBox1.Checked = False
+                msgbox("日付を指定してください。")
+
+
+
+            Else
+
+
+                Label1.Text = "フィルタ 期間指定"
+
+
+            End If
+
+
+
 
         Else
 
-
             Label1.Text = "フィルタ 全案件"
+            TextBox1.text = ""
+            TextBox2.text = ""
 
         End If
+
+
+
 
 
 

@@ -305,16 +305,21 @@ h1:after {
 
 
              <td class ="design02"  style="width:270px;Font-Size:15px;text-align:left;" >
-
-            <asp:Button class="button01"  ID="Button5" runat="server" Text="期間指定" Width="70px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
-            <asp:CheckBox class="button01"  ID="CheckBox1" runat="server" Height="30px" AutoPostBack="True" Font-Size="13px" />
-
-            <asp:TextBox class="button01"  ID="TextBox1" runat="server"  type="date" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
-            <asp:TextBox class="button01"  ID="TextBox2" runat="server"  type="date" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
+            &nbsp;&nbsp;
+            <asp:Label  ID="Label4" runat="server" Text="[期間指定]" Height="13px" AutoPostBack="True" Font-Size="13px" /> 
+            <asp:CheckBox class="button01"  ID="CheckBox1" runat="server" Height="13px" AutoPostBack="True" Font-Size="13px" />
 
 
-             <p> &nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Font-Size="8" Text="※チェックを入れている間は期間指定が有効"></asp:Label></p>
-             <p> &nbsp;&nbsp;<asp:Label ID="Label3" runat="server" Font-Size="8" Text=" ※表示の際は期間指定を都度クリック"></asp:Label></p>                                
+            <asp:TextBox class="button01"  ID="TextBox1" runat="server"  type="date" Width="120px" Height="13px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
+
+            <asp:TextBox class="button01"  ID="TextBox2" runat="server"  type="date" Width="120px" Height="13px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
+
+
+
+
+
+             <p> &nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Font-Size="8" Text="※日付を選択後、チェックを入れる"></asp:Label></p>
+             <p> &nbsp;&nbsp;<asp:Label ID="Label3" runat="server" Font-Size="8" Text=" ※チェック後、左のフィルタで選択"></asp:Label></p>                                
             </td>
 
 
