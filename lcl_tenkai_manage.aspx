@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>>LCL出荷_編集用</title>
+    <title>LCL出荷_編集用</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -120,6 +120,14 @@ h2:after{
   border-right: 2px solid #000000;
 }
 
+
+
+.btn00
+{
+
+                        cursor : pointer;
+}
+
     </style>
 <script>
     $(document).ready(function () {
@@ -179,13 +187,13 @@ h2:after{
 
 <td style="width:100px;Font-Size:25px;" >
 
-<asp:Button ID="Button1" runat="server" Text="表示" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+<asp:Button ID="Button1" CssClass ="btn00"  runat="server" Text="表示" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
 </td>
 
 <td style="width:100px;Font-Size:25px;" >
 
-<asp:Button ID="Button2" runat="server" Text="非表示" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+<asp:Button ID="Button2" CssClass ="btn00"  runat="server" Text="非表示" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
 </td>
 
