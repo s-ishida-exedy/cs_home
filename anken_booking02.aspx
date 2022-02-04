@@ -117,6 +117,13 @@ h2:after{
   border-right: 2px solid #000000;
 }
 
+
+
+.btn00
+{
+
+                        cursor : pointer;
+}
     </style>
    <script>
     $(document).ready(function () {
@@ -174,33 +181,33 @@ h2:after{
                 </td>
 
 
-<td style="width:100px;" >
+                <td style="width:200px;" >
 
-<asp:Button ID="Button3" runat="server" Text="登録" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+                                <asp:Label  ID="Label5" runat="server" Text="KD :"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
+                                <asp:CheckBox   ID="CheckBox1" runat="server" Height="13px" AutoPostBack="True" Font-Size="15px" />
+                                <asp:Label  ID="Label3" runat="server"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
 
-</td>
+                    <p></p>
 
-<td style="width:100px;" >
+                                <asp:Label  ID="Label6" runat="server" Text="ｱﾌﾀ："  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
+                                <asp:CheckBox   ID="CheckBox2" runat="server" Height="13px" AutoPostBack="True" Font-Size="15px" />
+                                <asp:Label  ID="Label4" runat="server"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
+                </td>
 
-<asp:Button ID="Button2" runat="server" Text="解除" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+                    <td style="width:50px" >
 
-</td>
+                                    判定：
+                </td>
+                <td style="width:550px" >
 
-<td style="width:100px;" >
-
-<asp:Button ID="Button1" runat="server" Text="案件抽出" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
-
-</td>
+                                    <asp:Label  ID="Label7" runat="server" Font-Size="30px" />
+                </td>
 
 
-<td style="width:500px; font-size:10px;" >
-
-<asp:Label ID="Label1" runat="server" Text="１．ＬＳ７、９（限定・試作）が同梱されている案件にチェックを入れる。"></asp:Label><br>
-<asp:Label ID="Label2" runat="server" Text="２．登録ボタンを押す。"></asp:Label><br>
-
-</td>
 
 <td style="width:80px;" >
+
+
 
 
 <div class="button04">
@@ -221,6 +228,65 @@ h2:after{
 </tr>
 
 </table>
+
+
+
+
+
+
+
+    <table style="width:700px;height:10px;">
+        <tr>
+
+            <td style="width:100px;" >
+
+            <asp:Button ID="Button3" CssClass ="btn00" runat="server" Text="登録" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+
+            </td>
+
+            <td style="width:100px;" >
+
+            <asp:Button ID="Button2"  CssClass ="btn00" runat="server" Text="解除" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+
+            </td>
+
+            <td style="width:100px;" >
+
+            <asp:Button ID="Button1"  CssClass ="btn00" runat="server" Text="案件抽出" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+
+            </td>
+
+
+            <td style="width:500px; font-size:10px;" >
+
+            <asp:Label ID="Label1" runat="server" Text="１．ＬＳ７、９（限定・試作）が同梱されている案件にチェックを入れる。"></asp:Label><br>
+            <asp:Label ID="Label2" runat="server" Text="２．登録ボタンを押す。"></asp:Label><br>
+
+            </td>
+
+
+
+        </tr>
+
+
+
+
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
@@ -289,7 +355,15 @@ h2:after{
 
 </div>
 
+
 </asp:Panel>   
+
+
+
+    
+
+
+
 </div>
 
 

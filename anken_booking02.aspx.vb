@@ -515,5 +515,343 @@ Partial Class yuusen
 
     End Sub
 
+    Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
+
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim dataread2 As SqlDataReader
+        Dim dbcmd2 As SqlCommand
+
+        Dim intCnt As Long
+
+
+        Dim strkd As String
+        Dim stram As String
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT T_EXL_ANKENCK.FLG01,T_EXL_ANKENCK.FLG02 FROM T_EXL_ANKENCK "
+        strSQL = strSQL & "WHERE T_EXL_ANKENCK.FLG03 ='1' "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+
+            strkd = Trim(dataread("FLG01"))
+            stram = Trim(dataread("FLG02"))
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        cnn.Close()
+        cnn.Dispose()
+
+
+
+
+        If Label3.Text = "" Then
+
+
+            If strkd = "1" Then
+
+
+
+                CheckBox1.Checked = True
+                Label3.Text = "済"
+
+
+            Else
+
+
+
+                CheckBox1.Checked = False
+                Label3.Text = "未"
+
+
+            End If
+
+            If stram = "1" Then
+
+
+                CheckBox2.Checked = True
+                Label4.Text = "済"
+
+
+
+            Else
+
+                CheckBox2.Checked = False
+                Label4.Text = "未"
+
+            End If
+
+        Else
+
+
+            If strkd = "1" Then
+
+                If CheckBox1.Checked = True Then
+
+                    CheckBox1.Checked = True
+                    Label3.Text = "済"
+
+
+
+                End If
+
+            Else
+
+                If CheckBox1.Checked = False Then
+
+
+
+                    CheckBox1.Checked = False
+                    Label3.Text = "未"
+
+                End If
+
+            End If
+
+            If stram = "1" Then
+
+                If CheckBox2.Checked = True Then
+
+                    CheckBox2.Checked = True
+                    Label4.Text = "済"
+
+
+
+                End If
+
+
+            Else
+                If CheckBox2.Checked = False Then
+
+                    CheckBox2.Checked = False
+                    Label4.Text = "未"
+
+                End If
+
+            End If
+
+        End If
+
+
+
+        If CheckBox1.Checked = True And CheckBox2.Checked = True Then
+
+            Label7.Text = "〇"
+
+
+        Else
+
+            Label7.Text = "×"
+
+        End If
+
+
+
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim dataread2 As SqlDataReader
+        Dim dbcmd2 As SqlCommand
+
+        Dim intCnt As Long
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+
+
+
+
+        If CheckBox1.Checked = True Then
+
+
+            strSQL = ""
+            strSQL = strSQL & "UPDATE T_EXL_ANKENCK SET "
+            strSQL = strSQL & "T_EXL_ANKENCK.FLG01 = '1' "
+            strSQL = strSQL & "WHERE T_EXL_ANKENCK.FLG03 ='1' "
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+
+
+        Else
+
+
+            strSQL = ""
+            strSQL = strSQL & "UPDATE T_EXL_ANKENCK SET "
+            strSQL = strSQL & "T_EXL_ANKENCK.FLG01 = '0' "
+            strSQL = strSQL & "WHERE T_EXL_ANKENCK.FLG03 ='1' "
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+
+            Command.ExecuteNonQuery()
+
+
+
+        End If
+
+
+
+
+
+        'クローズ処理 
+
+
+        cnn.Close()
+        cnn.Dispose()
+
+
+        If CheckBox1.Checked = True Then
+
+
+            Label3.Text = "済"
+
+
+        Else
+
+            Label3.Text = "未"
+
+        End If
+
+
+
+
+
+
+
+    End Sub
+
+    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
+
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim dataread2 As SqlDataReader
+        Dim dbcmd2 As SqlCommand
+
+        Dim intCnt As Long
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+
+
+
+
+        If CheckBox2.Checked = True Then
+
+
+            strSQL = ""
+            strSQL = strSQL & "UPDATE T_EXL_ANKENCK SET "
+            strSQL = strSQL & "T_EXL_ANKENCK.FLG02 = '1' "
+            strSQL = strSQL & "WHERE T_EXL_ANKENCK.FLG03 ='1' "
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+
+
+        Else
+
+
+            strSQL = ""
+            strSQL = strSQL & "UPDATE T_EXL_ANKENCK SET "
+            strSQL = strSQL & "T_EXL_ANKENCK.FLG02 = '0' "
+            strSQL = strSQL & "WHERE T_EXL_ANKENCK.FLG03 ='1' "
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+
+            Command.ExecuteNonQuery()
+
+
+
+        End If
+
+
+
+
+
+        'クローズ処理 
+
+
+        cnn.Close()
+        cnn.Dispose()
+
+
+        If CheckBox2.Checked = True Then
+
+
+            Label4.Text = "済"
+
+
+        Else
+
+            Label4.Text = "未"
+
+        End If
+
+
+
+
+    End Sub
+
 
 End Class
