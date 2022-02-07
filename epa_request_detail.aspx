@@ -14,6 +14,11 @@
 <script src="js/ddmenu_min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="js/default.js"></script>
+<%--Datepicker用--%>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<%--Datepicker用--%>
 <style type="text/css">
         .auto-style1 {
             width: 1280px;
@@ -36,6 +41,13 @@
         }
 </style>
 <script>
+    // カレンダー
+    jQuery(function ($) {
+        $(".date2").datepicker({
+            dateFormat: 'yy/mm/dd',
+            showButtonPanel: true
+        });
+    });
     $(document).ready(function () {
         var text = getParam('id');
         $('.result').text(text);
@@ -65,7 +77,7 @@
 </script>
 </head>
 <body class="c2">
-<form id="form1" runat="server">
+<form id="form1" runat="server" autocomplete="off">
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.htmlで行う -->
@@ -131,13 +143,11 @@
                 </td>
                 <th>ETA</th>
                 <td>
-                    <asp:TextBox ID="TextBox2" runat="server" style="width:164px"></asp:TextBox>
-                    <asp:Button ID="Button1" runat="server" Text="cal" />
+                    <asp:TextBox ID="TextBox2" runat="server" style="width:195px" class="date2"></asp:TextBox>
                 </td>
                 <th>ｶｯﾄ日</th>
                 <td>
-                    <asp:TextBox ID="TextBox3" runat="server" style="width:164px"></asp:TextBox>
-                    <asp:Button ID="Button2" runat="server" Text="cal" />
+                    <asp:TextBox ID="TextBox3" runat="server" style="width:195px" class="date2"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -157,25 +167,21 @@
             <tr>
                 <th>申請日</th>
                 <td>
-                    <asp:TextBox ID="TextBox7" runat="server" style="width:164px"></asp:TextBox>
-                    <asp:Button ID="Button3" runat="server" Text="cal" />
+                    <asp:TextBox ID="TextBox7" runat="server" style="width:195px" class="date2"></asp:TextBox>
                 </td>
                 <th>送付依頼日</th>
                 <td>
-                    <asp:TextBox ID="TextBox8" runat="server" style="width:164px"></asp:TextBox>
-                    <asp:Button ID="Button4" runat="server" Text="cal" />
+                    <asp:TextBox ID="TextBox8" runat="server" style="width:195px" class="date2"></asp:TextBox>
                 </td>
                 <th>受領日</th>
                 <td>
-                    <asp:TextBox ID="TextBox9" runat="server" style="width:164px"></asp:TextBox>
-                    <asp:Button ID="Button5" runat="server" Text="cal" />
+                    <asp:TextBox ID="TextBox9" runat="server" style="width:195px" class="date2"></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <th>EPA送付日</th>
                 <td>
-                    <asp:TextBox ID="TextBox10" runat="server" style="width:164px"></asp:TextBox>
-                    <asp:Button ID="Button6" runat="server" Text="cal" />
+                    <asp:TextBox ID="TextBox10" runat="server" style="width:195px" class="date2"></asp:TextBox>
                 </td>
                 <th>TRK#</th>
                 <td>
