@@ -127,6 +127,12 @@ h2:after{
   border-right: 2px solid #000000;
 }
 
+.btn00
+{
+
+                        cursor : pointer;
+}
+
 
     </style>
 <script>
@@ -180,7 +186,7 @@ h2:after{
 
 <td style="width:120px;" >
 
-<asp:Button class="btn-radius-gradient-wrap"  ID="Button1" runat="server" Text="追加" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+<asp:Button class="btn00"  ID="Button1" runat="server" Text="追加" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
 </td>
 

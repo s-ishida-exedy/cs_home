@@ -117,6 +117,7 @@ border: none;
  color: #000000;
       text-align: center;
       border-bottom: inset 2px #ffffff;
+                        cursor : pointer;
 }
 
 
@@ -129,6 +130,12 @@ border: none;
 }
 
 
+.btn00
+{
+
+                        cursor : pointer;
+}
+
 
 .button01
 {
@@ -136,6 +143,7 @@ background-color: #ffffff;
 border:none;
       color: #000000;
       border-bottom: inset 2px #ffffff;
+                        cursor : pointer;
 }
 
 .button01:hover {
@@ -307,8 +315,8 @@ h1:after {
 
                     <h1>フィルタ</h1>
                     <p></p>
-
-
+                    
+                    
                     <asp:DropDownList ID="DropDownList1" runat="server" Width="100px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" >
                     <asp:ListItem>--Select--</asp:ListItem>
                     <asp:ListItem>進捗状況</asp:ListItem>
@@ -351,8 +359,8 @@ h1:after {
             <tr>
                 <td style="width:1500px;" >
 
-                <asp:Button  ID="Button2" runat="server" Text="フォルダ作成登録" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
-                <asp:Button  ID="Button3" runat="server" Text="フォルダ作成" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
+                <asp:Button  ID="Button2" CssClass="btn00" runat="server" Text="フォルダ作成登録" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
+                <asp:Button  ID="Button3" CssClass="btn00" runat="server" Text="フォルダ作成" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
   
                 <p></p>
                 <asp:Label ID="Label1" runat="server" Text="※チェック後にボタンを押す。(チェックボックスが緑のものはフォルダ作成可能)"  Font-Size="10px"></asp:Label>
@@ -550,25 +558,25 @@ h1:after {
     
     
     
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([STATUS] = @STATUS)">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([STATUS] = @STATUS) ORDER BY CUT_DATE">
         <SelectParameters>
         <asp:ControlParameter ControlID="DropDownList2" Name="STATUS" PropertyName="SelectedValue" Type="String" />
         </SelectParameters>
         </asp:SqlDataSource>
 
 
-        <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([FORWARDER] = @FORWARDER)">
+        <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([FORWARDER] = @FORWARDER) ORDER BY CUT_DATE">
         <SelectParameters>
         <asp:ControlParameter ControlID="DropDownList2" Name="FORWARDER" PropertyName="SelectedValue" Type="String" />
         </SelectParameters>
         </asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([FORWARDER02] = @FORWARDER02)">
+        <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([FORWARDER02] = @FORWARDER02) ORDER BY CUT_DATE">
         <SelectParameters>
         <asp:ControlParameter ControlID="DropDownList2" Name="FORWARDER02" PropertyName="SelectedValue" Type="String" />
         </SelectParameters>
         </asp:SqlDataSource>
     
-        <asp:SqlDataSource ID="SqlDataSource9" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([CUST] = @CUST)">
+        <asp:SqlDataSource ID="SqlDataSource9" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([CUST] = @CUST) ORDER BY CUT_DATE">
         <SelectParameters>
         <asp:ControlParameter ControlID="DropDownList2" Name="CUST" PropertyName="SelectedValue" Type="String" />
         </SelectParameters>

@@ -117,6 +117,7 @@ border: none;
  color: #000000;
       text-align: center;
       border-bottom: inset 2px #ffffff;
+                  cursor : pointer;
 }
 
 
@@ -136,7 +137,7 @@ background-color: #ffffff;
 border:none;
 color: #000000;
 border-bottom: inset 2px #ffffff;
-
+            cursor : pointer;
 }
 
 
@@ -145,6 +146,16 @@ border-bottom: inset 2px #ffffff;
 text-align: center;
 border-bottom: inset 2px #000000;
 }
+
+
+
+
+
+
+
+
+
+
 
 .table01
 {
@@ -307,7 +318,9 @@ h1:after {
              <td class ="design02"  style="width:270px;Font-Size:15px;text-align:left;" >
             &nbsp;&nbsp;
             <asp:Label  ID="Label4" runat="server" Text="[期間指定]" Height="13px" AutoPostBack="True" Font-Size="13px" /> 
-            <asp:CheckBox class="button01"  ID="CheckBox1" runat="server" Height="13px" AutoPostBack="True" Font-Size="13px" />
+            <asp:CheckBox   ID="CheckBox1" runat="server" Height="13px" AutoPostBack="True" Font-Size="13px" />
+
+
 
 
             <asp:TextBox class="button01"  ID="TextBox1" runat="server"  type="date" Width="120px" Height="13px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
