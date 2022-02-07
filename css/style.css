@@ -520,6 +520,33 @@ footer .pr {display: block;font-size: 80%;}
 	text-align: center;	/*センタリング*/
 }
 
+/*topicta設定*/
+.topicta {
+	table-layout: fixed;
+	width: 100%;
+	margin: 0 auto 20px;
+	background: #fff;	/*背景色*/
+	color: #666;		/*文字色*/
+}
+.topicta, .topicta td, .topicta th {
+	word-break: break-all;
+	border: 1px solid #ccc;	/*テーブルの枠線の幅、線種、色*/
+	padding: 10px;	/*ボックス内の余白*/
+}
+/*topicta2設定*/
+.topicta2 {
+	table-layout: fixed;
+	width: 100%;
+	margin: 0 auto 20px;
+	background: #fff;	/*背景色*/
+	color: #666;		/*文字色*/
+}
+.topicta2, .topicta2 td, .topicta2 th {
+	word-break: break-all;
+	border: 1px solid #fff;	/*テーブルの枠線の幅、線種、色*/
+	padding: 10px;	/*ボックス内の余白*/
+}
+
 /*btn（inputタグ用）
 ---------------------------------------------------------------------------*/
 #main input[type="submit"].btn,

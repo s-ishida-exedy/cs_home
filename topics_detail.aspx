@@ -1,20 +1,31 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="start.aspx.vb" Inherits="cs_home" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="topics_detail.aspx.vb" Inherits="cs_home" %>
 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>ポータルサイト</title>
+<title>ポータルサイト(トピックス)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/openclose.js"></script>
 <script src="js/fixmenu.js"></script>
 <script src="js/fixmenu_pagetop.js"></script>
 <script src="js/ddmenu_min.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<%--Datepicker用--%>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<%--Datepicker用--%>
 <script src="js/default.js"></script>
 <script>
+    // カレンダー
+    jQuery(function ($) {
+        $(".date2").datepicker({
+            dateFormat: 'yy/mm/dd',
+            showButtonPanel: true
+        });
+    });
     // メニュークリック時の画面遷移
     $(function () {
         $('ul li').off("click").on("click", function () {
@@ -34,9 +45,6 @@
     });
 </script>
 <style type="text/css">
-        input {
-            display: none;
-        }
         label {
             display: block;
             margin: 0 0 4px 0;
@@ -79,111 +87,87 @@
         .txtth{
             font-size: 1em;
         }
+        .txt1 .date2{
+            text-align: center ;
+        }
+        .td-left{
+            text-align: left;
+        }
+        .ui-datepicker {
+            font-size: 70%;
+        }
+        .err{
+            color:red;
+            font-weight :700;
+        }
+
 </style>
 </head>
 
 <body class="c2">
 
-<form id="form1" runat="server">
+<form id="form1" runat="server" autocomplete="off">
 
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.htmlで行う -->
     <!-- #Include File="header.html" -->
-
 <div id="contents" class="inner">
 <div id="contents-in">
 
 <div id="main">
 
 <section>
-<h2>お知らせ</h2>
-
-<table class="ta1">
-<tr style="background-color: #eee;text-align: center;color: #666;font-weight: bold; ">
-    <td>
-        業務
+<h2>トピックス</h2>
+    <asp:Label ID="Label11" runat="server" Text="" Class="err"></asp:Label>
+<table class="topicta">
+<tr>
+    <td width="100px">
+        投稿日時：
+    </td>
+    <td class="td-left">
+        <asp:TextBox ID="TextBox1" runat="server" class="date2"></asp:TextBox>
+        <asp:TextBox ID="TextBox2" runat="server" class="txt1" Width="66px"></asp:TextBox>
     </td>
     <td>
-        本日の予定
-    </td>
-    <td>
-        翌営業日の予定
-    </td>
-    <td>
-        更新日時
+        投稿者：
+        <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" AutoPostBack="true" DataSourceID="SqlDataSource2" DataTextField="NAME_AB" DataValueField="NAME_AB" Width="170px" ></asp:DropDownList>
     </td>
 </tr>
 <tr>
-    <th>ＶＡＮ（本社　ＡＦ）</th>
-    <td>
-        <asp:Literal ID="Literal1" runat="server"></asp:Literal>
+    <td width="100px">
+        タイトル：
     </td>
-    <td>
-        <asp:Literal ID="Literal6" runat="server"></asp:Literal>
-    </td>
-    <td>
-        <asp:Literal ID="Literal7" runat="server"></asp:Literal>
+    <td colspan ="2" class="td-left">
+        <asp:TextBox ID="TextBox3" runat="server" Width="556px"></asp:TextBox>
+        ※25文字以内
     </td>
 </tr>
+</table>
+<table class="topicta">
 <tr>
-    <th>ＶＡＮ（本社　ＫＤ）</th>
-    <td>
-        <asp:Literal ID="Literal16" runat="server"></asp:Literal>
+    <td width="100px">
+        内　　容：<br/>
+        512文字以内
     </td>
-    <td>
-        <asp:Literal ID="Literal17" runat="server"></asp:Literal>
-    </td>
-    <td>
-        <asp:Literal ID="Literal18" runat="server"></asp:Literal>
+    <td colspan ="2" class="td-left">
+        <asp:TextBox ID="TextBox4" runat="server" Height="173px" TextMode="MultiLine" Width="751px"></asp:TextBox>
     </td>
 </tr>
+</table>
+<table class="topicta2">
 <tr>
-    <th>ＶＡＮ（上野）</th>
     <td>
-        <asp:Literal ID="Literal2" runat="server"></asp:Literal>
+        <asp:Button ID="Button1" runat="server" Text="登　　録" width="150px"/>
     </td>
     <td>
-        <asp:Literal ID="Literal8" runat="server"></asp:Literal>
+        <asp:Button ID="Button2" runat="server" Text="更　　新" width="150px" />
     </td>
     <td>
-        <asp:Literal ID="Literal9" runat="server"></asp:Literal>
-    </td>
-</tr>
-<tr>
-    <th>ＡＩＲ</th>
-    <td>
-        <asp:Literal ID="Literal3" runat="server"></asp:Literal>
+        <asp:Button ID="Button3" runat="server" Text="削　　除" width="150px" />
     </td>
     <td>
-        <asp:Literal ID="Literal10" runat="server"></asp:Literal>
-    </td>
-    <td>
-        <asp:Literal ID="Literal11" runat="server"></asp:Literal>
-    </td>
-</tr>
-<tr>
-    <th>自社通関</th>
-    <td>
-        <asp:Literal ID="Literal4" runat="server"></asp:Literal>
-    </td>
-    <td>
-        <asp:Literal ID="Literal12" runat="server"></asp:Literal>
-    </td>
-    <td>
-        <asp:Literal ID="Literal13" runat="server"></asp:Literal>
-    </td>
-</tr>
-<tr>
-    <th>通関委託</th>
-    <td>
-        <asp:Literal ID="Literal5" runat="server"></asp:Literal>
-    </td>
-    <td>
-        <asp:Literal ID="Literal14" runat="server"></asp:Literal>
-    </td>
-    <td>
-        <asp:Literal ID="Literal15" runat="server"></asp:Literal>
+        <a href="./topics.aspx">一覧へ戻る</a>
     </td>
 </tr>
 </table>
@@ -194,6 +178,16 @@
   , INFO_HEADER
 FROM
   T_EXL_INFOMATION "></asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT *
+FROM M_EXL_CS_MEMBER
+WHERE PLACE LIKE '%H%'
+AND CODE LIKE 'T%'
+UNION
+SELECT *
+FROM M_EXL_CS_MEMBER
+WHERE PLACE LIKE '%H%'
+AND CODE LIKE 'E%'"></asp:SqlDataSource>
 
 </section>
 

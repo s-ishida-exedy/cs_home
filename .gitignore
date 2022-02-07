@@ -243,3 +243,5 @@ ModelManifest.xml
 /cs_shippongmemo.aspx
 /cs_shippongmemo.aspx.vb
 *.html
+/Default.aspx.vb
+/Default.aspx
