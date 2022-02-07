@@ -94,7 +94,7 @@
                     <asp:Button ID="Button8" runat="server" Text="削　除" style="width:164px" />
                 </td>
                 <td class="auto-style2">
-                    <a href="#" onclick="window.history.back(); return false;">前のページに戻る</a>
+                    <a href="./epa_request.aspx">一覧に戻る</a>
                 </td>
             </tr>
         </table>

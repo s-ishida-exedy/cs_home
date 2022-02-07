@@ -79,6 +79,9 @@
         .txtth{
             font-size: 1em;
         }
+        .hTD1{
+            width :25%;
+        }
 </style>
 </head>
 
@@ -101,23 +104,33 @@
 
 <table class="ta1">
 <tr style="background-color: #eee;text-align: center;color: #666;font-weight: bold; ">
-    <td>
+    <td rowspan ="2">
         業務
     </td>
-    <td>
-        本日の予定
+    <td colspan ="2" class="hTD1">
+        本日
     </td>
-    <td>
+    <td rowspan ="2">
         翌営業日の予定
     </td>
-    <td>
+    <td rowspan ="2">
         更新日時
+    </td>
+</tr>
+<tr style="background-color: #eee;text-align: center;color: #666;font-weight: bold; ">
+    <td class="hTD1">
+        予定
+    </td>
+    <td class="hTD1">
+        実績
     </td>
 </tr>
 <tr>
     <th>ＶＡＮ（本社　ＡＦ）</th>
     <td>
         <asp:Literal ID="Literal1" runat="server"></asp:Literal>
+    </td>
+    <td>
     </td>
     <td>
         <asp:Literal ID="Literal6" runat="server"></asp:Literal>
@@ -132,6 +145,8 @@
         <asp:Literal ID="Literal16" runat="server"></asp:Literal>
     </td>
     <td>
+    </td>
+    <td>
         <asp:Literal ID="Literal17" runat="server"></asp:Literal>
     </td>
     <td>
@@ -142,6 +157,8 @@
     <th>ＶＡＮ（上野）</th>
     <td>
         <asp:Literal ID="Literal2" runat="server"></asp:Literal>
+    </td>
+    <td>
     </td>
     <td>
         <asp:Literal ID="Literal8" runat="server"></asp:Literal>
@@ -156,6 +173,8 @@
         <asp:Literal ID="Literal3" runat="server"></asp:Literal>
     </td>
     <td>
+    </td>
+    <td>
         <asp:Literal ID="Literal10" runat="server"></asp:Literal>
     </td>
     <td>
@@ -168,6 +187,8 @@
         <asp:Literal ID="Literal4" runat="server"></asp:Literal>
     </td>
     <td>
+    </td>
+    <td>
         <asp:Literal ID="Literal12" runat="server"></asp:Literal>
     </td>
     <td>
@@ -178,6 +199,8 @@
     <th>通関委託</th>
     <td>
         <asp:Literal ID="Literal5" runat="server"></asp:Literal>
+    </td>
+    <td>
     </td>
     <td>
         <asp:Literal ID="Literal14" runat="server"></asp:Literal>
