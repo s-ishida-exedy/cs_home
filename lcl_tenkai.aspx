@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>>LCL出荷_展開用</title>
+    <title>LCL出荷_展開用</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -43,12 +43,12 @@
           text-align:left;
           top: 0;
           z-index: 0;
-          background-color: #B0E0E6;
-          color: #000000;
+          background-color: #6fbfd1;
+          color: #ffffff;
         }
         .wrapper {
           overflow: scroll;
-          height: 450px;
+          height: 350px;
         }
 
 
@@ -124,6 +124,87 @@ h2:after{
   border-right: 2px solid #000000;
 }
 
+
+
+
+
+
+
+
+
+
+
+.CSSMarquee {
+    max-width: 1200px;
+    padding: 0.1em 0;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    color:#000;
+    font-weight: bold;
+}
+.CSSMarquee p:after {
+    content: "";
+    white-space: nowrap;
+}
+.CSSMarquee p {
+    margin: 0;
+    padding-left: 100%;
+    display: inline-block;
+    white-space: nowrap;
+    -webkit-animation-name:marqueeRL;
+    -webkit-animation-timing-function:linear;
+    -webkit-animation-duration:15s;
+    -webkit-animation-iteration-count:infinite;
+    -moz-animation-name:marqueeRL;
+    -moz-animation-timing-function:linear;
+    -moz-animation-duration:15s;
+    -moz-animation-iteration-count:infinite;
+    -ms-animation-name:marqueeRL;
+    -ms-animation-timing-function:linear;
+    -ms-animation-duration:15s;
+    -ms-animation-iteration-count:infinite;
+    -o-animation-name:marqueeRL;
+    -o-animation-timing-function:linear;
+    -o-animation-duration:15s;
+    -o-animation-iteration-count:infinite;
+    animation-name:marqueeRL;
+    animation-timing-function:linear;
+    animation-duration:15s;
+    animation-iteration-count:infinite;
+}
+ 
+@-webkit-keyframes marqueeRL {
+    from {-webkit-transform:translate(0);} to {-webkit-transform:translate(-100%);}
+}
+@-moz-keyframes marqueeRL {
+    from {-moz-transform:translate(0);} to {-moz-transform:translate(-100%);}
+}
+@-ms-keyframes marqueeRL {
+    from {-ms-transform:translate(0);} to {-ms-transform:translate(-100%);}
+}
+@-o-keyframes marqueeRL {
+    from {-o-transform:translate(0);} to {-o-transform:translate(-100%);}
+}
+@keyframes marqueeRL {
+    from {transform:translate(0);} to {transform:translate(-100%);}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
     </style>
 <script>
     $(document).ready(function () {
@@ -163,12 +244,12 @@ h2:after{
        
 <div id="contents2" class="inner2">
 <div >
-<table class="auto-style1" >
+<table >
 <tr>
 
 
 
-<td style="width:250px;Font-Size:25px;" >
+<td style="width:150px;Font-Size:25px;" >
 
 <h2>LCL出荷-展開用</h2>
 
@@ -177,9 +258,12 @@ h2:after{
 
 <td>
 
+
 </td>
 
 <td>
+
+
 
 </td>
 
@@ -195,12 +279,36 @@ h2:after{
 
 </tr>
 
+
+<tr>
+<td style="width:800px;Font-Size:13px;" >
+
+
+<p><b><asp:Label Font-Size="11" id="Label1" Text="引き取り・搬入予定LCL貨物の情報を展開しておりますので、荷量の追記、トラック手配をお願いいたします。" runat="server"></asp:Label></b></p>
+<p><asp:Label Font-Size="8" id="Label3" Text="・重量、荷量は編集ボタンを押して登録してください。" runat="server"></asp:Label></p>
+<p><asp:Label Font-Size="8" id="Label2" Text="・出荷後、リストから削除されていきます。" runat="server"></asp:Label></p>
+<asp:Label Font-Size="8" id="Label4" Text="・毎週水曜更新　（それ以外に追加・変更などの更新する場合はメールで通知します。）" runat="server"></asp:Label>
+
+
+</td>
+
+</tr>
+
+</table>
+
+
+<table>
+<tr>
+<td>
+<div class="CSSMarquee"><p><asp:Label Font-Size="10" id="Label5" Text="更新情報：" runat="server"></asp:Label></p></div>
+</td>
+</tr>
 </table>
 
 <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
 <div class="wrapper">
-<table class="sticky">
+<table class="sticky" >
 <thead class="fixed">
 
 </thead>
@@ -208,7 +316,7 @@ h2:after{
 
 <tbody>
 
-<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width = "2300px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width = "2200px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
 
 <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
 

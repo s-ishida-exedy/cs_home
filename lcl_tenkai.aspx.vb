@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+
+
 Partial Class cs_home
     Inherits System.Web.UI.Page
 
@@ -22,59 +24,10 @@ Partial Class cs_home
 
 
 
-        ''搬入日作成
-
-        ''接続文字列の作成
-        'Dim ConnectionString As String = String.Empty
-        ''SQL Server認証
-        'ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
-        ''SqlConnectionクラスの新しいインスタンスを初期化
-        'Dim cnn = New SqlConnection(ConnectionString)
-
-        ''データベース接続を開く
-        'cnn.Open()
-
-        ''ヘッダー以外に処理
-        'If e.Row.RowType = DataControlRowType.DataRow Then
-
-
-        '    '対象の日付以下の日付の最大値を取得
-
-        '    strSQL = "SELECT MAX(WORKDAY) AS WDAY01 FROM [T_EXL_CSWORKDAY] WHERE [T_EXL_CSWORKDAY].WORKDAY < '" & e.Row.Cells(6).Text & "' "
-
-
-        '    'ＳＱＬコマンド作成 
-        '    dbcmd = New SqlCommand(strSQL, cnn)
-        '    'ＳＱＬ文実行 
-        '    dataread = dbcmd.ExecuteReader()
-
-
-        '    '結果を取り出す 
-        '    While (dataread.Read())
-        '        wday2 = dataread("WDAY01")
-        '    End While
-
-
-        '    If Weekday(dt1) > 6 Then
-
-        '        cno = 7 - Weekday(dt1) + 6
-
-        '    Else
-
-        '        cno = 6 - Weekday(dt1) + 7
-
-        '    End If
-
 
 
         If e.Row.RowType = DataControlRowType.DataRow Then
 
-
-
-            '        e.Row.Cells(6).Text = wday2
-
-            '        Dim ts1 As New TimeSpan(cno, 0, 0, 0)
-            '        Dim dt2 As DateTime = dt1 + ts1
 
 
             If e.Row.Cells(1).Text = dt1.ToShortDateString Then
@@ -85,140 +38,41 @@ Partial Class cs_home
             End If
 
 
-            '            e.Row.BackColor = Drawing.Color.Salmon
 
-            '            If (e.Row.Cells(11).Text.Length = 6) And dt3 < dt2 Then
-
-            '                e.Row.Cells(11).Text = "AC要"
-            '                e.Row.Cells(11).BackColor = Drawing.Color.Red
-            '                e.Row.Cells(11).ForeColor = Drawing.Color.White
-
-            '            End If
-
-
-            '        End If
-
-
-            '        e.Row.Cells(6).Text = e.Row.Cells(6).Text & " (" & dt3.ToString("ddd") & ")"
-
-
-            '    End If
-
-
-            '    'クローズ処理 
-            '    dataread.Close()
-            '    dbcmd.Dispose()
 
         End If
 
 
 
-        'strSQL = "SELECT LCLFIN_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLFIN_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
-
-        ''ＳＱＬコマンド作成 
-        'dbcmd = New SqlCommand(strSQL, cnn)
-        ''ＳＱＬ文実行 
-        'dataread = dbcmd.ExecuteReader()
-
-        'strinv = ""
-        ''結果を取り出す 
-        'While (dataread.Read())
-        '    strinv += dataread("LCLFIN_INVNO")
 
 
-        '    '出荷手配状況
-        '    If Left(e.Row.Cells(4).Text, 4) = strinv Then
-        '        e.Row.BackColor = Drawing.Color.LightBlue
-        '    End If
-
-        'End While
-
-        ''クローズ処理 
-        'dataread.Close()
-        'dbcmd.Dispose()
-
-
-
-        'strSQL = "SELECT LCLARGD_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLARGD_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
-
-
-        ''ＳＱＬコマンド作成 
-        'dbcmd = New SqlCommand(strSQL, cnn)
-        ''ＳＱＬ文実行 
-        'dataread = dbcmd.ExecuteReader()
-
-        'strinv = ""
-        ''結果を取り出す 
-        'While (dataread.Read())
-        '    strinv += dataread("LCLARGD_INVNO")
-
-        '    '書類作成状況
-        '    If Left(e.Row.Cells(4).Text, 4) = strinv Then
-
-        '        If e.Row.Cells(11).Text = "AC要" Then
-        '            e.Row.Cells(11).Text = " Booking依頼済み"
-        '        End If
-
-        '    End If
-
-        'End While
-
-        ''クローズ処理 
-        'dataread.Close()
-        'dbcmd.Dispose()
-
-        'strSQL = "SELECT DOCFIN_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
-
-
-        ''ＳＱＬコマンド作成 
-        'dbcmd = New SqlCommand(strSQL, cnn)
-        ''ＳＱＬ文実行 
-        'dataread = dbcmd.ExecuteReader()
-
-        'strinv = ""
-        ''結果を取り出す 
-        'While (dataread.Read())
-        '    strinv += dataread("DOCFIN_INVNO")
-
-        '    '書類作成状況
-        '    If Left(e.Row.Cells(4).Text, 4) = strinv Then
-        '        e.Row.BackColor = Drawing.Color.DarkGray
-        '    End If
-
-        'End While
-
-        ''クローズ処理 
-        'dataread.Close()
-        'dbcmd.Dispose()
-
-
-        'cnn.Close()
-        'cnn.Dispose()
-
-        e.Row.Cells(0).Width = 50
-        e.Row.Cells(1).Width = 70
-        e.Row.Cells(2).Width = 120
+        e.Row.Cells(0).Width = 90
+        e.Row.Cells(1).Width = 40
+        e.Row.Cells(2).Width = 100
         e.Row.Cells(3).Width = 70
-        e.Row.Cells(4).Width = 100
-        e.Row.Cells(5).Width = 70
-        e.Row.Cells(6).Width = 70
+        e.Row.Cells(4).Width = 70
+        e.Row.Cells(5).Width = 110
+        e.Row.Cells(6).Width = 140
         e.Row.Cells(7).Width = 70
         e.Row.Cells(8).Width = 70
         e.Row.Cells(9).Width = 70
         e.Row.Cells(10).Width = 50
         e.Row.Cells(11).Width = 60
         e.Row.Cells(12).Width = 60
-        e.Row.Cells(13).Width = 120
+        e.Row.Cells(13).Width = 110
         e.Row.Cells(14).Width = 10
-        e.Row.Cells(15).Width = 120
+        e.Row.Cells(15).Width = 110
         e.Row.Cells(16).Width = 10
-        e.Row.Cells(17).Width = 120
-
+        e.Row.Cells(17).Width = 110
 
 
         e.Row.Cells(5).Visible = False
         e.Row.Cells(6).Visible = False
         e.Row.Cells(9).Visible = False
+        'e.Row.Cells(12).Visible = False
+        'e.Row.Cells(13).Visible = False
+        'e.Row.Cells(14).Visible = False
+
 
 
     End Sub
@@ -278,6 +132,5 @@ Partial Class cs_home
 
 
     End Sub
-
 
 End Class
