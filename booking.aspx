@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="booking.aspx.vb" Inherits="yuusen" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="booking.aspx.vb" Inherits="cs_home" %>
 
 <!DOCTYPE html>
 
@@ -21,10 +21,10 @@
         .first-cell {
             text-align:left;
             font-size:25px;
-            width: 300px;
+            width: 250px;
         }
         .second-cell {
-            width: 750px;
+            width: 850px;
         }   
         .third-cell {
             width: 250px;
@@ -134,7 +134,15 @@
                 <h2>Booking Sheet</h2> 
             </td>
             <td class="second-cell">
-                    
+                <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="Forwarder" DataValueField="Forwarder" AutoPostBack ="true" Width ="200px"></asp:DropDownList> 
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [Forwarder] FROM [T_BOOKING]"></asp:SqlDataSource>
+                &nbsp;
+                <asp:Label ID="Label1" runat="server" Text="客先CD:"></asp:Label>
+                <asp:TextBox ID="TextBox1" runat="server" Width ="100"></asp:TextBox>&nbsp;
+                <asp:Label ID="Label3" runat="server" Text="IVNO:"></asp:Label>
+                <asp:TextBox ID="TextBox2" runat="server" Width ="100"></asp:TextBox>&nbsp;
+                <asp:Button ID="Button1" runat="server" Text=" 絞込 " Font-Size="Small" Width ="80" />
+                <asp:Button ID="Button2" runat="server" Text=" ﾘｾｯﾄ " Font-Size="Small" Width ="80" />
             </td>
             <td class="third-cell">
                 <asp:Label ID="Label2" runat="server" Text="Labe2" ></asp:Label>
@@ -142,7 +150,7 @@
         </tr>
     </table>
 <div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="SEQ_NO02,CUST_CD" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="1980px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" AllowSorting="True">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="SEQ_NO02,CUST_CD" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="3200px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" AllowSorting="True">
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
             <Columns>
@@ -150,8 +158,8 @@
                 <HeaderStyle Width="60px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
-                <asp:BoundField DataField="Forwarder" HeaderText="Forwarder" SortExpression="Forwarder" >
-                <HeaderStyle Width="50px" />
+                <asp:BoundField DataField="Forwarder" HeaderText="海貨業者" SortExpression="Forwarder" >
+                <HeaderStyle Width="100px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="CUST_CD" HeaderText="客先" ReadOnly="True" SortExpression="CUST_CD" >

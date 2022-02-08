@@ -332,4 +332,43 @@ Public Class DBAccess
         Return Ds
     End Function
 
+    Public Function GET_BOOKING_DATA(strFwd As String, strCust As String, strIV As String) As DataSet
+        'バンニングスケジュール絞り込み
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT * "
+        StrSQL = StrSQL & "FROM T_BOOKING "
+
+        If strFwd <> "" And strCust = "" And strIV = "" Then
+            StrSQL = StrSQL & "WHERE Forwarder = '" & strFwd & "' "
+        ElseIf strFwd <> "" And strCust <> "" And strIV = "" Then
+            StrSQL = StrSQL & "WHERE Forwarder = '" & strFwd & "' "
+            StrSQL = StrSQL & "    AND CUST_CD like '%" & strCust & "%' "
+        ElseIf strFwd <> "" And strCust = "" And strIV <> "" Then
+            StrSQL = StrSQL & "WHERE Forwarder = '" & strFwd & "' "
+            StrSQL = StrSQL & "    AND INVOICE_NO like '%" & strIV & "%' "
+        ElseIf strFwd <> "" And strCust <> "" And strIV <> "" Then
+            StrSQL = StrSQL & "WHERE Forwarder = '" & strFwd & "' "
+            StrSQL = StrSQL & "    AND CUST_CD like '%" & strCust & "%' "
+            StrSQL = StrSQL & "    AND INVOICE_NO like '%" & strIV & "%' "
+        ElseIf strFwd = "" And strCust <> "" And strIV = "" Then
+            StrSQL = StrSQL & "WHERE CUST_CD like '%" & strCust & "%' "
+        ElseIf strFwd = "" And strCust <> "" And strIV <> "" Then
+            StrSQL = StrSQL & "WHERE CUST_CD like '%" & strCust & "%' "
+            StrSQL = StrSQL & "    AND INVOICE_NO like '%" & strIV & "%' "
+        ElseIf strFwd = "" And strCust = "" And strIV <> "" Then
+            StrSQL = StrSQL & "WHERE INVOICE_NO like '%" & strIV & "%' "
+        End If
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
+
 End Class

@@ -1,5 +1,7 @@
-﻿Imports System.Data.SqlClient
-Partial Class yuusen
+﻿Imports System.Data
+Imports System.Data.SqlClient
+
+Partial Class cs_home
     Inherits System.Web.UI.Page
 
     Public strRow As String
@@ -21,6 +23,12 @@ Partial Class yuusen
     End Sub
 
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
+        If IsPostBack Then
+            ' そうでない時処理
+        Else
+            Me.DropDownList1.Items.Insert(0, "") '先頭に空白行追加
+        End If
+
         Me.Label2.Text = ""
 
         '最終更新年月日取得
@@ -62,6 +70,35 @@ Partial Class yuusen
 
     End Sub
 
+    Private Sub Make_Grid()
+        'GRIDを作成する。
 
+        Dim Dataobj As New DBAccess
+        Dim strFwd As String = DropDownList1.SelectedValue
 
+        'データの取得
+        Dim ds As DataSet = Dataobj.GET_BOOKING_DATA(strFwd, Me.TextBox1.Text, Me.TextBox2.Text)
+        If ds.Tables.Count > 0 Then
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = ds
+            GridView1.DataBind()
+        End If
+    End Sub
+
+    Private Sub DropDownList1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList1.SelectedIndexChanged
+        '海貨業者選択
+        Call Make_Grid()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        '絞込ボタン押下
+        Call Make_Grid()
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        'リセットボタン押下
+        DropDownList1.SelectedIndex = 0
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+    End Sub
 End Class
