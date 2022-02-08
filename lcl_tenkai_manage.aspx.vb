@@ -1,4 +1,7 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Data
+Imports Microsoft.Office.Interop.Outlook
+Imports mod_function
 Partial Class cs_home
     Inherits System.Web.UI.Page
 
@@ -13,24 +16,26 @@ Partial Class cs_home
         End If
 
         e.Row.Cells(0).Width = 10
-        e.Row.Cells(1).Width = 120
-        e.Row.Cells(2).Width = 50
+        e.Row.Cells(1).Width = 90
+        e.Row.Cells(2).Width = 40
         e.Row.Cells(3).Width = 100
         e.Row.Cells(4).Width = 70
-        e.Row.Cells(5).Width = 100
+        e.Row.Cells(5).Width = 70
         e.Row.Cells(6).Width = 110
-        e.Row.Cells(7).Width = 70
+        e.Row.Cells(7).Width = 140
         e.Row.Cells(8).Width = 70
         e.Row.Cells(9).Width = 70
         e.Row.Cells(10).Width = 70
         e.Row.Cells(11).Width = 50
         e.Row.Cells(12).Width = 60
         e.Row.Cells(13).Width = 60
-        e.Row.Cells(14).Width = 120
+        e.Row.Cells(14).Width = 110
         e.Row.Cells(15).Width = 10
-        e.Row.Cells(16).Width = 120
+        e.Row.Cells(16).Width = 110
         e.Row.Cells(17).Width = 10
-        e.Row.Cells(18).Width = 150
+        e.Row.Cells(18).Width = 110
+        e.Row.Cells(19).Width = 600
+        e.Row.Cells(20).Width = 30
 
         e.Row.Cells(6).Visible = False
         e.Row.Cells(7).Visible = False
@@ -87,7 +92,7 @@ Partial Class cs_home
 
                 Call GET_IVDATA(GridView1.Rows(I).Cells(6).Text, 1)
                 Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(5).Text, 4), 1)
-
+                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(5).Text, 4), GridView1.Rows(I).Cells(6).Text, 1)
 
 
 
@@ -116,7 +121,7 @@ Partial Class cs_home
 
 
                     strSQL = ""
-                    strSQL = strSQL & "UPDATE T_EXL_LCLCUSTPREADS SET ADDRESS ='" & GridView1.Rows(I).Cells(11).Text & "' "
+                    strSQL = strSQL & "UPDATE T_EXL_LCLCUSTPREADS SET ADDRESS ='" & GridView1.Rows(I).Cells(19).Text & "' "
                     strSQL = strSQL & "WHERE CUSTCODE = '" & GridView1.Rows(I).Cells(4).Text & "'"
 
 
@@ -126,7 +131,7 @@ Partial Class cs_home
                     strSQL = strSQL & "INSERT INTO T_EXL_LCLCUSTPREADS VALUES("
 
                     strSQL = strSQL & "'" & GridView1.Rows(I).Cells(4).Text & "' "
-                    strSQL = strSQL & ",'" & GridView1.Rows(I).Cells(11).Text & "' "
+                    strSQL = strSQL & ",'" & GridView1.Rows(I).Cells(19).Text & "' "
 
 
 
@@ -207,7 +212,7 @@ Partial Class cs_home
 
                 Call GET_IVDATA(GridView1.Rows(I).Cells(6).Text, 2)
                 Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(5).Text, 4), 2)
-
+                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(5).Text, 4), GridView1.Rows(I).Cells(6).Text, 2)
 
             Else
 
@@ -391,6 +396,60 @@ Partial Class cs_home
             'クローズ処理 
             dataread.Close()
             dbcmd.Dispose()
+
+        End If
+
+        cnn.Close()
+        cnn.Dispose()
+
+    End Sub
+
+    Private Sub GET_IVDATA3(strinv As String, strbkg As String, A As String)
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+        Dim bkgno As String
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        If strbkg = "" Or IsNothing(strbkg) = True Then
+
+
+        Else
+
+
+
+            If A = "1" Then
+
+                Call INS_LCL(strinv, strbkg)
+
+            Else
+
+                Call DEL_LCL(strinv, strbkg)
+
+            End If
+
+
 
         End If
 
@@ -585,4 +644,57 @@ Partial Class cs_home
 
     End Sub
 
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+        Dim strmailtemp As String
+
+        'メール送信ボタン
+        Dim strName, strAdd, strDes As String
+
+        '客先情報取得
+        'Call GET_CustInfo(TextBox1.Text, strName, strAdd, strDes)
+
+        strmailtemp = "各位" & "<br>" & "お世話になっております。" & "<br>" & "<br>" & "更新いたしましたので、ご確認お願いいたします。" & "<br>" & "http://localhost:49375/.%2Flcl_tenkai.aspx" & "<br>" & "<br>" & "＜更新内容＞"
+
+
+        '本文作成
+        Dim strbody As String = strmailtemp & "<br>" & Replace(TextBox1.Text, vbCrLf, "<br>")
+        strbody = strbody & "<br>" & "<br>" & "<br>" & "恐れ入りますが宜しくお願いいたします。"
+
+        strbody = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & strbody & "</font>"
+
+
+        'メール送付
+        Dim app As New Microsoft.Office.Interop.Outlook.Application()
+        Dim Mail As MailItem = app.CreateItem(OlItemType.olMailItem)
+
+        '宛先
+        Mail.To = ""
+
+        'If CheckBox6.Checked = True Then
+        '    Mail.CC = TextBox6.Text
+        'Else
+        '    Mail.CC = ""
+        'End If
+
+        ''BCCのアドレスをDBから取得
+        'Mail.BCC = GET_BccAddress(DropDownList2.SelectedValue.ToString)
+
+        '件名
+        Mail.Subject = "LCL貨物引取・搬入連絡"
+
+        '形式をHTML
+        Mail.BodyFormat = OlBodyFormat.olFormatHTML
+        Mail.HTMLBody = "<HTML><BODY>" & strbody & "</BODY></HTML>"
+
+        'アドレス帳を用いてメールアドレスを名前解決
+        Mail.Recipients.ResolveAll()
+
+
+        'メールを表示
+        Mail.Display()
+
+
+
+    End Sub
 End Class

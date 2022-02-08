@@ -175,7 +175,6 @@ h2:after{
 <td style="width:500px;Font-Size:15px;" >
 
 <asp:Label id="Label1" Text="＜ラベル＞" runat="server"></asp:Label>
-</font>
 
 </td>
 
@@ -195,6 +194,28 @@ h2:after{
 </td>
 
 </tr>
+
+<tr>
+
+<td style="width:500px;Font-Size:12px;" >
+
+<p><asp:Label id="Label2" Text="※Bookingシート上にCUT日が記載されていない案件" runat="server"></asp:Label></p>
+
+<asp:Label id="Label3" Text="※CUT日を入力すると手配状況の画面に表示される" runat="server"></asp:Label>
+
+</td>
+
+<td style="width:500px;Font-Size:12px;" >
+
+<p><asp:Label id="Label4" Text="＜下表のCUT日は自動で設定されている＞" runat="server"></asp:Label></p>
+
+<asp:Label　Font-Size="10" id="Label5" Text="C258 ETDの8日前、C255 ETDの10日前、その他 ETDの7日前" runat="server"></asp:Label>
+
+</td>
+
+</tr>
+
+
 
 </table>
 

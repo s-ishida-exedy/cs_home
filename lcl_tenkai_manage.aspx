@@ -45,7 +45,7 @@
         }
         .wrapper {
           overflow: scroll;
-          height: 450px;
+          height: 250px;
         }
 
 
@@ -185,22 +185,6 @@ h2:after{
 </td>
 
 
-<td style="width:100px;Font-Size:25px;" >
-
-<asp:Button ID="Button1" CssClass ="btn00"  runat="server" Text="表示" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
-
-</td>
-
-<td style="width:100px;Font-Size:25px;" >
-
-<asp:Button ID="Button2" CssClass ="btn00"  runat="server" Text="非表示" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
-
-</td>
-
-
-<td style="width:400px;Font-Size:25px;" >
-
-</td>
 
 <td style="width:100px;Font-Size:25px;" >
 
@@ -227,12 +211,36 @@ h2:after{
   <a href="lcl_arange.aspx?id={0}">手配状況</a>
 </div>          
 
+</td>
+
+</tr>
+
+</table>
+
+
+<table style="Height:10px;">
+<tr>
+
+<td style="width:100px;Font-Size:25px; " >
+
+<asp:Button ID="Button1" CssClass ="btn00"  runat="server" Text="表示" Width="75px" Height="30px" AutoPostBack="True" Font-Size="13px" />
+
+</td>
+
+<td style="width:100px;Font-Size:25px;" >
+
+<asp:Button ID="Button2" CssClass ="btn00"  runat="server" Text="非表示" Width="75px" Height="30px" AutoPostBack="True" Font-Size="13px" />
+
+</td>
+
+<td style="width:800px;Font-Size:25px;" >
 
 </td>
 
 </tr>
 
 </table>
+
 
 
 <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
@@ -245,7 +253,7 @@ h2:after{
 
 <tbody>
 
-<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width = "2200px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" hight = "500px" Width = "2500px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
 
 <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
 
@@ -323,6 +331,63 @@ UpdateCommand="UPDATE T_EXL_LCLTENKAI SET [CUST]=@CUST, [INVOICE_NO]=@INVOICE_NO
 DeleteCommand="DELETE FROM T_EXL_LCLTENKAI WHERE BOOKING_NO=@BOOKING_NO"></asp:SqlDataSource>
 
 </asp:Panel>    
+
+
+<table style="height:20px;">
+
+
+</table>
+
+<table>
+
+<tr>
+
+<td style="width:150px;Font-Size:15px;" >
+
+<asp:Label ID="Label1" runat="server" Text="<通知メール作成>"></asp:Label>
+
+</td>
+
+<td style="width:100px;Font-Size:15px;" >
+
+<asp:Button ID="Button3" CssClass ="btn00"  runat="server" Text="送信" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+
+</td>
+
+<td style="width:800px;Font-Size:15px;" >
+
+
+</td>
+
+</tr>
+
+</table>
+
+
+
+<table>
+</table>
+
+<table>
+<tr>
+
+<td style="width:100px;Font-Size:15px; height:60px;" >
+<asp:TextBox ID="TextBox1" runat="server" Width="500px" Height="80px" TextMode="MultiLine" CssClass="" Font-Size="12px" AutoPostBack="True"  AppendDataBoundItems="true" ></asp:TextBox>
+</td>
+
+
+
+<td style="width:600px;Font-Size:25px;" >
+
+
+
+</td>
+
+</tr>
+
+</table>
+
+
 
 </div>
         

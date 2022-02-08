@@ -335,9 +335,9 @@ h1:after {
 
                 <td style="width:150px;" >
 
-                    <div class="button04">
+<%--                    <div class="button04">
                     <a href="anken_booking01.aspx?id={0}">当日案件へ</a>
-                    </div>
+                    </div>--%>
 
                 </td>
 

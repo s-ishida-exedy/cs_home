@@ -37,8 +37,8 @@
           position: sticky;
           top: 0;
           z-index: 0;
-          background-color: #FFFFFF;
-          color: #000000;
+          background-color: #6fbfd1;
+          color: #ffffff;
         }
         .wrapper {
           overflow: scroll;
@@ -124,6 +124,49 @@ h2:after{
 
                         cursor : pointer;
 }
+
+
+
+
+.design01 {
+ width: 65%;
+ text-align: center;
+ border-collapse: collapse;
+ border-spacing: 0;
+ border: solid 1px #778ca3;
+ background: #6fbfd1;
+}
+.design01 tr {
+ border-top: dashed 1px #778ca3;
+}
+.design01 th {
+ padding: 0px;
+ background: #e9faf9;
+}
+.design01 td {
+ padding: 0px;
+}
+
+
+.design02 {
+ width: 65%;
+
+ text-align: center;
+ border-collapse: collapse;
+ border-spacing: 0;
+ border: solid 1px #778ca3;
+}
+.design02 tr {
+ border-top: dashed 1px #778ca3;
+}
+.design02 th {
+ padding: 0px;
+ background: #e9faf9;
+}
+.design02 td {
+ padding: 0px;
+}
+
     </style>
    <script>
     $(document).ready(function () {
@@ -181,27 +224,7 @@ h2:after{
                 </td>
 
 
-                <td style="width:200px;" >
 
-                                <asp:Label  ID="Label5" runat="server" Text="KD :"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
-                                <asp:CheckBox   ID="CheckBox1" runat="server" Height="13px" AutoPostBack="True" Font-Size="15px" />
-                                <asp:Label  ID="Label3" runat="server"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
-
-                    <p></p>
-
-                                <asp:Label  ID="Label6" runat="server" Text="ｱﾌﾀ："  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
-                                <asp:CheckBox   ID="CheckBox2" runat="server" Height="13px" AutoPostBack="True" Font-Size="15px" />
-                                <asp:Label  ID="Label4" runat="server"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
-                </td>
-
-                    <td style="width:50px" >
-
-                                    判定：
-                </td>
-                <td style="width:550px" >
-
-                                    <asp:Label  ID="Label7" runat="server" Font-Size="30px" />
-                </td>
 
 
 
@@ -210,9 +233,9 @@ h2:after{
 
 
 
-<div class="button04">
+<%--<div class="button04">
 <a href="anken_booking01.aspx?id={0}">当日案件へ</a>
-</div>
+</div>--%>
 
 </td>
 
@@ -230,8 +253,69 @@ h2:after{
 </table>
 
 
+    
+
+    
 
 
+
+
+
+<table style="width:350px;height:10px;" >
+<tr>
+
+
+                <td style="width:20px;" class ="design01" >
+
+                                <asp:Label  ID="Label5" runat="server" ForeColor ="white" Text="KD"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
+                </td>   
+                <td style="width:40px;" class ="design02" >
+                                <asp:CheckBox   ID="CheckBox1" runat="server" Height="13px" AutoPostBack="True" Font-Size="15px" />
+                                <asp:Label  ID="Label3" runat="server"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
+
+                </td>   
+                <td style="width:20px;" class ="design01">
+
+                                <asp:Label  ID="Label6" runat="server"  ForeColor ="white"  Text="ｱﾌﾀ"  Height="13px" AutoPostBack="True" Font-Size="15px" />
+                </td>   
+                <td style="width:40px;" class ="design02" > 
+                                <asp:CheckBox   ID="CheckBox2" runat="server" Height="13px" AutoPostBack="True" Font-Size="15px" />
+                                <asp:Label  ID="Label4" runat="server"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
+                </td>
+
+                    <td style="width:20px"class ="design01" >
+
+                                <asp:Label  ID="Label8" runat="server"  ForeColor ="white"  Text="判定"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
+                                    
+                </td>
+
+
+
+
+
+
+                <td style="width:40px" class ="design02"　>
+                        <asp:Label ID="Label7" runat="server" Font-Size="20px"/>
+
+                </td>
+
+
+
+
+
+
+
+
+</tr>
+</table>
+
+<table style="width:320px;height:20px;" >
+<tr>
+
+                                   <asp:Label  ID="Label9" runat="server" Text="※作業完了後、チェックを入れてください。" Font-Size="12px" />
+
+</tr>
+</table>
 
 
 
@@ -278,16 +362,6 @@ h2:after{
 
 
 
-
-
-
-
-
-
-
-
-
-
 <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
 <div class="wrapper">
@@ -298,8 +372,8 @@ h2:after{
 
 <tbody>
                                  
-<asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" CssClass="auto-style6" DataSourceID="SqlDataSource1" Width="927px">
-<HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK" />
+<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="#6fbfd1" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" DataSourceID="SqlDataSource1" Width="927px">
+<HeaderStyle BackColor="#6fbfd1" Font-Bold="True" ForeColor="BLACK" />
 <HeaderStyle CssClass="Freezing" />
 <Columns>
 
@@ -344,7 +418,7 @@ h2:after{
 <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
 <RowStyle BackColor="#FFFFFF" ForeColor="Black" />
 <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-<SortedAscendingHeaderStyle BackColor="#0000A9" />
+
 </asp:GridView>
 
 </tbody>
