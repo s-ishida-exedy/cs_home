@@ -27,33 +27,6 @@ Partial Class cs_home
         '初期データ取得
         Call GET_DATA()
 
-        'HTML要素のIDを取得
-        '「TextBox1用」
-        Dim id As String = TextBox1.ClientID
-        Dim opt As String = "height=350,width=300,dependent=yes,location=no,menubar=no," +
-                            "scrolbars=no,toolbar=no,status=no"
-
-        'ポップアップカレンダーを開くスクリプトを作成
-        Dim script As String = "var url = 'Calendar.aspx?id={0}&date=' + getElementById('{0}').value;" +
-                               "window.open(url,'_blank', '{1}'); return false;"
-        script = String.Format(script, id, opt)
-
-        ' onclick 属性にスクリプトを設定する
-        Button1.Attributes.Add("onclick", script)
-
-        '「textbox2用」
-        Dim id2 As String = TextBox2.ClientID
-        Dim opt2 As String = "height=350,width=300,dependent=yes,location=no,menubar=no," +
-                            "scrolbars=no,toolbar=no,status=no"
-
-        'ポップアップカレンダーを開くスクリプトを作成
-        Dim script2 As String = "var url = 'Calendar.aspx?id={0}&date=' + getElementById('{0}').value;" +
-                               "window.open(url,'_blank', '{1}'); return false;"
-        script = String.Format(script2, id2, opt2)
-
-        ' onclick 属性にスクリプトを設定する
-        Button2.Attributes.Add("onclick", script)
-
     End Sub
 
     Private Sub Make_Grid(strCode As String)

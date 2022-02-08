@@ -14,6 +14,11 @@
 <script src="js/ddmenu_min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="js/default.js"></script>
+<%--Datepicker用--%>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<%--Datepicker用--%>
 <style type="text/css">
         .auto-style1 {
             width: 1280px;
@@ -33,6 +38,13 @@
         }   
 </style>
 <script>
+    // カレンダー
+    jQuery(function ($) {
+        $(".date2").datepicker({
+            dateFormat: 'yy/mm/dd',
+            showButtonPanel: true
+        });
+    });
     $(document).ready(function () {
         var text = getParam('id');
         $('.result').text(text);
@@ -80,11 +92,11 @@
                     <asp:ListItem Value="U">上野</asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                <asp:Button ID="Button1" runat="server" Text="cal" />
+                <asp:TextBox ID="TextBox1" runat="server" class="date2"></asp:TextBox>
                 &nbsp;
-                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-                <asp:Button ID="Button2" runat="server" Text="cal" />
+                <asp:Label ID="Label1" runat="server" Text="～"></asp:Label>
+                &nbsp;
+                <asp:TextBox ID="TextBox2" runat="server" class="date2"></asp:TextBox>
                 &nbsp;
                 <asp:Button ID="Button3" runat="server" Text="検　索" />
             </td>
