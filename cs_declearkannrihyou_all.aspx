@@ -166,11 +166,6 @@ h2:after{
 
 
 
-    <td style="width:50px;Font-Size:15px;" >
-
-<asp:Button ID="Button1" runat="server" Text="管理表に表示する" AutoPostBack="True" />
-
-</td>
 
 
 
@@ -183,6 +178,54 @@ h2:after{
 </td>
 </tr>
 </table>
+
+
+
+<table>
+
+<tr>
+
+<td style="width:1000px;Font-Size:15px;" >
+
+<p><asp:Label Font-Size="10" ID="Label1" runat="server" Text="・チェックを入れて管理表に表示するボタンを押すと、特定輸出管理表に表示される"></asp:Label></p>
+
+<asp:Label Font-Size="10" ID="Label2" runat="server" Text="・輸出許可書の許可後訂正を行った際は編集ボタンを押して修正後の管理番号を要録"></asp:Label>
+
+</td>
+
+</tr>
+
+</table>
+
+<table>
+
+<tr>
+
+<td  >
+
+<asp:Button ID="Button1" width="120" Font-Size="10" runat="server" Text="管理表に表示する" AutoPostBack="True" />
+
+</td>
+
+
+
+<td style="width:1000px;Font-Size:15px;">
+
+</td>
+
+</tr>
+
+</table>
+
+
+
+
+
+
+
+
+
+
 
 
 <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
