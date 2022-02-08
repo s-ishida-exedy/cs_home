@@ -15,22 +15,48 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="js/default.js"></script>
 <style type="text/css">
-        .auto-style1 {
-            width: 1280px;
+        .header-ta {
+            width: 1300px;
         }
-        .auto-style2 {
-            width: 250px;
+        .first-cell {
+            text-align:left;
+            font-size:25px;
+            width: 400px;
+        }
+        .second-cell {
+            width: 680px;
+        }   
+        .third-cell {
+            width: 220px;
             text-align:right;
         }
-        .auto-style4 {
-            text-align:left;
-            font-size:larger;
-            font-weight : 700;
-            width: 300px;
+        h2 {
+            padding-left: 45px;
+            position: relative;
+            border-radius: 10px; /* 角を丸くする */
         }
-        .auto-style7 {
-            width: 730px;
-        }   
+        h2:before {
+            content: "";
+            background-color: #6fbfd1;
+            border-radius: 50%;
+            opacity: 0.5;
+            width: 35px;
+            height: 35px;
+            left: 5px;
+            top: 0px;
+            position: absolute;
+        }
+        h2:after{
+            content: "";
+            background-color: #6fbfd1;
+            border-radius: 50%;
+            opacity: 0.5;
+            width: 20px;
+            height: 20px;
+            left: 25px;
+            top:15px;
+            position: absolute;
+        }
 </style>
 <script>
     $(document).ready(function () {
@@ -69,24 +95,24 @@
  <!-- #Include File="header.html" -->
        
 <div id="contents2" class="inner2">
-    <table class="auto-style1" >
+    <table class="header-ta" >
         <tr>
-            <td class="auto-style4">
-                <asp:Label ID="Label3" runat="server" Text="【バンニングスケジュール】" ></asp:Label>    
+            <td class="first-cell">
+                <h2>バンニングスケジュール</h2> 
             </td>
-            <td class="auto-style7">
-                <asp:Button ID="Button1" runat="server" Text="ファイルダウンロード" />&nbsp;
+            <td class="second-cell">
+                <asp:Button ID="Button1" runat="server" Text="　ファイルダウンロード　" Font-Size="Small" />&nbsp;
                 <asp:Label ID="Label1" runat="server" Text="絞り込み："></asp:Label>
                 <asp:DropDownList ID="DropDownList2" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="164px" DataSourceID="SqlDataSource3" DataTextField="VAN_DATE" DataValueField="VAN_DATE"></asp:DropDownList>
                 <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="164px" DataSourceID="SqlDataSource2" DataTextField="場所" DataValueField="場所"></asp:DropDownList>&nbsp;
-                <asp:Button ID="Button2" runat="server" Text="ﾘｾｯﾄ" />
+                <asp:Button ID="Button2" runat="server" Text="ﾘｾｯﾄ" Font-Size="Small" />
             </td>
-            <td class="auto-style2">
+            <td class="third-cell">
                 <asp:Label ID="Label2" runat="server" Text="Labe2" ></asp:Label>
             </td>
         </tr>
     </table>
-<div id="main2" style="width:100%;overflow:scroll;-webkit-overflow-scrolling:touch;border:solid 1px;">
+<div id="main2" style="width:100%;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="1280px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical">
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />

@@ -15,22 +15,81 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="js/default.js"></script>
 <style type="text/css">
-        .auto-style1 {
-            width: 1280px;
+        .header-ta {
+            width: 1300px;
         }
-        .auto-style2 {
+        .first-cell {
+            text-align:left;
+            font-size:25px;
+            width: 300px;
+        }
+        .second-cell {
+            width: 800px;
+        }   
+        .third-cell {
             width: 200px;
             text-align:right;
         }
-        .auto-style4 {
-            text-align:left;
-            font-size:larger;
-            font-weight : 700;
-            width: 200px;
+        .third-cell a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0.5em 1em;
+            width: 100px;
+            color: #000000;
+            font-size: 12px;
+            font-weight: 200;
+            border: 2px solid #ffffff;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.1s;
         }
-        .auto-style7 {
-            width: 880px;
-        }   
+        .third-cell a::after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+            transform: rotate(45deg);
+        }
+        .third-cell a:hover {
+            color: #000000;
+            text-decoration: none;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+        }
+        .third-cell a:hover::after {
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+        }
+        h2 {
+            padding-left: 45px;
+            position: relative;
+            border-radius: 10px; /* 角を丸くする */
+        }
+        h2:before {
+            content: "";
+            background-color: #6fbfd1;
+            border-radius: 50%;
+            opacity: 0.5;
+            width: 35px;
+            height: 35px;
+            left: 5px;
+            top: 0px;
+            position: absolute;
+        }
+        h2:after{
+            content: "";
+            background-color: #6fbfd1;
+            border-radius: 50%;
+            opacity: 0.5;
+            width: 20px;
+            height: 20px;
+            left: 25px;
+            top:15px;
+            position: absolute;
+        }
 </style>
 <script>
     $(document).ready(function () {
@@ -44,7 +103,6 @@
     $(function () {
         $('ul li').off("click").on("click", function () {
             var arr = $(this).data('id');
-            //var text = $(this).data('id');
             if (arr[0] == 'home' || arr[0] == 'aaa' || arr[0] == 'undefined') {
                 if (arr[0] == 'home') {
                     window.location.href = encodeURIComponent(arr[1]);
@@ -53,7 +111,6 @@
                     return false;
                 }
             } else{
-                //window.alert('koko3');
                 window.location.href = './detail.aspx?id=' + encodeURIComponent(arr[1]);
                 return false;
             };
@@ -69,33 +126,33 @@
  <!-- #Include File="header.html" -->
        
 <div id="contents2" class="inner2">
-    <table class="auto-style1" >
+    <table class="header-ta" >
         <tr>
-            <td class="auto-style4">
-                <asp:Label ID="Label3" runat="server" Text="【CSマニュアル】" ></asp:Label>    
+            <td class="first-cell">
+                <h2>ＣＳマニュアル</h2>  
             </td>
-            <td class="auto-style7">
+            <td class="second-cell">
                 <asp:Label ID="Label4" runat="server" Text="客先CD："></asp:Label>
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>&nbsp;
-                <asp:Button ID="Button1" runat="server" Text="表示" />&nbsp;
-                <asp:Button ID="Button2" runat="server" Text="詳細表示" />&nbsp;
-                <asp:Button ID="Button3" runat="server" Text="新規登録" />&nbsp;
-                <asp:Label ID="Label1" runat="server" Text="※新規登録時はﾍﾞｰｽの客先CDを入力してください。"></asp:Label>
+                <asp:TextBox ID="TextBox1" runat="server" Width ="100"></asp:TextBox>&nbsp;
+                <asp:Button ID="Button1" runat="server" Text="表示" Font-Size="Small" />&nbsp;
+                <asp:Button ID="Button2" runat="server" Text="　詳細表示　" Font-Size="Small" />&nbsp;
+                <asp:Button ID="Button3" runat="server" Text="　新規登録　" Font-Size="Small" />&nbsp;
+                <asp:Label ID="Label1" runat="server" Text="※新規登録時、ﾍﾞｰｽの客先CD必須"></asp:Label>
             </td>
-            <td class="auto-style2">
-                <a href="#" onclick="window.history.back(); return false;">前のページに戻る</a>
+            <td class="third-cell">
+                <a href="./start.aspx">ホームへ戻る</a>
             </td>
         </tr>
     </table>
-<div id="main2" style="width:auto; height:500px;overflow:scroll;border:solid 1px;">
+<div id="main2" style="width:auto; height:500px;overflow:scroll;border:None;">
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1"  Width="6500px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical">
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
         <Columns>
-            <asp:BoundField DataField="NEW_CODE" HeaderText="新&lt;BR&gt;ｺｰﾄﾞ" SortExpression="NEW_CODE" HtmlEncode="False" >
+            <asp:BoundField DataField="NEW_CODE" HeaderText="新ｺｰﾄﾞ" SortExpression="NEW_CODE" >
             <HeaderStyle Width="70px" />
             </asp:BoundField>
-            <asp:BoundField DataField="OLD_CODE" HeaderText="旧&lt;BR&gt;ｺｰﾄﾞ" SortExpression="OLD_CODE" HtmlEncode="False" >
+            <asp:BoundField DataField="OLD_CODE" HeaderText="旧ｺｰﾄﾞ" SortExpression="OLD_CODE" >
             <HeaderStyle Width="250px" />
             </asp:BoundField>
             <asp:BoundField DataField="CUST_NM" HeaderText="客先名" SortExpression="CUST_NM" >
@@ -110,7 +167,7 @@
             <asp:BoundField DataField="BL_TYPE" HeaderText="BL種類" SortExpression="BL_TYPE" >
             <HeaderStyle Width="150px" />
             </asp:BoundField>
-            <asp:BoundField DataField="BL_SEND" HeaderText="BL&lt;BR&gt;送付方法" SortExpression="BL_SEND" HtmlEncode="False" >
+            <asp:BoundField DataField="BL_SEND" HeaderText="BL送付方法" SortExpression="BL_SEND" >
             <HeaderStyle Width="400px" />
             </asp:BoundField>
             <asp:BoundField DataField="CUST_ADDRESS" HeaderText="客先住所" SortExpression="CUST_ADDRESS" >

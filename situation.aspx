@@ -67,6 +67,62 @@
 	    width: 200px;		/*幅*/
 	    text-align: center;	/*センタリング*/
     }
+        .topic {
+            border-collapse: collapse;
+            margin: 0 auto;
+            padding: 0;
+            width: 300px;
+            table-layout: fixed;
+            color: #4CAF50;
+        }
+
+        .topic tr {
+            background-color: #fff;
+            padding: .2em;
+            border-bottom: 1px dotted #8BC34A;
+        }
+        .topic th,
+        .topic td {
+            padding: .5em .5em .5em .5em;
+            color: #666;
+        }
+        .topic th{
+            width: 40px;
+            text-align: center;
+        }
+        .c a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0.5em 1em;
+            width: 100px;
+            color: #000000;
+            font-size: 12px;
+            font-weight: 200;
+            border: 2px solid #ffffff;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.1s;
+        }
+        .c a::after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+            transform: rotate(45deg);
+        }
+        .c a:hover {
+            color: #000000;
+            text-decoration: none;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+        }
+        .c a:hover::after {
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+        }
 </style>
 </head>
 
@@ -137,11 +193,50 @@
     <h2 class="mb10">ＥＸＬ概況</h2>
     <asp:Image class="imgOKNG" runat="server" src="images/NGtouka.png" style="margin-top:8px;margin-left:70px;" />
 </div>
+<h2>トピックス</h2>
 
-<!-- インクルードファイルの指定 -->
-<!-- サイドメニューの編集はsidemenu.htmlで行う -->
-    <!-- #Include File="sidemenu.html" -->
-
+<div class="list-sub">
+<table class="topic">
+    <tbody>
+        <tr>
+            <th class="txtth"><asp:Label ID="Label1" runat="server" Text="Label"></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label6" runat="server" Text="Label"></asp:Label></th>
+            <td data-label="内容" class="txt">
+                <asp:LinkButton ID="LinkButton1" runat="server" class="lnk">LinkButton</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <th class="txtth"><asp:Label ID="Label2" runat="server" Text="Label"></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label7" runat="server" Text="Label"></asp:Label></th>
+            <td data-label="内容" class="txt">
+                <asp:LinkButton ID="LinkButton2" runat="server" class="lnk">LinkButton</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <th class="txtth"><asp:Label ID="Label3" runat="server" Text="Label"></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label8" runat="server" Text="Label"></asp:Label></th>
+            <td data-label="内容" class="txt">
+                <asp:LinkButton ID="LinkButton3" runat="server" class="lnk">LinkButton</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <th class="txtth"><asp:Label ID="Label4" runat="server" Text="Label"></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label9" runat="server" Text="Label"></asp:Label></th>
+            <td data-label="内容" class="txt">
+                <asp:LinkButton ID="LinkButton4" runat="server" class="lnk">LinkButton</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <th class="txtth"><asp:Label ID="Label5" runat="server" Text="Label"></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label10" runat="server" Text="Label"></asp:Label></th>
+            <td data-label="内容" class="txt">
+                <asp:LinkButton ID="LinkButton5" runat="server" class="lnk">LinkButton</asp:LinkButton>
+            </td>
+        </tr>
+    </tbody>
+</table>  
+</div>
+<p class="c"><a href="./topics.aspx">トピックス一覧</a></p>
 </div>
 <!--/#sub-->
 

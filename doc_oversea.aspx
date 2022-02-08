@@ -15,22 +15,81 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="js/default.js"></script>
 <style type="text/css">
-        .auto-style1 {
-            width: 1280px;
+        .header-ta {
+            width: 1300px;
         }
-        .auto-style2 {
-            width: 400px;
+        .first-cell {
+            text-align:left;
+            font-size:25px;
+            width: 300px;
+        }
+        .second-cell {
+            width: 800px;
+        }   
+        .third-cell {
+            width: 200px;
             text-align:right;
         }
-        .auto-style4 {
-            text-align:left;
-            font-size:larger;
-            font-weight : 700;
-            width: 400px;
+        .third-cell a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0.5em 1em;
+            width: 100px;
+            color: #000000;
+            font-size: 12px;
+            font-weight: 200;
+            border: 2px solid #ffffff;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.1s;
         }
-        .auto-style7 {
-            width: 480px;
-        }   
+        .third-cell a::after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+            transform: rotate(45deg);
+        }
+        .third-cell a:hover {
+            color: #000000;
+            text-decoration: none;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+        }
+        .third-cell a:hover::after {
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+        }
+        h2 {
+            padding-left: 45px;
+            position: relative;
+            border-radius: 10px; /* 角を丸くする */
+        }
+        h2:before {
+            content: "";
+            background-color: #6fbfd1;
+            border-radius: 50%;
+            opacity: 0.5;
+            width: 35px;
+            height: 35px;
+            left: 5px;
+            top: 0px;
+            position: absolute;
+        }
+        h2:after{
+            content: "";
+            background-color: #6fbfd1;
+            border-radius: 50%;
+            opacity: 0.5;
+            width: 20px;
+            height: 20px;
+            left: 25px;
+            top:15px;
+            position: absolute;
+        }
 </style>
 <script>
     $(document).ready(function () {
@@ -69,20 +128,20 @@
  <!-- #Include File="header.html" -->
        
 <div id="contents2" class="inner2">
-        <table class="auto-style1" >
-            <tr>
-                <td class="auto-style4">
-                    <asp:Label ID="Label3" runat="server" Text="【海外手順書】" ></asp:Label>    
-                </td>
-                <td class="auto-style7">
+    <table class="header-ta" >
+        <tr>
+            <td class="first-cell">
+                <h2>海外手順書</h2> 
+            </td>
+            <td class="second-cell">
                     
-                </td>
-                <td class="auto-style2">
-                    <a href="#" onclick="window.history.back(); return false;">前のページに戻る</a>
-                </td>
-            </tr>
-        </table>
-<div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:solid 1px;">
+            </td>
+            <td class="third-cell">
+                <a href="./start.aspx">ホームへ戻る</a>
+            </td>
+        </tr>
+    </table>
+<div id="main2" style="width:100%;height:500px;overflow:scroll;border:None;">
     <%--テーブルの中身は自動生成--%>
     <asp:Table ID="Table1" class="ta1" runat="server"></asp:Table>
         

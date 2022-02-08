@@ -100,7 +100,39 @@
             color:red;
             font-weight :700;
         }
-
+        .c a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0.5em 1em;
+            width: 100px;
+            color: #000000;
+            font-size: 12px;
+            font-weight: 200;
+            border: 2px solid #ffffff;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.1s;
+        }
+        .c a::after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+            transform: rotate(45deg);
+        }
+        .c a:hover {
+            color: #000000;
+            text-decoration: none;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+        }
+        .c a:hover::after {
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+        }
 </style>
 </head>
 
@@ -166,7 +198,7 @@
     <td>
         <asp:Button ID="Button3" runat="server" Text="削　　除" width="150px" />
     </td>
-    <td>
+    <td class="c">
         <a href="./topics.aspx">一覧へ戻る</a>
     </td>
 </tr>
