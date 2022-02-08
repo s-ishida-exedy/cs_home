@@ -199,6 +199,8 @@ border: none;
 
 
 
+
+
     </style>
     <script>
     $(document).ready(function () {
@@ -262,6 +264,20 @@ border: none;
 
 </table>
 
+<table>
+
+<tr>
+
+<td>
+
+
+<asp:Label ID="Label1" runat="server" Text="＜委託マスタのメンテナンス＞"></asp:Label>
+
+</td>
+
+</tr>
+
+</table>
 
 <table class ="design02" >
 
@@ -384,6 +400,24 @@ border: none;
 
 
     </table>
+
+
+<table>
+
+<tr>
+
+<td>
+
+
+<asp:Label ID="Label2" runat="server" Text="＜その他マスタのメンテナンス＞"></asp:Label>
+
+</td>
+
+</tr>
+
+</table>
+
+
 
     <table class ="design02" >
 
