@@ -112,4 +112,19 @@ Public Class mod_function
 
         cnn.Close()
     End Sub
+
+    Public Shared Function HankakuNumChk(strValue As String) As Boolean
+        '半角数字チェック
+
+        HankakuNumChk = True
+
+        '正規表現パターンを指定(英字a-z,A-Z,数値0-9)
+        '        Dim r As New System.Text.RegularExpressions.Regex(“^[a-zA-Z0-9[ ]]+$”)
+        Dim r As New System.Text.RegularExpressions.Regex(“^[0-9]+$”)
+
+        '半角英数字に一致しているかチェック
+        If r.IsMatch(strValue) = False Then
+            HankakuNumChk = False
+        End If
+    End Function
 End Class
