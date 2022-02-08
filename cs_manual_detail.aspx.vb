@@ -42,22 +42,22 @@ Partial Class cs_home
 
             '結果を取り出す 
             While (dataread.Read())
-                DropDownList1.SelectedValue = dataread("IV_NECE")
-                DropDownList2.SelectedValue = dataread("PL_NECE")
-                DropDownList3.SelectedValue = dataread("BL_NECE")
-                DropDownList4.SelectedValue = dataread("CO_NECE")
-                DropDownList5.SelectedValue = dataread("EPA_NECE")
-                DropDownList6.SelectedValue = dataread("WOOD_NECE")
-                DropDownList7.SelectedValue = dataread("DELI_NECE")
-                DropDownList8.SelectedValue = dataread("INSP_NECE")
-                DropDownList9.SelectedValue = dataread("ERL_NECE")
-                DropDownList10.SelectedValue = dataread("VESS_NECE")
-                DropDownList11.SelectedValue = dataread("CONTAINER_CLEANING")
-                DropDownList12.SelectedValue = dataread("LC")
-                DropDownList13.SelectedValue = dataread("DOC_NECESSITY")
-                DropDownList14.SelectedValue = dataread("FTA")
-                DropDownList15.SelectedValue = dataread("CERTIFICATE_OF_CONFORMITY")
-                DropDownList16.SelectedValue = dataread("DOC_OF_EGYPT")
+                DropDownList1.SelectedValue = dataread("IV_NECE").ToString
+                DropDownList2.SelectedValue = dataread("PL_NECE").ToString
+                DropDownList3.SelectedValue = dataread("BL_NECE").ToString
+                DropDownList4.SelectedValue = dataread("CO_NECE").ToString
+                DropDownList5.SelectedValue = dataread("EPA_NECE").ToString
+                DropDownList6.SelectedValue = dataread("WOOD_NECE").ToString
+                DropDownList7.SelectedValue = dataread("DELI_NECE").ToString
+                DropDownList8.SelectedValue = dataread("INSP_NECE").ToString
+                DropDownList9.SelectedValue = dataread("ERL_NECE").ToString
+                DropDownList10.SelectedValue = dataread("VESS_NECE").ToString
+                DropDownList11.SelectedValue = dataread("CONTAINER_CLEANING").ToString
+                DropDownList12.SelectedValue = dataread("LC").ToString
+                DropDownList13.SelectedValue = dataread("DOC_NECESSITY").ToString
+                DropDownList14.SelectedValue = dataread("FTA").ToString
+                DropDownList15.SelectedValue = dataread("CERTIFICATE_OF_CONFORMITY").ToString
+                DropDownList16.SelectedValue = dataread("DOC_OF_EGYPT").ToString
 
                 If strMode = "01" Then
                     '更新モード
