@@ -160,23 +160,17 @@ h2:after{
 <tr>
 
 
-<td style="width:250px;Font-Size:25px;" >
+<td style="width:300px;Font-Size:25px;" >
 
 <h2>特定輸出管理表</h2>
 
 </td>
 
-<td style="width:50px;Font-Size:15px;" >
 
-<asp:Button ID="Button1" runat="server" Text="委託登録" AutoPostBack="True" />
+
+<td style="width:600px;Font-Size:13px;" >
 
 </td>
-
-<td style="width:50px;Font-Size:15px;" >
-
-<asp:Button ID="Button2" runat="server" Text="キャンセル登録" AutoPostBack="True" />
-</td>
-
 
 <td style="width:100px;Font-Size:13px;" >
 
@@ -186,12 +180,65 @@ h2:after{
 
 </td>
 
+</tr>
+
+</table>
 
 
 
+<table>
+
+<tr>
+
+<td style="width:1000px;Font-Size:15px;" >
+
+<p><asp:Label Font-Size="10" ID="Label1" runat="server" Text="・編集ボタンを押し、輸出管理番号を入力してください。"></asp:Label></p>
+
+<asp:Label Font-Size="10" ID="Label2" runat="server" Text="・委託案件、キャンセル案件がある場合は、チェックを入れたあとに委託登録、キャンセル登録のボタンを押してください。"></asp:Label>
+
+</td>
 
 </tr>
+
 </table>
+
+
+<table>
+
+<tr>
+
+<td  >
+
+<asp:Button ID="Button1" width="120" Font-Size="10" runat="server" Text="委託登録" AutoPostBack="True" />
+
+</td>
+
+<td>
+
+<asp:Button ID="Button2" width="120" Font-Size="10" runat="server" Text="キャンセル登録" AutoPostBack="True" />
+</td>
+
+<td style="width:1000px;Font-Size:15px;">
+
+</td>
+
+</tr>
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
