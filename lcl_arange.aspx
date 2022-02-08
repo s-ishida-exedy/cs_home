@@ -184,13 +184,63 @@ h2:after{
 
 </td>
 
-<td style="width:120px;" >
+<td style="width:400px;Font-Size:15px;" >
 
-<asp:Button class="btn00"  ID="Button1" runat="server" Text="追加" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+<asp:Label id="Label1" Text="＜ラベル＞" runat="server"></asp:Label>
+
+</td>
+
+<td style="width:80px;" >
+
+<div class="button04">
+  <a href="lcl_notcomfirmed.aspx?id={0}">未確定案件</a>
+</div>          
 
 </td>
 
 
+<td style="width:80px;" >
+
+<div class="button04">
+  <a href="lcl_tenkai.aspx?id={0}">展開済案件</a>
+</div>
+
+</td>
+
+
+
+<td style="width:80px;" >
+
+<div class="button04">
+  <a href="lcl_tenkai_manage.aspx?id={0}">作業メニュー</a>
+</div>          
+              
+
+</td>
+
+</tr>
+
+</table>
+
+
+
+
+
+
+
+<table >
+<tr>
+
+
+<td style="width:320px;" >
+
+<p><asp:Button class="btn00"  ID="Button1" runat="server" Text="追加" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px"/></p>
+<asp:Label ID="Label2" runat="server"　Font-Size="11px" Text="※チェックを入れてボタンを押すと作業メニューに追加される"></asp:Label>
+<p><asp:Button class="btn00"  ID="Button2" runat="server" Text="追加" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px"/></p>
+
+
+</td>
+    
 <td style="width:150px;Font-Size:12px;" >
 
 
@@ -216,34 +266,20 @@ h2:after{
 
 </td>
 
-<td style="width:80px;" >
 
-<div class="button04">
-  <a href="lcl_tenkai.aspx?id={0}">展開済案件</a>
-</div>
+<td style="width:500px;" >
 
-</td>
-
-<td style="width:80px;" >
-
-<div class="button04">
-  <a href="lcl_notcomfirmed.aspx?id={0}">未確定案件</a>
-</div>          
-
-</td>
-
-<td style="width:80px;" >
-
-<div class="button04">
-  <a href="lcl_tenkai_manage.aspx?id={0}">作業メニュー</a>
-</div>          
-              
 
 </td>
 
 </tr>
 
 </table>
+
+
+
+
+
 
 
 

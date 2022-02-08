@@ -1,6 +1,12 @@
 ﻿Imports System.Data.SqlClient
+
+Imports System.Data
+Imports Microsoft.Office.Interop.Outlook
+Imports mod_function
 Partial Class cs_home
     Inherits System.Web.UI.Page
+
+
 
     Public strRow As String
     Public strProcess As String
@@ -33,6 +39,27 @@ Partial Class cs_home
 
         'データベース接続を開く
         cnn.Open()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         'ヘッダー以外に処理
         If e.Row.RowType = DataControlRowType.DataRow Then
@@ -806,6 +833,44 @@ Partial Class cs_home
 
         cnn.Close()
         cnn.Dispose()
+
+    End Sub
+
+    Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
+
+        Me.Label1.Text = ""
+
+        '最終更新年月日取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String
+        Dim strinv As String
+        Dim cno As Long
+        Dim wno As Long
+        Dim wday As String
+        Dim wday2 As String
+
+        Dim dt1 As DateTime = DateTime.Now
+
+
+        If Weekday(dt1) > 6 Then
+
+            cno = 7 - Weekday(dt1) + 6
+
+        Else
+
+            cno = 6 - Weekday(dt1) + 7
+
+        End If
+
+
+        Dim ts1 As New TimeSpan(cno, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+
+
+        '最終更新年月日を表示
+        Me.Label1.Text = "手配対象期間：" & dt1.ToShortDateString & " (" & dt1.ToString("ddd") & ") " & "~ " & dt2.ToShortDateString & " (" & dt2.ToString("ddd") & ") "
+
 
     End Sub
 
