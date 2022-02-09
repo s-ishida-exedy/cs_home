@@ -249,7 +249,7 @@ h2:after{
 
 
 
-<td style="width:150px;Font-Size:25px;" >
+<td style="width:400px;Font-Size:25px;" >
 
 <h2>LCL出荷-展開用</h2>
 
@@ -279,6 +279,13 @@ h2:after{
 
 </tr>
 
+</table >
+
+
+
+<asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
+
+<table >
 
 <tr>
 <td style="width:800px;Font-Size:13px;" >
@@ -305,7 +312,6 @@ h2:after{
 </tr>
 </table>
 
-<asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
 <div class="wrapper">
 <table class="sticky" >
@@ -338,8 +344,8 @@ h2:after{
 
 <%--<asp:BoundField DataField="CONSIGNEE" HeaderText="CONSIGNEE" SortExpression="CONSIGNEE" />
 <asp:BoundField DataField="DESTINATION" HeaderText="DESTINATION" SortExpression="DESTINATION" />--%>
-<asp:BoundField DataField="FLG05" HeaderText="更新日" SortExpression="FLG05" ReadOnly="true" />
-<asp:BoundField DataField="FLG04" HeaderText="更新メモ" SortExpression="FLG04"　ReadOnly="true" />
+<asp:BoundField DataField="FLG05" HeaderText="追加/更新日" SortExpression="FLG05" ReadOnly="true" />
+<asp:BoundField DataField="FLG04" HeaderText="追加/更新メモ" SortExpression="FLG04"　ReadOnly="true" />
 <asp:BoundField DataField="CUST" HeaderText="客先" SortExpression="CUST"　 />
 <asp:BoundField DataField="INVOICE_NO" HeaderText="IN_NO" SortExpression="INVOICE_NO" ReadOnly="true" />
 <asp:BoundField DataField="BOOKING_NO" HeaderText="BKG_NO" SortExpression="BOOKING_NO" ReadOnly="true" />
