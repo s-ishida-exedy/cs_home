@@ -223,6 +223,50 @@ h1:after {
 }
 
 
+
+
+.button04 a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0.5em 1em;
+  width: 100px;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 200;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.1s;
+}
+
+.button04 a::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
+  transform: rotate(45deg);
+
+}
+
+.button04 a:hover {
+  color: #000000;
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+
+
+}
+
+.button04 a:hover::after {
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
+}
+
+
+
     </style>
     <script>
     $(document).ready(function () {
@@ -268,9 +312,6 @@ h1:after {
 <!-- メニューの編集はheader.htmlで行う -->
  <!-- #Include File="header.html" -->
   
-
-  
-
 
 <div id="contents2" class="inner2">
 
@@ -367,7 +408,13 @@ h1:after {
                 <td style="width:180px;" >
                 </td>
 
+                <td style="width:80px;" >
 
+                <div class="button04">
+                <a href="shippingmemo_dntget.aspx?id={0}">BL回収進捗</a>
+                </div>
+
+            </td>
 
 
         </tr>

@@ -25,7 +25,7 @@ Partial Class yuusen
             End If
 
             If e.Row.Cells(8).Text = "" Or e.Row.Cells(8).Text = "&nbsp;" Then
-                Call GET_IVDATA(Trim(e.Row.Cells(12).Text))
+                Call GET_IVDATA(Trim(e.Row.Cells(12).Text), Trim(e.Row.Cells(2).Text))
             End If
 
             Dim dt0 As DateTime = DateTime.Parse(e.Row.Cells(3).Text)
@@ -129,7 +129,7 @@ Partial Class yuusen
         '非表示ボタン　FLG03は非表示
         Dim I As Integer
         For I = 0 To GridView1.Rows.Count - 1
-            Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(12).Text))
+            Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(12).Text), Trim(GridView1.Rows(I).Cells(2).Text))
         Next
 
         'Grid再表示
@@ -137,7 +137,7 @@ Partial Class yuusen
 
     End Sub
 
-    Private Sub GET_IVDATA(bkgno As String)
+    Private Sub GET_IVDATA(bkgno As String, ivno As String)
 
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
@@ -170,6 +170,7 @@ Partial Class yuusen
         strSQL = strSQL & " T_INV_HD_TB.BOOKINGNO is not null "
         strSQL = strSQL & "GROUP BY T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.BLDATE,T_INV_HD_TB.INVOICENO,T_INV_HD_TB.STAMP,T_INV_HD_TB.RATE,T_INV_HD_TB.BOOKINGNO,T_INV_HD_TB.SHIPPEDPER,T_INV_HD_TB.SHIPBASE,T_INV_HD_TB.INVFROM,T_INV_HD_TB.INVON,T_INV_HD_TB.VOYAGENO "
         strSQL = strSQL & "HAVING (((T_INV_HD_TB.BOOKINGNO) = '" & bkgno & "')) "
+        strSQL = strSQL & "AND (((T_INV_HD_TB.OLD_INVNO) = '" & ivno & "')) "
         strSQL = strSQL & "AND ((Sum(T_INV_BD_TB.KIN))>0 ) "
         strSQL = strSQL & "AND T_INV_HD_TB.STAMP = (SELECT MAX(T_INV_HD_TB.STAMP) T_INV_HD_TB WHERE T_INV_HD_TB.BOOKINGNO = '" & bkgno & "') "
         strSQL = strSQL & "order by T_INV_HD_TB.STAMP DESC "
