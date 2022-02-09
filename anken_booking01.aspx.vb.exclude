@@ -5,6 +5,8 @@ Imports System.Data.Common
 Partial Class yuusen
     Inherits System.Web.UI.Page
 
+    '未使用
+
     Public strRow As String
     Public strProcess As String
 
