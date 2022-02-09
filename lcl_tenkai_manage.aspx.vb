@@ -47,11 +47,7 @@ Partial Class cs_home
 
     End Sub
 
-    Protected Sub GridView1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.SelectedIndexChanged
-        Dim sch_ID As String = GridView1.SelectedValue.ToString
-        '選択された行のSCH_ID
-        strRow = sch_ID
-    End Sub
+
 
     Protected Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
@@ -64,6 +60,8 @@ Partial Class cs_home
         Dim Command = cnn.CreateCommand
         Dim strSQL As String = ""
         Dim ivno As String = ""
+
+        Dim dt1 As DateTime = DateTime.Now
 
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
@@ -81,6 +79,8 @@ Partial Class cs_home
                 'FIN_FLGを更新
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET FLG03 ='1' "
+                strSQL = strSQL & ",FLG05 ='" & dt1.ToShortDateString & "' "
+
                 strSQL = strSQL & "WHERE CUST = '" & GridView1.Rows(I).Cells(4).Text & "'"
                 strSQL = strSQL & "AND ETD = '" & GridView1.Rows(I).Cells(9).Text & "'"
                 strSQL = strSQL & "AND LCL_SIZE = '" & GridView1.Rows(I).Cells(11).Text & "'"
@@ -153,11 +153,6 @@ Partial Class cs_home
 
             End If
         Next
-
-
-
-
-
 
 
 
@@ -697,4 +692,103 @@ Partial Class cs_home
 
 
     End Sub
+
+    Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
+
+
+
+
+    End Sub
+
+
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
+        If Panel1.Visible = True Then
+
+            Panel2.Visible = True
+            Panel1.Visible = False
+            Me.Label7.Text = "展開"
+
+        ElseIf Panel2.Visible = True Then
+
+            Panel2.Visible = False
+            Panel1.Visible = True
+            Me.Label7.Text = "編集"
+
+        End If
+
+    End Sub
+
+
+    Private Sub GridView2_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView2.RowDataBound
+
+        '最終更新年月日取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String
+        Dim strinv As String
+        Dim cno As Long
+        Dim wno As Long
+        Dim wday As String
+        Dim wday2 As String
+
+        Dim dt1 As DateTime = DateTime.Now.ToShortDateString
+
+
+
+
+
+        If e.Row.RowType = DataControlRowType.DataRow Then
+
+
+
+            If e.Row.Cells(1).Text = dt1.ToShortDateString Then
+
+                e.Row.Cells(1).BackColor = Drawing.Color.Salmon
+                e.Row.Cells(2).BackColor = Drawing.Color.Salmon
+
+            End If
+
+
+
+
+        End If
+
+
+
+
+
+        e.Row.Cells(0).Width = 90
+        e.Row.Cells(1).Width = 40
+        e.Row.Cells(2).Width = 100
+        e.Row.Cells(3).Width = 70
+        e.Row.Cells(4).Width = 70
+        e.Row.Cells(5).Width = 110
+        e.Row.Cells(6).Width = 140
+        e.Row.Cells(7).Width = 70
+        e.Row.Cells(8).Width = 70
+        e.Row.Cells(9).Width = 70
+        e.Row.Cells(10).Width = 50
+        e.Row.Cells(11).Width = 60
+        e.Row.Cells(12).Width = 60
+        e.Row.Cells(13).Width = 110
+        e.Row.Cells(14).Width = 10
+        e.Row.Cells(15).Width = 110
+        e.Row.Cells(16).Width = 10
+        e.Row.Cells(17).Width = 110
+
+
+        e.Row.Cells(5).Visible = False
+        e.Row.Cells(6).Visible = False
+        e.Row.Cells(9).Visible = False
+        'e.Row.Cells(12).Visible = False
+        'e.Row.Cells(13).Visible = False
+        'e.Row.Cells(14).Visible = False
+
+
+
+    End Sub
+
+
 End Class
