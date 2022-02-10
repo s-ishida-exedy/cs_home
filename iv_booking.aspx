@@ -109,7 +109,7 @@
         }
         .wrapper {
           overflow: scroll;
-          height: 450px;
+          height: 500px;
         }
         /*追加*/
 
