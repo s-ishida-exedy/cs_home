@@ -2,6 +2,8 @@
 Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Data.Common
+Imports System.Console
+Imports ClosedXML.Excel
 Partial Class yuusen
     Inherits System.Web.UI.Page
 
@@ -526,34 +528,53 @@ Partial Class yuusen
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
-        Dim i As Integer
-        'フォーマットを指定する場合
-        For i = 0 To GridView1.Rows.Count - 1
-            Me.GridView1.Rows(i).Cells(4).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
-            Me.GridView1.Rows(i).Cells(5).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
-            Me.GridView1.Rows(i).Cells(6).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
-            Me.GridView1.Rows(i).Cells(3).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
-            Me.GridView1.Rows(i).Cells(8).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
-            Me.GridView1.Rows(i).Cells(9).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+        'Dim i As Integer
+        ''フォーマットを指定する場合
+        'For i = 0 To GridView1.Rows.Count - 1
+        '    Me.GridView1.Rows(i).Cells(4).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+        '    Me.GridView1.Rows(i).Cells(5).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+        '    Me.GridView1.Rows(i).Cells(6).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+        '    Me.GridView1.Rows(i).Cells(3).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+        '    Me.GridView1.Rows(i).Cells(8).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
+        '    Me.GridView1.Rows(i).Cells(9).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
 
+        'Next
+
+        '' Set the content type to Excel.
+        'Response.AddHeader(“content-disposition”, “attachment; filename=SHIPPINGMEMO_” & Now.ToString(“yyyyMMddhh”) & “.xls”)
+        'Response.ContentType = “application/vnd.ms-excel”
+        'Response.Charset = “”
+        '' Turn off the view state.
+        'Me.EnableViewState = False
+        'Dim tw As New System.IO.StringWriter()
+        'Dim hw As New System.Web.UI.HtmlTextWriter(tw)
+        '' Get the HTML for the control.
+        'Me.GridView1.RenderControl(hw)
+        '' Write the HTML back to the browser.
+        'Response.Write(tw.ToString())
+        '' End the response.
+        'Response.End()
+
+        Dim dt As New DataTable("GridView_Data")
+        For Each cell As TableCell In GridView1.HeaderRow.Cells
+            dt.Columns.Add(cell.Text)
         Next
+        For Each row As GridViewRow In GridView1.Rows
+            dt.Rows.Add()
+            For i As Integer = 0 To row.Cells.Count - 1
+                dt.Rows(dt.Rows.Count - 1)(i) = Replace(row.Cells(i).Text, "&nbsp;", "")
+            Next
+        Next
+        Using wb As New XLWorkbook()
+            wb.Worksheets.Add(dt)
+            wb.SaveAs("C:\Users\T43529\OneDrive - 株式会社エクセディ\デスクトップ\新ツール\SHIPPINGMEMO_" & Now.ToString(“yyyyMMddhh”) & ".xlsx")
 
-        ' Set the content type to Excel.
-        Response.AddHeader(“content-disposition”, “attachment; filename=SHIPPINGMEMO_” & Now.ToString(“yyyyMMddhh”) & “.xls”)
-        Response.ContentType = “application/vnd.ms-excel”
-        Response.Charset = “”
-        ' Turn off the view state.
-        Me.EnableViewState = False
-        Dim tw As New System.IO.StringWriter()
-        Dim hw As New System.Web.UI.HtmlTextWriter(tw)
-        ' Get the HTML for the control.
-        Me.GridView1.RenderControl(hw)
-        ' Write the HTML back to the browser.
-        Response.Write(tw.ToString())
-        ' End the response.
-        Response.End()
+        End Using
+
+
 
     End Sub
+
 
     Public Overrides Sub VerifyRenderingInServerForm(ByVal control As Control)
         ' このOverridesは以下のエラーを回避するために必要です。

@@ -2,6 +2,8 @@
 Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Data.Common
+Imports System.Console
+Imports ClosedXML.Excel
 Partial Class yuusen
     Inherits System.Web.UI.Page
 
@@ -756,5 +758,25 @@ Partial Class yuusen
 
         Response.Redirect("通関フォルダ作成_委託メール作成.xls")
 
+
+
+        'Dim dt As New DataTable("GridView_Data")
+        'For Each cell As TableCell In GridView1.HeaderRow.Cells
+        '    dt.Columns.Add(cell.Text)
+        'Next
+        'For Each row As GridViewRow In GridView1.Rows
+        '    dt.Rows.Add()
+        '    For i As Integer = 0 To row.Cells.Count - 1
+        '        dt.Rows(dt.Rows.Count - 1)(i) = row.Cells(i).Text
+        '    Next
+        'Next
+        'Using wb As New XLWorkbook()
+        '    wb.Worksheets.Add(dt)
+        '    wb.SaveAs("C:\Users\T43529\OneDrive - 株式会社エクセディ\デスクトップ\新ツール\aaa.xlsx")
+
+        'End Using
+
     End Sub
+
+
 End Class
