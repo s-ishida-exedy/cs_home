@@ -245,3 +245,4 @@ ModelManifest.xml
 *.html
 /Default.aspx.vb
 /Default.aspx
+*.pubxml

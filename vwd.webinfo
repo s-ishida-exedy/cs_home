@@ -4,7 +4,5 @@
 -->
 <VisualWebDeveloper>
 
-  <comReferences>
-    <reference Name="interop.microsoft.office.interop.outlook" ID="{00062FFF-0000-0000-C000-000000000046}\9.6\0"/>
-  </comReferences>
+  <comReferences/>
 </VisualWebDeveloper>
