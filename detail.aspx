@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="detail.aspx.vb" Inherits="cs_home" %>
+﻿    <%@ Page Language="VB" AutoEventWireup="false" CodeFile="detail.aspx.vb" Inherits="cs_home" %>
 
 <!DOCTYPE html>
 
@@ -61,7 +61,7 @@
 <!-- メニューの編集はheader.htmlで行う -->
     <!-- #Include File="header.html" -->
 <div id="contents2" class="inner2">
-<div id="main2" style="width:100%;overflow:scroll;-webkit-overflow-scrolling:touch;border:solid 1px;">
+<div id="main2" style="width:100%;overflow:scroll;-webkit-overflow-scrolling:touch;">
 <%-- 画面表示する対象のWEBページをセット。縮小率を設定する。 --%>
     <iframe id="iframe" src="#" 
         style ="
@@ -76,7 +76,7 @@
             -webkit-transform-origin:0 0;
             -o-transform-origin:0 0;
             -ms-transform-origin:0 0;
-            border:solid 1px;
+            /*border:solid 1px;*/
             margin-bottom:-200px;
             margin-right:-100%;
             width:200%;">

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="lcl_tenkai.aspx.vb" Inherits="cs_home" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="lcl_tenkai_ex.aspx.vb" Inherits="cs_home" %>
 
 <!DOCTYPE html>
 

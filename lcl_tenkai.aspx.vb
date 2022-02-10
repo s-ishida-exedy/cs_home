@@ -157,7 +157,7 @@ Partial Class cs_home
 
 
         GridView1.DataBind()
-
+        GridView2.DataBind()
 
     End Sub
 
@@ -218,6 +218,8 @@ Partial Class cs_home
 
 
         GridView1.DataBind()
+        GridView2.DataBind()
+
 
 
     End Sub

@@ -9,7 +9,6 @@ Partial Class cs_home
     Public strRow As String
     Public strProcess As String
 
-
     Private Sub GridView1_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
 
         '最終更新年月日取得
@@ -151,7 +150,7 @@ Partial Class cs_home
 
         End If
 
-        If e.Row.Cells(11).Text = "AC要" Or e.Row.Cells(11).Text = "Booking依頼済み" Then
+        If e.Row.Cells(11).Text = "AC要" Or e.Row.Cells(11).Text = " Booking依頼済み" Then
 
             e.Row.Cells(11).Text = e.Row.Cells(11).Text & Left(e.Row.Cells(3).Text, 4) & Replace(e.Row.Cells(8).Text, "/", "")
 
@@ -223,11 +222,6 @@ Partial Class cs_home
 
     End Sub
 
-    Protected Sub GridView1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.SelectedIndexChanged
-        Dim sch_ID As String = GridView1.SelectedValue.ToString
-        '選択された行のSCH_ID
-        strRow = sch_ID
-    End Sub
 
 
     Protected Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -465,8 +459,8 @@ Partial Class cs_home
 
 
                     strSQL = ""
-                    strSQL = strSQL & "SELECT BOOKING_NO FROM T_EXL_LCLTENKAI WHERE "
-                    strSQL = strSQL & "T_EXL_LCLTENKAI.BOOKING_NO = '" & Left(Convert.ToString(GridView1.Rows(I).Cells(3).Text), 4) & Convert.ToString(GridView1.Rows(I).Cells(8).Text) & "' "
+                    strSQL = strSQL & "SELECT * FROM T_EXL_LCLTENKAI WHERE "
+                    strSQL = strSQL & "T_EXL_LCLTENKAI.BOOKING_NO like '%" & Left(Convert.ToString(GridView1.Rows(I).Cells(3).Text), 4) & Replace(Convert.ToString(GridView1.Rows(I).Cells(8).Text), "/", "") & "%' "
 
 
                     'ＳＱＬコマンド作成 
@@ -480,6 +474,19 @@ Partial Class cs_home
 
                         strbkck = dataread("BOOKING_NO")
 
+                        WEIGHT = Convert.ToString(dataread("WEIGHT"))
+                        QTY = Convert.ToString(dataread("QTY"))
+                        PICKUP01 = Convert.ToString(dataread("PICKUP01"))
+                        PICKUP02 = Convert.ToString(dataread("PICKUP02"))
+                        MOVEIN01 = Convert.ToString(dataread("MOVEIN01"))
+                        MOVEIN02 = Convert.ToString(dataread("MOVEIN02"))
+                        OTHERS01 = Convert.ToString(dataread("OTHERS01"))
+                        FLG01 = Convert.ToString(dataread("FLG01"))
+                        FLG02 = Convert.ToString(dataread("FLG02"))
+                        FLG03 = Convert.ToString(dataread("FLG03"))
+                        FLG04 = Convert.ToString(dataread("FLG04"))
+                        FLG05 = Convert.ToString(dataread("FLG05"))
+                        PICKINPLACE = Convert.ToString(dataread("PICKINPLACE"))
 
                     End While
 
@@ -528,7 +535,7 @@ Partial Class cs_home
                         strSQL = strSQL & "FLG04 = '" & FLG04 & "', "
                         strSQL = strSQL & "FLG05 = '" & FLG05 & "', "
                         strSQL = strSQL & "PICKINPLACE = '" & straddress & "' "
-                        strSQL = strSQL & "WHERE BOOKING_NO ='" & bkgno01 & "' "
+                        strSQL = strSQL & "WHERE BOOKING_NO like '%" & Left(Convert.ToString(GridView1.Rows(I).Cells(3).Text), 4) & Replace(Convert.ToString(GridView1.Rows(I).Cells(8).Text), "/", "") & "%' "
 
 
                     End If

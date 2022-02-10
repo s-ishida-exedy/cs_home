@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="lcl_tenkai_manage.aspx.vb" Inherits="cs_home" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="lcl_tenkai.aspx.vb" Inherits="cs_home" %>
 
 <!DOCTYPE html>
 
@@ -498,6 +498,8 @@ DeleteCommand="DELETE FROM T_EXL_LCLTENKAI WHERE BOOKING_NO=@BOOKING_NO"></asp:S
 </tbody>
 </table>
 </div>
+
+<asp:Label Font-Size="8" id="Label6" Text="※当日追加・更新分は 追加/更新日 と 追加/更新メモ が赤くマークされます。" runat="server"></asp:Label>
 
 </asp:Panel>   
 
