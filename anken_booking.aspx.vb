@@ -24,6 +24,9 @@ Partial Class yuusen
         Dim dt1 As DateTime = DateTime.Now
         Dim Kaika00 As String
 
+
+
+
         If e.Row.RowType = DataControlRowType.DataRow Then
 
             '接続文字列の作成
@@ -504,7 +507,246 @@ Partial Class yuusen
 
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 
+        Dim Kaika00 As String
+
+        Dim deccnt As Long
+        Dim lng14 As Long
+        Dim lng15 As Long
+
+        Dim WDAYNO00 As String
+        Dim WDAY00 As String
+        Dim WDAY01 As String
+
+        Dim strSQL As String
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        'If IsPostBack = True Then
+
+
+        'Else
+
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+            'SQL Server認証
+            ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+            'SqlConnectionクラスの新しいインスタンスを初期化
+            Dim cnn = New SqlConnection(ConnectionString)
+
+            'データベース接続を開く
+            cnn.Open()
+
+            '対象の日付以下の日付の最大値を取得
+
+            strSQL = ""
+            strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY_NO FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY <= '" & dt1.ToShortDateString & "' "
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+                'ＳＱＬ文実行 
+                dataread = dbcmd.ExecuteReader()
+
+
+            '結果を取り出す 
+            While (dataread.Read())
+
+                WDAYNO00 = dataread("WORKDAY_NO")
+
+            End While
+
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+
+
+            strSQL = ""
+            strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 1 & "' "
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+
+            '結果を取り出す 
+            While (dataread.Read())
+
+                WDAY00 = dataread("WORKDAY")
+
+            End While
+
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+
+
+            strSQL = ""
+            strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 2 & "' "
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+
+            '結果を取り出す 
+            While (dataread.Read())
+
+                WDAY01 = dataread("WORKDAY")
+
+            End While
+
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+
+
+
+            cnn.Close()
+            cnn.Dispose()
+
+
+
+
+
+
+            For I = 0 To GridView1.Rows.Count - 1
+
+                deccnt = 0
+                DEC_GET(GridView1.Rows(I).Cells(26).Text, deccnt)
+
+
+
+
+                If Left(GridView1.Rows(I).Cells(2).Text, 2) = "上野" Then
+
+                    If GridView1.Rows(I).Cells(7).Text <= WDAY00 Then
+
+                        If deccnt > 0 Then
+
+                            lng14 = lng14 + 1
+
+                        Else
+
+
+                        End If
+
+
+
+
+                    ElseIf GridView1.Rows(I).Cells(7).Text <= WDAY00 And GridView1.Rows(I).Cells(7).Text > WDAY00 Then   ' 1稼働日後がEXDCUT
+
+
+                        If deccnt > 0 Then
+
+                            lng15 = lng15 + 1
+
+                        Else
+
+                        End If
+
+                    End If
+
+                Else
+
+                    If GridView1.Rows(I).Cells(7).Text <= dt1.ToShortDateString Then
+
+
+                        If deccnt > 0 Then
+
+                            lng14 = lng14 + 1
+
+                        Else
+
+                        End If
+
+
+                    ElseIf GridView1.Rows(I).Cells(7).Text <= WDAY00 And GridView1.Rows(I).Cells(7).Text > dt1.ToShortDateString Then ' 1稼働日後がEXDCUT
+
+                        If deccnt > 0 Then
+
+                            lng15 = lng15 + 1
+
+                        Else
+
+                        End If
+
+
+                    End If
+
+                End If
+
+
+            Next
+
+
+
+        'End If
+
+
     End Sub
+
+    Private Function DEC_GET(STRBOOKING_NO As String, ByRef intCnt As Integer)
+
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim dataread2 As SqlDataReader
+        Dim dbcmd2 As SqlCommand
+
+
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
+        strSQL = strSQL & "DECFIN_BKGNO = '" & STRBOOKING_NO & "' "
+        strSQL = strSQL & "AND DECFIN_REGDATE between '" & dt3 & "' AND '" & dt2 & "' "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+
+            intCnt = dataread("RecCnt")
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
+
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
