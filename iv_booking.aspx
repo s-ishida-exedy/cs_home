@@ -90,6 +90,30 @@
             top:15px;
             position: absolute;
         }
+
+
+       　/*追加*/
+        table{
+          width: 100%;
+
+        }
+
+        th {
+          position: sticky;
+          top: 0;
+          z-index: 0;
+          background-color: #000084;
+          color: #ffffff;
+                    	/*border-top: 0px solid #999;
+	border-left: 0px solid #999;*/
+        }
+        .wrapper {
+          overflow: scroll;
+          height: 450px;
+        }
+        /*追加*/
+
+
 </style>
 <script>
     $(document).ready(function () {
@@ -141,7 +165,18 @@
             </td>
         </tr>
     </table>
-<div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">
+
+
+<div class="wrapper">
+<table class="sticky">
+<thead class="fixed">
+
+</thead>
+
+<tbody>
+
+
+<%--<div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">--%>
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="1500px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical">
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
@@ -242,8 +277,12 @@ FROM T_COMPARE_INV_HD
 WHERE SHIP_METHOD = '0'
 ORDER BY INVOICE_NO "></asp:SqlDataSource>
     
-</div>
+<%--</div>--%>
 <!--/#main2-->
+
+</tbody>
+</table>
+</div>
 
 </div>
 <!--/#contents2-->
