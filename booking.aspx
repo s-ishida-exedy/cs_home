@@ -108,7 +108,7 @@
         }
         .wrapper {
           overflow: scroll;
-          height: 450px;
+          height: 500px;
         }
         /*追加*/
 
@@ -254,7 +254,6 @@
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [t_booking]"></asp:SqlDataSource>
     
-        <br />
     
 <%--</div>--%>
 <!--/#main2-->
