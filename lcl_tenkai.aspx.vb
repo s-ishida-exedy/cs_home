@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Data
 Imports Microsoft.Office.Interop.Outlook
+Imports Microsoft.Office.Interop
 Imports mod_function
 Partial Class cs_home
     Inherits System.Web.UI.Page

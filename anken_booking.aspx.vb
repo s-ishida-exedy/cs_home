@@ -4,6 +4,7 @@ Imports System.Data.SqlClient
 Imports System.Data.Common
 Imports System.Console
 Imports ClosedXML.Excel
+Imports Microsoft.Office.Interop
 Partial Class yuusen
     Inherits System.Web.UI.Page
 
@@ -25,7 +26,6 @@ Partial Class yuusen
         Dim wday3 As String
         Dim dt1 As DateTime = DateTime.Now
         Dim Kaika00 As String
-
 
 
 
@@ -85,10 +85,7 @@ Partial Class yuusen
             dataread.Close()
             dbcmd.Dispose()
 
-            If e.Row.Cells(12).Text = "LCL" Then
-                e.Row.BackColor = Drawing.Color.DarkGray
-                e.Row.Cells(13).Text = "LCL"
-            End If
+
 
             strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
 
@@ -121,11 +118,20 @@ Partial Class yuusen
                 e.Row.BackColor = Drawing.Color.LightBlue
             End If
 
+            If e.Row.Cells(12).Text = "LCL" Then
+                e.Row.BackColor = Drawing.Color.DarkGray
+                e.Row.Cells(13).Text = "LCL"
+            End If
+
             If e.Row.Cells(36).Text = "1" Then
                 e.Row.Cells(0).BackColor = Drawing.Color.YellowGreen
             End If
 
         End If
+
+
+
+
 
         '不要行非表示
 
@@ -230,10 +236,7 @@ Partial Class yuusen
             dataread.Close()
             dbcmd.Dispose()
 
-            If e.Row.Cells(12).Text = "LCL" Then
-                e.Row.BackColor = Drawing.Color.DarkGray
-                e.Row.Cells(13).Text = "LCL"
-            End If
+
 
             strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
 
@@ -266,6 +269,11 @@ Partial Class yuusen
 
             If e.Row.Cells(1).Text = "EXDCUT" Then
                 e.Row.BackColor = Drawing.Color.LightBlue
+            End If
+
+            If e.Row.Cells(12).Text = "LCL" Then
+                e.Row.BackColor = Drawing.Color.DarkGray
+                e.Row.Cells(13).Text = "LCL"
             End If
 
             If e.Row.Cells(36).Text = "1" Then
@@ -756,7 +764,7 @@ Partial Class yuusen
         'p.StartInfo.FileName = “C:\Users\T43529\OneDrive - 株式会社エクセディ\デスクトップ\新ツール\通関フォルダ作成_委託メール作成.xls”
         'p.Start()
 
-        Response.Redirect("通関フォルダ作成_委託メール作成.xls")
+        '       Response.Redirect("通関フォルダ作成_委託メール作成.xls")
 
 
 
@@ -775,6 +783,33 @@ Partial Class yuusen
         '    wb.SaveAs("C:\Users\T43529\OneDrive - 株式会社エクセディ\デスクトップ\新ツール\aaa.xlsx")
 
         'End Using
+
+        Dim excelName As String = "C:\Users\T43529\OneDrive - 株式会社エクセディ\デスクトップ\新ツール\通関フォルダ作成_委託メール作成.xls"
+
+        Dim oXls As Excel.Application ' Excelオブジェクト
+        Dim oWBook As Excel.Workbook ' Workbookオブジェクト
+
+        oXls = New Excel.Application()
+        oXls.Visible = True ' 確認のためExcelのウィンドウを表示する
+
+        ' Excelファイルをオープンする
+        oWBook = DirectCast((oXls.Workbooks.Open(
+          excelName,
+          Type.Missing,
+          Type.Missing,
+          Type.Missing,
+          Type.Missing,
+          Type.Missing,
+          Type.Missing,
+          Type.Missing,
+          Type.Missing,
+          Type.Missing,
+          Type.Missing,
+          Type.Missing,
+          Type.Missing,
+          Type.Missing,
+          Type.Missing)),
+          Excel.Workbook)
 
     End Sub
 
