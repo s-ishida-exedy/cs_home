@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="anken_booking.aspx.vb" Inherits="yuusen" %>
 
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -273,7 +275,6 @@ h1:after {
 
 
 
-
 </head>
 
 
@@ -284,9 +285,7 @@ h1:after {
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.htmlで行う -->
  <!-- #Include File="header.html" -->
-  
 
-  
 
 
     <div id="contents2" class="inner2">
@@ -534,7 +533,13 @@ h1:after {
 
 
         <table style="height:10px;">
+        
+
+
         </table>
+
+
+
 
         </div>
     
