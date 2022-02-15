@@ -371,4 +371,84 @@ Public Class DBAccess
         Return Ds
     End Function
 
+    Public Function GET_AIR_DATA(strValue() As String, strChk As String, strMode As String) As DataSet
+        'AIR管理表絞り込み
+        'strMode 0:GridView 1:ETD 2:客先 3:依頼者 4:IVNO
+
+        Dim i As Integer = 0
+        Dim intCnt As Integer = 0
+        Dim intCnt2 As Integer = 0
+
+        For i = 0 To 3
+            If strValue(i) <> "" Then
+                intCnt += 1
+            End If
+        Next
+
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = ""
+        Select Case strMode
+            Case 0
+                StrSQL = StrSQL & "SELECT * "
+            Case 1
+                StrSQL = StrSQL & "SELECT DISTINCT ETD "
+            Case 2
+                StrSQL = StrSQL & "SELECT DISTINCT CUST_CD "
+            Case 3
+                StrSQL = StrSQL & "SELECT DISTINCT REQUESTER "
+            Case 4
+                StrSQL = StrSQL & "SELECT DISTINCT IVNO "
+        End Select
+        StrSQL = StrSQL & "FROM T_EXL_AIR_MANAGE "
+        If intCnt = 0 And strChk = "0" Then    '全件で無い場合(デフォルト)         
+            StrSQL = StrSQL & "WHERE PICKUP = '' "
+        Else
+            If intCnt > 0 And strChk = "1" Then  '1件でも条件がある場合
+                StrSQL = StrSQL & "WHERE "
+            ElseIf intCnt > 0 And strChk = "0" Then  '1件でも条件がある 且つ　全件で無い場合
+                StrSQL = StrSQL & "WHERE PICKUP = '' AND "
+            End If
+
+            For i = 0 To 3
+                If (intCnt2 > 0 And intCnt > intCnt2 And strValue(i) <> "") Then
+                    StrSQL = StrSQL & " AND "
+                End If
+                If strValue(i) <> "" Then
+                    Select Case i
+                        Case 0
+                            StrSQL = StrSQL & " ETD = '" & strValue(i) & "' "
+                        Case 1
+                            StrSQL = StrSQL & " CUST_CD = '" & strValue(i) & "' "
+                        Case 2
+                            StrSQL = StrSQL & " REQUESTER = '" & strValue(i) & "' "
+                        Case 3
+                            StrSQL = StrSQL & " IVNO = '" & strValue(i) & "' "
+                    End Select
+                    intCnt2 += 1
+                End If
+            Next
+        End If
+
+        Select Case strMode
+            Case 0, 1
+                StrSQL = StrSQL & "ORDER BY ETD "
+            Case 2
+                StrSQL = StrSQL & "ORDER BY CUST_CD "
+            Case 3
+                StrSQL = StrSQL & "ORDER BY REQUESTER "
+            Case 4
+                StrSQL = StrSQL & "ORDER BY IVNO "
+        End Select
+
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class
