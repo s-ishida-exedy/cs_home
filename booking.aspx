@@ -90,11 +90,9 @@
             top:15px;
             position: absolute;
         } 
-
-       　/*追加*/
+       　/*ヘッダー固定用*/
         table{
           width: 100%;
-
         }
 
         th {
@@ -103,16 +101,11 @@
           z-index: 0;
           background-color: #000084;
           color: #ffffff;
-                    	/*border-top: 0px solid #999;
-	border-left: 0px solid #999;*/
         }
         .wrapper {
           overflow: scroll;
           height: 500px;
         }
-        /*追加*/
-
-
 </style>
 <script>
     $(document).ready(function () {
