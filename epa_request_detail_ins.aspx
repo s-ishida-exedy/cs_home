@@ -98,6 +98,10 @@
         .ta3 th{
             background: #e6e6fa;
         }
+        .err{
+            color:red;
+            font-weight :700;
+        }
 </style>
 <script>
     // カレンダー
@@ -149,7 +153,8 @@
                 <h2>EPA発給申請管理明細</h2>  
             </td>
             <td class="second-cell">
-                <asp:Button ID="Button7" runat="server" Text="登　　録" style="width:164px" Font-Size="Small" />
+                <asp:Button ID="Button7" runat="server" Text="登　　録" style="width:164px" Font-Size="Small" />&nbsp;
+                <asp:Label ID="Label2" runat="server" Text="Label" Class="err"></asp:Label>
             </td>
             <td class="third-cell">
                 <a href="./epa_request.aspx">一覧に戻る</a>
