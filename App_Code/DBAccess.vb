@@ -290,7 +290,7 @@ Public Class DBAccess
     End Function
 
     Public Function GET_RESULT_SALES(strDate1 As String, strDate2 As String, strCode As String) As DataSet
-        'バンニングスケジュール絞り込み
+        '海外売上確定チェック絞り込み
         Conn = Me.Dbconnect2
         Cmd = Conn.CreateCommand
 
@@ -333,7 +333,7 @@ Public Class DBAccess
     End Function
 
     Public Function GET_BOOKING_DATA(strFwd As String, strCust As String, strIV As String) As DataSet
-        'バンニングスケジュール絞り込み
+        'ブッキングデータ絞り込み
         Conn = Me.Dbconnect
         Cmd = Conn.CreateCommand
 
