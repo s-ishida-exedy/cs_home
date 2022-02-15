@@ -458,6 +458,21 @@ Partial Class yuusen
             Panel2.Visible = True
             Panel3.Visible = False
 
+
+        Else
+
+
+
+            GridView2.DataSource = SqlDataSource3
+            GridView2.DataBind()
+
+            DropDownList2.Items.Clear()
+            DropDownList2.Items.Insert(0, "--Select--")
+
+            Panel1.Visible = False
+            Panel2.Visible = True
+            Panel3.Visible = False
+
         End If
 
     End Sub
@@ -505,6 +520,16 @@ Partial Class yuusen
             Panel3.Visible = False
 
         End If
+
+        DropDownList1.Items.Clear()
+
+        DropDownList1.Items.Insert(0, "--Select--")
+        DropDownList1.Items.Insert(1, "未回収")
+        DropDownList1.Items.Insert(2, "修正状況")
+
+
+        DropDownList2.Items.Clear()
+        DropDownList2.Items.Insert(0, "--Select--")
 
     End Sub
 
