@@ -161,7 +161,7 @@
             </td>
         </tr>
     </table>
-<div id="main2" style="width:100%;height:1900px;overflow:scroll;-webkit-overflow-scrolling:touch;border:solid 1px;">
+<div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:solid 1px;">
         <table class="ta3">
             <tr>
                 <th>依頼日</th>
