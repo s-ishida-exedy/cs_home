@@ -43,7 +43,7 @@
         }
         .wrapper {
           overflow: scroll;
-          height: 450px;
+          height: 400px;
         }
 
   
