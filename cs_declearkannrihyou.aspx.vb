@@ -38,8 +38,10 @@ Partial Class cs_home
             End If
         Next
 
+
         'Grid再表示
         GridView1.DataBind()
+        GridView2.DataBind()
 
     End Sub
 
@@ -70,6 +72,7 @@ Partial Class cs_home
 
         'Grid再表示
         GridView1.DataBind()
+        GridView2.DataBind()
 
     End Sub
 
@@ -278,6 +281,179 @@ Partial Class cs_home
 
     End Sub
 
+
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim strtype As String = "1"
+
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+
+        '非表示ボタン　FLG03は非表示
+        Dim I As Integer
+        For I = 0 To GridView2.Rows.Count - 1
+            If CType(GridView2.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
+
+
+                Call GET_IVDATA2(Trim(GridView2.Rows(I).Cells(9).Text), strtype)
+
+            Else
+
+
+            End If
+        Next
+
+
+        'Grid再表示
+        GridView1.DataBind()
+        GridView2.DataBind()
+
+    End Sub
+
+
+
+    Private Sub GET_IVDATA2(bkgno As String, strtype As String)
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+        Dim strinv As String
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        strSQL = "SELECT T_INV_HD_TB.OLD_INVNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
+        strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE "
+        strSQL = strSQL & "HAVING T_INV_HD_TB.BOOKINGNO = '" & bkgno & "' "
+        'strSQL = strSQL & "AND Sum(T_INV_BD_TB.QTY) >= 1 "
+        'strSQL = strSQL & "AND Sum(T_INV_BD_TB.KIN) >= 1 "
+        'strSQL = strSQL & "order by T_INV_HD_TB.CUTDATE Decs "
+
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strDate = ""
+        '結果を取り出す 
+        While (dataread.Read())
+
+            strinv = Convert.ToString(dataread("OLD_INVNO"))        'ETD(計上日)
+
+
+            If strtype = "1" Then
+
+                Call DEL_ITK(strinv, bkgno)
+
+
+
+            ElseIf strtype = "2" Then
+
+
+            End If
+
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Sub
+
+
+    Private Sub DEL_ITK(strinv As String, bkgno As String)
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim dataread2 As SqlDataReader
+        Dim dbcmd2 As SqlCommand
+
+        Dim intCnt As Long
+
+        Dim dt1 As DateTime = DateTime.Now
+
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+
+        strSQL = ""
+        strSQL = strSQL & "UPDATE T_EXL_DECKANRIHYO SET "
+        strSQL = strSQL & "T_EXL_DECKANRIHYO.IFLG = '0' "
+        strSQL = strSQL & "WHERE T_EXL_DECKANRIHYO.BOOKING_NO ='" & bkgno & "' "
+
+
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+
+
+        cnn.Close()
+        cnn.Dispose()
+
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
+
+        If Panel1.Visible = True Then
+
+            Panel1.Visible = False
+            Panel2.Visible = True
+            Me.Label5.Text = "全案件"
+
+        ElseIf Panel2.Visible = True Then
+
+            Panel1.Visible = True
+            Panel2.Visible = False
+            Me.Label5.Text = "申告未"
+
+        End If
+
+        'Grid再表示
+        GridView1.DataBind()
+        GridView2.DataBind()
+
+    End Sub
 End Class
 
 
