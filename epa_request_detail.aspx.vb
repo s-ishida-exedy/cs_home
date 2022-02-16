@@ -18,6 +18,8 @@ Partial Class cs_home
         Dim strStatus As String = ""
         Dim strVal As String = ""
 
+        Label3.Text = ""
+
         If IsPostBack Then
             ' そうでない時処理
         Else
@@ -221,49 +223,49 @@ Partial Class cs_home
 
         '全角入力チェック
         If HankakuEisuChk(TextBox1.Text) = False And Trim(TextBox1.Text) <> "" Then
-            MsgBox("船名に全角文字が使用されています。")
+            Label3.Text = "船名に全角文字が使用されています。"
             chk_Nyuryoku = False
         End If
         If HankakuEisuChk(TextBox4.Text) = False And Trim(TextBox4.Text) <> "" Then
-            MsgBox("VoyNOに全角文字が使用されています。")
+            Label3.Text = "VoyNOに全角文字が使用されています。"
             chk_Nyuryoku = False
         End If
         If HankakuEisuChk(TextBox5.Text) = False And Trim(TextBox5.Text) <> "" Then
-            MsgBox("受付番号に全角文字が使用されています。")
+            Label3.Text = "受付番号に全角文字が使用されています。"
             chk_Nyuryoku = False
         End If
         If HankakuEisuChk(TextBox6.Text) = False And Trim(TextBox6.Text) <> "" Then
-            MsgBox("IVNO(Full)に全角文字が使用されています。")
+            Label3.Text = "IVNO(Full)に全角文字が使用されています。"
             chk_Nyuryoku = False
         End If
         If HankakuEisuChk(TextBox11.Text) = False And Trim(TextBox11.Text) <> "" Then
-            MsgBox("TRK#に全角文字が使用されています。")
+            Label3.Text = "TRK#に全角文字が使用されています。"
             chk_Nyuryoku = False
         End If
 
         '日付入力チェック
         If Chk_Hiduke(TextBox2.Text) = False And Trim(TextBox2.Text) <> "" Then
-            MsgBox("ETAの日付形式が間違っています。")
+            Label3.Text = "ETAの日付形式が間違っています。"
             chk_Nyuryoku = False
         End If
         If Chk_Hiduke(TextBox3.Text) = False And Trim(TextBox3.Text) <> "" Then
-            MsgBox("カット日の日付形式が間違っています。")
+            Label3.Text = "カット日の日付形式が間違っています。"
             chk_Nyuryoku = False
         End If
         If Chk_Hiduke(TextBox7.Text) = False And Trim(TextBox7.Text) <> "" Then
-            MsgBox("申請日の日付形式が間違っています。")
+            Label3.Text = "申請日の日付形式が間違っています。"
             chk_Nyuryoku = False
         End If
         If Chk_Hiduke(TextBox8.Text) = False And Trim(TextBox8.Text) <> "" Then
-            MsgBox("送付依頼日の日付形式が間違っています。")
+            Label3.Text = "送付依頼日の日付形式が間違っています。"
             chk_Nyuryoku = False
         End If
         If Chk_Hiduke(TextBox9.Text) = False And Trim(TextBox9.Text) <> "" Then
-            MsgBox("受領日の日付形式が間違っています。")
+            Label3.Text = "受領日の日付形式が間違っています。"
             chk_Nyuryoku = False
         End If
         If Chk_Hiduke(TextBox10.Text) = False And Trim(TextBox10.Text) <> "" Then
-            MsgBox("EPA送付日の日付形式が間違っています。")
+            Label3.Text = "EPA送付日の日付形式が間違っています。"
             chk_Nyuryoku = False
         End If
     End Function
