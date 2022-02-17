@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
+Imports System.Console
 
 Partial Class cs_home
     Inherits System.Web.UI.Page
@@ -79,6 +80,9 @@ Partial Class cs_home
         'クリックされたリンクボタンを取得
         Dim lnkbutton = CType(sender, LinkButton)
 
+        'WEBサーバーの「\\kbhwpm01\exp\cs_home\manual」に配置されたファイルのみ起動可能
+        Response.Redirect("./manual/" & lnkbutton.ID)       'フルパス指定
+
         'ID（ファイル名）を引数にファイルオープン処理
         'Dim p As New System.Diagnostics.Process
         'p.StartInfo.FileName = strMainPath & lnkbutton.ID   'フルパス指定
@@ -94,8 +98,61 @@ Partial Class cs_home
 
         'Response.Redirect("./manual/手順書_【国内】A042」LS1 帳票出力.xlsx")
 
-        'WEBサーバーの「\\kbhwpm01\exp\cs_home\manual」に配置されたファイルのみ起動可能
-        Response.Redirect("./manual/" & lnkbutton.ID)       'フルパス指定
+
+        'Dim workbook
+        '        Dim ExcelFilePath As String = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\手順書\新規_手順書\2019年度手順書整備\02.承認待ち\手順書_【国内】A042」 LS1集荷指示書出力.xlsx"
+        'Dim ExcelFilePath As String = "C:\temp\Book1.xlsx"
+        'Dim ExcelFilePath As String = "\\KBHWPA83\InvPack送信前フォルダ\Book1.xlsx"
+
+        'Dim workbook = New XLWorkbook(ExcelFilePath)
+        '' Excelファイルを開く
+        ''Using workbook As New ClosedXML.Excel.XLWorkbook(ExcelFilePath)
+        ''End Using
+        'workbook.Worksheet(1).Range("A1").Value = "wsssss"
+        'workbook.SaveAs(ExcelFilePath)
+        '        Dim workbook = New XLWorkbook
+
+        'ワークブックを保存するには最低１つのシートが必要
+        '        workbook.AddWorksheet("Sheet1")
+        'workbook.Worksheet(1).Range("B1").Value = "test"
+        'workbook.SaveAs(ExcelFilePath)
+        '    Dim file As String = ExcelFilePath
+        '    Using fs As New FileStream(
+        'file,
+        'FileMode.Open,
+        'FileAccess.Read,
+        'FileShare.ReadWrite)
+        '        Dim book As New ClosedXML.Excel.XLWorkbook(fs, ClosedXML.Excel.XLEventTracking.Disabled)
+        '        Dim sheet As ClosedXML.Excel.IXLWorksheet
+        '        ' 開くシート名を指定する
+        '        sheet = book.Worksheet("sheet1")
+        '        ' セルの位置を指定する(左右方向がx,上下方向がy)
+        '        Dim x As Integer = 1
+        '        Dim y As Integer = 1
+        '        ' セルの値をRead
+        '        Dim read_data As String = sheet.Cell(y, x).Value.ToString
+        '    End Using
+
+        'Dim excelApp As Excel.Application = Nothing
+        'Dim wkbk As Excel.Workbook
+        'Dim sheet As Excel.Worksheet
+        'Dim filePath As String = "\\KBHWPA83\InvPack送信前フォルダ\Book1.xlsx"
+
+        'Try
+        '    ' Start Excel and create a workbook and worksheet.
+        '    excelApp = New Excel.Application
+        '    wkbk = excelApp.Workbooks.Open(filePath)
+        '    excelApp.Visible = True
+        'Catch
+
+        'Finally
+        '    sheet = Nothing
+        '    wkbk = Nothing
+
+        '    ' Close Excel.
+        '    'excelApp.Quit()
+        '    excelApp = Nothing
+        'End Try
 
     End Sub
 

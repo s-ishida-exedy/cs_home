@@ -13,6 +13,8 @@ Partial Class cs_home
         If IsPostBack Then
             ' そうでない時処理
         Else
+            Me.DropDownList5.Items.Insert(0, "-select-") '先頭にタイトル行追加
+
             'メール確認画面から戻ってきた場合、セッション値をセットする
             If Session("strMode") = "0" Then
                 DropDownList5.SelectedValue = Session("strTant")
@@ -101,6 +103,11 @@ Partial Class cs_home
 
     Private Function chk_Nyuryoku() As Boolean
         chk_Nyuryoku = True
+
+        If DropDownList5.SelectedValue = "-select-" Then
+            Label12.Text = "依頼者が選択されていません。"
+            chk_Nyuryoku = False
+        End If
 
         '全角入力チェック
         If HankakuEisuChk(TextBox1.Text) = False And Trim(TextBox1.Text) <> "" Then
