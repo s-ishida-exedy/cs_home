@@ -12,9 +12,9 @@ Partial Class cs_home
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim strStatus As String = ""
-        'セッション情報取得
-        Dim strId As String = Session("strId")
-        Dim strMode As String = Session("strMode")
+        'パラメータ取得
+        Dim strId As String = Request.QueryString("strId")
+        Dim strMode As String = Request.QueryString("strMode")
 
         If IsPostBack Then
         Else
@@ -221,9 +221,9 @@ Partial Class cs_home
     End Sub
     Private Sub Redirect_Detail(strId As String)
         'トピックス詳細画面へ遷移
-        Session("strId") = strId
-        Session("strMode") = "01"           '表示モード
-        Response.Redirect("topics_detail.aspx")
+        '表示モード
+        Response.Redirect("topics_detail.aspx?strId=" & strId & "&strMode=01")
+
     End Sub
 
     Private Sub LinkButton1_Click(sender As Object, e As EventArgs) Handles LinkButton1.Click

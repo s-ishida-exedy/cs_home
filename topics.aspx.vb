@@ -39,15 +39,15 @@ Partial Class cs_home
         If e.CommandName = "edt" Then
             Dim index As Integer = Convert.ToInt32(e.CommandArgument)
 
-            Session("strId") = Me.GridView1.Rows(index).Cells(1).Text
-            Session("strMode") = "02"       '更新/削除モード
-            Response.Redirect("topics_detail.aspx")
+            Dim strId As String = Me.GridView1.Rows(index).Cells(1).Text
+            '更新/削除モード
+            Response.Redirect("topics_detail.aspx?strId=" & strId & "&strMode=02")
         End If
     End Sub
 
     Protected Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         '新規登録ボタン押下
-        Session("strMode") = "03"           '登録モード
-        Response.Redirect("topics_detail.aspx")
+        '登録モード
+        Response.Redirect("topics_detail.aspx?strMode=03")
     End Sub
 End Class

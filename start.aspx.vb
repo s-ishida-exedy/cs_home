@@ -12,7 +12,7 @@ Partial Class cs_home
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        '現在保持ているセッション情報をクリアする。
+        '現在保持しているセッション情報をクリアする。
         Session.RemoveAll()
 
         Call GET_VAN_DATA()
@@ -74,6 +74,7 @@ Partial Class cs_home
 
 
     End Sub
+
     Private Sub GET_VAN_DATA()
         'バンニングスケジュール情報を取得する
         Dim dataread As SqlDataReader
@@ -276,14 +277,12 @@ Partial Class cs_home
         cnn.Close()
         cnn.Dispose()
 
-
     End Sub
 
     Private Sub Redirect_Detail(strId As String)
         'トピックス詳細画面へ遷移
-        Session("strId") = strId
-        Session("strMode") = "01"           '表示モード
-        Response.Redirect("topics_detail.aspx")
+        '表示モード
+        Response.Redirect("topics_detail.aspx?strId=" & strId & "&strMode=01")
     End Sub
 
     Private Sub LinkButton1_Click(sender As Object, e As EventArgs) Handles LinkButton1.Click
