@@ -162,10 +162,8 @@ Partial Class cs_home
         Literal10.Text = StrConv(lngAir2, VbStrConv.Wide) + "件"
 
         Literal4.Text = StrConv(lngJishT, VbStrConv.Wide) + "件"
-        Literal12.Text = StrConv(lngJishT2, VbStrConv.Wide) + "件"
 
         Literal5.Text = StrConv(lngTsukI, VbStrConv.Wide) + "件"
-        Literal14.Text = StrConv(lngTsukI, VbStrConv.Wide) + "件"
 
         'クローズ処理 
         dataread.Close()

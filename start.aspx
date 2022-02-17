@@ -220,9 +220,10 @@
         <asp:Literal ID="Literal4" runat="server"></asp:Literal>
     </td>
     <td>
+        <asp:Label ID="Label11" runat="server" Text="－"></asp:Label>
     </td>
     <td>
-        <asp:Literal ID="Literal12" runat="server"></asp:Literal>
+        <asp:Label ID="Label12" runat="server" Text="－"></asp:Label>
     </td>
     <td>
         <asp:Literal ID="Literal13" runat="server"></asp:Literal>
@@ -234,9 +235,10 @@
         <asp:Literal ID="Literal5" runat="server"></asp:Literal>
     </td>
     <td>
+        <asp:Label ID="Label13" runat="server" Text="－"></asp:Label>
     </td>
     <td>
-        <asp:Literal ID="Literal14" runat="server"></asp:Literal>
+        <asp:Label ID="Label14" runat="server" Text="－"></asp:Label>
     </td>
     <td>
         <asp:Literal ID="Literal15" runat="server"></asp:Literal>
