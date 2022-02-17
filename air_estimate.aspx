@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="air_estimate.aspx.vb" Inherits="cs_home" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="air_estimate.aspx.vb" Inherits="cs_home" Async="true" %>
 
 <!DOCTYPE html>
 
@@ -140,7 +140,7 @@
 </script>
 </head>
 <body class="c2">
-<form id="form1" runat="server" autocomplete="off">
+<form id="form1" runat="server" autocomplete="off" enctype="multipart/form-data">
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.htmlで行う -->
@@ -153,8 +153,11 @@
                     <h2>AIR見積り依頼</h2> 
                 </td>
                 <td class="second-cell">
+                    <asp:Label ID="Label3" runat="server" Text="依頼者："></asp:Label>
+                    <asp:DropDownList ID="DropDownList5" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="NAME_AB" DataValueField="NAME_AB" Width="170px" ></asp:DropDownList>
+                    &nbsp;
                     <asp:Button ID="Button1" runat="server" Text="　メール作成　" style="width:164px" Font-Size="Small" />
-                    <asp:Button ID="Button2" runat="server" Text="　メール送信　" style="width:164px" Font-Size="Small" />&nbsp;
+                    &nbsp;
                     <asp:Label ID="Label12" runat="server" Text="Label" Class="err"></asp:Label>
                 </td>
                 <td class="third-cell">
@@ -259,18 +262,14 @@
                     <asp:CheckBox ID="CheckBox3" runat="server" AutoPostBack="true" text="：集荷日/到着日は添付参照" />
                 </td>
             </tr>
-        </table>
-        <table class="ta3">
             <tr>
-                <th>添付ファイル</th>
+                <th>添付ファイル<br/>(PDFのみ)</th>
                 <td>
-                    <asp:CheckBox ID="CheckBox4" runat="server" Text="：添付ファイルあり" />
-                </td>
-                <th>メール送信</th>
-                <td>
-                    <asp:CheckBox ID="CheckBox5" runat="server" Text="：確認画面後、自動でメール送信されます。" />
+                    <input type="file" name="userfile" accept="application/pdf" />
                 </td>
             </tr>
+        </table>
+        <table class="ta3">
             <tr>
                 <th>CC追加</th>
                 <td>
@@ -292,6 +291,15 @@
         </table>
 </div>
 <!--/#main2-->
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT *
+FROM M_EXL_CS_MEMBER
+WHERE PLACE LIKE '%H%'
+AND CODE LIKE 'T%'
+UNION
+SELECT *
+FROM M_EXL_CS_MEMBER
+WHERE PLACE LIKE '%H%'
+AND CODE LIKE 'E%'"></asp:SqlDataSource>
 
 </div>
 <!--/#contents2-->
