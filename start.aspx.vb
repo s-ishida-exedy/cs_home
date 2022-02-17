@@ -11,6 +11,10 @@ Partial Class cs_home
     Public strProcess As String
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        '現在保持ているセッション情報をクリアする。
+        Session.RemoveAll()
+
         Call GET_VAN_DATA()
         Dim strStatus As String = ""
 

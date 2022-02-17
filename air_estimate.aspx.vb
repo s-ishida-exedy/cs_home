@@ -1,6 +1,5 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Data
-Imports Microsoft.Office.Interop.Outlook
 Imports mod_function
 
 Partial Class cs_home
@@ -13,12 +12,51 @@ Partial Class cs_home
         Label12.Text = ""
         If IsPostBack Then
             ' そうでない時処理
-            Dim ste As String = ""
         Else
-            Dim ste2 As String = ""
+            Me.DropDownList5.Items.Insert(0, "-select-") '先頭にタイトル行追加
 
-            Button2.Visible = False
-            TextBox6.Enabled = False
+            'メール確認画面から戻ってきた場合、セッション値をセットする
+            If Session("strMode") = "0" Then
+                DropDownList5.SelectedValue = Session("strTant")
+
+                DropDownList1.SelectedValue = Session("strIrai")
+                DropDownList2.SelectedValue = Session("strPlac")
+                TextBox1.Text = Session("strCust")
+                DropDownList3.SelectedValue = Session("strImco")
+                TextBox9.Text = Session("strWeit")
+                TextBox10.Text = Session("strKogu")
+                TextBox3.Text = Session("strTate")
+                TextBox4.Text = Session("strYoko")
+                TextBox5.Text = Session("strTaka")
+                TextBox7.Text = Session("strPick")
+                TextBox8.Text = Session("strArrD")
+                DropDownList4.SelectedValue = Session("strPicT")
+                If Session("strCWei") = "0" Then
+                    CheckBox1.Checked = False
+                Else
+                    CheckBox1.Checked = True
+                End If
+                If Session("strCSiz") = "0" Then
+                    CheckBox2.Checked = False
+                Else
+                    CheckBox2.Checked = True
+                End If
+                If Session("strCDat") = "0" Then
+                    CheckBox3.Checked = False
+                Else
+                    CheckBox3.Checked = True
+                End If
+                If Session("strCC") = "" Then
+                    CheckBox6.Checked = False
+                Else
+                    CheckBox6.Checked = True
+                    TextBox6.Text = Session("strCC")
+                End If
+                TextBox2.Text = Session("strRenr")
+            Else
+                TextBox6.Enabled = False
+            End If
+
         End If
         Button1.Attributes.Add("onclick", "return confirm('見積り依頼します。よろしいですか？');")
     End Sub
@@ -66,6 +104,11 @@ Partial Class cs_home
     Private Function chk_Nyuryoku() As Boolean
         chk_Nyuryoku = True
 
+        If DropDownList5.SelectedValue = "-select-" Then
+            Label12.Text = "依頼者が選択されていません。"
+            chk_Nyuryoku = False
+        End If
+
         '全角入力チェック
         If HankakuEisuChk(TextBox1.Text) = False And Trim(TextBox1.Text) <> "" Then
             Label12.Text = "客先コードに全角文字が使用されています。"
@@ -79,33 +122,33 @@ Partial Class cs_home
         End If
 
         '半角数字チェック
-        If HankakuNumChk(TextBox9.Text) = False And Trim(TextBox1.Text) <> "" Then
+        If HankakuNumChk(TextBox9.Text) = False And Trim(TextBox9.Text) <> "" Then
             Label12.Text = "総重量に数字以外が使用されています。"
             chk_Nyuryoku = False
         End If
-        If HankakuNumChk(TextBox10.Text) = False And Trim(TextBox1.Text) <> "" Then
+        If HankakuNumChk(TextBox10.Text) = False And Trim(TextBox10.Text) <> "" Then
             Label12.Text = "個口に数字以外が使用されています。"
             chk_Nyuryoku = False
         End If
-        If HankakuNumChk(TextBox3.Text) = False And Trim(TextBox1.Text) <> "" Then
+        If HankakuNumChk(TextBox3.Text) = False And Trim(TextBox3.Text) <> "" Then
             Label12.Text = "ｻｲｽﾞ(縦)に数字以外が使用されています。"
             chk_Nyuryoku = False
         End If
-        If HankakuNumChk(TextBox4.Text) = False And Trim(TextBox1.Text) <> "" Then
+        If HankakuNumChk(TextBox4.Text) = False And Trim(TextBox4.Text) <> "" Then
             Label12.Text = "ｻｲｽﾞ(横)に数字以外が使用されています。"
             chk_Nyuryoku = False
         End If
-        If HankakuNumChk(TextBox5.Text) = False And Trim(TextBox1.Text) <> "" Then
+        If HankakuNumChk(TextBox5.Text) = False And Trim(TextBox5.Text) <> "" Then
             Label12.Text = "ｻｲｽﾞ(高さ)に数字以外が使用されています。"
             chk_Nyuryoku = False
         End If
 
         '日付入力チェック
-        If Chk_Hiduke(TextBox7.Text) = False And Trim(TextBox2.Text) <> "" Then
+        If Chk_Hiduke(TextBox7.Text) = False And Trim(TextBox7.Text) <> "" Then
             Label12.Text = "集荷日の日付形式が間違っています。"
             chk_Nyuryoku = False
         End If
-        If Chk_Hiduke(TextBox8.Text) = False And Trim(TextBox2.Text) <> "" Then
+        If Chk_Hiduke(TextBox8.Text) = False And Trim(TextBox8.Text) <> "" Then
             Label12.Text = "到着希望日の日付形式が間違っています。"
             chk_Nyuryoku = False
         End If
@@ -136,275 +179,72 @@ Partial Class cs_home
             Return
         End If
 
-        'ボタン表示制御
-        Button1.Visible = False
-        Button2.Visible = True
+        '記載内容をセッションに入れる
+        Session("strMode") = "0"        '確認画面へ画面遷移
 
-        '各コントロールを非活性にする
-        DropDownList1.Enabled = False
-        DropDownList2.Enabled = False
-        TextBox1.Enabled = False
-        DropDownList3.Enabled = False
-        TextBox9.Enabled = False
-        TextBox10.Enabled = False
-        TextBox3.Enabled = False
-        TextBox4.Enabled = False
-        TextBox5.Enabled = False
-        TextBox7.Enabled = False
-        TextBox8.Enabled = False
-        DropDownList4.Enabled = False
-        CheckBox1.Enabled = False
-        CheckBox2.Enabled = False
-        CheckBox3.Enabled = False
-        CheckBox4.Enabled = False
-        CheckBox5.Enabled = False
-        TextBox2.Enabled = False
-        CheckBox6.Enabled = False
-        TextBox6.Enabled = False
+        Session("strTant") = DropDownList5.SelectedValue
 
-        Label12.Text = "下記内容を確認し、メール送信ボタンを押してください。"
+        Session("strName") = strName
+        Session("strAdd") = strAdd
+        Session("strDes") = strDes
 
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        'メール送信ボタン
-        Dim strName, strAdd, strDes As String
-
-        '客先情報取得
-        Call GET_CustInfo(TextBox1.Text, strName, strAdd, strDes)
-
-        '本文作成
-        Dim strbody As String = UriBodyC(strName, strAdd, strDes)
-
-        'メール送付
-        Dim app As New Microsoft.Office.Interop.Outlook.Application()
-        Dim Mail As MailItem = app.CreateItem(OlItemType.olMailItem)
-
-        '宛先
-        Mail.To = ""
-
-        If CheckBox6.Checked = True Then
-            Mail.CC = TextBox6.Text
+        Session("strIrai") = DropDownList1.SelectedValue
+        Session("strPlac") = DropDownList2.SelectedValue
+        Session("strCust") = TextBox1.Text
+        Session("strImco") = DropDownList3.SelectedValue
+        Session("strWeit") = TextBox9.Text
+        Session("strKogu") = TextBox10.Text
+        Session("strTate") = TextBox3.Text
+        Session("strYoko") = TextBox4.Text
+        Session("strTaka") = TextBox5.Text
+        Session("strPick") = TextBox7.Text
+        Session("strArrD") = TextBox8.Text
+        Session("strPicT") = DropDownList4.SelectedValue
+        If CheckBox1.Checked = False Then
+            Session("strCWei") = "0"
         Else
-            Mail.CC = ""
+            Session("strCWei") = "1"
         End If
-
-        'BCCのアドレスをDBから取得
-        Mail.BCC = GET_BccAddress(DropDownList2.SelectedValue.ToString)
-
-        '件名
-        Mail.Subject = " 【見積り依頼  " & TextBox1.Text & "向け】ETD:　" & TextBox7.Text
-
-        '形式をHTML
-        Mail.BodyFormat = OlBodyFormat.olFormatHTML
-        Mail.HTMLBody = "<HTML><BODY>" & strbody & "</BODY></HTML>"
-
-        'アドレス帳を用いてメールアドレスを名前解決
-        Mail.Recipients.ResolveAll()
-
-        If CheckBox5.Checked = True Then
-            '自動送信がONになっている場合は、そのまま送信
-            '送信実行
-            Mail.Send()
+        If CheckBox2.Checked = False Then
+            Session("strCSiz") = "0"
         Else
-            'メールを表示
-            Mail.Display()
+            Session("strCSiz") = "1"
         End If
-
-        'ボタン表示制御
-        Button1.Visible = True
-        Button2.Visible = False
-
-        '各コントロールを活性にする
-        DropDownList1.Enabled = True
-        DropDownList2.Enabled = True
-        TextBox1.Enabled = True
-        DropDownList3.Enabled = True
-        TextBox9.Enabled = True
-        TextBox10.Enabled = True
-        TextBox3.Enabled = True
-        TextBox4.Enabled = True
-        TextBox5.Enabled = True
-        TextBox7.Enabled = True
-        TextBox8.Enabled = True
-        DropDownList4.Enabled = True
-        CheckBox1.Enabled = True
-        CheckBox2.Enabled = True
-        CheckBox3.Enabled = True
-        CheckBox4.Enabled = True
-        CheckBox5.Enabled = True
-        TextBox2.Enabled = True
-        CheckBox6.Enabled = True
-        TextBox6.Enabled = True
-
-        Label12.Text = ""
-
-    End Sub
-
-    Public Function UriBodyC(strName As String, strAdd As String, strDes As String) As String
-        'メール本文の作成
-        Dim Bdy As String = ""
-
-        Bdy = Bdy + "お世話になります。<BR>"
-        Bdy = Bdy + "早速ですがAIRの見積りを依頼をさせていただきます。<BR>"
-        Bdy = Bdy + "下記条件を元にお見積りをお願い申し上げます。<BR><BR>"
-
-        '出荷場所
-        If Me.DropDownList2.SelectedValue = 0 Then
-            Bdy = Bdy + "集荷場所：〒572-0822　(株)エクセディ物流 1F<BR>"
-            Bdy = Bdy + "住所: 大阪府寝屋川市木田元宮1 -30 - 1<BR><BR>"
+        If CheckBox3.Checked = False Then
+            Session("strCDat") = "0"
         Else
-            Bdy = Bdy + "集荷場所：〒518-0825　(株)エクセディ物流 上野出張所<BR>"
-            Bdy = Bdy + "住所: 三重県伊賀市小田町2500番地<BR><BR>"
+            Session("strCDat") = "1"
+        End If
+        If CheckBox6.Checked = False Then
+            Session("strCC") = ""
+        Else
+            Session("strCC") = TextBox6.Text
+        End If
+        Session("strRenr") = TextBox2.Text
+
+        '添付ファイルをサーバーにアップロード
+        Dim posted As HttpPostedFile = Request.Files("userfile")
+
+        If Not posted.FileName = "" Then
+            posted.SaveAs("C:\exp\cs_home\upload\" & System.IO.Path.GetFileName(posted.FileName))
+            Session("strFile") = System.IO.Path.GetFileName(posted.FileName)
         End If
 
-        'サイズ欄の文字列生成
-        Dim strSize As String = ""
-        strSize = TextBox3.Text & "×" & TextBox4.Text & "×" & TextBox5.Text & "cm"
+        '確認画面へ遷移
+        Response.Redirect("air_est_comfirm.aspx")
 
-        '表の作成
-        Bdy = Bdy + "<table border = ""0"" style=""border-collapse: collapse;width:348pt; border: 0.5pt solid windowtext;"" width=""463"">"
-        Bdy = Bdy + "<tr height=32>"
-        Bdy = Bdy + "    <td height=32 width=125 style=""border: .5pt solid windowtext;text-align: center;"">客先コード</td>"
-        Bdy = Bdy + "    <td colspan=2 width=338 style=""border: .5pt solid windowtext;text-align: center;"">"
-        Bdy = Bdy + "" & TextBox1.Text & "</td>"
-        Bdy = Bdy + "</tr>"
-        Bdy = Bdy + "<tr height=""32"" style=""height:24.0pt"">"
-        Bdy = Bdy + "    <td height=32 width=125 style=""border: .5pt solid windowtext;text-align: center;"">客先名</td>"
-        Bdy = Bdy + "    <td style=""border: 0.5pt solid windowtext;"" colspan=""2"" width=""338"">"
-        Bdy = Bdy + "" & strName & "</td>"
-        Bdy = Bdy + "</tr>"
-        Bdy = Bdy + "<tr height=""32"" style=""height:24.0pt"">"
-        Bdy = Bdy + "    <td height=32 width=125 style=""border: .5pt solid windowtext;text-align: center;"">住所</td>"
-        Bdy = Bdy + "    <td style=""border: 0.5pt solid windowtext;"" colspan=""2"" width=""338"">"
-        Bdy = Bdy + "" & strAdd & "</td>"
-        Bdy = Bdy + "</tr>"
-        Bdy = Bdy + "<tr height=""32"" style=""height:24.0pt"">"
-        Bdy = Bdy + "    <td height=32 width=125 style=""border: .5pt solid windowtext;text-align: center;"">仕向地</td>"
-        Bdy = Bdy + "    <td style=""border: 0.5pt solid windowtext;text-align: center;"" colspan=""2"" width=""338"">"
-        Bdy = Bdy + "" & strDes & "</td>"
-        Bdy = Bdy + "</tr>"
-        Bdy = Bdy + "<tr height=""32"" style=""height:24.0pt"">"
-        Bdy = Bdy + "    <td height=32 width=125 style=""border: .5pt solid windowtext;text-align: center;"">輸送条件</td>"
-        Bdy = Bdy + "    <td style=""border: 0.5pt solid windowtext;text-align: center;"" colspan=""2"" width=""338"">集荷～通関～航空輸送～通関～配達</td>"
-        Bdy = Bdy + "</tr>"
-        Bdy = Bdy + "<tr height=""32"" style=""height:24.0pt"">"
-        Bdy = Bdy + "    <td height=32 width=125 style=""border: .5pt solid windowtext;text-align: center;"">建値</td>"
-        Bdy = Bdy + "    <td style=""border: 0.5pt solid windowtext;text-align: center;"" colspan=""2"">"
-        Bdy = Bdy + "" & DropDownList3.SelectedValue & "</td>"
-        Bdy = Bdy + "</tr>"
-        Bdy = Bdy + "<tr height=""32"" style=""height:24.0pt"">"
-        Bdy = Bdy + "    <td height=32 width=125 style=""border: .5pt solid windowtext;text-align: center;"">集荷日/時間</td>"
-        Bdy = Bdy + "    <td style=""border: 0.5pt solid windowtext;text-align: center;"">"
-        Bdy = Bdy + "" & TextBox7.Text & "</td>"
-        Bdy = Bdy + "    <td style=""border: 0.5pt solid windowtext;text-align: center;"">"
-        Bdy = Bdy + "" & DropDownList4.SelectedValue & "</td>"
-        Bdy = Bdy + "</tr>"
-        Bdy = Bdy + "<tr height=""32"" style=""height:24.0pt"">"
-        Bdy = Bdy + "    <td height=32 width=125 style=""border: .5pt solid windowtext;text-align: center;"">到着希望日</td>"
-        Bdy = Bdy + "    <td style=""border: 0.5pt solid windowtext;text-align: center;"" colspan=""2"">"
-        Bdy = Bdy + "" & TextBox8.Text & "</td>"
-        Bdy = Bdy + "</tr>"
-        Bdy = Bdy + "<tr height=""32"" style=""height:24.0pt"">"
-        Bdy = Bdy + "    <td height=32 width=125 style=""border: .5pt solid windowtext;text-align: center;"">総重量/個数</td>"
-        Bdy = Bdy + "    <td style=""border: 0.5pt solid windowtext;text-align: center;"">約 "
-        Bdy = Bdy + "" & TextBox9.Text & " Kg</td>"
-        Bdy = Bdy + "    <td style=""border: 0.5pt solid windowtext;text-align: center;"">"
-        Bdy = Bdy + "" & TextBox10.Text & " 個口</td>"
-        Bdy = Bdy + "</tr>"
-        Bdy = Bdy + "<tr height=""32"" style=""height:24.0pt"">"
-        Bdy = Bdy + "    <td height=32 width=125 style=""border: .5pt solid windowtext;text-align: center;"">サイズ</td>"
-        Bdy = Bdy + "    <td style=""border: 0.5pt solid windowtext;text-align: center;"" colspan=""2"">"
-        Bdy = Bdy + "" & strSize & "</td>"
-        Bdy = Bdy + "</tr>"
-        Bdy = Bdy + "<tr height=""32"" style=""height:24.0pt"">"
-        Bdy = Bdy + "    <td height=32 width=125 style=""border: .5pt solid windowtext;text-align: center;"">備考</td>"
-        Bdy = Bdy + "    <td style=""border: 0.5pt solid windowtext;text-align: center;"" colspan=""2"">危険品非該当</td>"
-        Bdy = Bdy + "</tr>"
-        Bdy = Bdy + "<tr height=""32"" style=""height:24.0pt"">"
-        Bdy = Bdy + "    <td height=32 width=125 style=""border: .5pt solid windowtext;text-align: center;"">連絡事項</td>"
-        Bdy = Bdy + "    <td style=""border: 0.5pt solid windowtext;"" colspan=""2"">"
-        Bdy = Bdy + "" & TextBox2.Text & "</td>"
-        Bdy = Bdy + "</tr>"
-        Bdy = Bdy + "</table>"
-        Return Bdy
-    End Function
-
-    Private Sub CtrlCheckBox()
-        'チェックボックスの制御
-        If CheckBox1.Checked = True Or CheckBox2.Checked = True Or CheckBox3.Checked = True Then
-            'どれかのチェックがONの場合、添付ファイル有のチェックをON
-            CheckBox4.Checked = True
-            '添付ファイルありの場合は、自動送信OFF
-            CheckBox5.Checked = False
-            CheckBox5.Enabled = False
-        ElseIf CheckBox1.Checked = False And CheckBox2.Checked = False And CheckBox3.Checked = False Then
-            CheckBox4.Checked = False
-            CheckBox5.Enabled = True
-        End If
-    End Sub
-
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-        Call CtrlCheckBox()
-    End Sub
-
-    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
-        Call CtrlCheckBox()
-    End Sub
-
-    Private Sub CheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox3.CheckedChanged
-        Call CtrlCheckBox()
     End Sub
 
     Private Sub CheckBox6_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox6.CheckedChanged
-        'CC追加チェックボックス制御
+        'CCアドレス追加チェック時の制御
+
         If CheckBox6.Checked = True Then
             TextBox6.Enabled = True
         Else
             TextBox6.Enabled = False
         End If
+
     End Sub
 
-    Private Function GET_BccAddress(strPlace As String) As String
-        'BCCメールアドレス情報を取得
-        Dim dataread As SqlDataReader
-        Dim dbcmd As SqlCommand
-        Dim strSQL As String = ""
-        Dim strDate As String
-
-        GET_BccAddress = ""
-
-        '接続文字列の作成
-        Dim ConnectionString As String = String.Empty
-        'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
-        'SqlConnectionクラスの新しいインスタンスを初期化
-        Dim cnn = New SqlConnection(ConnectionString)
-
-        'データベース接続を開く
-        cnn.Open()
-
-        strSQL = strSQL & "SELECT MAIL_ADD FROM M_EXL_AIR_MAIL "
-        strSQL = strSQL & "WHERE PLACE = '" & strPlace & "' "
-
-        'ＳＱＬコマンド作成 
-        dbcmd = New SqlCommand(strSQL, cnn)
-        'ＳＱＬ文実行 
-        dataread = dbcmd.ExecuteReader()
-
-        strDate = ""
-        '結果を取り出す 
-        While (dataread.Read())
-            GET_BccAddress += dataread("MAIL_ADD") + ";"
-
-        End While
-
-        'クローズ処理 
-        dataread.Close()
-        dbcmd.Dispose()
-        cnn.Close()
-        cnn.Dispose()
-
-    End Function
 End Class
 
