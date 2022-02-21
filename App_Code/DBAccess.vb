@@ -451,4 +451,36 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
+    Public Function GET_RESULT_AIR_EXC(strMode As String) As DataSet
+        'AIR専用オーダー取得
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT DISTINCT "
+        StrSQL = StrSQL & "  CUST_CD  "
+        StrSQL = StrSQL & "  , NOUKI "
+        StrSQL = StrSQL & "  , LS_TYP "
+        StrSQL = StrSQL & "  , CUST_ODR_NO "
+        StrSQL = StrSQL & "  , SALESNOTENO "
+        StrSQL = StrSQL & "  , a.ODR_CTL_NO "
+        StrSQL = StrSQL & "  , b.IVNO "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "  T_EXL_AIR_EXC_ODR a "
+        StrSQL = StrSQL & "  LEFT JOIN T_EXL_AIR_EXCLUSIVE b "
+        StrSQL = StrSQL & "    ON a.ODR_CTL_NO = b.ODR_CTL_NO "
+        If strMode = "1" Then
+            StrSQL = StrSQL & "WHERE b.IVNO IS NULL "
+        End If
+        StrSQL = StrSQL & "ORDER BY NOUKI "
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class
