@@ -784,32 +784,32 @@ Partial Class yuusen
 
         'End Using
 
-        Dim excelName As String = "C:\Users\T43529\OneDrive - 株式会社エクセディ\デスクトップ\新ツール\通関フォルダ作成_委託メール作成.xls"
+        '    Dim excelName As String = "C:\Users\T43529\OneDrive - 株式会社エクセディ\デスクトップ\新ツール\通関フォルダ作成_委託メール作成.xls"
 
-        Dim oXls As Excel.Application ' Excelオブジェクト
-        Dim oWBook As Excel.Workbook ' Workbookオブジェクト
+        '    Dim oXls As Excel.Application ' Excelオブジェクト
+        '    Dim oWBook As Excel.Workbook ' Workbookオブジェクト
 
-        oXls = New Excel.Application()
-        oXls.Visible = True ' 確認のためExcelのウィンドウを表示する
+        '    oXls = New Excel.Application()
+        '    oXls.Visible = True ' 確認のためExcelのウィンドウを表示する
 
-        ' Excelファイルをオープンする
-        oWBook = DirectCast((oXls.Workbooks.Open(
-          excelName,
-          Type.Missing,
-          Type.Missing,
-          Type.Missing,
-          Type.Missing,
-          Type.Missing,
-          Type.Missing,
-          Type.Missing,
-          Type.Missing,
-          Type.Missing,
-          Type.Missing,
-          Type.Missing,
-          Type.Missing,
-          Type.Missing,
-          Type.Missing)),
-          Excel.Workbook)
+        '    ' Excelファイルをオープンする
+        '    oWBook = DirectCast((oXls.Workbooks.Open(
+        '      excelName,
+        '      Type.Missing,
+        '      Type.Missing,
+        '      Type.Missing,
+        '      Type.Missing,
+        '      Type.Missing,
+        '      Type.Missing,
+        '      Type.Missing,
+        '      Type.Missing,
+        '      Type.Missing,
+        '      Type.Missing,
+        '      Type.Missing,
+        '      Type.Missing,
+        '      Type.Missing,
+        '      Type.Missing)),
+        '      Excel.Workbook)
 
     End Sub
 
