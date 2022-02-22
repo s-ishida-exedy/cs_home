@@ -137,22 +137,6 @@ Partial Class yuusen
         'Grid再表示
         GridView1.DataBind()
 
-        Panel1.Visible = True
-        Panel2.Visible = False
-        Panel3.Visible = False
-
-
-        DropDownList1.Items.Clear()
-
-        DropDownList1.Items.Insert(0, "--Select--")
-        DropDownList1.Items.Insert(1, "未回収")
-        DropDownList1.Items.Insert(2, "修正状況")
-
-
-        DropDownList2.Items.Clear()
-        DropDownList2.Items.Insert(0, "--Select--")
-
-
     End Sub
 
     Private Sub GET_IVDATA(bkgno As String, ivno As String)
