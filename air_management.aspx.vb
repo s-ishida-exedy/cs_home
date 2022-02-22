@@ -1,6 +1,8 @@
 ﻿Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Linq
+Imports ClosedXML.Excel
+Imports System.IO
 
 Partial Class cs_home
     Inherits System.Web.UI.Page
@@ -287,4 +289,73 @@ Partial Class cs_home
         Response.Redirect("air_mng_detail.aspx")
 
     End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        '前月分ダウンロードボタン押下
+        Dim strFile As String = Format(Now, "yyyyMMdd") & "_air_previous.xlsx"
+        Dim strPath As String = "C:\exp\cs_home\files\"
+        Dim strChanged As String    'サーバー上のフルパス
+        Dim strFileNm As String     'ファイル名
+
+        Dim dt = GetNorthwindProductTable()
+        Dim workbook = New XLWorkbook()
+        Dim worksheet = workbook.Worksheets.Add(dt)
+        workbook.SaveAs(strPath & strFile)
+
+        'ファイル名を取得する
+        Dim strTxtFiles() As String = IO.Directory.GetFiles(strPath, "*_air_previous.xlsx")
+
+        strChanged = strTxtFiles(0)
+        strFileNm = Path.GetFileName(strChanged)
+
+        'Contentをクリア
+        Response.ClearContent()
+
+        'Contentを設定
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+        Response.ContentType = "application/vnd.ms-excel"
+
+        '表示ファイル名を指定
+        Dim fn As String = HttpUtility.UrlEncode(strFileNm)
+        Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
+
+        'ダウンロード対象ファイルを指定
+        Response.WriteFile(strChanged)
+
+        'ダウンロード実行
+        Response.Flush()
+        Response.End()
+
+    End Sub
+
+    Private Shared Function GetNorthwindProductTable() As DataTable
+        'EXCELファイル出力
+        Dim strSQL As String = ""
+        Dim strSDate As String = ""
+        Dim strEDate As String = ""
+        Dim dtToday As DateTime = DateTime.Today
+
+        Dim dtFDM As Date = New DateTime(dtToday.Year, dtToday.Month, 1).AddMonths(-1)      '前月初日
+        Dim dtTDM As Date = New DateTime(dtToday.Year, dtToday.Month, 1).AddDays(-1)        '前月末日
+
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+        Dim dt = New DataTable("T_EXL_AIR_MANAGE")
+
+        Using conn = New SqlConnection(ConnectionString)
+            Dim cmd = conn.CreateCommand()
+
+            strSQL = strSQL & "SELECT * FROM T_EXL_AIR_MANAGE "
+            strSQL = strSQL & "WHERE ETD BETWEEN '" & Format(dtFDM, "yyyy/MM/dd") & "' "
+            strSQL = strSQL & "AND '" & Format(dtTDM, "yyyy/MM/dd") & "' "
+
+            cmd.CommandText = strSQL
+            Dim sda = New SqlDataAdapter(cmd)
+            sda.Fill(dt)
+        End Using
+
+        Return dt
+    End Function
 End Class
