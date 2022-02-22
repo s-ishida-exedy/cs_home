@@ -201,6 +201,8 @@ Partial Class yuusen
         dbcmd.Dispose()
 
 
+
+
         strSQL = ""
         strSQL = strSQL & "SELECT * FROM T_EXL_KINGAKU WHERE "
         strSQL = strSQL & "KBN = '上野' "
