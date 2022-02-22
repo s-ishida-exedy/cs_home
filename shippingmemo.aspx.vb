@@ -272,7 +272,7 @@ Partial Class yuusen
         strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.RECEIVED_PORT ='" & str09 & "', "
         strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.SHIP_PLACE ='" & str10 & "' "
         strSQL = strSQL & "WHERE T_EXL_SHIPPINGMEMOLIST.BOOKING_NO ='" & bkgno & "' "
-        strSQL = strSQL & "AND T_EXL_SHIPPINGMEMOLIST.BOOKING_NO ='" & ivno & "' "
+        strSQL = strSQL & "AND T_EXL_SHIPPINGMEMOLIST.INVOICE_NO ='" & ivno & "' "
 
         Command.CommandText = strSQL
         ' SQLの実行
