@@ -88,7 +88,7 @@ Partial Class cs_home
             cnn.Dispose()
 
             '名前列に値セット
-            e.Row.Cells(4).Text = strCode
+            e.Row.Cells(6).Text = strCode
         End If
     End Sub
 
