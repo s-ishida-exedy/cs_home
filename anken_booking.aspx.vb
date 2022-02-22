@@ -42,7 +42,9 @@ Partial Class yuusen
             'データベース接続を開く
             cnn.Open()
 
-            strSQL = "SELECT DOCFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT DOCFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '002' "
 
             'ＳＱＬコマンド作成
             dbcmd = New SqlCommand(strSQL, cnn)
@@ -63,7 +65,9 @@ Partial Class yuusen
             dataread.Close()
             dbcmd.Dispose()
 
-            strSQL = "SELECT DECFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DECFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT DECFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DECFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '003' "
 
             'ＳＱＬコマンド作成
             dbcmd = New SqlCommand(strSQL, cnn)
@@ -87,7 +91,9 @@ Partial Class yuusen
 
 
 
-            strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '001' "
 
             'ＳＱＬコマンド作成
             dbcmd = New SqlCommand(strSQL, cnn)
@@ -194,7 +200,10 @@ Partial Class yuusen
             'データベース接続を開く
             cnn.Open()
 
-            strSQL = "SELECT DOCFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT DOCFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+
+            strSQL = "SELECT BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '002' "
 
             'ＳＱＬコマンド作成
             dbcmd = New SqlCommand(strSQL, cnn)
@@ -215,7 +224,9 @@ Partial Class yuusen
             dataread.Close()
             dbcmd.Dispose()
 
-            strSQL = "SELECT DECFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DECFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT DECFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DECFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '003' "
 
             'ＳＱＬコマンド作成
             dbcmd = New SqlCommand(strSQL, cnn)
@@ -238,7 +249,9 @@ Partial Class yuusen
 
 
 
-            strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '001' "
 
             'ＳＱＬコマンド作成
             dbcmd = New SqlCommand(strSQL, cnn)
@@ -703,7 +716,7 @@ Partial Class yuusen
 
     End Sub
 
-    Private Function DEC_GET(STRBOOKING_NO As String, ByRef intCnt As Integer)
+    Private Function DEC_GET(STRBOOKING_NO As String, ByRef intCnt As Integer) As Object
 
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
@@ -731,10 +744,16 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
+        'strSQL = ""
+        'strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
+        'strSQL = strSQL & "DECFIN_BKGNO = '" & STRBOOKING_NO & "' "
+        'strSQL = strSQL & "AND DECFIN_REGDATE between '" & dt3 & "' AND '" & dt2 & "' "
+
         strSQL = ""
-        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
-        strSQL = strSQL & "DECFIN_BKGNO = '" & STRBOOKING_NO & "' "
-        strSQL = strSQL & "AND DECFIN_REGDATE between '" & dt3 & "' AND '" & dt2 & "' "
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
+        strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '003' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & STRBOOKING_NO & "' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.REGDATE  between '" & dt3 & "' AND '" & dt2 & "' "
 
 
         'ＳＱＬコマンド作成 
