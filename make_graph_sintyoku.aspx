@@ -831,7 +831,7 @@ h2:after{
 <table >
 <tr>
 <td style="width:450px;Font-Size:25px;" >
-<h2>受注金額グラフ</h2>
+<h2>出荷進捗グラフ</h2>
 </td>
 </tr>
 </table>
