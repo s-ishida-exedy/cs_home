@@ -146,10 +146,19 @@ Partial Class cs_home
         'データベース接続を開く
         cnn.Open()
 
+        'strSQL = ""
+        'strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
+        'strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_INVNO = '" & strinv & "' "
+        'strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.LCLFIN_BKGNO = '" & bkgno & "' "
+
         strSQL = ""
-        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
-        strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_INVNO = '" & strinv & "' "
-        strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.LCLFIN_BKGNO = '" & bkgno & "' "
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
+        strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '005' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+
+
+
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -166,39 +175,60 @@ Partial Class cs_home
 
         If intCnt > 0 Then
 
+            'strSQL = ""
+            'strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
+            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "', "
+            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
+            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
+            'strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.LCLFIN_INVNO ='" & strinv & "' "
+
             strSQL = ""
-            strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
-            strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "', "
-            strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
-            strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
-            strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.LCLFIN_INVNO ='" & strinv & "' "
+            strSQL = strSQL & "UPDATE T_EXL_WORKSTATUS00 SET "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001', "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.INVNO = '" & strinv & "', "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+            strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.INVNO ='" & strinv & "' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+
 
         Else
 
+            'strSQL = ""
+            'strSQL = strSQL & "INSERT INTO T_EXL_CSWORKSTATUS VALUES("
+
+            'strSQL = strSQL & " '" & "' "
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+
+            'strSQL = strSQL & ",'" & strinv & "' "
+            'strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
+            'strSQL = strSQL & ",'" & bkgno & "' "
+
+            'strSQL = strSQL & ")"
+
+
             strSQL = ""
-            strSQL = strSQL & "INSERT INTO T_EXL_CSWORKSTATUS VALUES("
-
-            strSQL = strSQL & " '" & "' "
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-
+            strSQL = strSQL & "INSERT INTO T_EXL_WORKSTATUS00 VALUES("
+            strSQL = strSQL & " '001' "
             strSQL = strSQL & ",'" & strinv & "' "
-            strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
             strSQL = strSQL & ",'" & bkgno & "' "
-
+            strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
             strSQL = strSQL & ")"
+
+
 
         End If
 
