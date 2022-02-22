@@ -124,6 +124,7 @@ h2:after{
          gData[13] = $("#TextBox14").val();
          gData[14] = $("#TextBox15").val();
 
+         //window.alert(gData[13]);
 
 
 
@@ -227,12 +228,22 @@ h2:after{
                      // 範囲を設定
                      var xscale = target.scales["x-axis-0"];
                      var yscale = target.scales["y-axis-0"];
+                     var left = xscale.getPixelForValue(0);  // 塗りつぶしを開始するラベル位置
+                     var right = xscale.getPixelForValue(gData[0]); // 塗りつぶしを終了するラベル位置
+                     var top = yscale.top;                      // 塗りつぶしの基点（上端）
+
+                     // 塗りつぶす長方形の設定
+                     ctx.fillStyle = "rgba(255,0,0, 0.2)";
+                     ctx.fillRect(left, top, right - left, yscale.height);
+
+                     var xscale = target.scales["x-axis-0"];
+                     var yscale = target.scales["y-axis-0"];
                      var left = xscale.getPixelForValue(gData[0]);  // 塗りつぶしを開始するラベル位置
                      var right = xscale.getPixelForValue(gData[1]); // 塗りつぶしを終了するラベル位置
                      var top = yscale.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx.fillStyle = "rgba(255,0,0, 0.2)";
+                     ctx.fillStyle = "rgba(0,255,0, 0.2)";
                      ctx.fillRect(left, top, right - left, yscale.height);
 
                      var xscale = target.scales["x-axis-0"];
@@ -242,7 +253,27 @@ h2:after{
                      var top = yscale.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx.fillStyle = "rgba(0,255,0, 0.2)";
+                     ctx.fillStyle = "rgba(0,0,225, 0.2)";
+                     ctx.fillRect(left, top, right - left, yscale.height);
+
+                     var xscale = target.scales["x-axis-0"];
+                     var yscale = target.scales["y-axis-0"];
+                     var left = xscale.getPixelForValue(gData[2]);  // 塗りつぶしを開始するラベル位置
+                     var right = xscale.getPixelForValue(gData[3]); // 塗りつぶしを終了するラベル位置
+                     var top = yscale.top;                      // 塗りつぶしの基点（上端）
+
+                     // 塗りつぶす長方形の設定
+                     ctx.fillStyle = "rgba(0,0,0, 0.2)";
+                     ctx.fillRect(left, top, right - left, yscale.height);
+
+                     var xscale = target.scales["x-axis-0"];
+                     var yscale = target.scales["y-axis-0"];
+                     var left = xscale.getPixelForValue(gData[3]);  // 塗りつぶしを開始するラベル位置
+                     var right = xscale.getPixelForValue(gData[12]); // 塗りつぶしを終了するラベル位置
+                     var top = yscale.top;                      // 塗りつぶしの基点（上端）
+
+                     // 塗りつぶす長方形の設定
+                     ctx.fillStyle = "rgba(205,133,63, 0.2)";
                      ctx.fillRect(left, top, right - left, yscale.height);
 
                  }
@@ -310,6 +341,9 @@ h2:after{
                          //    display: false
                          
                          //},
+
+
+
                          scales: {                          // 軸設定
                              xAxes: [                           // Ｘ軸設定
                                  {
@@ -334,7 +368,7 @@ h2:after{
                        stacked: true, //積み上げ棒グラフにする設定
                        scaleLabel: {                  // 軸ラベル
                            display: true,                 // 表示の有無
-                           labelString: '受注台数',     // ラベル
+                           //labelString: '受注台数',     // ラベル
                            fontFamily: "sans-serif",
                            fontColor: "blue",             // 文字の色
                            fontFamily: "sans-serif",
@@ -370,8 +404,8 @@ h2:after{
                      // 範囲を設定
                      var xscale2 = target2.scales["x-axis-0"];
                      var yscale2 = target2.scales["y-axis-0"];
-                     var left2 = xscale2.getPixelForValue(gData[0]);  // 塗りつぶしを開始するラベル位置
-                     var right2 = xscale2.getPixelForValue(gData[1]); // 塗りつぶしを終了するラベル位置
+                     var left2 = xscale2.getPixelForValue(0);  // 塗りつぶしを開始するラベル位置
+                     var right2 = xscale2.getPixelForValue(gData[4]); // 塗りつぶしを終了するラベル位置
                      var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
@@ -380,12 +414,42 @@ h2:after{
 
                      var xscale2 = target2.scales["x-axis-0"];
                      var yscale2 = target2.scales["y-axis-0"];
-                     var left2 = xscale2.getPixelForValue(gData[1]);  // 塗りつぶしを開始するラベル位置
-                     var right2 = xscale2.getPixelForValue(gData[2]); // 塗りつぶしを終了するラベル位置
+                     var left2 = xscale2.getPixelForValue(gData[4]);  // 塗りつぶしを開始するラベル位置
+                     var right2 = xscale2.getPixelForValue(gData[5]); // 塗りつぶしを終了するラベル位置
                      var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
                      ctx2.fillStyle = "rgba(0,255,0, 0.2)";
+                     ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
+
+                     var xscale2 = target2.scales["x-axis-0"];
+                     var yscale2 = target2.scales["y-axis-0"];
+                     var left2 = xscale2.getPixelForValue(gData[5]);  // 塗りつぶしを開始するラベル位置
+                     var right2 = xscale2.getPixelForValue(gData[6]); // 塗りつぶしを終了するラベル位置
+                     var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
+
+                     // 塗りつぶす長方形の設定
+                     ctx2.fillStyle = "rgba(0,0,255, 0.2)";
+                     ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
+
+                     var xscale2 = target2.scales["x-axis-0"];
+                     var yscale2 = target2.scales["y-axis-0"];
+                     var left2 = xscale2.getPixelForValue(gData[6]);  // 塗りつぶしを開始するラベル位置
+                     var right2 = xscale2.getPixelForValue(gData[7]); // 塗りつぶしを終了するラベル位置
+                     var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
+
+                     // 塗りつぶす長方形の設定
+                     ctx2.fillStyle = "rgba(0,0,0, 0.2)";
+                     ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
+
+                     var xscale2 = target2.scales["x-axis-0"];
+                     var yscale2 = target2.scales["y-axis-0"];
+                     var left2 = xscale2.getPixelForValue(gData[7]);  // 塗りつぶしを開始するラベル位置
+                     var right2 = xscale2.getPixelForValue(gData[13]); // 塗りつぶしを終了するラベル位置
+                     var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
+
+                     // 塗りつぶす長方形の設定
+                     ctx2.fillStyle = "rgba(205,133,63, 0.2)";
                      ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
 
                  }
@@ -476,7 +540,7 @@ h2:after{
                        stacked: true, //積み上げ棒グラフにする設定
                        scaleLabel: {                  // 軸ラベル
                            display: true,                 // 表示の有無
-                           labelString: '受注台数',     // ラベル
+                           //labelString: '受注台数',     // ラベル
                            fontFamily: "sans-serif",
                            fontColor: "blue",             // 文字の色
                            fontFamily: "sans-serif",
@@ -508,25 +572,55 @@ h2:after{
                      // 背景色                
                  function drawBackground3(target3) {
                      // 範囲を設定
-                     var xscale2 = target3.scales["x-axis-0"];
-                     var yscale2 = target3.scales["y-axis-0"];
-                     var left2 = xscale2.getPixelForValue(gData[0]);  // 塗りつぶしを開始するラベル位置
-                     var right2 = xscale2.getPixelForValue(gData[1]); // 塗りつぶしを終了するラベル位置
-                     var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
+                     var xscale3 = target3.scales["x-axis-0"];
+                     var yscale3 = target3.scales["y-axis-0"];
+                     var left3 = xscale3.getPixelForValue(0);  // 塗りつぶしを開始するラベル位置
+                     var right3 = xscale3.getPixelForValue(gData[8]); // 塗りつぶしを終了するラベル位置
+                     var top3 = yscale3.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
                      ctx3.fillStyle = "rgba(255,0,0, 0.2)";
-                     ctx3.fillRect(left2, top2, right2 - left2, yscale2.height);
+                     ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
 
-                     var xscale2 = target3.scales["x-axis-0"];
-                     var yscale2 = target3.scales["y-axis-0"];
-                     var left2 = xscale2.getPixelForValue(gData[1]);  // 塗りつぶしを開始するラベル位置
-                     var right2 = xscale2.getPixelForValue(gData[2]); // 塗りつぶしを終了するラベル位置
-                     var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
+                     var xscale3 = target3.scales["x-axis-0"];
+                     var yscale3 = target3.scales["y-axis-0"];
+                     var left3 = xscale3.getPixelForValue(gData[8]);  // 塗りつぶしを開始するラベル位置
+                     var right3 = xscale3.getPixelForValue(gData[9]); // 塗りつぶしを終了するラベル位置
+                     var top3 = yscale3.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
                      ctx3.fillStyle = "rgba(0,255,0, 0.2)";
-                     ctx3.fillRect(left2, top2, right2 - left2, yscale2.height);
+                     ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
+
+                     var xscale3 = target3.scales["x-axis-0"];
+                     var yscale3 = target3.scales["y-axis-0"];
+                     var left3 = xscale3.getPixelForValue(gData[9]);  // 塗りつぶしを開始するラベル位置
+                     var right3 = xscale3.getPixelForValue(gData[10]); // 塗りつぶしを終了するラベル位置
+                     var top3 = yscale3.top;                      // 塗りつぶしの基点（上端）
+
+                     // 塗りつぶす長方形の設定
+                     ctx3.fillStyle = "rgba(0,0,255, 0.2)";
+                     ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
+
+                     var xscale3 = target3.scales["x-axis-0"];
+                     var yscale3 = target3.scales["y-axis-0"];
+                     var left3 = xscale3.getPixelForValue(gData[10]);  // 塗りつぶしを開始するラベル位置
+                     var right3 = xscale3.getPixelForValue(gData[11]); // 塗りつぶしを終了するラベル位置
+                     var top3 = yscale3.top;                      // 塗りつぶしの基点（上端）
+
+                     // 塗りつぶす長方形の設定
+                     ctx3.fillStyle = "rgba(0,0,0, 0.2)";
+                     ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
+
+                     var xscale3 = target3.scales["x-axis-0"];
+                     var yscale3 = target3.scales["y-axis-0"];
+                     var left3 = xscale3.getPixelForValue(gData[11]);  // 塗りつぶしを開始するラベル位置
+                     var right3 = xscale3.getPixelForValue(gData[14]); // 塗りつぶしを終了するラベル位置
+                     var top3 = yscale3.top;                      // 塗りつぶしの基点（上端）
+
+                     // 塗りつぶす長方形の設定
+                     ctx3.fillStyle = "rgba(205,133,63, 0.2)";
+                     ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
 
                  }
 
@@ -598,7 +692,7 @@ h2:after{
                                      stacked: true, //積み上げ棒グラフにする設定
                                      scaleLabel: {                 // 軸ラベル
                                          display: true,                // 表示設定
-                                         labelString: '百万円',    // ラベル
+                                         labelString: '単位：百万円',    // ラベル
                                          //fontColor: "red",             // 文字の色
                                          fontSize: 16                  // フォントサイズ
                                      },
@@ -616,7 +710,7 @@ h2:after{
                        stacked: true, //積み上げ棒グラフにする設定
                        scaleLabel: {                  // 軸ラベル
                            display: true,                 // 表示の有無
-                           labelString: '受注台数',     // ラベル
+                           //labelString: '受注台数',     // ラベル
                            fontFamily: "sans-serif",
                            fontColor: "blue",             // 文字の色
                            fontFamily: "sans-serif",
@@ -737,7 +831,7 @@ h2:after{
 <table >
 <tr>
 <td style="width:450px;Font-Size:25px;" >
-<h2>受注台数グラフ</h2>
+<h2>受注金額グラフ</h2>
 </td>
 </tr>
 </table>
