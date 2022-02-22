@@ -1,6 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Data
-Imports Microsoft.Office.Interop.Outlook
+
 Imports mod_function
 
 Partial Class cs_home
@@ -115,8 +115,10 @@ Partial Class cs_home
         End If
 
 
-        strSQL = "SELECT LCLARGD_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLARGD_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
+        'strSQL = "SELECT LCLARGD_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLARGD_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
 
+        strSQL = "SELECT INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
+        strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '004' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -158,7 +160,11 @@ Partial Class cs_home
 
 
 
-        strSQL = "SELECT LCLFIN_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLFIN_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
+        'strSQL = "SELECT LCLFIN_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLFIN_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
+        'strSQL = strSQL & "AND [T_EXL_CSWORKSTATUS].LCLFIN_BKGNO = '" & e.Row.Cells(11).Text & "' "
+
+        strSQL = "SELECT INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
+        strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '005' "
         strSQL = strSQL & "AND [T_EXL_CSWORKSTATUS].LCLFIN_BKGNO = '" & e.Row.Cells(11).Text & "' "
 
         'ＳＱＬコマンド作成 
@@ -186,7 +192,9 @@ Partial Class cs_home
 
 
 
-        strSQL = "SELECT DOCFIN_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
+        'strSQL = "SELECT DOCFIN_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
+        strSQL = "SELECT INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
+        strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '002' "
 
 
         'ＳＱＬコマンド作成 
@@ -757,10 +765,19 @@ Partial Class cs_home
 
 
 
+        'strSQL = ""
+        'strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
+        'strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_INVNO = '" & strinv & "' "
+        'strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.LCLFIN_BKGNO = '" & bkgno & "' "
+
+
         strSQL = ""
-        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
-        strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_INVNO = '" & strinv & "' "
-        strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.LCLFIN_BKGNO = '" & bkgno & "' "
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
+        strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '005' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+
+
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -780,12 +797,23 @@ Partial Class cs_home
 
         If intCnt > 0 Then
 
+            'strSQL = ""
+            'strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
+            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_INVNO = '" & strinv & "', "
+            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
+            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_BKGNO = '" & bkgno & "' "
+            'strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.LCLFIN_INVNO ='" & strinv & "' "
+
+
             strSQL = ""
-            strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
-            strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_INVNO = '" & strinv & "', "
-            strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
-            strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_BKGNO = '" & bkgno & "' "
-            strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.LCLFIN_INVNO ='" & strinv & "' "
+            strSQL = strSQL & "UPDATE T_EXL_WORKSTATUS00 SET "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '005', "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.INVNO = '" & strinv & "', "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+            strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.INVNO ='" & strinv & "' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+
 
         Else
 
@@ -816,6 +844,17 @@ Partial Class cs_home
 
 
             strSQL = strSQL & ")"
+
+
+            strSQL = ""
+            strSQL = strSQL & "INSERT INTO T_EXL_WORKSTATUS00 VALUES("
+            strSQL = strSQL & " '005' "
+            strSQL = strSQL & ",'" & strinv & "' "
+            strSQL = strSQL & ",'" & bkgno & "' "
+            strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
+            strSQL = strSQL & ")"
+
+
 
         End If
 
@@ -1025,8 +1064,9 @@ Partial Class cs_home
 
 
 
-        strSQL = "SELECT LCLARGD_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLARGD_INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
-
+        'strSQL = "SELECT LCLARGD_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLARGD_INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
+        strSQL = "SELECT INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
+        strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '004' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
