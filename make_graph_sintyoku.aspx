@@ -363,6 +363,7 @@ h2:after{
                                      }
                                  }
                              ],
+
                              yAxes: [                           // Ｙ軸設定
                    {
                        stacked: true, //積み上げ棒グラフにする設定
@@ -381,7 +382,7 @@ h2:after{
                        ticks: {                       // 目盛り
                            min: 0,                        // 最小値
                            //max: 20,                       // 最大値
-                           //stepSize: 5,                   // 軸間隔
+                           stepSize: 100,                   // 軸間隔
                            fontColor: "blue",             // 目盛りの色
                            fontSize: 14                   // フォントサイズ
                        }
