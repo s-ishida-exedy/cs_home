@@ -1,7 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Data
-Imports Microsoft.Office.Interop.Outlook
-Imports Microsoft.Office.Interop
+
 Imports mod_function
 Partial Class cs_home
     Inherits System.Web.UI.Page
@@ -644,53 +643,6 @@ Partial Class cs_home
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
-        Dim strmailtemp As String
-
-        'メール送信ボタン
-        Dim strName, strAdd, strDes As String
-
-        '客先情報取得
-        'Call GET_CustInfo(TextBox1.Text, strName, strAdd, strDes)
-
-        strmailtemp = "各位" & "<br>" & "お世話になっております。" & "<br>" & "<br>" & "更新いたしましたので、ご確認お願いいたします。" & "<br>" & "http://localhost:49375/.%2Flcl_tenkai.aspx" & "<br>" & "<br>" & "＜更新内容＞"
-
-
-        '本文作成
-        Dim strbody As String = strmailtemp & "<br>" & Replace(TextBox1.Text, vbCrLf, "<br>")
-        strbody = strbody & "<br>" & "<br>" & "<br>" & "恐れ入りますが宜しくお願いいたします。"
-
-        strbody = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & strbody & "</font>"
-
-
-        'メール送付
-        Dim app As New Microsoft.Office.Interop.Outlook.Application()
-        Dim Mail As MailItem = app.CreateItem(OlItemType.olMailItem)
-
-        '宛先
-        Mail.To = ""
-
-        'If CheckBox6.Checked = True Then
-        '    Mail.CC = TextBox6.Text
-        'Else
-        '    Mail.CC = ""
-        'End If
-
-        ''BCCのアドレスをDBから取得
-        'Mail.BCC = GET_BccAddress(DropDownList2.SelectedValue.ToString)
-
-        '件名
-        Mail.Subject = "LCL貨物引取・搬入連絡"
-
-        '形式をHTML
-        Mail.BodyFormat = OlBodyFormat.olFormatHTML
-        Mail.HTMLBody = "<HTML><BODY>" & strbody & "</BODY></HTML>"
-
-        'アドレス帳を用いてメールアドレスを名前解決
-        Mail.Recipients.ResolveAll()
-
-
-        'メールを表示
-        Mail.Display()
 
 
 
