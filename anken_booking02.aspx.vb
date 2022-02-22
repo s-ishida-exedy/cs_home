@@ -37,7 +37,11 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
         If e.Row.RowType = DataControlRowType.DataRow Then
-            strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(9).Text) & "' "
+            'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(9).Text) & "' "
+
+            strSQL = "SELECT BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(9).Text) & "' "
+            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '001' "
+
             'ＳＱＬコマンド作成
             dbcmd = New SqlCommand(strSQL, cnn)
             'ＳＱＬ文実行
@@ -265,10 +269,18 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
+        'strSQL = ""
+        'strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
+        'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "' "
+        'strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
+
         strSQL = ""
-        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
-        strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "' "
-        strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
+        strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+
+
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -284,37 +296,59 @@ Partial Class yuusen
         dbcmd.Dispose()
 
         If intCnt > 0 Then
+
+            'strSQL = ""
+            'strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
+            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "', "
+            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
+            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
+            'strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.ITK_INVNO ='" & strinv & "' "
+
             strSQL = ""
-            strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
-            strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "', "
-            strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
-            strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
-            strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.ITK_INVNO ='" & strinv & "' "
+            strSQL = strSQL & "UPDATE T_EXL_WORKSTATUS00 SET "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001', "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.INVNO = '" & strinv & "', "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+            strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.INVNO ='" & strinv & "' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+
+
         Else
+            'strSQL = ""
+            'strSQL = strSQL & "INSERT INTO T_EXL_CSWORKSTATUS VALUES("
+
+            'strSQL = strSQL & " '" & "' "
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+
+            'strSQL = strSQL & ",'" & strinv & "' "
+            'strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
+            'strSQL = strSQL & ",'" & bkgno & "' "
+
+            'strSQL = strSQL & ")"
+
             strSQL = ""
-            strSQL = strSQL & "INSERT INTO T_EXL_CSWORKSTATUS VALUES("
-
-            strSQL = strSQL & " '" & "' "
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-
+            strSQL = strSQL & "INSERT INTO T_EXL_WORKSTATUS00 VALUES("
+            strSQL = strSQL & " '001' "
             strSQL = strSQL & ",'" & strinv & "' "
-            strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
             strSQL = strSQL & ",'" & bkgno & "' "
-
+            strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
             strSQL = strSQL & ")"
+
+
 
         End If
 
@@ -350,10 +384,18 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
+        'strSQL = ""
+        'strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
+        'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "' "
+        'strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
+
         strSQL = ""
-        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
-        strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "' "
-        strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
+        strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+
+
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -369,10 +411,17 @@ Partial Class yuusen
         dbcmd.Dispose()
 
         If intCnt > 0 Then
+            'strSQL = ""
+            'strSQL = strSQL & "DELETE FROM T_EXL_CSWORKSTATUS "
+            'strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.ITK_INVNO ='" & strinv & "' "
+            'strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO ='" & bkgno & "' "
+
             strSQL = ""
-            strSQL = strSQL & "DELETE FROM T_EXL_CSWORKSTATUS "
-            strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.ITK_INVNO ='" & strinv & "' "
-            strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO ='" & bkgno & "' "
+            strSQL = strSQL & "DELETE FROM T_EXL_WORKSTATUS00 "
+            strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.ID = '001' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO ='" & bkgno & "' "
+
 
             Command.CommandText = strSQL
             ' SQLの実行
