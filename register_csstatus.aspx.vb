@@ -268,10 +268,18 @@ Partial Class yuusen
         cnn.Open()
 
 
+        'strSQL = ""
+        'strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
+        'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "' "
+        'strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
+
         strSQL = ""
-        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
-        strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "' "
-        strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
+        strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+
+
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -291,43 +299,62 @@ Partial Class yuusen
 
         If intCnt > 0 Then
 
+            'strSQL = ""
+            'strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
+            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "', "
+            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
+            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
+            'strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.ITK_INVNO ='" & strinv & "' "
+
             strSQL = ""
-            strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
-            strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "', "
-            strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
-            strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
-            strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.ITK_INVNO ='" & strinv & "' "
+            strSQL = strSQL & "UPDATE T_EXL_WORKSTATUS00 SET "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001', "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.INVNO = '" & strinv & "', "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+            strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.INVNO ='" & strinv & "' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+
 
         Else
 
+            'strSQL = ""
+            'strSQL = strSQL & "INSERT INTO T_EXL_CSWORKSTATUS VALUES("
+
+            'strSQL = strSQL & " '" & "' "
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+
+
+
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+
+
+
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+            'strSQL = strSQL & ",'" & " ' "
+
+            'strSQL = strSQL & ",'" & strinv & "' "
+            'strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
+            'strSQL = strSQL & ",'" & bkgno & "' "
+
+            'strSQL = strSQL & ")"
+
             strSQL = ""
-            strSQL = strSQL & "INSERT INTO T_EXL_CSWORKSTATUS VALUES("
-
-            strSQL = strSQL & " '" & "' "
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-
-
-
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-
-
-
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-            strSQL = strSQL & ",'" & " ' "
-
+            strSQL = strSQL & "INSERT INTO T_EXL_WORKSTATUS00 VALUES("
+            strSQL = strSQL & " '001' "
             strSQL = strSQL & ",'" & strinv & "' "
-            strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
             strSQL = strSQL & ",'" & bkgno & "' "
-
+            strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
             strSQL = strSQL & ")"
+
 
         End If
 
@@ -366,13 +393,21 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
+        'strSQL = ""
+        'strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
+        'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '', "
+        'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_REGDATE = '', "
+        'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_BKGNO = '' "
+        'strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.ITK_INVNO ='" & strinv & "' "
+        'strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO ='" & bkgno & "' "
+
         strSQL = ""
-        strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
-        strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '', "
-        strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_REGDATE = '', "
-        strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_BKGNO = '' "
-        strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.ITK_INVNO ='" & strinv & "' "
-        strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO ='" & bkgno & "' "
+        strSQL = strSQL & "DELETE FROM T_EXL_WORKSTATUS00 "
+        strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.ID = '001' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO ='" & strinv & "' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO ='" & bkgno & "' "
+
+
 
         Command.CommandText = strSQL
         ' SQLの実行
@@ -613,9 +648,9 @@ Partial Class yuusen
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
 
-        Dim p As New System.Diagnostics.Process
-        p.StartInfo.FileName = “\\kbhwpm01\exp\登録用_T_EXL_CSWORKSTATUS.xls”
-        p.Start()
+        'Dim p As New System.Diagnostics.Process
+        'p.StartInfo.FileName = “\\kbhwpm01\exp\登録用_T_EXL_CSWORKSTATUS.xls”
+        'p.Start()
 
 
 
