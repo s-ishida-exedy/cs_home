@@ -156,8 +156,8 @@
                 <asp:Label ID="Label1" runat="server" Text="～"></asp:Label>
                 &nbsp;
                 <asp:TextBox ID="TextBox2" runat="server" Width="160px" Height="18px" class="date2" Font-Size="13px"></asp:TextBox>
-                &nbsp;
-                <asp:Button ID="Button3" runat="server" Text="　検　索　" Font-Size="Small" />
+                <asp:Button ID="Button3" runat="server" Text="検　索" Font-Size="Small" Width ="75px" />
+                <asp:Button ID="Button1" runat="server" Text="クリア" Font-Size="Small" Width ="75px" />
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>

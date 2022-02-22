@@ -147,4 +147,18 @@ Partial Class cs_home
         'グリッド表示
         Call Make_Grid(strCode)
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        'クリアボタン押下
+
+        'テキストボックスに月初と月末をセット
+        Dim dtToday As DateTime = DateTime.Today
+        Dim dtFDM As New DateTime(dtToday.Year, dtToday.Month, 1)
+        Dim dtLDM As New DateTime(dtToday.Year, dtToday.Month,
+            DateTime.DaysInMonth(dtToday.Year, dtToday.Month))
+
+        TextBox1.Text = dtFDM
+        TextBox2.Text = dtLDM
+
+    End Sub
 End Class
