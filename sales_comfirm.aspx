@@ -151,13 +151,13 @@
                     <asp:ListItem Value="U">上野</asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;
-                <asp:TextBox ID="TextBox1" runat="server" type="date" Width="160px" Height="18px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
+                <asp:TextBox ID="TextBox1" runat="server" Width="160px" Height="18px" class="date2" Font-Size="13px"></asp:TextBox>
                 &nbsp;
                 <asp:Label ID="Label1" runat="server" Text="～"></asp:Label>
                 &nbsp;
-                <asp:TextBox ID="TextBox2" runat="server" type="date" Width="160px" Height="18px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
-                &nbsp;
-                <asp:Button ID="Button3" runat="server" Text="　検　索　" Font-Size="Small" />
+                <asp:TextBox ID="TextBox2" runat="server" Width="160px" Height="18px" class="date2" Font-Size="13px"></asp:TextBox>
+                <asp:Button ID="Button3" runat="server" Text="検　索" Font-Size="Small" Width ="75px" />
+                <asp:Button ID="Button1" runat="server" Text="クリア" Font-Size="Small" Width ="75px" />
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
@@ -169,13 +169,33 @@
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
             <Columns>
-                <asp:BoundField DataField="BLDATE" HeaderText="BLDATE" ReadOnly="True" SortExpression="BLDATE" />
-                <asp:BoundField DataField="OLD_INVNO" HeaderText="インボイス番号" SortExpression="OLD_INVNO" />
-                <asp:BoundField DataField="CUSTNAME" HeaderText="客先" SortExpression="CUSTNAME" />
-                <asp:BoundField DataField="REGPERSON" HeaderText="登録者CD" SortExpression="REGPERSON" />
-                <asp:BoundField DataField="REGNAME" HeaderText="登録者" SortExpression="REGPERSON" />
-                <asp:BoundField DataField="CUTDATE" HeaderText="カット日" ReadOnly="True" SortExpression="CUTDATE" />
-                <asp:BoundField DataField="ALLOUTSTAMP" HeaderText="一括出力日" SortExpression="ALLOUTSTAMP" />
+                <asp:BoundField DataField="BLDATE" HeaderText="BLDATE" ReadOnly="True" SortExpression="BLDATE" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="OLD_INVNO" HeaderText="IVNO" SortExpression="OLD_INVNO" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="CUSTCODE" HeaderText="客先CD" SortExpression="CUSTCODE" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="CUSTNAME" HeaderText="客先" SortExpression="CUSTNAME" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="SHIPCD" HeaderText="出荷方法" SortExpression="SHIPCD">
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="REGPERSON" HeaderText="登録者CD" SortExpression="REGPERSON" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="REGNAME" HeaderText="登録者" SortExpression="REGPERSON" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="CUTDATE" HeaderText="カット日" ReadOnly="True" SortExpression="CUTDATE" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="ALLOUTSTAMP" HeaderText="一括出力日" SortExpression="ALLOUTSTAMP" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
             </Columns>
             <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
@@ -192,7 +212,15 @@
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:KBHWPA85ConnectionString %>" SelectCommand="SELECT
   FORMAT(T_INV_HD_TB.BLDATE,'yyyy/MM/dd') AS BLDATE
   , T_INV_HD_TB.OLD_INVNO
+  , T_INV_HD_TB.CUSTCODE
   , T_INV_HD_TB.CUSTNAME
+  , CASE T_INV_HD_TB.SHIPCD 
+      WHEN '01' THEN '20ft'
+      WHEN '02' THEN '40ft'
+      WHEN '03' THEN 'CFS'
+      WHEN '05' THEN 'AIR'
+      WHEN '06' THEN 'AIR'
+    END AS SHIPCD
   , T_INV_HD_TB.REGPERSON
   , ''  AS REGNAME
   , FORMAT(T_INV_HD_TB.CUTDATE,'yyyy/MM/dd') AS CUTDATE
@@ -206,6 +234,7 @@ GROUP BY
   , T_INV_HD_TB.OLD_INVNO
   , T_INV_HD_TB.CUSTCODE
   , T_INV_HD_TB.CUSTNAME
+  , T_INV_HD_TB.SHIPCD
   , T_INV_HD_TB.REGPERSON
   , T_INV_HD_TB.CUTDATE
   , T_INV_HD_TB.ALLOUTSTAMP
@@ -213,8 +242,7 @@ GROUP BY
 HAVING
     T_INV_HD_TB.CUSTCODE &lt;&gt; '111' And T_INV_HD_TB.CUSTCODE &lt;&gt; 'A121'
     AND T_INV_HD_TB.SALESFLG Is Null
-ORDER BY  T_INV_HD_TB.BLDATE;
-"></asp:SqlDataSource>
+ORDER BY  T_INV_HD_TB.BLDATE"></asp:SqlDataSource>
 
 </div>
 <!--/#contents2-->
