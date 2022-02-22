@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>ポータルサイト(AIR専用オーダー確認)</title>
+<title>ポータルサイト(AIR専用客先オーダー確認)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -121,7 +121,32 @@
             width: 360px;
             padding: 10px
         }
-</style>
+        .tab1 {
+            border-collapse:collapse;
+            border-spacing:0px;
+            border:1px solid #000000;
+            width:350px;
+        }
+
+        .td1{
+            border:1px solid #000000;
+            width:190px;
+            text-align:center;
+        }
+        .td2{
+            border:1px solid #000000;
+            width:90px;
+            text-align:center;
+        }
+        .td3{
+            border:1px solid #000000;
+            width:70px;
+            text-align:center;
+        }
+        .err{
+            color:red;
+            font-weight :700;
+        }</style>
 <script>
     // カレンダー
     jQuery(function ($) {
@@ -159,7 +184,7 @@
 </script>
 </head>
 <body class="c2">
-<form id="form1" runat="server">
+<form id="form1" runat="server" autocomplete="off">
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.htmlで行う -->
@@ -169,10 +194,10 @@
     <table class="header-ta" >
         <tr>
             <td class="first-cell">
-                <h2>AIR専用オーダー確認</h2>  
+                <h2>AIR専用客先オーダー確認</h2>  
             </td>
             <td class="second-cell">
-                <asp:Button ID="Button2" runat="server" Text="チェックした案件をまとめて更新" width="250px" Font-Size="Small" />&nbsp;
+                <asp:Label ID="Label12" runat="server" Text="" Class="err"></asp:Label>&nbsp;
                 <asp:CheckBox ID="CheckBox2" runat="server" text="IVNOが割り振られていない案件のみ表示" Font-Size="Small" AutoPostBack="true"  />
             </td>
             <td class="third-cell">
@@ -253,9 +278,138 @@ ORDER BY NOUKI"></asp:SqlDataSource>
 </tbody>
 </table>
 <div class="right">
-    <asp:Label ID="Label1" runat="server" Text="更新対象："></asp:Label>
-      <asp:Table ID="Table1" runat="server" BorderColor="#3333CC" BorderWidth="1px" GridLines="Both">
-      </asp:Table>
+    <asp:Label ID="Label13" runat="server" Text="更新者："></asp:Label>&nbsp;
+    <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="NAME_AB" DataValueField="NAME_AB" Width="170px" ></asp:DropDownList>
+    <asp:Label ID="Label1" runat="server" Text="更新対象："></asp:Label>&nbsp;
+    <asp:Button ID="Button1" runat="server" Text="まとめて更新" width="200px" Font-Size="Small" />
+    <table class="tab1">
+        <tr>
+            <th>受注管理番号</th>
+            <th>IVNO</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td class ="td1">
+                <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td2">
+                <asp:TextBox ID="TextBox2" runat="server" Width ="60px"></asp:TextBox>
+            </td>
+            <td class ="td3">
+                <asp:Button ID="Button2" runat="server" Text="削" Width ="30px" />
+            </td>
+        </tr>
+        <tr>
+            <td class ="td1">
+                <asp:Label ID="Label3" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td2">
+                <asp:TextBox ID="TextBox3" runat="server" Width ="60px"></asp:TextBox>
+            </td>
+            <td class ="td3">
+                <asp:Button ID="Button3" runat="server" Text="削" Width ="30px" />
+            </td>
+        </tr>
+        <tr>
+            <td class ="td1">
+                <asp:Label ID="Label4" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td2">
+                <asp:TextBox ID="TextBox4" runat="server" Width ="60px"></asp:TextBox>
+            </td>
+            <td class ="td3">
+                <asp:Button ID="Button4" runat="server" Text="削" Width ="30px" />
+            </td>
+        </tr>
+        <tr>
+            <td class ="td1">
+                <asp:Label ID="Label5" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td2">
+                <asp:TextBox ID="TextBox5" runat="server" Width ="60px"></asp:TextBox>
+            </td>
+            <td class ="td3">
+                <asp:Button ID="Button5" runat="server" Text="削" Width ="30px" />
+            </td>
+        </tr>
+        <tr>
+            <td class ="td1">
+                <asp:Label ID="Label6" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td2">
+                <asp:TextBox ID="TextBox6" runat="server" Width ="60px"></asp:TextBox>
+            </td>
+            <td class ="td3">
+                <asp:Button ID="Button6" runat="server" Text="削" Width ="30px" />
+            </td>
+        </tr>
+        <tr>
+            <td class ="td1">
+                <asp:Label ID="Label7" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td2">
+                <asp:TextBox ID="TextBox7" runat="server" Width ="60px"></asp:TextBox>
+            </td>
+            <td class ="td3">
+                <asp:Button ID="Button7" runat="server" Text="削" Width ="30px" />
+            </td>
+        </tr>
+        <tr>
+            <td class ="td1">
+                <asp:Label ID="Label8" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td2">
+                <asp:TextBox ID="TextBox8" runat="server" Width ="60px"></asp:TextBox>
+            </td>
+            <td class ="td3">
+                <asp:Button ID="Button8" runat="server" Text="削" Width ="30px" />
+            </td>
+        </tr>
+        <tr>
+            <td class ="td1">
+                <asp:Label ID="Label9" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td2">
+                <asp:TextBox ID="TextBox9" runat="server" Width ="60px"></asp:TextBox>
+            </td>
+            <td class ="td3">
+                <asp:Button ID="Button9" runat="server" Text="削" Width ="30px" />
+            </td>
+        </tr>
+        <tr>
+            <td class ="td1">
+                <asp:Label ID="Label10" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td2">
+                <asp:TextBox ID="TextBox10" runat="server" Width ="60px"></asp:TextBox>
+            </td>
+            <td class ="td3">
+                <asp:Button ID="Button10" runat="server" Text="削" Width ="30px" />
+            </td>
+        </tr>
+        <tr>
+            <td class ="td1">
+                <asp:Label ID="Label11" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td2">
+                <asp:TextBox ID="TextBox11" runat="server" Width ="60px"></asp:TextBox>
+            </td>
+            <td class ="td3">
+                <asp:Button ID="Button11" runat="server" Text="削" Width ="30px" />
+            </td>
+        </tr>
+    </table>
+
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT *
+FROM M_EXL_CS_MEMBER
+WHERE PLACE LIKE '%H%'
+AND CODE LIKE 'T%'
+UNION
+SELECT *
+FROM M_EXL_CS_MEMBER
+WHERE PLACE LIKE '%H%'
+AND CODE LIKE 'E%'"></asp:SqlDataSource>
+
 </div>
 
 </div>
@@ -267,7 +421,8 @@ ORDER BY NOUKI"></asp:SqlDataSource>
 <!--/#contents2-->
 
 <!--ページの上部に戻る「↑」ボタン-->
-<p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
+<p class="nav-fix-pos-pagetop"><a href="#">↑</a>
+</p>
 
 </form>
 

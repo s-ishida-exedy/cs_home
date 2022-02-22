@@ -6,32 +6,27 @@ Imports System.IO
 Partial Class cs_home
     Inherits System.Web.UI.Page
 
-    Public strRow As String
-    Public strProcess As String
+    Public strOdrCtrl As String
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim TableRow As TableRow
-        Dim TableCell As TableCell
+
+        Label12.Text = ""
 
         If IsPostBack Then
             ' そうでない時処理
             Dim i As String = ""
         Else
+            Me.DropDownList1.Items.Insert(0, "-select-") '先頭にタイトル行追加
+
             'AIR専用客先のセールスノート情報取得
             Call Get_SN_Data()
 
-            TableRow = New TableRow()
-            TableCell = New TableCell()
-            TableCell.Text = "セル"
-            TableRow.Cells.Add(TableCell)
-            TableCell = New TableCell()
-            TableCell.Text = "セル1"
-            TableRow.Cells.Add(TableCell)
-            Table1.Rows.Add(TableRow)
+            '表示データ取得
+            Call Make_Grid()
         End If
 
-        '表示データ取得
-        Call Make_Grid()
+        Button1.Attributes.Add("onclick", "return confirm('登録します。よろしいですか？');")
+
     End Sub
 
     Private Sub Make_Grid()
@@ -249,9 +244,256 @@ Partial Class cs_home
             Dim data1 = Me.GridView1.Rows(index).Cells(6).Text
             Dim data2 = Me.GridView1.Rows(index).Cells(7).Text
 
+            If data2 = "&nbsp;" Then
+                data2 = ""
+            End If
 
-
+            If Label2.Text = "" Then
+                Label2.Text = data1
+                TextBox2.Text = data2
+            ElseIf Label3.Text = "" Then
+                Label3.Text = data1
+                TextBox3.Text = data2
+            ElseIf Label4.Text = "" Then
+                Label4.Text = data1
+                TextBox4.Text = data2
+            ElseIf Label5.Text = "" Then
+                Label5.Text = data1
+                TextBox5.Text = data2
+            ElseIf Label6.Text = "" Then
+                Label6.Text = data1
+                TextBox6.Text = data2
+            ElseIf Label7.Text = "" Then
+                Label7.Text = data1
+                TextBox7.Text = data2
+            ElseIf Label8.Text = "" Then
+                Label8.Text = data1
+                TextBox8.Text = data2
+            ElseIf Label9.Text = "" Then
+                Label9.Text = data1
+                TextBox9.Text = data2
+            ElseIf Label10.Text = "" Then
+                Label10.Text = data1
+                TextBox10.Text = data2
+            ElseIf Label11.Text = "" Then
+                Label11.Text = data1
+                TextBox11.Text = data2
+            End If
         End If
 
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        '更新ボタン
+
+        '入力チェック
+        If Chk_IVNO() = False Then
+            Return
+        End If
+
+        strOdrCtrl = ""
+
+        If Label2.Text <> "" Then
+            Call INS_DATA(Label2.Text, TextBox2.Text)       '登録または更新
+        End If
+        If Label3.Text <> "" Then
+            Call INS_DATA(Label3.Text, TextBox3.Text)
+        End If
+        If Label4.Text <> "" Then
+            Call INS_DATA(Label4.Text, TextBox4.Text)
+        End If
+        If Label5.Text <> "" Then
+            Call INS_DATA(Label5.Text, TextBox5.Text)
+        End If
+        If Label6.Text <> "" Then
+            Call INS_DATA(Label6.Text, TextBox6.Text)
+        End If
+        If Label7.Text <> "" Then
+            Call INS_DATA(Label7.Text, TextBox7.Text)
+        End If
+        If Label8.Text <> "" Then
+            Call INS_DATA(Label8.Text, TextBox8.Text)
+        End If
+        If Label9.Text <> "" Then
+            Call INS_DATA(Label9.Text, TextBox9.Text)
+        End If
+        If Label10.Text <> "" Then
+            Call INS_DATA(Label10.Text, TextBox10.Text)
+        End If
+        If Label11.Text <> "" Then
+            Call INS_DATA(Label11.Text, TextBox11.Text)
+        End If
+
+        If strOdrCtrl <> "" Then
+            '新規登録があった場合、EXL担当者にメール送信
+            Session("strOdrCtrl") = Mid(strOdrCtrl, 1, Len(strOdrCtrl) - 1)
+            Session("strTan") = DropDownList1.SelectedValue
+            Response.Redirect("./air_exc_comfirm.aspx")
+        Else
+            '新規登録以外は、再表示
+            Label12.Text = "更新しました。"
+
+            Label2.Text = ""
+            Label3.Text = ""
+            Label4.Text = ""
+            Label5.Text = ""
+            Label6.Text = ""
+            Label7.Text = ""
+            Label8.Text = ""
+            Label9.Text = ""
+            Label10.Text = ""
+            Label11.Text = ""
+            TextBox2.Text = ""
+            TextBox3.Text = ""
+            TextBox4.Text = ""
+            TextBox5.Text = ""
+            TextBox6.Text = ""
+            TextBox7.Text = ""
+            TextBox8.Text = ""
+            TextBox9.Text = ""
+            TextBox10.Text = ""
+            TextBox11.Text = ""
+
+            '表示データ取得
+            Call Make_Grid()
+        End If
+
+    End Sub
+
+    Private Sub INS_DATA(strCtrl As String, strIVNO As String)
+        '既存データの削除
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim intRec As Integer = 0
+
+        'SQL Server認証
+        Dim ConnectionString As String = String.Empty
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_AIR_EXCLUSIVE "
+        strSQL = strSQL & "WHERE ODR_CTL_NO = '" & strCtrl & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            intRec = dataread("RecCnt")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        If intRec > 0 Then
+            '既に存在している場合
+            If strIVNO <> "" Then
+                'IVNOが入っている場合、UPDATE
+                strSQL = ""
+                strSQL = strSQL & "UPDATE T_EXL_AIR_EXCLUSIVE "
+                strSQL = strSQL & "SET IVNO = '" & strIVNO & "' "
+                strSQL = strSQL & "WHERE ODR_CTL_NO = '" & strCtrl & "' "
+            Else
+                strSQL = ""
+                strSQL = strSQL & "DELETE FROM T_EXL_AIR_EXCLUSIVE "
+                strSQL = strSQL & "WHERE ODR_CTL_NO = '" & strCtrl & "' "
+            End If
+
+        Else
+            '存在し無い場合、INSERT
+            strSQL = ""
+            strSQL = strSQL & "INSERT INTO T_EXL_AIR_EXCLUSIVE "
+            strSQL = strSQL & "VALUES('" & strCtrl & "' "
+            strSQL = strSQL & ",'" & strIVNO & "' "
+            strSQL = strSQL & ")"
+
+            strOdrCtrl += "'" & strCtrl & "',"
+        End If
+
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+        'クローズ処理 
+        cnn.Close()
+        cnn.Dispose()
+    End Sub
+
+    Private Function Chk_IVNO() As Boolean
+        '入力チェック
+
+        Chk_IVNO = True
+
+        If Label2.Text = "" And Label3.Text = "" And Label4.Text = "" And Label5.Text = "" And
+           Label6.Text = "" And Label7.Text = "" And Label8.Text = "" And Label9.Text = "" And
+           Label10.Text = "" And Label11.Text = "" Then
+            Label12.Text = "更新対象がありません。"
+            Chk_IVNO = False
+        End If
+
+        If DropDownList1.SelectedValue = "" Then
+            Label12.Text = "更新者が選択されていません。"
+            Chk_IVNO = False
+        End If
+
+    End Function
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Label2.Text = ""
+        TextBox2.Text = ""
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Label3.Text = ""
+        TextBox3.Text = ""
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Label4.Text = ""
+        TextBox4.Text = ""
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Label5.Text = ""
+        TextBox5.Text = ""
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Label6.Text = ""
+        TextBox6.Text = ""
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Label7.Text = ""
+        TextBox7.Text = ""
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Label8.Text = ""
+        TextBox8.Text = ""
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        Label9.Text = ""
+        TextBox9.Text = ""
+    End Sub
+
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        Label10.Text = ""
+        TextBox10.Text = ""
+    End Sub
+
+    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+        Label11.Text = ""
+        TextBox11.Text = ""
+    End Sub
+
 End Class
