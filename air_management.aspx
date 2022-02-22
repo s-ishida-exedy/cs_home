@@ -21,13 +21,13 @@
         .first-cell {
             text-align:left;
             font-size:25px;
-            width: 250px;
+            width: 220px;
         }
         .second-cell {
-            width: 950px;
+            width: 1010px;
         }   
         .third-cell {
-            width: 150px;
+            width: 120px;
             text-align:right;
         }
         .third-cell a {
@@ -166,7 +166,8 @@
                 <asp:DropDownList ID="DropDownList8" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource9" DataTextField="IVNO" DataValueField="IVNO" AutoPostBack="True"></asp:DropDownList>
                 <asp:Button ID="Button2" runat="server" Text=" ﾘｾｯﾄ " Font-Size="Small" Width ="80" />
                 <asp:CheckBox ID="CheckBox1" runat="server" Text =" 集荷済みも表示する"  AutoPostBack="True"/>&nbsp;
-                <asp:Button ID="Button4" runat="server" Text="新規登録" Font-Size="Small" Width="150px" />
+                <asp:Button ID="Button4" runat="server" Text="新規登録" Font-Size="Small" Width="120px" />
+                <asp:Button ID="Button5" runat="server" Text="前月分ﾀﾞｳﾝﾛｰﾄﾞ" Font-Size="Small" Width="120px" />
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
@@ -227,26 +228,26 @@
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="REQUESTER" HeaderText="依頼者" SortExpression="REQUESTER" >
-                <HeaderStyle Width="100px" />
+                <HeaderStyle Width="90px" />
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="DEPARTMENT" HeaderText="部署" SortExpression="DEPARTMENT" >
-                <HeaderStyle Width="200px" />
+                <HeaderStyle Width="180px" />
                 </asp:BoundField>
                 <asp:BoundField DataField="AUTHOR" HeaderText="作成者" SortExpression="AUTHOR" >
                 <HeaderStyle Width="70px" />
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
-                <asp:BoundField DataField="DOC_FIN" HeaderText="書類作成" SortExpression="DOC_FIN" >
-                <HeaderStyle Width="100px" />
+                <asp:BoundField DataField="DOC_FIN" HeaderText="書類" SortExpression="DOC_FIN" >
+                <HeaderStyle Width="50px" />
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="SHIPPING_COMPANY" HeaderText="海貨業者" SortExpression="SHIPPING_COMPANY" >
-                <HeaderStyle Width="100px" />
+                <HeaderStyle Width="90px" />
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="PICKUP" HeaderText="集荷" SortExpression="PICKUP" >
-                <HeaderStyle Width="100px" />
+                <HeaderStyle Width="50px" />
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="PLACE" HeaderText="場所" SortExpression="PLACE" >
@@ -263,7 +264,27 @@
         </asp:GridView>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" 
-            SelectCommand="SELECT REQUESTED_DATE, CREATED_DATE, ETD, CUST_CD, IVNO, REQUESTER, DEPARTMENT, AUTHOR, DOC_FIN, SHIPPING_COMPANY, PICKUP, PLACE, REMARKS FROM T_EXL_AIR_MANAGE WHERE PICKUP = ''  ORDER BY ETD" CancelSelectOnNullParameter="False">
+            SelectCommand="SELECT
+  REQUESTED_DATE
+  , CREATED_DATE
+  , ETD
+  , CUST_CD
+  , IVNO
+  , REQUESTER
+  , DEPARTMENT
+  , AUTHOR
+  , CASE DOC_FIN WHEN '作成済み' THEN '済' END AS DOC_FIN
+  , SHIPPING_COMPANY
+  , CASE PICKUP WHEN '集荷済み' THEN '済' END AS PICKUP
+  , PLACE
+  , REMARKS 
+FROM
+  T_EXL_AIR_MANAGE 
+WHERE
+  PICKUP = '' 
+ORDER BY
+  ETD
+" CancelSelectOnNullParameter="False">
         </asp:SqlDataSource>
 
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [ETD] FROM [T_EXL_AIR_MANAGE] WHERE  PICKUP = '' ORDER BY [ETD]"></asp:SqlDataSource>

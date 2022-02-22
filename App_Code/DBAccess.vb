@@ -391,15 +391,21 @@ Public Class DBAccess
         StrSQL = ""
         Select Case strMode
             Case 0
-                StrSQL = StrSQL & "SELECT * "
+                StrSQL = StrSQL & "SELECT  "
+                StrSQL = StrSQL & " REQUESTED_DATE  , CREATED_DATE, ETD, CUST_CD "
+                StrSQL = StrSQL & ", IVNO  , REQUESTER  , DEPARTMENT  , AUTHOR "
+                StrSQL = StrSQL & ", CASE DOC_FIN WHEN '作成済み' THEN '済' END AS DOC_FIN "
+                StrSQL = StrSQL & ", SHIPPING_COMPANY "
+                StrSQL = StrSQL & ", CASE PICKUP WHEN '集荷済み' THEN '済' END AS PICKUP "
+                StrSQL = StrSQL & ", PLACE  , REMARKS  "
             Case 1
-                StrSQL = StrSQL & "SELECT DISTINCT ETD "
+                StrSQL = StrSQL & "Select DISTINCT ETD "
             Case 2
-                StrSQL = StrSQL & "SELECT DISTINCT CUST_CD "
+                StrSQL = StrSQL & "Select DISTINCT CUST_CD "
             Case 3
-                StrSQL = StrSQL & "SELECT DISTINCT REQUESTER "
+                StrSQL = StrSQL & "Select DISTINCT REQUESTER "
             Case 4
-                StrSQL = StrSQL & "SELECT DISTINCT IVNO "
+                StrSQL = StrSQL & "Select DISTINCT IVNO "
         End Select
         StrSQL = StrSQL & "FROM T_EXL_AIR_MANAGE "
         If intCnt = 0 And strChk = "0" Then    '全件で無い場合(デフォルト)         
