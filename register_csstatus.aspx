@@ -309,7 +309,7 @@ border: none;
 
 <td style="width:200px;Font-Size:15px;" >
 
-<asp:DropDownList ID="DropDownList1" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="ITK_INVNO" DataValueField="ITK_INVNO" AppendDataBoundItems="true">
+<asp:DropDownList ID="DropDownList1" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="INVNO" DataValueField="INVNO" AppendDataBoundItems="true">
 
 <asp:ListItem Text="Please select" Value="" />
 </asp:DropDownList>
@@ -509,7 +509,7 @@ border: none;
 <a href="#">↑</a></p>   
 
 
-<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [ITK_INVNO] FROM [T_EXL_CSWORKSTATUS] WHERE ITK_INVNO <>'' AND ITK_REGDATE > GETDATE()-60 ORDER BY [ITK_INVNO] "></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [INVNO] FROM [T_EXL_WORKSTATUS00 ] WHERE INVNO <>'' AND REGDATE  > GETDATE()-60 AND ID='001' ORDER BY [INVNO] "></asp:SqlDataSource>
 <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CUST_CD] FROM [T_EXL_ITAKU] WHERE CUST_CD <>'' ORDER BY CUST_CD "></asp:SqlDataSource>
 <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [FORWARDER] FROM [T_EXL_ITAKU] WHERE FORWARDER <>'' ORDER BY [FORWARDER] "></asp:SqlDataSource>
 <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT left([CUST_CD],4) AS C FROM [T_BOOKING] ORDER BY C" ></asp:SqlDataSource>
