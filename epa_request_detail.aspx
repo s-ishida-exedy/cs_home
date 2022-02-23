@@ -153,8 +153,8 @@
                 <h2>EPA発給申請管理明細</h2>  
             </td>
             <td class="second-cell">
-                <asp:Button ID="Button7" runat="server" Text="　更　新　" style="width:164px" Font-Size="Small" />&nbsp;
-                <asp:Button ID="Button8" runat="server" Text="　削　除　" style="width:164px" Font-Size="Small" />&nbsp;
+                <asp:Button ID="Button7" runat="server" Text="更　新" style="width:120px" Font-Size="Small" />&nbsp;
+                <asp:Button ID="Button8" runat="server" Text="削　除" style="width:120px" Font-Size="Small" />&nbsp;
                 <asp:Label ID="Label3" runat="server" Text="Label" Class="err"></asp:Label>
             </td>
             <td class="third-cell">
