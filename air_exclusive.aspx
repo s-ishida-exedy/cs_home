@@ -279,7 +279,7 @@ ORDER BY NOUKI"></asp:SqlDataSource>
 </table>
 <div class="right">
     <asp:Label ID="Label13" runat="server" Text="更新者："></asp:Label>&nbsp;
-    <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="NAME_AB" DataValueField="NAME_AB" Width="170px" ></asp:DropDownList>
+    <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="NAME_AB" DataValueField="NAME_AB" Width="170px" ></asp:DropDownList><br />
     <asp:Label ID="Label1" runat="server" Text="更新対象："></asp:Label>&nbsp;
     <asp:Button ID="Button1" runat="server" Text="まとめて更新" width="200px" Font-Size="Small" />
     <table class="tab1">
