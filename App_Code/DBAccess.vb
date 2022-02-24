@@ -500,4 +500,52 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
+    Public Function GET_RESULT_CS(strCode As String, strPlace As String, strName As String) As DataSet
+        'CSメンバーマスタ取得
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  CODE "
+        StrSQL = StrSQL & "  , MEMBER_NAME "
+        StrSQL = StrSQL & "  , NAME_AB "
+        StrSQL = StrSQL & "  , CASE PLACE "
+        StrSQL = StrSQL & "    WHEN 'H' THEN '本社'  "
+        StrSQL = StrSQL & "    WHEN 'U' THEN '上野'  "
+        StrSQL = StrSQL & "    WHEN 'HU' THEN '本社'  "
+        StrSQL = StrSQL & "    END AS PLACE "
+        StrSQL = StrSQL & "  , COMPANY "
+        StrSQL = StrSQL & "  , TEAM "
+        StrSQL = StrSQL & "  , TEL_NO "
+        StrSQL = StrSQL & "  , FAX_NO "
+        StrSQL = StrSQL & "  , E_MAIL  "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "  (SELECT *  "
+        StrSQL = StrSQL & "    FROM  M_EXL_CS_MEMBER  "
+        StrSQL = StrSQL & "    WHERE "
+        StrSQL = StrSQL & "      CODE LIKE 'T%'  "
+        StrSQL = StrSQL & "    UNION  "
+        StrSQL = StrSQL & "   SELECT *  "
+        StrSQL = StrSQL & "    FROM  M_EXL_CS_MEMBER  "
+        StrSQL = StrSQL & "    WHERE "
+        StrSQL = StrSQL & "      CODE LIKE 'E%'  ) A  "
+        StrSQL = StrSQL & "WHERE "
+        StrSQL = StrSQL & "  CODE LIKE '%" & strCode & "%'  "
+        If strPlace <> "" Then
+            StrSQL = StrSQL & "  AND PLACE LIKE '%" & strPlace & "%'  "
+        End If
+        If strName <> "" Then
+            StrSQL = StrSQL & "  AND MEMBER_NAME LIKE '%" & strName & "%'  "
+        End If
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class

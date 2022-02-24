@@ -1,11 +1,11 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="epa_request_detail.aspx.vb" Inherits="cs_home" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="m_cs_member_detail.aspx.vb" Inherits="cs_home" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>ポータルサイト(EPA申請状況)</title>
+<title>ポータルサイト(CSﾒﾝﾊﾞｰﾏｽﾀ詳細)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -14,11 +14,6 @@
 <script src="js/ddmenu_min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="js/default.js"></script>
-<%--Datepicker用--%>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<%--Datepicker用--%>
 <style type="text/css">
         .header-ta {
             width: 1300px;
@@ -102,15 +97,18 @@
             color:red;
             font-weight :700;
         }
+        .txtb{
+            width:300px;
+            padding: 5px;
+            font-size :small ;
+        }
+        .cmb{
+            width:315px;
+            padding: 5px;
+            font-size :small ;
+        }
 </style>
 <script>
-    // カレンダー
-    jQuery(function ($) {
-        $(".date2").datepicker({
-            dateFormat: 'yy/mm/dd',
-            showButtonPanel: true
-        });
-    });
     $(document).ready(function () {
         var text = getParam('id');
         $('.result').text(text);
@@ -150,112 +148,78 @@
     <table class="header-ta" >
         <tr>
             <td class="first-cell">
-                <h2>EPA発給申請管理明細</h2>  
+                <h2>CSメンバーマスタ詳細</h2>  
             </td>
             <td class="second-cell">
+                <asp:Button ID="Button1" runat="server" Text="登　録" style="width:120px" Font-Size="Small" />&nbsp;
                 <asp:Button ID="Button7" runat="server" Text="更　新" style="width:120px" Font-Size="Small" />&nbsp;
                 <asp:Button ID="Button8" runat="server" Text="削　除" style="width:120px" Font-Size="Small" />&nbsp;
                 <asp:Label ID="Label3" runat="server" Text="Label" Class="err"></asp:Label>
             </td>
             <td class="third-cell">
-                <a href="./epa_request.aspx">一覧に戻る</a>
+                <a href="./m_cs_member.aspx">一覧に戻る</a>
             </td>
         </tr>
     </table>
-<div id="main2" style="width:100%; height:500px;border:None;">
+<div id="main2" style="width:100%; height:450px;border:None;">
         <table class="ta3">
             <tr>
-                <th>ステータス</th>
+                <th>社員番号</th>
                 <td>
-                    <asp:DropDownList ID="DropDownList1" runat="server" style="width:195px">
-                        <asp:ListItem Value="01">未</asp:ListItem>
-                        <asp:ListItem Value="02">済</asp:ListItem>
-                        <asp:ListItem Value="03">対象ﾅｼ</asp:ListItem>
-                        <asp:ListItem Value="04">ｷｬﾝｾﾙ</asp:ListItem>
-                        <asp:ListItem Value="09">再発給</asp:ListItem>
-                    </asp:DropDownList>
+                    <asp:Label ID="Label1" runat="server" Text="Label" style="width:195px"></asp:Label>
+                    <asp:TextBox ID="TextBox1" runat="server" style="width:300px"></asp:TextBox>
                 </td>
-                <th>ETD</th>
+                <th>社員名</th>
                 <td>
-                    <asp:Label ID="Label1" runat="server" Text="Label" style="width:164px"></asp:Label>
-                </td>
-                <th>IV</th>
-                <td>
-                    <asp:Label ID="Label2" runat="server" Text="Label" style="width:164px"></asp:Label>
+                    <asp:TextBox ID="TextBox2" runat="server" class="txtb"></asp:TextBox>
                 </td>
             </tr>
             <tr>
-                <th>客先</th>
+                <th>略称</th>
                 <td>
-                    <asp:Label ID="Label4" runat="server" Text="Label" style="width:164px"></asp:Label>
+                    <asp:TextBox ID="TextBox3" runat="server" class="txtb"></asp:TextBox>
                 </td>
-                <th>客先ｺｰﾄﾞ</th>
+                <th>場所</th>
                 <td>
-                    <asp:Label ID="Label5" runat="server" Text="Label" style="width:164px"></asp:Label>
-                </td>
-                <th>売上確定</th>
-                <td>
-                    <asp:Label ID="Label6" runat="server" Text="Label" style="width:164px"></asp:Label>
+                    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="PLACE" DataValueField="PLACE" class="cmb"></asp:DropDownList>
                 </td>
             </tr>
+            <tr>
+                <th>会社名</th>
+                <td>
+                    <asp:TextBox ID="TextBox4" runat="server" class="txtb"></asp:TextBox>
+                </td>
+                <th>チーム</th>
+                <td>
+                    <asp:TextBox ID="TextBox5" runat="server" class="txtb"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <th>TEL</th>
+                <td>
+                    <asp:TextBox ID="TextBox6" runat="server" class="txtb"></asp:TextBox>
+                </td>
+                <th>FAX</th>
+                <td>
+                    <asp:TextBox ID="TextBox7" runat="server" class="txtb"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <th>EMAIL</th>
+                <td>
+                    <asp:TextBox ID="TextBox8" runat="server" class="txtb"></asp:TextBox>
+                </td>
+            </tr>
+
         </table>
-        <table class="ta3">
-            <tr>
-                <th>船名</th>
-                <td>
-                    <asp:TextBox ID="TextBox1" runat="server" style="width:195px"></asp:TextBox>
-                </td>
-                <th>ETA</th>
-                <td>
-                    <asp:TextBox ID="TextBox2" runat="server" style="width:195px" class="date2"></asp:TextBox>
-                </td>
-                <th>ｶｯﾄ日</th>
-                <td>
-                    <asp:TextBox ID="TextBox3" runat="server" style="width:195px" class="date2"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <th>VoyNO</th>
-                <td>
-                    <asp:TextBox ID="TextBox4" runat="server" style="width:195px"></asp:TextBox>
-                </td>
-                <th>受付番号</th>
-                <td>
-                    <asp:TextBox ID="TextBox5" runat="server" style="width:195px"></asp:TextBox>
-                </td>
-                <th>IVNO(Full)</th>
-                <td>
-                    <asp:TextBox ID="TextBox6" runat="server" style="width:195px"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <th>申請日</th>
-                <td>
-                    <asp:TextBox ID="TextBox7" runat="server" style="width:195px" class="date2"></asp:TextBox>
-                </td>
-                <th>送付依頼日</th>
-                <td>
-                    <asp:TextBox ID="TextBox8" runat="server" style="width:195px" class="date2"></asp:TextBox>
-                </td>
-                <th>受領日</th>
-                <td>
-                    <asp:TextBox ID="TextBox9" runat="server" style="width:195px" class="date2"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <th>EPA送付日</th>
-                <td>
-                    <asp:TextBox ID="TextBox10" runat="server" style="width:195px" class="date2"></asp:TextBox>
-                </td>
-                <th>TRK#</th>
-                <td>
-                    <asp:TextBox ID="TextBox11" runat="server" style="width:195px"></asp:TextBox>
-                </td>
-                <th></th>
-                <td>
-               </td>
-            </tr>
-        </table>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT
+   CASE PLACE
+      WHEN 'H' THEN '本社'
+      WHEN 'U' THEN '上野'
+      WHEN 'HU' THEN '本社'
+	END AS PLACE
+FROM M_EXL_CS_MEMBER
+ORDER BY PLACE DESC"></asp:SqlDataSource>
 </div>
 <!--/#main2-->
 

@@ -239,38 +239,38 @@ AND CODE LIKE 'E%'"></asp:SqlDataSource>
 <table class="topic">
     <tbody>
         <tr>
-            <th class="txtth"><asp:Label ID="Label1" runat="server" Text="Label"></asp:Label></th>
-            <th class="txtth"><asp:Label ID="Label6" runat="server" Text="Label"></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label1" runat="server" Text=""></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label6" runat="server" Text=""></asp:Label></th>
             <td data-label="内容" class="txt">
-                <asp:LinkButton ID="LinkButton1" runat="server" class="lnk">LinkButton</asp:LinkButton>
+                <asp:LinkButton ID="LinkButton1" runat="server" class="lnk"></asp:LinkButton>
             </td>
         </tr>
         <tr>
-            <th class="txtth"><asp:Label ID="Label2" runat="server" Text="Label"></asp:Label></th>
-            <th class="txtth"><asp:Label ID="Label7" runat="server" Text="Label"></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label2" runat="server" Text=""></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label7" runat="server" Text=""></asp:Label></th>
             <td data-label="内容" class="txt">
-                <asp:LinkButton ID="LinkButton2" runat="server" class="lnk">LinkButton</asp:LinkButton>
+                <asp:LinkButton ID="LinkButton2" runat="server" class="lnk"></asp:LinkButton>
             </td>
         </tr>
         <tr>
-            <th class="txtth"><asp:Label ID="Label3" runat="server" Text="Label"></asp:Label></th>
-            <th class="txtth"><asp:Label ID="Label8" runat="server" Text="Label"></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label3" runat="server" Text=""></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label8" runat="server" Text=""></asp:Label></th>
             <td data-label="内容" class="txt">
-                <asp:LinkButton ID="LinkButton3" runat="server" class="lnk">LinkButton</asp:LinkButton>
+                <asp:LinkButton ID="LinkButton3" runat="server" class="lnk"></asp:LinkButton>
             </td>
         </tr>
         <tr>
-            <th class="txtth"><asp:Label ID="Label4" runat="server" Text="Label"></asp:Label></th>
-            <th class="txtth"><asp:Label ID="Label9" runat="server" Text="Label"></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label4" runat="server" Text=""></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label9" runat="server" Text=""></asp:Label></th>
             <td data-label="内容" class="txt">
-                <asp:LinkButton ID="LinkButton4" runat="server" class="lnk">LinkButton</asp:LinkButton>
+                <asp:LinkButton ID="LinkButton4" runat="server" class="lnk"></asp:LinkButton>
             </td>
         </tr>
         <tr>
-            <th class="txtth"><asp:Label ID="Label5" runat="server" Text="Label"></asp:Label></th>
-            <th class="txtth"><asp:Label ID="Label10" runat="server" Text="Label"></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label5" runat="server" Text=""></asp:Label></th>
+            <th class="txtth"><asp:Label ID="Label10" runat="server" Text=""></asp:Label></th>
             <td data-label="内容" class="txt">
-                <asp:LinkButton ID="LinkButton5" runat="server" class="lnk">LinkButton</asp:LinkButton>
+                <asp:LinkButton ID="LinkButton5" runat="server" class="lnk"></asp:LinkButton>
             </td>
         </tr>
     </tbody>

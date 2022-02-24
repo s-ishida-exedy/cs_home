@@ -150,22 +150,26 @@
                     <ItemTemplate>
                         <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="edt" Text="編集" />
                     </ItemTemplate>
-                    <HeaderStyle HorizontalAlign="Center" Width="60px" />
+                    <HeaderStyle HorizontalAlign="Center" Width="50px" />
                     <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
                 <asp:BoundField DataField="INFO_NO" HeaderText="INFO_NO" SortExpression="INFO_NO" InsertVisible="False" ReadOnly="True" >
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="INFO_DATE" HeaderText="投稿日" SortExpression="INFO_DATE">
+                <HeaderStyle Width="100px" />
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="INFO_TIME" HeaderText="時間" SortExpression="INFO_TIME">
+                <HeaderStyle Width="50px" />
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="CREATE_NM" HeaderText="投稿者" SortExpression="CREATE_NM">
+                <HeaderStyle Width="80px" />
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="INFO_HEADER" HeaderText="タイトル" SortExpression="INFO_HEADER">
+                <HeaderStyle Width="350px" />
                 </asp:BoundField>
                 <asp:BoundField DataField="INFO_DETAIL" HeaderText="内容" SortExpression="INFO_DETAIL">
                 </asp:BoundField>
@@ -179,9 +183,21 @@
         </asp:GridView>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" 
-SelectCommand="SELECT * FROM T_EXL_TOPICS  
-WHERE INFO_DATE &gt; DATEADD(DAY, -30, GETDATE())
-ORDER BY INFO_DATE, INFO_TIME">
+SelectCommand="SELECT
+    INFO_NO
+  , INFO_DATE
+  , INFO_TIME
+  , CREATE_NM
+  , INFO_HEADER
+  , SUBSTRING(INFO_DETAIL,1,30) + '…' AS INFO_DETAIL
+  , INFO_KBN
+FROM
+  T_EXL_TOPICS 
+WHERE
+  INFO_DATE &gt; DATEADD(DAY, - 30, GETDATE()) 
+ORDER BY
+  INFO_DATE  , INFO_TIME
+">
         </asp:SqlDataSource>
     
         <br />

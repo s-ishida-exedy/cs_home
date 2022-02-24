@@ -100,5 +100,7 @@ Partial Class cs_home
         DropDownList1.SelectedIndex = 0
         TextBox1.Text = ""
         TextBox2.Text = ""
+
+        Make_Grid()
     End Sub
 End Class

@@ -72,16 +72,18 @@ Partial Class cs_home
             If strMode = "01" Then
                 Button1.Text = "更　　新"
                 Button1.Attributes.Add("onclick", "return confirm('更新します。よろしいですか？');")
+                Button2.Visible = True
             Else
                 Button1.Text = "登　　録"
                 Button1.Attributes.Add("onclick", "return confirm('登録します。よろしいですか？');")
+                Button2.Visible = False
             End If
 
         End If
 
     End Sub
 
-    Private Sub DB_access()
+    Private Sub DB_access(strExecMode As String)
         '画面入力情報をテーブルへ登録
         Dim strSQL As String
         Dim strVal As String = ""
@@ -102,7 +104,7 @@ Partial Class cs_home
         'データベース接続を開く
         cnn.Open()
 
-        If strMode = "01" Then
+        If strMode = "01" And strExecMode = "01" Then
             'データ更新
             strSQL = ""
             strSQL = strSQL & "UPDATE T_EXL_AIR_MANAGE "
@@ -120,6 +122,12 @@ Partial Class cs_home
             strSQL = strSQL & "  , PICKUP =  '" & DropDownList2.SelectedValue & "' "
             strSQL = strSQL & "  , PLACE =  '" & DropDownList3.SelectedValue & "' "
             strSQL = strSQL & "  , REMARKS =  '" & LTrim(RTrim(TextBox10.Text)) & "' "
+            strSQL = strSQL & "WHERE "
+            strSQL = strSQL & "       ETD =  '" & strEtd & "' "
+            strSQL = strSQL & "  AND IVNO =  '" & strIvno & "' "
+        ElseIf strMode = "01" And strExecMode = "02" Then
+            strSQL = ""
+            strSQL = strSQL & "DELETE FROM  T_EXL_AIR_MANAGE "
             strSQL = strSQL & "WHERE "
             strSQL = strSQL & "       ETD =  '" & strEtd & "' "
             strSQL = strSQL & "  AND IVNO =  '" & strIvno & "' "
@@ -251,10 +259,21 @@ Partial Class cs_home
         End If
 
         '更新(登録)
-        Call DB_access()
+        Call DB_access("01")
 
         '元の画面に戻る
         Response.Redirect("air_management.aspx")
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        '削除ボタン押下
+
+        '削除
+        Call DB_access("02")
+
+        '元の画面に戻る
+        Response.Redirect("air_management.aspx")
+
     End Sub
 End Class
 
