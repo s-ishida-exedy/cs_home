@@ -72,6 +72,7 @@ Partial Class cs_home
             If strMode = "01" Then
                 Button1.Text = "更　　新"
                 Button1.Attributes.Add("onclick", "return confirm('更新します。よろしいですか？');")
+                Button2.Attributes.Add("onclick", "return confirm('削除します。よろしいですか？');")
                 Button2.Visible = True
             Else
                 Button1.Text = "登　　録"
