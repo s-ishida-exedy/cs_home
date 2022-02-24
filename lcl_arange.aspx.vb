@@ -117,7 +117,7 @@ Partial Class cs_home
 
         'strSQL = "SELECT LCLARGD_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLARGD_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
 
-        strSQL = "SELECT INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
+        strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
         strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '004' "
 
         'ＳＱＬコマンド作成 
@@ -128,7 +128,7 @@ Partial Class cs_home
         strinv = ""
         '結果を取り出す 
         While (dataread.Read())
-            strinv += dataread("LCLARGD_INVNO")
+            strinv += dataread("INVNO")
 
             '書類作成状況
             If Left(e.Row.Cells(4).Text, 4) = strinv Then
@@ -163,9 +163,9 @@ Partial Class cs_home
         'strSQL = "SELECT LCLFIN_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLFIN_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
         'strSQL = strSQL & "AND [T_EXL_CSWORKSTATUS].LCLFIN_BKGNO = '" & e.Row.Cells(11).Text & "' "
 
-        strSQL = "SELECT INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
+        strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
         strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '005' "
-        strSQL = strSQL & "AND [T_EXL_CSWORKSTATUS].LCLFIN_BKGNO = '" & e.Row.Cells(11).Text & "' "
+        strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].BKGNO = '" & e.Row.Cells(11).Text & "' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -175,7 +175,7 @@ Partial Class cs_home
         strinv = ""
         '結果を取り出す 
         While (dataread.Read())
-            strinv += dataread("LCLFIN_INVNO")
+            strinv += dataread("INVNO")
 
 
             '出荷手配状況
@@ -193,7 +193,7 @@ Partial Class cs_home
 
 
         'strSQL = "SELECT DOCFIN_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
-        strSQL = "SELECT INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
+        strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
         strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '002' "
 
 
@@ -205,7 +205,7 @@ Partial Class cs_home
         strinv = ""
         '結果を取り出す 
         While (dataread.Read())
-            strinv += dataread("DOCFIN_INVNO")
+            strinv += dataread("INVNO")
 
             '書類作成状況
             If Left(e.Row.Cells(4).Text, 4) = strinv Then
