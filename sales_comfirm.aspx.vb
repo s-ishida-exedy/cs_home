@@ -160,5 +160,8 @@ Partial Class cs_home
         TextBox1.Text = dtFDM
         TextBox2.Text = dtLDM
 
+        DropDownList1.SelectedIndex = 0
+
+        Call GET_DATA()
     End Sub
 End Class
