@@ -154,6 +154,7 @@
                 </td>
             <td class="second-cell">
                     <asp:Button ID="Button1" runat="server" Text="更　新" style="width:164px" Font-Size="Small" />&nbsp;
+                    <asp:Button ID="Button2" runat="server" Text="削　除" style="width:164px" Font-Size="Small" />&nbsp;
                     <asp:Label ID="Label1" runat="server" Text="" Class="err"></asp:Label>
                 </td>
             <td class="third-cell">
@@ -161,7 +162,7 @@
             </td>
         </tr>
     </table>
-<div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:solid 1px;">
+<div id="main2" style="width:100%;height:480px;overflow:scroll;-webkit-overflow-scrolling:touch;border:solid 1px;">
         <table class="ta3">
             <tr>
                 <th>依頼日</th>
