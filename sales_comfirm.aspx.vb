@@ -14,6 +14,8 @@ Partial Class cs_home
         If IsPostBack Then
             ' そうでない時処理
         Else
+            Me.DropDownList2.Items.Insert(0, "-出荷方法-") '先頭に空白行追加
+
             'テキストボックスに月初と月末をセット
             Dim dtToday As DateTime = DateTime.Today
             Dim dtFDM As New DateTime(dtToday.Year, dtToday.Month, 1)
@@ -33,9 +35,24 @@ Partial Class cs_home
         'GRIDを作成する。
 
         Dim Dataobj As New DBAccess
+        Dim strShukka As String = ""
+        Dim strChk As String = CheckBox1.Checked.ToString
+
+        Select Case DropDownList2.SelectedValue
+            Case "20ft"
+                strShukka = "01"
+            Case "40ft"
+                strShukka = "02"
+            Case "CFS"
+                strShukka = "03"
+            Case "AIR"
+                strShukka = "05"
+            Case "COURIER"
+                strShukka = "06"
+        End Select
 
         'データの取得
-        Dim ds As DataSet = Dataobj.GET_RESULT_SALES(Me.TextBox1.Text, Me.TextBox2.Text, strCode)
+        Dim ds As DataSet = Dataobj.GET_RESULT_SALES(Me.TextBox1.Text, Me.TextBox2.Text, strCode, strShukka, strChk)
         If ds.Tables.Count > 0 Then
             GridView1.DataSourceID = ""
             GridView1.DataSource = ds
@@ -161,6 +178,9 @@ Partial Class cs_home
         TextBox2.Text = dtLDM
 
         DropDownList1.SelectedIndex = 0
+        DropDownList2.SelectedIndex = 0
+
+        CheckBox1.Checked = False
 
         Call GET_DATA()
     End Sub

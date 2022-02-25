@@ -95,6 +95,9 @@
             top:15px;
             position: absolute;
         }  
+        .cbo{
+            font-size:small ;
+        }
 </style>
 <script>
     // カレンダー
@@ -146,18 +149,19 @@
                 <h2>海外売上確定チェック</h2>  
             </td>
             <td class="second-cell">
-                <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="120px">
+                <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="100px" Class="cbo">
                     <asp:ListItem Selected="True" Value="H">本社</asp:ListItem>
                     <asp:ListItem Value="U">上野</asp:ListItem>
                 </asp:DropDownList>
-                &nbsp;
-                <asp:TextBox ID="TextBox1" runat="server" Width="160px" Height="18px" class="date2" Font-Size="13px"></asp:TextBox>
-                &nbsp;
+                <asp:DropDownList ID="DropDownList2" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="SHIPCD" DataValueField="SHIPCD" AutoPostBack ="true" Width ="150px" Class="cbo"></asp:DropDownList> 
+                <asp:TextBox ID="TextBox1" runat="server" Width="160px" Height="18px" class="date2" Font-Size="small"></asp:TextBox>
                 <asp:Label ID="Label1" runat="server" Text="～"></asp:Label>
-                &nbsp;
-                <asp:TextBox ID="TextBox2" runat="server" Width="160px" Height="18px" class="date2" Font-Size="13px"></asp:TextBox>
-                <asp:Button ID="Button3" runat="server" Text="検　索" Font-Size="Small" Width ="75px" />
-                <asp:Button ID="Button1" runat="server" Text="クリア" Font-Size="Small" Width ="75px" />
+                <asp:TextBox ID="TextBox2" runat="server" Width="160px" Height="18px" class="date2" Font-Size="small"></asp:TextBox>
+                <br />
+                <asp:CheckBox ID="CheckBox1" runat="server" text="一括出力済みのみ表示する" Font-Size="Small" AutoPostBack ="true" />
+                &nbsp;&nbsp;
+                <asp:Button ID="Button3" runat="server" Text="検　索" Font-Size="Small" Width ="100px" />&nbsp;
+                <asp:Button ID="Button1" runat="server" Text="リセット" Font-Size="Small" Width ="100px" />
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
@@ -219,7 +223,7 @@
       WHEN '02' THEN '40ft'
       WHEN '03' THEN 'CFS'
       WHEN '05' THEN 'AIR'
-      WHEN '06' THEN 'AIR'
+      WHEN '06' THEN 'COURIER'
     END AS SHIPCD
   , T_INV_HD_TB.REGPERSON
   , ''  AS REGNAME
@@ -243,6 +247,33 @@ HAVING
     T_INV_HD_TB.CUSTCODE &lt;&gt; '111' And T_INV_HD_TB.CUSTCODE &lt;&gt; 'A121'
     AND T_INV_HD_TB.SALESFLG Is Null
 ORDER BY  T_INV_HD_TB.BLDATE"></asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:KBHWPA85ConnectionString %>" SelectCommand="SELECT DISTINCT
+  CASE T_INV_HD_TB.SHIPCD 
+      WHEN '01' THEN '20ft'
+      WHEN '02' THEN '40ft'
+      WHEN '03' THEN 'CFS'
+      WHEN '05' THEN 'AIR'
+      WHEN '06' THEN 'COURIER'
+    END AS SHIPCD
+FROM
+    T_INV_HD_TB 
+    INNER JOIN T_INV_BD_TB 
+    ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO
+GROUP BY
+  T_INV_HD_TB.BLDATE
+  , T_INV_HD_TB.OLD_INVNO
+  , T_INV_HD_TB.CUSTCODE
+  , T_INV_HD_TB.CUSTNAME
+  , T_INV_HD_TB.SHIPCD
+  , T_INV_HD_TB.REGPERSON
+  , T_INV_HD_TB.CUTDATE
+  , T_INV_HD_TB.ALLOUTSTAMP
+  , T_INV_HD_TB.SALESFLG 
+HAVING
+    T_INV_HD_TB.CUSTCODE &lt;&gt; '111' And T_INV_HD_TB.CUSTCODE &lt;&gt; 'A121'
+    AND T_INV_HD_TB.SALESFLG Is Null
+	AND SHIPCD IS NOT NULL"></asp:SqlDataSource>
 
 </div>
 <!--/#contents2-->

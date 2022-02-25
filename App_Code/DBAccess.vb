@@ -289,7 +289,8 @@ Public Class DBAccess
         Return Ds
     End Function
 
-    Public Function GET_RESULT_SALES(strDate1 As String, strDate2 As String, strCode As String) As DataSet
+    Public Function GET_RESULT_SALES(strDate1 As String, strDate2 As String, strCode As String,
+                                     strShukka As String, strChk As String) As DataSet
         '海外売上確定チェック絞り込み
         Conn = Me.Dbconnect2
         Cmd = Conn.CreateCommand
@@ -305,7 +306,7 @@ Public Class DBAccess
         StrSQL = StrSQL & "      WHEN '02' THEN '40ft' "
         StrSQL = StrSQL & "      WHEN '03' THEN 'CFS' "
         StrSQL = StrSQL & "      WHEN '05' THEN 'AIR' "
-        StrSQL = StrSQL & "      WHEN '06' THEN 'AIR' "
+        StrSQL = StrSQL & "      WHEN '06' THEN 'COURIER' "
         StrSQL = StrSQL & "    END AS SHIPCD "
         StrSQL = StrSQL & "  , T_INV_HD_TB.REGPERSON "
         StrSQL = StrSQL & "  , '' AS REGNAME "
@@ -331,6 +332,12 @@ Public Class DBAccess
         StrSQL = StrSQL & "    AND T_INV_HD_TB.SALESFLG Is Null "
         If strDate1 <> "" And strDate2 <> "" Then
             StrSQL = StrSQL & "    AND T_INV_HD_TB.BLDATE >= '" & strDate1 & "' And T_INV_HD_TB.BLDATE <= '" & strDate2 & "' "
+        End If
+        If strShukka <> "" Then
+            StrSQL = StrSQL & "    AND T_INV_HD_TB.SHIPCD = '" & strShukka & "' "
+        End If
+        If strChk = "True" Then
+            StrSQL = StrSQL & "    AND T_INV_HD_TB.ALLOUTSTAMP IS NOT NULL "
         End If
         StrSQL = StrSQL & "ORDER BY  T_INV_HD_TB.BLDATE "
 
