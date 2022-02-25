@@ -34,9 +34,9 @@ Public Class mod_function
 
         HankakuEisuChk = True
 
-        '正規表現パターンを指定(英字a-z,A-Z,数値0-9)
+        '正規表現パターンを指定(英字a-z,A-Z,数値0-9,ハイフン)
         '        Dim r As New System.Text.RegularExpressions.Regex(“^[a-zA-Z0-9[ ]]+$”)
-        Dim r As New System.Text.RegularExpressions.Regex(“^[a-zA-Z0-9\uFF61-\uFF9F\s]+$”)
+        Dim r As New System.Text.RegularExpressions.Regex(“^[-\a-zA-Z0-9\uFF61-\uFF9F\s]+$”)
 
         '半角英数字に一致しているかチェック
         If r.IsMatch(strValue) = False Then

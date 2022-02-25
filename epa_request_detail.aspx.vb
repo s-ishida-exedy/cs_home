@@ -119,7 +119,6 @@ Partial Class cs_home
         Button8.Attributes.Add("onclick", "return confirm('削除します。よろしいですか？');")
     End Sub
 
-
     Private Sub DB_access(strMode As String)
         '画面入力情報をテーブルへ登録
         Dim strSQL As String

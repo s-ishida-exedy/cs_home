@@ -104,7 +104,7 @@
         }
         .wrapper {
           overflow: scroll;
-          height: 450px;
+          height: 475px;
         }
 </style>
 <script>
@@ -164,15 +164,15 @@
 </thead>
 <tbody>
 <%--<div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">--%>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="1800px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" DataKeyNames="BLDATE,INV">
-            <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
-            <AlternatingRowStyle BackColor="#DCDCDC" />
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" Width="1500px" CellPadding="4" GridLines="Vertical" DataKeyNames="BLDATE,INV" ForeColor="#333333" >
+            <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+            <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:TemplateField ShowHeader="False">
                     <ItemTemplate>
                         <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="edt" Text="編集" />
                     </ItemTemplate>
-                    <HeaderStyle Width="60px" />
+                    <HeaderStyle Width="50px" />
                     <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
                 <asp:BoundField DataField="STATUS" HeaderText="状態" SortExpression="STATUS" >
@@ -196,30 +196,46 @@
                 <asp:BoundField DataField="SHIPPEDPER" HeaderText="船名" SortExpression="SHIPPEDPER" >
                 </asp:BoundField>
                 <asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" >
+                <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="CUTDATE" HeaderText="ｶｯﾄ日" SortExpression="CUTDATE" >
+                <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="VOYAGENO" HeaderText="VoyNO" SortExpression="VOYAGENO" >
                 </asp:BoundField>
                 <asp:BoundField DataField="RECEIPT_NUMBER" HeaderText="受付番号" SortExpression="RECEIPT_NUMBER" >
+                <ItemStyle HorizontalAlign="Center" />
+                <HeaderStyle Width="100px" />
                 </asp:BoundField>
                 <asp:BoundField DataField="IVNO_FULL" HeaderText="IVNO" SortExpression="IVNO_FULL" >
+                <ItemStyle HorizontalAlign="Center" />
+                <HeaderStyle Width="150px" />
                 </asp:BoundField>
                 <asp:BoundField DataField="APPLICATION_DATE" HeaderText="申請日" SortExpression="APPLICATION_DATE" >
+                <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="SENDING_REQ_DATE" HeaderText="送付依頼日" SortExpression="SENDING_REQ_DATE" >
+                <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="RECEIPT_DATE" HeaderText="受領日" SortExpression="RECEIPT_DATE" >
+                <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="EPA_SEND_DATE" HeaderText="EPA送付日" SortExpression="EPA_SEND_DATE" >
+                <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="TRK_NO" HeaderText="TRK#" SortExpression="TRK_NO" >
                 </asp:BoundField>
+                <asp:BoundField DataField="BLDATE_FULL" HeaderText="BLDATE_FULL" SortExpression="BLDATE_FULL" >
+                </asp:BoundField>
             </Columns>
-            <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-            <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-            <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
-            <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+            <FooterStyle BackColor="#990000" ForeColor="White" Font-Bold="True" />
+            <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
+            <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
+            <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />
+            <SortedAscendingCellStyle BackColor="#FDF5AC" />
+            <SortedAscendingHeaderStyle BackColor="#4D0000" />
+            <SortedDescendingCellStyle BackColor="#FCF6C0" />
+            <SortedDescendingHeaderStyle BackColor="#820000" />
         </asp:GridView>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" 
@@ -231,7 +247,7 @@ SelectCommand="SELECT
   	WHEN '04' THEN 'ｷｬﾝｾﾙ'
   	WHEN '09' THEN '再発給'
   END AS STATUS
-  , BLDATE 
+  , FORMAT(CONVERT(DATETIME, BLDATE),'MM/dd') AS BLDATE
   , INV 
   , CUSTNAME 
   , CUSTCODE 
@@ -240,15 +256,16 @@ SelectCommand="SELECT
         ELSE ''
 	END AS SALESFLG
   , SHIPPEDPER 
-  , ETA 
-  , CUTDATE 
+  , FORMAT(CONVERT(DATETIME, ETA),'MM/dd') AS ETA
+  , FORMAT(CONVERT(DATETIME, CUTDATE),'MM/dd') AS CUTDATE
   , VOYAGENO 
   , RECEIPT_NUMBER 
   , IVNO_FULL 
-  , APPLICATION_DATE 
-  , SENDING_REQ_DATE 
-  , RECEIPT_DATE 
-  , EPA_SEND_DATE 
+  , BLDATE AS BLDATE_FULL
+  ,FORMAT(CONVERT(DATETIME, APPLICATION_DATE),'MM/dd') AS APPLICATION_DATE
+  , FORMAT(CONVERT(DATETIME, SENDING_REQ_DATE),'MM/dd') AS SENDING_REQ_DATE
+  , FORMAT(CONVERT(DATETIME, RECEIPT_DATE),'MM/dd') AS RECEIPT_DATE
+  , FORMAT(CONVERT(DATETIME, EPA_SEND_DATE),'MM/dd') AS EPA_SEND_DATE
   , TRK_NO 
 FROM T_EXL_EPA_KANRI
 ORDER BY BLDATE, INV">

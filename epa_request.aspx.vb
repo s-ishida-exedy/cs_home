@@ -9,7 +9,8 @@ Partial Class cs_home
 
         '列非表示処理
         If e.Row.RowType = DataControlRowType.DataRow OrElse e.Row.RowType = DataControlRowType.Header Then
-            'e.Row.Cells(10).Visible = False
+            'キー項目のETDをテーブルのデータのままセットし、その項目は非表示にする。
+            e.Row.Cells(18).Visible = False
         End If
 
         'ボタンに行数をセット
@@ -25,31 +26,15 @@ Partial Class cs_home
 
     End Sub
 
-    Protected Sub GridView1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.SelectedIndexChanged
-        Dim sch_ID As String = GridView1.SelectedValue.ToString
-        '選択された行のSCH_ID
-        strRow = sch_ID
-    End Sub
-
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 
         AddHandler GridView1.RowCommand, AddressOf GridView1_RowCommand
     End Sub
 
-    Private Sub GridView1_RowEditing(sender As Object, e As GridViewEditEventArgs) Handles GridView1.RowEditing
-        '編集ボタン押下
-        '選択行のステータスを取得する。
-        'Dim sch_ID As String = GridView1.SelectedValue.ToString
-        ''選択された行のSCH_ID
-        'strRow = sch_ID
-
-
-    End Sub
-
     Private Sub GridView1_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView1.RowCommand
         If e.CommandName = "edt" Then
             Dim index As Integer = Convert.ToInt32(e.CommandArgument)
-            Dim data1 = Me.GridView1.Rows(index).Cells(2).Text
+            Dim data1 = Me.GridView1.Rows(index).Cells(18).Text     '非表示としたキー項目
             Dim data2 = Me.GridView1.Rows(index).Cells(3).Text
             Dim data3 = Me.GridView1.Rows(index).Cells(5).Text
             Dim data4 = Me.GridView1.Rows(index).Cells(1).Text
