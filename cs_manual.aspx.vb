@@ -33,7 +33,7 @@ Partial Class cs_home
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         '詳細表示ボタン押下
         If Trim(TextBox1.Text) = "" Then
-            MsgBox("表示する客先コードを入力してください。")
+            Label12.Text = "表示する客先コードを入力してください。"
             Return
         End If
 
@@ -48,7 +48,7 @@ Partial Class cs_home
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         '新規登録ボタン押下
         If Trim(TextBox1.Text) = "" Then
-            MsgBox("ベースとなる客先コードを入力してください。")
+            Label12.Text = "ベースとなる客先コードを入力してください。"
             Return
         End If
 

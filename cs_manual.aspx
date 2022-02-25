@@ -105,6 +105,10 @@
           overflow: scroll;
           height: 450px;
         }
+        .err{
+            color:red;
+            font-weight :700;
+        }
 </style>
 <script>
     $(document).ready(function () {
@@ -147,12 +151,14 @@
                 <h2>ＣＳマニュアル</h2>  
             </td>
             <td class="second-cell">
-                <asp:Label ID="Label4" runat="server" Text="客先CD："></asp:Label>
+                <asp:Label ID="Label12" runat="server" Text="" Class="err"></asp:Label>
+                <br/>
+                <asp:Label ID="Label4" runat="server" Text="客先CD：" Font-Size="Small"></asp:Label>
                 <asp:TextBox ID="TextBox1" runat="server" Width ="100"></asp:TextBox>&nbsp;
                 <asp:Button ID="Button1" runat="server" Text="表示" Font-Size="Small" />&nbsp;
-                <asp:Button ID="Button2" runat="server" Text="　詳細表示　" Font-Size="Small" />&nbsp;
-                <asp:Button ID="Button3" runat="server" Text="　新規登録　" Font-Size="Small" />&nbsp;
-                <asp:Label ID="Label1" runat="server" Text="※新規登録時、ﾍﾞｰｽの客先CD必須"></asp:Label>
+                <asp:Button ID="Button2" runat="server" Text="詳細表示" Width ="100px" Font-Size="Small" />&nbsp;
+                <asp:Button ID="Button3" runat="server" Text="新規登録" Width ="100px" Font-Size="Small" />&nbsp;
+                <asp:Label ID="Label1" runat="server" Text="※新規登録時、ﾍﾞｰｽの客先CD必須" Font-Size="Small"></asp:Label>
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
