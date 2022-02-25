@@ -29,10 +29,17 @@
             width: 400px;
         }
         .second-cell {
-            width: 700px;
+            width: 500px;
         }   
+        .ex-cell{
+            width: 300px;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: solid 1px #778ca3;
+            padding: 2px;
+        }
         .third-cell {
-            width: 200px;
+            width: 100px;
             text-align:right;
         }
         .third-cell a {
@@ -197,8 +204,19 @@
                 <h2>AIR専用客先オーダー確認</h2>  
             </td>
             <td class="second-cell">
-                <asp:Label ID="Label12" runat="server" Text="" Class="err"></asp:Label>&nbsp;
+                <asp:Label ID="Label12" runat="server" Text="" Class="err"></asp:Label>
+                <br/>
                 <asp:CheckBox ID="CheckBox2" runat="server" text="IVNOが割り振られていない案件のみ表示" Font-Size="Small" AutoPostBack="true"  />
+            </td>
+            <td class="ex-cell">
+                &nbsp;
+                <asp:Label ID="Label14" runat="server" Text="登録済みAIR専用客先：" Font-Size="Small"></asp:Label>
+                <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="SqlDataSource3" DataTextField="CUST_CD" DataValueField="CUST_CD" Font-Size="Small"></asp:DropDownList>
+                <br/>
+                &nbsp;
+                <asp:TextBox ID="TextBox1" runat="server" Width="80px"></asp:TextBox>
+                <asp:Button ID="Button12" runat="server" Text="追加" Width="70px" Font-Size="Small" />
+                <asp:Button ID="Button13" runat="server" Text="削除" Width="70px" Font-Size="Small" />
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
@@ -271,6 +289,7 @@ FROM
   LEFT JOIN T_EXL_AIR_EXCLUSIVE b
     ON a.ODR_CTL_NO = b.ODR_CTL_NO
 ORDER BY NOUKI"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [M_EXL_AIR_EXC_CST]"></asp:SqlDataSource>
 <%--</div>--%>
 
 <!--/#main2-->
@@ -279,7 +298,7 @@ ORDER BY NOUKI"></asp:SqlDataSource>
 </table>
 <div class="right">
     <asp:Label ID="Label13" runat="server" Text="更新者："></asp:Label>&nbsp;
-    <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="NAME_AB" DataValueField="NAME_AB" Width="170px" ></asp:DropDownList><br />
+    <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="NAME_AB" DataValueField="NAME_AB" Width="170px"  Font-Size="Small"></asp:DropDownList><br />
     <asp:Label ID="Label1" runat="server" Text="更新対象："></asp:Label>&nbsp;
     <asp:Button ID="Button1" runat="server" Text="まとめて更新" width="200px" Font-Size="Small" />
     <table class="tab1">

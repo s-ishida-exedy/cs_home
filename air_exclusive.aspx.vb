@@ -26,6 +26,8 @@ Partial Class cs_home
         End If
 
         Button1.Attributes.Add("onclick", "return confirm('登録します。よろしいですか？');")
+        Button12.Attributes.Add("onclick", "return confirm('AIR専用客先を登録します。よろしいですか？');")
+        Button13.Attributes.Add("onclick", "return confirm('選択されたAIR専用客先を削除します。よろしいですか？');")
 
     End Sub
 
@@ -496,4 +498,82 @@ Partial Class cs_home
         TextBox11.Text = ""
     End Sub
 
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        'AIR専用客先追加ボタン押下
+        Dim strSQL As String = ""
+        Dim strValue As String = ""
+
+        If TextBox1.Text = "" Then
+            Label12.Text = "追加する客先コードが空白です。"
+            Return
+        Else
+            strValue = TextBox1.Text
+        End If
+
+        'KBHWPM02用
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "INSERT INTO M_EXL_AIR_EXC_CST VALUES('" & strValue & "') "
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+        cnn.Close()
+        cnn.Dispose()
+
+        'テキストボックスクリア
+        TextBox1.Text = ""
+
+        'AIR専用客先のセールスノート情報取得
+        Call Get_SN_Data()
+
+        '表示データ取得
+        Call Make_Grid()
+
+        DropDownList2.DataBind()
+    End Sub
+
+    Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
+        'AIR専用客先削除ボタン押下
+        Dim strSQL As String = ""
+        Dim strValue As String = ""
+
+        strValue = DropDownList2.SelectedValue
+
+        'KBHWPM02用
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "DELETE FROM M_EXL_AIR_EXC_CST WHERE CUST_CD = '" & strValue & "' "
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+        cnn.Close()
+        cnn.Dispose()
+
+        'テキストボックスクリア
+        TextBox1.Text = ""
+
+        'AIR専用客先のセールスノート情報取得
+        Call Get_SN_Data()
+
+        '表示データ取得
+        Call Make_Grid()
+
+        DropDownList2.DataBind()
+    End Sub
 End Class
