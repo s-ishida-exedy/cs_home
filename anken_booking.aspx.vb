@@ -43,7 +43,7 @@ Partial Class yuusen
             cnn.Open()
 
             'strSQL = "SELECT DOCFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
             strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '002' "
 
             'ＳＱＬコマンド作成
@@ -53,7 +53,7 @@ Partial Class yuusen
             strbkg = ""
             '結果を取り出す
             While (dataread.Read())
-                strbkg += dataread("DOCFIN_BKGNO")
+                strbkg += dataread("BKGNO")
                 '書類作成状況
                 If Trim(e.Row.Cells(26).Text) = strbkg Then
                     e.Row.BackColor = Drawing.Color.DarkSalmon
@@ -66,7 +66,7 @@ Partial Class yuusen
             dbcmd.Dispose()
 
             'strSQL = "SELECT DECFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DECFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
             strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '003' "
 
             'ＳＱＬコマンド作成
@@ -77,7 +77,7 @@ Partial Class yuusen
             strbkg = ""
             '結果を取り出す
             While (dataread.Read())
-                strbkg += dataread("DECFIN_BKGNO")
+                strbkg += dataread("BKGNO")
                 '書類作成状況
                 If Trim(e.Row.Cells(26).Text) = strbkg Then
                     e.Row.BackColor = Drawing.Color.DarkGray
@@ -92,7 +92,7 @@ Partial Class yuusen
 
 
             'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
             strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '001' "
 
             'ＳＱＬコマンド作成
@@ -102,7 +102,7 @@ Partial Class yuusen
             strbkg = ""
             '結果を取り出す
             While (dataread.Read())
-                strbkg += dataread("ITK_BKGNO")
+                strbkg += dataread("BKGNO")
                 '書類作成状況
                 If Trim(e.Row.Cells(26).Text) = strbkg Then
                     e.Row.BackColor = Drawing.Color.DarkGray
@@ -202,7 +202,7 @@ Partial Class yuusen
 
             'strSQL = "SELECT DOCFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
 
-            strSQL = "SELECT BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
             strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '002' "
 
             'ＳＱＬコマンド作成
@@ -212,7 +212,7 @@ Partial Class yuusen
             strbkg = ""
             '結果を取り出す
             While (dataread.Read())
-                strbkg += dataread("DOCFIN_BKGNO")
+                strbkg += dataread("BKGNO")
                 '書類作成状況
                 If Trim(e.Row.Cells(26).Text) = strbkg Then
                     e.Row.BackColor = Drawing.Color.DarkSalmon
@@ -225,7 +225,7 @@ Partial Class yuusen
             dbcmd.Dispose()
 
             'strSQL = "SELECT DECFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DECFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
             strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '003' "
 
             'ＳＱＬコマンド作成
@@ -235,7 +235,7 @@ Partial Class yuusen
             strbkg = ""
             '結果を取り出す
             While (dataread.Read())
-                strbkg += dataread("DECFIN_BKGNO")
+                strbkg += dataread("BKGNO")
                 '書類作成状況
                 If Trim(e.Row.Cells(26).Text) = strbkg Then
                     e.Row.BackColor = Drawing.Color.DarkGray
@@ -250,7 +250,7 @@ Partial Class yuusen
 
 
             'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
             strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '001' "
 
             'ＳＱＬコマンド作成
@@ -261,7 +261,7 @@ Partial Class yuusen
             strbkg = ""
             '結果を取り出す
             While (dataread.Read())
-                strbkg += dataread("ITK_BKGNO")
+                strbkg += dataread("BKGNO")
                 '書類作成状況
                 If Trim(e.Row.Cells(26).Text) = strbkg Then
                     e.Row.BackColor = Drawing.Color.DarkGray
@@ -376,20 +376,52 @@ Partial Class yuusen
             GridView3.DataSource = SqlDataSource1
             GridView3.DataBind()
 
+            DropDownList2.Items.Clear()
+            DropDownList2.DataSource = SqlDataSource2
+            DropDownList2.DataTextField = "STATUS"
+            DropDownList2.DataValueField = "STATUS"
+            DropDownList2.DataBind()
+
+            DropDownList2.Items.Insert(0, "--Select--")
+
         ElseIf DropDownList1.Text = "シート" Then
 
             GridView3.DataSource = SqlDataSource5
             GridView3.DataBind()
+
+            DropDownList2.Items.Clear()
+            DropDownList2.DataSource = SqlDataSource3
+            DropDownList2.DataTextField = "FORWARDER"
+            DropDownList2.DataValueField = "FORWARDER"
+            DropDownList2.DataBind()
+
+            DropDownList2.Items.Insert(0, "--Select--")
 
         ElseIf DropDownList1.Text = "海貨業者" Then
 
             GridView3.DataSource = SqlDataSource6
             GridView3.DataBind()
 
+            DropDownList2.Items.Clear()
+            DropDownList2.DataSource = SqlDataSource4
+            DropDownList2.DataTextField = "FORWARDER02"
+            DropDownList2.DataValueField = "FORWARDER02"
+            DropDownList2.DataBind()
+
+            DropDownList2.Items.Insert(0, "--Select--")
+
         ElseIf DropDownList1.Text = "客先コード" Then
 
             GridView3.DataSource = SqlDataSource9
             GridView3.DataBind()
+
+            DropDownList2.Items.Clear()
+            DropDownList2.DataSource = SqlDataSource8
+            DropDownList2.DataTextField = "CUST"
+            DropDownList2.DataValueField = "CUST"
+            DropDownList2.DataBind()
+
+            DropDownList2.Items.Insert(0, "--Select--")
 
         End If
 
