@@ -94,7 +94,6 @@
             background: #e6e6fa;
         }
         .txtb{
-            width:300px;
             padding: 5px;
             font-size :small ;
         }
