@@ -657,7 +657,10 @@ Partial Class yuusen
         If CheckBox1.Checked = True Then
             If TextBox1.Text = "" Or TextBox2.Text = "" Then
                 CheckBox1.Checked = False
-                MsgBox("日付を指定してください。")
+
+
+                Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('日付を指定してください。');</script>", False)
+
             Else
                 Label1.Text = "フィルタ 期間指定"
             End If
