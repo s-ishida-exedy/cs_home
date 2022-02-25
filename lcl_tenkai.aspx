@@ -193,6 +193,8 @@ h2:after{
 <asp:Button class="btn00"  ID="Button4" runat="server" Text="切替" Width="50px" Height="30px" AutoPostBack="True" Font-Size="13px"/>       
 :<asp:Label id="Label7" Text="展開" Font-Size="10" runat="server"></asp:Label>
 
+ <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+
 </td>
 
 <td style="width:100px;Font-Size:25px;" >
@@ -286,7 +288,7 @@ h2:after{
 </EditItemTemplate>
 </asp:TemplateField>
 
-
+    <asp:BoundField DataField="OTHERS01" HeaderText="備考" SortExpression="OTHERS01" />
 <%--<asp:BoundField DataField="CONSIGNEE" HeaderText="CONSIGNEE" SortExpression="CONSIGNEE" />
 <asp:BoundField DataField="DESTINATION" HeaderText="DESTINATION" SortExpression="DESTINATION" />--%>
 <asp:BoundField DataField="FLG05" HeaderText="追加/更新日" SortExpression="FLG05" ReadOnly ="true"　 />
@@ -305,7 +307,7 @@ h2:after{
 <asp:BoundField DataField="PICKUP02" HeaderText="" SortExpression="PICKUP02" />
 <asp:BoundField DataField="MOVEIN01" HeaderText="搬入希望日" SortExpression="MOVEIN01" />
 <asp:BoundField DataField="MOVEIN02" HeaderText="" SortExpression="MOVEIN02" />
-<asp:BoundField DataField="OTHERS01" HeaderText="完了報告希望" SortExpression="OTHERS01" />
+
 <asp:BoundField DataField="PICKINPLACE" HeaderText="搬入先" SortExpression="PICKINPLACE" />
 <%--asp:BoundField DataField="FLG01" HeaderText="搬入先" SortExpression="FLG01" />
 <asp:BoundField DataField="FLG02" HeaderText="FLG02" SortExpression="FLG02" />--%>
@@ -477,7 +479,7 @@ DeleteCommand="DELETE FROM T_EXL_LCLTENKAI WHERE BOOKING_NO=@BOOKING_NO"></asp:S
 <asp:BoundField DataField="PICKUP02" HeaderText="" SortExpression="PICKUP02" ReadOnly="true" />
 <asp:BoundField DataField="MOVEIN01" HeaderText="搬入希望日" SortExpression="MOVEIN01"  ReadOnly="true"/>
 <asp:BoundField DataField="MOVEIN02" HeaderText="" SortExpression="MOVEIN02"  ReadOnly="true"/>
-<asp:BoundField DataField="OTHERS01" HeaderText="完了報告希望" SortExpression="OTHERS01" ReadOnly="true" />
+<asp:BoundField DataField="OTHERS01" HeaderText="備考" SortExpression="OTHERS01" ReadOnly="true" />
 <asp:BoundField DataField="PICKINPLACE" HeaderText="搬入先" SortExpression="PICKINPLACE" ReadOnly="true" />
 <%--<asp:BoundField DataField="FLG01" HeaderText="搬入先" SortExpression="FLG01" />--%>
 <%--<asp:BoundField DataField="FLG02" HeaderText="FLG02" SortExpression="FLG02" />
@@ -500,6 +502,11 @@ DeleteCommand="DELETE FROM T_EXL_LCLTENKAI WHERE BOOKING_NO=@BOOKING_NO"></asp:S
 </div>
 
 <asp:Label Font-Size="8" id="Label6" Text="※当日追加・更新分は 追加/更新日 と 追加/更新メモ が赤くマークされます。" runat="server"></asp:Label>
+
+
+    <p></p>
+    重量登録通知メール：<asp:Button ID="Button5" runat="server" Text="KD" width="100" Height="30" />
+    <asp:Button ID="Button6" runat="server" Text="ｱﾌﾀ" width="100" Height="30" />
 
 </asp:Panel>   
 

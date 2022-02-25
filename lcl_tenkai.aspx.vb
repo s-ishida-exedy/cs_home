@@ -1,7 +1,14 @@
-﻿Imports System.Data.SqlClient
-Imports System.Data
+﻿
 
+
+Imports System.Data.SqlClient
+Imports System.Data
 Imports mod_function
+Imports MailKit.Net.Smtp
+Imports MailKit.Security
+Imports MimeKit
+Imports MimeKit.Text
+Imports System.IO
 Partial Class cs_home
     Inherits System.Web.UI.Page
 
@@ -17,32 +24,33 @@ Partial Class cs_home
 
         e.Row.Cells(0).Width = 10
         e.Row.Cells(1).Width = 90
-        e.Row.Cells(2).Width = 40
-        e.Row.Cells(3).Width = 100
-        e.Row.Cells(4).Width = 70
+        e.Row.Cells(2).Width = 90
+        e.Row.Cells(3).Width = 40
+        e.Row.Cells(4).Width = 100
         e.Row.Cells(5).Width = 70
-        e.Row.Cells(6).Width = 110
-        e.Row.Cells(7).Width = 140
-        e.Row.Cells(8).Width = 70
+        e.Row.Cells(6).Width = 70
+        e.Row.Cells(7).Width = 110
+        e.Row.Cells(8).Width = 140
         e.Row.Cells(9).Width = 70
         e.Row.Cells(10).Width = 70
-        e.Row.Cells(11).Width = 50
-        e.Row.Cells(12).Width = 60
+        e.Row.Cells(11).Width = 70
+        e.Row.Cells(12).Width = 50
         e.Row.Cells(13).Width = 60
-        e.Row.Cells(14).Width = 110
-        e.Row.Cells(15).Width = 10
-        e.Row.Cells(16).Width = 110
-        e.Row.Cells(17).Width = 10
-        e.Row.Cells(18).Width = 110
+        e.Row.Cells(14).Width = 60
+        e.Row.Cells(15).Width = 110
+        e.Row.Cells(16).Width = 10
+        e.Row.Cells(17).Width = 110
+        e.Row.Cells(18).Width = 10
+
         e.Row.Cells(19).Width = 600
         e.Row.Cells(20).Width = 30
 
-        e.Row.Cells(6).Visible = False
         e.Row.Cells(7).Visible = False
-        e.Row.Cells(10).Visible = False
+        e.Row.Cells(8).Visible = False
         e.Row.Cells(11).Visible = False
         e.Row.Cells(12).Visible = False
         e.Row.Cells(13).Visible = False
+        e.Row.Cells(14).Visible = False
         e.Row.Cells(20).Visible = False
 
     End Sub
@@ -686,15 +694,120 @@ Partial Class cs_home
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
+        'メールの送信に必要な情報
+        Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
+        Dim smtpPort As Integer = 25
+
+        ' メールの内容
+        Dim strfrom As String = "r-fukao@exedy.com"
+        Dim strto As String = "r-fukao@exedy.com"
+
+        'TextBox1.Text = "aaaaa"
+
+        'メールの件名
+        'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
+
+        'メールの件名
+        Dim subject As String = "<通知>LCL案件展開　変更・追加・連絡" '"【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
+        'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
+
+        'メールの本文
+        Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>LCL出荷案件の内容に変更、追加がございましたのでご連絡いたします。</p>下記URLに重量の登録をお願いいたします。</p>http://kbhwpm01/exp/cs_home/lcl_tenkai.aspx</p></body></html>" ' UriBodyC()
 
 
+
+        Dim t As String = "<html><body><Table border='1' style='Font-Size:13px;'><tr><td>備考</td><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
+
+        For I = 0 To GridView1.Rows.Count - 1
+
+            t = t & "<tr><td >" & GridView1.Rows(I).Cells(2).Text & "</td><td>" & GridView1.Rows(I).Cells(5).Text & "</td><td>" & GridView1.Rows(I).Cells(8).Text & "</td><td>" & GridView1.Rows(I).Cells(9).Text & "</td><td>" & GridView1.Rows(I).Cells(11).Text & "</td><td>" & GridView1.Rows(I).Cells(12).Text & "</td><td>" & GridView1.Rows(I).Cells(13).Text & "</td><td>" & GridView1.Rows(I).Cells(14).Text & "</td><td>" & GridView1.Rows(I).Cells(15).Text & "</td><td>" & GridView1.Rows(I).Cells(16).Text & "</td><td>" & GridView1.Rows(I).Cells(17).Text & "</td><td>" & GridView1.Rows(I).Cells(18).Text & "</td><td>" & GridView1.Rows(I).Cells(19).Text & "</td></tr>"
+
+
+        Next
+
+        t = t & "</Table></body></html>"
+
+        body = body & t
+
+        Dim body2 As String = "====内容==================================</p>" & TextBox1.Text.Replace(vbCrLf, "<br/>") & "</p>" ' UriBodyC()
+
+        body = body & body2
+
+        body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+
+
+
+
+        'Dim strFilePath As String = "" '"C:\exp\cs_home\upload\" & Session("strFile")
+
+        'Using stream = File.OpenRead(strFilePath)
+        ' MailKit におけるメールの情報
+        Dim message = New MimeKit.MimeMessage()
+
+        ' 送り元情報  
+        message.From.Add(MailboxAddress.Parse(strfrom))
+
+
+        ' 宛先情報  
+        message.To.Add(MailboxAddress.Parse(strto))
+        'If Session("strCC") <> "" Then
+
+        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
+
+        'End If
+
+
+        ' 表題  
+        message.Subject = subject
+
+        ' 本文
+        Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
+        textPart.Text = body
+        message.Body = textPart
+
+
+        ''添付ファイル
+        'Dim path = strFilePath     '添付したいファイル
+        '    Dim attachment = New MimeKit.MimePart("application", "pdf") _
+        '    With {
+        '        .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
+        '        .ContentDisposition = New MimeKit.ContentDisposition(),
+        '        .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
+        '        .FileName = System.IO.Path.GetFileName(path)
+        '    }
+
+        Dim multipart = New MimeKit.Multipart("mixed")
+
+        multipart.Add(textPart)
+        'multipart.Add(attachment)
+
+        message.Body = multipart
+
+        Using client As New MailKit.Net.Smtp.SmtpClient()
+            client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
+            client.Send(message)
+            client.Disconnect(True)
+            client.Dispose()
+            message.Dispose()
+        End Using
+        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
+
+        'stream.Dispose()
+        'End Using
+
+        'File.Delete(strFilePath)
+
+        TextBox1.text = ""
 
     End Sub
 
+
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 
-
-
+        Button5.Attributes.Add("onclick", "return confirm('メールを送付します。よろしいですか？');")
+        Button6.Attributes.Add("onclick", "return confirm('メールを送付します。よろしいですか？');")
+        Button3.Attributes.Add("onclick", "return confirm('メールを送付します。よろしいですか？');")
 
     End Sub
 
@@ -702,19 +815,25 @@ Partial Class cs_home
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
-        If Panel1.Visible = True Then
+        If TextBox2.Text = "qqqqq" Then
 
-            Panel2.Visible = True
-            Panel1.Visible = False
-            Me.Label7.Text = "展開"
+            If Panel1.Visible = True Then
 
-        ElseIf Panel2.Visible = True Then
+                Panel2.Visible = True
+                Panel1.Visible = False
+                Me.Label7.Text = "展開"
 
-            Panel2.Visible = False
-            Panel1.Visible = True
-            Me.Label7.Text = "編集"
+            ElseIf Panel2.Visible = True Then
 
+                Panel2.Visible = False
+                Panel1.Visible = True
+                Me.Label7.Text = "編集"
+
+            End If
+
+        Else
         End If
+
 
     End Sub
 
@@ -785,6 +904,131 @@ Partial Class cs_home
         'e.Row.Cells(14).Visible = False
 
 
+
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+
+        Dim kbn As String = "KD"
+        Call niryoumail(kbn)
+
+    End Sub
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+
+        Dim kbn As String = "ｱﾌﾀ"
+        Call niryoumail(kbn)
+
+    End Sub
+    Private Sub niryoumail(kbn As String)
+
+
+
+        'メールの送信に必要な情報
+        Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
+        Dim smtpPort As Integer = 25
+
+        ' メールの内容
+        Dim strfrom As String = "r-fukao@exedy.com"
+        Dim strto As String = "r-fukao@exedy.com"
+
+        'TextBox1.Text = "aaaaa"
+
+
+        'メールの件名
+        'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
+
+        'メールの件名
+        Dim subject As String = "<通知>LCL案件展開　荷量追加 " & kbn '"【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
+        'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
+
+        'メールの本文
+        Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>荷量を追加いたしました。</p>http://kbhwpm01/exp/cs_home/lcl_tenkai.aspx</p></body></html>" ' UriBodyC()
+
+        Dim t As String = "<html><body><Table border='1' style='Font-Size:13px;'><tr><td>備考</td><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
+
+        GridView1.DataBind()
+
+        For I = 0 To GridView1.Rows.Count - 1
+
+            t = t & "<tr><td >" & GridView1.Rows(I).Cells(2).Text & "</td><td>" & GridView1.Rows(I).Cells(5).Text & "</td><td>" & GridView1.Rows(I).Cells(8).Text & "</td><td>" & GridView1.Rows(I).Cells(9).Text & "</td><td>" & GridView1.Rows(I).Cells(11).Text & "</td><td>" & GridView1.Rows(I).Cells(12).Text & "</td><td>" & GridView1.Rows(I).Cells(13).Text & "</td><td>" & GridView1.Rows(I).Cells(14).Text & "</td><td>" & GridView1.Rows(I).Cells(15).Text & "</td><td>" & GridView1.Rows(I).Cells(16).Text & "</td><td>" & GridView1.Rows(I).Cells(17).Text & "</td><td>" & GridView1.Rows(I).Cells(18).Text & "</td><td>" & GridView1.Rows(I).Cells(19).Text & "</td></tr>"
+
+
+        Next
+
+        t = t & "</Table></body></html>"
+
+        body = body & t
+
+        Dim body2 As String = "</p>" ' UriBodyC()
+
+        body = body & body2
+
+        body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+
+
+
+
+        'Dim strFilePath As String = "" '"C:\exp\cs_home\upload\" & Session("strFile")
+
+        'Using stream = File.OpenRead(strFilePath)
+        ' MailKit におけるメールの情報
+        Dim message = New MimeKit.MimeMessage()
+
+        ' 送り元情報  
+        message.From.Add(MailboxAddress.Parse(strfrom))
+
+
+        ' 宛先情報  
+        message.To.Add(MailboxAddress.Parse(strto))
+        'If Session("strCC") <> "" Then
+
+        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
+
+        'End If
+
+
+        ' 表題  
+        message.Subject = subject
+
+        ' 本文
+        Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
+        textPart.Text = body
+        message.Body = textPart
+
+
+        ''添付ファイル
+        'Dim path = strFilePath     '添付したいファイル
+        '    Dim attachment = New MimeKit.MimePart("application", "pdf") _
+        '    With {
+        '        .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
+        '        .ContentDisposition = New MimeKit.ContentDisposition(),
+        '        .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
+        '        .FileName = System.IO.Path.GetFileName(path)
+        '    }
+
+        Dim multipart = New MimeKit.Multipart("mixed")
+
+        multipart.Add(textPart)
+        'multipart.Add(attachment)
+
+        message.Body = multipart
+
+        Using client As New MailKit.Net.Smtp.SmtpClient()
+            client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
+            client.Send(message)
+            client.Disconnect(True)
+            client.Dispose()
+            message.Dispose()
+        End Using
+        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
+
+        'stream.Dispose()
+        'End Using
+
+        'File.Delete(strFilePath)
+
+        TextBox1.Text = ""
 
     End Sub
 
