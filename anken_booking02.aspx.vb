@@ -39,7 +39,7 @@ Partial Class yuusen
         If e.Row.RowType = DataControlRowType.DataRow Then
             'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(9).Text) & "' "
 
-            strSQL = "SELECT BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(9).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(9).Text) & "' "
             strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '001' "
 
             'ＳＱＬコマンド作成
@@ -50,7 +50,7 @@ Partial Class yuusen
             strbkg = ""
             '結果を取り出す
             While (dataread.Read())
-                strbkg += dataread("ITK_BKGNO")
+                strbkg += dataread("BKGNO")
                 '書類作成状況
                 If Trim(e.Row.Cells(9).Text) = strbkg Then
                     Call itaku(e.Row.Cells(9).Text)
