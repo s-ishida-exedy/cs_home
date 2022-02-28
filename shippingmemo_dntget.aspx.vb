@@ -45,19 +45,22 @@ Partial Class yuusen
 
             If e.Row.Cells(8).Text <> "&nbsp;" And e.Row.Cells(11).Text = "&nbsp;" Then
                 If e.Row.Cells(3).Text <> "&nbsp;" And e.Row.Cells(9).Text <> "&nbsp;" Then
+                    If e.Row.Cells(3).Text <> "&nbsp;" And e.Row.Cells(9).Text <> " " Then
+                        Dim dt1 As DateTime = DateTime.Parse(e.Row.Cells(9).Text)
 
-                    Dim dt1 As DateTime = DateTime.Parse(e.Row.Cells(9).Text)
-
-                    If dt0.ToString("MM") = dt1.ToString("MM") Then
-                        str02 = "不要"
-                        str01 = "-"
-                        Call UPD_MEMO02(Trim(e.Row.Cells(12).Text), str01, str02)
-                    Else
-                        str02 = "要"
-                        str01 = "確認要"
-                        Call UPD_MEMO02(Trim(e.Row.Cells(12).Text), str01, str02)
+                        If dt0.ToString("MM") = dt1.ToString("MM") Then
+                            str02 = "不要"
+                            str01 = "-"
+                            Call UPD_MEMO02(Trim(e.Row.Cells(12).Text), str01, str02)
+                        Else
+                            str02 = "要"
+                            str01 = "確認要"
+                            Call UPD_MEMO02(Trim(e.Row.Cells(12).Text), str01, str02)
+                        End If
                     End If
+
                 End If
+
             End If
 
 
