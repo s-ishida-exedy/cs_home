@@ -89,24 +89,24 @@ Partial Class cs_home
                 strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET FLG03 ='1' "
                 strSQL = strSQL & ",FLG05 ='" & dt1.ToShortDateString & "' "
 
-                strSQL = strSQL & "WHERE CUST = '" & GridView1.Rows(I).Cells(4).Text & "'"
-                strSQL = strSQL & "AND ETD = '" & GridView1.Rows(I).Cells(9).Text & "'"
-                strSQL = strSQL & "AND LCL_SIZE = '" & GridView1.Rows(I).Cells(11).Text & "'"
+                strSQL = strSQL & "WHERE CUST = '" & GridView1.Rows(I).Cells(5).Text & "'"
+                strSQL = strSQL & "AND ETD = '" & GridView1.Rows(I).Cells(10).Text & "'"
+                strSQL = strSQL & "AND LCL_SIZE = '" & GridView1.Rows(I).Cells(12).Text & "'"
 
 
                 Command.CommandText = strSQL
                 ' SQLの実行
                 Command.ExecuteNonQuery()
 
-                Call GET_IVDATA(GridView1.Rows(I).Cells(6).Text, 1)
-                Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(5).Text, 4), 1)
-                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(5).Text, 4), GridView1.Rows(I).Cells(6).Text, 1)
+                Call GET_IVDATA(GridView1.Rows(I).Cells(7).Text, 1)
+                Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(6).Text, 4), 1)
+                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(6).Text, 4), GridView1.Rows(I).Cells(7).Text, 1)
 
 
 
                 strSQL = ""
                 strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_LCLCUSTPREADS WHERE "
-                strSQL = strSQL & "T_EXL_LCLCUSTPREADS.CUSTCODE = '" & GridView1.Rows(I).Cells(4).Text & "' "
+                strSQL = strSQL & "T_EXL_LCLCUSTPREADS.CUSTCODE = '" & GridView1.Rows(I).Cells(5).Text & "' "
 
                 'ＳＱＬコマンド作成 
                 dbcmd = New SqlCommand(strSQL, cnn)
@@ -130,7 +130,7 @@ Partial Class cs_home
 
                     strSQL = ""
                     strSQL = strSQL & "UPDATE T_EXL_LCLCUSTPREADS SET ADDRESS ='" & GridView1.Rows(I).Cells(19).Text & "' "
-                    strSQL = strSQL & "WHERE CUSTCODE = '" & GridView1.Rows(I).Cells(4).Text & "'"
+                    strSQL = strSQL & "WHERE CUSTCODE = '" & GridView1.Rows(I).Cells(5).Text & "'"
 
 
                 Else
@@ -138,7 +138,7 @@ Partial Class cs_home
                     strSQL = ""
                     strSQL = strSQL & "INSERT INTO T_EXL_LCLCUSTPREADS VALUES("
 
-                    strSQL = strSQL & "'" & GridView1.Rows(I).Cells(4).Text & "' "
+                    strSQL = strSQL & "'" & GridView1.Rows(I).Cells(5).Text & "' "
                     strSQL = strSQL & ",'" & GridView1.Rows(I).Cells(19).Text & "' "
 
 
@@ -202,9 +202,9 @@ Partial Class cs_home
 
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET FLG03 ='' "
-                strSQL = strSQL & "WHERE CUST = '" & GridView1.Rows(I).Cells(4).Text & "'"
-                strSQL = strSQL & "AND ETD = '" & GridView1.Rows(I).Cells(9).Text & "'"
-                strSQL = strSQL & "AND LCL_SIZE = '" & GridView1.Rows(I).Cells(11).Text & "'"
+                strSQL = strSQL & "WHERE CUST = '" & GridView1.Rows(I).Cells(5).Text & "'"
+                strSQL = strSQL & "AND ETD = '" & GridView1.Rows(I).Cells(10).Text & "'"
+                strSQL = strSQL & "AND LCL_SIZE = '" & GridView1.Rows(I).Cells(12).Text & "'"
 
                 Command.CommandText = strSQL
                 ' SQLの実行
@@ -213,9 +213,9 @@ Partial Class cs_home
                 '            Response.Redirect("anken_booking02.aspx")
 
 
-                Call GET_IVDATA(GridView1.Rows(I).Cells(6).Text, 2)
-                Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(5).Text, 4), 2)
-                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(5).Text, 4), GridView1.Rows(I).Cells(6).Text, 2)
+                Call GET_IVDATA(GridView1.Rows(I).Cells(7).Text, 2)
+                Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(6).Text, 4), 2)
+                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(6).Text, 4), GridView1.Rows(I).Cells(7).Text, 2)
 
             Else
 
