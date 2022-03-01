@@ -150,7 +150,8 @@
                 <h2>EPA発給申請管理</h2> 
             </td>
             <td class="second-cell">
-                <asp:Button ID="Button2" runat="server" Text="追加登録" style="width:164px" Font-Size="Small" />
+                <asp:Button ID="Button2" runat="server" Text="追加登録" style="width:164px" Font-Size="Small" />&nbsp;
+                <asp:CheckBox ID="CheckBox1" runat="server" AutoPostBack ="true" Text ="「未」以外も表示する。"/>
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
@@ -247,7 +248,7 @@ SelectCommand="SELECT
   	WHEN '04' THEN 'ｷｬﾝｾﾙ'
   	WHEN '09' THEN '再発給'
   END AS STATUS
-  , FORMAT(CONVERT(DATETIME, BLDATE),'MM/dd') AS BLDATE
+  , CASE BLDATE WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,BLDATE ),'MM/dd') END  AS BLDATE
   , INV 
   , CUSTNAME 
   , CUSTCODE 
@@ -256,18 +257,19 @@ SelectCommand="SELECT
         ELSE ''
 	END AS SALESFLG
   , SHIPPEDPER 
-  , FORMAT(CONVERT(DATETIME, ETA),'MM/dd') AS ETA
-  , FORMAT(CONVERT(DATETIME, CUTDATE),'MM/dd') AS CUTDATE
+  , CASE ETA WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,ETA ),'MM/dd') END  AS ETA
+  , CASE CUTDATE WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,CUTDATE ),'MM/dd') END  AS CUTDATE
   , VOYAGENO 
   , RECEIPT_NUMBER 
   , IVNO_FULL 
   , BLDATE AS BLDATE_FULL
-  ,FORMAT(CONVERT(DATETIME, APPLICATION_DATE),'MM/dd') AS APPLICATION_DATE
-  , FORMAT(CONVERT(DATETIME, SENDING_REQ_DATE),'MM/dd') AS SENDING_REQ_DATE
-  , FORMAT(CONVERT(DATETIME, RECEIPT_DATE),'MM/dd') AS RECEIPT_DATE
-  , FORMAT(CONVERT(DATETIME, EPA_SEND_DATE),'MM/dd') AS EPA_SEND_DATE
+  , CASE APPLICATION_DATE WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,APPLICATION_DATE ),'MM/dd') END  AS APPLICATION_DATE
+  , CASE SENDING_REQ_DATE WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,SENDING_REQ_DATE ),'MM/dd') END  AS SENDING_REQ_DATE
+  , CASE RECEIPT_DATE WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,RECEIPT_DATE ),'MM/dd') END  AS RECEIPT_DATE
+  , CASE EPA_SEND_DATE WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,EPA_SEND_DATE ),'MM/dd') END  AS EPA_SEND_DATE
   , TRK_NO 
 FROM T_EXL_EPA_KANRI
+WHERE STATUS = '01'
 ORDER BY BLDATE, INV">
         </asp:SqlDataSource>
     

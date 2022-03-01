@@ -605,4 +605,53 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
+    Public Function GET_RESULT_EPA(strValue As String) As DataSet
+        'CSメンバーマスタ取得
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  CASE STATUS "
+        StrSQL = StrSQL & "  	WHEN '01' THEN '未' "
+        StrSQL = StrSQL & "  	WHEN '02' THEN '済' "
+        StrSQL = StrSQL & "  	WHEN '03' THEN '対象ﾅｼ' "
+        StrSQL = StrSQL & "  	WHEN '04' THEN 'ｷｬﾝｾﾙ' "
+        StrSQL = StrSQL & "  	WHEN '09' THEN '再発給' "
+        StrSQL = StrSQL & "  END AS STATUS "
+        StrSQL = StrSQL & "  , CASE BLDATE WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,BLDATE ),'MM/dd') END  AS BLDATE "
+        StrSQL = StrSQL & "  , INV  "
+        StrSQL = StrSQL & "  , CUSTNAME  "
+        StrSQL = StrSQL & "  , CUSTCODE  "
+        StrSQL = StrSQL & "  , CASE SALESFLG "
+        StrSQL = StrSQL & "  		WHEN '1' THEN '済' "
+        StrSQL = StrSQL & "        ELSE '' "
+        StrSQL = StrSQL & "	END AS SALESFLG "
+        StrSQL = StrSQL & "  , SHIPPEDPER  "
+        StrSQL = StrSQL & "  , CASE ETA WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,ETA ),'MM/dd') END  AS ETA "
+        StrSQL = StrSQL & "  , CASE CUTDATE WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,CUTDATE ),'MM/dd') END  AS CUTDATE "
+        StrSQL = StrSQL & "  , VOYAGENO  "
+        StrSQL = StrSQL & "  , RECEIPT_NUMBER  "
+        StrSQL = StrSQL & "  , IVNO_FULL  "
+        StrSQL = StrSQL & "  , BLDATE AS BLDATE_FULL "
+        StrSQL = StrSQL & "  , CASE APPLICATION_DATE WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,APPLICATION_DATE ),'MM/dd') END  AS APPLICATION_DATE "
+        StrSQL = StrSQL & "  , CASE SENDING_REQ_DATE WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,SENDING_REQ_DATE ),'MM/dd') END  AS SENDING_REQ_DATE "
+        StrSQL = StrSQL & "  , CASE RECEIPT_DATE WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,RECEIPT_DATE ),'MM/dd') END  AS RECEIPT_DATE "
+        StrSQL = StrSQL & "  , CASE EPA_SEND_DATE WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,EPA_SEND_DATE ),'MM/dd') END  AS EPA_SEND_DATE "
+        StrSQL = StrSQL & "  , TRK_NO  "
+        StrSQL = StrSQL & "FROM T_EXL_EPA_KANRI "
+        If strValue = "False" Then
+            StrSQL = StrSQL & "WHERE STATUS = '01' "
+        End If
+        StrSQL = StrSQL & "ORDER BY BLDATE, INV"
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class
