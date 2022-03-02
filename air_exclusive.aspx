@@ -115,7 +115,7 @@
         }
         .wrapper {
           overflow: scroll;
-          height: 480px;
+          height: 470px;
           width: calc(100% - 360px);
         }
         .flex{
