@@ -198,8 +198,9 @@ Partial Class cs_home
             strSQL = strSQL & "GROUP BY "
             strSQL = strSQL & "  CUST_CD , INVOICE_NO)AA "
             strSQL = strSQL & "WHERE AA.FINAL_VAN = '" & strDate & "') AAA "
-            strSQL = strSQL & "ON VSD.IVNO LIKE '%' + LEFT(AAA.INVOICE_NO,4) + '%' "
-            strSQL = strSQL & "WHERE VSD.IVNO LIKE '%" & strCode & "%' "
+            '            strSQL = strSQL & "ON VSD.IVNO LIKE '%' + LEFT(AAA.INVOICE_NO,4) + '%' "
+            strSQL = strSQL & "On AAA.INVOICE_NO Like '%' + RIGHT(VSD.IVNO,4) + '%'  "
+            strSQL = strSQL & "WHERE VSD.IVNO Like '%" & strCode & "%' "
             strSQL = strSQL & "ORDER BY PLACE, VAN_DATE, VAN_TIME "
 
             'ＳＱＬコマンド作成 
