@@ -29,6 +29,8 @@ Partial Class yuusen
         Public Property label2 As String
         Public Property label3 As String
 
+        Public Property labelZ1 As String
+
         Public Property value As String
         Public Property value2 As String
         Public Property value3 As String
@@ -54,6 +56,9 @@ Partial Class yuusen
         Public Property value23 As String
         Public Property value24 As String
         Public Property value25 As String
+
+        Public Property valueZ1 As String
+        Public Property valueZ2 As String
 
 
         Public Property color As String
@@ -109,6 +114,46 @@ Partial Class yuusen
         Return t
     End Function
 
+    <WebMethod()>
+    Public Shared Function getTrafficSourceData2() As List(Of trafficSourceData)
+        '    Public Shared Function getTrafficSourceData(ByVal gData As List(Of String)) As List(Of trafficSourceData)
+
+        Dim tt As List(Of trafficSourceData) = New List(Of trafficSourceData)()
+
+        Dim arrColor As String() = New String() {"#0068B7", "#F39800", "#FFF100", "#009944", "#E60012", "#1D2088", "#920783", "#16F27E", "#FC9775", "#5A69A6"} '
+        Using cn2 As SqlConnection = New SqlConnection("Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
+
+            Dim myQuery2 As String = "select KBN,ZANKIN from T_EXL_GRAPH_KDSINTYOKU "
+            Dim cmd2 As SqlCommand = New SqlCommand()
+            cmd2.CommandText = myQuery2
+            cmd2.CommandType = CommandType.Text
+            cmd2.Connection = cn2
+            cn2.Open()
+            Dim dr2 As SqlDataReader = cmd2.ExecuteReader()
+
+            If dr2.HasRows Then
+                Dim counter2 As Integer = 0
+
+                While dr2.Read()
+                    Dim tsData2 As trafficSourceData = New trafficSourceData()
+                    tsData2.valueZ1 = Double.Parse(dr2("ZANKIN"))
+                    tsData2.labelZ1 = dr2("KBN").ToString()
+
+                    tsData2.color = arrColor(counter2)
+                    tt.Add(tsData2)
+                    counter2 += 1
+                End While
+            End If
+
+
+
+
+        End Using
+
+
+
+        Return tt
+    End Function
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 
 
@@ -139,6 +184,25 @@ Partial Class yuusen
         Dim wval13 As String = ""
         Dim wval14 As String = ""
         Dim wval15 As String = ""
+
+        Dim sumval1 As Double
+        Dim sumval2 As Double
+        Dim sumval3 As Double
+        Dim sumval4 As Double
+        Dim sumval5 As Integer
+        Dim sumval6 As Integer
+        Dim sumval7 As Integer
+        Dim sumval8 As Integer
+        Dim sumval9 As Integer
+        Dim sumval10 As Integer
+        Dim sumval11 As Integer
+        Dim sumval12 As Integer
+        Dim sumval13 As Integer
+        Dim sumval14 As Integer
+        Dim sumval15 As Integer
+        Dim sumval16 As Integer
+
+
 
         Dim dt1 As DateTime = DateTime.Now
 
@@ -228,8 +292,7 @@ Partial Class yuusen
         dataread.Close()
         dbcmd.Dispose()
 
-        cnn.Close()
-        cnn.Dispose()
+
         TextBox1.Text = wval00
         TextBox2.Text = wval01
         TextBox3.Text = wval02
@@ -246,6 +309,188 @@ Partial Class yuusen
         TextBox14.Text = wval13
         TextBox15.Text = wval14
 
+
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT * FROM T_EXL_HYOU_SINTYOKU WHERE "
+        strSQL = strSQL & "KBN = 'アフタ' "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+
+            Label1.Text = dataread("KBN")
+            Label2.Text = Double.Parse(dataread("BO")).ToString("#,0")
+            Label3.Text = Double.Parse(dataread("ODR_T_T")).ToString("#,0")
+            Label4.Text = Double.Parse(dataread("ODR_T_O")).ToString("#,0")
+            Label5.Text = Double.Parse(dataread("ODR_T_S")).ToString("#,0")
+            Label6.Text = Double.Parse(dataread("ODR_T_T_N")).ToString("#,0")
+            Label7.Text = Double.Parse(dataread("SHIP_SEN")).ToString("#,0")
+            Label8.Text = Double.Parse(dataread("SHIP_T")).ToString("#,0")
+            Label9.Text = Double.Parse(dataread("SHIP_O")).ToString("#,0")
+            Label10.Text = Double.Parse(dataread("SHIP_S")).ToString("#,0")
+            Label11.Text = Double.Parse(dataread("SHIP_SEN_N")).ToString("#,0")
+            Label12.Text = Double.Parse(dataread("SHIP_SUM")).ToString("#,0")
+            Label13.Text = Double.Parse(dataread("ZAN_T")).ToString("#,0")
+            Label14.Text = Double.Parse(dataread("ZAN_T_T_N")).ToString("#,0")
+            Label15.Text = Double.Parse(dataread("ZAN_SUM")).ToString("#,0")
+
+            sumval1 = Double.Parse(dataread("BO")).ToString("N")
+            sumval2 = Double.Parse(dataread("ODR_T_T")).ToString("N")
+            sumval3 = Double.Parse(dataread("ODR_T_O")).ToString("N")
+            sumval4 = Double.Parse(dataread("ODR_T_S")).ToString("N")
+            sumval5 = Double.Parse(dataread("ODR_T_T_N")).ToString("N")
+            sumval6 = Double.Parse(dataread("SHIP_SEN")).ToString("N")
+            sumval7 = Double.Parse(dataread("SHIP_T")).ToString("N")
+            sumval8 = Double.Parse(dataread("SHIP_O")).ToString("N")
+            sumval9 = Double.Parse(dataread("SHIP_S")).ToString("N")
+            sumval10 = Double.Parse(dataread("SHIP_SEN_N")).ToString("N")
+            sumval11 = Double.Parse(dataread("SHIP_SUM")).ToString("N")
+            sumval12 = Double.Parse(dataread("ZAN_T")).ToString("N")
+            sumval13 = Double.Parse(dataread("ZAN_T_T_N")).ToString("N")
+            sumval14 = Double.Parse(dataread("ZAN_SUM")).ToString("N")
+
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT * FROM T_EXL_HYOU_SINTYOKU WHERE "
+        strSQL = strSQL & "KBN = 'KD' "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+
+            Label16.Text = dataread("KBN")
+            Label17.Text = Double.Parse(dataread("BO")).ToString("#,0")
+            Label18.Text = Double.Parse(dataread("ODR_T_T")).ToString("#,0")
+            Label19.Text = Double.Parse(dataread("ODR_T_O")).ToString("#,0")
+            Label20.Text = Double.Parse(dataread("ODR_T_S")).ToString("#,0")
+            Label21.Text = Double.Parse(dataread("ODR_T_T_N")).ToString("#,0")
+            Label22.Text = Double.Parse(dataread("SHIP_SEN")).ToString("#,0")
+            Label23.Text = Double.Parse(dataread("SHIP_T")).ToString("#,0")
+            Label24.Text = Double.Parse(dataread("SHIP_O")).ToString("#,0")
+            Label25.Text = Double.Parse(dataread("SHIP_S")).ToString("#,0")
+            Label26.Text = Double.Parse(dataread("SHIP_SEN_N")).ToString("#,0")
+            Label27.Text = Double.Parse(dataread("SHIP_SUM")).ToString("#,0")
+            Label28.Text = Double.Parse(dataread("ZAN_T")).ToString("#,0")
+            Label29.Text = Double.Parse(dataread("ZAN_T_T_N")).ToString("#,0")
+            Label30.Text = Double.Parse(dataread("ZAN_SUM")).ToString("#,0")
+
+            sumval1 = sumval1 + Double.Parse(dataread("BO")).ToString("N")
+            sumval2 = sumval2 + Double.Parse(dataread("ODR_T_T")).ToString("N")
+            sumval3 = sumval3 + Double.Parse(dataread("ODR_T_O")).ToString("N")
+            sumval4 = sumval4 + Double.Parse(dataread("ODR_T_S")).ToString("N")
+            sumval5 = sumval5 + Double.Parse(dataread("ODR_T_T_N")).ToString("N")
+            sumval6 = sumval6 + Double.Parse(dataread("SHIP_SEN")).ToString("N")
+            sumval7 = sumval7 + Double.Parse(dataread("SHIP_T")).ToString("N")
+            sumval8 = sumval8 + Double.Parse(dataread("SHIP_O")).ToString("N")
+            sumval9 = sumval9 + Double.Parse(dataread("SHIP_S")).ToString("N")
+            sumval10 = sumval10 + Double.Parse(dataread("SHIP_SEN_N")).ToString("N")
+            sumval11 = sumval11 + Double.Parse(dataread("SHIP_SUM")).ToString("N")
+            sumval12 = sumval12 + Double.Parse(dataread("ZAN_T")).ToString("N")
+            sumval13 = sumval13 + Double.Parse(dataread("ZAN_T_T_N")).ToString("N")
+            sumval14 = sumval14 + Double.Parse(dataread("ZAN_SUM")).ToString("N")
+
+
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT * FROM T_EXL_HYOU_SINTYOKU WHERE "
+        strSQL = strSQL & "KBN = '上野' "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+
+            Label31.Text = dataread("KBN")
+            Label32.Text = Double.Parse(dataread("BO")).ToString("#,0")
+            Label33.Text = Double.Parse(dataread("ODR_T_T")).ToString("#,0")
+            Label34.Text = Double.Parse(dataread("ODR_T_O")).ToString("#,0")
+            Label35.Text = Double.Parse(dataread("ODR_T_S")).ToString("#,0")
+            Label36.Text = Double.Parse(dataread("ODR_T_T_N")).ToString("#,0")
+            Label37.Text = Double.Parse(dataread("SHIP_SEN")).ToString("#,0")
+            Label38.Text = Double.Parse(dataread("SHIP_T")).ToString("#,0")
+            Label39.Text = Double.Parse(dataread("SHIP_O")).ToString("#,0")
+            Label40.Text = Double.Parse(dataread("SHIP_S")).ToString("#,0")
+            Label41.Text = Double.Parse(dataread("SHIP_SEN_N")).ToString("#,0")
+            Label42.Text = Double.Parse(dataread("SHIP_SUM")).ToString("#,0")
+            Label43.Text = Double.Parse(dataread("ZAN_T")).ToString("#,0")
+            Label44.Text = Double.Parse(dataread("ZAN_T_T_N")).ToString("#,0")
+            Label45.Text = Double.Parse(dataread("ZAN_SUM")).ToString("#,0")
+
+            sumval1 = sumval1 + Double.Parse(dataread("BO")).ToString("N")
+            sumval2 = sumval2 + Double.Parse(dataread("ODR_T_T")).ToString("N")
+            sumval3 = sumval3 + Double.Parse(dataread("ODR_T_O")).ToString("N")
+            sumval4 = sumval4 + Double.Parse(dataread("ODR_T_S")).ToString("N")
+            sumval5 = sumval5 + Double.Parse(dataread("ODR_T_T_N")).ToString("N")
+            sumval6 = sumval6 + Double.Parse(dataread("SHIP_SEN")).ToString("N")
+            sumval7 = sumval7 + Double.Parse(dataread("SHIP_T")).ToString("N")
+            sumval8 = sumval8 + Double.Parse(dataread("SHIP_O")).ToString("N")
+            sumval9 = sumval9 + Double.Parse(dataread("SHIP_S")).ToString("N")
+            sumval10 = sumval10 + Double.Parse(dataread("SHIP_SEN_N")).ToString("N")
+            sumval11 = sumval11 + Double.Parse(dataread("SHIP_SUM")).ToString("N")
+            sumval12 = sumval12 + Double.Parse(dataread("ZAN_T")).ToString("N")
+            sumval13 = sumval13 + Double.Parse(dataread("ZAN_T_T_N")).ToString("N")
+            sumval14 = sumval14 + Double.Parse(dataread("ZAN_SUM")).ToString("N")
+
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        Label65.Text = sumval1.ToString("#,0")
+        Label66.Text = sumval2.ToString("#,0")
+        Label67.Text = sumval3.ToString("#,0")
+        Label68.Text = sumval4.ToString("#,0")
+        Label69.Text = sumval5.ToString("#,0")
+        Label70.Text = sumval6.ToString("#,0")
+        Label71.Text = sumval7.ToString("#,0")
+        Label72.Text = sumval8.ToString("#,0")
+        Label73.Text = sumval9.ToString("#,0")
+        Label74.Text = sumval10.ToString("#,0")
+        Label75.Text = sumval11.ToString("#,0")
+        Label76.Text = sumval12.ToString("#,0")
+        Label77.Text = sumval13.ToString("#,0")
+        Label78.Text = sumval14.ToString("#,0")
+
+
+
+
+
+
+
+
+
+
+        cnn.Close()
+        cnn.Dispose()
 
 
     End Sub

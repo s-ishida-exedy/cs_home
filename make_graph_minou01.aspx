@@ -43,6 +43,7 @@
 
         table{
           width: 100%;
+          text-align: right;
         }
         th {
           position: sticky;
@@ -367,6 +368,9 @@ h2:after{
 <td style="width:450px;Font-Size:25px;" >
 <h2>未納金額（アフタ）</h2>
 </td>
+
+    <asp:Button ID="Button1" runat="server" Text="データ出力" />
+
 </tr>
 </table>
 
@@ -401,7 +405,7 @@ h2:after{
 
 <tbody>
 
-<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width = "1250px" DataSourceID="SqlDataSource1" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+<asp:GridView ID="GridView1"  runat="server" AutoGenerateColumns="False" Width = "1250px" DataSourceID="SqlDataSource1" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" horizontalalign="right" >
 
 <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
 <AlternatingRowStyle BackColor="#ffffff" />
@@ -409,7 +413,7 @@ h2:after{
 
 <asp:BoundField DataField="CUSTCODE" HeaderText="客先コード" SortExpression="CUSTCODE" >
 </asp:BoundField>
-<asp:BoundField DataField="MINOU" HeaderText="未納金額"　DataFormatString="{0:N0}" SortExpression="MINOU"  >
+<asp:BoundField DataField="MINOU" HeaderText="未納金額"　SortExpression="MINOU"  >
 </asp:BoundField>
 <asp:BoundField DataField="RED" HeaderText="赤処理金額" SortExpression="RED" >
 </asp:BoundField>
@@ -427,7 +431,7 @@ h2:after{
 
 </asp:GridView>
 
-<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CUSTCODE], [MINOU], [RED], [DELAY], [ADJ], [ACM] FROM [T_EXL_GRAPH_MINOU_AM]"></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CUSTCODE], [MINOU], [RED], [DELAY], [ADJ], [ACM] FROM [T_EXL_GRAPH_MINOU_AM] WHERE [CUSTCODE] <>'' "></asp:SqlDataSource>
 
 </tbody>
 </table>

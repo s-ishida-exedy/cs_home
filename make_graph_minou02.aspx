@@ -40,6 +40,7 @@
 
         table{
           width: 100%;
+          text-align: right;
         }
         th {
           position: sticky;
@@ -361,6 +362,10 @@ h2:after{
 <td style="width:450px;Font-Size:25px;" >
 <h2>未納金額（KD）</h2>
 </td>
+
+
+    <asp:Button ID="Button1" runat="server" Text="データ出力" />
+
 </tr>
 </table>
 
@@ -421,7 +426,7 @@ h2:after{
 
 </asp:GridView>
 
-<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CUSTCODE], [MINOU], [RED], [DELAY], [ADJ], [ACM] FROM [T_EXL_GRAPH_MINOU_KD]"></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CUSTCODE], [MINOU], [RED], [DELAY], [ADJ], [ACM] FROM [T_EXL_GRAPH_MINOU_KD]  WHERE [CUSTCODE] <>'' "></asp:SqlDataSource>
 
 </tbody>
 </table>
