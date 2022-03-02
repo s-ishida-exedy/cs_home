@@ -239,6 +239,9 @@
                 <asp:BoundField DataField="VOYAGE_NO" HeaderText="VoyNo" SortExpression="VOYAGE_NO" >
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
+                <asp:BoundField DataField="SEQ_NO02" HeaderText="近鉄はHBLNO" SortExpression="SEQ_NO02" >
+                <ItemStyle Font-Size="Small" />
+                </asp:BoundField>
             </Columns>
             <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
