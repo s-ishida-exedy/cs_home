@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.VisualBasic
+Imports System.Data.SqlClient
 Imports System.Data.Common
 Imports System.Data
 Public Class DBAccess
@@ -350,43 +351,43 @@ Public Class DBAccess
         Return Ds
     End Function
 
-    Public Function GET_BOOKING_DATA(strFwd As String, strCust As String, strIV As String) As DataSet
+    Public Function GET_BOOKING_DATA(strSts As String, strFwd As String, strCust As String, strIV As String) As DataSet
+        'Public Function GET_BOOKING_DATA(strSts As String, strFwd As String, strCust As String, strIV As String) As DataSet
         'ブッキングデータ絞り込み
         Conn = Me.Dbconnect
-        Cmd = Conn.CreateCommand
 
+        Dim cmd = New SqlCommand()
+
+        cmd.Connection = Conn
+        cmd.CommandType = System.Data.CommandType.Text
+
+        'データソースで実行するTransact-SQLステートメントを指定
         StrSQL = StrSQL & ""
         StrSQL = StrSQL & "SELECT * "
         StrSQL = StrSQL & "FROM T_BOOKING "
+        StrSQL = StrSQL & "WHERE STATUS like @STATUS "
+        StrSQL = StrSQL & "AND   Forwarder like @Forwarder "
+        StrSQL = StrSQL & "AND   CUST_CD like @CUST_CD "
+        StrSQL = StrSQL & "AND   INVOICE_NO like @INVOICE_NO "
 
-        If strFwd <> "" And strCust = "" And strIV = "" Then
-            StrSQL = StrSQL & "WHERE Forwarder = '" & strFwd & "' "
-        ElseIf strFwd <> "" And strCust <> "" And strIV = "" Then
-            StrSQL = StrSQL & "WHERE Forwarder = '" & strFwd & "' "
-            StrSQL = StrSQL & "    AND CUST_CD like '%" & strCust & "%' "
-        ElseIf strFwd <> "" And strCust = "" And strIV <> "" Then
-            StrSQL = StrSQL & "WHERE Forwarder = '" & strFwd & "' "
-            StrSQL = StrSQL & "    AND INVOICE_NO like '%" & strIV & "%' "
-        ElseIf strFwd <> "" And strCust <> "" And strIV <> "" Then
-            StrSQL = StrSQL & "WHERE Forwarder = '" & strFwd & "' "
-            StrSQL = StrSQL & "    AND CUST_CD like '%" & strCust & "%' "
-            StrSQL = StrSQL & "    AND INVOICE_NO like '%" & strIV & "%' "
-        ElseIf strFwd = "" And strCust <> "" And strIV = "" Then
-            StrSQL = StrSQL & "WHERE CUST_CD like '%" & strCust & "%' "
-        ElseIf strFwd = "" And strCust <> "" And strIV <> "" Then
-            StrSQL = StrSQL & "WHERE CUST_CD like '%" & strCust & "%' "
-            StrSQL = StrSQL & "    AND INVOICE_NO like '%" & strIV & "%' "
-        ElseIf strFwd = "" And strCust = "" And strIV <> "" Then
-            StrSQL = StrSQL & "WHERE INVOICE_NO like '%" & strIV & "%' "
-        End If
-
-        Cmd.CommandText = StrSQL
+        cmd.CommandText = StrSQL
+        cmd.Parameters.Clear()
+        'パラメータ値を設定
+        cmd.Parameters.Add("@STATUS", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strSts & "%"
+        cmd.Parameters.Add("@Forwarder", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strFwd & "%"
+        cmd.Parameters.Add("@CUST_CD", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strCust & "%"
+        cmd.Parameters.Add("@INVOICE_NO", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strIV & "%"
 
         Da = Factroy.CreateDataAdapter()
-        Da.SelectCommand = Cmd
+        Da.SelectCommand = cmd
+
+        cmd.Dispose()
+        Conn.Close()
+
         Ds = New DataSet
         Da.Fill(Ds)
         Return Ds
+
     End Function
 
     Public Function GET_AIR_DATA(strValue() As String, strChk As String, strMode As String) As DataSet

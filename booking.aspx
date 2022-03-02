@@ -96,15 +96,19 @@
         }
 
         th {
-          position: sticky;
-          top: 0;
-          z-index: 0;
-          background-color: #000084;
-          color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 0;
+            background-color: #000084;
+            color: #ffffff;
         }
         .wrapper {
-          overflow: scroll;
-          height: 450px;
+            overflow: scroll;
+            height: 450px;
+        }
+        .DropDownList{
+            text-align :center;
+            font-size :small;
         }
 </style>
 <script>
@@ -150,13 +154,14 @@
                 <h2>Booking Sheet</h2> 
             </td>
             <td class="second-cell">
-                <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="Forwarder" DataValueField="Forwarder" AutoPostBack ="true" Width ="200px"></asp:DropDownList> 
-                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [Forwarder] FROM [T_BOOKING]"></asp:SqlDataSource>
+                <asp:DropDownList ID="DropDownList1" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource3" DataTextField="STATUS" DataValueField="STATUS" AutoPostBack ="True" Width ="100px"></asp:DropDownList> 
+                <asp:DropDownList ID="DropDownList2" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="Forwarder" DataValueField="Forwarder" AutoPostBack ="true" Width ="200px"></asp:DropDownList> 
                 &nbsp;
                 <asp:Label ID="Label1" runat="server" Text="客先CD:"></asp:Label>
-                <asp:TextBox ID="TextBox1" runat="server" Width ="100"></asp:TextBox>&nbsp;
+                <asp:TextBox ID="TextBox1" runat="server" Width ="100"></asp:TextBox>
                 <asp:Label ID="Label3" runat="server" Text="IVNO:"></asp:Label>
-                <asp:TextBox ID="TextBox2" runat="server" Width ="100"></asp:TextBox>&nbsp;
+                <asp:TextBox ID="TextBox2" runat="server" Width ="100"></asp:TextBox>
+                <br />
                 <asp:Button ID="Button1" runat="server" Text=" 絞込 " Font-Size="Small" Width ="80" />
                 <asp:Button ID="Button2" runat="server" Text=" ﾘｾｯﾄ " Font-Size="Small" Width ="80" />
             </td>
@@ -245,15 +250,15 @@
             <SortedDescendingHeaderStyle BackColor="#000065" />--%>
         </asp:GridView>
 
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [t_booking]"></asp:SqlDataSource>
-    
-    
-<%--</div>--%>
-<!--/#main2-->
-
 </tbody>
 </table>
 </div>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [t_booking]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [Forwarder] FROM [T_BOOKING]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT STATUS FROM T_BOOKING"></asp:SqlDataSource>
+<%--</div>--%>
+<!--/#main2-->
+
 
 </div>
 <!--/#contents2-->

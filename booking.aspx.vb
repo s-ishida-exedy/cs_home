@@ -26,7 +26,8 @@ Partial Class cs_home
         If IsPostBack Then
             ' そうでない時処理
         Else
-            Me.DropDownList1.Items.Insert(0, "") '先頭に空白行追加
+            Me.DropDownList1.Items.Insert(0, "-ｽﾃｰﾀｽ-") '先頭に空白行追加
+            Me.DropDownList2.Items.Insert(0, "-海貨業者-") '先頭に空白行追加
         End If
 
         Me.Label2.Text = ""
@@ -74,10 +75,18 @@ Partial Class cs_home
         'GRIDを作成する。
 
         Dim Dataobj As New DBAccess
-        Dim strFwd As String = DropDownList1.SelectedValue
+        Dim strSts As String = DropDownList1.SelectedValue
+        Dim strFwd As String = DropDownList2.SelectedValue
+
+        If strSts = "-ｽﾃｰﾀｽ-" Then
+            strSts = ""
+        End If
+        If strFwd = "-海貨業者-" Then
+            strFwd = ""
+        End If
 
         'データの取得
-        Dim ds As DataSet = Dataobj.GET_BOOKING_DATA(strFwd, Me.TextBox1.Text, Me.TextBox2.Text)
+        Dim ds As DataSet = Dataobj.GET_BOOKING_DATA(strSts, strFwd, Me.TextBox1.Text, Me.TextBox2.Text)
         If ds.Tables.Count > 0 Then
             GridView1.DataSourceID = ""
             GridView1.DataSource = ds
@@ -86,6 +95,11 @@ Partial Class cs_home
     End Sub
 
     Private Sub DropDownList1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList1.SelectedIndexChanged
+        'ステータス選択
+        Call Make_Grid()
+    End Sub
+
+    Private Sub DropDownList2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList2.SelectedIndexChanged
         '海貨業者選択
         Call Make_Grid()
     End Sub
@@ -98,9 +112,11 @@ Partial Class cs_home
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         'リセットボタン押下
         DropDownList1.SelectedIndex = 0
+        DropDownList2.SelectedIndex = 0
         TextBox1.Text = ""
         TextBox2.Text = ""
 
         Make_Grid()
     End Sub
+
 End Class
