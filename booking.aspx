@@ -21,10 +21,10 @@
         .first-cell {
             text-align:left;
             font-size:25px;
-            width: 250px;
+            width: 350px;
         }
         .second-cell {
-            width: 850px;
+            width: 750px;
         }   
         .third-cell {
             width: 250px;

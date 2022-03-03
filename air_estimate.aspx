@@ -102,6 +102,9 @@
             color:red;
             font-weight :700;
         }
+        .DropDownList{
+            text-align :center;
+        }
 </style>
 <script>
     // カレンダー
@@ -154,7 +157,7 @@
                 </td>
                 <td class="second-cell">
                     <asp:Label ID="Label3" runat="server" Text="依頼者："></asp:Label>
-                    <asp:DropDownList ID="DropDownList5" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="NAME_AB" DataValueField="NAME_AB" Width="170px" ></asp:DropDownList>
+                    <asp:DropDownList ID="DropDownList5" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="NAME_AB" DataValueField="NAME_AB" Width="120px" ></asp:DropDownList>
                     &nbsp;
                     <asp:Button ID="Button1" runat="server" Text="　メール作成　" style="width:164px" Font-Size="Small" />
                     &nbsp;

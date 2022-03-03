@@ -153,7 +153,12 @@
         .err{
             color:red;
             font-weight :700;
-        }</style>
+        }
+        .DropDownList{
+            text-align :center;
+            font-size :small;
+        }
+</style>
 <script>
     // カレンダー
     jQuery(function ($) {
@@ -211,7 +216,7 @@
             <td class="ex-cell">
                 &nbsp;
                 <asp:Label ID="Label14" runat="server" Text="登録済みAIR専用客先：" Font-Size="Small"></asp:Label>
-                <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="SqlDataSource3" DataTextField="CUST_CD" DataValueField="CUST_CD" Font-Size="Small"></asp:DropDownList>
+                <asp:DropDownList ID="DropDownList2" class="DropDownList" runat="server" DataSourceID="SqlDataSource3" DataTextField="CUST_CD" DataValueField="CUST_CD"></asp:DropDownList>
                 <br/>
                 &nbsp;
                 <asp:TextBox ID="TextBox1" runat="server" Width="80px"></asp:TextBox>
@@ -298,7 +303,7 @@ ORDER BY NOUKI"></asp:SqlDataSource>
 </table>
 <div class="right">
     <asp:Label ID="Label13" runat="server" Text="更新者："></asp:Label>&nbsp;
-    <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="NAME_AB" DataValueField="NAME_AB" Width="170px"  Font-Size="Small"></asp:DropDownList><br />
+    <asp:DropDownList ID="DropDownList1" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="NAME_AB" DataValueField="NAME_AB" Width="120px"></asp:DropDownList><br />
     <asp:Label ID="Label1" runat="server" Text="更新対象："></asp:Label>&nbsp;
     <asp:Button ID="Button1" runat="server" Text="まとめて更新" width="200px" Font-Size="Small" />
     <table class="tab1">

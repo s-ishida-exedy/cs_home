@@ -73,6 +73,10 @@
           overflow: scroll;
           height: 450px;
         }
+        .DropDownList{
+            text-align :center;
+            font-size :small;
+        }
 </style>
 <script>
     $(document).ready(function () {
@@ -117,11 +121,11 @@
                 <h2>バンニングスケジュール</h2> 
             </td>
             <td class="second-cell">
-                <asp:Button ID="Button1" runat="server" Text="　ファイルダウンロード　" Font-Size="Small" />&nbsp;
                 <asp:Label ID="Label1" runat="server" Text="絞り込み："></asp:Label>
-                <asp:DropDownList ID="DropDownList2" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="164px" DataSourceID="SqlDataSource3" DataTextField="VAN_DATE" DataValueField="VAN_DATE"></asp:DropDownList>
-                <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="164px" DataSourceID="SqlDataSource2" DataTextField="場所" DataValueField="場所"></asp:DropDownList>&nbsp;
-                <asp:Button ID="Button2" runat="server" Text="ﾘｾｯﾄ" Font-Size="Small" />
+                <asp:DropDownList ID="DropDownList2" class="DropDownList" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="164px" DataSourceID="SqlDataSource3" DataTextField="VAN_DATE" DataValueField="VAN_DATE"></asp:DropDownList>
+                <asp:DropDownList ID="DropDownList1" class="DropDownList" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="164px" DataSourceID="SqlDataSource2" DataTextField="場所" DataValueField="場所"></asp:DropDownList>&nbsp;
+                <asp:Button ID="Button2" runat="server" Text="ﾘｾｯﾄ" Font-Size="Small" width="60px" />&nbsp;
+                <asp:Button ID="Button1" runat="server" Text="ファイルダウンロード" Font-Size="Small" width="160px"/>
             </td>
             <td class="third-cell">
                 <asp:Label ID="Label2" runat="server" Text="Labe2" ></asp:Label>
@@ -143,14 +147,28 @@
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
         <Columns>
-            <asp:BoundField DataField="場所" HeaderText="場所" ReadOnly="True" SortExpression="場所" />
-            <asp:BoundField DataField="客先名" HeaderText="客先名" SortExpression="客先名" />
-            <asp:BoundField DataField="VAN日" HeaderText="VAN日" SortExpression="VAN日" />
-            <asp:BoundField DataField="ｽﾀｰﾄ" HeaderText="ｽﾀｰﾄ" SortExpression="ｽﾀｰﾄ" />
-            <asp:BoundField DataField="コンテナサイズ" HeaderText="コンテナサイズ" SortExpression="コンテナサイズ" />
+            <asp:BoundField DataField="場所" HeaderText="場所" ReadOnly="True" SortExpression="場所" >
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
+            <asp:BoundField DataField="客先名" HeaderText="客先名" SortExpression="客先名" >
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
+            <asp:BoundField DataField="VAN日" HeaderText="VAN日" SortExpression="VAN日" >
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
+            <asp:BoundField DataField="ｽﾀｰﾄ" HeaderText="ｽﾀｰﾄ" SortExpression="ｽﾀｰﾄ" >
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
+            <asp:BoundField DataField="コンテナサイズ" HeaderText="コンテナサイズ" SortExpression="コンテナサイズ" >
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
             <asp:BoundField DataField="インボイスNO" HeaderText="インボイスNO" SortExpression="インボイスNO" />
-            <asp:BoundField DataField="カット日" HeaderText="カット日" SortExpression="カット日" />
-            <asp:BoundField DataField="ＥＴＤ" HeaderText="ＥＴＤ" SortExpression="ＥＴＤ" />
+            <asp:BoundField DataField="カット日" HeaderText="カット日" SortExpression="カット日" >
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
+            <asp:BoundField DataField="ＥＴＤ" HeaderText="ＥＴＤ" SortExpression="ＥＴＤ" >
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
             <asp:BoundField DataField="最終" HeaderText="最終" SortExpression="最終">
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
