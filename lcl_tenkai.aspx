@@ -86,7 +86,7 @@ h2:after{
   align-items: center;
   margin: 0 auto;
   padding: 0.5em 1em;
-  width: 100px;
+  width: 150px;
   color: #000000;
   font-size: 12px;
   font-weight: 200;
@@ -132,6 +132,16 @@ h2:after{
 
 
     </style>
+
+
+    <script type="text/javascript">
+      function LinkClick() {
+        var url = 'register_lcl_address.aspx?q=' 
+        window.open(url, null);
+      }
+
+    </script>
+
 <script>
     $(document).ready(function () {
         var text = getParam('id');
@@ -243,7 +253,20 @@ h2:after{
 
 </td>
 
-<td style="width:800px;Font-Size:25px;" >
+<td style="width:100px;Font-Size:25px;" >
+
+<div class="button04">
+      <a href="javascript:void(0);" onclick="LinkClick()">LCL住所確認・登録</a>
+</div>    
+
+
+
+</td>
+
+<td style="width:700px;Font-Size:25px;" >
+
+
+
 
 </td>
 
