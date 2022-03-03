@@ -805,6 +805,8 @@ Partial Class cs_home
 
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 
+
+
         Button5.Attributes.Add("onclick", "return confirm('メールを送付します。よろしいですか？');")
         Button6.Attributes.Add("onclick", "return confirm('メールを送付します。よろしいですか？');")
         Button3.Attributes.Add("onclick", "return confirm('メールを送付します。よろしいですか？');")
