@@ -43,7 +43,7 @@
 
         table{
           width: 100%;
-          text-align: right;
+          /*text-align: right;*/
         }
         th {
           position: sticky;
@@ -57,6 +57,19 @@
           height: 400px;
         }
 
+.AA {
+          text-align: right;
+}
+
+
+.BB {
+          text-align: center;
+}
+
+.color01 {
+background-color: red;  
+color: white;
+}  
 
 
 h2 {
@@ -365,14 +378,31 @@ h2:after{
 <div id="contents2" class="inner2">
 <table >
 <tr>
-<td style="width:450px;Font-Size:25px;" >
+<td style="width:450px;Font-Size:25px;" align="left" >
 <h2>未納金額（アフタ）</h2>
 </td>
 
-    <asp:Button ID="Button1" runat="server" Text="データ出力" />
+    <asp:Button ID="Button1" runat="server" Text="EXELE出力" Visible="false" />
 
 </tr>
 </table>
+
+
+
+<table border ="1" class ="BB">
+<tr>
+
+
+    <td>未納金額：<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label> 百万円</td>
+    <td>赤処理金額：<asp:Label ID="Label2" runat="server" Text="Label"></asp:Label> 百万円</td>
+    <td>出港遅延金額：<asp:Label ID="Label5" runat="server" Text="Label"></asp:Label> 百万円</td>
+    <td class="color01">未納金額合計：<asp:Label ID="Label3" runat="server" Text="Label"></asp:Label> 百万円</td>
+    <td>調整金額：<asp:Label ID="Label4" runat="server" Text="Label"></asp:Label> 百万円</td>
+
+
+</tr>
+</table>
+
 
 <table>
 <tr>
@@ -394,24 +424,24 @@ h2:after{
 
 
 
-<asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
+<asp:Panel ID="Panel1" runat="server"  Font-Size="12px" class ="AA">
 
-<div class="wrapper" id="main2">
-<table class="sticky">
-<thead class="fixed">
+<div class="wrapper" id="main2" >
+<table class="sticky"   >
+<thead class="fixed" >
 
 </thead>
+    
 
+<tbody >
 
-<tbody>
-
-<asp:GridView ID="GridView1"  runat="server" AutoGenerateColumns="False" Width = "1250px" DataSourceID="SqlDataSource1" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" horizontalalign="right" >
+<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width = "1250px" DataSourceID="SqlDataSource1" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
 
 <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
 <AlternatingRowStyle BackColor="#ffffff" />
-<Columns>
+<Columns >
 
-<asp:BoundField DataField="CUSTCODE" HeaderText="客先コード" SortExpression="CUSTCODE" >
+<asp:BoundField DataField="CUSTCODE" HeaderText="客先コード" SortExpression="CUSTCODE"  >
 </asp:BoundField>
 <asp:BoundField DataField="MINOU" HeaderText="未納金額"　SortExpression="MINOU"  >
 </asp:BoundField>
