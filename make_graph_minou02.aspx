@@ -40,7 +40,7 @@
 
         table{
           width: 100%;
-          text-align: right;
+          /*text-align: right;*/
         }
         th {
           position: sticky;
@@ -53,6 +53,19 @@
           overflow: scroll;
           height: 400px;
         }
+
+.AA {
+          text-align: right;
+}
+
+.BB {
+          text-align: center;
+}
+
+.color01 {
+background-color: red;  
+color: white;
+}  
 
 h2 {
   padding-left: 45px;
@@ -364,10 +377,31 @@ h2:after{
 </td>
 
 
-    <asp:Button ID="Button1" runat="server" Text="データ出力" />
+    <asp:Button ID="Button1" runat="server" Text="EXELE出力" Visible="false" />
 
 </tr>
 </table>
+
+
+<table border ="1" class ="BB">
+<tr>
+
+
+    <td>未納金額：<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label> 百万円</td>
+    <td>赤処理金額：<asp:Label ID="Label2" runat="server" Text="Label"></asp:Label> 百万円</td>
+    <td>出港遅延金額：<asp:Label ID="Label5" runat="server" Text="Label"></asp:Label> 百万円</td>
+    <td class="color01">未納金額合計：<asp:Label ID="Label3" runat="server" Text="Label"></asp:Label> 百万円</td>
+    <td>調整金額：<asp:Label ID="Label4" runat="server" Text="Label"></asp:Label> 百万円</td>
+
+
+</tr>
+</table>
+
+
+
+
+
+
 
 <table>
 <tr>
@@ -389,7 +423,7 @@ h2:after{
 
 
 
-<asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
+<asp:Panel ID="Panel1" runat="server"  Font-Size="12px" class ="AA">
 
 <div class="wrapper" id="main2">
 <table class="sticky">

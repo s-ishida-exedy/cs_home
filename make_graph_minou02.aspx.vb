@@ -132,4 +132,105 @@ Partial Class yuusen
 
     End Sub
 
+
+    Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
+
+
+
+
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim wval00 As String = ""
+        Dim wval01 As String = ""
+        Dim wval02 As String = ""
+        Dim wval03 As String = ""
+        Dim wval04 As String = ""
+        Dim wval05 As String = ""
+        Dim wval06 As String = ""
+        Dim wval07 As String = ""
+        Dim wval08 As String = ""
+        Dim wval09 As String = ""
+        Dim wval10 As String = ""
+        Dim wval11 As String = ""
+        Dim wval12 As String = ""
+        Dim wval13 As String = ""
+        Dim wval14 As String = ""
+        Dim wval15 As String = ""
+
+        Dim sumval1 As Double
+        Dim sumval2 As Double
+        Dim sumval3 As Double
+        Dim sumval4 As Double
+        Dim sumval5 As Integer
+        Dim sumval6 As Integer
+        Dim sumval7 As Integer
+        Dim sumval8 As Integer
+        Dim sumval9 As Integer
+        Dim sumval10 As Integer
+        Dim sumval11 As Integer
+        Dim sumval12 As Integer
+        Dim sumval13 As Integer
+        Dim sumval14 As Integer
+        Dim sumval15 As Integer
+        Dim sumval16 As Integer
+
+
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT * FROM T_EXL_GRAPH_MINOU_KD WHERE "
+        strSQL = strSQL & "CUSTCODE = '合計' "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+
+
+
+            Label1.Text = Double.Parse(Double.Parse(dataread("MINOU")) / 1000000).ToString("#,0.0")
+            Label2.Text = Double.Parse(Double.Parse(dataread("RED")) / 1000000).ToString("#,0.0")
+            Label3.Text = Double.Parse((Double.Parse(dataread("MINOU")) + Double.Parse(dataread("RED")) + Double.Parse(dataread("ADJ")) + Double.Parse(dataread("DELAY"))) / 1000000).ToString("#,0.0")
+            Label4.Text = Double.Parse(Double.Parse(dataread("ADJ")) / 1000000).ToString("#,0.0")
+            Label5.Text = Double.Parse(Double.Parse(dataread("DELAY")) / 1000000).ToString("#,0.0")
+
+
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+
+
+
+
+
+
+
+    End Sub
+
 End Class
