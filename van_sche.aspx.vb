@@ -16,8 +16,8 @@ Partial Class cs_home
         If IsPostBack Then
             ' そうでない時処理
         Else
-            Me.DropDownList2.Items.Insert(0, "") '先頭に空白行追加（日付）
-            Me.DropDownList1.Items.Insert(0, "") '先頭に空白行追加（場所）
+            Me.DropDownList2.Items.Insert(0, "-VAN日-") '先頭に空白行追加（日付）
+            Me.DropDownList1.Items.Insert(0, "-場所-") '先頭に空白行追加（場所）
         End If
 
         '最終更新年月日取得
@@ -90,7 +90,7 @@ Partial Class cs_home
 
     Private Sub DropDownList1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList1.SelectedIndexChanged
         Dim Dataobj As New DBAccess
-        Dim strDate As String = DropDownList2.SelectedValue
+        Dim strDate As String = ""
         Dim strPlace As String = ""
 
         Select Case DropDownList1.SelectedValue
@@ -101,6 +101,10 @@ Partial Class cs_home
             Case "03:AIR"
                 strPlace = "2A"
         End Select
+
+        If DropDownList2.SelectedValue <> "-VAN日-" Then
+            strDate = DropDownList2.SelectedValue
+        End If
 
         Dim ds As DataSet = Dataobj.GET_RESULT_VAN_SCH(strDate, strPlace)
         If ds.Tables.Count > 0 Then
@@ -115,7 +119,7 @@ Partial Class cs_home
 
     Private Sub DropDownList2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList2.SelectedIndexChanged
         Dim Dataobj As New DBAccess
-        Dim strDate As String = DropDownList2.SelectedValue
+        Dim strDate As String = ""
         Dim strPlace As String = ""
 
         Select Case DropDownList1.SelectedValue
@@ -126,6 +130,10 @@ Partial Class cs_home
             Case "03:AIR"
                 strPlace = "2A"
         End Select
+
+        If DropDownList2.SelectedValue <> "-VAN日-" Then
+            strDate = DropDownList2.SelectedValue
+        End If
 
         Dim ds As DataSet = Dataobj.GET_RESULT_VAN_SCH(strDate, strPlace)
         If ds.Tables.Count > 0 Then

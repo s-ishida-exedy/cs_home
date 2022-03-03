@@ -21,10 +21,10 @@
         .first-cell {
             text-align:left;
             font-size:25px;
-            width: 250px;
+            width: 350px;
         }
         .second-cell {
-            width: 850px;
+            width: 750px;
         }   
         .third-cell {
             width: 250px;
@@ -237,6 +237,9 @@
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="VOYAGE_NO" HeaderText="VoyNo" SortExpression="VOYAGE_NO" >
+                <ItemStyle Font-Size="Small" />
+                </asp:BoundField>
+                <asp:BoundField DataField="SEQ_NO02" HeaderText="近鉄はHBLNO" SortExpression="SEQ_NO02" >
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
             </Columns>

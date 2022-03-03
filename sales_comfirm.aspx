@@ -95,8 +95,9 @@
             top:15px;
             position: absolute;
         }  
-        .cbo{
-            font-size:small ;
+        .DropDownList{
+            text-align :center;
+            font-size :small;
         }
 </style>
 <script>
@@ -149,11 +150,11 @@
                 <h2>海外売上確定チェック</h2>  
             </td>
             <td class="second-cell">
-                <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="100px" Class="cbo">
+                <asp:DropDownList ID="DropDownList1" class="DropDownList" runat="server" AppendDataBoundItems="True" AutoPostBack="true" Width ="100px">
                     <asp:ListItem Selected="True" Value="H">本社</asp:ListItem>
                     <asp:ListItem Value="U">上野</asp:ListItem>
                 </asp:DropDownList>
-                <asp:DropDownList ID="DropDownList2" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="SHIPCD" DataValueField="SHIPCD" AutoPostBack ="true" Width ="150px" Class="cbo"></asp:DropDownList> 
+                <asp:DropDownList ID="DropDownList2" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="SHIPCD" DataValueField="SHIPCD" AutoPostBack ="true" Width ="150px"></asp:DropDownList> 
                 <asp:TextBox ID="TextBox1" runat="server" Width="160px" Height="18px" class="date2" Font-Size="small"></asp:TextBox>
                 <asp:Label ID="Label1" runat="server" Text="～"></asp:Label>
                 <asp:TextBox ID="TextBox2" runat="server" Width="160px" Height="18px" class="date2" Font-Size="small"></asp:TextBox>
