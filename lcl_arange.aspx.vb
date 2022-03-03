@@ -366,6 +366,33 @@ Partial Class cs_home
                 dbcmd.Dispose()
 
 
+                'strSQL = ""
+                'strSQL = strSQL & "SELECT ADDRESS,REF01,REF02 FROM T_EXL_LCLADDRESS WHERE "
+                'strSQL = strSQL & "T_EXL_LCLADDRESS.ADDRESS = '" & straddress & "' "
+
+
+                ''ＳＱＬコマンド作成 
+                'dbcmd = New SqlCommand(strSQL, cnn)
+                ''ＳＱＬ文実行 
+                'dataread = dbcmd.ExecuteReader()
+
+                'straddress = ""
+
+                'While (dataread.Read())
+
+                '    straddress = dataread("ADDRESS") & " " & dataread("REF01") & " " & dataread("REF02")
+
+
+                'End While
+
+                ''クローズ処理 
+                'dataread.Close()
+                'dbcmd.Dispose()
+
+
+
+
+
                 If straddress = "" Then
 
 
@@ -388,10 +415,36 @@ Partial Class cs_home
 
                     End While
 
+
+
+
                     'クローズ処理 
                     dataread.Close()
                     dbcmd.Dispose()
 
+
+                    'strSQL = ""
+                    'strSQL = strSQL & "SELECT ADDRESS,REF01,REF02 FROM T_EXL_LCLADDRESS WHERE "
+                    'strSQL = strSQL & "T_EXL_LCLADDRESS.ADDRESS = '" & straddress & "' "
+
+
+                    ''ＳＱＬコマンド作成 
+                    'dbcmd = New SqlCommand(strSQL, cnn)
+                    ''ＳＱＬ文実行 
+                    'dataread = dbcmd.ExecuteReader()
+
+                    'straddress = ""
+
+                    'While (dataread.Read())
+
+                    '    straddress = dataread("ADDRESS") & " " & dataread("REF01") & " " & dataread("REF02")
+
+
+                    'End While
+
+                    ''クローズ処理 
+                    'dataread.Close()
+                    'dbcmd.Dispose()
 
 
                 End If
