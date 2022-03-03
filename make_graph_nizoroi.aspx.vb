@@ -67,9 +67,9 @@ Partial Class yuusen
 
                 While dr.Read()
                     Dim tsData As trafficSourceData = New trafficSourceData()
-                    tsData.value = Double.Parse(dr("RDY02")) + Double.Parse(dr("RDY_BO02")) * 100
+                    tsData.value = (Double.Parse(dr("RDY02")) + Double.Parse(dr("RDY_BO02"))) * 100
                     tsData.label = dr("TITLE01").ToString()
-                    tsData.value2 = Double.Parse(dr("VAN02")) + Double.Parse(dr("VAN_BO02")) * 100
+                    tsData.value2 = (Double.Parse(dr("VAN02")) + Double.Parse(dr("VAN_BO02"))) * 100
                     tsData.value3 = Double.Parse(dr("INVTRY")) * 100
                     tsData.value4 = Double.Parse(dr("NON_INVTRY")) * 100
 

@@ -269,41 +269,43 @@
 
 
 
-
                     options: {
                         responsive: false,
                         scales: {                          // 軸設定
                             xAxes: [                           // Ｘ軸設定
 
                                 {
-                                    stacked: "100", //積み上げ棒グラフにする設定
+                                    stacked: true, //積み上げ棒グラフにする設定
                                     scaleLabel: {                 // 軸ラベル
                                         display: true,                // 表示設定
                                         labelString: '%',    // ラベル
                                         //fontColor: "red",             // 文字の色
-                                        //fontSize: 16                  // フォントサイズ
+                                        fontSize: 18                  // フォントサイズ
                                     },
                                     gridLines: {                   // 補助線
                                         //color: "rgba(255, 0, 0, 0.2)", // 補助線の色
                                     },
                                     ticks: {                      // 目盛り
                                         //fontColor: "red",             // 目盛りの色
-                                        //fontSize: 14                  // フォントサイズ
+                                        //max: 20,                       // 最大値
+                                        stepSize: 10,                   // 軸間隔
+
+                                        fontSize: 14                  // フォントサイズ
                                     }
                                 }
                             ],
                             yAxes: [                           // Ｙ軸設定
 
                   {
-                      stacked: "100", //積み上げ棒グラフにする設定
+                      stacked: true, //積み上げ棒グラフにする設定
                       scaleLabel: {                  // 軸ラベル
                           display: true,                 // 表示の有無
 
-                          //labelString: '受注台数',     // ラベル
+                          labelString: '充当パレット数',     // ラベル
                           fontFamily: "sans-serif",
                           fontColor: "blue",             // 文字の色
                           fontFamily: "sans-serif",
-                          //fontSize: 16                   // フォントサイズ
+                          fontSize: 24                   // フォントサイズ
                       },
                       gridLines: {                   // 補助線
                           color: "rgba(0, 0, 255, 0.2)", // 補助線の色
@@ -314,7 +316,7 @@
                           //max: 20,                       // 最大値
                           //stepSize: 5,                   // 軸間隔
                           fontColor: "blue",             // 目盛りの色
-                          //fontSize: 14                   // フォントサイズ
+                          fontSize: 12                   // フォントサイズ
                       }
                   }
                             ]
@@ -386,14 +388,17 @@
                                         display: true,                // 表示設定
                                         labelString: 'パレット',    // ラベル
                                         //fontColor: "red",             // 文字の色
-                                        //fontSize: 16                  // フォントサイズ
+                                        fontSize: 18                  // フォントサイズ
                                     },
                                     gridLines: {                   // 補助線
                                         //color: "rgba(255, 0, 0, 0.2)", // 補助線の色
                                     },
                                     ticks: {                      // 目盛り
                                         //fontColor: "red",             // 目盛りの色
-                                        //fontSize: 14                  // フォントサイズ
+                                        //max: 20,                       // 最大値
+                                        stepSize: 10,                   // 軸間隔
+                                        position :"top",
+                                        fontSize: 14                  // フォントサイズ
                                     }
                                 }
                             ],
@@ -404,11 +409,11 @@
                       scaleLabel: {                  // 軸ラベル
                           display: true,                 // 表示の有無
 
-                          //labelString: '受注台数',     // ラベル
+                          labelString: '充当パレット数',     // ラベル
                           fontFamily: "sans-serif",
                           fontColor: "blue",             // 文字の色
                           fontFamily: "sans-serif",
-                          //fontSize: 16                   // フォントサイズ
+                          fontSize: 24                   // フォントサイズ
                       },
                       gridLines: {                   // 補助線
                           color: "rgba(0, 0, 255, 0.2)", // 補助線の色
@@ -419,7 +424,7 @@
                           //max: 20,                       // 最大値
                           //stepSize: 5,                   // 軸間隔
                           fontColor: "blue",             // 目盛りの色
-                          //fontSize: 14                   // フォントサイズ
+                          fontSize: 12                   // フォントサイズ
                       }
                   }
                             ]
@@ -430,11 +435,11 @@
 
 
 
-                ctx.canvas.height = 550;
+                ctx.canvas.height = 600;
                 ctx.canvas.width = 1200;
 
 
-                ctx2.canvas.height = 550;
+                ctx2.canvas.height = 600;
                 ctx2.canvas.width = 1200;
 
 
@@ -463,13 +468,13 @@
             <table>
                 <tr>
                     <td style="width: 450px; font-size: 25px;">
-                        <h2>充当率グラフ</h2>
+                        <h2>アフタ出荷案件別充当状況</h2>
                     </td>
                 </tr>
             </table>
 
 
-<table>
+<%--<table>
     <tr>
         <td style="width:120px;" >
 
@@ -479,7 +484,7 @@
 
         </td>
     </tr>
-</table>
+</table>--%>
 
         <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
@@ -495,7 +500,7 @@
         </asp:Panel>
 
 
-<table>
+<%--<table>
     <tr>
         <td style="width:120px;" >
 
@@ -504,7 +509,15 @@
 
         </td>
     </tr>
+</table>--%>
+
+
+<table style="height:50px;">
+    <tr>
+
+    </tr>
 </table>
+
 
         <asp:Panel ID="Panel2" runat="server"  Font-Size="12px">
 
