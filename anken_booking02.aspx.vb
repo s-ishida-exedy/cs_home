@@ -2,6 +2,9 @@
 Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Data.Common
+Imports System.Console
+Imports ClosedXML.Excel
+
 Partial Class yuusen
     Inherits System.Web.UI.Page
 
@@ -121,7 +124,55 @@ Partial Class yuusen
         'p.StartInfo.FileName = “\\kbhwpm01\exp\cs_home\通関フォルダ作成_委託メール作成.xls”
         'p.Start()
 
-        Response.Redirect("通関フォルダ作成_委託メール作成.xls")
+        'Response.Redirect("通関フォルダ作成_委託メール作成.xls")
+
+
+        'My.Computer.FileSystem.CreateDirectory("\\svnas201\EXD06101\DISC_COMMON\自社通関輸出書類\test\sub")
+        'My.Computer.FileSystem.CreateDirectory("\\svnas201\EXD06101\DISC_COMMON\自社通関輸出書類\test\1")
+        'My.Computer.FileSystem.CreateDirectory("\\svnas201\EXD06101\DISC_COMMON\自社通関輸出書類\test\2")
+
+        ''フォルダ"C:\test\1"を"C:\test\2"に移動する
+        ''第3項にTrueを指定すると、"C:\test\2"が存在する時、上書きする
+        ''My.Computer.FileSystem.MoveDirectory("C:\test\1", "C:\test\2", True)
+
+        ''フォルダ"C:\test\1"を"C:\test\2"に移動する
+        ''進行状況ダイアログとエラーダイアログを表示する
+        ''ユーザーがキャンセルしても例外OperationCanceledExceptionをスローしない
+        'My.Computer.FileSystem.MoveDirectory("\\svnas201\EXD06101\DISC_COMMON\自社通関輸出書類\test\1", "\\svnas201\EXD06101\DISC_COMMON\自社通関輸出書類test\2",
+        '    FileIO.UIOption.AllDialogs, FileIO.UICancelOption.DoNothing)
+
+        ''フォルダ"C:\test\2"を削除して、ごみ箱に入れる
+        ''進行状況ダイアログとエラーダイアログを表示する
+        ''ユーザーがキャンセルしても例外OperationCanceledExceptionをスローしない
+        'My.Computer.FileSystem.DeleteDirectory("\\svnas201\EXD06101\DISC_COMMON\自社通関輸出書類\test\2",
+        '    FileIO.UIOption.AllDialogs, FileIO.RecycleOption.SendToRecycleBin,
+        '    FileIO.UICancelOption.DoNothing)
+
+
+        'Dim xlApplication As New Microsoft.Office.Interop.Excel.Application()
+        'Dim xlBooks As Microsoft.Office.Interop.Excel.Workbooks
+
+        '' xlApplication から WorkBooks を取得する
+        'xlBooks = xlApplication.Workbooks
+
+        '' 既存の Excel ブックを開く
+        'xlBooks.Open("C:\Users\T43529\OneDrive - 株式会社エクセディ\デスクトップ\新ツール\通関フォルダ作成_委託メール作成.xls")
+
+        '' Excel を表示する
+        'xlApplication.Visible = True
+
+        '' 1000 ミリ秒 (1秒) 待機する
+        'System.Threading.Thread.Sleep(1000)
+
+        '' Excel を終了する
+        ''xlApplication.Quit()
+
+        '' COM オブジェクトの参照カウントを解放する (正しくは COM オブジェクトの参照カウントを解放する を参照)
+        'System.Runtime.InteropServices.Marshal.ReleaseComObject(xlBooks)
+        'System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApplication)
+
+
+
 
     End Sub
 
@@ -212,11 +263,20 @@ Partial Class yuusen
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
 
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+
         'データベース接続を開く
         cnn.Open()
 
         strSQL = "SELECT T_INV_HD_TB.OLD_INVNO "
         strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
+        strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
         strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE "
         strSQL = strSQL & "HAVING T_INV_HD_TB.BOOKINGNO = '" & bkgno & "' "
         'strSQL = strSQL & "AND Sum(T_INV_BD_TB.QTY) >= 1 "
