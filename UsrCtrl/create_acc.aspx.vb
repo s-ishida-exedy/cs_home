@@ -87,7 +87,7 @@ Partial Class create_acc
             strSQL = strSQL & "'" & strID & "' "
             strSQL = strSQL & ",'" & strInsPass & "' "
             strSQL = strSQL & ",'" & strName & "' "
-            strSQL = strSQL & ",'' "
+            strSQL = strSQL & ",' ' "
             strSQL = strSQL & ",'usr' "
             strSQL = strSQL & ",'" & strMail & "' "
             strSQL = strSQL & ") "
