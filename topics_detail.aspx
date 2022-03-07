@@ -141,9 +141,8 @@
 <form id="form1" runat="server" autocomplete="off">
 
 <!--PC用（901px以上端末）メニュー-->
-<!-- インクルードファイルの指定 -->
-<!-- メニューの編集はheader.htmlで行う -->
-    <!-- #Include File="header.html" -->
+<!-- メニューの編集はheader.aspxで行う -->
+    <!-- #Include File="header/header.aspx" -->
 <div id="contents" class="inner">
 <div id="contents-in">
 

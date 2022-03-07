@@ -36,7 +36,7 @@
                 }
             } else{
                 //window.alert('koko3');
-                window.location.href = './test.aspx?id=' + encodeURIComponent(arr[1]);
+                window.location.href = './detail.aspx?id=' + encodeURIComponent(arr[1]);
                 return false;
             };
         });
@@ -47,7 +47,7 @@
             if (text == 'home' || text == 'aaa' || text == 'undefined') {
                 return false;
             } else {
-                window.location.href = './test.aspx?id=' + encodeURIComponent(text);
+                window.location.href = './detail.aspx?id=' + encodeURIComponent(text);
                 return false;
             };
         });
@@ -58,8 +58,12 @@
 <form id="form1" runat="server">
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
-<!-- メニューの編集はheader.htmlで行う -->
-    <!-- #Include File="header.html" -->
+<!-- メニューの編集はheader.aspxで行う -->
+<% If Session("strRole") = "admin" Or Session("strRole") = "csusr" Then %>
+    <!-- #Include File="header/header.aspx" -->
+<% Else %>
+    <!-- #Include File="header/exl_header.aspx" -->
+<% End If %>
 <div id="contents2" class="inner2">
 <div id="main2" style="width:100%;overflow:scroll;-webkit-overflow-scrolling:touch;">
 <%-- 画面表示する対象のWEBページをセット。縮小率を設定する。 --%>

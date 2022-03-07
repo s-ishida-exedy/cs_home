@@ -18,21 +18,53 @@
         img{
             width: 100%;height: 100%;
         }
-        .auto-style1 {
-            width: 1280px;
+        .header-ta {
+            width: 1300px;
         }
-        .auto-style2 {
+        .first-cell {
+            text-align:left;
+            font-size:25px;
             width: 400px;
+        }
+        .second-cell {
+            width: 700px;
+        }   
+        .third-cell {
+            width: 200px;
             text-align:right;
         }
-        .auto-style4 {
-            text-align:left;
-            font-size:larger;
-            font-weight : 700;
-            width: 400px;
+        .third-cell a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0.5em 1em;
+            width: 100px;
+            color: #000000;
+            font-size: 12px;
+            font-weight: 200;
+            border: 2px solid #ffffff;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.1s;
         }
-        .auto-style7 {
-            width: 480px;
+        .third-cell a::after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+            transform: rotate(45deg);
+        }
+        .third-cell a:hover {
+            color: #000000;
+            text-decoration: none;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+        }
+        .third-cell a:hover::after {
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
         }
         img.imgJpg{
             width: 100%;
@@ -71,19 +103,27 @@
 <form id="form1" runat="server">
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
-<!-- メニューの編集はheader.htmlで行う -->
- <!-- #Include File="header.html" -->
+<!-- メニューの編集はheader.aspxで行う -->
+<% If Session("strRole") = "admin" Or Session("strRole") = "csusr" Then %>
+    <!-- #Include File="header/header.aspx" -->
+<% Else %>
+    <!-- #Include File="header/exl_header.aspx" -->
+<% End If %>
        
 <div id="contents2" class="inner2">
-    <table class="auto-style1" >
+    <table class="header-ta" >
         <tr>
-            <td class="auto-style4">
+            <td class="first-cell">
                 <asp:Label ID="Label3" runat="server" Text="【3F梱包進捗状況】" ></asp:Label>    
             </td>
-            <td class="auto-style7">
+            <td class="second-cell">
             </td>
-            <td class="auto-style2">
-                <a href="#" onclick="window.history.back(); return false;">前のページに戻る</a>
+            <td class="third-cell">
+                <% If Session("strRole") = "admin" Or Session("strRole") = "csusr" Then %>
+                    <a href="./start.aspx">ホームへ戻る</a>
+                <% Else %>
+                    <a href="./exl_top.aspx">ホームへ戻る</a>
+                <% End If %>                
             </td>
         </tr>
     </table>

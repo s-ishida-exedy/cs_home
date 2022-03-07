@@ -115,6 +115,9 @@
             border-top: 2px solid #000000;
             border-right: 2px solid #000000;
         }
+        .cop{
+            font-size :1px;
+        }
 </style>
 </head>
 
@@ -124,8 +127,8 @@
 
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
-<!-- メニューの編集はheader.htmlで行う -->
-    <!-- #Include File="header.html" -->
+<!-- メニューの編集はheader.aspxで行う -->
+    <!-- #Include File="header/header.aspx" -->
 
 <div id="contents" class="inner">
 <div id="contents-in">
@@ -326,11 +329,13 @@ FROM
 <footer>
 
 <div id="footermenu" class="inner">
-
+    <a href ="admin/admin_top.aspx">管理者メニューへ</a>
 </div>
 <!--/footermenu-->
 
 <div id="copyright">
+    <small>Copyright&copy; <a href="start.aspx">CS PORTAL SITE</a> All Rights Reserved.</small>
+    <span class="cop"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
 </div>
 
 </footer>

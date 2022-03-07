@@ -655,4 +655,41 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
+    Public Function GET_RESULT_USR(strCode As String, strName As String) As DataSet
+        'ユーザーマスタ取得
+        Conn = Me.Dbconnect
+        Dim cmd = New SqlCommand()
+
+        cmd.Connection = Conn
+        cmd.CommandType = System.Data.CommandType.Text
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  uid "
+        StrSQL = StrSQL & "  , unam  "
+        StrSQL = StrSQL & "  , depart  "
+        StrSQL = StrSQL & "  , role  "
+        StrSQL = StrSQL & "  , e_mail "
+        StrSQL = StrSQL & "FROM M_EXL_USR "
+        StrSQL = StrSQL & "WHERE uid like @UID "
+        StrSQL = StrSQL & "AND   unam like @UNAME "
+
+        cmd.CommandText = StrSQL
+        cmd.Parameters.Clear()
+        'パラメータ値を設定
+        cmd.Parameters.Add("@UID", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strCode & "%"
+        cmd.Parameters.Add("@UNAME", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strName & "%"
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = cmd
+
+        cmd.Dispose()
+        Conn.Close()
+
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+
+    End Function
 End Class

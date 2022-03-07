@@ -126,8 +126,12 @@
 <form id="form1" runat="server">
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
-<!-- メニューの編集はheader.htmlで行う -->
- <!-- #Include File="header.html" -->
+<!-- メニューの編集はheader.aspxで行う -->
+<% If Session("strRole") = "admin" Or Session("strRole") = "csusr" Then %>
+    <!-- #Include File="header/header.aspx" -->
+<% Else %>
+    <!-- #Include File="header/exl_header.aspx" -->
+<% End If %>
        
 <div id="contents2" class="inner2">
     <table class="header-ta" >
@@ -139,7 +143,11 @@
                 <asp:Button ID="Button1" runat="server" Text="ファイルダウンロード" Font-Size="Small" />
             </td>
             <td class="third-cell">
-                <a href="./start.aspx">ホームへ戻る</a>
+                <% If Session("strRole") = "admin" Or Session("strRole") = "csusr" Then %>
+                    <a href="./start.aspx">ホームへ戻る</a>
+                <% Else %>
+                    <a href="./exl_top.aspx">ホームへ戻る</a>
+                <% End If %>                
             </td>
         </tr>
     </table>

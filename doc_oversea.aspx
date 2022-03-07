@@ -124,8 +124,8 @@
 <form id="form1" runat="server">
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
-<!-- メニューの編集はheader.htmlで行う -->
- <!-- #Include File="header.html" -->
+<!-- メニューの編集はheader.aspxで行う -->
+    <!-- #Include File="header/header.aspx" -->
        
 <div id="contents2" class="inner2">
     <table class="header-ta" >
