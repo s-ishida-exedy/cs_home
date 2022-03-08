@@ -692,4 +692,36 @@ Public Class DBAccess
         Return Ds
 
     End Function
+
+    Public Function GET_RESULT_AUTH(strURL As String) As DataSet
+        '権限マスタ取得
+        Conn = Me.Dbconnect
+        Dim cmd = New SqlCommand()
+
+        cmd.Connection = Conn
+        cmd.CommandType = System.Data.CommandType.Text
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  url "
+        StrSQL = StrSQL & "  , role  "
+        StrSQL = StrSQL & "FROM M_EXL_AUTH "
+        StrSQL = StrSQL & "WHERE url like @URL "
+
+        cmd.CommandText = StrSQL
+        cmd.Parameters.Clear()
+        'パラメータ値を設定
+        cmd.Parameters.Add("@URL", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strURL & "%"
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = cmd
+
+        cmd.Dispose()
+        Conn.Close()
+
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+
+    End Function
 End Class

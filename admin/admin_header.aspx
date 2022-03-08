@@ -5,6 +5,7 @@
         <ul class="menu__second-level">
             <!-- 第一階層 -->
             <li data-id='["home","m_user.aspx"]'><a href="#">ユーザーマスタ</a></li>
+            <li data-id='["home","m_auth.aspx"]'><a href="#">権限マスタ</a></li>
         </ul>
     </li>
     <li class="menu__multi">
