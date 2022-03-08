@@ -18,7 +18,6 @@
     $(function () {
         $('ul li').off("click").on("click", function () {
             var arr = $(this).data('id');
-            //var text = $(this).data('id');
             if (arr[0] == 'home' || arr[0] == 'aaa' || arr[0] == 'undefined') {
                 if (arr[0] == 'home') {
                     window.location.href = encodeURIComponent(arr[1]);
@@ -27,7 +26,6 @@
                     return false;
                 }
             } else {
-                //window.alert('koko3');
                 window.location.href = './detail.aspx?id=' + encodeURIComponent(arr[1]);
                 return false;
             };
