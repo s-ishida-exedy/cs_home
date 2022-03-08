@@ -272,7 +272,7 @@ Partial Class cs_home
         'データベース接続を開く
         cnn.Open()
 
-        Dim strCode = Session("strCode")
+        Dim strCode = Trim(TextBox1.Text)
 
         strSQL = ""
         StrSQL = StrSQL & "SELECT COUNT(*) AS RecCnt "
