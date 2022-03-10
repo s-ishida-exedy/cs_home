@@ -36,19 +36,18 @@ Partial Class cs_home
         'GRIDを作成する。
 
         Dim Dataobj As New DBAccess
-        Dim strVal As String = DropDownList1.SelectedValue
-        Dim strPlace As String = ""
-        Dim strFwd As String = DropDownList2.SelectedValue
+        Dim strkbn As String = DropDownList1.SelectedValue
+        'Dim strkbn As String = DropDownList2.SelectedValue
 
-        Select Case strVal
-            Case "本社"
-                strPlace = "0"
-            Case "上野"
-                strPlace = "1"
-        End Select
+        'Select Case strVal
+        '    Case "本社"
+
+        '    Case "上野"
+
+        'End Select
 
         'データの取得
-        Dim ds As DataSet = Dataobj.GET_RESULT_DEC_LCL(strFwd, Me.TextBox1.Text, strPlace)
+        Dim ds As DataSet = Dataobj.GET_RESULT_DEC_LCL(strkbn, Me.TextBox1.Text)
         If ds.Tables.Count > 0 Then
             GridView1.DataSourceID = ""
             GridView1.DataSource = ds
