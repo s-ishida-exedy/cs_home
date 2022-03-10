@@ -724,4 +724,51 @@ Public Class DBAccess
         Return Ds
 
     End Function
+
+    Public Function GET_RESULT_DEC_LCL(strkbn As String, strMail As String) As DataSet
+        'AIR用海貨業者アドレスマスタ取得
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  CODE "
+        StrSQL = StrSQL & "  , MAIL_ADD "
+        StrSQL = StrSQL & "  , Case KBN "
+        StrSQL = StrSQL & "     WHEN '0' THEN '販促品' "
+        StrSQL = StrSQL & "     WHEN '1' THEN 'LCL展開' "
+        StrSQL = StrSQL & "     WHEN '2' THEN '郵船委託' "
+        StrSQL = StrSQL & "     WHEN '3' THEN '近鉄委託' "
+        StrSQL = StrSQL & "    End As KBN "
+        StrSQL = StrSQL & "  , CASE TO_CC "
+        StrSQL = StrSQL & "     WHEN '0' THEN 'CC' "
+        StrSQL = StrSQL & "     WHEN '1' THEN 'LCL展開' "
+        StrSQL = StrSQL & "     WHEN '1' THEN '宛先' "
+        StrSQL = StrSQL & "    End As TO_CC "
+        StrSQL = StrSQL & "  , REF  "
+        StrSQL = StrSQL & "FROM M_EXL_LCL_DEC_MAIL "
+
+        If strkbn <> "" Or strMail <> "" Then
+            StrSQL = StrSQL & "WHERE "
+
+            If strkbn <> "" And strMail = "" Then
+                StrSQL = StrSQL & "  REF LIKE '%" & strkbn & "%'  "
+            ElseIf strkbn <> "" And strMail <> "" Then
+                StrSQL = StrSQL & "  REF LIKE '%" & strkbn & "%'  "
+                StrSQL = StrSQL & "  AND MAIL_ADD LIKE '%" & strMail & "%'  "
+
+            ElseIf strkbn = "" And strMail <> "" Then
+                StrSQL = StrSQL & "  MAIL_ADD LIKE '%" & strMail & "%'  "
+            ElseIf strkbn = "" And strMail = "" Then
+            End If
+        End If
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class
