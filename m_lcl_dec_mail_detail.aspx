@@ -180,7 +180,10 @@
                 </td>
                 <th>宛先：1 CC：0</th>
                 <td>
-                    <asp:TextBox ID="TextBox3" runat="server" class="txtb"></asp:TextBox>
+                    <asp:DropDownList ID="DropDownList2" runat="server" class="cmb">
+                        <asp:ListItem>0</asp:ListItem>
+                        <asp:ListItem>1</asp:ListItem>
+                    </asp:DropDownList>
                 </td>
 
 

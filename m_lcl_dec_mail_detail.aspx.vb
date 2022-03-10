@@ -60,7 +60,7 @@ Partial Class cs_home
                     Label1.Text = dataread("CODE")
                     TextBox2.Text = dataread("MAIL_ADD")
                     DropDownList1.SelectedValue = dataread("KBN")
-                    TextBox3.Text = dataread("TO_CC")
+                    DropDownList2.SelectedValue = dataread("TO_CC")
                 End While
 
                 'クローズ処理 
@@ -106,6 +106,7 @@ Partial Class cs_home
         Dim strSQL As String = ""
         Dim strVal As String = ""
         Dim strkbn As String = ""
+        Dim strref As String = ""
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -124,17 +125,21 @@ Partial Class cs_home
         Select Case DropDownList1.SelectedValue
             Case "販促品"
                 strkbn = "0"
+                strref = "販促品確認"
             Case "LCL展開"
                 strkbn = "1"
+                strref = "LCL貨物引取・搬入連絡"
             Case "郵船委託"
                 strkbn = "2"
+                strref = "郵船委託"
             Case "近鉄委託"
                 strkbn = "3"
+                strref = "近鉄委託"
         End Select
 
         '画面入力情報を変数に代入
         Dim strMail As String = TextBox2.Text
-        Dim strCc As String = TextBox3.Text
+        Dim strCc As String = DropDownList2.Text
 
         If strExecMode = "01" Then
             '更新
@@ -143,6 +148,7 @@ Partial Class cs_home
             strSQL = strSQL & " MAIL_ADD = '" & strMail & "' "
             strSQL = strSQL & ",KBN = '" & strkbn & "' "
             strSQL = strSQL & ",TO_CC = '" & strCc & "' "
+            strSQL = strSQL & ",REF = '" & strref & "' "
             strSQL = strSQL & "WHERE CODE = '" & strCode & "' "
 
         ElseIf strExecMode = "02" Then
@@ -160,7 +166,7 @@ Partial Class cs_home
             strSQL = strSQL & "'" & strMail & "' "
             strSQL = strSQL & ",'" & strkbn & "' "
             strSQL = strSQL & ",'" & strCc & "' "
-            strSQL = strSQL & ",'" & "A" & "' ) "
+            strSQL = strSQL & ",'" & strref & "' ) "
 
         End If
 
@@ -190,7 +196,7 @@ Partial Class cs_home
             Label3.Text = "メールアドレスは必須入力です。。"
             chk_Nyuryoku = False
         End If
-        If TextBox3.Text = "" Then
+        If DropDownList2.Text = "" Then
             Label3.Text = "宛先：1 CC：0を入力してください。"
             chk_Nyuryoku = False
         End If
@@ -209,7 +215,7 @@ Partial Class cs_home
         Call DB_access("01")        '更新モード
 
         '元の画面に戻る
-        Response.Redirect("m_air_mail.aspx")
+        Response.Redirect("m_lcl_dec_mail.aspx")
     End Sub
     Protected Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         '削除ボタン押下
@@ -218,7 +224,7 @@ Partial Class cs_home
         Call DB_access("02")        '削除モード
 
         '元の画面に戻る
-        Response.Redirect("m_air_mail.aspx")
+        Response.Redirect("m_lcl_dec_mail.aspx")
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -236,7 +242,7 @@ Partial Class cs_home
         Call DB_access("03")        '登録モード
 
         '元の画面に戻る
-        Response.Redirect("m_air_mail.aspx")
+        Response.Redirect("m_lcl_dec_mail.aspx")
 
     End Sub
 End Class
