@@ -142,7 +142,11 @@
             <td class="second-cell">
             </td>
             <td class="third-cell">
-                <a href="./start.aspx">ホームへ戻る</a>
+                <% If Session("strRole") = "admin" Or Session("strRole") = "csusr" Then %>
+                    <a href="./start.aspx">ホームへ戻る</a>
+                <% Else %>
+                    <a href="./exl_top.aspx">ホームへ戻る</a>
+                <% End If %>                    
             </td>
         </tr>
     </table>
