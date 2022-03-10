@@ -178,7 +178,7 @@ Partial Class yuusen
 
         Dim dt1 As DateTime = DateTime.Now
 
-        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts1 As New TimeSpan(400, 0, 0, 0)
         Dim ts2 As New TimeSpan(100, 0, 0, 0)
         Dim dt2 As DateTime = dt1 + ts1
         Dim dt3 As DateTime = dt1 - ts1
@@ -291,8 +291,11 @@ Partial Class yuusen
         strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.LOADING_PORT ='" & str08 & "', "
         strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.RECEIVED_PORT ='" & str09 & "', "
         strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.SHIP_PLACE ='" & str10 & "' "
-        strSQL = strSQL & "WHERE T_EXL_SHIPPINGMEMOLIST.BOOKING_NO ='" & bkgno & "' "
-        strSQL = strSQL & "AND T_EXL_SHIPPINGMEMOLIST.INVOICE_NO ='" & ivno & "' "
+        'strSQL = strSQL & "WHERE T_EXL_SHIPPINGMEMOLIST.BOOKING_NO ='" & str01 & "' "
+        'strSQL = strSQL & "AND T_EXL_SHIPPINGMEMOLIST.INVOICE_NO ='" & ivno & "' "
+
+        strSQL = strSQL & "WHERE T_EXL_SHIPPINGMEMOLIST.BOOKING_NO ='" & str01 & "' "
+        strSQL = strSQL & "WHERE T_EXL_SHIPPINGMEMOLIST.INVOICE_NO ='" & ivno & "' "
 
         Command.CommandText = strSQL
         ' SQLの実行

@@ -1131,14 +1131,14 @@ Partial Class yuusen
                                 erflg = 1
                             End If
 
-                            If ws1.Cell(16, 5).Style.Fill.BackgroundColor = XLColor.Red Then
-                                ws1.Cell(30, 1).Style.Fill.BackgroundColor = XLColor.Red
-                                erflg = 1
-                            End If
-                            '---------------------------------------------------------
+                        If ws1.Cell(16, 7).Style.Fill.BackgroundColor = XLColor.Red Then
+                            ws1.Cell(30, 1).Style.Fill.BackgroundColor = XLColor.Red
+                            erflg = 1
+                        End If
+                        '---------------------------------------------------------
 
-                            '------------　21/03追記  Bookingsheetからデータ取得　--------------
-                            If erflg = 1 Then
+                        '------------　21/03追記  Bookingsheetからデータ取得　--------------
+                        If erflg = 1 Then
 
                                 Dim niuke As String = ""
                                 Dim tsumi As String = ""
@@ -1493,7 +1493,7 @@ Step00:
                             erflg = 1
                         End If
 
-                        If ws1.Cell(16, 5).Style.Fill.BackgroundColor = XLColor.Red Then
+                        If ws1.Cell(16, 7).Style.Fill.BackgroundColor = XLColor.Red Then
                             ws1.Cell(30, 1).Style.Fill.BackgroundColor = XLColor.Red
                             erflg = 1
                         End If
