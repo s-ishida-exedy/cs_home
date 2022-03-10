@@ -25,11 +25,11 @@ Partial Class cs_home
         Literal4.Text = GET_CS_Member(6)
         Literal5.Text = "【AIR " & Session("strIrai") & "依頼" & Session("strCust") & "向け】"
         Literal6.Text = Session("strFile")
-        'If Session("strPlac") = "0" Then
-        '    Literal3.Text = GET_BccAddress("0")
-        'ElseIf Session("strPlac") = "1" Then
-        '    Literal3.Text = GET_BccAddress("1")
-        'End If
+        If Session("strPlac") = "0" Then
+            Literal3.Text = GET_BccAddress("0")
+        ElseIf Session("strPlac") = "1" Then
+            Literal3.Text = GET_BccAddress("1")
+        End If
 
         Button1.Attributes.Add("onclick", "return confirm('メール送信します。よろしいですか？');")
     End Sub
@@ -315,7 +315,7 @@ Partial Class cs_home
         strDate = ""
         '結果を取り出す 
         While (dataread.Read())
-            GET_BccAddress += dataread("MAIL_ADD") + ";"
+            GET_BccAddress += dataread("MAIL_ADD") + ","
 
         End While
 
@@ -367,11 +367,11 @@ Partial Class cs_home
             If Session("strCC") <> "" Then
                 message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
             End If
-            'If Session("strPlac") = "0" Then
-            '    message.Bcc.Add(MailboxAddress.Parse(GET_BccAddress("0")))
-            'ElseIf Session("strPlac") = "1" Then
-            '    message.Bcc.Add(MailboxAddress.Parse(GET_BccAddress("1")))
-            'End If
+            If Session("strPlac") = "0" Then
+                message.Bcc.Add(MailboxAddress.Parse(GET_BccAddress("0")))
+            ElseIf Session("strPlac") = "1" Then
+                message.Bcc.Add(MailboxAddress.Parse(GET_BccAddress("1")))
+            End If
 
             ' 表題  
             message.Subject = subject
