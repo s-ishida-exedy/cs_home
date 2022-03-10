@@ -39,10 +39,30 @@
         </ul>
     </li>
     <li class="menu__multi">
+        <a href="#" class="init-bottom">業務<span>Work</span></a>
+        <ul class="menu__second-level">
+            <!-- 第一階層 -->
+            <li data-id='["home","eir_comfirm.aspx"]'><a href="#">EIR、Booking情報差異連絡</a></li>
+        </ul>
     </li>
     <li class="menu__multi">
+        <a href="#" class="init-bottom">システム<span>System</span></a>
+        <ul class="menu__second-level">
+            <!-- 第一階層 -->
+            <li data-id='["home","logoff.aspx"]'><a href="#">ログオフ</a></li>
+        </ul>
     </li>
     <li class="menu__multi">
+        <%  Dim strUsr As String = Session("strUsr") %>
+        <%  Dim strNam As String = Session("strNam") %>
+        <%  Dim strRole As String = Session("strRole") %>
+        <a href="#" class="init-bottom">ログインユーザー情報<span>Login User</span></a>
+        <ul class="menu__second-level">
+            <!-- 第一階層 -->
+            <li><a href="#"><%= strUsr %></a></li>
+            <li><a href="#"><%= strNam %></a></li>
+            <li><a href="#"><%= strRole %></a></li>
+        </ul>
     </li>
     <li class="menu__multi">
     </li>
