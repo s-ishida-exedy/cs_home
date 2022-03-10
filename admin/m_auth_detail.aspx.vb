@@ -5,7 +5,7 @@ Partial Class cs_home
     Inherits System.Web.UI.Page
 
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
-        Dim strURL As String = ""
+        Dim strCODE As String = ""
         Dim strSQL As String = ""
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
@@ -22,7 +22,7 @@ Partial Class cs_home
 
             If strMode = "0" Then
                 '更新モード　DBから値取得し、セット
-                strURL = Session("strURL")
+                strCODE = Session("strCODE")
 
                 '接続文字列の作成
                 Dim ConnectionString As String = String.Empty
@@ -37,7 +37,7 @@ Partial Class cs_home
                 strSQL = ""
                 strSQL = strSQL & "SELECT url, role "
                 strSQL = strSQL & "FROM M_EXL_AUTH "
-                strSQL = strSQL & "WHERE url = '" & strURL & "' "
+                strSQL = strSQL & "WHERE CODE = '" & strCODE & "' "
 
                 'ＳＱＬコマンド作成 
                 dbcmd = New SqlCommand(strSQL, cnn)
@@ -90,6 +90,7 @@ Partial Class cs_home
         '画面入力情報をテーブルへ登録
 
         Dim strSQL As String = ""
+        Dim strCODE As String = ""
         Dim strUrl As String = ""
         Dim strRole As String = ""
 
@@ -104,7 +105,7 @@ Partial Class cs_home
         'データベース接続を開く
         cnn.Open()
 
-        strUrl = Session("strUrl")
+        strCODE = Session("strCODE")
 
         '画面入力情報を変数に代入
         If CheckBox1.Checked = True Then
@@ -124,13 +125,13 @@ Partial Class cs_home
             strSQL = ""
             strSQL = strSQL & "UPDATE M_EXL_AUTH SET"
             strSQL = strSQL & " role = '" & strRole & "' "
-            strSQL = strSQL & "WHERE url = '" & strUrl & "' "
+            strSQL = strSQL & "WHERE CODE = '" & strCODE & "' "
 
         ElseIf strExecMode = "02" Then
             'データ削除
             strSQL = ""
             strSQL = strSQL & "DELETE FROM M_EXL_AUTH "
-            strSQL = strSQL & "WHERE url = '" & strUrl & "' "
+            strSQL = strSQL & "WHERE CODE = '" & strCODE & "' "
 
         ElseIf strExecMode = "03" Then
             '登録
@@ -223,12 +224,12 @@ Partial Class cs_home
         'データベース接続を開く
         cnn.Open()
 
-        Dim strUrl = Trim(TextBox1.Text)
+        Dim strURL = Trim(TextBox1.Text)
 
         strSQL = ""
         StrSQL = StrSQL & "SELECT COUNT(*) AS RecCnt "
         strSQL = strSQL & "FROM M_EXL_AUTH "
-        strSQL = strSQL & "WHERE url = '" & strUrl & "' "
+        strSQL = strSQL & "WHERE url = '" & strURL & "' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(StrSQL, cnn)
