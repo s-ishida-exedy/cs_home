@@ -48,7 +48,7 @@ Partial Class cs_home
         End Select
 
         'データの取得
-        Dim ds As DataSet = Dataobj.GET_RESULT_FWD(strFwd, Me.TextBox1.Text, strPlace)
+        Dim ds As DataSet = Dataobj.GET_RESULT_DEC_LCL(strFwd, Me.TextBox1.Text, strPlace)
         If ds.Tables.Count > 0 Then
             GridView1.DataSourceID = ""
             GridView1.DataSource = ds
@@ -77,7 +77,7 @@ Partial Class cs_home
 
             Session("strMode") = "0"    '更新モード
             Session("strCode") = data1
-            Response.Redirect("m_air_mail_detail.aspx")
+            Response.Redirect("m_lcl_dec_mail_detail.aspx")
         End If
 
     End Sub
@@ -86,6 +86,6 @@ Partial Class cs_home
         '新規登録ボタン押下
 
         Session("strMode") = "1"    '登録モード
-        Response.Redirect("m_air_mail_detail.aspx")
+        Response.Redirect("m_lcl_dec_mail_detail.aspx")
     End Sub
 End Class

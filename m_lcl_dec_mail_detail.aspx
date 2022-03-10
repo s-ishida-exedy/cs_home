@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="m_air_mail_detail.aspx.vb" Inherits="cs_home" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="m_lcl_dec_mail_detail.aspx.vb" Inherits="cs_home" %>
 
 <!DOCTYPE html>
 

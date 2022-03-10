@@ -1,11 +1,11 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="m_air_mail.aspx.vb" Inherits="cs_home" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="m_lcl_dec_mail.aspx.vb" Inherits="cs_home" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>ポータルサイト(AIR用海貨業者ｱﾄﾞﾚｽﾏｽﾀ)</title>
+<title>ポータルサイト(通関・LCL関係ｱﾄﾞﾚｽﾏｽﾀ)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -147,15 +147,15 @@
     <table class="header-ta" >
         <tr>
             <td class="first-cell">
-                <h2>AIR用海貨業者アドレスマスタ</h2> 
+                <h2>通関・LCL関係アドレスマスタ</h2> 
             </td>
             <td class="second-cell">
-                <asp:Label ID="Label1" runat="server" Text="業者:"></asp:Label>
-                <asp:DropDownList ID="DropDownList2" runat="server" AppendDataBoundItems="True" Width ="100px" DataSourceID="SqlDataSource2" DataTextField="GYOSHA" DataValueField="GYOSHA"></asp:DropDownList>&nbsp;
+                <asp:Label ID="Label1" runat="server" Text="なし:"></asp:Label>
+                <asp:DropDownList ID="DropDownList2" runat="server" AppendDataBoundItems="True" Width ="100px" DataSourceID="SqlDataSource2" DataTextField="KBN" DataValueField="KBN"></asp:DropDownList>&nbsp;
                 <asp:Label ID="Label3" runat="server" Text="ﾒｰﾙｱﾄﾞﾚｽ:"></asp:Label>
                 <asp:TextBox ID="TextBox1" runat="server" Width ="300"></asp:TextBox>&nbsp;
                 <asp:Label ID="Label2" runat="server" Text="場所:"></asp:Label>
-                <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" Width ="100px" DataSourceID="SqlDataSource3" DataTextField="PLACE" DataValueField="PLACE"></asp:DropDownList>&nbsp;
+                <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" Width ="100px" DataSourceID="SqlDataSource3" DataTextField="KBN" DataValueField="KBN"></asp:DropDownList>&nbsp;
                 <br/>
                 <asp:Button ID="Button1" runat="server" Text="検索" Font-Size="Small" Width ="80" />&nbsp;
                 <asp:Button ID="Button2" runat="server" Text="ﾘｾｯﾄ" Font-Size="Small" Width ="80" />&nbsp;
@@ -193,11 +193,11 @@
             <asp:BoundField DataField="MAIL_ADD" HeaderText="メールアドレス" SortExpression="MAIL_ADD" >
             <HeaderStyle BackColor="#6B696B" Width="400px" />
             </asp:BoundField>
-            <asp:BoundField DataField="PLACE" HeaderText="場所" SortExpression="PLACE" >
+            <asp:BoundField DataField="KBN" HeaderText="場所" SortExpression="KBN" >
             <HeaderStyle BackColor="#6B696B" Width="60px" />
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
-            <asp:BoundField DataField="GYOSHA" HeaderText="海貨業者" SortExpression="GYOSHA" >
+            <asp:BoundField DataField="TO_CC" HeaderText="海貨業者" SortExpression="TO_CC" >
             <HeaderStyle BackColor="#6B696B" Width="150px" />
             </asp:BoundField>
         </Columns>
@@ -214,27 +214,35 @@
 
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT CODE, MAIL_ADD, 
-CASE PLACE
- WHEN '0' THEN '本社'
- WHEN '1' THEN '上野'
-END AS PLACE
-, GYOSHA
- FROM [M_EXL_AIR_MAIL]"></asp:SqlDataSource>
+CASE KBN
+ WHEN '0' THEN '販促品'
+ WHEN '1' THEN 'LCL展開'
+ WHEN '2' THEN '郵船委託'
+ WHEN '3' THEN '近鉄委託'
+END AS KBN
+,CASE TO_CC
+ WHEN '0' THEN 'CC'
+ WHEN '1' THEN '宛先'
+END AS TO_CC
+, REF
+ FROM [M_EXL_LCL_DEC_MAIL]"></asp:SqlDataSource>
     
-    
+<%--    無し--%>
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT
-   GYOSHA
-FROM M_EXL_AIR_MAIL
+   KBN
+FROM M_EXL_LCL_DEC_MAIL
 "></asp:SqlDataSource>
     
     
     <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT 
-CASE PLACE
- WHEN '0' THEN '本社'
- WHEN '1' THEN '上野'
-END AS PLACE
-FROM M_EXL_AIR_MAIL
-ORDER BY PLACE DESC"></asp:SqlDataSource>
+CASE KBN
+ WHEN '0' THEN '販促品'
+ WHEN '1' THEN 'LCL展開'
+ WHEN '2' THEN '郵船委託'
+ WHEN '3' THEN '近鉄委託'
+END AS KBN
+FROM M_EXL_LCL_DEC_MAIL
+ORDER BY KBN DESC"></asp:SqlDataSource>
     
     
 <%--</div>--%>
