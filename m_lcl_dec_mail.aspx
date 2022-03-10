@@ -193,11 +193,11 @@
             <asp:BoundField DataField="MAIL_ADD" HeaderText="メールアドレス" SortExpression="MAIL_ADD" >
             <HeaderStyle BackColor="#6B696B" Width="400px" />
             </asp:BoundField>
-            <asp:BoundField DataField="KBN" HeaderText="場所" SortExpression="KBN" >
-            <HeaderStyle BackColor="#6B696B" Width="60px" />
+            <asp:BoundField DataField="KBN" HeaderText="区分" SortExpression="KBN" >
+            <HeaderStyle BackColor="#6B696B" Width="100px" />
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
-            <asp:BoundField DataField="TO_CC" HeaderText="海貨業者" SortExpression="TO_CC" >
+            <asp:BoundField DataField="TO_CC" HeaderText="宛先、CC" SortExpression="TO_CC" >
             <HeaderStyle BackColor="#6B696B" Width="150px" />
             </asp:BoundField>
         </Columns>

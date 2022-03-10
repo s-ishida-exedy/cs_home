@@ -148,7 +148,7 @@
     <table class="header-ta" >
         <tr>
             <td class="first-cell">
-                <h2>AIR用海貨業者アドレスマスタ詳細</h2>  
+                <h2>通関・LCL関係アドレスマスタ詳細</h2>  
             </td>
             <td class="second-cell">
                 <asp:Button ID="Button1" runat="server" Text="登　録" style="width:120px" Font-Size="Small" />&nbsp;
@@ -157,7 +157,7 @@
                 <asp:Label ID="Label3" runat="server" Text="Label" Class="err"></asp:Label>
             </td>
             <td class="third-cell">
-                <a href="./m_air_mail.aspx">一覧に戻る</a>
+                <a href="./m_lcl_dec_mail.aspx">一覧に戻る</a>
             </td>
         </tr>
     </table>
@@ -174,23 +174,31 @@
                 </td>
             </tr>
             <tr>
-                <th>場所</th>
+                <th>区分</th>
                 <td>
-                    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="PLACE" DataValueField="PLACE" class="cmb"></asp:DropDownList>
+                    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="KBN" DataValueField="KBN" class="cmb"></asp:DropDownList>          
                 </td>
-                <th>海貨業者</th>
+                <th>宛先：1 CC：0</th>
                 <td>
                     <asp:TextBox ID="TextBox3" runat="server" class="txtb"></asp:TextBox>
                 </td>
-            </tr>
+
+
         </table>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT
-   CASE PLACE
-      WHEN '0' THEN '本社'
-      WHEN '1' THEN '上野'
-	END AS PLACE
-FROM M_EXL_AIR_MAIL
-ORDER BY PLACE DESC"></asp:SqlDataSource>
+
+
+
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT 
+CASE KBN
+ WHEN '0' THEN '販促品'
+ WHEN '1' THEN 'LCL展開'
+ WHEN '2' THEN '郵船委託'
+ WHEN '3' THEN '近鉄委託'
+END AS KBN
+FROM M_EXL_LCL_DEC_MAIL
+ORDER BY KBN DESC"></asp:SqlDataSource>
+
+
 </div>
 <!--/#main2-->
 

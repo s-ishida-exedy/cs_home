@@ -37,13 +37,18 @@ Partial Class cs_home
                 strSQL = strSQL & "SELECT  "
                 strSQL = strSQL & "  CODE "
                 strSQL = strSQL & "  , MAIL_ADD "
-                strSQL = strSQL & "  , CASE PLACE "
-                strSQL = strSQL & "    WHEN '0' THEN '本社'  "
-                strSQL = strSQL & "    WHEN '1' THEN '上野'  "
-                strSQL = strSQL & "    END AS PLACE "
-                strSQL = strSQL & "  , GYOSHA "
-                strSQL = strSQL & "FROM M_EXL_AIR_MAIL "
+                strSQL = strSQL & "  , Case KBN "
+                strSQL = strSQL & "   WHEN '0' THEN '販促品' "
+                strSQL = strSQL & "   WHEN '1' THEN 'LCL展開' "
+                strSQL = strSQL & "   WHEN '2' THEN '郵船委託' "
+                strSQL = strSQL & "   WHEN '3' THEN '近鉄委託' "
+                strSQL = strSQL & "   End As KBN "
+                strSQL = strSQL & "  , TO_CC "
+                strSQL = strSQL & "  , REF "
+                strSQL = strSQL & "FROM M_EXL_LCL_DEC_MAIL "
                 strSQL = strSQL & "WHERE CODE = '" & strCode & "' "
+
+
 
                 'ＳＱＬコマンド作成 
                 dbcmd = New SqlCommand(strSQL, cnn)
@@ -52,10 +57,10 @@ Partial Class cs_home
 
                 '結果を取り出す 
                 While (dataread.Read())
-                    DropDownList1.SelectedValue = dataread("PLACE")
                     Label1.Text = dataread("CODE")
                     TextBox2.Text = dataread("MAIL_ADD")
-                    TextBox3.Text = dataread("GYOSHA")
+                    DropDownList1.SelectedValue = dataread("KBN")
+                    TextBox3.Text = dataread("TO_CC")
                 End While
 
                 'クローズ処理 
@@ -70,8 +75,8 @@ Partial Class cs_home
                 'CODEの現在値を取得する
                 strSQL = ""
                 strSQL = strSQL & "SELECT DISTINCT "
-                strSQL = strSQL & "  IDENT_CURRENT('M_EXL_AIR_MAIL') AS CODE "
-                strSQL = strSQL & "FROM M_EXL_AIR_MAIL "
+                strSQL = strSQL & "  IDENT_CURRENT('M_EXL_LCL_DEC_MAIL') AS CODE "
+                strSQL = strSQL & "FROM M_EXL_LCL_DEC_MAIL "
 
                 'ＳＱＬコマンド作成 
                 dbcmd = New SqlCommand(strSQL, cnn)
@@ -100,7 +105,7 @@ Partial Class cs_home
 
         Dim strSQL As String = ""
         Dim strVal As String = ""
-        Dim strPlace As String = ""
+        Dim strkbn As String = ""
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -117,29 +122,33 @@ Partial Class cs_home
 
         'ステータスのドロップダウン
         Select Case DropDownList1.SelectedValue
-            Case "本社"
-                strPlace = "0"
-            Case "上野"
-                strPlace = "1"
+            Case "販促品"
+                strkbn = "0"
+            Case "LCL展開"
+                strkbn = "1"
+            Case "郵船委託"
+                strkbn = "2"
+            Case "近鉄委託"
+                strkbn = "3"
         End Select
 
         '画面入力情報を変数に代入
         Dim strMail As String = TextBox2.Text
-        Dim strGyosha As String = TextBox3.Text
+        Dim strCc As String = TextBox3.Text
 
         If strExecMode = "01" Then
             '更新
             strSQL = ""
-            strSQL = strSQL & "UPDATE M_EXL_AIR_MAIL SET"
+            strSQL = strSQL & "UPDATE M_EXL_LCL_DEC_MAIL SET"
             strSQL = strSQL & " MAIL_ADD = '" & strMail & "' "
-            strSQL = strSQL & ",GYOSHA = '" & strGyosha & "' "
-            strSQL = strSQL & ",PLACE = '" & strPlace & "' "
+            strSQL = strSQL & ",KBN = '" & strkbn & "' "
+            strSQL = strSQL & ",TO_CC = '" & strCc & "' "
             strSQL = strSQL & "WHERE CODE = '" & strCode & "' "
 
         ElseIf strExecMode = "02" Then
             'データ削除
             strSQL = ""
-            strSQL = strSQL & "DELETE FROM M_EXL_AIR_MAIL "
+            strSQL = strSQL & "DELETE FROM M_EXL_LCL_DEC_MAIL "
             strSQL = strSQL & "WHERE CODE = '" & strCode & "' "
 
         ElseIf strExecMode = "03" Then
@@ -147,10 +156,11 @@ Partial Class cs_home
             strCode = Label1.Text
 
             strSQL = ""
-            strSQL = strSQL & "INSERT INTO M_EXL_AIR_MAIL VALUES("
+            strSQL = strSQL & "INSERT INTO M_EXL_LCL_DEC_MAIL VALUES("
             strSQL = strSQL & "'" & strMail & "' "
-            strSQL = strSQL & ",'" & strPlace & "' "
-            strSQL = strSQL & ",'" & strGyosha & "' ) "
+            strSQL = strSQL & ",'" & strkbn & "' "
+            strSQL = strSQL & ",'" & strCc & "' "
+            strSQL = strSQL & ",'" & "A" & "' ) "
 
         End If
 
@@ -181,7 +191,7 @@ Partial Class cs_home
             chk_Nyuryoku = False
         End If
         If TextBox3.Text = "" Then
-            Label3.Text = "海貨業者は必須入力です。。"
+            Label3.Text = "宛先：1 CC：0を入力してください。"
             chk_Nyuryoku = False
         End If
 
