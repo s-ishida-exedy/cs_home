@@ -725,7 +725,7 @@ Public Class DBAccess
 
     End Function
 
-    Public Function GET_RESULT_DEC_LCL(strFwd As String, strMail As String, strPlace As String) As DataSet
+    Public Function GET_RESULT_DEC_LCL(strkbn As String, strMail As String) As DataSet
         'AIR用海貨業者アドレスマスタ取得
         Conn = Me.Dbconnect
         Cmd = Conn.CreateCommand
@@ -734,35 +734,32 @@ Public Class DBAccess
         StrSQL = StrSQL & "SELECT "
         StrSQL = StrSQL & "  CODE "
         StrSQL = StrSQL & "  , MAIL_ADD "
-        StrSQL = StrSQL & "  , Case PLACE "
-        StrSQL = StrSQL & "     WHEN '0' THEN '本社' "
-        StrSQL = StrSQL & "     WHEN '1' THEN '上野' "
-        StrSQL = StrSQL & "    End As PLACE "
-        StrSQL = StrSQL & "  , PLACE "
-        StrSQL = StrSQL & "  , GYOSHA  "
-        StrSQL = StrSQL & "FROM M_EXL_AIR_MAIL "
+        StrSQL = StrSQL & "  , Case KBN "
+        StrSQL = StrSQL & "     WHEN '0' THEN '販促品' "
+        StrSQL = StrSQL & "     WHEN '1' THEN 'LCL展開' "
+        StrSQL = StrSQL & "     WHEN '2' THEN '郵船委託' "
+        StrSQL = StrSQL & "     WHEN '3' THEN '近鉄委託' "
+        StrSQL = StrSQL & "    End As KBN "
+        StrSQL = StrSQL & "  , CASE TO_CC "
+        StrSQL = StrSQL & "     WHEN '0' THEN 'CC' "
+        StrSQL = StrSQL & "     WHEN '1' THEN 'LCL展開' "
+        StrSQL = StrSQL & "     WHEN '1' THEN '宛先' "
+        StrSQL = StrSQL & "    End As TO_CC "
+        StrSQL = StrSQL & "  , REF  "
+        StrSQL = StrSQL & "FROM M_EXL_LCL_DEC_MAIL "
 
-        If strFwd <> "" Or strMail <> "" Or strPlace <> "" Then
+        If strkbn <> "" Or strMail <> "" Then
             StrSQL = StrSQL & "WHERE "
-            If strFwd <> "" And strMail = "" And strPlace = "" Then
-                StrSQL = StrSQL & "  GYOSHA LIKE '%" & strFwd & "%'  "
-            ElseIf strFwd <> "" And strMail <> "" And strPlace = "" Then
-                StrSQL = StrSQL & "  GYOSHA LIKE '%" & strFwd & "%'  "
+
+            If strkbn <> "" And strMail = "" Then
+                StrSQL = StrSQL & "  REF LIKE '%" & strkbn & "%'  "
+            ElseIf strkbn <> "" And strMail <> "" Then
+                StrSQL = StrSQL & "  REF LIKE '%" & strkbn & "%'  "
                 StrSQL = StrSQL & "  AND MAIL_ADD LIKE '%" & strMail & "%'  "
-            ElseIf strFwd <> "" And strMail <> "" And strPlace <> "" Then
-                StrSQL = StrSQL & "  GYOSHA LIKE '%" & strFwd & "%'  "
-                StrSQL = StrSQL & "  AND MAIL_ADD LIKE '%" & strMail & "%'  "
-                StrSQL = StrSQL & "  AND PLACE LIKE '%" & strPlace & "%'  "
-            ElseIf strFwd <> "" And strMail = "" And strPlace <> "" Then
-                StrSQL = StrSQL & "  GYOSHA LIKE '%" & strFwd & "%'  "
-                StrSQL = StrSQL & "  AND PLACE LIKE '%" & strPlace & "%'  "
-            ElseIf strFwd = "" And strMail <> "" And strPlace = "" Then
+
+            ElseIf strkbn = "" And strMail <> "" Then
                 StrSQL = StrSQL & "  MAIL_ADD LIKE '%" & strMail & "%'  "
-            ElseIf strFwd = "" And strMail <> "" And strPlace <> "" Then
-                StrSQL = StrSQL & "  MAIL_ADD LIKE '%" & strMail & "%'  "
-                StrSQL = StrSQL & "  AND PLACE LIKE '%" & strPlace & "%'  "
-            ElseIf strFwd = "" And strMail = "" And strPlace <> "" Then
-                StrSQL = StrSQL & "  PLACE LIKE '%" & strPlace & "%'  "
+            ElseIf strkbn = "" And strMail = "" Then
             End If
         End If
 
