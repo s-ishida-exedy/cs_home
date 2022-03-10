@@ -261,7 +261,7 @@ h2:after{
 
 
 
-<table style="width:350px;height:10px;" >
+<table style="width:800px;height:10px;" >
 <tr>
 
 
@@ -299,9 +299,20 @@ h2:after{
 
                 </td>
 
+    <td style="width:20px;" >
+    </td>
 
+    <td style="width:70px;" >
 
+    <asp:Button ID="Button1"  CssClass ="btn00" runat="server" Text="フォルダ作成" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
+    </td>
+
+    <td style="width:70px;" >
+
+    <asp:Button ID="Button4"  CssClass ="btn00" runat="server" Text="メール" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+
+    </td>
 
 
 
@@ -331,12 +342,6 @@ h2:after{
             <td style="width:100px;" >
 
             <asp:Button ID="Button2"  CssClass ="btn00" runat="server" Text="解除" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
-
-            </td>
-
-            <td style="width:100px;" >
-
-            <asp:Button ID="Button1"  CssClass ="btn00" runat="server" Text="案件抽出" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
 
             </td>
 
@@ -391,10 +396,27 @@ h2:after{
 <asp:BoundField DataField="CUST" HeaderText="客先コード" SortExpression="CUST" />
 <asp:BoundField DataField="INVOICE" HeaderText="INVOICE" SortExpression="INVOICE" />
 <asp:BoundField DataField="STATUS" HeaderText="進捗状況" SortExpression="STATUS" />
-<%--                    <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" />--%>
 <asp:BoundField DataField="CUT_DATE" HeaderText="CUT" SortExpression="CUT_DATE" />
 <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" />
-<%--                    <asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" />--%><%--                    <asp:BoundField DataField="TWENTY_FEET" HeaderText="20Ft" SortExpression="TWENTY_FEET" />
+<asp:BoundField DataField="BOOKING_NO" HeaderText="BOOKING_NO" SortExpression="BOOKING_NO" />
+
+
+
+<asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" />
+<asp:BoundField DataField="BOOK_TO" HeaderText="BOOK_TO" SortExpression="BOOK_TO" />
+<asp:BoundField DataField="VESSEL_NAME" HeaderText="船名" SortExpression="VESSEL_NAME" />
+<asp:BoundField DataField="VOYAGE_NO" HeaderText="VOYAGE_NO" SortExpression="VOYAGE_NO" />
+
+<asp:BoundField DataField="PLACE_OF_RECEIPT" HeaderText="荷受港" SortExpression="PLACE_OF_RECEIPT" />
+<asp:BoundField DataField="LOADING_PORT" HeaderText="積出港" SortExpression="LOADING_PORT" />
+<asp:BoundField DataField="DISCHARGING_PORT" HeaderText="揚港" SortExpression="DISCHARGING_PORT" />
+<asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="配送先" SortExpression="PLACE_OF_DELIVERY" />
+
+<asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" />
+
+
+
+<%--                    --%><%--                    <asp:BoundField DataField="TWENTY_FEET" HeaderText="20Ft" SortExpression="TWENTY_FEET" />
 <asp:BoundField DataField="FOURTY_FEET" HeaderText="40Ft" SortExpression="FOURTY_FEET" />
 <asp:BoundField DataField="LCL_QTY" HeaderText="LCL/40Ft" SortExpression="LCL_QTY" />--%><%--                    <asp:BoundField DataField="CONTAINER" HeaderText="コンテナ" SortExpression="CONTAINER" />--%>
 <%--                    <asp:BoundField DataField="DAY01" HeaderText="VAN01" SortExpression="DAY01" />
@@ -409,10 +431,13 @@ h2:after{
 <asp:BoundField DataField="DAY10" HeaderText="VAN10" SortExpression="DAY10" />
 <asp:BoundField DataField="DAY11" HeaderText="VAN11" SortExpression="DAY11" />
 <asp:BoundField DataField="FINALVANDATE" HeaderText="最終バン日" SortExpression="FINALVANDATE" />--%>
-<asp:BoundField DataField="BOOKING_NO" HeaderText="BOOKING_NO" SortExpression="BOOKING_NO" />
-<%--                    <asp:BoundField DataField="BOOK_TO" HeaderText="BOOK_TO" SortExpression="BOOK_TO" />--%><%--                    <asp:BoundField DataField="VESSEL_NAME" HeaderText="船名" SortExpression="VESSEL_NAME" />
-<asp:BoundField DataField="VOYAGE_NO" HeaderText="VOYAGE_NO" SortExpression="VOYAGE_NO" />--%><%--                    <asp:BoundField DataField="PLACE_OF_RECEIPT" HeaderText="荷受港" SortExpression="PLACE_OF_RECEIPT" />--%><%--                    <asp:BoundField DataField="LOADING_PORT" HeaderText="積出港" SortExpression="LOADING_PORT" />--%><%--                    <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="揚港" SortExpression="DISCHARGING_PORT" />--%><%--                    <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="配送先" SortExpression="PLACE_OF_DELIVERY" />--%><%--                    <asp:BoundField DataField="FLG01" HeaderText="FLG01" SortExpression="FLG01" />--%><%--                    <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
+
+<%--<asp:BoundField DataField="FLG01" HeaderText="FLG01" SortExpression="FLG01" />
+<asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
 <asp:BoundField DataField="FLG04" HeaderText="FLG04" SortExpression="FLG04" />--%>
+
+
+
 </Columns>
 <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
 <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
@@ -431,10 +456,6 @@ h2:after{
 
 
 </asp:Panel>   
-
-
-
-    
 
 
 
