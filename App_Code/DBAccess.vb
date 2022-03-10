@@ -724,4 +724,54 @@ Public Class DBAccess
         Return Ds
 
     End Function
+
+    Public Function GET_RESULT_DEC_LCL(strFwd As String, strMail As String, strPlace As String) As DataSet
+        'AIR用海貨業者アドレスマスタ取得
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  CODE "
+        StrSQL = StrSQL & "  , MAIL_ADD "
+        StrSQL = StrSQL & "  , Case PLACE "
+        StrSQL = StrSQL & "     WHEN '0' THEN '本社' "
+        StrSQL = StrSQL & "     WHEN '1' THEN '上野' "
+        StrSQL = StrSQL & "    End As PLACE "
+        StrSQL = StrSQL & "  , PLACE "
+        StrSQL = StrSQL & "  , GYOSHA  "
+        StrSQL = StrSQL & "FROM M_EXL_AIR_MAIL "
+
+        If strFwd <> "" Or strMail <> "" Or strPlace <> "" Then
+            StrSQL = StrSQL & "WHERE "
+            If strFwd <> "" And strMail = "" And strPlace = "" Then
+                StrSQL = StrSQL & "  GYOSHA LIKE '%" & strFwd & "%'  "
+            ElseIf strFwd <> "" And strMail <> "" And strPlace = "" Then
+                StrSQL = StrSQL & "  GYOSHA LIKE '%" & strFwd & "%'  "
+                StrSQL = StrSQL & "  AND MAIL_ADD LIKE '%" & strMail & "%'  "
+            ElseIf strFwd <> "" And strMail <> "" And strPlace <> "" Then
+                StrSQL = StrSQL & "  GYOSHA LIKE '%" & strFwd & "%'  "
+                StrSQL = StrSQL & "  AND MAIL_ADD LIKE '%" & strMail & "%'  "
+                StrSQL = StrSQL & "  AND PLACE LIKE '%" & strPlace & "%'  "
+            ElseIf strFwd <> "" And strMail = "" And strPlace <> "" Then
+                StrSQL = StrSQL & "  GYOSHA LIKE '%" & strFwd & "%'  "
+                StrSQL = StrSQL & "  AND PLACE LIKE '%" & strPlace & "%'  "
+            ElseIf strFwd = "" And strMail <> "" And strPlace = "" Then
+                StrSQL = StrSQL & "  MAIL_ADD LIKE '%" & strMail & "%'  "
+            ElseIf strFwd = "" And strMail <> "" And strPlace <> "" Then
+                StrSQL = StrSQL & "  MAIL_ADD LIKE '%" & strMail & "%'  "
+                StrSQL = StrSQL & "  AND PLACE LIKE '%" & strPlace & "%'  "
+            ElseIf strFwd = "" And strMail = "" And strPlace <> "" Then
+                StrSQL = StrSQL & "  PLACE LIKE '%" & strPlace & "%'  "
+            End If
+        End If
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class
