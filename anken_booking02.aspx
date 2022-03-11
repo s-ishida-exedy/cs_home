@@ -200,6 +200,16 @@ h2:after{
 </script>
 
 
+
+    <script type="text/javascript">
+      function LinkClick() {
+          var url = 'm_lcl_dec_mail.aspx?q='
+        window.open(url, null);
+      }
+
+    </script>
+
+
 </head>
 <body class="c2">
 <form id="form1" runat="server">
@@ -320,7 +330,15 @@ h2:after{
 
     </td>
 
+    <td style="width:100px;Font-Size:25px;" >
 
+<div class="button04">
+      <a href="javascript:void(0);" onclick="LinkClick()">アドレス登録</a>
+</div>    
+
+
+
+</td>
 
 
 </tr>

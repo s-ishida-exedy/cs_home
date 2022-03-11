@@ -25,7 +25,7 @@ Partial Class cs_home
             ' そうでない時処理
         Else
             Me.DropDownList1.Items.Insert(0, "") '先頭に空白行追加
-            Me.DropDownList2.Items.Insert(0, "") '先頭に空白行追加
+
         End If
 
         AddHandler GridView1.RowCommand, AddressOf GridView1_RowCommand
@@ -68,7 +68,7 @@ Partial Class cs_home
         'リセットボタン押下
         DropDownList1.SelectedIndex = 0
         TextBox1.Text = ""
-        DropDownList2.SelectedIndex = 0
+
 
         Call Make_Grid()
     End Sub
