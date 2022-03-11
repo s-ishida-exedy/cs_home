@@ -217,13 +217,15 @@ CASE KBN
  WHEN '1' THEN 'LCL展開'
  WHEN '2' THEN '郵船委託'
  WHEN '3' THEN '近鉄委託'
+ WHEN '4' THEN '日ト委託'
+ WHEN '5' THEN '日通委託'
 END AS KBN
 ,CASE TO_CC
  WHEN '0' THEN 'CC'
  WHEN '1' THEN '宛先'
 END AS TO_CC
 , REF
- FROM [M_EXL_LCL_DEC_MAIL]"></asp:SqlDataSource>
+ FROM [M_EXL_LCL_DEC_MAIL] ORDER BY KBN DESC"></asp:SqlDataSource>
     
 <%--    無し--%>
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT
@@ -238,6 +240,8 @@ CASE KBN
  WHEN '1' THEN 'LCL展開'
  WHEN '2' THEN '郵船委託'
  WHEN '3' THEN '近鉄委託'
+ WHEN '4' THEN '日ト委託'
+ WHEN '5' THEN '日通委託'
 END AS KBN
 FROM M_EXL_LCL_DEC_MAIL
 ORDER BY KBN DESC"></asp:SqlDataSource>

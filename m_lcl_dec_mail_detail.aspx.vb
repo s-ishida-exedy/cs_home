@@ -42,6 +42,8 @@ Partial Class cs_home
                 strSQL = strSQL & "   WHEN '1' THEN 'LCL展開' "
                 strSQL = strSQL & "   WHEN '2' THEN '郵船委託' "
                 strSQL = strSQL & "   WHEN '3' THEN '近鉄委託' "
+                strSQL = strSQL & "   WHEN '4' THEN '日ト委託' "
+                strSQL = strSQL & "   WHEN '5' THEN '日通委託' "
                 strSQL = strSQL & "   End As KBN "
                 strSQL = strSQL & "  , TO_CC "
                 strSQL = strSQL & "  , REF "
@@ -135,6 +137,12 @@ Partial Class cs_home
             Case "近鉄委託"
                 strkbn = "3"
                 strref = "近鉄委託"
+            Case "日ト委託"
+                strkbn = "4"
+                strref = "日ト委託"
+            Case "日通委託"
+                strkbn = "5"
+                strref = "日通委託"
         End Select
 
         '画面入力情報を変数に代入

@@ -48,6 +48,10 @@ Partial Class cs_home
                 strkbn = "2"
             Case "近鉄委託"
                 strkbn = "3"
+            Case "日ト委託"
+                strkbn = "4"
+            Case "日通委託"
+                strkbn = "5"
         End Select
 
         'データの取得
