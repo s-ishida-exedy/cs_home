@@ -739,6 +739,8 @@ Public Class DBAccess
         StrSQL = StrSQL & "     WHEN '1' THEN 'LCL展開' "
         StrSQL = StrSQL & "     WHEN '2' THEN '郵船委託' "
         StrSQL = StrSQL & "     WHEN '3' THEN '近鉄委託' "
+        StrSQL = StrSQL & "     WHEN '4' THEN '日ト委託' "
+        StrSQL = StrSQL & "     WHEN '5' THEN '日通委託' "
         StrSQL = StrSQL & "    End As KBN "
         StrSQL = StrSQL & "  , CASE TO_CC "
         StrSQL = StrSQL & "     WHEN '0' THEN 'CC' "
