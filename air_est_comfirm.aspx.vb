@@ -363,60 +363,65 @@ Partial Class cs_home
                 strIrai = "集荷見積り"
         End Select
 
-        Dim subject As String = "【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
+        Dim subject As String = "【AIR " & strIrai & "依頼　" & Session("strCust") & "向け】"
 
         'メールの本文
         Dim body As String = UriBodyC()
 
         Dim strFilePath As String = "C:\exp\cs_home\upload\" & Session("strFile")
 
-        Using stream = File.OpenRead(strFilePath)
-            ' MailKit におけるメールの情報
-            Dim message = New MimeKit.MimeMessage()
+        'Using stream = File.OpenRead(strFilePath)
+        ' MailKit におけるメールの情報
+        Dim message = New MimeKit.MimeMessage()
 
-            ' 送り元情報  
-            message.From.Add(MailboxAddress.Parse(strfrom))
+        ' 送り元情報  
+        message.From.Add(MailboxAddress.Parse(strfrom))
 
-            ' 宛先情報  
-            message.To.Add(MailboxAddress.Parse(strto))
-            If Session("strCC") <> "" Then
-                'カンマ区切りをSPLIT
-                Dim strVal() As String = Session("strCC").Split(",")
-                For Each c In strVal
-                    message.Cc.Add(New MailboxAddress("", c))
-                Next
-            End If
+        ' 宛先情報  
+        message.To.Add(MailboxAddress.Parse(strto))
+        If Session("strCC") <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = Session("strCC").Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
 
-            strSQL = ""
-            strSQL = strSQL & "SELECT MAIL_ADD FROM M_EXL_AIR_MAIL "
-            strSQL = strSQL & "WHERE PLACE = '" & Session("strPlac") & "' "
+        strSQL = ""
+        strSQL = strSQL & "SELECT MAIL_ADD FROM M_EXL_AIR_MAIL "
+        strSQL = strSQL & "WHERE PLACE = '" & Session("strPlac") & "' "
 
-            'ＳＱＬコマンド作成 
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行 
-            dataread = dbcmd.ExecuteReader()
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
 
-            '結果を取り出す 
-            While (dataread.Read())
-                message.Bcc.Add(New MailboxAddress("", dataread("MAIL_ADD")))
-            End While
+        '結果を取り出す 
+        While (dataread.Read())
+            message.Bcc.Add(New MailboxAddress("", dataread("MAIL_ADD")))
+        End While
 
-            'クローズ処理 
-            dataread.Close()
-            dbcmd.Dispose()
-            cnn.Close()
-            cnn.Dispose()
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
 
 
-            ' 表題  
-            message.Subject = subject
+        ' 表題  
+        message.Subject = subject
 
-            ' 本文
-            Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
-            textPart.Text = body
-            message.Body = textPart
+        ' 本文
+        Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
+        textPart.Text = body
+        message.Body = textPart
 
-            '添付ファイル
+        Dim multipart = New MimeKit.Multipart("mixed")
+        multipart.Add(textPart)
+        message.Body = multipart
+
+        '添付ファイル
+        If Session("strFile") <> "" Then
             Dim path = strFilePath     '添付したいファイル
             Dim attachment = New MimeKit.MimePart("application", "pdf") _
             With {
@@ -425,25 +430,21 @@ Partial Class cs_home
                 .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
                 .FileName = System.IO.Path.GetFileName(path)
             }
-
-            Dim multipart = New MimeKit.Multipart("mixed")
-            multipart.Add(textPart)
             multipart.Add(attachment)
+        End If
 
-            message.Body = multipart
-
-            Using client As New MailKit.Net.Smtp.SmtpClient()
-                client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
-                client.Send(message)
-                client.Disconnect(True)
-                client.Dispose()
-                message.Dispose()
-            End Using
-            stream.Dispose()
+        Using client As New MailKit.Net.Smtp.SmtpClient()
+            client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
+            client.Send(message)
+            client.Disconnect(True)
+            client.Dispose()
+            message.Dispose()
         End Using
-
-        File.Delete(strFilePath)
-
+        '    stream.Dispose()
+        'End Using
+        If Session("strFile") <> "" Then
+            File.Delete(strFilePath)
+        End If
     End Sub
 
 End Class

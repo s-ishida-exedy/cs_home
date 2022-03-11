@@ -104,6 +104,14 @@
         }
         .DropDownList{
             text-align :center;
+            font-size :small ;
+        }
+        .txtb{
+            padding: 5px;
+            font-size :small ;
+        }
+        .date2{
+            font-size :small ;
         }
 </style>
 <script>
@@ -173,7 +181,7 @@
             <tr>
                 <th>依頼内容</th>
                 <td>
-                    <asp:DropDownList ID="DropDownList1" runat="server" Width="130px">
+                    <asp:DropDownList ID="DropDownList1" runat="server" Width="130px" class="DropDownList">
                         <asp:ListItem Value="0">見積り</asp:ListItem>
                         <asp:ListItem Value="1">集荷</asp:ListItem>
                         <asp:ListItem Value="2">集荷見積り</asp:ListItem>
@@ -181,20 +189,20 @@
                 </td>
                 <th>集荷場所</th>
                 <td>
-                    <asp:DropDownList ID="DropDownList2" runat="server" Width="130px">
+                    <asp:DropDownList ID="DropDownList2" runat="server" Width="130px" class="DropDownList">
                         <asp:ListItem Value="0">本社</asp:ListItem>
                         <asp:ListItem Value="1">上野</asp:ListItem>
                     </asp:DropDownList>
                 </td>
                 <th>客先コード</th>
                 <td>
-                    <asp:TextBox ID="TextBox1" runat="server" Width="130px"></asp:TextBox>
+                    <asp:TextBox ID="TextBox1" runat="server" Width="130px" Class ="txtb"></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <th>建値</th>
                 <td>
-                    <asp:DropDownList ID="DropDownList3" runat="server" Width="130px">
+                    <asp:DropDownList ID="DropDownList3" runat="server" Width="130px" class="DropDownList">
                         <asp:ListItem Value="EX-WORKS">EX-WORKS</asp:ListItem>
                         <asp:ListItem Value="DDP">DDP</asp:ListItem>
                         <asp:ListItem Value="DDU">DDU</asp:ListItem>
@@ -205,29 +213,29 @@
                 </td>
                 <th>総重量</th>
                 <td>
-                    <asp:TextBox ID="TextBox9" runat="server" Width="104px"></asp:TextBox>
+                    <asp:TextBox ID="TextBox9" runat="server" Width="104px" Class ="txtb"></asp:TextBox>
                     <asp:Label ID="Label7" runat="server" Text="Kg"></asp:Label>
                 </td>
                 <th>個口</th>
                 <td>
-                    <asp:TextBox ID="TextBox10" runat="server" Width="95px"></asp:TextBox>
+                    <asp:TextBox ID="TextBox10" runat="server" Width="95px" Class ="txtb"></asp:TextBox>
                     <asp:Label ID="Label8" runat="server" Text="個口"></asp:Label>
                 </td>
             </tr>
             <tr>
                 <th>ｻｲｽﾞ(縦)</th>
                 <td>
-                    <asp:TextBox ID="TextBox3" runat="server" Width="63px"></asp:TextBox>
+                    <asp:TextBox ID="TextBox3" runat="server" Width="63px" Class ="txtb"></asp:TextBox>
                     <asp:Label ID="Label2" runat="server" Text="cm"></asp:Label>
                 </td>
                 <th>ｻｲｽﾞ(横)</th>
                 <td>
-                    <asp:TextBox ID="TextBox4" runat="server" Width="63px"></asp:TextBox>
+                    <asp:TextBox ID="TextBox4" runat="server" Width="63px" Class ="txtb"></asp:TextBox>
                     <asp:Label ID="Label4" runat="server" Text="cm"></asp:Label>
                 </td>
                 <th>ｻｲｽﾞ(高さ)</th>
                 <td>
-                    <asp:TextBox ID="TextBox5" runat="server" Width="63px"></asp:TextBox>
+                    <asp:TextBox ID="TextBox5" runat="server" Width="63px" Class ="txtb"></asp:TextBox>
                     <asp:Label ID="Label5" runat="server" Text="cm"></asp:Label>
                 </td>
             </tr>
@@ -242,7 +250,7 @@
                 </td>
                 <th>集荷時間</th>
                 <td>
-                    <asp:DropDownList ID="DropDownList4" runat="server" Width="130px">
+                    <asp:DropDownList ID="DropDownList4" runat="server" Width="130px" class="DropDownList">
                         <asp:ListItem Value="13:00">13:00</asp:ListItem>
                         <asp:ListItem Value="13:30">13:30</asp:ListItem>
                         <asp:ListItem Value="14:00">14:00</asp:ListItem>
@@ -288,7 +296,7 @@
             <tr>
                 <th>連絡事項</th>
                 <td colspan ="3">
-                    <asp:TextBox ID="TextBox2" runat="server" Class="date2" Width="1080px" Height="40px" TextMode="MultiLine"></asp:TextBox>
+                    <asp:TextBox ID="TextBox2" runat="server" Class ="txtb" Width="1080px" Height="40px" TextMode="MultiLine"></asp:TextBox>
                 </td>
             </tr>
         </table>
