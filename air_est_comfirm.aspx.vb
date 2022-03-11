@@ -119,6 +119,10 @@ Partial Class cs_home
         'メール本文の作成
         Dim Bdy As String = ""
 
+        Bdy = Bdy + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        Bdy = Bdy + "このメールはシステムから送信されています。<br/>"
+        Bdy = Bdy + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
+        Bdy = Bdy + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
         Bdy = Bdy + "お世話になります。<BR>"
         Bdy = Bdy + "早速ですがAIRの見積りを依頼をさせていただきます。<BR>"
         Bdy = Bdy + "下記条件を元にお見積りをお願い申し上げます。<BR><BR>"
@@ -290,7 +294,6 @@ Partial Class cs_home
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
         Dim strSQL As String = ""
-        Dim strDate As String
 
         GET_BccAddress = ""
 
@@ -312,11 +315,9 @@ Partial Class cs_home
         'ＳＱＬ文実行 
         dataread = dbcmd.ExecuteReader()
 
-        strDate = ""
         '結果を取り出す 
         While (dataread.Read())
             GET_BccAddress += dataread("MAIL_ADD") + ","
-
         End While
 
         'クローズ処理 
@@ -329,6 +330,21 @@ Partial Class cs_home
 
     Private Sub Send_Mail()
         'メールの送信に必要な情報
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+
         Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
         Dim smtpPort As Integer = 25
 
@@ -348,7 +364,6 @@ Partial Class cs_home
         End Select
 
         Dim subject As String = "【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
-        'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
         Dim body As String = UriBodyC()
@@ -365,13 +380,33 @@ Partial Class cs_home
             ' 宛先情報  
             message.To.Add(MailboxAddress.Parse(strto))
             If Session("strCC") <> "" Then
-                message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
+                'カンマ区切りをSPLIT
+                Dim strVal() As String = Session("strCC").Split(",")
+                For Each c In strVal
+                    message.Cc.Add(New MailboxAddress("", c))
+                Next
             End If
-            If Session("strPlac") = "0" Then
-                message.Bcc.Add(MailboxAddress.Parse(GET_BccAddress("0")))
-            ElseIf Session("strPlac") = "1" Then
-                message.Bcc.Add(MailboxAddress.Parse(GET_BccAddress("1")))
-            End If
+
+            strSQL = ""
+            strSQL = strSQL & "SELECT MAIL_ADD FROM M_EXL_AIR_MAIL "
+            strSQL = strSQL & "WHERE PLACE = '" & Session("strPlac") & "' "
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+            '結果を取り出す 
+            While (dataread.Read())
+                message.Bcc.Add(New MailboxAddress("", dataread("MAIL_ADD")))
+            End While
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+            cnn.Close()
+            cnn.Dispose()
+
 
             ' 表題  
             message.Subject = subject
