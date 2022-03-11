@@ -363,7 +363,7 @@ Partial Class cs_home
                 strIrai = "集荷見積り"
         End Select
 
-        Dim subject As String = "【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
+        Dim subject As String = "【AIR " & strIrai & "依頼　" & Session("strCust") & "向け】"
 
         'メールの本文
         Dim body As String = UriBodyC()
@@ -442,9 +442,9 @@ Partial Class cs_home
         End Using
         '    stream.Dispose()
         'End Using
-
-        File.Delete(strFilePath)
-
+        If Session("strFile") <> "" Then
+            File.Delete(strFilePath)
+        End If
     End Sub
 
 End Class
