@@ -179,6 +179,10 @@
                 </ItemTemplate>
                 <HeaderStyle BackColor="#6B696B" />
             </asp:TemplateField>
+            <asp:BoundField DataField="CODE" HeaderText="通番" SortExpression="CODE">
+            <HeaderStyle Width="60px" />
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
             <asp:BoundField DataField="url" HeaderText="URL" ReadOnly="True" SortExpression="url" >
             <HeaderStyle Width="300px" />
             </asp:BoundField>

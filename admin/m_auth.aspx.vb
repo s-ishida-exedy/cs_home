@@ -62,7 +62,7 @@ Partial Class cs_home
             Dim data1 = Me.GridView1.Rows(index).Cells(1).Text
 
             Session("strMode") = "0"    '更新モード
-            Session("strURL") = data1
+            Session("strCODE") = data1
             Response.Redirect("m_auth_detail.aspx")
         End If
 
