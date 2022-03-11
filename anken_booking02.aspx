@@ -255,7 +255,13 @@ h2:after{
 
     
 
-    
+    <table style="width:320px;" >
+<tr>
+
+       <asp:Label  ID="Label10" runat="server" Text="<<登録、フォルダ作成が完了してます>>" Font-Size="15px" forecolor="red" Font-Bold="true" />
+
+</tr>
+</table>
 
 
 
@@ -320,10 +326,14 @@ h2:after{
 </tr>
 </table>
 
+
+
+
+
 <table style="width:320px;height:20px;" >
 <tr>
 
-                                   <asp:Label  ID="Label9" runat="server" Text="※作業完了後、チェックを入れてください。" Font-Size="12px" />
+       <asp:Label  ID="Label9" runat="server" Text="※作業完了後、チェックを入れてください。" Font-Size="12px" />
 
 </tr>
 </table>

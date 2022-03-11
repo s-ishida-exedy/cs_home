@@ -742,7 +742,6 @@ Public Class DBAccess
         StrSQL = StrSQL & "    End As KBN "
         StrSQL = StrSQL & "  , CASE TO_CC "
         StrSQL = StrSQL & "     WHEN '0' THEN 'CC' "
-        StrSQL = StrSQL & "     WHEN '1' THEN 'LCL展開' "
         StrSQL = StrSQL & "     WHEN '1' THEN '宛先' "
         StrSQL = StrSQL & "    End As TO_CC "
         StrSQL = StrSQL & "  , REF  "

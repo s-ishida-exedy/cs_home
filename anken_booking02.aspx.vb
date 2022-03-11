@@ -729,9 +729,12 @@ Partial Class yuusen
             Dim madef01 As String
 
             Call makefld(madef01)
+            Label10.Visible = True
+
 
         Else
             Label7.Text = "×"
+            Label10.Visible = False
         End If
 
     End Sub
@@ -1799,6 +1802,9 @@ Step00:
         Dim strfrom As String = "r-fukao@exedy.com"
         Dim strto As String = "r-fukao@exedy.com"
 
+        Dim strfrom2 As String = GET_ToAddress(1, 1)
+        Dim strto2 As String = GET_ToAddress(1, 0)
+
         Dim f As String = ""
         Dim dt1 As DateTime = DateTime.Now
 
@@ -1891,5 +1897,47 @@ Step00:
 
     End Sub
 
+    Private Function GET_ToAddress(strkbn As String, strtocc As String) As String
+        'BCCメールアドレス情報を取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+
+        GET_ToAddress = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = strSQL & "SELECT MAIL_ADD FROM M_EXL_LCL_DEC_MAIL "
+        strSQL = strSQL & "WHERE kbn = '" & strkbn & "' "
+        strSQL = strSQL & "AND TO_CC = '" & strtocc & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strDate = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            GET_ToAddress += dataread("MAIL_ADD") + ","
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
 
 End Class
