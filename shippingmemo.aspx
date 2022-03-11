@@ -388,7 +388,6 @@ h1:after {
             <td style="width:300px;" >
 
                 <asp:Button class="button01"  ID="Button1" runat="server" Text="更新" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
-                 <asp:Button class="button01"  ID="Button3" runat="server" Text="編集メニュ" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
                   <asp:Button class="button01"  ID="Button4" runat="server" Text="エクセル出力" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
 
 
@@ -454,6 +453,13 @@ h1:after {
                     <Columns>
 
 
+            <asp:TemplateField ShowHeader="False">
+                <ItemTemplate>
+                    <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="false" CommandName="edt" ImageUrl="~/icon/write.png" Text="編集" width = "20" height = "20" />
+                </ItemTemplate>
+                <HeaderStyle BackColor="#6B696B" />
+            </asp:TemplateField>
+
                     <asp:BoundField DataField="CUSTCODE" HeaderText="客先コード" SortExpression="CUSTCODE" ReadOnly="true" ></asp:BoundField>
                     <asp:BoundField DataField="CUSTNAME" HeaderText="客先名" SortExpression="CUSTNAME" ReadOnly="true" ></asp:BoundField>
                     <asp:BoundField DataField="INVOICE_NO" HeaderText="IVNO" SortExpression="INVOICE_NO" ReadOnly="true" ></asp:BoundField>
@@ -509,185 +515,8 @@ h1:after {
             </asp:Panel>
                             
 
-            <asp:Panel ID="Panel2" runat="server"  Font-Size="12px">
-
-                <div class="wrapper">
-                    <table class="sticky">
-                        <thead class="fixed">
-
-                        </thead>
-
-                    <tbody>
 
 
-                    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" Width = "2500px"  DataKeyNames="INVOICE_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
-
-
-                    <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
-<%--                    <AlternatingRowStyle BackColor="#DCDCDC" />--%>
-                    <Columns>
-
-
-            
-<%--                    <asp:TemplateField HeaderText="EDITMENU">
-                    <ItemTemplate>
-                    <asp:Button runat="server" CommandName="Edit" Text="編集" />
-                    </ItemTemplate>
-
-                    <EditItemTemplate>
-                    <asp:Button runat="server" CommandName="Update" Text="保存" />
-                    <asp:Button runat="server" CommandName="Cancel" Text="戻る" />
-
-                    </EditItemTemplate>
-                    </asp:TemplateField>--%>
-
-
-
-                    <asp:BoundField DataField="CUSTCODE" HeaderText="客先コード" SortExpression="CUSTCODE" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="CUSTNAME" HeaderText="客先名" SortExpression="CUSTNAME" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="INVOICE_NO" HeaderText="IVNO" SortExpression="INVOICE_NO" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="REV_ETD" HeaderText="REV_ETD" SortExpression="REV_ETD" ReadOnly="true" ></asp:BoundField>
-
-                    <asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="REV_ETA" HeaderText="REV_ETA" SortExpression="REV_ETA" ReadOnly="true" ></asp:BoundField>
-
-                    <%--            <asp:BoundField DataField="MEMOFLG" HeaderText="メモ出力" SortExpression="MEMOFLG" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="SIFLG" HeaderText="SI出力" SortExpression="SIFLG" ReadOnly="true" ></asp:BoundField>--%>
-
-                    <asp:BoundField DataField="SHIP_TYPE" HeaderText="種類" SortExpression="SHIP_TYPE" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="DATE_GETBL" HeaderText="BL回収" SortExpression="DATE_GETBL" ></asp:BoundField>
-                    <asp:BoundField DataField="DATE_ONBL" HeaderText="BL上の日付" SortExpression="DATE_ONBL" ></asp:BoundField>
-
-                    <asp:BoundField DataField="REV_SALESDATE" HeaderText="修正後計上日" SortExpression="REV_SALESDATE" ></asp:BoundField>
-                    <asp:BoundField DataField="REV_STATUS" HeaderText="修正状況" SortExpression="REV_STATUS" ></asp:BoundField>
-                    <asp:BoundField DataField="BOOKING_NO" HeaderText="BOOKING_NO" SortExpression="BOOKING_NO" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="VOY_NO" HeaderText="VOY_NO" SortExpression="VOY_NO" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="IV_BLDATE" HeaderText="IV_BLDATE" SortExpression="IV_BLDATE" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="KIN_GAIKA" HeaderText="金額（外貨）" SortExpression="KIN_GAIKA" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="RATE" HeaderText="レート" SortExpression="RATE" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="KIN_JPY" HeaderText="金額（JPY）" SortExpression="KIN_JPY" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="VESSEL" HeaderText="船名" SortExpression="VESSEL" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="LOADING_PORT" HeaderText="積出" SortExpression="LOADING_PORT" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="RECEIVED_PORT" HeaderText="荷受" SortExpression="RECEIVED_PORT" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="SHIP_PLACE" HeaderText="出荷拠点" SortExpression="SHIP_PLACE" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="CHECKFLG" HeaderText="確認" SortExpression="CHECKFLG" ReadOnly="true" ></asp:BoundField>
-
-                    <%--            <asp:BoundField DataField="FLG01" HeaderText="FLG01" SortExpression="FLG01" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="FLG02" HeaderText="FLG02" SortExpression="FLG02" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="FLG04" HeaderText="FLG04" SortExpression="FLG04" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="FLG05" HeaderText="FLG05" SortExpression="FLG05" ReadOnly="true" ></asp:BoundField>--%>
-
-                    </Columns>
-<%--                    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-                    <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                    <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
-                    <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                    <SortedAscendingHeaderStyle BackColor="#0000A9" />
-                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                    <SortedDescendingHeaderStyle BackColor="#000065" />--%>
-                    </asp:GridView>
-
-
-                    </tbody>
-                    </table>
-                </div>
-            </asp:Panel>
-
-
-
-
-    
-            <asp:Panel ID="Panel3" runat="server"  Font-Size="12px">
-
-                <div class="wrapper">
-                    <table class="sticky">
-                        <thead class="fixed">
-
-                        </thead>
-
-                    <tbody>
-
-
-
-                    <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" Width = "2500px" DataSourceID="SqlDataSource6" DataKeyNames="INVOICE_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
-
-
-                    <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
-<%--                    <AlternatingRowStyle BackColor="#DCDCDC" />--%>
-                    <Columns>
-
-
-            
-                    <asp:TemplateField HeaderText="編集メニュ">
-                    <ItemTemplate>
-                    <asp:Button runat="server" CommandName="Edit" Text="編集" />
-                    </ItemTemplate>
-
-                    <EditItemTemplate>
-                                            <asp:Button runat="server" CommandName="Update" Text="保存" />
-                    <asp:Button runat="server" CommandName="Cancel" Text="戻る" />
-
-                    </EditItemTemplate>
-                    </asp:TemplateField>
-
-
-
-                    <asp:BoundField DataField="CUSTCODE" HeaderText="客先コード" SortExpression="CUSTCODE" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="CUSTNAME" HeaderText="客先名" SortExpression="CUSTNAME" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="INVOICE_NO" HeaderText="IVNO" SortExpression="INVOICE_NO" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="REV_ETD" HeaderText="REV_ETD" SortExpression="REV_ETD" ReadOnly="true" ></asp:BoundField>
-
-                    <asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="REV_ETA" HeaderText="REV_ETA" SortExpression="REV_ETA" ReadOnly="true" ></asp:BoundField>
-
-                    <%--            <asp:BoundField DataField="MEMOFLG" HeaderText="メモ出力" SortExpression="MEMOFLG" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="SIFLG" HeaderText="SI出力" SortExpression="SIFLG" ReadOnly="true" ></asp:BoundField>--%>
-
-                    <asp:BoundField DataField="SHIP_TYPE" HeaderText="種類" SortExpression="SHIP_TYPE" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="DATE_GETBL" HeaderText="BL回収" SortExpression="DATE_GETBL" ></asp:BoundField>
-                    <asp:BoundField DataField="DATE_ONBL" HeaderText="BL上の日付" SortExpression="DATE_ONBL" ></asp:BoundField>
-
-                    <asp:BoundField DataField="REV_SALESDATE" HeaderText="修正後計上日" SortExpression="REV_SALESDATE" ></asp:BoundField>
-                    <asp:BoundField DataField="REV_STATUS" HeaderText="修正状況" SortExpression="REV_STATUS" ></asp:BoundField>
-                    <asp:BoundField DataField="BOOKING_NO" HeaderText="BOOKING_NO" SortExpression="BOOKING_NO" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="VOY_NO" HeaderText="VOY_NO" SortExpression="VOY_NO" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="IV_BLDATE" HeaderText="IV_BLDATE" SortExpression="IV_BLDATE" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="KIN_GAIKA" HeaderText="金額（外貨）" SortExpression="KIN_GAIKA" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="RATE" HeaderText="レート" SortExpression="RATE" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="KIN_JPY" HeaderText="金額（JPY）" SortExpression="KIN_JPY" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="VESSEL" HeaderText="船名" SortExpression="VESSEL" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="LOADING_PORT" HeaderText="積出" SortExpression="LOADING_PORT" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="RECEIVED_PORT" HeaderText="荷受" SortExpression="RECEIVED_PORT" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="SHIP_PLACE" HeaderText="出荷拠点" SortExpression="SHIP_PLACE" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="CHECKFLG" HeaderText="確認" SortExpression="CHECKFLG" ReadOnly="true" ></asp:BoundField>
-
-                    <%--            <asp:BoundField DataField="FLG01" HeaderText="FLG01" SortExpression="FLG01" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="FLG02" HeaderText="FLG02" SortExpression="FLG02" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="FLG04" HeaderText="FLG04" SortExpression="FLG04" ReadOnly="true" ></asp:BoundField>
-                    <asp:BoundField DataField="FLG05" HeaderText="FLG05" SortExpression="FLG05" ReadOnly="true" ></asp:BoundField>--%>
-
-                    </Columns>
-<%--                    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-                    <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                    <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
-                    <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                    <SortedAscendingHeaderStyle BackColor="#0000A9" />
-                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                    <SortedDescendingHeaderStyle BackColor="#000065" />--%>
-                    </asp:GridView>
-
-                    </tbody>
-                    </table>
-                </div>
-
- 
-            </asp:Panel>
 
 
 
@@ -723,7 +552,7 @@ h1:after {
             <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [DATE_GETBL] FROM [T_EXL_SHIPPINGMEMOLIST]"></asp:SqlDataSource>
             <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [REV_STATUS] FROM [T_EXL_SHIPPINGMEMOLIST] WHERE REV_STATUS <>''"></asp:SqlDataSource>
 
-            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_SHIPPINGMEMOLIST] WHERE [DATE_GETBL] ='' AND [REV_STATUS] <>'出港済み' AND CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530' )  ORDER BY ETD  ">
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT  CUSTCODE,CUSTNAME,INVOICE_NO,ETD,MEMOFLG,SIFLG,DATE_GETBL,SHIP_TYPE,DATE_ONBL,ETA,REV_SALESDATE,REV_STATUS,BOOKING_NO,VOY_NO,IV_BLDATE,KIN_GAIKA,RATE,KIN_JPY,VESSEL,LOADING_PORT,RECEIVED_PORT,SHIP_PLACE,CHECKFLG,REV_ETD,REV_ETA,FLG01,FLG02,FLG03,FLG04,FLG05 FROM [T_EXL_SHIPPINGMEMOLIST] WHERE [DATE_GETBL] ='' AND [REV_STATUS] <>'出港済み' AND CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530' )  ORDER BY ETD  ">
             <SelectParameters>
             <asp:Parameter DefaultValue="&amp;nbsp;" Name="DATE_GETBL" Type="String" />
             </SelectParameters>

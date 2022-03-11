@@ -20,32 +20,32 @@ Partial Class yuusen
 
 
         If e.Row.RowType = DataControlRowType.DataRow Then
-            If e.Row.Cells(11).Text = "月またぎ" Then
+            If e.Row.Cells(12).Text = "月またぎ" Then
                 e.Row.BackColor = Drawing.Color.DarkSalmon
-            ElseIf e.Row.Cells(11).Text = "出港済み" Then
+            ElseIf e.Row.Cells(12).Text = "出港済み" Then
                 e.Row.BackColor = Drawing.Color.LightBlue
             End If
 
-            If e.Row.Cells(8).Text = "" Or e.Row.Cells(8).Text = "&nbsp;" Then
-                Call GET_IVDATA(Trim(e.Row.Cells(12).Text), Trim(e.Row.Cells(2).Text))
+            If e.Row.Cells(9).Text = "" Or e.Row.Cells(9).Text = "&nbsp;" Then
+                Call GET_IVDATA(Trim(e.Row.Cells(13).Text), Trim(e.Row.Cells(3).Text))
             End If
 
-            Dim dt0 As DateTime = DateTime.Parse(e.Row.Cells(3).Text)
+            Dim dt0 As DateTime = DateTime.Parse(e.Row.Cells(4).Text)
 
-            If e.Row.Cells(8).Text <> "&nbsp;" And e.Row.Cells(11).Text = "&nbsp;" Then
-                If e.Row.Cells(3).Text <> "&nbsp;" And e.Row.Cells(9).Text <> "&nbsp;" Then
+            If e.Row.Cells(9).Text <> "&nbsp;" And e.Row.Cells(12).Text = "&nbsp;" Then
+                If e.Row.Cells(4).Text <> "&nbsp;" And e.Row.Cells(10).Text <> "&nbsp;" Then
 
-                    If e.Row.Cells(3).Text <> "&nbsp;" And e.Row.Cells(9).Text <> " " Then ' ツール回収
-                        Dim dt1 As DateTime = DateTime.Parse(e.Row.Cells(9).Text)
+                    If e.Row.Cells(4).Text <> "&nbsp;" And e.Row.Cells(10).Text <> " " Then ' ツール回収
+                        Dim dt1 As DateTime = DateTime.Parse(e.Row.Cells(10).Text)
 
                         If dt0.ToString("MM") = dt1.ToString("MM") Then
                             str02 = "不要"
                             str01 = "-"
-                            Call UPD_MEMO02(Trim(e.Row.Cells(12).Text), str01, str02)
+                            Call UPD_MEMO02(Trim(e.Row.Cells(13).Text), str01, str02)
                         Else
                             str02 = "要"
                             str01 = "確認要"
-                            Call UPD_MEMO02(Trim(e.Row.Cells(12).Text), str01, str02)
+                            Call UPD_MEMO02(Trim(e.Row.Cells(13).Text), str01, str02)
                         End If
                     End If
                 End If
@@ -54,32 +54,32 @@ Partial Class yuusen
 
 
 
-            If e.Row.Cells(14).Text <> "&nbsp;" Then
+            If e.Row.Cells(15).Text <> "&nbsp;" Then
 
-                If Trim(e.Row.Cells(14).Text) <> "" Then
-                    Dim dt2 As DateTime = DateTime.Parse(e.Row.Cells(14).Text)
+                If Trim(e.Row.Cells(15).Text) <> "" Then
+                    Dim dt2 As DateTime = DateTime.Parse(e.Row.Cells(15).Text)
 
                     If dt0.ToString("MM") = dt2.ToString("MM") Then
                         str03 = "○"
-                        Call UPD_MEMO03(Trim(e.Row.Cells(12).Text), str03)
+                        Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str03)
                     Else
                         str03 = "×"
-                        Call UPD_MEMO03(Trim(e.Row.Cells(12).Text), str03)
+                        Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str03)
                     End If
                 End If
             End If
 
-            If e.Row.Cells(4).Text <> "&nbsp;" Then
-                If Trim(e.Row.Cells(4).Text) <> "" Then
+            If e.Row.Cells(5).Text <> "&nbsp;" Then
+                If Trim(e.Row.Cells(5).Text) <> "" Then
 
-                    Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(4).Text)
+                    Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
 
                     If dt0.ToString("MM") = dt3.ToString("MM") Then
                         str04 = "○"
-                        Call UPD_MEMO03(Trim(e.Row.Cells(12).Text), str04)
+                        Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str04)
                     Else
                         str04 = "×"
-                        Call UPD_MEMO03(Trim(e.Row.Cells(12).Text), str04)
+                        Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str04)
                     End If
                 End If
             End If
@@ -88,10 +88,10 @@ Partial Class yuusen
             Dim ts1 As New TimeSpan(7, 0, 0, 0)
             Dim dt01 As DateTime = dt00 + ts1
 
-            If e.Row.Cells(8).Text = "&nbsp;" Or Trim(e.Row.Cells(8).Text) = "" Then
-                If e.Row.Cells(6).Text = "&nbsp;" Or Trim(e.Row.Cells(6).Text) = "" Then
+            If e.Row.Cells(9).Text = "&nbsp;" Or Trim(e.Row.Cells(9).Text) = "" Then
+                If e.Row.Cells(7).Text = "&nbsp;" Or Trim(e.Row.Cells(7).Text) = "" Then
 
-                    Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
+                    Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
 
                     If dt4 <= dt01 Then
                         e.Row.BackColor = Drawing.Color.Red
@@ -99,7 +99,7 @@ Partial Class yuusen
                     End If
                 Else
 
-                    Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
+                    Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(7).Text)
 
                     If dt3 <= dt01 Then
                         e.Row.BackColor = Drawing.Color.Red
@@ -109,10 +109,14 @@ Partial Class yuusen
             End If
         End If
 
-        Panel1.Visible = True
-        Panel2.Visible = False
-        Panel3.Visible = False
 
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            Dim dltButton As ImageButton = e.Row.FindControl("ImageButton1")
+            'ボタンが存在する場合のみセット
+            If Not (dltButton Is Nothing) Then
+                dltButton.CommandArgument = e.Row.RowIndex.ToString()
+            End If
+        End If
 
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -140,9 +144,7 @@ Partial Class yuusen
         'Grid再表示
         GridView1.DataBind()
 
-        Panel1.Visible = True
-        Panel2.Visible = False
-        Panel3.Visible = False
+
 
 
         DropDownList1.Items.Clear()
@@ -295,7 +297,7 @@ Partial Class yuusen
         'strSQL = strSQL & "AND T_EXL_SHIPPINGMEMOLIST.INVOICE_NO ='" & ivno & "' "
 
         strSQL = strSQL & "WHERE T_EXL_SHIPPINGMEMOLIST.BOOKING_NO ='" & str01 & "' "
-        strSQL = strSQL & "WHERE T_EXL_SHIPPINGMEMOLIST.INVOICE_NO ='" & ivno & "' "
+        strSQL = strSQL & "AND T_EXL_SHIPPINGMEMOLIST.INVOICE_NO ='" & ivno & "' "
 
         Command.CommandText = strSQL
         ' SQLの実行
@@ -397,20 +399,17 @@ Partial Class yuusen
 
                 Dim ds As DataSet = Dataobj.GET_CS_RESULT_SHIPPINGMEMO(strstart2, strend2, strd1, strd2)
                 If ds.Tables.Count > 0 Then
-                    GridView2.DataSourceID = ""
-                    GridView2.DataSource = ds
+                    GridView1.DataSourceID = ""
+                    GridView1.DataSource = ds
                     Session("data") = ds
                 End If
 
                 'Grid再表示
-                GridView2.DataBind()
+                GridView1.DataBind()
 
                 DropDownList2.Items.Clear()
                 DropDownList2.Items.Insert(0, "--Select--")
 
-                Panel1.Visible = False
-                Panel2.Visible = True
-                Panel3.Visible = False
 
             ElseIf DropDownList1.Text = "修正状況" Then
                 DropDownList2.Items.Clear()
@@ -431,15 +430,13 @@ Partial Class yuusen
 
             If DropDownList1.Text = "未回収" Then
 
-                GridView2.DataSource = SqlDataSource2
-                GridView2.DataBind()
+                GridView1.DataSourceID = ""
+                GridView1.DataSource = SqlDataSource2
+                GridView1.DataBind()
 
                 DropDownList2.Items.Clear()
                 DropDownList2.Items.Insert(0, "--Select--")
 
-                Panel1.Visible = False
-                Panel2.Visible = True
-                Panel3.Visible = False
 
             ElseIf DropDownList1.Text = "修正状況" Then
 
@@ -484,45 +481,39 @@ Partial Class yuusen
 
                 Dim ds As DataSet = Dataobj.GET_CS_RESULT_SHIPPINGMEMO(strstart2, strend2, strd1, strd2)
                 If ds.Tables.Count > 0 Then
-                    GridView2.DataSourceID = ""
-                    GridView2.DataSource = ds
+                    GridView1.DataSourceID = ""
+                    GridView1.DataSource = ds
                     Session("data") = ds
                 End If
 
                 'Grid再表示
-                GridView2.DataBind()
+                GridView1.DataBind()
 
                 DropDownList2.Items.Clear()
                 DropDownList2.Items.Insert(0, "--Select--")
 
             Else
 
-                GridView2.DataSource = SqlDataSource3
-                GridView2.DataBind()
+                GridView1.DataSource = SqlDataSource3
+                GridView1.DataBind()
 
                 DropDownList2.Items.Clear()
                 DropDownList2.Items.Insert(0, "--Select--")
 
             End If
 
-            Panel1.Visible = False
-            Panel2.Visible = True
-            Panel3.Visible = False
+
 
 
         Else
 
 
-
-            GridView2.DataSource = SqlDataSource3
-            GridView2.DataBind()
+            GridView1.DataSource = SqlDataSource3
+            GridView1.DataBind()
 
             DropDownList2.Items.Clear()
             DropDownList2.Items.Insert(0, "--Select--")
 
-            Panel1.Visible = False
-            Panel2.Visible = True
-            Panel3.Visible = False
 
         End If
 
@@ -553,22 +544,17 @@ Partial Class yuusen
 
             Dim ds As DataSet = Dataobj.GET_CS_RESULT_SHIPPINGMEMO(strstart2, strend2, strd1, strd2)
             If ds.Tables.Count > 0 Then
-                GridView2.DataSourceID = ""
-                GridView2.DataSource = ds
+                GridView1.DataSourceID = ""
+                GridView1.DataSource = ds
                 Session("data") = ds
             End If
 
             'Grid再表示
-            GridView2.DataBind()
-            Panel1.Visible = False
-            Panel2.Visible = True
-            Panel3.Visible = False
+            GridView1.DataBind()
+
 
         Else
 
-            Panel1.Visible = True
-            Panel2.Visible = False
-            Panel3.Visible = False
 
         End If
 
@@ -584,23 +570,7 @@ Partial Class yuusen
 
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
-        If Panel3.Visible = True Then
-
-            Panel1.Visible = True
-            Panel2.Visible = True
-            Panel3.Visible = False
-
-        Else
-
-            Panel1.Visible = False
-            Panel2.Visible = False
-            Panel3.Visible = True
-
-        End If
-
-    End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
@@ -688,66 +658,90 @@ Partial Class yuusen
 
     End Sub
 
-    Private Sub GridView2_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles GridView2.RowDataBound
+    'Private Sub GridView2_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles GridView2.RowDataBound
 
-        If e.Row.RowType = DataControlRowType.DataRow Then
-            If e.Row.Cells(11).Text = "月またぎ" Then
-                e.Row.BackColor = Drawing.Color.DarkSalmon
-            ElseIf e.Row.Cells(11).Text = "出港済み" Then
-                e.Row.BackColor = Drawing.Color.LightBlue
-            End If
+    '    If e.Row.RowType = DataControlRowType.DataRow Then
+    '        If e.Row.Cells(11).Text = "月またぎ" Then
+    '            e.Row.BackColor = Drawing.Color.DarkSalmon
+    '        ElseIf e.Row.Cells(11).Text = "出港済み" Then
+    '            e.Row.BackColor = Drawing.Color.LightBlue
+    '        End If
 
-            Dim dt00 As DateTime = DateTime.Now
-            Dim ts1 As New TimeSpan(7, 0, 0, 0)
-            Dim dt01 As DateTime = dt00 + ts1
+    '        Dim dt00 As DateTime = DateTime.Now
+    '        Dim ts1 As New TimeSpan(7, 0, 0, 0)
+    '        Dim dt01 As DateTime = dt00 + ts1
 
-            If e.Row.Cells(8).Text = "&nbsp;" Or Trim(e.Row.Cells(8).Text) = "" Then
-                If e.Row.Cells(6).Text = "&nbsp;" Or Trim(e.Row.Cells(6).Text) = "" Then
-                    Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
-                    If dt4 <= dt01 Then
-                        e.Row.BackColor = Drawing.Color.Red
-                    Else
-                    End If
-                Else
-                    Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
-                    If dt3 <= dt01 Then
-                        e.Row.BackColor = Drawing.Color.Red
-                    Else
-                    End If
-                End If
-            End If
-        End If
+    '        If e.Row.Cells(8).Text = "&nbsp;" Or Trim(e.Row.Cells(8).Text) = "" Then
+    '            If e.Row.Cells(6).Text = "&nbsp;" Or Trim(e.Row.Cells(6).Text) = "" Then
+    '                Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
+    '                If dt4 <= dt01 Then
+    '                    e.Row.BackColor = Drawing.Color.Red
+    '                Else
+    '                End If
+    '            Else
+    '                Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
+    '                If dt3 <= dt01 Then
+    '                    e.Row.BackColor = Drawing.Color.Red
+    '                Else
+    '                End If
+    '            End If
+    '        End If
+    '    End If
 
-    End Sub
+    'End Sub
 
-    Private Sub GridView3_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles GridView3.RowDataBound
+    'Private Sub GridView3_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles GridView3.RowDataBound
 
-        If e.Row.RowType = DataControlRowType.DataRow Then
-            If e.Row.Cells(11).Text = "月またぎ" Then
-                e.Row.BackColor = Drawing.Color.DarkSalmon
-            ElseIf e.Row.Cells(11).Text = "出港済み" Then
-                e.Row.BackColor = Drawing.Color.LightBlue
-            End If
+    '    If e.Row.RowType = DataControlRowType.DataRow Then
+    '        If e.Row.Cells(11).Text = "月またぎ" Then
+    '            e.Row.BackColor = Drawing.Color.DarkSalmon
+    '        ElseIf e.Row.Cells(11).Text = "出港済み" Then
+    '            e.Row.BackColor = Drawing.Color.LightBlue
+    '        End If
 
-            Dim dt00 As DateTime = DateTime.Now
-            Dim ts1 As New TimeSpan(7, 0, 0, 0)
-            Dim dt01 As DateTime = dt00 + ts1
+    '        Dim dt00 As DateTime = DateTime.Now
+    '        Dim ts1 As New TimeSpan(7, 0, 0, 0)
+    '        Dim dt01 As DateTime = dt00 + ts1
 
-            If e.Row.Cells(8).Text = "&nbsp;" Or Trim(e.Row.Cells(8).Text) = "" Then
-                If e.Row.Cells(6).Text = "&nbsp;" Or Trim(e.Row.Cells(6).Text) = "" Then
-                    Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
-                    If dt4 <= dt01 Then
-                        e.Row.BackColor = Drawing.Color.Red
-                    Else
-                    End If
-                Else
-                    Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
-                    If dt3 <= dt01 Then
-                        e.Row.BackColor = Drawing.Color.Red
-                    Else
-                    End If
-                End If
-            End If
+    '        If e.Row.Cells(8).Text = "&nbsp;" Or Trim(e.Row.Cells(8).Text) = "" Then
+    '            If e.Row.Cells(6).Text = "&nbsp;" Or Trim(e.Row.Cells(6).Text) = "" Then
+    '                Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
+    '                If dt4 <= dt01 Then
+    '                    e.Row.BackColor = Drawing.Color.Red
+    '                Else
+    '                End If
+    '            Else
+    '                Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
+    '                If dt3 <= dt01 Then
+    '                    e.Row.BackColor = Drawing.Color.Red
+    '                Else
+    '                End If
+    '            End If
+    '        End If
+    '    End If
+
+    'End Sub
+
+    Private Sub GridView1_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView1.RowCommand
+        If e.CommandName = "edt" Then
+            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+            Dim data0 = Me.GridView1.Rows(index).Cells(3).Text
+            Dim data1 = Me.GridView1.Rows(index).Cells(13).Text
+
+            Session("strMode") = "0"    '更新モード
+            Session("strinv") = data0
+            Session("strbkg") = data1
+
+
+            Dim clientScript As String = "<script language='JavaScript'> window.open('shippingmemo_detail.aspx', '', 'width=1500,height=450','scrollbars=no','status=no','toolbar=no','location=no','menubar=no','resizable=no') <" + "/script>"
+            Dim startupScript As String = "<script language='JavaScript'>  window.open('shippingmemo_detail.aspx') <" + "/script>"
+
+
+
+            RegisterClientScriptBlock("client", clientScript)
+            'RegisterStartupScript("startup", startupScript)
+
+            'Page.ClientScript.RegisterStartupScript(Me.GetType(), "window-script", "openWindow('shippingmemo_detail.aspx')", True)
         End If
 
     End Sub
