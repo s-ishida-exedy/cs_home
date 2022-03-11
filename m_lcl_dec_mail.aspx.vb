@@ -39,12 +39,16 @@ Partial Class cs_home
         Dim strkbn As String = DropDownList1.SelectedValue
         'Dim strkbn As String = DropDownList2.SelectedValue
 
-        'Select Case strVal
-        '    Case "本社"
-
-        '    Case "上野"
-
-        'End Select
+        Select Case strkbn
+            Case "販促品"
+                strkbn = "0"
+            Case "LCL展開"
+                strkbn = "1"
+            Case "郵船委託"
+                strkbn = "2"
+            Case "近鉄委託"
+                strkbn = "3"
+        End Select
 
         'データの取得
         Dim ds As DataSet = Dataobj.GET_RESULT_DEC_LCL(strkbn, Me.TextBox1.Text)

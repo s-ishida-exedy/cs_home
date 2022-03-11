@@ -751,9 +751,9 @@ Public Class DBAccess
             StrSQL = StrSQL & "WHERE "
 
             If strkbn <> "" And strMail = "" Then
-                StrSQL = StrSQL & "  REF LIKE '%" & strkbn & "%'  "
+                StrSQL = StrSQL & "  KBN LIKE '%" & strkbn & "%'  "
             ElseIf strkbn <> "" And strMail <> "" Then
-                StrSQL = StrSQL & "  REF LIKE '%" & strkbn & "%'  "
+                StrSQL = StrSQL & "  KBN LIKE '%" & strkbn & "%'  "
                 StrSQL = StrSQL & "  AND MAIL_ADD LIKE '%" & strMail & "%'  "
 
             ElseIf strkbn = "" And strMail <> "" Then
