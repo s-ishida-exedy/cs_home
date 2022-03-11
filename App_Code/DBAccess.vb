@@ -770,4 +770,31 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
+    Public Function GET_RESULT_EIR(strValue As String) As DataSet
+        'EIR情報取得
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT a.CODE, a.REGPERSON, a.REGSTAMP, a.MAIL_TITLE, a.VOYNO01, a.VOYNO02, "
+        StrSQL = StrSQL & "a.VESSEL01, a.VESSEL02, a.BOOKING01, a.BOOKING02, a.CONTAINER01, a.CONTAINER02, a.ETC01, a.ETC02,  "
+        StrSQL = StrSQL & "CASE a.STATUS  "
+        StrSQL = StrSQL & " WHEN '0' THEN '未対応' "
+        StrSQL = StrSQL & " WHEN '1' THEN '確認済み' "
+        StrSQL = StrSQL & "END AS STATUS "
+        StrSQL = StrSQL & "FROM T_EXL_EIR_COMF a "
+        StrSQL = StrSQL & "LEFT JOIN M_EXL_USR b "
+        StrSQL = StrSQL & "ON a.REGPERSON = b.uid "
+        StrSQL = StrSQL & "WHERE STATUS IN (" & strValue & ") "
+        StrSQL = StrSQL & "ORDER BY REGSTAMP "
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class
