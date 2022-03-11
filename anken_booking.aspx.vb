@@ -571,17 +571,17 @@ Partial Class yuusen
 
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 
-        Dim Kaika00 As String
+        Dim Kaika00 As String = ""
 
         Dim deccnt As Long
         Dim lng14 As Long
         Dim lng15 As Long
 
-        Dim WDAYNO00 As String
-        Dim WDAY00 As String
-        Dim WDAY01 As String
+        Dim WDAYNO00 As String = ""
+        Dim WDAY00 As String = ""
+        Dim WDAY01 As String = ""
 
-        Dim strSQL As String
+        Dim strSQL As String = ""
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
 
@@ -683,13 +683,12 @@ Partial Class yuusen
 
             For I = 0 To GridView1.Rows.Count - 1
 
-                deccnt = 0
-                DEC_GET(GridView1.Rows(I).Cells(26).Text, deccnt)
+            deccnt = 0
+            deccnt = DEC_GET(GridView1.Rows(I).Cells(26).Text)
 
 
 
-
-                If Left(GridView1.Rows(I).Cells(2).Text, 2) = "上野" Then
+            If Left(GridView1.Rows(I).Cells(2).Text, 2) = "上野" Then
 
                     If GridView1.Rows(I).Cells(7).Text <= WDAY00 Then
 
@@ -757,7 +756,7 @@ Partial Class yuusen
 
     End Sub
 
-    Private Function DEC_GET(STRBOOKING_NO As String, ByRef intCnt As Integer) As Object
+    Private Function DEC_GET(STRBOOKING_NO As String) As Integer
 
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
@@ -773,7 +772,7 @@ Partial Class yuusen
         Dim dataread2 As SqlDataReader
         Dim dbcmd2 As SqlCommand
 
-
+        DEC_GET = 0
 
         Dim dt1 As DateTime = DateTime.Now
 
@@ -804,7 +803,7 @@ Partial Class yuusen
 
         While (dataread.Read())
 
-            intCnt = dataread("RecCnt")
+            DEC_GET = dataread("RecCnt")
 
         End While
 
@@ -896,7 +895,7 @@ Partial Class yuusen
 
                             '委託検索
                             itkflg = 0
-                        Call get_itakuhanntei(I, itkflg, GridView1.Rows(I).Cells(6).Text)
+                        itkflg = get_itakuhanntei(GridView1.Rows(I).Cells(6).Text)
 
                         If itkflg = 1 Then
                             Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('委託：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
@@ -1258,7 +1257,7 @@ Step00:
 
                         '委託検索
                         itkflg = 0
-                        Call get_itakuhanntei(I, itkflg, GridView3.Rows(I).Cells(6).Text)
+                        itkflg = get_itakuhanntei(GridView3.Rows(I).Cells(6).Text)
 
                         If itkflg = 1 Then
                             madef00 = 1
@@ -1605,13 +1604,15 @@ Step01:
     End Sub
 
 
-    Private Sub get_itakuhanntei(i As String, ByRef itkflg As String, ivno As String)
+    Private Function get_itakuhanntei(ivno As String) As String
 
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
         Dim strSQL As String = ""
         Dim strDate As String
         Dim strinv As String
+
+        get_itakuhanntei = ""
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -1653,7 +1654,7 @@ Step01:
 
             Else
 
-                itkflg = 1
+                get_itakuhanntei = 1
 
             End If
         End While
@@ -1664,7 +1665,7 @@ Step01:
         cnn.Close()
         cnn.Dispose()
 
-    End Sub
+    End Function
 
     Private Sub copy_custfile(iptbx As String, ByRef Cname As String, ByRef Ccode As String)
 

@@ -150,8 +150,6 @@
                 <h2>通関・LCL関係アドレスマスタ</h2> 
             </td>
             <td class="second-cell">
-                <asp:Label ID="Label1" runat="server" Text="なし:"></asp:Label>
-                <asp:DropDownList ID="DropDownList2" runat="server" AppendDataBoundItems="True" Width ="100px" DataSourceID="SqlDataSource2" DataTextField="KBN" DataValueField="KBN"></asp:DropDownList>&nbsp;
                 <asp:Label ID="Label3" runat="server" Text="ﾒｰﾙｱﾄﾞﾚｽ:"></asp:Label>
                 <asp:TextBox ID="TextBox1" runat="server" Width ="300"></asp:TextBox>&nbsp;
                 <asp:Label ID="Label2" runat="server" Text="場所:"></asp:Label>

@@ -742,7 +742,6 @@ Public Class DBAccess
         StrSQL = StrSQL & "    End As KBN "
         StrSQL = StrSQL & "  , CASE TO_CC "
         StrSQL = StrSQL & "     WHEN '0' THEN 'CC' "
-        StrSQL = StrSQL & "     WHEN '1' THEN 'LCL展開' "
         StrSQL = StrSQL & "     WHEN '1' THEN '宛先' "
         StrSQL = StrSQL & "    End As TO_CC "
         StrSQL = StrSQL & "  , REF  "
@@ -752,9 +751,9 @@ Public Class DBAccess
             StrSQL = StrSQL & "WHERE "
 
             If strkbn <> "" And strMail = "" Then
-                StrSQL = StrSQL & "  REF LIKE '%" & strkbn & "%'  "
+                StrSQL = StrSQL & "  KBN LIKE '%" & strkbn & "%'  "
             ElseIf strkbn <> "" And strMail <> "" Then
-                StrSQL = StrSQL & "  REF LIKE '%" & strkbn & "%'  "
+                StrSQL = StrSQL & "  KBN LIKE '%" & strkbn & "%'  "
                 StrSQL = StrSQL & "  AND MAIL_ADD LIKE '%" & strMail & "%'  "
 
             ElseIf strkbn = "" And strMail <> "" Then

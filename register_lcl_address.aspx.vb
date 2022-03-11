@@ -613,6 +613,15 @@ Partial Class yuusen
         DropDownList1.DataBind()
         DropDownList1.Items.Insert(0, "--Select--")
 
+        DropDownList2.Items.Clear()
+        'DropDownList1.DataSource = SqlDataSource8
+        DropDownList2.DataBind()
+        DropDownList2.Items.Insert(0, "--Select--")
+
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+        TextBox3.Text = ""
+
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -677,6 +686,15 @@ Partial Class yuusen
         'DropDownList1.DataSource = SqlDataSource8
         DropDownList2.DataBind()
         DropDownList2.Items.Insert(0, "--Select--")
+
+
+    End Sub
+
+    Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
+
+        Button1.Attributes.Add("onclick", "return confirm('登録します。よろしいですか？');")
+        Button2.Attributes.Add("onclick", "return confirm('削除します。よろしいですか？');")
+
 
 
     End Sub

@@ -142,6 +142,14 @@ h2:after{
 
     </script>
 
+        <script type="text/javascript">
+      function LinkClick2() {
+          var url = 'm_lcl_dec_mail.aspx?q='
+        window.open(url, null);
+      }
+
+    </script>
+
 <script>
     $(document).ready(function () {
         var text = getParam('id');
@@ -250,6 +258,16 @@ h2:after{
 
 <div class="button04">
       <a href="javascript:void(0);" onclick="LinkClick()">LCL住所確認・登録</a>
+</div>    
+
+
+
+</td>
+
+<td style="width:100px;Font-Size:25px;" >
+
+<div class="button04">
+      <a href="javascript:void(0);" onclick="LinkClick2()">メール登録</a>
 </div>    
 
 

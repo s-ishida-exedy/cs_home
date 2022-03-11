@@ -144,13 +144,15 @@ Partial Class yuusen
 
 
     End Sub
-    Private Sub get_itakuhanntei(i As String, ByRef itkflg As String, ivno As String)
+    Private Function get_itakuhanntei(ivno As String) As String
 
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
         Dim strSQL As String = ""
         Dim strDate As String
         Dim strinv As String
+
+        get_itakuhanntei = ""
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -192,7 +194,7 @@ Partial Class yuusen
 
             Else
 
-                itkflg = 1
+                get_itakuhanntei = 1
 
             End If
         End While
@@ -203,7 +205,7 @@ Partial Class yuusen
         cnn.Close()
         cnn.Dispose()
 
-    End Sub
+    End Function
 
     Private Sub copy_custfile(iptbx As String, ByRef Cname As String, ByRef Ccode As String)
 
@@ -729,9 +731,12 @@ Partial Class yuusen
             Dim madef01 As String
 
             Call makefld(madef01)
+            Label10.Visible = True
+
 
         Else
             Label7.Text = "×"
+            Label10.Visible = False
         End If
 
     End Sub
@@ -1016,8 +1021,8 @@ Partial Class yuusen
 
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
-        Call body01(t, "郵船")
-        Call body02(t, "郵船", f)
+        t = body01("郵船")
+        f = body02("郵船")
 
         t = t & "</Table></body></html>"
 
@@ -1141,8 +1146,9 @@ Partial Class yuusen
 
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
-        Call body01(t, "近鉄")
-        Call body02(t, "近鉄", f)
+
+        t = body01("近鉄")
+        f = body02("近鉄")
 
         t = t & "</Table></body></html>"
 
@@ -1232,7 +1238,7 @@ Partial Class yuusen
     End Sub
 
 
-    Sub body01(ByRef t As String, A As String)
+    Private Function body01(A As String) As String
 
 
         Dim dataread As SqlDataReader
@@ -1261,6 +1267,7 @@ Partial Class yuusen
         Dim dt2 As DateTime = dt1 + ts1
         Dim dt3 As DateTime = dt1 - ts1
 
+        body01 = ""
 
         'データベース接続を開く
         cnn.Open()
@@ -1300,7 +1307,7 @@ Partial Class yuusen
             PLACE_OF_DELIVERY = Convert.ToString(dataread("PLACE_OF_DELIVERY"))
 
 
-            t = t & "<tr><td >" & CUST & "</td><td>" & INVOICE & " / " & BOOKING_NO & "</td><td>" & DISCHARGING_PORT & "</td><td>" & PLACE_OF_DELIVERY & "</td></tr>"
+            body01 = body01 & "<tr><td >" & CUST & "</td><td>" & INVOICE & " / " & BOOKING_NO & "</td><td>" & DISCHARGING_PORT & "</td><td>" & PLACE_OF_DELIVERY & "</td></tr>"
 
 
 
@@ -1316,11 +1323,11 @@ Partial Class yuusen
         cnn.Dispose()
 
 
-    End Sub
+    End Function
 
 
 
-    Sub body02(ByRef t As String, A As String, ByRef f As String)
+    Private Function body02(A As String) As String
 
 
         Dim dataread As SqlDataReader
@@ -1328,7 +1335,7 @@ Partial Class yuusen
         Dim strSQL As String = ""
         Dim strDate As String
 
-
+        body02 = ""
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -1367,13 +1374,10 @@ Partial Class yuusen
 
 
 
-        f = ""
-
-
         '結果を取り出す 
         While (dataread.Read())
 
-            f = "1"
+            body02 = "1"
 
 
 
@@ -1389,7 +1393,7 @@ Partial Class yuusen
         cnn.Dispose()
 
 
-    End Sub
+    End Function
 
     Sub makefld(ByRef madef01 As String)
 
@@ -1460,9 +1464,9 @@ Partial Class yuusen
 
             '委託検索
             itkflg = 0
-            Call get_itakuhanntei(I, itkflg, GridView1.Rows(I).Cells(5).Text)
+            itkflg = get_itakuhanntei(GridView1.Rows(I).Cells(5).Text)
 
-            If itkflg = 1 Then
+            If itkflg = "1" Then
 
                 madef00 = 1
 
@@ -1799,6 +1803,9 @@ Step00:
         Dim strfrom As String = "r-fukao@exedy.com"
         Dim strto As String = "r-fukao@exedy.com"
 
+        Dim strfrom2 As String = GET_ToAddress(1, 1)
+        Dim strto2 As String = GET_ToAddress(1, 0)
+
         Dim f As String = ""
         Dim dt1 As DateTime = DateTime.Now
 
@@ -1891,5 +1898,47 @@ Step00:
 
     End Sub
 
+    Private Function GET_ToAddress(strkbn As String, strtocc As String) As String
+        'BCCメールアドレス情報を取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+
+        GET_ToAddress = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = strSQL & "SELECT MAIL_ADD FROM M_EXL_LCL_DEC_MAIL "
+        strSQL = strSQL & "WHERE kbn = '" & strkbn & "' "
+        strSQL = strSQL & "AND TO_CC = '" & strtocc & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strDate = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            GET_ToAddress += dataread("MAIL_ADD") + ","
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
 
 End Class
