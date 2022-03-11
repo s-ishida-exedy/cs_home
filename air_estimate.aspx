@@ -281,7 +281,7 @@
                 <th>CCアドレス</th>
                 <td>
                     <asp:TextBox ID="TextBox6" runat="server" Width="200px"></asp:TextBox>
-                    <asp:Label ID="Label1" runat="server" Text="複数の場合「;」で区切る"></asp:Label>
+                    <asp:Label ID="Label1" runat="server" Text="複数の場合「,」で区切る"></asp:Label>
                 </td>
             </tr>
 
