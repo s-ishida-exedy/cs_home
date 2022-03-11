@@ -965,23 +965,49 @@ Partial Class yuusen
 
         Dim yusen As String = ""
         Dim kin As String = ""
+        Dim nihontoran As String = ""
+        Dim nitsu As String = ""
 
         Call Mail01(WDAY00, WDAY01, yusen)
         Call Mail02(WDAY00, WDAY01, kin)
+        Call Mail03(WDAY00, WDAY01, nihontoran)
+        Call Mail04(WDAY00, WDAY01, nitsu)
 
-        If yusen <> "" And kin <> "" Then
+        Dim mailmsg As String = ""
+        If yusen <> "" Then
 
-            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('郵船、近鉄にメールを送信しました。');</script>", False)
+            mailmsg = mailmsg & "," & "郵船"
 
-        ElseIf yusen <> "" And kin = "" Then
+        End If
 
-            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('郵船にメールを送信しました。');</script>", False)
+        If kin <> "" Then
+
+            mailmsg = mailmsg & "," & "近鉄"
+
+        End If
+
+        If nihontoran <> "" Then
+
+            mailmsg = mailmsg & "," & "日本トランス"
+
+        End If
+
+        If nitsu <> "" Then
+
+            mailmsg = mailmsg & "," & "日通"
+
+        End If
+
+        If mailmsg = "" Then
+
+            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('対象なしです。');</script>", False)
 
 
-        ElseIf yusen = "" And kin <> "" Then
 
-            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('郵船、近鉄にメールを送信しました。');</script>", False)
+        Else
 
+            mailmsg = "対象：" & mailmsg
+            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('" & mailmsg & "にメールを送信しました。');</script>", False)
 
 
 
@@ -1237,6 +1263,247 @@ Partial Class yuusen
 
     End Sub
 
+    Sub Mail03(WDAY00 As String, WDAY01 As String, ByRef r As String)
+
+
+
+        'メールの送信に必要な情報
+        Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
+        Dim smtpPort As Integer = 25
+
+        ' メールの内容
+        Dim strfrom As String = "r-fukao@exedy.com"
+        Dim strto As String = "r-fukao@exedy.com"
+        Dim f As String = ""
+
+
+        'メールの件名
+        'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
+
+        'メールの件名
+        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY00 & "分"
+        'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
+
+        'メールの本文
+        Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+
+
+
+
+
+
+
+        Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
+
+
+        t = body01("日ト")
+        f = body02("日ト")
+
+        t = t & "</Table></body></html>"
+
+        body = body & t
+
+        Dim body2 As String = "</p>" ' UriBodyC()
+
+        body = body & body2
+
+        body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+
+
+
+
+        'Dim strFilePath As String = "" '"C:\exp\cs_home\upload\" & Session("strFile")
+
+        'Using stream = File.OpenRead(strFilePath)
+        ' MailKit におけるメールの情報
+        Dim message = New MimeKit.MimeMessage()
+
+        ' 送り元情報  
+        message.From.Add(MailboxAddress.Parse(strfrom))
+
+
+        ' 宛先情報  
+        message.To.Add(MailboxAddress.Parse(strto))
+        'If Session("strCC") <> "" Then
+
+        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
+
+        'End If
+
+
+        ' 表題  
+        message.Subject = subject
+
+        ' 本文
+        Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
+        textPart.Text = body
+        message.Body = textPart
+
+
+        ''添付ファイル
+        'Dim path = strFilePath     '添付したいファイル
+        '    Dim attachment = New MimeKit.MimePart("application", "pdf") _
+        '    With {
+        '        .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
+        '        .ContentDisposition = New MimeKit.ContentDisposition(),
+        '        .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
+        '        .FileName = System.IO.Path.GetFileName(path)
+        '    }
+
+        Dim multipart = New MimeKit.Multipart("mixed")
+
+        multipart.Add(textPart)
+        'multipart.Add(attachment)
+
+        message.Body = multipart
+
+        If f <> "" Then
+
+
+            Using client As New MailKit.Net.Smtp.SmtpClient()
+                client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
+                client.Send(message)
+                client.Disconnect(True)
+                client.Dispose()
+                message.Dispose()
+                r = "1k"
+            End Using
+
+        Else
+
+
+
+        End If
+
+
+        'stream.Dispose()
+        'End Using
+
+        'File.Delete(strFilePath)
+
+
+
+    End Sub
+
+    Sub Mail04(WDAY00 As String, WDAY01 As String, ByRef r As String)
+
+
+
+        'メールの送信に必要な情報
+        Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
+        Dim smtpPort As Integer = 25
+
+        ' メールの内容
+        Dim strfrom As String = "r-fukao@exedy.com"
+        Dim strto As String = "r-fukao@exedy.com"
+        Dim f As String = ""
+
+
+        'メールの件名
+        'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
+
+        'メールの件名
+        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY00 & "分"
+        'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
+
+        'メールの本文
+        Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+
+
+
+        Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
+
+
+        t = body01("日通")
+        f = body02("日通")
+
+        t = t & "</Table></body></html>"
+
+        body = body & t
+
+        Dim body2 As String = "</p>" ' UriBodyC()
+
+        body = body & body2
+
+        body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+
+
+
+
+        'Dim strFilePath As String = "" '"C:\exp\cs_home\upload\" & Session("strFile")
+
+        'Using stream = File.OpenRead(strFilePath)
+        ' MailKit におけるメールの情報
+        Dim message = New MimeKit.MimeMessage()
+
+        ' 送り元情報  
+        message.From.Add(MailboxAddress.Parse(strfrom))
+
+
+        ' 宛先情報  
+        message.To.Add(MailboxAddress.Parse(strto))
+        'If Session("strCC") <> "" Then
+
+        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
+
+        'End If
+
+
+        ' 表題  
+        message.Subject = subject
+
+        ' 本文
+        Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
+        textPart.Text = body
+        message.Body = textPart
+
+
+        ''添付ファイル
+        'Dim path = strFilePath     '添付したいファイル
+        '    Dim attachment = New MimeKit.MimePart("application", "pdf") _
+        '    With {
+        '        .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
+        '        .ContentDisposition = New MimeKit.ContentDisposition(),
+        '        .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
+        '        .FileName = System.IO.Path.GetFileName(path)
+        '    }
+
+        Dim multipart = New MimeKit.Multipart("mixed")
+
+        multipart.Add(textPart)
+        'multipart.Add(attachment)
+
+        message.Body = multipart
+
+        If f <> "" Then
+
+
+            Using client As New MailKit.Net.Smtp.SmtpClient()
+                client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
+                client.Send(message)
+                client.Disconnect(True)
+                client.Dispose()
+                message.Dispose()
+                r = "1k"
+            End Using
+
+        Else
+
+
+
+        End If
+
+
+        'stream.Dispose()
+        'End Using
+
+        'File.Delete(strFilePath)
+
+
+
+    End Sub
 
     Private Function body01(A As String) As String
 
