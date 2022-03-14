@@ -799,4 +799,91 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
+    Public Function GET_FINAL_DOC_DATA(strDate As String, strPlace As String) As DataSet
+        '書類最終データ絞り込み
+        Conn = Me.Dbconnect
+
+        Dim cmd = New SqlCommand()
+
+        cmd.Connection = Conn
+        cmd.CommandType = System.Data.CommandType.Text
+
+        'データソースで実行するTransact-SQLステートメントを指定
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT AAA.* "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "(SELECT DISTINCT "
+        StrSQL = StrSQL & "  CASE  "
+        StrSQL = StrSQL & "  LEFT (Forwarder, 2)  "
+        StrSQL = StrSQL & "  WHEN 'AT' THEN '上野'  "
+        StrSQL = StrSQL & "  ELSE '本社'  "
+        StrSQL = StrSQL & "  END AS Forwarder "
+        StrSQL = StrSQL & "  , CUST_CD "
+        StrSQL = StrSQL & "  , INVOICE_NO "
+        StrSQL = StrSQL & "  , MAX(VAN_DATE) AS FINAL_VAN "
+        StrSQL = StrSQL & "  , CUT_DATE "
+        StrSQL = StrSQL & "  , ETD  "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "  ( SELECT Forwarder, CUST_CD, INVOICE_NO, DAY01 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING "
+        StrSQL = StrSQL & "    UNION ALL   "
+        StrSQL = StrSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY02 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING "
+        StrSQL = StrSQL & "    UNION ALL   "
+        StrSQL = StrSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY03 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        StrSQL = StrSQL & "    UNION ALL   "
+        StrSQL = StrSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY04 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        StrSQL = StrSQL & "    UNION ALL   "
+        StrSQL = StrSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY05 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        StrSQL = StrSQL & "    UNION ALL   "
+        StrSQL = StrSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY06 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        StrSQL = StrSQL & "    UNION ALL   "
+        StrSQL = StrSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY07 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        StrSQL = StrSQL & "    UNION ALL   "
+        StrSQL = StrSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY08 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        StrSQL = StrSQL & "    UNION ALL   "
+        StrSQL = StrSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY09 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        StrSQL = StrSQL & "    UNION ALL   "
+        StrSQL = StrSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY10 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        StrSQL = StrSQL & "    UNION ALL   "
+        StrSQL = StrSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY11 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING) AS TBL "
+        StrSQL = StrSQL & "WHERE "
+        StrSQL = StrSQL & "  INVOICE_NO <> ''  "
+        StrSQL = StrSQL & "  AND VAN_DATE <> ''  "
+        StrSQL = StrSQL & "  AND VAN_DATE >=  CONVERT(NVARCHAR,  GETDATE(), 111) "
+        StrSQL = StrSQL & "  AND INVOICE_NO NOT LIKE '%ヒョウコウ%' "
+        StrSQL = StrSQL & "GROUP BY "
+        StrSQL = StrSQL & "  Forwarder "
+        StrSQL = StrSQL & "  , CUST_CD "
+        StrSQL = StrSQL & "  , INVOICE_NO "
+        StrSQL = StrSQL & "  , CUT_DATE "
+        StrSQL = StrSQL & "  , ETD  )AAA "
+        If strDate <> "" Then
+            StrSQL = StrSQL & "WHERE    FINAL_VAN = @VAN_DATE  "
+        End If
+        If strPlace <> "" Then
+            StrSQL = StrSQL & "And Forwarder  = @PLACE "
+        End If
+        StrSQL = StrSQL & "ORDER BY "
+        StrSQL = StrSQL & "  FINAL_VAN "
+        StrSQL = StrSQL & "  , Forwarder DESC "
+        StrSQL = StrSQL & "  , CUT_DATE "
+        StrSQL = StrSQL & "  , ETD  "
+
+        cmd.CommandText = StrSQL
+        cmd.Parameters.Clear()
+        'パラメータ値を設定
+        cmd.Parameters.Add("@VAN_DATE", System.Data.SqlDbType.NVarChar, 50).Value = strDate
+        cmd.Parameters.Add("@PLACE", System.Data.SqlDbType.NVarChar, 50).Value = strPlace
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = cmd
+
+        cmd.Dispose()
+        Conn.Close()
+
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+
+    End Function
 End Class

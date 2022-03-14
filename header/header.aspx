@@ -44,6 +44,7 @@
         <ul class="menu__second-level">
             <!-- 第一階層 -->
             <li data-id='["home","van_sche.aspx"]'><a href="#">本日のバンニング予定</a></li>
+            <li data-id='["home","doc_final.aspx"]'><a href="#">書類最終一覧</a></li>
             <li data-id='["home","eir_comfirm_cs.aspx"]'><a href="#">EIR,Booking差異 CS対応</a></li>
             <li data-id='["aaa",""]'>
                 <a href="#" class="init-right">LCL</a>
