@@ -1028,6 +1028,10 @@ Partial Class yuusen
         Dim smtpPort As Integer = 25
 
         ' メールの内容
+
+        Dim strfrom2 As String = GET_ToAddress(2, 1)
+        Dim strto2 As String = GET_ToAddress(2, 0)
+
         Dim strfrom As String = "r-fukao@exedy.com"
         Dim strto As String = "r-fukao@exedy.com"
 
@@ -1042,12 +1046,12 @@ Partial Class yuusen
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
-        Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+        Dim body As String = "<html><body><p>郵船ロジスティクス ご担当者様<p>いつもお世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
 
 
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
-        t = body01("郵船")
+        t = t & body01("郵船")
         f = body02("郵船")
 
         t = t & "</Table></body></html>"
@@ -1056,7 +1060,7 @@ Partial Class yuusen
 
         Dim body2 As String = "</p>" ' UriBodyC()
 
-        body = body & body2
+        body = body & body2 & "</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>"
 
         body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
         body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
@@ -1149,6 +1153,10 @@ Partial Class yuusen
         Dim smtpPort As Integer = 25
 
         ' メールの内容
+
+        Dim strfrom2 As String = GET_ToAddress(3, 1)
+        Dim strto2 As String = GET_ToAddress(3, 0)
+
         Dim strfrom As String = "r-fukao@exedy.com"
         Dim strto As String = "r-fukao@exedy.com"
         Dim f As String = ""
@@ -1162,7 +1170,7 @@ Partial Class yuusen
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
-        Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+        Dim body As String = "<html><body><p>近鉄エクスプレス ご担当者様<p>いつもお世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
 
 
 
@@ -1173,7 +1181,7 @@ Partial Class yuusen
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
 
-        t = body01("近鉄")
+        t = t & body01("近鉄")
         f = body02("近鉄")
 
         t = t & "</Table></body></html>"
@@ -1182,7 +1190,7 @@ Partial Class yuusen
 
         Dim body2 As String = "</p>" ' UriBodyC()
 
-        body = body & body2
+        body = body & body2 & "</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>"
 
         body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
         body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
@@ -1272,6 +1280,10 @@ Partial Class yuusen
         Dim smtpPort As Integer = 25
 
         ' メールの内容
+
+        Dim strfrom2 As String = GET_ToAddress(4, 1)
+        Dim strto2 As String = GET_ToAddress(4, 0)
+
         Dim strfrom As String = "r-fukao@exedy.com"
         Dim strto As String = "r-fukao@exedy.com"
         Dim f As String = ""
@@ -1285,7 +1297,7 @@ Partial Class yuusen
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
-        Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+        Dim body As String = "<html><body><p>日本トランスポート ご担当者様<p>いつもお世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
 
 
 
@@ -1296,7 +1308,7 @@ Partial Class yuusen
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
 
-        t = body01("日ト")
+        t = t & body01("日ト")
         f = body02("日ト")
 
         t = t & "</Table></body></html>"
@@ -1305,7 +1317,7 @@ Partial Class yuusen
 
         Dim body2 As String = "</p>" ' UriBodyC()
 
-        body = body & body2
+        body = body & body2 & "</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>"
 
         body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
         body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
@@ -1395,6 +1407,10 @@ Partial Class yuusen
         Dim smtpPort As Integer = 25
 
         ' メールの内容
+
+        Dim strfrom2 As String = GET_ToAddress(5, 1)
+        Dim strto2 As String = GET_ToAddress(5, 0)
+
         Dim strfrom As String = "r-fukao@exedy.com"
         Dim strto As String = "r-fukao@exedy.com"
         Dim f As String = ""
@@ -1408,14 +1424,14 @@ Partial Class yuusen
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
-        Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+        Dim body As String = "<html><body><p>日本通運 ご担当者様<p>いつもお世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>" ' UriBodyC()
 
 
 
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
 
-        t = body01("日通")
+        t = t & body01("日通")
         f = body02("日通")
 
         t = t & "</Table></body></html>"
@@ -1424,7 +1440,7 @@ Partial Class yuusen
 
         Dim body2 As String = "</p>" ' UriBodyC()
 
-        body = body & body2
+        body = body & body2 & "</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>"
 
         body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
         body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
@@ -2070,8 +2086,8 @@ Step00:
         Dim strfrom As String = "r-fukao@exedy.com"
         Dim strto As String = "r-fukao@exedy.com"
 
-        Dim strfrom2 As String = GET_ToAddress(1, 1)
-        Dim strto2 As String = GET_ToAddress(1, 0)
+        Dim strfrom2 As String = GET_ToAddress(0, 1)
+        Dim strto2 As String = GET_ToAddress(0, 0)
 
         Dim f As String = ""
         Dim dt1 As DateTime = DateTime.Now

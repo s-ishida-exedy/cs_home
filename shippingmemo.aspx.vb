@@ -32,6 +32,10 @@ Partial Class yuusen
 
             Dim dt0 As DateTime = DateTime.Parse(e.Row.Cells(4).Text)
 
+
+
+
+
             If e.Row.Cells(9).Text <> "&nbsp;" And e.Row.Cells(12).Text = "&nbsp;" Then
                 If e.Row.Cells(4).Text <> "&nbsp;" And e.Row.Cells(10).Text <> "&nbsp;" Then
 
@@ -83,6 +87,8 @@ Partial Class yuusen
                     End If
                 End If
             End If
+
+
 
             Dim dt00 As DateTime = DateTime.Now
             Dim ts1 As New TimeSpan(7, 0, 0, 0)
@@ -733,15 +739,15 @@ Partial Class yuusen
             Session("strbkg") = data1
 
 
-            Dim clientScript As String = "<script language='JavaScript'> window.open('shippingmemo_detail.aspx', '', 'width=1500,height=450','scrollbars=no','status=no','toolbar=no','location=no','menubar=no','resizable=no') <" + "/script>"
-            Dim startupScript As String = "<script language='JavaScript'>  window.open('shippingmemo_detail.aspx') <" + "/script>"
+            'Dim clientScript As String = "<script language='JavaScript'> window.open('shippingmemo_detail.aspx', '', 'width=1500,height=450','scrollbars=no','status=no','toolbar=no','location=no','menubar=no','resizable=no') <" + "/script>"
+            'Dim startupScript As String = "<script language='JavaScript'>  window.open('shippingmemo_detail.aspx') <" + "/script>"
 
 
 
-            RegisterClientScriptBlock("client", clientScript)
-            'RegisterStartupScript("startup", startupScript)
+            'RegisterClientScriptBlock("client", clientScript)
 
-            'Page.ClientScript.RegisterStartupScript(Me.GetType(), "window-script", "openWindow('shippingmemo_detail.aspx')", True)
+            Response.Redirect("shippingmemo_detail.aspx")
+
         End If
 
     End Sub

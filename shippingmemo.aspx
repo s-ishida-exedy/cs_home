@@ -365,9 +365,9 @@ h1:after {
 
 
 
-            <asp:TextBox class="button01"  ID="TextBox1" runat="server"  type="date" Width="120px" Height="13px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
+            <asp:TextBox class="button01"  ID="TextBox1" runat="server"  type="date" Width="120px" Height="13px" AutoPostBack="false" Font-Size="13px"></asp:TextBox>
 
-            <asp:TextBox class="button01"  ID="TextBox2" runat="server"  type="date" Width="120px" Height="13px" AutoPostBack="True" Font-Size="13px"></asp:TextBox>
+            <asp:TextBox class="button01"  ID="TextBox2" runat="server"  type="date" Width="120px" Height="13px" AutoPostBack="false" Font-Size="13px"></asp:TextBox>
 
 
 
