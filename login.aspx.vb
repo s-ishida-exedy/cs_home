@@ -2,7 +2,7 @@
 Imports System.Data.SqlClient
 Imports mod_function
 
-Partial Class Default2
+Partial Class cs_home
     Inherits System.Web.UI.Page
 
     Private Sub objBtn_Click(sender As Object, e As EventArgs) Handles objBtn.Click
@@ -51,16 +51,16 @@ Partial Class Default2
             '＜本番用　ロールを確認し、ユーザー権限ごとにログイン先を設定する＞
             If objDr("role") = "usr" Then
                 FormsAuthentication.SetAuthCookie(txtUsr.Text, False)　 'cookie設定
-                Response.Redirect("/exl_top.aspx")           'リダイレクト
+                Response.Redirect("exl_top.aspx")           'リダイレクト
             Else
                 '＜開発用　実行したいaspxから実行すればその画面が立ち上がる＞
                 '＜aspxが指定されてい無い場合はソリューションに設定されたスタートページ＞
-                FormsAuthentication.RedirectFromLoginPage(txtUsr.Text, False)
+                'FormsAuthentication.RedirectFromLoginPage(txtUsr.Text, False)
 
 
                 ''AdminとCSユーザー
-                'FormsAuthentication.SetAuthCookie(txtUsr.Text, False)　 'cookie設定
-                'Response.Redirect("/start.aspx")           'リダイレクト
+                FormsAuthentication.SetAuthCookie(txtUsr.Text, False)　 'cookie設定
+                Response.Redirect("start.aspx")           'リダイレクト
             End If
         Else
             objLbl.Text = "正しいユーザーID、パスワードを入力してください"
