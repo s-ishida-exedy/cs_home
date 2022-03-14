@@ -89,6 +89,7 @@
         }
         .txt1 .date2{
             text-align: center ;
+            padding: 5px;
         }
         .td-left{
             text-align: left;
@@ -133,6 +134,9 @@
             border-top: 2px solid #000000;
             border-right: 2px solid #000000;
         }
+        .txtb{
+            padding: 5px;
+        }
 </style>
 </head>
 
@@ -170,7 +174,7 @@
         タイトル：
     </td>
     <td colspan ="2" class="td-left">
-        <asp:TextBox ID="TextBox3" runat="server" Width="556px"></asp:TextBox>
+        <asp:TextBox ID="TextBox3" runat="server" Width="556px" Class ="txtb"></asp:TextBox>
         ※25文字以内
     </td>
 </tr>
@@ -182,7 +186,7 @@
         512文字以内
     </td>
     <td colspan ="2" class="td-left">
-        <asp:TextBox ID="TextBox4" runat="server" Height="173px" TextMode="MultiLine" Width="751px"></asp:TextBox>
+        <asp:TextBox ID="TextBox4" runat="server" Height="173px" TextMode="MultiLine" Width="751px" Class ="txtb"></asp:TextBox>
     </td>
 </tr>
 </table>
