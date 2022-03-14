@@ -21,9 +21,9 @@
 <%--コンテナヤードではマウス、キーボード操作を行わない為、ヘッダなし--%>
        
 <div id="contents2" class="inner2">
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" Width="1300px" CellPadding="4" GridLines="Vertical" ForeColor="#333333"  >
-        <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
-        <AlternatingRowStyle BackColor="White" />
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" Width="1300px" CellPadding="3" GridLines="Vertical" ForeColor="Black" BackColor="White"  >
+        <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+        <AlternatingRowStyle BackColor="#CCCCCC" />
         <Columns>
             <asp:BoundField DataField="VAN_DATE" HeaderText="VAN日" SortExpression="VAN_DATE" >
             <HeaderStyle Width="60px" />
@@ -44,14 +44,13 @@
             <asp:BoundField DataField="ETC02" HeaderText="その他(正)" SortExpression="ETC02">
             </asp:BoundField>
         </Columns>
-        <FooterStyle BackColor="#990000" ForeColor="White" Font-Bold="True" />
-        <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
-        <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
-        <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />
-        <SortedAscendingCellStyle BackColor="#FDF5AC" />
-        <SortedAscendingHeaderStyle BackColor="#4D0000" />
-        <SortedDescendingCellStyle BackColor="#FCF6C0" />
-        <SortedDescendingHeaderStyle BackColor="#820000" />
+        <FooterStyle BackColor="#CCCCCC" />
+        <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+        <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+        <SortedAscendingCellStyle BackColor="#F1F1F1" />
+        <SortedAscendingHeaderStyle BackColor="#808080" />
+        <SortedDescendingCellStyle BackColor="#CAC9C9" />
+        <SortedDescendingHeaderStyle BackColor="#383838" />
     </asp:GridView>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" 
