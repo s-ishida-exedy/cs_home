@@ -301,7 +301,8 @@ Partial Class cs_home
         End Using
 
         'データをT_EXL_EIR_COMFに登録
-        Call DB_access(subject)
+        Dim strSubject As String = strTime & "バンニング " & strCust & "向け"
+        Call DB_access(strSubject)
 
     End Sub
 
