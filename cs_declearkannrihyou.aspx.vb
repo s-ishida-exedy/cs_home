@@ -194,13 +194,13 @@ Partial Class cs_home
 
             strSQL = ""
             strSQL = strSQL & "UPDATE T_EXL_WORKSTATUS00 SET "
-            strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001', "
+
             strSQL = strSQL & "T_EXL_WORKSTATUS00.INVNO = '" & strinv & "', "
             strSQL = strSQL & "T_EXL_WORKSTATUS00.REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
             strSQL = strSQL & "T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
             strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.INVNO ='" & strinv & "' "
             strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
-
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.ID = '001' "
 
         Else
 

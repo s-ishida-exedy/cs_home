@@ -209,9 +209,9 @@ h2:after{
 
 <td style="width:100px;Font-Size:25px;" >
 
-<%--<div class="button04">
-  <a href="lcl_tenkai.aspx?id={0}">展開済案件</a>
-</div>--%>
+<div class="button04">
+  <a href="lcl_tenkai_m.aspx?id={0}">管理メニュ</a>
+</div>
 
 </td>
 

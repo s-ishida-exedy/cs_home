@@ -542,13 +542,12 @@ Partial Class cs_home
 
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_WORKSTATUS00 SET "
-                strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '005', "
                 strSQL = strSQL & "T_EXL_WORKSTATUS00.INVNO = '" & strinv & "', "
                 strSQL = strSQL & "T_EXL_WORKSTATUS00.REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
                 strSQL = strSQL & "T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
                 strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.INVNO ='" & strinv & "' "
                 strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
-
+                strSQL = strSQL & "AND T_EXL_WORKSTATUS00.ID = '005' "
 
             Else
 
@@ -709,6 +708,10 @@ Partial Class cs_home
         Dim smtpPort As Integer = 25
 
         ' メールの内容
+
+        Dim strfrom2 As String = GET_ToAddress(1, 1)
+        Dim strto2 As String = GET_ToAddress(1, 0)
+
         Dim strfrom As String = "r-fukao@exedy.com"
         Dim strto As String = "r-fukao@exedy.com"
 
@@ -718,7 +721,7 @@ Partial Class cs_home
         'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
 
         'メールの件名
-        Dim subject As String = "<通知>LCL案件展開　変更・追加・連絡" '"【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
+        Dim subject As String = "TEST<通知>LCL案件展開　変更・追加・連絡" '"【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
@@ -726,7 +729,7 @@ Partial Class cs_home
 
 
 
-        Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>備考</td><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
+        Dim t As String = "<html><body><Table border='1' style='Font-Size:11px;'><tr><td>備考</td><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
 
         For I = 0 To GridView1.Rows.Count - 1
 
@@ -823,6 +826,50 @@ Partial Class cs_home
 
 
 
+
+
+    Private Function GET_ToAddress(strkbn As String, strtocc As String) As String
+        'BCCメールアドレス情報を取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+
+        GET_ToAddress = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = strSQL & "SELECT MAIL_ADD FROM M_EXL_LCL_DEC_MAIL "
+        strSQL = strSQL & "WHERE kbn = '" & strkbn & "' "
+        strSQL = strSQL & "AND TO_CC = '" & strtocc & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strDate = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            GET_ToAddress += dataread("MAIL_ADD") + ","
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
 
 
 
