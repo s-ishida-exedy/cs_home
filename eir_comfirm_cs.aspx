@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>ポータルサイト(EIR、Booking情報差異連絡 対応)</title>
+<title>ポータルサイト(EIR,Booking差異 CS対応)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -147,7 +147,7 @@
     <table class="header-ta" >
         <tr>
             <td class="first-cell">
-                <h2>EIR、Booking情報差異連絡 ＣＳ対応</h2> 
+                <h2>EIR,Booking差異 CS対応</h2> 
             </td>
             <td class="second-cell">
                 <asp:CheckBox ID="CheckBox1" runat="server" AutoPostBack ="true" Text ="「未対応」以外も表示する。"/>
