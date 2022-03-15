@@ -6,7 +6,7 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <title>アフタ未納金額</title>
+    <title>ポータルサイト(アフタ未納金額グラフ)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -252,7 +252,7 @@ h2:after{
                              label: '赤処理',
                              data: dataarr2,
 
-                             backgroundColor: 'rgba(54, 0, 235, 0.5)',
+                             backgroundColor: 'rgba(255, 165, 0, 0.5)',
                              borderColor: 'rgb(54, 162, 235)',
                              cubicInterpolationMode: 'monotone',
                              //背景色（ホバーしたときに）

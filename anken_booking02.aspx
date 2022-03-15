@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>案件抽出</title>
+    <title>ポータルサイト(案件抽出)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -204,6 +204,7 @@ h2:after{
     <script type="text/javascript">
       function LinkClick() {
           var url = 'm_lcl_dec_mail.aspx?q='
+          confirm('別ウインドウでメールアドレス管理ページを開きます');
         window.open(url, null);
       }
 

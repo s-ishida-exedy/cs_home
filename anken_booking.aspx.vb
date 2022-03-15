@@ -893,12 +893,12 @@ Partial Class yuusen
                             GoTo Step00
                             End If
 
-                            '委託検索
-                            itkflg = 0
+                        '委託検索
+                        itkflg = ""
                         itkflg = get_itakuhanntei(GridView1.Rows(I).Cells(6).Text)
 
-                        If itkflg = 1 Then
-                            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('委託：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
+                        If itkflg = "1" Then
+                            'Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('委託：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
                             madef00 = 1
                             GoTo Step00
 
@@ -1187,18 +1187,18 @@ Step00:
 
                         If madef00 = "" Then
 
-                            madef01 = madef01 & "\n" & "作成済み　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(5).Text
+                            madef01 = madef01 & "\n" & "作成済み　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
 
                         ElseIf madef00 = "0" Then
 
-                            madef01 = madef01 & "\n" & "依頼書なし　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(5).Text
+                            madef01 = madef01 & "\n" & "依頼書なし　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
 
                         ElseIf madef00 = "1" Then
-                            madef01 = madef01 & "\n" & "委託案件　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(5).Text
+                            madef01 = madef01 & "\n" & "委託案件　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
 
                         ElseIf madef00 = "2" Then
 
-                            madef01 = madef01 & "\n" & "同一フォルダあり 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(5).Text
+                            madef01 = madef01 & "\n" & "同一フォルダあり 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
 
                         End If
                         madef00 = ""
@@ -1256,12 +1256,12 @@ Step00:
                         End If
 
                         '委託検索
-                        itkflg = 0
+                        itkflg = ""
                         itkflg = get_itakuhanntei(GridView3.Rows(I).Cells(6).Text)
 
-                        If itkflg = 1 Then
+                        If itkflg = "1" Then
                             madef00 = 1
-                            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('委託：客先：" & Replace(GridView3.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView3.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
+                            'Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('委託：客先：" & Replace(GridView3.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView3.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
                             GoTo Step01
 
                         End If
@@ -1548,18 +1548,18 @@ Step01:
 
                         If madef00 = "" Then
 
-                            madef01 = madef01 & "\n" & "作成済み　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(5).Text
+                            madef01 = madef01 & "\n" & "作成済み　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
 
                         ElseIf madef00 = "0" Then
 
-                            madef01 = madef01 & "\n" & "依頼書なし　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(5).Text
+                            madef01 = madef01 & "\n" & "依頼書なし　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
 
                         ElseIf madef00 = "1" Then
-                            madef01 = madef01 & "\n" & "委託案件　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(5).Text
+                            madef01 = madef01 & "\n" & "委託案件　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
 
                         ElseIf madef00 = "2" Then
 
-                            madef01 = madef01 & "\n" & "同一フォルダあり 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(5).Text
+                            madef01 = madef01 & "\n" & "同一フォルダあり 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
 
                         End If
                         madef00 = ""

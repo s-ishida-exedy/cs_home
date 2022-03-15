@@ -6,7 +6,7 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <title>出荷進捗</title>
+    <title>ポータルサイト(出荷進捗グラフ)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -72,6 +72,24 @@ h2:after{
 
 
 
+.design01 {
+ width: 65%;
+ text-align: center;
+ border-collapse: collapse;
+ border-spacing: 0;
+ border: solid 1px #778ca3;
+}
+.design01 tr {
+ border-top: dashed 1px #778ca3;
+}
+.design01 th {
+ padding: 10px;
+ background: #e9faf9;
+}
+.design01 td {
+ padding: 10px;
+}
+
 .design02 table {
   border-collapse: collapse;
   width: 100%; /* 幅 */
@@ -122,7 +140,7 @@ table.sample1  tbody  tr {
   background-color: rgba(0,0,0, 0.2);
 }
 .second5 {  
-  background-color: rgba(205,133,63, 0.2);
+  background-color: rgba(255, 152, 0, 0.2);
 }
 
 
@@ -181,6 +199,7 @@ table.sample1  tbody  tr {
          gData[12] = $("#TextBox13").val();
          gData[13] = $("#TextBox14").val();
          gData[14] = $("#TextBox15").val();
+         gData[15] = $("#TextBox16").val();
 
          //window.alert(gData[13]);
 
@@ -331,7 +350,7 @@ table.sample1  tbody  tr {
                      var top = yscale.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx.fillStyle = "rgba(205,133,63, 0.2)";
+                     ctx.fillStyle = "rgba(255, 152, 0, 0.2)";
                      ctx.fillRect(left, top, right - left, yscale.height);
 
                  }
@@ -400,9 +419,13 @@ table.sample1  tbody  tr {
                              //凡例
                              display: true,
 
-                             labels: { fontSize: 15 }
+                             labels: { fontSize: 12}
                          },
+                         tooltips: {
+  
+                             mode: "point",
 
+                         },
 
 
                          scales: {                          // 軸設定
@@ -413,14 +436,15 @@ table.sample1  tbody  tr {
                                          display: true,                // 表示設定
                                          //labelString: '百万円',    // ラベル
                                          //fontColor: "red",             // 文字の色
-                                         fontSize: 16                  // フォントサイズ
+                                         //fontSize: 12                  // フォントサイズ
                                      },
                                      gridLines: {                   // 補助線
                                          //color: "rgba(255, 0, 0, 0.2)", // 補助線の色
                                      },
                                      ticks: {                      // 目盛り
                                          //fontColor: "red",             // 目盛りの色
-                                         fontSize: 14                  // フォントサイズ
+                                         fontSize: 14,                  // フォントサイズ
+                                         max: Number(gData[15])                       // 最大値
                                      }
                                  }
                              ],
@@ -429,7 +453,7 @@ table.sample1  tbody  tr {
                    {
                        stacked: true, //積み上げ棒グラフにする設定
                        scaleLabel: {                  // 軸ラベル
-                           display: true,                 // 表示の有無
+                           //display: true,                 // 表示の有無
                            //labelString: '受注台数',     // ラベル
                            fontFamily: "sans-serif",
                            fontColor: "blue",             // 文字の色
@@ -442,10 +466,10 @@ table.sample1  tbody  tr {
                        },
                        ticks: {                       // 目盛り
                            min: 0,                        // 最小値
-                           //max: 20,                       // 最大値
-                           stepSize: 100,                   // 軸間隔
-                           fontColor: "blue",             // 目盛りの色
-                           fontSize: 14                   // フォントサイズ
+                           ////max: 20,                       // 最大値
+                           //stepSize: 100,                   // 軸間隔
+                           //fontColor: "blue",             // 目盛りの色
+                           //fontSize: 14                   // フォントサイズ
                        }
                    }
                              ]
@@ -511,7 +535,7 @@ table.sample1  tbody  tr {
                      var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx2.fillStyle = "rgba(205,133,63, 0.2)";
+                     ctx2.fillStyle = "rgba(255, 152, 0, 0.2)";
                      ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
 
                  }
@@ -578,6 +602,11 @@ table.sample1  tbody  tr {
                              display: false
 
                          },
+                         tooltips: {
+
+                             mode: "point",
+
+                         },
                          scales: {                          // 軸設定
                              xAxes: [                           // Ｘ軸設定
                                  {
@@ -586,14 +615,15 @@ table.sample1  tbody  tr {
                                          display: true,                // 表示設定
     
                                          //fontColor: "red",             // 文字の色
-                                         fontSize: 16                  // フォントサイズ
+                                         //fontSize: 16                  // フォントサイズ
                                      },
                                      gridLines: {                   // 補助線
                                          //color: "rgba(255, 0, 0, 0.2)", // 補助線の色
                                      },
                                      ticks: {                      // 目盛り
                                          //fontColor: "red",             // 目盛りの色
-                                         fontSize: 14                  // フォントサイズ
+                                         fontSize: 14,                  // フォントサイズ
+                                         max: Number(gData[15])                       // 最大値
                                      }
                                  }
                              ],
@@ -601,7 +631,7 @@ table.sample1  tbody  tr {
                    {
                        stacked: true, //積み上げ棒グラフにする設定
                        scaleLabel: {                  // 軸ラベル
-                           display: true,                 // 表示の有無
+                           //display: true,                 // 表示の有無
                            //labelString: '受注台数',     // ラベル
                            fontFamily: "sans-serif",
                            fontColor: "blue",             // 文字の色
@@ -614,10 +644,10 @@ table.sample1  tbody  tr {
                        },
                        ticks: {                       // 目盛り
                            min: 0,                        // 最小値
-                           //max: 20,                       // 最大値
-                           //stepSize: 5,                   // 軸間隔
-                           fontColor: "blue",             // 目盛りの色
-                           fontSize: 14                   // フォントサイズ
+                           ////max: 20,                       // 最大値
+                           ////stepSize: 5,                   // 軸間隔
+                           //fontColor: "blue",             // 目盛りの色
+                           //fontSize: 14                   // フォントサイズ
                        }
                    }
                              ]
@@ -681,7 +711,7 @@ table.sample1  tbody  tr {
                      var top3 = yscale3.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx3.fillStyle = "rgba(205,133,63, 0.2)";
+                     ctx3.fillStyle = "rgba(255, 152, 0, 0.2)";
                      ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
 
                  }
@@ -748,6 +778,11 @@ table.sample1  tbody  tr {
                              display: false
 
                          },
+                         tooltips: {
+
+                             mode: "point",
+
+                         },
                          scales: {                          // 軸設定
                              xAxes: [                           // Ｘ軸設定
                                  {
@@ -756,14 +791,15 @@ table.sample1  tbody  tr {
                                          display: true,                // 表示設定
                                          labelString: '単位：百万円',    // ラベル
                                          //fontColor: "red",             // 文字の色
-                                         fontSize: 16                  // フォントサイズ
+                                         //fontSize: 12                  // フォントサイズ
                                      },
                                      gridLines: {                   // 補助線
                                          //color: "rgba(255, 0, 0, 0.2)", // 補助線の色
                                      },
                                      ticks: {                      // 目盛り
                                          //fontColor: "red",             // 目盛りの色
-                                         fontSize: 14                  // フォントサイズ
+                                         fontSize: 14,                  // フォントサイズ
+                                         max: Number(gData[15])                       // 最大値
                                      }
                                  }
                              ],
@@ -771,7 +807,7 @@ table.sample1  tbody  tr {
                    {
                        stacked: true, //積み上げ棒グラフにする設定
                        scaleLabel: {                  // 軸ラベル
-                           display: true,                 // 表示の有無
+                           //display: true,                 // 表示の有無
                            //labelString: '受注台数',     // ラベル
                            fontFamily: "sans-serif",
                            fontColor: "blue",             // 文字の色
@@ -784,10 +820,10 @@ table.sample1  tbody  tr {
                        },
                        ticks: {                       // 目盛り
                            min: 0,                        // 最小値
-                           //max: 20,                       // 最大値
-                           //stepSize: 5,                   // 軸間隔
-                           fontColor: "blue",             // 目盛りの色
-                           fontSize: 14                   // フォントサイズ
+                           ////max: 20,                       // 最大値
+                           ////stepSize: 5,                   // 軸間隔
+                           //fontColor: "blue",             // 目盛りの色
+                           //fontSize: 14                   // フォントサイズ
                        }
                    }
                              ]
@@ -987,27 +1023,20 @@ table.sample1  tbody  tr {
 </table>
 
 
-<table>
+<table >
+
 
 <tr>
 
-    <td　style="Font-Size:12px;">
-   <asp:Label ID="Label85" runat="server" Text="背景色：週ごとの出荷予定金額"></asp:Label><p></p>
-    </td>
-</tr>
-
-<tr>
-
-    <td　style="width:1000px;Font-Size:12px;">
-    <asp:Label CssClass ="second1" ID="Label80" runat="server" Text="1週目予定金額"></asp:Label>
-    <asp:Label CssClass ="second2" ID="Label82" runat="server" Text="2週目予定金額"></asp:Label>
-    <asp:Label CssClass ="second3" ID="Label83" runat="server" Text="3週目予定金額"></asp:Label>
-    <asp:Label CssClass ="second4" ID="Label84" runat="server" Text="4週目予定金額"></asp:Label>
-    <asp:Label CssClass ="second5" ID="Label81" runat="server" Text="5週目予定金額"></asp:Label>
+    <td　style="width:1000px;">
+    <asp:Label style="Font-Size:12px;" ID="Label85" runat="server" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;背景色：週ごとの出荷予定金額"></asp:Label>
+    <asp:Label style="Font-Size:12px;" CssClass ="second1" ID="Label80" runat="server" Text="1週目予定金額"></asp:Label>
+    <asp:Label style="Font-Size:12px;" CssClass ="second2" ID="Label82" runat="server" Text="2週目予定金額"></asp:Label>
+    <asp:Label style="Font-Size:12px;" CssClass ="second3" ID="Label83" runat="server" Text="3週目予定金額"></asp:Label>
+    <asp:Label style="Font-Size:12px;" CssClass ="second4" ID="Label84" runat="server" Text="4週目予定金額"></asp:Label>
+    <asp:Label style="Font-Size:12px;" CssClass ="second5" ID="Label81" runat="server" Text="5週目予定金額"></asp:Label>
 
     </td>
-
-
 
 </tr>
 </table>
@@ -1016,9 +1045,9 @@ table.sample1  tbody  tr {
 <tr>
 
 
-<td style="width:1500px;Font-Size:25px;height:28px;" >
+<td style="width:1500px;Font-Size:25px;" >
 
-<canvas id="myChart" width="160" height="25"></canvas>
+<canvas id="myChart" width="160" height="15"></canvas>
 </td>
 
 </tr>
@@ -1026,17 +1055,17 @@ table.sample1  tbody  tr {
 <tr>
 
 
-<td style="width:1500px;Font-Size:25px;height:18px;" >
-    <canvas id="myChart2" width="160" height="22"></canvas>
+<td style="width:1500px;Font-Size:25px;" >
+    <canvas id="myChart2" width="160" height="11"></canvas>
             </td>
 
 
-</tr>
+</tr>   
 
 <tr>
 
-<td style="width:1500px;Font-Size:25px;height:18px;" >
-        <canvas id="myChart3" width="160" height="22"></canvas>
+<td style="width:1500px;Font-Size:25px;" >
+        <canvas id="myChart3" width="160" height="11"></canvas>
                 </td>
 
 </tr>
@@ -1044,8 +1073,8 @@ table.sample1  tbody  tr {
 </table>
 
 
-<table style="height:50px;">
-</table>
+<%--<table style="height:10px;">
+</table>--%>
 
 <table align="center" border='1' style="width:1300px;Font-Size:11px;" class ="sample1">
 
@@ -1216,7 +1245,7 @@ table.sample1  tbody  tr {
 <asp:TextBox ID="TextBox13" runat="server" Text="aaa"></asp:TextBox>
 <asp:TextBox ID="TextBox14" runat="server" Text="aaa"></asp:TextBox>
 <asp:TextBox ID="TextBox15" runat="server" Text="aaa"></asp:TextBox>
-    
+<asp:TextBox ID="TextBox16" runat="server" Text="aaa"></asp:TextBox>    
 <!--/#contents2-->
 
 <!--ページの上部に戻る「↑」ボタン-->

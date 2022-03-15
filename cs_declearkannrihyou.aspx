@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>輸出申告（申告管理表）</title>
+<title>ポータルサイト(輸出申告管理表)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -182,9 +182,9 @@ h2:after{
 
 <td style="width:100px;Font-Size:13px;" >
 
-<div class="button04">
+<%--<div class="button04">
   <a href="cs_declearkannrihyou_all.aspx?id={0}">履歴へ</a>
-</div>
+</div>--%>
 
 </td>
 
@@ -317,10 +317,14 @@ UpdateCommand="UPDATE T_EXL_DECKANRIHYO SET [KANNRINO]=@KANNRINO, [REV_KANNRINO]
 </table>
 </div>
 </asp:Panel>  
-</div>
 
 
-<div id="contents2" class="inner2">
+
+<%--</div>
+<div id="contents2" class="inner2">--%>
+
+
+
 
 <asp:Panel ID="Panel2" runat="server"  Font-Size="12px" Visible ="false">
 
@@ -377,8 +381,8 @@ UpdateCommand="UPDATE T_EXL_DECKANRIHYO SET [KANNRINO]=@KANNRINO, [REV_KANNRINO]
 <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" Width = "1250px" DataSourceID="SqlDataSource2" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
 
 
-<HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
-<AlternatingRowStyle BackColor="#DCDCDC" />
+<HeaderStyle BackColor="#ffffe0" Font-Bold="True" ForeColor="White" />
+<AlternatingRowStyle BackColor="#ffffe0" />
 <Columns>
 
 <asp:TemplateField>
@@ -433,14 +437,14 @@ UpdateCommand="UPDATE T_EXL_DECKANRIHYO SET [KANNRINO]=@KANNRINO, [REV_KANNRINO]
 <%--            <asp:BoundField DataField="SALES" HeaderText="SALES" SortExpression="SALES" ReadOnly="true" />
 <asp:BoundField DataField="CHECK01" HeaderText="CHECK01" SortExpression="CHECK01" ReadOnly="true" />--%>
 </Columns>
-<FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-<PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-<RowStyle BackColor="#EEEEEE" ForeColor="Black" />
-<SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-<SortedAscendingCellStyle BackColor="#F1F1F1" />
-<SortedAscendingHeaderStyle BackColor="#0000A9" />
-<SortedDescendingCellStyle BackColor="#CAC9C9" />
-<SortedDescendingHeaderStyle BackColor="#000065" />
+<FooterStyle BackColor="#ffffe0" ForeColor="Black" />
+<PagerStyle BackColor="#ffffe0" ForeColor="Black" HorizontalAlign="Center" />
+<RowStyle BackColor="#ffffe0" ForeColor="Black" />
+<SelectedRowStyle BackColor="#ffffe0" Font-Bold="True" ForeColor="White" />
+<SortedAscendingCellStyle BackColor="#ffffe0" />
+<SortedAscendingHeaderStyle BackColor="#ffffe0" />
+<SortedDescendingCellStyle BackColor="#ffffe0" />
+<SortedDescendingHeaderStyle BackColor="#ffffe0" />
 </asp:GridView>
 <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT TDATE,CUT,CUST,SUMMARY_INVO,LOADING_PORT,DESTINATION,KANNRINO,BOOKING_NO,REV_KANNRINO,IFLG FROM [T_EXL_DECKANRIHYO] WHERE ([KANNRINO] <>'' or [KANNRINO] IS NOT NULL AND [IFLG] <>'0' ) or (([KANNRINO] ='' or [KANNRINO] IS NULL) AND [IFLG] <>'0')  "
 UpdateCommand="UPDATE T_EXL_DECKANRIHYO SET [KANNRINO]=@KANNRINO, [REV_KANNRINO]=@REV_KANNRINO WHERE BOOKING_NO=@BOOKING_NO"
