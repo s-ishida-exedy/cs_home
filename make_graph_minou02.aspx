@@ -247,7 +247,7 @@ h2:after{
                              label: '赤処理',
                              data: dataarr2,
 
-                             backgroundColor: 'rgba(54, 0, 235, 0.5)',
+                             backgroundColor: 'rgba(255, 165, 0, 0.5)',
                              borderColor: 'rgb(54, 162, 235)',
                              cubicInterpolationMode: 'monotone',
                              //背景色（ホバーしたときに）
