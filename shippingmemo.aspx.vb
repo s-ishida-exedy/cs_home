@@ -519,7 +519,7 @@ Partial Class yuusen
 
         Else
 
-
+            GridView1.DataSourceID = ""
             GridView1.DataSource = SqlDataSource3
             GridView1.DataBind()
 

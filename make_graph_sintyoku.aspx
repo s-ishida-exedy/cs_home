@@ -6,7 +6,7 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <title>出荷進捗</title>
+    <title>ポータルサイト(出荷進捗グラフ)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -140,7 +140,7 @@ table.sample1  tbody  tr {
   background-color: rgba(0,0,0, 0.2);
 }
 .second5 {  
-  background-color: rgba(205,133,63, 0.2);
+  background-color: rgba(255, 152, 0, 0.2);
 }
 
 
@@ -350,7 +350,7 @@ table.sample1  tbody  tr {
                      var top = yscale.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx.fillStyle = "rgba(205,133,63, 0.2)";
+                     ctx.fillStyle = "rgba(255, 152, 0, 0.2)";
                      ctx.fillRect(left, top, right - left, yscale.height);
 
                  }
@@ -436,7 +436,7 @@ table.sample1  tbody  tr {
                                          display: true,                // 表示設定
                                          //labelString: '百万円',    // ラベル
                                          //fontColor: "red",             // 文字の色
-                                         fontSize: 12                  // フォントサイズ
+                                         //fontSize: 12                  // フォントサイズ
                                      },
                                      gridLines: {                   // 補助線
                                          //color: "rgba(255, 0, 0, 0.2)", // 補助線の色
@@ -453,7 +453,7 @@ table.sample1  tbody  tr {
                    {
                        stacked: true, //積み上げ棒グラフにする設定
                        scaleLabel: {                  // 軸ラベル
-                           display: true,                 // 表示の有無
+                           //display: true,                 // 表示の有無
                            //labelString: '受注台数',     // ラベル
                            fontFamily: "sans-serif",
                            fontColor: "blue",             // 文字の色
@@ -466,10 +466,10 @@ table.sample1  tbody  tr {
                        },
                        ticks: {                       // 目盛り
                            min: 0,                        // 最小値
-                           //max: 20,                       // 最大値
-                           stepSize: 100,                   // 軸間隔
-                           fontColor: "blue",             // 目盛りの色
-                           fontSize: 14                   // フォントサイズ
+                           ////max: 20,                       // 最大値
+                           //stepSize: 100,                   // 軸間隔
+                           //fontColor: "blue",             // 目盛りの色
+                           //fontSize: 14                   // フォントサイズ
                        }
                    }
                              ]
@@ -535,7 +535,7 @@ table.sample1  tbody  tr {
                      var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx2.fillStyle = "rgba(205,133,63, 0.2)";
+                     ctx2.fillStyle = "rgba(255, 152, 0, 0.2)";
                      ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
 
                  }
@@ -615,7 +615,7 @@ table.sample1  tbody  tr {
                                          display: true,                // 表示設定
     
                                          //fontColor: "red",             // 文字の色
-                                         fontSize: 16                  // フォントサイズ
+                                         //fontSize: 16                  // フォントサイズ
                                      },
                                      gridLines: {                   // 補助線
                                          //color: "rgba(255, 0, 0, 0.2)", // 補助線の色
@@ -631,7 +631,7 @@ table.sample1  tbody  tr {
                    {
                        stacked: true, //積み上げ棒グラフにする設定
                        scaleLabel: {                  // 軸ラベル
-                           display: true,                 // 表示の有無
+                           //display: true,                 // 表示の有無
                            //labelString: '受注台数',     // ラベル
                            fontFamily: "sans-serif",
                            fontColor: "blue",             // 文字の色
@@ -644,10 +644,10 @@ table.sample1  tbody  tr {
                        },
                        ticks: {                       // 目盛り
                            min: 0,                        // 最小値
-                           //max: 20,                       // 最大値
-                           //stepSize: 5,                   // 軸間隔
-                           fontColor: "blue",             // 目盛りの色
-                           fontSize: 14                   // フォントサイズ
+                           ////max: 20,                       // 最大値
+                           ////stepSize: 5,                   // 軸間隔
+                           //fontColor: "blue",             // 目盛りの色
+                           //fontSize: 14                   // フォントサイズ
                        }
                    }
                              ]
@@ -711,7 +711,7 @@ table.sample1  tbody  tr {
                      var top3 = yscale3.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx3.fillStyle = "rgba(205,133,63, 0.2)";
+                     ctx3.fillStyle = "rgba(255, 152, 0, 0.2)";
                      ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
 
                  }
@@ -791,7 +791,7 @@ table.sample1  tbody  tr {
                                          display: true,                // 表示設定
                                          labelString: '単位：百万円',    // ラベル
                                          //fontColor: "red",             // 文字の色
-                                         fontSize: 12                  // フォントサイズ
+                                         //fontSize: 12                  // フォントサイズ
                                      },
                                      gridLines: {                   // 補助線
                                          //color: "rgba(255, 0, 0, 0.2)", // 補助線の色
@@ -807,7 +807,7 @@ table.sample1  tbody  tr {
                    {
                        stacked: true, //積み上げ棒グラフにする設定
                        scaleLabel: {                  // 軸ラベル
-                           display: true,                 // 表示の有無
+                           //display: true,                 // 表示の有無
                            //labelString: '受注台数',     // ラベル
                            fontFamily: "sans-serif",
                            fontColor: "blue",             // 文字の色
@@ -820,10 +820,10 @@ table.sample1  tbody  tr {
                        },
                        ticks: {                       // 目盛り
                            min: 0,                        // 最小値
-                           //max: 20,                       // 最大値
-                           //stepSize: 5,                   // 軸間隔
-                           fontColor: "blue",             // 目盛りの色
-                           fontSize: 14                   // フォントサイズ
+                           ////max: 20,                       // 最大値
+                           ////stepSize: 5,                   // 軸間隔
+                           //fontColor: "blue",             // 目盛りの色
+                           //fontSize: 14                   // フォントサイズ
                        }
                    }
                              ]
@@ -1028,13 +1028,13 @@ table.sample1  tbody  tr {
 
 <tr>
 
-    <td　style="width:1000px;Font-Size:10px;">
-    <asp:Label ID="Label85" runat="server" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;背景色：週ごとの出荷予定金額"></asp:Label>
-    <asp:Label CssClass ="second1" ID="Label80" runat="server" Text="1週目予定金額"></asp:Label>
-    <asp:Label CssClass ="second2" ID="Label82" runat="server" Text="2週目予定金額"></asp:Label>
-    <asp:Label CssClass ="second3" ID="Label83" runat="server" Text="3週目予定金額"></asp:Label>
-    <asp:Label CssClass ="second4" ID="Label84" runat="server" Text="4週目予定金額"></asp:Label>
-    <asp:Label CssClass ="second5" ID="Label81" runat="server" Text="5週目予定金額"></asp:Label>
+    <td　style="width:1000px;">
+    <asp:Label style="Font-Size:12px;" ID="Label85" runat="server" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;背景色：週ごとの出荷予定金額"></asp:Label>
+    <asp:Label style="Font-Size:12px;" CssClass ="second1" ID="Label80" runat="server" Text="1週目予定金額"></asp:Label>
+    <asp:Label style="Font-Size:12px;" CssClass ="second2" ID="Label82" runat="server" Text="2週目予定金額"></asp:Label>
+    <asp:Label style="Font-Size:12px;" CssClass ="second3" ID="Label83" runat="server" Text="3週目予定金額"></asp:Label>
+    <asp:Label style="Font-Size:12px;" CssClass ="second4" ID="Label84" runat="server" Text="4週目予定金額"></asp:Label>
+    <asp:Label style="Font-Size:12px;" CssClass ="second5" ID="Label81" runat="server" Text="5週目予定金額"></asp:Label>
 
     </td>
 
@@ -1047,7 +1047,7 @@ table.sample1  tbody  tr {
 
 <td style="width:1500px;Font-Size:25px;" >
 
-<canvas id="myChart" width="160" height="18"></canvas>
+<canvas id="myChart" width="160" height="15"></canvas>
 </td>
 
 </tr>
@@ -1056,7 +1056,7 @@ table.sample1  tbody  tr {
 
 
 <td style="width:1500px;Font-Size:25px;" >
-    <canvas id="myChart2" width="160" height="15"></canvas>
+    <canvas id="myChart2" width="160" height="11"></canvas>
             </td>
 
 
@@ -1065,7 +1065,7 @@ table.sample1  tbody  tr {
 <tr>
 
 <td style="width:1500px;Font-Size:25px;" >
-        <canvas id="myChart3" width="160" height="15"></canvas>
+        <canvas id="myChart3" width="160" height="11"></canvas>
                 </td>
 
 </tr>

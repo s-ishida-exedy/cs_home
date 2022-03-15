@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>ポータルサイト(AIR用海貨業者ｱﾄﾞﾚｽﾏｽﾀ詳細)</title>
+<title>ポータルサイト(通関・LCL関係ｱﾄﾞﾚｽ詳細)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
