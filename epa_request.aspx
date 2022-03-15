@@ -106,6 +106,10 @@
           overflow: scroll;
           height: 475px;
         }
+        .err{
+            color:red;
+            font-weight :700;
+        }
 </style>
 <script>
     $(document).ready(function () {
@@ -152,6 +156,9 @@
             <td class="second-cell">
                 <asp:Button ID="Button2" runat="server" Text="追加登録" style="width:164px" Font-Size="Small" />&nbsp;
                 <asp:CheckBox ID="CheckBox1" runat="server" AutoPostBack ="true" Text ="「未」以外も表示する。"/>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:Button ID="Button3" runat="server" Text="最新情報取込" style="width:164px" Font-Size="Small" />
+                <asp:Label ID="Label1" runat="server" Text="" Class="err"></asp:Label>
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
