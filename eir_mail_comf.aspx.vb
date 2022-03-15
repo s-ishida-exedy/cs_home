@@ -301,7 +301,8 @@ Partial Class cs_home
         End Using
 
         'データをT_EXL_EIR_COMFに登録
-        Call DB_access(subject)
+        Dim strSubject As String = strTime & "バンニング " & strCust & "向け"
+        Call DB_access(strSubject)
 
     End Sub
 
@@ -309,6 +310,7 @@ Partial Class cs_home
         '画面入力情報をテーブルへ登録
         Dim strSQL As String
         Dim strVal As String = ""
+        Dim strDate As String = Format(Now, "yyyy/MM/dd")
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -341,6 +343,7 @@ Partial Class cs_home
         strSQL = strSQL & "INSERT INTO T_EXL_EIR_COMF VALUES("
         strSQL = strSQL & " '" & strRegP & "' "
         strSQL = strSQL & " ,'" & datRegT & "' "
+        strSQL = strSQL & " ,'" & strDate & "' "
         strSQL = strSQL & " ,'" & strTitle & "' "
         strSQL = strSQL & " ,'" & strVoy01 & "' "
         strSQL = strSQL & " ,'" & strVoy02 & "' "

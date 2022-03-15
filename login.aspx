@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="login.aspx.vb" Inherits="Default2" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="login.aspx.vb" Inherits="cs_home" %>
 
 <html>
 <head>
@@ -122,9 +122,9 @@
        <asp:Label id="objLbl" runat="Server" ForeColor="Red" />
     </div>
   <div class="form-footer">
-    <p><a href="../UsrCtrl/create_acc.aspx">ユーザー登録</a></p>
+    <p><a href="UsrCtrl/create_acc.aspx">ユーザー登録</a></p>
       <br/  >
-    <p><a href="../UsrCtrl/re_pass.aspx">パスワードの再設定</a></p>
+    <p><a href="UsrCtrl/re_pass.aspx">パスワードの再設定</a></p>
   </div>
 </div>
 </form>

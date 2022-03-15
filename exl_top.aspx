@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>ポータルサイト（概況）</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="css/style.css">
 <script src="js/openclose.js"></script>
 <script src="js/fixmenu.js"></script>
 <script src="js/fixmenu_pagetop.js"></script>
@@ -190,7 +190,7 @@
 
 <div class="box1">
     <h2 class="mb10">ＥＸＬ概況</h2>
-    <asp:Image class="imgOKNG" runat="server" src="../images/NGtouka.png" style="margin-top:8px;margin-left:70px;" />
+    <asp:Image class="imgOKNG" runat="server" src="images/NGtouka.png" style="margin-top:8px;margin-left:70px;" />
 </div>
 <!--/#sub-->
 
