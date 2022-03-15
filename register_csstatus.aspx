@@ -448,7 +448,7 @@ border: none;
 
     </table>
 
-    <table class ="design02" >
+<%--    <table class ="design02" >
 
 <tr >
 
@@ -497,7 +497,7 @@ border: none;
 
 </tr>
 
-</table>
+</table>--%>
 
 </div>
 

@@ -19,6 +19,7 @@ Partial Class yuusen
         Dim str05 As String = ""
 
 
+
         If e.Row.RowType = DataControlRowType.DataRow Then
             If e.Row.Cells(12).Text = "月またぎ" Then
                 e.Row.BackColor = Drawing.Color.DarkSalmon
@@ -26,69 +27,72 @@ Partial Class yuusen
                 e.Row.BackColor = Drawing.Color.LightBlue
             End If
 
-            If e.Row.Cells(9).Text = "" Or e.Row.Cells(9).Text = "&nbsp;" Then
-                Call GET_IVDATA(Trim(e.Row.Cells(13).Text), Trim(e.Row.Cells(3).Text))
-            End If
-
-            Dim dt0 As DateTime = DateTime.Parse(e.Row.Cells(4).Text)
+            If IsPostBack = True Then
 
 
+                If e.Row.Cells(9).Text = "" Or e.Row.Cells(9).Text = "&nbsp;" Then
+                    Call GET_IVDATA(Trim(e.Row.Cells(13).Text), Trim(e.Row.Cells(3).Text))
+                End If
+
+                Dim dt0 As DateTime = DateTime.Parse(e.Row.Cells(4).Text)
 
 
 
-            If e.Row.Cells(9).Text <> "&nbsp;" And e.Row.Cells(12).Text = "&nbsp;" Then
-                If e.Row.Cells(4).Text <> "&nbsp;" And e.Row.Cells(10).Text <> "&nbsp;" Then
 
-                    If e.Row.Cells(4).Text <> "&nbsp;" And e.Row.Cells(10).Text <> " " Then ' ツール回収
-                        Dim dt1 As DateTime = DateTime.Parse(e.Row.Cells(10).Text)
 
-                        If dt0.ToString("MM") = dt1.ToString("MM") Then
-                            str02 = "不要"
-                            str01 = "-"
-                            Call UPD_MEMO02(Trim(e.Row.Cells(13).Text), str01, str02)
+                If e.Row.Cells(9).Text <> "&nbsp;" And e.Row.Cells(12).Text = "&nbsp;" Then
+                    If e.Row.Cells(4).Text <> "&nbsp;" And e.Row.Cells(10).Text <> "&nbsp;" Then
+
+                        If e.Row.Cells(4).Text <> "&nbsp;" And e.Row.Cells(10).Text <> " " Then ' ツール回収
+                            Dim dt1 As DateTime = DateTime.Parse(e.Row.Cells(10).Text)
+
+                            If dt0.ToString("MM") = dt1.ToString("MM") Then
+                                str02 = "不要"
+                                str01 = "-"
+                                Call UPD_MEMO02(Trim(e.Row.Cells(13).Text), str01, str02)
+                            Else
+                                str02 = "要"
+                                str01 = "確認要"
+                                Call UPD_MEMO02(Trim(e.Row.Cells(13).Text), str01, str02)
+                            End If
+                        End If
+                    End If
+
+                End If
+
+
+
+                If e.Row.Cells(15).Text <> "&nbsp;" Then
+
+                    If Trim(e.Row.Cells(15).Text) <> "" Then
+                        Dim dt2 As DateTime = DateTime.Parse(e.Row.Cells(15).Text)
+
+                        If dt0.ToString("MM") = dt2.ToString("MM") Then
+                            str03 = "○"
+                            Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str03)
                         Else
-                            str02 = "要"
-                            str01 = "確認要"
-                            Call UPD_MEMO02(Trim(e.Row.Cells(13).Text), str01, str02)
+                            str03 = "×"
+                            Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str03)
+                        End If
+                    End If
+                End If
+
+                If e.Row.Cells(5).Text <> "&nbsp;" Then
+                    If Trim(e.Row.Cells(5).Text) <> "" Then
+
+                        Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
+
+                        If dt0.ToString("MM") = dt3.ToString("MM") Then
+                            str04 = "○"
+                            Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str04)
+                        Else
+                            str04 = "×"
+                            Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str04)
                         End If
                     End If
                 End If
 
             End If
-
-
-
-            If e.Row.Cells(15).Text <> "&nbsp;" Then
-
-                If Trim(e.Row.Cells(15).Text) <> "" Then
-                    Dim dt2 As DateTime = DateTime.Parse(e.Row.Cells(15).Text)
-
-                    If dt0.ToString("MM") = dt2.ToString("MM") Then
-                        str03 = "○"
-                        Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str03)
-                    Else
-                        str03 = "×"
-                        Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str03)
-                    End If
-                End If
-            End If
-
-            If e.Row.Cells(5).Text <> "&nbsp;" Then
-                If Trim(e.Row.Cells(5).Text) <> "" Then
-
-                    Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
-
-                    If dt0.ToString("MM") = dt3.ToString("MM") Then
-                        str04 = "○"
-                        Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str04)
-                    Else
-                        str04 = "×"
-                        Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str04)
-                    End If
-                End If
-            End If
-
-
 
             Dim dt00 As DateTime = DateTime.Now
             Dim ts1 As New TimeSpan(7, 0, 0, 0)
@@ -116,7 +120,9 @@ Partial Class yuusen
         End If
 
 
-        If e.Row.RowType = DataControlRowType.DataRow Then
+
+
+            If e.Row.RowType = DataControlRowType.DataRow Then
             Dim dltButton As ImageButton = e.Row.FindControl("ImageButton1")
             'ボタンが存在する場合のみセット
             If Not (dltButton Is Nothing) Then
@@ -499,7 +505,7 @@ Partial Class yuusen
                 DropDownList2.Items.Insert(0, "--Select--")
 
             Else
-
+                GridView1.DataSourceID = ""
                 GridView1.DataSource = SqlDataSource3
                 GridView1.DataBind()
 

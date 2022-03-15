@@ -658,7 +658,7 @@ Partial Class yuusen
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
 
 
-        Response.Redirect("登録用_カレンダマスタ.xls")
+        Response.Redirect("\\svnas201\EXD06101\DISC_COMMON\登録用_カレンダマスタ.xls")
         'Dim p As New System.Diagnostics.Process
         'p.StartInfo.FileName = “\\kbhwpm01\exp\登録用_T_EXL_CSWORKSTATUS.xls”
         'p.Start()

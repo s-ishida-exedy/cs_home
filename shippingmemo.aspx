@@ -350,7 +350,7 @@ h1:after {
 
                     <asp:DropDownList ID="DropDownList2" runat="server" Width="140px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" ></asp:DropDownList>
 
-                    <asp:Button CssClass ="button01" ID="Button2" runat="server" Text="全件表示" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+                    <asp:Button CssClass ="button01" ID="Button2" runat="server" Text="全件表示" Width="100px" Height="40px" Font-Size="13px" />
 
 
 
@@ -359,8 +359,8 @@ h1:after {
 
              <td class ="design02"  style="width:270px;Font-Size:15px;text-align:left;" >
             &nbsp;&nbsp;
-            <asp:Label  ID="Label4" runat="server" Text="[期間指定]" Height="13px" AutoPostBack="True" Font-Size="13px" /> 
-            <asp:CheckBox   ID="CheckBox1" runat="server" Height="13px" AutoPostBack="True" Font-Size="13px" />
+            <asp:Label  ID="Label4" runat="server" Text="[期間指定]" Height="13px"  Font-Size="13px" /> 
+            <asp:CheckBox   ID="CheckBox1" runat="server" Height="13px"  Font-Size="13px" />
 
 
 

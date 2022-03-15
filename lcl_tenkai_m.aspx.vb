@@ -22,28 +22,28 @@ Partial Class cs_home
             e.Row.BackColor = Drawing.Color.DarkGray
         End If
 
-        e.Row.Cells(0).Width = 10
-        e.Row.Cells(1).Width = 90
-        e.Row.Cells(2).Width = 90
-        e.Row.Cells(3).Width = 40
-        e.Row.Cells(4).Width = 100
-        e.Row.Cells(5).Width = 70
-        e.Row.Cells(6).Width = 70
-        e.Row.Cells(7).Width = 110
-        e.Row.Cells(8).Width = 140
-        e.Row.Cells(9).Width = 70
-        e.Row.Cells(10).Width = 70
-        e.Row.Cells(11).Width = 70
-        e.Row.Cells(12).Width = 50
-        e.Row.Cells(13).Width = 60
-        e.Row.Cells(14).Width = 60
-        e.Row.Cells(15).Width = 110
-        e.Row.Cells(16).Width = 10
-        e.Row.Cells(17).Width = 110
-        e.Row.Cells(18).Width = 10
+        'e.Row.Cells(0).Width = 10
+        'e.Row.Cells(1).Width = 90
+        'e.Row.Cells(2).Width = 90
+        'e.Row.Cells(3).Width = 40
+        'e.Row.Cells(4).Width = 100
+        'e.Row.Cells(5).Width = 70
+        'e.Row.Cells(6).Width = 70
+        'e.Row.Cells(7).Width = 110
+        'e.Row.Cells(8).Width = 140
+        'e.Row.Cells(9).Width = 70
+        'e.Row.Cells(10).Width = 70
+        'e.Row.Cells(11).Width = 70
+        'e.Row.Cells(12).Width = 50
+        'e.Row.Cells(13).Width = 60
+        'e.Row.Cells(14).Width = 60
+        'e.Row.Cells(15).Width = 110
+        'e.Row.Cells(16).Width = 10
+        'e.Row.Cells(17).Width = 110
+        'e.Row.Cells(18).Width = 10
 
-        e.Row.Cells(19).Width = 600
-        e.Row.Cells(20).Width = 30
+        'e.Row.Cells(19).Width = 600
+        'e.Row.Cells(20).Width = 30
 
         e.Row.Cells(7).Visible = False
         e.Row.Cells(8).Visible = False

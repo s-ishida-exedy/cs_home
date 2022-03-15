@@ -159,9 +159,9 @@
                 <asp:Button ID="Button2" runat="server" Text="ﾘｾｯﾄ" Font-Size="Small" Width ="80" />&nbsp;
                 <asp:Button ID="Button3" runat="server" Text="新規登録" Font-Size="Small" Width ="80" />
             </td>
-            <td class="third-cell">
+<%--            <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
-            </td>
+            </td>--%>
         </tr>
     </table>
 

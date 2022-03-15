@@ -136,7 +136,8 @@ h2:after{
 
     <script type="text/javascript">
       function LinkClick() {
-        var url = 'register_lcl_address.aspx?q=' 
+          var url = 'register_lcl_address.aspx?q='
+          confirm('別ウインドウでLCL住所変更ページを開きます');
         window.open(url, null);
       }
 
@@ -145,6 +146,7 @@ h2:after{
         <script type="text/javascript">
       function LinkClick2() {
           var url = 'm_lcl_dec_mail.aspx?q='
+          confirm('別ウインドウでメールアドレス管理ページを開きます');
         window.open(url, null);
       }
 
@@ -210,9 +212,9 @@ h2:after{
 
 <td style="width:100px;Font-Size:25px;" >
 
-<%--<div class="button04">
+<div class="button04">
   <a href="lcl_tenkai.aspx?id={0}">展開済案件</a>
-</div>--%>
+</div>
 
 </td>
 
@@ -306,6 +308,7 @@ h2:after{
 <asp:CheckBox ID="cb" Checked="false" runat="server"  />
 
 </ItemTemplate>
+        <HeaderStyle Width="20px" />
 </asp:TemplateField>
 
 
@@ -320,27 +323,54 @@ h2:after{
 <asp:Button runat="server" CommandName="Delete" Text="削除" />
 
 </EditItemTemplate>
+        <HeaderStyle Width="100px" />
 </asp:TemplateField>
 
-    <asp:BoundField DataField="OTHERS01" HeaderText="備考" SortExpression="OTHERS01" />
+    <asp:BoundField DataField="OTHERS01" HeaderText="備考" SortExpression="OTHERS01"  >
+    <HeaderStyle Width="120px" />
+    </asp:BoundField>
+
+
+
 <%--<asp:BoundField DataField="CONSIGNEE" HeaderText="CONSIGNEE" SortExpression="CONSIGNEE" />
 <asp:BoundField DataField="DESTINATION" HeaderText="DESTINATION" SortExpression="DESTINATION" />--%>
-<asp:BoundField DataField="FLG05" HeaderText="追加/更新日" SortExpression="FLG05" ReadOnly ="true"　 />
-<asp:BoundField DataField="FLG04" HeaderText="追加/更新メモ" SortExpression="FLG04" />
-<asp:BoundField DataField="CUST" HeaderText="客先" SortExpression="CUST"　 />
-<asp:BoundField DataField="INVOICE_NO" HeaderText="IN_NO" SortExpression="INVOICE_NO" />
+<asp:BoundField DataField="FLG05" HeaderText="追加/更新日" SortExpression="FLG05" ReadOnly ="true">
+    <HeaderStyle Width="80px" />
+    </asp:BoundField>
+
+<asp:BoundField DataField="FLG04" HeaderText="追加/更新メモ" SortExpression="FLG04" >
+    <HeaderStyle Width="120px" />
+    </asp:BoundField>
+<asp:BoundField DataField="CUST" HeaderText="客先" SortExpression="CUST" >
+    <HeaderStyle Width="80px" />
+    </asp:BoundField>
+<asp:BoundField DataField="INVOICE_NO" HeaderText="IN_NO" SortExpression="INVOICE_NO" >
+    <HeaderStyle Width="100px" />
+    </asp:BoundField>
 <asp:BoundField DataField="BOOKING_NO" HeaderText="BKG_NO" SortExpression="BOOKING_NO" ReadOnly ="true" />
 <asp:BoundField DataField="OFFICIAL_QUOT" HeaderText="TATENE" SortExpression="OFFICIAL_QUOT"/>
-<asp:BoundField DataField="CUT_DATE" HeaderText="カット日" SortExpression="CUT_DATE" />
-<asp:BoundField DataField="ETD" HeaderText="出港日" SortExpression="ETD" />
+<asp:BoundField DataField="CUT_DATE" HeaderText="カット日" SortExpression="CUT_DATE" >
+    <HeaderStyle Width="80px" />
+    </asp:BoundField>
+<asp:BoundField DataField="ETD" HeaderText="出港日" SortExpression="ETD" >
+    <HeaderStyle Width="80px" />
+    </asp:BoundField>
 <asp:BoundField DataField="ETA" HeaderText="到着日" SortExpression="ETA" />
 <asp:BoundField DataField="LCL_SIZE" HeaderText="M3" SortExpression="LCL_SIZE" />
 <asp:BoundField DataField="WEIGHT" HeaderText="重量" SortExpression="WEIGHT" />
 <asp:BoundField DataField="QTY" HeaderText="荷量" SortExpression="QTY" />
-<asp:BoundField DataField="PICKUP01" HeaderText="引取希望日" SortExpression="PICKUP01" />
-<asp:BoundField DataField="PICKUP02" HeaderText="" SortExpression="PICKUP02" />
-<asp:BoundField DataField="MOVEIN01" HeaderText="搬入希望日" SortExpression="MOVEIN01" />
-<asp:BoundField DataField="MOVEIN02" HeaderText="" SortExpression="MOVEIN02" />
+<asp:BoundField DataField="PICKUP01" HeaderText="引取希望日" SortExpression="PICKUP01" >
+        <HeaderStyle Width="110px" />
+    </asp:BoundField>
+<asp:BoundField DataField="PICKUP02" HeaderText="" SortExpression="PICKUP02" >
+        <HeaderStyle Width="20px" />
+    </asp:BoundField>
+<asp:BoundField DataField="MOVEIN01" HeaderText="搬入希望日" SortExpression="MOVEIN01" >
+    <HeaderStyle Width="110px" />
+    </asp:BoundField>
+<asp:BoundField DataField="MOVEIN02" HeaderText="" SortExpression="MOVEIN02" >
+        <HeaderStyle Width="20px" />
+    </asp:BoundField>
 
 <asp:BoundField DataField="PICKINPLACE" HeaderText="搬入先" SortExpression="PICKINPLACE" />
 <%--asp:BoundField DataField="FLG01" HeaderText="搬入先" SortExpression="FLG01" />

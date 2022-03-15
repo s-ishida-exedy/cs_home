@@ -91,13 +91,13 @@ Partial Class yuusen
 
                 While dr.Read()
                     Dim tsData As trafficSourceData = New trafficSourceData()
-                    tsData.value = Double.Parse(dr("ZENSEN"))
-                    tsData.label = dr("TITLE").ToString()
-                    tsData.value2 = Double.Parse(dr("TOUTYOU"))
-                    tsData.value3 = Double.Parse(dr("TOUORI"))
-                    tsData.value4 = Double.Parse(dr("ZAN"))
-                    tsData.value5 = Double.Parse(dr("SENYOKU"))
-                    tsData.value6 = Double.Parse(dr("TYOUYOKU"))
+                    tsData.value = Math.Round(Double.Parse(dr("ZENSEN")), MidpointRounding.AwayFromZero)
+                    tsData.label = Replace(dr("TITLE").ToString(), "ー", "")
+                    tsData.value2 = Math.Round(Double.Parse(dr("TOUTYOU")), MidpointRounding.AwayFromZero)
+                    tsData.value3 = Math.Round(Double.Parse(dr("TOUORI")), MidpointRounding.AwayFromZero)
+                    tsData.value4 = Math.Round(Double.Parse(dr("ZAN")), MidpointRounding.AwayFromZero)
+                    tsData.value5 = Math.Round(Double.Parse(dr("SENYOKU")), MidpointRounding.AwayFromZero)
+                    tsData.value6 = Math.Round(Double.Parse(dr("TYOUYOKU")), MidpointRounding.AwayFromZero)
                     '                   tsData.color = arrColor(counter)
                     t.Add(tsData)
                     counter += 1
@@ -201,7 +201,7 @@ Partial Class yuusen
         Dim sumval14 As Integer
         Dim sumval15 As Integer
         Dim sumval16 As Integer
-
+        Dim sumval17 As Integer
 
 
         Dim dt1 As DateTime = DateTime.Now
@@ -293,21 +293,47 @@ Partial Class yuusen
         dbcmd.Dispose()
 
 
-        TextBox1.Text = wval00
-        TextBox2.Text = wval01
-        TextBox3.Text = wval02
-        TextBox4.Text = wval03
-        TextBox5.Text = wval04
-        TextBox6.Text = wval05
-        TextBox7.Text = wval06
-        TextBox8.Text = wval07
-        TextBox9.Text = wval08
-        TextBox10.Text = wval09
-        TextBox11.Text = wval10
-        TextBox12.Text = wval11
-        TextBox13.Text = wval12
-        TextBox14.Text = wval13
-        TextBox15.Text = wval14
+
+        TextBox1.Text = Int(wval00)
+        TextBox2.Text = Int(wval01)
+        TextBox3.Text = Int(wval02)
+        TextBox4.Text = Int(wval03)
+        TextBox5.Text = Int(wval04)
+        TextBox6.Text = Int(wval05)
+        TextBox7.Text = Int(wval06)
+        TextBox8.Text = Int(wval07)
+        TextBox9.Text = Int(wval08)
+        TextBox10.Text = Int(wval09)
+        TextBox11.Text = Int(wval10)
+        TextBox12.Text = Int(wval11)
+        TextBox13.Text = Int(wval12)
+        TextBox14.Text = Int(wval13)
+        TextBox15.Text = Int(wval14)
+
+        If Double.Parse(wval12) > Double.Parse(wval13) Then
+
+            sumval17 = Double.Parse(wval12)
+
+        Else
+            sumval17 = Double.Parse(wval13)
+
+        End If
+
+        If Double.Parse(wval14) > Double.Parse(sumval17) Then
+
+            sumval17 = Double.Parse(wval14)
+
+        Else
+
+
+        End If
+
+        Dim a As Integer
+
+        a = sumval17 / 100
+        a = a * 100
+
+        TextBox16.Text = a
 
 
 
