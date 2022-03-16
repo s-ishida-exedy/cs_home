@@ -15,7 +15,6 @@ Partial Class cs_home
 
             'メール確認画面から戻ってきた場合、セッション値をセットする
             If Session("strMode") = "0" Then
-                TextBox9.Text = Session("strTant")
                 DropDownList1.SelectedIndex = Session("strIdx")
                 TextBox1.Text = Session("strCust")
                 TextBox8.Text = Session("strTime")
@@ -163,7 +162,6 @@ Partial Class cs_home
         TextBox5.Text = ""
         TextBox6.Text = ""
         TextBox7.Text = ""
-        TextBox9.Text = 0
 
     End Sub
 
@@ -172,10 +170,6 @@ Partial Class cs_home
         chk_Nyuryoku = True
 
         '必須チェック
-        If TextBox9.Text = "" Then
-            Label12.Text = "依頼者が入力されていません。"
-            chk_Nyuryoku = False
-        End If
         If TextBox2.Text = "" And TextBox3.Text = "" And TextBox4.Text = "" And TextBox5.Text = "" _
             And (TextBox6.Text = "" Or TextBox7.Text = "") Then
             Label12.Text = "差異項目が入力されていません。"
@@ -196,53 +190,6 @@ Partial Class cs_home
             chk_Nyuryoku = False
         End If
 
-        '社員番号チェック
-        If Left(TextBox9.Text, 1) <> "T" And Left(TextBox9.Text, 3) <> "EXL" Then
-            Label12.Text = "社員番号の形式が間違っています。"
-            chk_Nyuryoku = False
-        End If
-
-    End Function
-    Private Function GET_USR_DATA(strCode As String) As String
-        '依頼者の存在チェック
-        Dim dataread As SqlDataReader
-        Dim dbcmd As SqlCommand
-        Dim strSQL As String = ""
-        Dim intCnt As Integer = 0
-        GET_USR_DATA = "NG"
-
-        '接続文字列の作成
-        Dim ConnectionString As String = String.Empty
-        'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
-        'SqlConnectionクラスの新しいインスタンスを初期化
-        Dim cnn = New SqlConnection(ConnectionString)
-
-        'データベース接続を開く
-        cnn.Open()
-
-        strSQL = strSQL & "Select COUNT(*) AS RecCnt FROM M_EXL_USR "
-        strSQL = strSQL & "WHERE uid = '" & strCode & "' "
-
-        'ＳＱＬコマンド作成 
-        dbcmd = New SqlCommand(strSQL, cnn)
-        'ＳＱＬ文実行 
-        dataread = dbcmd.ExecuteReader()
-
-        '結果を取り出す 
-        While (dataread.Read())
-            intCnt = dataread("RecCnt")
-        End While
-        If intCnt > 0 Then
-            GET_USR_DATA = "OK"
-        End If
-
-        'クローズ処理 
-        dataread.Close()
-        dbcmd.Dispose()
-        cnn.Close()
-        cnn.Dispose()
-
     End Function
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -253,12 +200,6 @@ Partial Class cs_home
 
         '入力チェック
         If chk_Nyuryoku() = False Then
-            Return
-        End If
-
-        '依頼者社員番号の存在チェック
-        If GET_USR_DATA(Trim(TextBox9.Text)) = "NG" Then
-            Label12.Text = "社員番号が存在しません。"
             Return
         End If
 
@@ -284,8 +225,6 @@ Partial Class cs_home
 
         '記載内容をセッションに入れる
         Session("strMode") = "0"        '確認画面へ画面遷移
-
-        Session("strTant") = Trim(TextBox9.Text)
 
         Session("strIdx") = DropDownList1.SelectedIndex
         Session("strCust") = strCust

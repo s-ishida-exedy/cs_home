@@ -53,7 +53,7 @@ Partial Class cs_home
         cnn.Open()
 
         strSQL = strSQL & "Select * FROM M_EXL_USR "
-        strSQL = strSQL & "WHERE uid = '" & Session("strTant") & "' "
+        strSQL = strSQL & "WHERE uid = '" & Session("UsrId") & "' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -134,7 +134,6 @@ Partial Class cs_home
 
         'セッションキーをクリアする
         Session.Remove("strMode")
-        Session.Remove("strTant")
         Session.Remove("strIdx")
         Session.Remove("strCust")
         Session.Remove("strTime")
@@ -324,7 +323,7 @@ Partial Class cs_home
         cnn.Open()
 
         '画面入力情報を変数に代入
-        Dim strRegP As String = Session("strTant")
+        Dim strRegP As String = Session("UsrId")
         Dim datRegT As DateTime = DateTime.Now
 
         Dim strVoy01 As String = Session("strVoy1")

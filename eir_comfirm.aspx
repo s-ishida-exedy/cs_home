@@ -281,10 +281,6 @@
         </table>
         <table class="table01">
             <tr>
-                <th style="width:350px;text-align:left">
-                    <asp:Label ID="Label18" runat="server" Text="依頼者社員番号："></asp:Label>
-                    <asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
-                </th>
                 <td style="width:200px;text-align:left">
                     <asp:Button ID="Button1" runat="server" Text="メール作成" style="width:164px" Font-Size="Small" />                    
                 </td>
