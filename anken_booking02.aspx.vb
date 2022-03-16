@@ -1747,7 +1747,7 @@ Partial Class yuusen
 
             '委託検索
             itkflg = 0
-            itkflg = get_itakuhanntei(GridView1.Rows(I).Cells(5).Text)
+            itkflg = get_itakuhanntei(Left(GridView1.Rows(I).Cells(5).Text, 4))
 
             If itkflg = "1" Then
 

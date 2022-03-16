@@ -305,52 +305,52 @@ table.sample1  tbody  tr {
                      // 範囲を設定
                      var xscale = target.scales["x-axis-0"];
                      var yscale = target.scales["y-axis-0"];
-                     var left = xscale.getPixelForValue(0);  // 塗りつぶしを開始するラベル位置
+                     var left = xscale.getPixelForValue(gData[0]-3);  // 塗りつぶしを開始するラベル位置
                      var right = xscale.getPixelForValue(gData[0]); // 塗りつぶしを終了するラベル位置
                      var top = yscale.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx.fillStyle = "rgba(255,0,0, 0.2)";
+                     ctx.fillStyle = "rgba(230,0,51)";
                      ctx.fillRect(left, top, right - left, yscale.height);
 
                      var xscale = target.scales["x-axis-0"];
                      var yscale = target.scales["y-axis-0"];
-                     var left = xscale.getPixelForValue(gData[0]);  // 塗りつぶしを開始するラベル位置
+                     var left = xscale.getPixelForValue(gData[1]-3);  // 塗りつぶしを開始するラベル位置
                      var right = xscale.getPixelForValue(gData[1]); // 塗りつぶしを終了するラベル位置
                      var top = yscale.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx.fillStyle = "rgba(0,255,0, 0.2)";
+                     ctx.fillStyle = "rgba(230,0,51)";
                      ctx.fillRect(left, top, right - left, yscale.height);
 
                      var xscale = target.scales["x-axis-0"];
                      var yscale = target.scales["y-axis-0"];
-                     var left = xscale.getPixelForValue(gData[1]);  // 塗りつぶしを開始するラベル位置
+                     var left = xscale.getPixelForValue(gData[2]-3);  // 塗りつぶしを開始するラベル位置
                      var right = xscale.getPixelForValue(gData[2]); // 塗りつぶしを終了するラベル位置
                      var top = yscale.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx.fillStyle = "rgba(0,0,225, 0.2)";
+                     ctx.fillStyle = "rgba(230,0,51)";
                      ctx.fillRect(left, top, right - left, yscale.height);
 
                      var xscale = target.scales["x-axis-0"];
                      var yscale = target.scales["y-axis-0"];
-                     var left = xscale.getPixelForValue(gData[2]);  // 塗りつぶしを開始するラベル位置
+                     var left = xscale.getPixelForValue(gData[3]-3);  // 塗りつぶしを開始するラベル位置
                      var right = xscale.getPixelForValue(gData[3]); // 塗りつぶしを終了するラベル位置
                      var top = yscale.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx.fillStyle = "rgba(0,0,0, 0.2)";
+                     ctx.fillStyle = "rgba(230,0,51)";
                      ctx.fillRect(left, top, right - left, yscale.height);
 
                      var xscale = target.scales["x-axis-0"];
                      var yscale = target.scales["y-axis-0"];
-                     var left = xscale.getPixelForValue(gData[3]);  // 塗りつぶしを開始するラベル位置
+                     var left = xscale.getPixelForValue(gData[12]-3);  // 塗りつぶしを開始するラベル位置
                      var right = xscale.getPixelForValue(gData[12]); // 塗りつぶしを終了するラベル位置
                      var top = yscale.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx.fillStyle = "rgba(255, 152, 0, 0.2)";
+                     ctx.fillStyle =  "rgba(230,0,51)";
                      ctx.fillRect(left, top, right - left, yscale.height);
 
                  }
@@ -490,52 +490,52 @@ table.sample1  tbody  tr {
                      // 範囲を設定
                      var xscale2 = target2.scales["x-axis-0"];
                      var yscale2 = target2.scales["y-axis-0"];
-                     var left2 = xscale2.getPixelForValue(0);  // 塗りつぶしを開始するラベル位置
+                     var left2 = xscale2.getPixelForValue(gData[4]-3);  // 塗りつぶしを開始するラベル位置
                      var right2 = xscale2.getPixelForValue(gData[4]); // 塗りつぶしを終了するラベル位置
                      var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx2.fillStyle = "rgba(255,0,0, 0.2)";
+                     ctx2.fillStyle = "rgba(230,0,51)";
                      ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
 
                      var xscale2 = target2.scales["x-axis-0"];
                      var yscale2 = target2.scales["y-axis-0"];
-                     var left2 = xscale2.getPixelForValue(gData[4]);  // 塗りつぶしを開始するラベル位置
+                     var left2 = xscale2.getPixelForValue(gData[5]-3);  // 塗りつぶしを開始するラベル位置
                      var right2 = xscale2.getPixelForValue(gData[5]); // 塗りつぶしを終了するラベル位置
                      var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx2.fillStyle = "rgba(0,255,0, 0.2)";
+                     ctx2.fillStyle = "rgba(230,0,51)";
                      ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
 
                      var xscale2 = target2.scales["x-axis-0"];
                      var yscale2 = target2.scales["y-axis-0"];
-                     var left2 = xscale2.getPixelForValue(gData[5]);  // 塗りつぶしを開始するラベル位置
+                     var left2 = xscale2.getPixelForValue(gData[6]-3);  // 塗りつぶしを開始するラベル位置
                      var right2 = xscale2.getPixelForValue(gData[6]); // 塗りつぶしを終了するラベル位置
                      var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx2.fillStyle = "rgba(0,0,255, 0.2)";
+                     ctx2.fillStyle = "rgba(230,0,51)";
                      ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
 
                      var xscale2 = target2.scales["x-axis-0"];
                      var yscale2 = target2.scales["y-axis-0"];
-                     var left2 = xscale2.getPixelForValue(gData[6]);  // 塗りつぶしを開始するラベル位置
+                     var left2 = xscale2.getPixelForValue(gData[7]-3);  // 塗りつぶしを開始するラベル位置
                      var right2 = xscale2.getPixelForValue(gData[7]); // 塗りつぶしを終了するラベル位置
                      var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx2.fillStyle = "rgba(0,0,0, 0.2)";
+                     ctx2.fillStyle = "rgba(230,0,51)";
                      ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
 
                      var xscale2 = target2.scales["x-axis-0"];
                      var yscale2 = target2.scales["y-axis-0"];
-                     var left2 = xscale2.getPixelForValue(gData[7]);  // 塗りつぶしを開始するラベル位置
+                     var left2 = xscale2.getPixelForValue(gData[13]-3);  // 塗りつぶしを開始するラベル位置
                      var right2 = xscale2.getPixelForValue(gData[13]); // 塗りつぶしを終了するラベル位置
                      var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx2.fillStyle = "rgba(255, 152, 0, 0.2)";
+                     ctx2.fillStyle = "rgba(230,0,51)";
                      ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
 
                  }
@@ -666,52 +666,52 @@ table.sample1  tbody  tr {
                      // 範囲を設定
                      var xscale3 = target3.scales["x-axis-0"];
                      var yscale3 = target3.scales["y-axis-0"];
-                     var left3 = xscale3.getPixelForValue(0);  // 塗りつぶしを開始するラベル位置
+                     var left3 = xscale3.getPixelForValue(gData[8]-3);  // 塗りつぶしを開始するラベル位置
                      var right3 = xscale3.getPixelForValue(gData[8]); // 塗りつぶしを終了するラベル位置
                      var top3 = yscale3.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx3.fillStyle = "rgba(255,0,0, 0.2)";
+                     ctx3.fillStyle = "rgba(230,0,51)";
                      ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
 
                      var xscale3 = target3.scales["x-axis-0"];
                      var yscale3 = target3.scales["y-axis-0"];
-                     var left3 = xscale3.getPixelForValue(gData[8]);  // 塗りつぶしを開始するラベル位置
+                     var left3 = xscale3.getPixelForValue(gData[9]-3);  // 塗りつぶしを開始するラベル位置
                      var right3 = xscale3.getPixelForValue(gData[9]); // 塗りつぶしを終了するラベル位置
                      var top3 = yscale3.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx3.fillStyle = "rgba(0,255,0, 0.2)";
+                     ctx3.fillStyle = "rgba(230,0,51)";
                      ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
 
                      var xscale3 = target3.scales["x-axis-0"];
                      var yscale3 = target3.scales["y-axis-0"];
-                     var left3 = xscale3.getPixelForValue(gData[9]);  // 塗りつぶしを開始するラベル位置
+                     var left3 = xscale3.getPixelForValue(gData[10]-3);  // 塗りつぶしを開始するラベル位置
                      var right3 = xscale3.getPixelForValue(gData[10]); // 塗りつぶしを終了するラベル位置
                      var top3 = yscale3.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx3.fillStyle = "rgba(0,0,255, 0.2)";
+                     ctx3.fillStyle = "rgba(230,0,51)";
                      ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
 
                      var xscale3 = target3.scales["x-axis-0"];
                      var yscale3 = target3.scales["y-axis-0"];
-                     var left3 = xscale3.getPixelForValue(gData[10]);  // 塗りつぶしを開始するラベル位置
+                     var left3 = xscale3.getPixelForValue(gData[11]-3);  // 塗りつぶしを開始するラベル位置
                      var right3 = xscale3.getPixelForValue(gData[11]); // 塗りつぶしを終了するラベル位置
                      var top3 = yscale3.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx3.fillStyle = "rgba(0,0,0, 0.2)";
+                     ctx3.fillStyle = "rgba(230,0,51)";
                      ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
 
                      var xscale3 = target3.scales["x-axis-0"];
                      var yscale3 = target3.scales["y-axis-0"];
-                     var left3 = xscale3.getPixelForValue(gData[11]);  // 塗りつぶしを開始するラベル位置
+                     var left3 = xscale3.getPixelForValue(gData[14]-3);  // 塗りつぶしを開始するラベル位置
                      var right3 = xscale3.getPixelForValue(gData[14]); // 塗りつぶしを終了するラベル位置
                      var top3 = yscale3.top;                      // 塗りつぶしの基点（上端）
 
                      // 塗りつぶす長方形の設定
-                     ctx3.fillStyle = "rgba(255, 152, 0, 0.2)";
+                     ctx3.fillStyle = "rgba(230,0,51)";
                      ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
 
                  }
@@ -984,13 +984,86 @@ table.sample1  tbody  tr {
                  window.alert('エラーです');
              }
 
+
+
+         
+             $.ajax({
+                 type: "POST",
+                 //url: "getTrafficSourceData",
+                 url: "./make_graph_sintyoku.aspx/getTrafficSourceData3",
+                 //data: jsonData,
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: OnSuccess3_,
+                 error: OnErrorCall3_
+             });
+
+
+             function OnSuccess3_(response) {
+                 var aDataZ2 = response.d;
+                 var dataarrZ2 = [];
+                 var LabelarrZ2 = [];
+                 var colZ2 = [];
+                 $.each(aDataZ2, function (inx, val) {
+                     dataarrZ2.push(val.valueZ2);
+                     LabelarrZ2.push(val.labelZ2);
+                     colZ2.push(val.color2);
+                 });
+
+                 var ctxZ2 = $("#myChartZ2").get(0).getContext("2d");
+                 var configZ2 = {
+                     type: 'pie',
+                     data: {
+                         datasets: [{
+                             fill: false,
+                             data: dataarrZ2,
+                             backgroundColor: colZ2,
+                             
+                             pointRadius: 0,
+                             pointHoverRadius: 0,
+                             //pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                             //pointHoverBorderColor: "rgba(220,220,220,1)",
+                             pointHitRadius: 10,
+                                 
+                             cubicInterpolationMode: 'monotone',
+                         }],
+
+                         labels: LabelarrZ2
+
+                     },
+
+
+
+
+                     options: {
+                         responsive: true,
+                         title: {                           // タイトル
+                             display: true,                     // 表示設定
+                             fontSize: 25,                      // フォントサイズ
+                             fontFamily: "sans-serif",
+                             text: ' AM：客先別当月分残金額 '                   // タイトルのラベル
+                         },
+
+                     }
+                 };
+
+
+
+
+                 var myPieChartZ2 = new Chart(ctxZ2, configZ2);
+             }
+
+             function OnErrorCall3_(response) {
+                 window.alert('エラーです');
+             }
+
+
+
+
              e.preventDefault();
      });
          //});
     </script>
-
-
-
 
 
 
@@ -1028,14 +1101,19 @@ table.sample1  tbody  tr {
 
 <tr>
 
-    <td　style="width:1000px;">
-    <asp:Label style="Font-Size:12px;" ID="Label85" runat="server" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;背景色：週ごとの出荷予定金額"></asp:Label>
-    <asp:Label style="Font-Size:12px;" CssClass ="second1" ID="Label80" runat="server" Text="1週目予定金額"></asp:Label>
+<td style="width:1000px;Font-Size:25px;" >
+
+</td>
+
+    <td >
+<strong>
+    <asp:Label style="Font-Size:13px;Color:red" ID="Label85" runat="server" Text="赤線：各週の出荷予定金額"></asp:Label>
+<%--    <asp:Label style="Font-Size:12px;" CssClass ="second1" ID="Label80" runat="server" Text="1週目予定金額"></asp:Label>
     <asp:Label style="Font-Size:12px;" CssClass ="second2" ID="Label82" runat="server" Text="2週目予定金額"></asp:Label>
     <asp:Label style="Font-Size:12px;" CssClass ="second3" ID="Label83" runat="server" Text="3週目予定金額"></asp:Label>
     <asp:Label style="Font-Size:12px;" CssClass ="second4" ID="Label84" runat="server" Text="4週目予定金額"></asp:Label>
-    <asp:Label style="Font-Size:12px;" CssClass ="second5" ID="Label81" runat="server" Text="5週目予定金額"></asp:Label>
-
+    <asp:Label style="Font-Size:12px;" CssClass ="second5" ID="Label81" runat="server" Text="5週目予定金額"></asp:Label>--%>
+</strong>
     </td>
 
 </tr>
@@ -1216,12 +1294,17 @@ table.sample1  tbody  tr {
 </table>
 
 
-<table>
+<table >
 <tr>
 
-<td style="width:900px;Font-Size:25px;height:18px;" >
-        <canvas id="myChartZ" width="160" height="70"></canvas>
-                </td>
+<td style="width:650px;Font-Size:25px;height:20px;" >
+<canvas id="myChartZ2" width="160" height="70"></canvas>
+</td>
+
+<td style="width:650px;Font-Size:25px;height:20px;" >
+<canvas id="myChartZ" width="160" height="70"></canvas>
+</td>
+
 
 </tr>
 </table>
