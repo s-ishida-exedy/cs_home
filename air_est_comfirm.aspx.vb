@@ -79,7 +79,6 @@ Partial Class cs_home
         Call Send_Mail()
 
         'セッションキーをクリアする
-        Session.Remove("strTant")
         Session.Remove("strName")
         Session.Remove("strAdd")
         Session.Remove("strDes")
@@ -255,7 +254,7 @@ Partial Class cs_home
         cnn.Open()
 
         strSQL = strSQL & "SELECT * FROM M_EXL_CS_MEMBER "
-        strSQL = strSQL & "WHERE NAME_AB = '" & Session("strTant") & "' "
+        strSQL = strSQL & "WHERE CODE = '" & Session("UsrId") & "' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
