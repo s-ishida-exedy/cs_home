@@ -170,7 +170,8 @@ Partial Class cs_home
             strSQL = strSQL & "ORDER BY "
             strSQL = strSQL & "  T_INV_HD_TB.BLDATE "
             strSQL = strSQL & "  , T_INV_HD_TB.CUSTCODE "
-            strSQL = strSQL & "  , T_INV_HD_TB.OLD_INVNO "
+            strSQL = strSQL & "  , T_INV_HD_TB.OLD_INVNO "
+
             'ＳＱＬコマンド作成 
             dbcmd = New SqlCommand(strSQL, cnn)
             'ＳＱＬ文実行 
