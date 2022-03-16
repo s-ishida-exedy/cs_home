@@ -53,9 +53,9 @@
         </ul>
     </li>
     <li class="menu__multi">
-        <%  Dim strUsr As String = Session("strUsr") %>
-        <%  Dim strNam As String = Session("strNam") %>
-        <%  Dim strRole As String = Session("strRole") %>
+        <%  Dim strUsr As String = Session("UsrId") %>
+        <%  Dim strNam As String = Session("UsrName") %>
+        <%  Dim strRole As String = Session("Role") %>
         <a href="#" class="init-bottom">ログインユーザー情報<span>Login User</span></a>
         <ul class="menu__second-level">
             <!-- 第一階層 -->

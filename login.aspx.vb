@@ -43,9 +43,9 @@ Partial Class cs_home
             Session.RemoveAll()
 
             'ログイン情報をセッションに追加
-            Session("strUsr") = txtUsr.Text
-            Session("strNam") = objDr("unam")
-            Session("strRole") = objDr("role")
+            Session("UsrId") = txtUsr.Text
+            Session("UsrName") = objDr("unam")
+            Session("Role") = objDr("role")
 
 
             '＜本番用　ロールを確認し、ユーザー権限ごとにログイン先を設定する＞
