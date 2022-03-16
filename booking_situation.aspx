@@ -127,7 +127,7 @@
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.aspxで行う -->
-<% If Session("strRole") = "admin" Or Session("strRole") = "csusr" Then %>
+<% If Session("Role") = "admin" Or Session("Role") = "csusr" Then %>
     <!-- #Include File="header/header.aspx" -->
 <% Else %>
     <!-- #Include File="header/exl_header.aspx" -->
@@ -143,7 +143,7 @@
                 <asp:Button ID="Button1" runat="server" Text="ファイルダウンロード" Font-Size="Small" />
             </td>
             <td class="third-cell">
-                <% If Session("strRole") = "admin" Or Session("strRole") = "csusr" Then %>
+                <% If Session("Role") = "admin" Or Session("Role") = "csusr" Then %>
                     <a href="./start.aspx">ホームへ戻る</a>
                 <% Else %>
                     <a href="./exl_top.aspx">ホームへ戻る</a>

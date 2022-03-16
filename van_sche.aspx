@@ -112,7 +112,7 @@
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.aspxで行う -->
-<% If Session("strRole") = "admin" Or Session("strRole") = "csusr" Then %>
+<% If Session("Role") = "admin" Or Session("Role") = "csusr" Then %>
     <!-- #Include File="header/header.aspx" -->
 <% Else %>
     <!-- #Include File="header/exl_header.aspx" -->
