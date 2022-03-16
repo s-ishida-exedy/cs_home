@@ -112,11 +112,7 @@
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.aspxで行う -->
-<% If Session("strRole") = "admin" Or Session("strRole") = "csusr" Then %>
-    <!-- #Include File="header/header.aspx" -->
-<% Else %>
-    <!-- #Include File="header/exl_header.aspx" -->
-<% End If %>
+<!-- #Include File="header/header.aspx" -->
 
 <div id="contents2" class="inner2">
     <table class="header-ta" >
