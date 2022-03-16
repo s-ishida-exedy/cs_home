@@ -792,7 +792,8 @@ Partial Class yuusen
 
         If CheckBox1.Checked = True Then
             Label3.Text = "済"
-            Call Mail03(kbn)
+            Dim struid As String = Session("UsrId")
+            Call Mail030(kbn, struid)
 
         Else
             Label3.Text = "未"
@@ -850,7 +851,8 @@ Partial Class yuusen
 
         If CheckBox2.Checked = True Then
             Label4.Text = "済"
-            Call Mail03(kbn)
+            Dim struid As String = Session("UsrId")
+            Call Mail030(kbn, struid)
         Else
             Label4.Text = "未"
         End If
@@ -968,10 +970,12 @@ Partial Class yuusen
         Dim nihontoran As String = ""
         Dim nitsu As String = ""
 
-        Call Mail01(WDAY00, WDAY01, yusen)
-        Call Mail02(WDAY00, WDAY01, kin)
-        Call Mail03(WDAY00, WDAY01, nihontoran)
-        Call Mail04(WDAY00, WDAY01, nitsu)
+
+        Dim struid As String = Session("UsrId")
+        Call Mail01(WDAY00, WDAY01, yusen, struid)
+        Call Mail02(WDAY00, WDAY01, kin, struid)
+        Call Mail03(WDAY00, WDAY01, nihontoran, struid)
+        Call Mail04(WDAY00, WDAY01, nitsu, struid)
 
         Dim mailmsg As String = ""
         If yusen <> "" Then
@@ -1019,7 +1023,7 @@ Partial Class yuusen
     End Sub
 
 
-    Sub Mail01(WDAY00 As String, WDAY01 As String, ByRef r As String)
+    Sub Mail01(WDAY00 As String, WDAY01 As String, ByRef r As String, struid As String)
         '郵船
 
 
@@ -1029,11 +1033,16 @@ Partial Class yuusen
 
         ' メールの内容
 
-        Dim strfrom2 As String = GET_ToAddress(2, 1)
-        Dim strto2 As String = GET_ToAddress(2, 0)
+        Dim strfrom As String = GET_from(struid)
+        Dim strto As String = GET_from(struid)
+        Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
 
-        Dim strfrom As String = "r-fukao@exedy.com"
-        Dim strto As String = "r-fukao@exedy.com"
+
+        Dim strfrom2 As String = GET_from(struid)
+        Dim strto2 As String = GET_ToAddress(2, 1)
+        Dim strcc2 As String = GET_ToAddress(2, 0) + "," + GET_from(struid)
+
+        Dim strsyomei As String = GET_syomei(struid)
 
         Dim f As String = ""
 
@@ -1046,7 +1055,7 @@ Partial Class yuusen
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
-        Dim body As String = "<html><body><p>郵船ロジスティクス ご担当者様<p>いつもお世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+        Dim body As String = "<html><body>郵船ロジスティクス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY00 & "弊社CUT分で通関委託がございます。<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
 
 
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
@@ -1058,9 +1067,9 @@ Partial Class yuusen
 
         body = body & t
 
-        Dim body2 As String = "</p>" ' UriBodyC()
+        Dim body2 As String = "<br>" ' UriBodyC()
 
-        body = body & body2 & "</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>"
+        body = body & body2 & "お忙しい中とは存じますが、宜しくお願い申し上げます。<br>以上になります。<br><br></body></html>" & strsyomei
 
         body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
         body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
@@ -1092,11 +1101,18 @@ Partial Class yuusen
 
         ' 宛先情報  
         message.To.Add(MailboxAddress.Parse(strto))
-        'If Session("strCC") <> "" Then
 
-        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
 
-        'End If
+
+
+        If strcc <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
+
 
 
         ' 表題  
@@ -1144,7 +1160,7 @@ Partial Class yuusen
 
     End Sub
 
-    Sub Mail02(WDAY00 As String, WDAY01 As String, ByRef r As String)
+    Sub Mail02(WDAY00 As String, WDAY01 As String, ByRef r As String, struid As String)
 
 
 
@@ -1154,11 +1170,17 @@ Partial Class yuusen
 
         ' メールの内容
 
-        Dim strfrom2 As String = GET_ToAddress(3, 1)
-        Dim strto2 As String = GET_ToAddress(3, 0)
+        Dim strfrom As String = GET_from(struid)
+        Dim strto As String = GET_from(struid)
+        Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
 
-        Dim strfrom As String = "r-fukao@exedy.com"
-        Dim strto As String = "r-fukao@exedy.com"
+
+        Dim strfrom2 As String = GET_from(struid)
+        Dim strto2 As String = GET_ToAddress(3, 1)
+        Dim strcc2 As String = GET_ToAddress(3, 0) + "," + GET_from(struid)
+
+        Dim strsyomei As String = GET_syomei(struid)
+
         Dim f As String = ""
 
 
@@ -1166,11 +1188,11 @@ Partial Class yuusen
         'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
 
         'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY00 & "分"
+        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
-        Dim body As String = "<html><body><p>近鉄エクスプレス ご担当者様<p>いつもお世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+        Dim body As String = "<html><body>近鉄エクスプレス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
 
 
 
@@ -1188,12 +1210,12 @@ Partial Class yuusen
 
         body = body & t
 
-        Dim body2 As String = "</p>" ' UriBodyC()
+        Dim body2 As String = "<br>" ' UriBodyC()
 
-        body = body & body2 & "</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>"
+        body = body & body2 & "お忙しい中とは存じますが、宜しくお願い申し上げます。<br>以上になります。<br></body></html>" & strsyomei
 
-        body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
-        body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+        body = "<font size=" & Chr(34) & " 2" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
 
 
@@ -1210,11 +1232,15 @@ Partial Class yuusen
 
         ' 宛先情報  
         message.To.Add(MailboxAddress.Parse(strto))
-        'If Session("strCC") <> "" Then
 
-        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
 
-        'End If
+        If strcc <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
 
 
         ' 表題  
@@ -1271,7 +1297,7 @@ Partial Class yuusen
 
     End Sub
 
-    Sub Mail03(WDAY00 As String, WDAY01 As String, ByRef r As String)
+    Sub Mail03(WDAY00 As String, WDAY01 As String, ByRef r As String, struid As String)
 
 
 
@@ -1281,11 +1307,17 @@ Partial Class yuusen
 
         ' メールの内容
 
-        Dim strfrom2 As String = GET_ToAddress(4, 1)
-        Dim strto2 As String = GET_ToAddress(4, 0)
+        Dim strfrom As String = GET_from(struid)
+        Dim strto As String = GET_from(struid)
+        Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
 
-        Dim strfrom As String = "r-fukao@exedy.com"
-        Dim strto As String = "r-fukao@exedy.com"
+
+        Dim strfrom2 As String = GET_from(struid)
+        Dim strto2 As String = GET_ToAddress(4, 1)
+        Dim strcc2 As String = GET_ToAddress(4, 0) + "," + GET_from(struid)
+
+        Dim strsyomei As String = GET_syomei(struid)
+
         Dim f As String = ""
 
 
@@ -1293,11 +1325,11 @@ Partial Class yuusen
         'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
 
         'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY00 & "分"
+        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
-        Dim body As String = "<html><body><p>日本トランスポート ご担当者様<p>いつもお世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+        Dim body As String = "<html><body>日本トランスポート ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
 
 
 
@@ -1315,12 +1347,12 @@ Partial Class yuusen
 
         body = body & t
 
-        Dim body2 As String = "</p>" ' UriBodyC()
+        Dim body2 As String = "<br>" ' UriBodyC()
 
-        body = body & body2 & "</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>"
+        body = body & body2 & "お忙しい中とは存じますが、宜しくお願い申し上げます。<br>以上になります。<br><br></body></html>" & strsyomei
 
-        body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
-        body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+        body = "<font size=" & Chr(34) & " 2" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
 
 
@@ -1337,11 +1369,15 @@ Partial Class yuusen
 
         ' 宛先情報  
         message.To.Add(MailboxAddress.Parse(strto))
-        'If Session("strCC") <> "" Then
 
-        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
 
-        'End If
+        If strcc <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
 
 
         ' 表題  
@@ -1398,7 +1434,7 @@ Partial Class yuusen
 
     End Sub
 
-    Sub Mail04(WDAY00 As String, WDAY01 As String, ByRef r As String)
+    Sub Mail04(WDAY00 As String, WDAY01 As String, ByRef r As String, struid As String)
 
 
 
@@ -1408,11 +1444,17 @@ Partial Class yuusen
 
         ' メールの内容
 
-        Dim strfrom2 As String = GET_ToAddress(5, 1)
-        Dim strto2 As String = GET_ToAddress(5, 0)
+        Dim strfrom As String = GET_from(struid)
+        Dim strto As String = GET_from(struid)
+        Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
 
-        Dim strfrom As String = "r-fukao@exedy.com"
-        Dim strto As String = "r-fukao@exedy.com"
+
+        Dim strfrom2 As String = GET_from(struid)
+        Dim strto2 As String = GET_ToAddress(5, 1)
+        Dim strcc2 As String = GET_ToAddress(5, 0) + "," + GET_from(struid)
+
+        Dim strsyomei As String = GET_syomei(struid)
+
         Dim f As String = ""
 
 
@@ -1420,11 +1462,11 @@ Partial Class yuusen
         'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
 
         'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY00 & "分"
+        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
-        Dim body As String = "<html><body><p>日本通運 ご担当者様<p>いつもお世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>" ' UriBodyC()
+        Dim body As String = "<html><body>日本通運 ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br>" ' UriBodyC()
 
 
 
@@ -1438,12 +1480,12 @@ Partial Class yuusen
 
         body = body & t
 
-        Dim body2 As String = "</p>" ' UriBodyC()
+        Dim body2 As String = "<br>" ' UriBodyC()
 
-        body = body & body2 & "</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>"
+        body = body & body2 & "お忙しい中とは存じますが、宜しくお願い申し上げます。<br>以上になります。<br><br></body></html>" & strsyomei
 
-        body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
-        body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+        body = "<font size=" & Chr(34) & " 2" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
 
 
@@ -1460,11 +1502,15 @@ Partial Class yuusen
 
         ' 宛先情報  
         message.To.Add(MailboxAddress.Parse(strto))
-        'If Session("strCC") <> "" Then
 
-        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
 
-        'End If
+        If strcc <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
 
 
         ' 表題  
@@ -1559,7 +1605,7 @@ Partial Class yuusen
 
 
         strSQL = ""
-        strSQL = strSQL & "SELECT T_EXL_CSANKEN.CUST, T_EXL_CSANKEN.INVOICE, T_EXL_CSANKEN.BOOKING_NO, T_EXL_CSANKEN.DISCHARGING_PORT, T_EXL_CSANKEN.PLACE_OF_DELIVERY "
+        strSQL = strSQL & "SELECT T_EXL_CSANKEN.CUST, T_EXL_CSANKEN.INVOICE, T_EXL_CSANKEN.BOOKING_NO, T_EXL_CSANKEN.LOADING_PORT, T_EXL_CSANKEN.PLACE_OF_DELIVERY "
         strSQL = strSQL & "FROM T_EXL_CSANKEN "
         strSQL = strSQL & "WHERE T_EXL_CSANKEN.FLG01 ='1' "
         strSQL = strSQL & "AND T_EXL_CSANKEN.FLG02 ='1' "
@@ -1586,11 +1632,11 @@ Partial Class yuusen
             CUST = Convert.ToString(dataread("CUST"))
             INVOICE = Convert.ToString(dataread("INVOICE"))
             BOOKING_NO = Convert.ToString(dataread("BOOKING_NO"))
-            DISCHARGING_PORT = Convert.ToString(dataread("DISCHARGING_PORT"))
+            DISCHARGING_PORT = Convert.ToString(dataread("LOADING_PORT"))
             PLACE_OF_DELIVERY = Convert.ToString(dataread("PLACE_OF_DELIVERY"))
 
 
-            body01 = body01 & "<tr><td >" & CUST & "</td><td>" & INVOICE & " / " & BOOKING_NO & "</td><td>" & DISCHARGING_PORT & "</td><td>" & PLACE_OF_DELIVERY & "</td></tr>"
+            body01 = body01 & "<tr><td>" & CUST & "</td><td>" & INVOICE & " / " & BOOKING_NO & "</td><td>" & DISCHARGING_PORT & "</td><td>" & PLACE_OF_DELIVERY & "</td></tr>"
 
 
 
@@ -2074,20 +2120,26 @@ Step00:
     End Sub
 
 
-    Sub Mail03(kbn As String)
+    Sub Mail030(kbn As String, struid As String)
         '通知メール
 
+
+
+        Dim strfrom As String = GET_from(struid)
+        Dim strto As String = GET_from(struid)
+        Dim strcc As String = GET_from(struid) + "," + GET_from(struid) + "," + "r-fukao@exedy.com"
+
+        Dim strsyomei As String = GET_syomei(struid)
 
         'メールの送信に必要な情報
         Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
         Dim smtpPort As Integer = 25
 
         ' メールの内容
-        Dim strfrom As String = "r-fukao@exedy.com"
-        Dim strto As String = "r-fukao@exedy.com"
 
-        Dim strfrom2 As String = GET_ToAddress(0, 1)
-        Dim strto2 As String = GET_ToAddress(0, 0)
+
+        Dim strto2 As String = GET_ToAddress(0, 1) '宛先
+        Dim strcc2 As String = GET_ToAddress(0, 0) + "," + GET_from(struid)  'CC 
 
         Dim f As String = ""
         Dim dt1 As DateTime = DateTime.Now
@@ -2113,9 +2165,10 @@ Step00:
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
-        Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>" & kbn & " 登録完了いたしました。</p>以上になります。</p>" & kbn & "担当</body></html>" ' UriBodyC()
+        Dim body As String = "<html><body>各位<br>お世話になっております。<br><br>" & kbn & " 登録完了いたしました。<br><br>以上になります。<br>" & kbn & "担当</body></html>" ' UriBodyC()
 
-
+        body = "<font size=" & Chr(34) & " 3" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
         'Dim strFilePath As String = "" '"C:\exp\cs_home\upload\" & Session("strFile")
 
@@ -2129,11 +2182,14 @@ Step00:
 
         ' 宛先情報  
         message.To.Add(MailboxAddress.Parse(strto))
-        'If Session("strCC") <> "" Then
 
-        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
-
-        'End If
+        If strcc <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
 
 
         ' 表題  
@@ -2223,5 +2279,94 @@ Step00:
         cnn.Dispose()
 
     End Function
+
+
+    Private Function GET_from(struid As String) As String
+        'BCCメールアドレス情報を取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+
+        GET_from = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = strSQL & "SELECT e_mail FROM M_EXL_USR "
+        strSQL = strSQL & "WHERE uid = '" & struid & "' "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strDate = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            GET_from += dataread("e_mail")
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
+
+
+    Private Function GET_syomei(struid As String) As String
+        'BCCメールアドレス情報を取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+
+        GET_syomei = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = strSQL & "SELECT MEMBER_NAME,COMPANY,TEAM,TEL_NO,E_MAIL FROM M_EXL_CS_MEMBER "
+        strSQL = strSQL & "WHERE code = '" & struid & "' "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strDate = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            GET_syomei += "<html><body>******************************<p></p>" + "" + dataread("MEMBER_NAME") + "<p></p>" + dataread("COMPANY") + "<p></p>" + dataread("TEL_NO") + "<p></p>" + dataread("E_MAIL") + "<p></p>" + "******************************</body></html>"
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
+
 
 End Class

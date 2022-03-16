@@ -167,6 +167,55 @@ h2:after{
  padding: 0px;
 }
 
+       .header-ta {
+            width: 1300px;
+        }
+        .first-cell {
+            text-align:left;
+            font-size:25px;
+            width: 400px;
+        }
+        .second-cell {
+            width: 700px;
+        }   
+        .third-cell {
+            width: 200px;
+            text-align:right;
+        }
+        .third-cell a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0.5em 1em;
+            width: 100px;
+            color: #000000;
+            font-size: 12px;
+            font-weight: 200;
+            border: 2px solid #ffffff;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.1s;
+        }
+        .third-cell a::after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+            transform: rotate(45deg);
+        }
+        .third-cell a:hover {
+            color: #000000;
+            text-decoration: none;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+        }
+        .third-cell a:hover::after {
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+        }
+
     </style>
    <script>
     $(document).ready(function () {
@@ -219,49 +268,33 @@ h2:after{
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.aspxで行う -->
+<% If Session("strRole") = "admin" Or Session("strRole") = "csusr" Then %>
     <!-- #Include File="header/header.aspx" -->
+<% Else %>
+    <!-- #Include File="header/exl_header.aspx" -->
+<% End If %>
 
 
 <div id="contents2" class="inner2">
 
-<table >
 
-<tr>
+    <table class="header-ta" >
+        <tr>
+            <td class="first-cell">
+                <h2>案件抽出</h2> 
+            </td>
+            <td class="second-cell">
+            </td>
+            <td class="third-cell">
+                <% If Session("strRole") = "admin" Or Session("strRole") = "csusr" Then %>
+                    <a href="./anken_booking.aspx">全案件へ</a>
+                <% Else %>
+                    <a href="./anken_booking02.aspx">全案件へ</a>
+                <% End If %>                
+            </td>
+        </tr>
+    </table>
 
-                <td style="width:250px;Font-Size:25px;" >
-
-                    <h2>案件抽出</h2>
-
-                </td>
-
-
-
-
-
-
-<td style="width:80px;" >
-
-
-
-
-<%--<div class="button04">
-<a href="anken_booking01.aspx?id={0}">当日案件へ</a>
-</div>--%>
-
-</td>
-
-<td style="width:80px;" >
-
-<div class="button04">
-<a href="anken_booking.aspx?id={0}">全案件へ</a>
-</div>
-
-</td>
-
-
-</tr>
-
-</table>
 
 
     
@@ -333,9 +366,20 @@ h2:after{
 
     <td style="width:100px;Font-Size:25px;" >
 
-<div class="button04">
-      <a href="javascript:void(0);" onclick="LinkClick()">アドレス登録</a>
-</div>    
+
+
+
+
+
+            <% If Session("strRole") = "admin" Or Session("strRole") = "csusr" Then %>
+                    <div class="button04">
+                  <a href="javascript:void(0);" onclick="LinkClick()">アドレス登録</a>
+            </div>      
+            <% Else %>
+
+            <% End If %>                
+
+
 
 
 
