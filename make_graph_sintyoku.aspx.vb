@@ -30,6 +30,7 @@ Partial Class yuusen
         Public Property label3 As String
 
         Public Property labelZ1 As String
+        Public Property labelZ2 As String
 
         Public Property value As String
         Public Property value2 As String
@@ -62,6 +63,7 @@ Partial Class yuusen
 
 
         Public Property color As String
+        Public Property color2 As String
         Public Property hightlight As String
 
     End Class
@@ -153,6 +155,47 @@ Partial Class yuusen
 
 
         Return tt
+    End Function
+
+    <WebMethod()>
+    Public Shared Function getTrafficSourceData3() As List(Of trafficSourceData)
+        '    Public Shared Function getTrafficSourceData(ByVal gData As List(Of String)) As List(Of trafficSourceData)
+
+        Dim ttt As List(Of trafficSourceData) = New List(Of trafficSourceData)()
+
+        Dim arrColor2 As String() = New String() {"#0068B7", "#F39800", "#FFF100", "#009944", "#E60012", "#1D2088", "#920783", "#16F27E", "#FC9775", "#5A69A6"} '
+        Using cn3 As SqlConnection = New SqlConnection("Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
+
+            Dim myQuery3 As String = "select KBN,ZANKIN from T_EXL_GRAPH_AMSINTYOKU "
+            Dim cmd3 As SqlCommand = New SqlCommand()
+            cmd3.CommandText = myQuery3
+            cmd3.CommandType = CommandType.Text
+            cmd3.Connection = cn3
+            cn3.Open()
+            Dim dr3 As SqlDataReader = cmd3.ExecuteReader()
+
+            If dr3.HasRows Then
+                Dim counter3 As Integer = 0
+
+                While dr3.Read()
+                    Dim tsData3 As trafficSourceData = New trafficSourceData()
+                    tsData3.valueZ2 = Double.Parse(dr3("ZANKIN"))
+                    tsData3.labelZ2 = dr3("KBN").ToString()
+
+                    tsData3.color2 = arrColor2(counter3)
+                    ttt.Add(tsData3)
+                    counter3 += 1
+                End While
+            End If
+
+
+
+
+        End Using
+
+
+
+        Return ttt
     End Function
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 

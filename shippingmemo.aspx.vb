@@ -501,7 +501,17 @@ Partial Class yuusen
                 'Grid再表示
                 GridView1.DataBind()
 
+                'DropDownList2.Items.Clear()
+                'DropDownList2.Items.Insert(0, "--Select--")
+
+
+
                 DropDownList2.Items.Clear()
+                DropDownList2.DataSource = SqlDataSource5
+                DropDownList2.DataTextField = "REV_STATUS"
+                DropDownList2.DataValueField = "REV_STATUS"
+                DropDownList2.DataBind()
+
                 DropDownList2.Items.Insert(0, "--Select--")
 
             Else
@@ -509,7 +519,15 @@ Partial Class yuusen
                 GridView1.DataSource = SqlDataSource3
                 GridView1.DataBind()
 
+                'DropDownList2.Items.Clear()
+                'DropDownList2.Items.Insert(0, "--Select--")
+
                 DropDownList2.Items.Clear()
+                DropDownList2.DataSource = SqlDataSource5
+                DropDownList2.DataTextField = "REV_STATUS"
+                DropDownList2.DataValueField = "REV_STATUS"
+                DropDownList2.DataBind()
+
                 DropDownList2.Items.Insert(0, "--Select--")
 
             End If
@@ -523,7 +541,15 @@ Partial Class yuusen
             GridView1.DataSource = SqlDataSource3
             GridView1.DataBind()
 
+            'DropDownList2.Items.Clear()
+            'DropDownList2.Items.Insert(0, "--Select--")
+
             DropDownList2.Items.Clear()
+            DropDownList2.DataSource = SqlDataSource5
+            DropDownList2.DataTextField = "REV_STATUS"
+            DropDownList2.DataValueField = "REV_STATUS"
+            DropDownList2.DataBind()
+
             DropDownList2.Items.Insert(0, "--Select--")
 
 
