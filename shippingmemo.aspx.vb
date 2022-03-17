@@ -18,8 +18,6 @@ Partial Class yuusen
         Dim str04 As String = ""
         Dim str05 As String = ""
 
-
-
         If e.Row.RowType = DataControlRowType.DataRow Then
             If e.Row.Cells(12).Text = "月またぎ" Then
                 e.Row.BackColor = Drawing.Color.DarkSalmon
@@ -29,23 +27,16 @@ Partial Class yuusen
 
             If IsPostBack = True Then
 
-
                 If e.Row.Cells(9).Text = "" Or e.Row.Cells(9).Text = "&nbsp;" Then
                     Call GET_IVDATA(Trim(e.Row.Cells(13).Text), Trim(e.Row.Cells(3).Text))
                 End If
 
                 Dim dt0 As DateTime = DateTime.Parse(e.Row.Cells(4).Text)
 
-
-
-
-
                 If e.Row.Cells(9).Text <> "&nbsp;" And e.Row.Cells(12).Text = "&nbsp;" Then
                     If e.Row.Cells(4).Text <> "&nbsp;" And e.Row.Cells(10).Text <> "&nbsp;" Then
-
                         If e.Row.Cells(4).Text <> "&nbsp;" And e.Row.Cells(10).Text <> " " Then ' ツール回収
                             Dim dt1 As DateTime = DateTime.Parse(e.Row.Cells(10).Text)
-
                             If dt0.ToString("MM") = dt1.ToString("MM") Then
                                 str02 = "不要"
                                 str01 = "-"
@@ -57,16 +48,12 @@ Partial Class yuusen
                             End If
                         End If
                     End If
-
                 End If
 
 
-
                 If e.Row.Cells(15).Text <> "&nbsp;" Then
-
                     If Trim(e.Row.Cells(15).Text) <> "" Then
                         Dim dt2 As DateTime = DateTime.Parse(e.Row.Cells(15).Text)
-
                         If dt0.ToString("MM") = dt2.ToString("MM") Then
                             str03 = "○"
                             Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str03)
@@ -79,9 +66,7 @@ Partial Class yuusen
 
                 If e.Row.Cells(5).Text <> "&nbsp;" Then
                     If Trim(e.Row.Cells(5).Text) <> "" Then
-
                         Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
-
                         If dt0.ToString("MM") = dt3.ToString("MM") Then
                             str04 = "○"
                             Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str04)
@@ -100,9 +85,7 @@ Partial Class yuusen
 
             If e.Row.Cells(9).Text = "&nbsp;" Or Trim(e.Row.Cells(9).Text) = "" Then
                 If e.Row.Cells(7).Text = "&nbsp;" Or Trim(e.Row.Cells(7).Text) = "" Then
-
                     Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
-
                     If dt4 <= dt01 Then
                         e.Row.BackColor = Drawing.Color.Red
                     Else
@@ -120,9 +103,7 @@ Partial Class yuusen
         End If
 
 
-
-
-            If e.Row.RowType = DataControlRowType.DataRow Then
+        If e.Row.RowType = DataControlRowType.DataRow Then
             Dim dltButton As ImageButton = e.Row.FindControl("ImageButton1")
             'ボタンが存在する場合のみセット
             If Not (dltButton Is Nothing) Then
@@ -156,9 +137,6 @@ Partial Class yuusen
         'Grid再表示
         GridView1.DataBind()
 
-
-
-
         DropDownList1.Items.Clear()
 
         DropDownList1.Items.Insert(0, "--Select--")
@@ -168,8 +146,6 @@ Partial Class yuusen
 
         DropDownList2.Items.Clear()
         DropDownList2.Items.Insert(0, "--Select--")
-
-
 
     End Sub
 
@@ -207,18 +183,6 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
-        'strSQL = "SELECT T_INV_HD_TB.OLD_INVNO,T_INV_HD_TB.INVFROM,T_INV_HD_TB.INVON, T_INV_HD_TB.BLDATE, Sum(T_INV_BD_TB.KIN) AS KINの合計,T_INV_HD_TB.INVOICENO,T_INV_HD_TB.STAMP,T_INV_HD_TB.RATE,(Sum(T_INV_BD_TB.KIN) * T_INV_HD_TB.RATE) as JPY,T_INV_HD_TB.BOOKINGNO,T_INV_HD_TB.SHIPPEDPER,T_INV_HD_TB.SHIPBASE,T_INV_HD_TB.VOYAGENO "
-        'strSQL = strSQL & "FROM T_INV_BD_TB RIGHT JOIN T_INV_HD_TB ON T_INV_BD_TB.INVOICENO = T_INV_HD_TB.INVOICENO "
-        'strSQL = strSQL & "WHERE "
-        'strSQL = strSQL & " T_INV_HD_TB.BOOKINGNO is not null "
-        'strSQL = strSQL & "GROUP BY T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.BLDATE,T_INV_HD_TB.INVOICENO,T_INV_HD_TB.STAMP,T_INV_HD_TB.RATE,T_INV_HD_TB.BOOKINGNO,T_INV_HD_TB.SHIPPEDPER,T_INV_HD_TB.SHIPBASE,T_INV_HD_TB.INVFROM,T_INV_HD_TB.INVON,T_INV_HD_TB.VOYAGENO "
-        'strSQL = strSQL & "HAVING (((T_INV_HD_TB.BOOKINGNO) = '" & bkgno & "')) "
-        'strSQL = strSQL & "AND (((T_INV_HD_TB.OLD_INVNO) = '" & ivno & "')) "
-        'strSQL = strSQL & "AND ((Sum(T_INV_BD_TB.KIN))>0 ) "
-        'strSQL = strSQL & "AND T_INV_HD_TB.STAMP = (SELECT MAX(T_INV_HD_TB.STAMP) T_INV_HD_TB WHERE T_INV_HD_TB.BOOKINGNO = '" & bkgno & "') "
-        'strSQL = strSQL & "order by T_INV_HD_TB.STAMP DESC "
-
-
 
         strSQL = "SELECT T_INV_HD_TB.OLD_INVNO,T_INV_HD_TB.INVFROM,T_INV_HD_TB.INVON, T_INV_HD_TB.BLDATE, Sum(T_INV_BD_TB.KIN) AS KINの合計,T_INV_HD_TB.INVOICENO,T_INV_HD_TB.STAMP,T_INV_HD_TB.RATE,(Sum(T_INV_BD_TB.KIN) * T_INV_HD_TB.RATE) as JPY,T_INV_HD_TB.BOOKINGNO,T_INV_HD_TB.SHIPPEDPER,T_INV_HD_TB.SHIPBASE,T_INV_HD_TB.VOYAGENO "
         strSQL = strSQL & "FROM T_INV_BD_TB RIGHT JOIN T_INV_HD_TB ON T_INV_BD_TB.INVOICENO = T_INV_HD_TB.INVOICENO "
@@ -236,8 +200,6 @@ Partial Class yuusen
         strSQL = strSQL & "AND T_INV_HD_TB.STAMP = (SELECT MAX(T_INV_HD_TB.STAMP) T_INV_HD_TB WHERE T_INV_HD_TB.OLD_INVNO = " & Chr(39) & ivno & Chr(39) & ") "
         strSQL = strSQL & "order by T_INV_HD_TB.STAMP DESC "
 
-
-
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
         'ＳＱＬ文実行 
@@ -246,7 +208,6 @@ Partial Class yuusen
         strDate = ""
         '結果を取り出す 
         While (dataread.Read())
-
             str01 = Convert.ToString(dataread("BOOKINGNO"))        'ETD(計上日)
             str02 = Convert.ToString(dataread("VOYAGENO"))        'ETD(計上日)
             str03 = Convert.ToString(dataread("BLDATE"))        'ETD(計上日)
@@ -422,7 +383,6 @@ Partial Class yuusen
                 DropDownList2.Items.Clear()
                 DropDownList2.Items.Insert(0, "--Select--")
 
-
             ElseIf DropDownList1.Text = "修正状況" Then
                 DropDownList2.Items.Clear()
                 DropDownList2.DataSource = SqlDataSource5
@@ -531,10 +491,6 @@ Partial Class yuusen
                 DropDownList2.Items.Insert(0, "--Select--")
 
             End If
-
-
-
-
         Else
 
             GridView1.DataSourceID = ""
@@ -551,7 +507,6 @@ Partial Class yuusen
             DropDownList2.DataBind()
 
             DropDownList2.Items.Insert(0, "--Select--")
-
 
         End If
 
@@ -590,10 +545,7 @@ Partial Class yuusen
             'Grid再表示
             GridView1.DataBind()
 
-
         Else
-
-
         End If
 
         DropDownList1.Items.Clear()
@@ -612,32 +564,6 @@ Partial Class yuusen
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
-        'Dim i As Integer
-        ''フォーマットを指定する場合
-        'For i = 0 To GridView1.Rows.Count - 1
-        '    Me.GridView1.Rows(i).Cells(4).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
-        '    Me.GridView1.Rows(i).Cells(5).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
-        '    Me.GridView1.Rows(i).Cells(6).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
-        '    Me.GridView1.Rows(i).Cells(3).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
-        '    Me.GridView1.Rows(i).Cells(8).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
-        '    Me.GridView1.Rows(i).Cells(9).Style.Add(“mso-number-format”, “yyyy\\/mm\\/dd”)
-
-        'Next
-
-        '' Set the content type to Excel.
-        'Response.AddHeader(“content-disposition”, “attachment; filename=SHIPPINGMEMO_” & Now.ToString(“yyyyMMddhh”) & “.xls”)
-        'Response.ContentType = “application/vnd.ms-excel”
-        'Response.Charset = “”
-        '' Turn off the view state.
-        'Me.EnableViewState = False
-        'Dim tw As New System.IO.StringWriter()
-        'Dim hw As New System.Web.UI.HtmlTextWriter(tw)
-        '' Get the HTML for the control.
-        'Me.GridView1.RenderControl(hw)
-        '' Write the HTML back to the browser.
-        'Response.Write(tw.ToString())
-        '' End the response.
-        'Response.End()
 
         Dim dt As New DataTable("GridView_Data")
         For Each cell As TableCell In GridView1.HeaderRow.Cells
@@ -656,9 +582,7 @@ Partial Class yuusen
         End Using
 
 
-
     End Sub
-
 
     Public Overrides Sub VerifyRenderingInServerForm(ByVal control As Control)
         ' このOverridesは以下のエラーを回避するために必要です。
@@ -670,11 +594,7 @@ Partial Class yuusen
 
         If CheckBox1.Checked = True Then
             If TextBox1.Text = "" Or TextBox2.Text = "" Then
-                CheckBox1.Checked = False
-
-
                 Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('日付を指定してください。');</script>", False)
-
             Else
                 Label1.Text = "フィルタ 期間指定"
             End If
@@ -695,71 +615,6 @@ Partial Class yuusen
         End If
 
     End Sub
-
-    'Private Sub GridView2_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles GridView2.RowDataBound
-
-    '    If e.Row.RowType = DataControlRowType.DataRow Then
-    '        If e.Row.Cells(11).Text = "月またぎ" Then
-    '            e.Row.BackColor = Drawing.Color.DarkSalmon
-    '        ElseIf e.Row.Cells(11).Text = "出港済み" Then
-    '            e.Row.BackColor = Drawing.Color.LightBlue
-    '        End If
-
-    '        Dim dt00 As DateTime = DateTime.Now
-    '        Dim ts1 As New TimeSpan(7, 0, 0, 0)
-    '        Dim dt01 As DateTime = dt00 + ts1
-
-    '        If e.Row.Cells(8).Text = "&nbsp;" Or Trim(e.Row.Cells(8).Text) = "" Then
-    '            If e.Row.Cells(6).Text = "&nbsp;" Or Trim(e.Row.Cells(6).Text) = "" Then
-    '                Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
-    '                If dt4 <= dt01 Then
-    '                    e.Row.BackColor = Drawing.Color.Red
-    '                Else
-    '                End If
-    '            Else
-    '                Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
-    '                If dt3 <= dt01 Then
-    '                    e.Row.BackColor = Drawing.Color.Red
-    '                Else
-    '                End If
-    '            End If
-    '        End If
-    '    End If
-
-    'End Sub
-
-    'Private Sub GridView3_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles GridView3.RowDataBound
-
-    '    If e.Row.RowType = DataControlRowType.DataRow Then
-    '        If e.Row.Cells(11).Text = "月またぎ" Then
-    '            e.Row.BackColor = Drawing.Color.DarkSalmon
-    '        ElseIf e.Row.Cells(11).Text = "出港済み" Then
-    '            e.Row.BackColor = Drawing.Color.LightBlue
-    '        End If
-
-    '        Dim dt00 As DateTime = DateTime.Now
-    '        Dim ts1 As New TimeSpan(7, 0, 0, 0)
-    '        Dim dt01 As DateTime = dt00 + ts1
-
-    '        If e.Row.Cells(8).Text = "&nbsp;" Or Trim(e.Row.Cells(8).Text) = "" Then
-    '            If e.Row.Cells(6).Text = "&nbsp;" Or Trim(e.Row.Cells(6).Text) = "" Then
-    '                Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
-    '                If dt4 <= dt01 Then
-    '                    e.Row.BackColor = Drawing.Color.Red
-    '                Else
-    '                End If
-    '            Else
-    '                Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
-    '                If dt3 <= dt01 Then
-    '                    e.Row.BackColor = Drawing.Color.Red
-    '                Else
-    '                End If
-    '            End If
-    '        End If
-    '    End If
-
-    'End Sub
-
     Private Sub GridView1_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView1.RowCommand
         If e.CommandName = "edt" Then
             Dim index As Integer = Convert.ToInt32(e.CommandArgument)
@@ -770,11 +625,8 @@ Partial Class yuusen
             Session("strinv") = data0
             Session("strbkg") = data1
 
-
             'Dim clientScript As String = "<script language='JavaScript'> window.open('shippingmemo_detail.aspx', '', 'width=1500,height=450','scrollbars=no','status=no','toolbar=no','location=no','menubar=no','resizable=no') <" + "/script>"
             'Dim startupScript As String = "<script language='JavaScript'>  window.open('shippingmemo_detail.aspx') <" + "/script>"
-
-
 
             'RegisterClientScriptBlock("client", clientScript)
 
