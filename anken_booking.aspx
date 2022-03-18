@@ -107,9 +107,6 @@
         }
 
 
-
-
-
         .DropDown
         {
             background-color: #ffffff;
@@ -447,6 +444,22 @@
                 </table>
             </div>
         </asp:Panel>
+
+    <asp:Panel ID="Panel3" runat="server"  Font-Size="20px" Visible ="false">
+
+        
+        <table style="width:1500px;height:10px;">
+        </table>
+        <table style="width:1500px;height:10px;">
+            <tr>
+                <td style="width:1500px;" >
+                    <asp:Label ID="Label12" runat="server" Text="データ未更新です。8:30以降の場合、異常報告ボタンを押してください。"></asp:Label>
+                    <asp:Button ID="Button5"  CssClass ="btn00" runat="server" Text="異常報告" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+                </td>
+            </tr>
+        </table>
+
+    </asp:Panel>
 
         <table style="height:10px;">
         </table>

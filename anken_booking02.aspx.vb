@@ -601,8 +601,7 @@ Partial Class yuusen
         dataread.Close()
         dbcmd.Dispose()
 
-        cnn.Close()
-        cnn.Dispose()
+
 
         If Label3.Text = "" Then
             If strkd = "1" Then
@@ -667,6 +666,64 @@ Partial Class yuusen
         Button4.Attributes.Add("onclick", "return confirm('メール送信します。よろしいですか？');")
 
 
+
+        Dim strupddate00 As Date
+        Dim strupddate01 As Date
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT T_EXL_DATA_UPD.DATA_UPD FROM T_EXL_DATA_UPD "
+        strSQL = strSQL & "WHERE T_EXL_DATA_UPD.DATA_CD ='008' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            strupddate00 = Trim(dataread("DATA_UPD"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT T_EXL_DATA_UPD.DATA_UPD FROM T_EXL_DATA_UPD "
+        strSQL = strSQL & "WHERE T_EXL_DATA_UPD.DATA_CD ='012' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            strupddate01 = Trim(dataread("DATA_UPD"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        Dim dt00 As String = dt1.ToShortDateString
+        Dim dt01 As String = strupddate00.ToShortDateString
+        Dim dt02 As String = strupddate01.ToShortDateString
+
+
+        If dt00 = dt01 And dt02 = dt00 Then
+
+            Panel1.Visible = True
+            Panel2.Visible = False
+
+        Else
+
+            Panel1.Visible = False
+            Panel2.Visible = True
+
+        End If
+
+        cnn.Close()
+        cnn.Dispose()
 
     End Sub
 
@@ -963,7 +1020,9 @@ Partial Class yuusen
         body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
         If f = "" Then
-            body = "たいしょうなし"
+            body = "<html><body>郵船ロジスティクス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY00 & "弊社CUT分で通関委託案件はございません。<br>（LCL案件は全て委託となります。）<br><br>宜しくお願い申し上げます。<br>以上になります。<br><br></body></html>" & strsyomei
+            body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
+            body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
         End If
 
         ' MailKit におけるメールの情報
@@ -1208,7 +1267,7 @@ Partial Class yuusen
         Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
 
         'メールの本文
-        Dim body As String = "<html><body>日本通運 ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br>" ' UriBodyC()
+        Dim body As String = "<html><body>日本通運 ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br><br>" ' UriBodyC()
 
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
@@ -1779,6 +1838,8 @@ Step00:
 
     End Sub
 
+
+
     Private Function GET_ToAddress(strkbn As String, strtocc As String) As String
         'BCCメールアドレス情報を取得
         Dim dataread As SqlDataReader
@@ -1905,5 +1966,71 @@ Step00:
 
     End Function
 
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
 
+
+
+        Dim struid As String = Session("UsrId")
+        Dim strfrom As String = GET_from(struid)
+        '        Dim strto As String = "r-fukao@exedy.com,s-ishida@exedy.com"
+        Dim strto As String = "r-fukao@exedy.com,r-fukao@exedy.com"
+
+        Dim strsyomei As String = GET_syomei(struid)
+
+        'メールの送信に必要な情報
+        Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
+        Dim smtpPort As Integer = 25
+
+        ' メールの内容
+
+
+        'メールの件名
+        Dim subject As String = "【異常報告】案件抽出ページ"
+
+        'メールの本文
+        Dim body As String = "<html><body>案件抽出ページから異常報告です。<br>http://kbhwpm01/EXP/cs_home/anken_booking02.aspx</body></html>" ' UriBodyC()
+
+        body = "<font size=" & Chr(34) & " 3" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
+
+        ' MailKit におけるメールの情報
+        Dim message = New MimeKit.MimeMessage()
+
+        ' 送り元情報  
+        message.From.Add(MailboxAddress.Parse(strfrom))
+
+
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
+
+        ' 表題  
+        message.Subject = subject
+
+        ' 本文
+        Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
+        textPart.Text = body
+        message.Body = textPart
+
+        Dim multipart = New MimeKit.Multipart("mixed")
+
+        multipart.Add(textPart)
+
+        message.Body = multipart
+
+        Using client As New MailKit.Net.Smtp.SmtpClient()
+            client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
+            client.Send(message)
+            client.Disconnect(True)
+            client.Dispose()
+            message.Dispose()
+        End Using
+
+        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
+
+    End Sub
 End Class

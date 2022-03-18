@@ -57,48 +57,48 @@
           height: 400px;
         }
 
-.AA {
-          text-align: right;
-}
+        .AA {
+                  text-align: right;
+        }
 
 
-.BB {
-          text-align: center;
-}
+        .BB {
+                  text-align: center;
+        }
 
-.color01 {
-background-color: red;  
-color: white;
-}  
+        .color01 {
+        background-color: red;  
+        color: white;
+        }  
 
 
-h2 {
-  padding-left: 45px;
-  position: relative;
-  border-radius: 10px; /* 角を丸くする */
-}
-h2:before {
-  content: "";
-  background-color: #6fbfd1;
-  border-radius: 50%;
-  opacity: 0.5;
-  width: 35px;
-  height: 35px;
-  left: 5px;
-  top: 0px;
-  position: absolute;
-}
-h2:after{
-  content: "";
-  background-color: #6fbfd1;
-  border-radius: 50%;
-  opacity: 0.5;
-  width: 20px;
-  height: 20px;
-  left: 25px;
-  top:15px;
-  position: absolute;
-}
+        h2 {
+          padding-left: 45px;
+          position: relative;
+          border-radius: 10px; /* 角を丸くする */
+        }
+        h2:before {
+          content: "";
+          background-color: #6fbfd1;
+          border-radius: 50%;
+          opacity: 0.5;
+          width: 35px;
+          height: 35px;
+          left: 5px;
+          top: 0px;
+          position: absolute;
+        }
+        h2:after{
+          content: "";
+          background-color: #6fbfd1;
+          border-radius: 50%;
+          opacity: 0.5;
+          width: 20px;
+          height: 20px;
+          left: 25px;
+          top:15px;
+          position: absolute;
+        }
 
     </style>
     <script>
@@ -132,59 +132,8 @@ h2:after{
 
 </script>
 
- <%--    <script>
-    Chart.plugins.register({
-    afterDatasetsDraw: function (chart, easing) {
-        // To only draw at the end of animation, check for easing === 1
-        var ctx = chart.ctx;
-
-        chart.data.datasets.forEach(function (dataset, i) {
-            var meta = chart.getDatasetMeta(i);
-            if (!meta.hidden) {
-                meta.data.forEach(function (element, index) {
-                    // Draw the text in black, with the specified font
-                    ctx.fillStyle = 'rgb(0, 0, 0)';
-
-                    var fontSize = 16;
-                    var fontStyle = 'normal';
-                    var fontFamily = 'Helvetica Neue';
-                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
-
-                    // Just naively convert to string for now
-                    var dataString = dataset.data[index].toString();
-
-                    // Make sure alignment settings are correct
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-
-                    var padding = 5;
-                    var position = element.tooltipPosition();
-                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
-                });
-            }
-        });
-    }
-});
-</script>
-   --%>
  <script>
      $(document).ready(function () {
-         //window.alert('koko1');
-         //$("#btnGeneratePieChart").on('click', function (e) {
-         //    //window.alert('koko2');
-         //    e.preventDefault();
-             //window.alert('koko3');
-             //var gData = [];
-             ////window.alert('koko4');
-             //gData[0] = $("#ddlyear").val();
-             ////gData[1] = $("#ddlMonth").val();
-             ////window.alert(gData[0]);
-             ////window.alert('koko5');
-             //var jsonData = JSON.stringify({
-             //    gData: gData
-             //});
-             //window.alert(jsonData);
-             //window.alert('koko6');
 
              $.ajax({
                     type: "POST",
@@ -226,12 +175,8 @@ h2:after{
                              type: "line",
                              fill: false,
                              data: dataarr5,
-                             //backgroundColor: 'rgba(255,0,0,0.5)',
-                             
                              pointRadius: 0,
                              pointHoverRadius: 0,
-                             //pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                             //pointHoverBorderColor: "rgba(220,220,220,1)",
                              pointHitRadius: 10,
                                  
                              borderColor: 'rgb(255,0,0,0.5)',
@@ -291,8 +236,6 @@ h2:after{
                      },
 
 
-
-
                      options: {
                          responsive: true,
                          title: {                           // タイトル
@@ -330,8 +273,6 @@ h2:after{
                            fontColor: "blue",             // 文字の色
                            fontFamily: "sans-serif",
                            fontSize: 16                   // フォントサイズ
-
-
                        },
 
                        gridLines: {                   // 補助線
@@ -352,8 +293,6 @@ h2:after{
                          }
                      }
                  };
-
-
 
 
                  var myPieChart = new Chart(ctx, config);
@@ -380,97 +319,78 @@ h2:after{
 <% End If %>
        
 <div id="contents2" class="inner2">
-<table >
-<tr>
-<td style="width:450px;Font-Size:25px;" align="left" >
-<h2>未納金額（アフタ）</h2>
-</td>
-
-    <asp:Button ID="Button1" runat="server" Text="EXELE出力" Visible="false" />
-
-</tr>
-</table>
 
 
+    <table >
+        <tr>
+            <td style="width:450px;Font-Size:25px;" align="left" >
+                <h2>未納金額（アフタ）</h2>
+            </td>
+            <asp:Button ID="Button1" runat="server" Text="EXELE出力" Visible="false" />
+        </tr>
+    </table>
 
-<table border ="1" class ="BB">
-<tr>
+    <table border ="1" class ="BB">
+        <tr>
+            <td>未納金額：<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label> 百万円</td>
+            <td>赤処理金額：<asp:Label ID="Label2" runat="server" Text="Label"></asp:Label> 百万円</td>
+            <td>出港遅延金額：<asp:Label ID="Label5" runat="server" Text="Label"></asp:Label> 百万円</td>
+            <td class="color01">未納金額合計：<asp:Label ID="Label3" runat="server" Text="Label"></asp:Label> 百万円</td>
+            <td>調整金額：<asp:Label ID="Label4" runat="server" Text="Label"></asp:Label> 百万円</td>
+        </tr>
+    </table>
 
+    <table>
+        <tr>
 
-    <td>未納金額：<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label> 百万円</td>
-    <td>赤処理金額：<asp:Label ID="Label2" runat="server" Text="Label"></asp:Label> 百万円</td>
-    <td>出港遅延金額：<asp:Label ID="Label5" runat="server" Text="Label"></asp:Label> 百万円</td>
-    <td class="color01">未納金額合計：<asp:Label ID="Label3" runat="server" Text="Label"></asp:Label> 百万円</td>
-    <td>調整金額：<asp:Label ID="Label4" runat="server" Text="Label"></asp:Label> 百万円</td>
+        <canvas id="myChart" width="160" height="60"></canvas>
 
-
-</tr>
-</table>
-
-
-<table>
-<tr>
-<%--<td style="width:1500px;Font-Size:25px;" >--%>
-<canvas id="myChart" width="160" height="60"></canvas>
-<%--</td>--%>
-</tr>
-</table>
-
-
-
-
-
+        </tr>
+    </table>
 
 
+    <asp:Panel ID="Panel1" runat="server"  Font-Size="12px" class ="AA">
 
+        <div class="wrapper" id="main2" >
+        <table class="sticky"   >
+        <thead class="fixed" >
 
-
-
-
-
-<asp:Panel ID="Panel1" runat="server"  Font-Size="12px" class ="AA">
-
-<div class="wrapper" id="main2" >
-<table class="sticky"   >
-<thead class="fixed" >
-
-</thead>
+        </thead>
     
+        <tbody >
 
-<tbody >
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width = "1250px" DataSourceID="SqlDataSource1" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
 
-<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width = "1250px" DataSourceID="SqlDataSource1" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+        <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
+        <AlternatingRowStyle BackColor="#ffffff" />
+        <Columns >
 
-<HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
-<AlternatingRowStyle BackColor="#ffffff" />
-<Columns >
+        <asp:BoundField DataField="CUSTCODE" HeaderText="客先コード" SortExpression="CUSTCODE"  >
+        </asp:BoundField>
+        <asp:BoundField DataField="MINOU" HeaderText="未納金額"　SortExpression="MINOU"  >
+        </asp:BoundField>
+        <asp:BoundField DataField="RED" HeaderText="赤処理金額" SortExpression="RED" >
+        </asp:BoundField>
+        <asp:BoundField DataField="DELAY" HeaderText="出港遅延" SortExpression="DELAY" >
+        </asp:BoundField>
+        <asp:BoundField DataField="ADJ" HeaderText="調整納期" SortExpression="ADJ" >
+        </asp:BoundField>
+        <asp:BoundField DataField="ACM" HeaderText="累積金額" SortExpression="ACM" >
+        </asp:BoundField>
+        </Columns>
+        <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+        <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+        <RowStyle BackColor="#DCDCDC" ForeColor="Black" />
+        <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
 
-<asp:BoundField DataField="CUSTCODE" HeaderText="客先コード" SortExpression="CUSTCODE"  >
-</asp:BoundField>
-<asp:BoundField DataField="MINOU" HeaderText="未納金額"　SortExpression="MINOU"  >
-</asp:BoundField>
-<asp:BoundField DataField="RED" HeaderText="赤処理金額" SortExpression="RED" >
-</asp:BoundField>
-<asp:BoundField DataField="DELAY" HeaderText="出港遅延" SortExpression="DELAY" >
-</asp:BoundField>
-<asp:BoundField DataField="ADJ" HeaderText="調整納期" SortExpression="ADJ" >
-</asp:BoundField>
-<asp:BoundField DataField="ACM" HeaderText="累積金額" SortExpression="ACM" >
-</asp:BoundField>
-</Columns>
-<FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-<PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-<RowStyle BackColor="#DCDCDC" ForeColor="Black" />
-<SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+        </asp:GridView>
 
-</asp:GridView>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CUSTCODE], [MINOU], [RED], [DELAY], [ADJ], [ACM] FROM [T_EXL_GRAPH_MINOU_AM] WHERE [CUSTCODE] <>'' "></asp:SqlDataSource>
 
-<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CUSTCODE], [MINOU], [RED], [DELAY], [ADJ], [ACM] FROM [T_EXL_GRAPH_MINOU_AM] WHERE [CUSTCODE] <>'' "></asp:SqlDataSource>
-
-</tbody>
-</table>
-</div>
-</asp:Panel>  
+        </tbody>
+        </table>
+        </div>
+    </asp:Panel>  
 </div>
 
 

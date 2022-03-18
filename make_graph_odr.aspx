@@ -40,33 +40,33 @@
 
 
 
-h2 {
-  padding-left: 45px;
-  position: relative;
-  border-radius: 10px; /* 角を丸くする */
-}
-h2:before {
-  content: "";
-  background-color: #6fbfd1;
-  border-radius: 50%;
-  opacity: 0.5;
-  width: 35px;
-  height: 35px;
-  left: 5px;
-  top: 0px;
-  position: absolute;
-}
-h2:after{
-  content: "";
-  background-color: #6fbfd1;
-  border-radius: 50%;
-  opacity: 0.5;
-  width: 20px;
-  height: 20px;
-  left: 25px;
-  top:15px;
-  position: absolute;
-}
+        h2 {
+          padding-left: 45px;
+          position: relative;
+          border-radius: 10px; /* 角を丸くする */
+        }
+        h2:before {
+          content: "";
+          background-color: #6fbfd1;
+          border-radius: 50%;
+          opacity: 0.5;
+          width: 35px;
+          height: 35px;
+          left: 5px;
+          top: 0px;
+          position: absolute;
+        }
+        h2:after{
+          content: "";
+          background-color: #6fbfd1;
+          border-radius: 50%;
+          opacity: 0.5;
+          width: 20px;
+          height: 20px;
+          left: 25px;
+          top:15px;
+          position: absolute;
+        }
 
     </style>
     <script>
@@ -104,23 +104,7 @@ h2:after{
    
  <script>
      $(document).ready(function () {
-         //window.alert('koko1');
-         //$("#btnGeneratePieChart").on('click', function (e) {
-         //    //window.alert('koko2');
-         //    e.preventDefault();
-             //window.alert('koko3');
-             //var gData = [];
-             ////window.alert('koko4');
-             //gData[0] = $("#ddlyear").val();
-             ////gData[1] = $("#ddlMonth").val();
-             ////window.alert(gData[0]);
-             ////window.alert('koko5');
-             //var jsonData = JSON.stringify({
-             //    gData: gData
-             //});
-             //window.alert(jsonData);
-             //window.alert('koko6');
-
+       
              $.ajax({
                     type: "POST",
                  //url: "getTrafficSourceData",
@@ -163,18 +147,7 @@ h2:after{
                              borderColor: 'rgb(255,0,0,0.5)',
                              cubicInterpolationMode: 'monotone',
                          }
-                         //, {
-                         //    label: 'MAX',
-                         //    type: "line",
-                         //    fill: false,
-                         //    data: dataarr4,
-                         //    hidden:true,
-                         //    pointRadius: 0,
-                         //    pointHoverRadius: 0,
-                         //    //backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                         //    borderColor: 'rgb(255,0,0,0.5)',
-                         //    cubicInterpolationMode: 'monotone',
-                         //}
+
                          , {
                              label: '出荷済',
                              type: 'bar',
@@ -203,9 +176,6 @@ h2:after{
                          labels: Labelarr
 
                      },
-
-
-
 
                      options: {
                          responsive: true,
@@ -268,8 +238,6 @@ h2:after{
                  };
 
 
-
-
                  var myPieChart = new Chart(ctx, config);
              }
              function OnErrorCall_(response) {
@@ -294,21 +262,22 @@ h2:after{
 <% End If %>
        
 <div id="contents2" class="inner2">
-<table >
-<tr>
-<td style="width:450px;Font-Size:25px;" >
-<h2>受注台数グラフ</h2>
-</td>
-</tr>
-</table>
 
-<table>
-<tr>
-<td style="width:1500px;Font-Size:25px;" >
-<canvas id="myChart" width="160" height="60"></canvas>
-</td>
-</tr>
-</table>
+    <table >
+        <tr>
+            <td style="width:450px;Font-Size:25px;" >
+                <h2>受注台数グラフ</h2>
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td style="width:1500px;Font-Size:25px;" >
+                <canvas id="myChart" width="160" height="60"></canvas>
+            </td>
+        </tr>
+    </table>
 
 </div>
 

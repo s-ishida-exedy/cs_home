@@ -334,7 +334,8 @@
 
     <table style="width:320px;height:20px;" >
         <tr>
-            <asp:Label  ID="Label9" runat="server" Text="※作業完了後、チェックを入れてください。" Font-Size="12px" />
+            <p><asp:Label  ID="Label9" runat="server" Text="※作業完了後、チェックを入れてください。" Font-Size="12px" /></p>
+            <asp:Label  ID="Label13" runat="server" Text="※作業は8:30以降にしてください。" Font-Size="12px" ForeColor="red" />
         </tr>
     </table>
 
@@ -399,25 +400,7 @@
     <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="揚港" SortExpression="DISCHARGING_PORT" />
     <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="配送先" SortExpression="PLACE_OF_DELIVERY" />
     <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" />
-    <%--                    --%><%--                    <asp:BoundField DataField="TWENTY_FEET" HeaderText="20Ft" SortExpression="TWENTY_FEET" />
-    <asp:BoundField DataField="FOURTY_FEET" HeaderText="40Ft" SortExpression="FOURTY_FEET" />
-    <asp:BoundField DataField="LCL_QTY" HeaderText="LCL/40Ft" SortExpression="LCL_QTY" />--%><%--                    <asp:BoundField DataField="CONTAINER" HeaderText="コンテナ" SortExpression="CONTAINER" />--%>
-    <%--                    <asp:BoundField DataField="DAY01" HeaderText="VAN01" SortExpression="DAY01" />
-    <asp:BoundField DataField="DAY02" HeaderText="VAN02" SortExpression="DAY02" />
-    <asp:BoundField DataField="DAY03" HeaderText="VAN03" SortExpression="DAY03" />
-    <asp:BoundField DataField="DAY04" HeaderText="VAN04" SortExpression="DAY04" />
-    <asp:BoundField DataField="DAY05" HeaderText="VAN05" SortExpression="DAY05" />
-    <asp:BoundField DataField="DAY06" HeaderText="VAN06" SortExpression="DAY06" />
-    <asp:BoundField DataField="DAY07" HeaderText="VAN07" SortExpression="DAY07" />
-    <asp:BoundField DataField="DAY08" HeaderText="VAN08" SortExpression="DAY08" />
-    <asp:BoundField DataField="DAY09" HeaderText="VAN09" SortExpression="DAY09" />
-    <asp:BoundField DataField="DAY10" HeaderText="VAN10" SortExpression="DAY10" />
-    <asp:BoundField DataField="DAY11" HeaderText="VAN11" SortExpression="DAY11" />
-    <asp:BoundField DataField="FINALVANDATE" HeaderText="最終バン日" SortExpression="FINALVANDATE" />--%>
 
-    <%--<asp:BoundField DataField="FLG01" HeaderText="FLG01" SortExpression="FLG01" />
-    <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
-    <asp:BoundField DataField="FLG04" HeaderText="FLG04" SortExpression="FLG04" />--%>
 
     </Columns>
     <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
@@ -435,6 +418,24 @@
     </div>
 
     </asp:Panel>   
+
+
+    <asp:Panel ID="Panel2" runat="server"  Font-Size="30px">
+
+        <table style="width:1500px;height:10px;">
+        </table>
+        <table style="width:1500px;height:10px;">
+            <tr>
+                <td style="width:1500px;" >
+                    <asp:Label ID="Label12" runat="server" Text="データ未更新です。8:30以降の場合、異常報告ボタンを押してください。"></asp:Label>
+                    <asp:Button ID="Button5"  CssClass ="btn00" runat="server" Text="異常報告" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+                </td>
+            </tr>
+        </table>
+
+    </asp:Panel>   
+
+
 </div>
 
 
