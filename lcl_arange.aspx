@@ -43,8 +43,6 @@
           z-index: 0;
           background-color: #ffffff;
           color: #000000;
-                    	/*border-top: 0px solid #999;
-	border-left: 0px solid #999;*/
         }
         .wrapper {
           overflow: scroll;
@@ -54,81 +52,78 @@
 
 
 
-h2 {
-  padding-left: 45px;
-  position: relative;
-  border-radius: 10px; /* 角を丸くする */
-}
-h2:before {
-  content: "";
-  background-color: #6fbfd1;
-  border-radius: 50%;
-  opacity: 0.5;
-  width: 35px;
-  height: 35px;
-  left: 5px;
-  top: 0px;
-  position: absolute;
-}
-h2:after{
-  content: "";
-  background-color: #6fbfd1;
-  border-radius: 50%;
-  opacity: 0.5;
-  width: 20px;
-  height: 20px;
-  left: 25px;
-  top:15px;
-  position: absolute;
-}
+        h2 {
+            padding-left: 45px;
+            position: relative;
+            border-radius: 10px; /* 角を丸くする */
+        }
+        h2:before {
+            content: "";
+            background-color: #6fbfd1;
+            border-radius: 50%;
+            opacity: 0.5;
+            width: 35px;
+            height: 35px;
+            left: 5px;
+            top: 0px;
+            position: absolute;
+        }
+        h2:after{
+            content: "";
+            background-color: #6fbfd1;
+            border-radius: 50%;
+            opacity: 0.5;
+            width: 20px;
+            height: 20px;
+            left: 25px;
+            top:15px;
+            position: absolute;
+        }
 
 
 
-.button04 a {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-  padding: 0.5em 1em;
-  width: 100px;
-  color: #000000;
-  font-size: 12px;
-  font-weight: 200;
-  border: 2px solid #ffffff;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: all 0.1s;
-}
+        .button04 a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0.5em 1em;
+            width: 100px;
+            color: #000000;
+            font-size: 12px;
+            font-weight: 200;
+            border: 2px solid #ffffff;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.1s;
+        }
 
-.button04 a::after {
-  content: '';
-  width: 5px;
-  height: 5px;
-  border-top: 2px solid #000000;
-  border-right: 2px solid #000000;
-  transform: rotate(45deg);
+        .button04 a::after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+            transform: rotate(45deg);
 
-}
+        }
 
-.button04 a:hover {
-  color: #000000;
-  text-decoration: none;
-  background-color: #ffffff;
-  border: 2px solid #000000;
+        .button04 a:hover {
+            color: #000000;
+            text-decoration: none;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+        }
 
+        .button04 a:hover::after {
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+        }
 
-}
-
-.button04 a:hover::after {
-  border-top: 2px solid #000000;
-  border-right: 2px solid #000000;
-}
-
-.btn00
-{
-
-                        cursor : pointer;
-}
+        .btn00
+        {
+            cursor : pointer;
+        }
 
 
     </style>
@@ -170,245 +165,192 @@ h2:after{
        
 <div id="contents2" class="inner2">
 
-<table >
-<tr>
+    <table >
+        <tr>
+            <td style="width:250px;Font-Size:25px;" >
+                <h2>LCL出荷準備進捗</h2>
+            </td>
+            <td style="width:300px;Font-Size:15px;" >
+                <asp:Label id="Label1" Text="＜ラベル＞" runat="server"></asp:Label>
+            </td>
+            <td style="width:50px;Font-Size:15px;" >
+            </td>
+            <td style="width:80px;" >
+                <asp:Button class="btn00"  ID="Button2" runat="server" Text="切替" Width="50px" Height="30px" AutoPostBack="True" Font-Size="13px"/>       
+                :<asp:Label id="Label3" Text="進捗" Font-Size="10" runat="server"></asp:Label>
+            </td>
+            <td style="width:80px;" >
+                <div class="button04">
+                    <a href="lcl_tenkai.aspx?id={0}">展開済案件</a>
+                </div>
+            </td>
+            <td style="width:80px;" >
+            </td>
+        </tr>
+    </table>
 
+    <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
-
-<td style="width:250px;Font-Size:25px;" >
-
-<h2>LCL出荷準備進捗</h2>
-
-</td>
-
-<td style="width:300px;Font-Size:15px;" >
-
-<asp:Label id="Label1" Text="＜ラベル＞" runat="server"></asp:Label>
-
-</td>
-
-<td style="width:50px;Font-Size:15px;" >
-
-</td>
-
-
-<td style="width:80px;" >
-
-
-<asp:Button class="btn00"  ID="Button2" runat="server" Text="切替" Width="50px" Height="30px" AutoPostBack="True" Font-Size="13px"/>       
-:<asp:Label id="Label3" Text="進捗" Font-Size="10" runat="server"></asp:Label>
-
-</td>
-
-
-<td style="width:80px;" >
-
-<div class="button04">
-  <a href="lcl_tenkai.aspx?id={0}">展開済案件</a>
-</div>
-
-</td>
-
-
-
-<td style="width:80px;" >
-
-<%--<div class="button04">
-  <a href="lcl_tenkai_manage.aspx?id={0}">作業メニュー</a>
-</div>    --%>      
-              
-
-</td>
-
-</tr>
-
-</table>
-
-
-
-
-
-<asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
-
-<table >
-<tr>
-
-
-<td style="width:320px;" >
-
-<p><asp:Button class="btn00"  ID="Button1" runat="server" Text="追加" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px"/></p>
-<asp:Label ID="Label2" runat="server"　Font-Size="11px" Text="※チェックを入れてボタンを押すと作業メニューに追加される"></asp:Label>
-
-
-</td>
-    
-<td style="width:150px;Font-Size:12px;" >
-
-
-<div style="background-color:DarkGray;">
-<p>・グレー:書類作成済</p>
-</div>
-
-<div style="background-color:LightBlue;">
-<p>・ブルー:手配依頼済</p>
-</div>
-
-</td>
-
-<td style="width:150px;Font-Size:12px;" >
-
-<div style="background-color:Salmon;">
-<p>・レッド:これから手配が必要</p>
-</div>
-
-<div style="background-color:red;color:White;">
-<p>・AC要:BOOKING未確定</p>
-</div>
-
-</td>
-
-
-<td style="width:500px;" >
-
-
-</td>
-
-</tr>
-
-</table>
+        <table >
+            <tr>
+            <td style="width:320px;" >
+            <p><asp:Button class="btn00"  ID="Button1" runat="server" Text="追加" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px"/></p>
+            <asp:Label ID="Label2" runat="server"　Font-Size="11px" Text="※チェックを入れてボタンを押すと作業メニューに追加される"></asp:Label>
+            </td>  
+                <td style="width:150px;Font-Size:12px;" >
+                    <div style="background-color:DarkGray;">
+                        <p>・グレー:書類作成済</p>
+                    </div>
+                    <div style="background-color:LightBlue;">
+                        <p>・ブルー:手配依頼済</p>
+                    </div>
+                </td>
+                <td style="width:150px;Font-Size:12px;" >
+                    <div style="background-color:Salmon;">
+                        <p>・レッド:これから手配が必要</p>
+                        </div>
+                            <div style="background-color:red;color:White;">
+                        <p>・AC要:BOOKING未確定</p>
+                    </div>
+                </td>
+                <td style="width:500px;" >
+                </td>
+            </tr>
+        </table>
 
 
     
-<div class="wrapper">
-<table class="sticky">
-<thead class="fixed">
+        <div class="wrapper">
+        <table class="sticky">
+        <thead class="fixed">
 
-</thead>
+        </thead>
 
-<tbody>
+        <tbody>
 
-<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="1250px" BackColor="White" BorderColor="#555555" BorderStyle="none" BorderWidth="3px" CellPadding="3" GridLines="Both">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="1250px" BackColor="White" BorderColor="#555555" BorderStyle="none" BorderWidth="3px" CellPadding="3" GridLines="Both">
 
+        <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK" > </HeaderStyle>
+        <HeaderStyle CssClass="Freezing"></HeaderStyle>
 
-<HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK" > </HeaderStyle>
-<HeaderStyle CssClass="Freezing"></HeaderStyle>
+        <Columns>
 
-<Columns>
+        <asp:TemplateField>
+        <ItemTemplate>
 
-<asp:TemplateField>
-<ItemTemplate>
+        <asp:CheckBox ID="cb" Checked="false" runat="server"  />
 
-<asp:CheckBox ID="cb" Checked="false" runat="server"  />
+        </ItemTemplate>
+        </asp:TemplateField>
 
-</ItemTemplate>
-</asp:TemplateField>
+        <asp:BoundField DataField="CONSIGNEE" HeaderText="客先" SortExpression="CONSIGNEE" />
+        <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" />
+        <asp:BoundField DataField="CUST_CD" HeaderText="客先コード" SortExpression="CUSTCODE" />
+        <asp:BoundField DataField="INVOICE_NO" HeaderText="INVOICE_NO" SortExpression="INVOICE_NO" />
+        <asp:BoundField DataField="OFFICIAL_QUOT" HeaderText="建値" SortExpression="TATENE" />
+        <asp:BoundField DataField="CUT_DATE2" HeaderText="搬入日" SortExpression="CUT2" />
+        <asp:BoundField DataField="CUT_DATE" HeaderText="CUT" SortExpression="CUT" />
+        <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" />
+        <asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" />
+        <asp:BoundField DataField="LCL_QTY" HeaderText="荷量" SortExpression="VOLUME" />
+        <asp:BoundField DataField="BOOKING_NO" HeaderText="ブッキング＃" SortExpression="BOOKING_NO" />
 
+        </Columns>
+        <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+        <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+        <RowStyle BackColor="#FFFFFF" ForeColor="Black" />
+        <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+        <SortedAscendingCellStyle BackColor="#F1F1F1" />
+        <SortedAscendingHeaderStyle BackColor="#0000A9" />
+        <SortedDescendingCellStyle BackColor="#CAC9C9" />
+        <SortedDescendingHeaderStyle BackColor="#000065" />
+        </asp:GridView>
 
-<asp:BoundField DataField="CONSIGNEE" HeaderText="客先" SortExpression="CONSIGNEE" />
-<asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" />
-<asp:BoundField DataField="CUST_CD" HeaderText="客先コード" SortExpression="CUSTCODE" />
-<asp:BoundField DataField="INVOICE_NO" HeaderText="INVOICE_NO" SortExpression="INVOICE_NO" />
-<asp:BoundField DataField="OFFICIAL_QUOT" HeaderText="建値" SortExpression="TATENE" />
-<asp:BoundField DataField="CUT_DATE2" HeaderText="搬入日" SortExpression="CUT2" />
-<asp:BoundField DataField="CUT_DATE" HeaderText="CUT" SortExpression="CUT" />
-<asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" />
-<asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" />
-<asp:BoundField DataField="LCL_QTY" HeaderText="荷量" SortExpression="VOLUME" />
-<asp:BoundField DataField="BOOKING_NO" HeaderText="ブッキング＃" SortExpression="BOOKING_NO" />
+        </tbody>
+        </table>
+        </div>
 
-
-</Columns>
-<FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-<PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-<RowStyle BackColor="#FFFFFF" ForeColor="Black" />
-<SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-<SortedAscendingCellStyle BackColor="#F1F1F1" />
-<SortedAscendingHeaderStyle BackColor="#0000A9" />
-<SortedDescendingCellStyle BackColor="#CAC9C9" />
-<SortedDescendingHeaderStyle BackColor="#000065" />
-</asp:GridView>
-
-</tbody>
-</table>
-</div>
-
-</asp:Panel>
+    </asp:Panel>
 
 </div>
 
 <div id="contents2" class="inner2">
 
-<asp:Panel ID="Panel2" runat="server"  Font-Size="12px" Visible ="false">
+    <asp:Panel ID="Panel2" runat="server"  Font-Size="12px" Visible ="false">
 
-<table>
-<tr>
-
-<td style="width:500px;Font-Size:12px;" >
-
-<p>※Bookingシート上にCUT日が記載されていない案件</p>
-
-※CUT日を入力すると手配状況の画面に表示される
-
-</td>
-
-<td style="width:500px;Font-Size:12px;" >
-
-<p>＜下表のCUT日は自動で設定されている＞</p>
-
-C258 ETDの8日前、C255 ETDの10日前、その他 ETDの7日前
-
-</td>
-
-</tr>
-</table>
+    <table>
+        <tr>
+            <td style="width:500px;Font-Size:12px;" >
+                <p>※Bookingシート上にCUT日が記載されていない案件</p>
+                ※CUT日を入力すると手配状況の画面に表示される
+            </td>
+            <td style="width:500px;Font-Size:12px;" >
+                <p>＜下表のCUT日は自動で設定されている＞</p>
+                C258 ETDの8日前、C255 ETDの10日前、その他 ETDの7日前
+            </td>
+        </tr>
+    </table>
 
 
+    <div class="wrapper">
+    <table class="sticky">
+    <thead class="fixed">
 
-<div class="wrapper">
-<table class="sticky">
-<thead class="fixed">
+    </thead>
 
-</thead>
+    <tbody>
 
-<tbody>
+    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource2" Width="1200px" BackColor="White" BorderColor="#555555" BorderStyle="none" BorderWidth="3px" CellPadding="3" GridLines="Both">
 
-<asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource2" Width="1200px" BackColor="White" BorderColor="#555555" BorderStyle="none" BorderWidth="3px" CellPadding="3" GridLines="Both">
+    <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK" > </HeaderStyle>
+    <HeaderStyle CssClass="Freezing"></HeaderStyle>
 
+    <Columns>
 
-<HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK" > </HeaderStyle>
-<HeaderStyle CssClass="Freezing"></HeaderStyle>
+    <asp:BoundField DataField="CONSIGNEE" HeaderText="客先" SortExpression="CONSIGNEE" />
+    <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" />
+    <asp:BoundField DataField="CUST_CD" HeaderText="客先コード" SortExpression="CUSTCODE" />
+    <asp:BoundField DataField="INVOICE_NO" HeaderText="INVOICE_NO" SortExpression="INVOICE_NO" />
+    <asp:BoundField DataField="OFFICIAL_QUOT" HeaderText="建値" SortExpression="TATENE" />
+    <asp:BoundField DataField="CUT_DATE2" HeaderText="搬入日" SortExpression="CUT2" />
+    <asp:BoundField DataField="CUT_DATE" HeaderText="CUT" SortExpression="CUT" />
+    <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" />
+    <asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" />
+    <asp:BoundField DataField="LCL_QTY" HeaderText="荷量" SortExpression="VOLUME" />
+    <asp:BoundField DataField="BOOKING_NO" HeaderText="ブッキング＃" SortExpression="BOOKING_NO" />
 
-<Columns>
+    </Columns>
+    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+    <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+    <RowStyle BackColor="#FFFFFF" ForeColor="Black" />
+    <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+    <SortedAscendingCellStyle BackColor="#F1F1F1" />
+    <SortedAscendingHeaderStyle BackColor="#0000A9" />
+    <SortedDescendingCellStyle BackColor="#CAC9C9" />
+    <SortedDescendingHeaderStyle BackColor="#000065" />
+    </asp:GridView>
 
-<asp:BoundField DataField="CONSIGNEE" HeaderText="客先" SortExpression="CONSIGNEE" />
-<asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" />
-<asp:BoundField DataField="CUST_CD" HeaderText="客先コード" SortExpression="CUSTCODE" />
-<asp:BoundField DataField="INVOICE_NO" HeaderText="INVOICE_NO" SortExpression="INVOICE_NO" />
-<asp:BoundField DataField="OFFICIAL_QUOT" HeaderText="建値" SortExpression="TATENE" />
-<asp:BoundField DataField="CUT_DATE2" HeaderText="搬入日" SortExpression="CUT2" />
-<asp:BoundField DataField="CUT_DATE" HeaderText="CUT" SortExpression="CUT" />
-<asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" />
-<asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" />
-<asp:BoundField DataField="LCL_QTY" HeaderText="荷量" SortExpression="VOLUME" />
-<asp:BoundField DataField="BOOKING_NO" HeaderText="ブッキング＃" SortExpression="BOOKING_NO" />
+    </tbody>
+    </table>
+    </div>
 
-</Columns>
-<FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-<PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-<RowStyle BackColor="#FFFFFF" ForeColor="Black" />
-<SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-<SortedAscendingCellStyle BackColor="#F1F1F1" />
-<SortedAscendingHeaderStyle BackColor="#0000A9" />
-<SortedDescendingCellStyle BackColor="#CAC9C9" />
-<SortedDescendingHeaderStyle BackColor="#000065" />
-</asp:GridView>
+    </asp:Panel>
 
-</tbody>
-</table>
-</div>
+    <asp:Panel ID="Panel3" runat="server"  Font-Size="20px" Visible ="false">
 
-</asp:Panel>
+        
+        <table style="width:1500px;height:10px;">
+        </table>
+        <table style="width:1500px;height:10px;">
+            <tr>
+                <td style="width:1500px;" >
+                    <asp:Label ID="Label12" runat="server" Text="データ未更新です。8:30以降の場合、異常報告ボタンを押してください。"></asp:Label>
+                    <asp:Button ID="Button5"  CssClass ="btn00" runat="server" Text="異常報告" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+                </td>
+            </tr>
+        </table>
 
+    </asp:Panel>
 
 </div>
 

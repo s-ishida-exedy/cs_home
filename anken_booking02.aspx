@@ -16,7 +16,7 @@
 <script src="js/default.js"></script>
 
 
-   <style type="text/css">
+    <style type="text/css">
         #form1
         {
             background-color : #ffffff;
@@ -25,147 +25,181 @@
         body {
             background-color: #ffffff;
         }
-        A.sample1:link { color: blue;}
-        A.sample1:visited { color: blue;}
-        A.sample1:active { color: blue;}
-        A.sample1:hover { color: blue;}
+            A.sample1:link { color: blue;}
+            A.sample1:visited { color: blue;}
+            A.sample1:active { color: blue;}
+            A.sample1:hover { color: blue;}
 
         table{
-          width: 100%;
+            width: 100%;
         }
         th {
-          position: sticky;
-          top: 0;
-          z-index: 0;
-          background-color: #6fbfd1;
-          color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 0;
+            background-color: #6fbfd1;
+            color: #ffffff;
         }
         .wrapper {
-          overflow: scroll;
-          height: 400px;
+            overflow: scroll;
+            height: 400px;
         }
 
+        h2 {
+            padding-left: 45px;
+            position: relative;
+            border-radius: 10px; /* 角を丸くする */
+        }
+        h2:before {
+            content: "";
+            background-color: #6fbfd1;
+            border-radius: 50%;
+            opacity: 0.5;
+            width: 35px;
+            height: 35px;
+            left: 5px;
+            top: 0px;
+            position: absolute;
+        }
+        h2:after{
+            content: "";
+            background-color: #6fbfd1;
+            border-radius: 50%;
+            opacity: 0.5;
+            width: 20px;
+            height: 20px;
+            left: 25px;
+            top:15px;
+            position: absolute;
+        }
 
-h2 {
-  padding-left: 45px;
-  position: relative;
-  border-radius: 10px; /* 角を丸くする */
-}
-h2:before {
-  content: "";
-  background-color: #6fbfd1;
-  border-radius: 50%;
-  opacity: 0.5;
-  width: 35px;
-  height: 35px;
-  left: 5px;
-  top: 0px;
-  position: absolute;
-}
-h2:after{
-  content: "";
-  background-color: #6fbfd1;
-  border-radius: 50%;
-  opacity: 0.5;
-  width: 20px;
-  height: 20px;
-  left: 25px;
-  top:15px;
-  position: absolute;
-}
+        .button04 a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0.5em 1em;
+            width: 100px;
+            color: #000000;
+            font-size: 12px;
+            font-weight: 200;
+            border: 2px solid #ffffff;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.1s;
+        }
 
+        .button04 a::after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+            transform: rotate(45deg);
+        }
 
+        .button04 a:hover {
+            color: #000000;
+            text-decoration: none;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+        }
 
+        .button04 a:hover::after {
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+        }
 
-.button04 a {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-  padding: 0.5em 1em;
-  width: 100px;
-  color: #000000;
-  font-size: 12px;
-  font-weight: 200;
-  border: 2px solid #ffffff;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: all 0.1s;
-}
+        .btn00
+        {
+            cursor : pointer;
+        }
 
-.button04 a::after {
-  content: '';
-  width: 5px;
-  height: 5px;
-  border-top: 2px solid #000000;
-  border-right: 2px solid #000000;
-  transform: rotate(45deg);
+        .design01 {
+            width: 65%;
+            text-align: center;
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: solid 1px #778ca3;
+            background: #6fbfd1;
+        }
+        .design01 tr {
+            border-top: dashed 1px #778ca3;
+        }
+        .design01 th {
+            padding: 0px;
+            background: #e9faf9;
+        }
+        .design01 td {
+            padding: 0px;
+        }
 
-}
+        .design02 {
+            width: 65%;
+            text-align: center;
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: solid 1px #778ca3;
+        }
+        .design02 tr {
+            border-top: dashed 1px #778ca3;
+        }
+        .design02 th {
+            padding: 0px;
+            background: #e9faf9;
+        }
+        .design02 td {
+            padding: 0px;
+        }
 
-.button04 a:hover {
-  color: #000000;
-  text-decoration: none;
-  background-color: #ffffff;
-  border: 2px solid #000000;
-
-
-}
-
-.button04 a:hover::after {
-  border-top: 2px solid #000000;
-  border-right: 2px solid #000000;
-}
-
-
-
-.btn00
-{
-
-                        cursor : pointer;
-}
-
-
-
-
-.design01 {
- width: 65%;
- text-align: center;
- border-collapse: collapse;
- border-spacing: 0;
- border: solid 1px #778ca3;
- background: #6fbfd1;
-}
-.design01 tr {
- border-top: dashed 1px #778ca3;
-}
-.design01 th {
- padding: 0px;
- background: #e9faf9;
-}
-.design01 td {
- padding: 0px;
-}
-
-
-.design02 {
- width: 65%;
-
- text-align: center;
- border-collapse: collapse;
- border-spacing: 0;
- border: solid 1px #778ca3;
-}
-.design02 tr {
- border-top: dashed 1px #778ca3;
-}
-.design02 th {
- padding: 0px;
- background: #e9faf9;
-}
-.design02 td {
- padding: 0px;
-}
+        .header-ta {
+            width: 1300px;
+        }
+        .first-cell {
+            text-align:left;
+            font-size:25px;
+            width: 400px;
+        }
+        .second-cell {
+            width: 700px;
+        }   
+        .third-cell {
+            width: 200px;
+            text-align:right;
+        }
+        .third-cell a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0.5em 1em;
+            width: 100px;
+            color: #000000;
+            font-size: 12px;
+            font-weight: 200;
+            border: 2px solid #ffffff;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.1s;
+        }
+        .third-cell a::after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+            transform: rotate(45deg);
+        }
+        .third-cell a:hover {
+            color: #000000;
+            text-decoration: none;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+        }
+        .third-cell a:hover::after {
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+        }
 
     </style>
    <script>
@@ -219,176 +253,105 @@ h2:after{
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.aspxで行う -->
+<% If Session("Role") = "admin" Or Session("Role") = "csusr" Then %>
     <!-- #Include File="header/header.aspx" -->
-
+<% Else %>
+    <!-- #Include File="header/exl_header.aspx" -->
+<% End If %>
 
 <div id="contents2" class="inner2">
 
-<table >
+    <table class="header-ta" >
+        <tr>
+            <td class="first-cell">
+                <h2>案件抽出</h2> 
+            </td>
+            <td class="second-cell">
+            </td>
+            <td class="third-cell">
+                <% If Session("Role") = "admin" Or Session("Role") = "csusr" Then %>
+                    <a href="./anken_booking.aspx">全案件へ</a>
+                <% Else %>
 
-<tr>
-
-                <td style="width:250px;Font-Size:25px;" >
-
-                    <h2>案件抽出</h2>
-
-                </td>
-
-
-
-
-
-
-<td style="width:80px;" >
-
-
-
-
-<%--<div class="button04">
-<a href="anken_booking01.aspx?id={0}">当日案件へ</a>
-</div>--%>
-
-</td>
-
-<td style="width:80px;" >
-
-<div class="button04">
-<a href="anken_booking.aspx?id={0}">全案件へ</a>
-</div>
-
-</td>
-
-
-</tr>
-
-</table>
-
-
-    
+                <% End If %>                
+            </td>
+        </tr>
+    </table>
 
     <table style="width:320px;" >
-<tr>
+        <tr>
+            <asp:Label  ID="Label10" runat="server" Text="<<登録、フォルダ作成が完了してます>>" Font-Size="15px" forecolor="red" Font-Bold="true" />
+            <asp:Label  ID="Label11" runat="server" Text="<<未登録です。登録しチェックを押してください。>>" Font-Size="15px"  Font-Bold="true" />
+        </tr>
+    </table>
 
-       <asp:Label  ID="Label10" runat="server" Text="<<登録、フォルダ作成が完了してます>>" Font-Size="15px" forecolor="red" Font-Bold="true" />
+    <table style="width:800px;height:10px;" >
+        <tr>
+            <td style="width:20px;" class ="design01" >
+                <asp:Label  ID="Label5" runat="server" ForeColor ="white" Text="KD"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
+            </td>   
+            <td style="width:40px;" class ="design02" >
+                <asp:CheckBox   ID="CheckBox1" runat="server" Height="13px" AutoPostBack="True" Font-Size="15px" />
+                <asp:Label  ID="Label3" runat="server"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
+            </td>   
+            <td style="width:20px;" class ="design01">
+                <asp:Label  ID="Label6" runat="server"  ForeColor ="white"  Text="ｱﾌﾀ"  Height="13px" AutoPostBack="True" Font-Size="15px" />
+            </td>   
+            <td style="width:40px;" class ="design02" > 
+                <asp:CheckBox   ID="CheckBox2" runat="server" Height="13px" AutoPostBack="True" Font-Size="15px" />
+                <asp:Label  ID="Label4" runat="server"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
+            </td>
+            <td style="width:20px"class ="design01" >
+                <asp:Label  ID="Label8" runat="server"  ForeColor ="white"  Text="判定"  Height="13px" AutoPostBack="True" Font-Size="15px" />                           
+            </td>                   
+            <td style="width:40px" class ="design02"　>
+                <asp:Label ID="Label7" runat="server" Font-Size="20px"/>
+            </td>
+            <td style="width:20px;" >
+            </td>
+            <td style="width:70px;" >
+                <% If Session("Role") = "admin" Or Session("Role") = "csusr" Then %>
+                    <asp:Button ID="Button1"  CssClass ="btn00" runat="server" Text="フォルダ作成" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+                <% Else %>
+                <% End If %> 
+            </td>                                                                                           
+            <td style="width:70px;" >
+                <% If Session("Role") = "admin" Or Session("Role") = "csusr" Then %>
+                    <asp:Button ID="Button4"  CssClass ="btn00" runat="server" Text="メール" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+                <% Else %>
+                <% End If %> 
+            </td>       
+            <td style="width:100px;Font-Size:25px;" >
+                <% If Session("Role") = "admin" Or Session("Role") = "csusr" Then %>
+                    <div class="button04">
+                        <a href="javascript:void(0);" onclick="LinkClick()">アドレス登録</a>
+                    </div>      
+                <% Else %>
+                <% End If %>                
+            </td>
+        </tr>
+    </table>
 
-</tr>
-</table>
-
-
-
-
-
-<table style="width:800px;height:10px;" >
-<tr>
-
-
-                <td style="width:20px;" class ="design01" >
-
-                                <asp:Label  ID="Label5" runat="server" ForeColor ="white" Text="KD"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
-                </td>   
-                <td style="width:40px;" class ="design02" >
-                                <asp:CheckBox   ID="CheckBox1" runat="server" Height="13px" AutoPostBack="True" Font-Size="15px" />
-                                <asp:Label  ID="Label3" runat="server"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
-
-                </td>   
-                <td style="width:20px;" class ="design01">
-
-                                <asp:Label  ID="Label6" runat="server"  ForeColor ="white"  Text="ｱﾌﾀ"  Height="13px" AutoPostBack="True" Font-Size="15px" />
-                </td>   
-                <td style="width:40px;" class ="design02" > 
-                                <asp:CheckBox   ID="CheckBox2" runat="server" Height="13px" AutoPostBack="True" Font-Size="15px" />
-                                <asp:Label  ID="Label4" runat="server"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
-                </td>
-
-                    <td style="width:20px"class ="design01" >
-
-                                <asp:Label  ID="Label8" runat="server"  ForeColor ="white"  Text="判定"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
-                                    
-                </td>
-
-
-
-
-
-
-                <td style="width:40px" class ="design02"　>
-                        <asp:Label ID="Label7" runat="server" Font-Size="20px"/>
-
-                </td>
-
-    <td style="width:20px;" >
-    </td>
-
-    <td style="width:70px;" >
-
-    <asp:Button ID="Button1"  CssClass ="btn00" runat="server" Text="フォルダ作成" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" />
-
-    </td>
-
-    <td style="width:70px;" >
-
-    <asp:Button ID="Button4"  CssClass ="btn00" runat="server" Text="メール" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
-
-    </td>
-
-    <td style="width:100px;Font-Size:25px;" >
-
-<div class="button04">
-      <a href="javascript:void(0);" onclick="LinkClick()">アドレス登録</a>
-</div>    
-
-
-
-</td>
-
-
-</tr>
-</table>
-
-
-
-
-
-<table style="width:320px;height:20px;" >
-<tr>
-
-       <asp:Label  ID="Label9" runat="server" Text="※作業完了後、チェックを入れてください。" Font-Size="12px" />
-
-</tr>
-</table>
-
-
+    <table style="width:320px;height:20px;" >
+        <tr>
+            <p><asp:Label  ID="Label9" runat="server" Text="※作業完了後、チェックを入れてください。" Font-Size="12px" /></p>
+            <asp:Label  ID="Label13" runat="server" Text="※作業は8:30以降にしてください。" Font-Size="12px" ForeColor="red" />
+        </tr>
+    </table>
 
     <table style="width:700px;height:10px;">
         <tr>
-
             <td style="width:100px;" >
-
-            <asp:Button ID="Button3" CssClass ="btn00" runat="server" Text="登録" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
-
+                <asp:Button ID="Button3" CssClass ="btn00" runat="server" Text="登録" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
             </td>
-
             <td style="width:100px;" >
-
-            <asp:Button ID="Button2"  CssClass ="btn00" runat="server" Text="解除" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
-
+                <asp:Button ID="Button2"  CssClass ="btn00" runat="server" Text="解除" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
             </td>
-
-
             <td style="width:500px; font-size:10px;" >
-
-            <asp:Label ID="Label1" runat="server" Text="１．ＬＳ７、９（限定・試作）が同梱されている案件にチェックを入れる。"></asp:Label><br>
-            <asp:Label ID="Label2" runat="server" Text="２．登録ボタンを押す。"></asp:Label><br>
-
+                <asp:Label ID="Label1" runat="server" Text="１．ＬＳ７、９（限定・試作）が同梱されている案件にチェックを入れる。"></asp:Label><br>
+                <asp:Label ID="Label2" runat="server" Text="２．登録ボタンを押す。"></asp:Label><br>
             </td>
-
-
-
         </tr>
-
-
-
-
     </table>
 
 
@@ -396,96 +359,81 @@ h2:after{
 
 
 
-<asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
+    <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
-<div class="wrapper">
-<table class="sticky">
-<thead class="fixed">
+    <div class="wrapper">
+    <table class="sticky">
+    <thead class="fixed">
 
-</thead>
+    </thead>
 
-<tbody>
+    <tbody>
                                  
-<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="#6fbfd1" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" DataSourceID="SqlDataSource1" Width="927px">
-<HeaderStyle BackColor="#6fbfd1" Font-Bold="True" ForeColor="BLACK" />
-<HeaderStyle CssClass="Freezing" />
-<Columns>
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="#6fbfd1" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" DataSourceID="SqlDataSource1" Width="927px">
+    <HeaderStyle BackColor="#6fbfd1" Font-Bold="True" ForeColor="BLACK" />
+    <HeaderStyle CssClass="Freezing" />
+    <Columns>
 
-<asp:TemplateField>
+    <asp:TemplateField>
 
-<ItemTemplate>
-<asp:CheckBox ID="cb" runat="server" Checked="false"  />
-</ItemTemplate>
+    <ItemTemplate>
+    <asp:CheckBox ID="cb" runat="server" Checked="false"  />
+    </ItemTemplate>
 
-</asp:TemplateField>
+    </asp:TemplateField>
 
-<asp:BoundField DataField="FLG02" HeaderText="状況" SortExpression="FLG02" />
-<asp:BoundField DataField="FORWARDER" HeaderText="シート" SortExpression="FORWARDER" />
-<asp:BoundField DataField="FORWARDER02" HeaderText="海貨業者" SortExpression="FORWARDER02" />
-<asp:BoundField DataField="CUST" HeaderText="客先コード" SortExpression="CUST" />
-<asp:BoundField DataField="INVOICE" HeaderText="INVOICE" SortExpression="INVOICE" />
-<asp:BoundField DataField="STATUS" HeaderText="進捗状況" SortExpression="STATUS" />
-<asp:BoundField DataField="CUT_DATE" HeaderText="CUT" SortExpression="CUT_DATE" />
-<asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" />
-<asp:BoundField DataField="BOOKING_NO" HeaderText="BOOKING_NO" SortExpression="BOOKING_NO" />
-
-
-
-<asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" />
-<asp:BoundField DataField="BOOK_TO" HeaderText="BOOK_TO" SortExpression="BOOK_TO" />
-<asp:BoundField DataField="VESSEL_NAME" HeaderText="船名" SortExpression="VESSEL_NAME" />
-<asp:BoundField DataField="VOYAGE_NO" HeaderText="VOYAGE_NO" SortExpression="VOYAGE_NO" />
-
-<asp:BoundField DataField="PLACE_OF_RECEIPT" HeaderText="荷受港" SortExpression="PLACE_OF_RECEIPT" />
-<asp:BoundField DataField="LOADING_PORT" HeaderText="積出港" SortExpression="LOADING_PORT" />
-<asp:BoundField DataField="DISCHARGING_PORT" HeaderText="揚港" SortExpression="DISCHARGING_PORT" />
-<asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="配送先" SortExpression="PLACE_OF_DELIVERY" />
-
-<asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" />
+    <asp:BoundField DataField="FLG02" HeaderText="状況" SortExpression="FLG02" />
+    <asp:BoundField DataField="FORWARDER" HeaderText="シート" SortExpression="FORWARDER" />
+    <asp:BoundField DataField="FORWARDER02" HeaderText="海貨業者" SortExpression="FORWARDER02" />
+    <asp:BoundField DataField="CUST" HeaderText="客先コード" SortExpression="CUST" />
+    <asp:BoundField DataField="INVOICE" HeaderText="INVOICE" SortExpression="INVOICE" />
+    <asp:BoundField DataField="STATUS" HeaderText="進捗状況" SortExpression="STATUS" />
+    <asp:BoundField DataField="CUT_DATE" HeaderText="CUT" SortExpression="CUT_DATE" />
+    <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" />
+    <asp:BoundField DataField="BOOKING_NO" HeaderText="BOOKING_NO" SortExpression="BOOKING_NO" />
+    <asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" />
+    <asp:BoundField DataField="BOOK_TO" HeaderText="BOOK_TO" SortExpression="BOOK_TO" />
+    <asp:BoundField DataField="VESSEL_NAME" HeaderText="船名" SortExpression="VESSEL_NAME" />
+    <asp:BoundField DataField="VOYAGE_NO" HeaderText="VOYAGE_NO" SortExpression="VOYAGE_NO" />
+    <asp:BoundField DataField="PLACE_OF_RECEIPT" HeaderText="荷受港" SortExpression="PLACE_OF_RECEIPT" />
+    <asp:BoundField DataField="LOADING_PORT" HeaderText="積出港" SortExpression="LOADING_PORT" />
+    <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="揚港" SortExpression="DISCHARGING_PORT" />
+    <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="配送先" SortExpression="PLACE_OF_DELIVERY" />
+    <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" />
 
 
+    </Columns>
+    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+    <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+    <RowStyle BackColor="#FFFFFF" ForeColor="Black" />
+    <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
 
-<%--                    --%><%--                    <asp:BoundField DataField="TWENTY_FEET" HeaderText="20Ft" SortExpression="TWENTY_FEET" />
-<asp:BoundField DataField="FOURTY_FEET" HeaderText="40Ft" SortExpression="FOURTY_FEET" />
-<asp:BoundField DataField="LCL_QTY" HeaderText="LCL/40Ft" SortExpression="LCL_QTY" />--%><%--                    <asp:BoundField DataField="CONTAINER" HeaderText="コンテナ" SortExpression="CONTAINER" />--%>
-<%--                    <asp:BoundField DataField="DAY01" HeaderText="VAN01" SortExpression="DAY01" />
-<asp:BoundField DataField="DAY02" HeaderText="VAN02" SortExpression="DAY02" />
-<asp:BoundField DataField="DAY03" HeaderText="VAN03" SortExpression="DAY03" />
-<asp:BoundField DataField="DAY04" HeaderText="VAN04" SortExpression="DAY04" />
-<asp:BoundField DataField="DAY05" HeaderText="VAN05" SortExpression="DAY05" />
-<asp:BoundField DataField="DAY06" HeaderText="VAN06" SortExpression="DAY06" />
-<asp:BoundField DataField="DAY07" HeaderText="VAN07" SortExpression="DAY07" />
-<asp:BoundField DataField="DAY08" HeaderText="VAN08" SortExpression="DAY08" />
-<asp:BoundField DataField="DAY09" HeaderText="VAN09" SortExpression="DAY09" />
-<asp:BoundField DataField="DAY10" HeaderText="VAN10" SortExpression="DAY10" />
-<asp:BoundField DataField="DAY11" HeaderText="VAN11" SortExpression="DAY11" />
-<asp:BoundField DataField="FINALVANDATE" HeaderText="最終バン日" SortExpression="FINALVANDATE" />--%>
+    </asp:GridView>
 
-<%--<asp:BoundField DataField="FLG01" HeaderText="FLG01" SortExpression="FLG01" />
-<asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
-<asp:BoundField DataField="FLG04" HeaderText="FLG04" SortExpression="FLG04" />--%>
+    </tbody>
+    </table>
+
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE FLG01 = '1' ORDER BY CUT_DATE"></asp:SqlDataSource>
+
+    </div>
+
+    </asp:Panel>   
 
 
+    <asp:Panel ID="Panel2" runat="server"  Font-Size="30px">
 
-</Columns>
-<FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-<PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-<RowStyle BackColor="#FFFFFF" ForeColor="Black" />
-<SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+        <table style="width:1500px;height:10px;">
+        </table>
+        <table style="width:1500px;height:10px;">
+            <tr>
+                <td style="width:1500px;" >
+                    <asp:Label ID="Label12" runat="server" Text="データ未更新です。8:30以降の場合、異常報告ボタンを押してください。"></asp:Label>
+                    <asp:Button ID="Button5"  CssClass ="btn00" runat="server" Text="異常報告" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+                </td>
+            </tr>
+        </table>
 
-</asp:GridView>
-
-</tbody>
-</table>
-
-
-<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE FLG01 = '1' ORDER BY CUT_DATE"></asp:SqlDataSource>
-
-</div>
-
-
-</asp:Panel>   
-
+    </asp:Panel>   
 
 
 </div>

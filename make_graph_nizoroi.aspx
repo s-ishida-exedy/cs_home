@@ -134,59 +134,9 @@
 
     </script>
 
-    <%--    <script>
-    Chart.plugins.register({
-    afterDatasetsDraw: function (chart, easing) {
-        // To only draw at the end of animation, check for easing === 1
-        var ctx = chart.ctx;
-
-        chart.data.datasets.forEach(function (dataset, i) {
-            var meta = chart.getDatasetMeta(i);
-            if (!meta.hidden) {
-                meta.data.forEach(function (element, index) {
-                    // Draw the text in black, with the specified font
-                    ctx.fillStyle = 'rgb(0, 0, 0)';
-
-                    var fontSize = 16;
-                    var fontStyle = 'normal';
-                    var fontFamily = 'Helvetica Neue';
-                    ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
-
-                    // Just naively convert to string for now
-                    var dataString = dataset.data[index].toString();
-
-                    // Make sure alignment settings are correct
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-
-                    var padding = 5;
-                    var position = element.tooltipPosition();
-                    ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
-                });
-            }
-        });
-    }
-});
-</script>
     --%>
     <script>
         $(document).ready(function () {
-            //window.alert('koko1');
-            //$("#btnGeneratePieChart").on('click', function (e) {
-            //    //window.alert('koko2');
-            //    e.preventDefault();
-            //window.alert('koko3');
-            //var gData = [];
-            ////window.alert('koko4');
-            //gData[0] = $("#ddlyear").val();
-            ////gData[1] = $("#ddlMonth").val();
-            ////window.alert(gData[0]);
-            ////window.alert('koko5');
-            //var jsonData = JSON.stringify({
-            //    gData: gData
-            //});
-            //window.alert(jsonData);
-            //window.alert('koko6');
 
             $.ajax({
                 type: "POST",
@@ -267,8 +217,6 @@
 
                     },
 
-
-
                     options: {
                         responsive: false,
                         scales: {                          // 軸設定
@@ -325,11 +273,6 @@
                 };
 
 
-
-
-
-
-
                 var ctx2 = $("#myChart2").get(0).getContext("2d");
                 var config2 = {
                     type: 'horizontalBar',
@@ -373,8 +316,6 @@
                         labels: Labelarr
 
                     },
-
-
 
 
                     options: {
@@ -433,11 +374,8 @@
                 };
 
 
-
-
                 ctx.canvas.height = 600;
                 ctx.canvas.width = 1200;
-
 
                 ctx2.canvas.height = 600;
                 ctx2.canvas.width = 1200;
@@ -458,108 +396,60 @@
 
 </head>
 <body class="c2">
-    <form id="form1" runat="server">
-        <!--PC用（901px以上端末）メニュー-->
-        <!-- インクルードファイルの指定 -->
-        <!-- メニューの編集はheader.aspxで行う -->
-        <% If Session("Role") = "admin" Or Session("Role") = "csusr" Then %>
-            <!-- #Include File="header/header.aspx" -->
-        <% Else %>
-            <!-- #Include File="header/exl_header.aspx" -->
-        <% End If %>
+<form id="form1" runat="server">
+    <!--PC用（901px以上端末）メニュー-->
+    <!-- インクルードファイルの指定 -->
+    <!-- メニューの編集はheader.aspxで行う -->
+    <% If Session("Role") = "admin" Or Session("Role") = "csusr" Then %>
+        <!-- #Include File="header/header.aspx" -->
+    <% Else %>
+        <!-- #Include File="header/exl_header.aspx" -->
+    <% End If %>
 
-        <div id="contents2" class="inner2">
-            <table>
-                <tr>
-                    <td style="width: 450px; font-size: 25px;">
-                        <h2>アフタ出荷案件別充当状況</h2>
-                    </td>
-                </tr>
-            </table>
+<div id="contents2" class="inner2">
+    <table>
+        <tr>
+            <td style="width: 450px; font-size: 25px;">
+                <h2>アフタ出荷案件別充当状況</h2>
+            </td>
+        </tr>
+    </table>
+        
 
+    <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
+        <table>
+            <tr>
+                <canvas id="myChart" ></canvas>
+            </tr>
+        </table>     
+    </asp:Panel>
 
-<%--<table>
-    <tr>
-        <td style="width:120px;" >
-
- 
-
-        <asp:Label id="Label7" Text="＜　充当率　＞" Font-Size="15" runat="server"></asp:Label>
-
-        </td>
-    </tr>
-</table>--%>
-
-        <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
-
-            <table>
-                <tr>
-
-                    <canvas id="myChart" ></canvas>
+    <table style="height:50px;">
+        <tr>
+        </tr>
+    </table>
 
 
-                </tr>
-            </table>
-                     
-        </asp:Panel>
+    <asp:Panel ID="Panel2" runat="server"  Font-Size="12px">
+        <table>
+            <tr>
+                <canvas id="myChart2" ></canvas>
+            </tr>
+        </table>    
+    </asp:Panel>
+</div>
 
 
-<%--<table>
-    <tr>
-        <td style="width:120px;" >
+    <!--/#contents2-->
 
-  
-        <asp:Label id="Label1" Text="＜　充当数　＞" Font-Size="15" runat="server"></asp:Label>
-
-        </td>
-    </tr>
-</table>--%>
-
-
-<table style="height:50px;">
-    <tr>
-
-    </tr>
-</table>
-
-
-        <asp:Panel ID="Panel2" runat="server"  Font-Size="12px">
-
-            <table>
-                <tr>
-
-                    <canvas id="myChart2" ></canvas>
-
-
-                </tr>
-            </table>
-                     
-        </asp:Panel>
+    <!--ページの上部に戻る「↑」ボタン-->
+    <p class="nav-fix-pos-pagetop">
+        <a href="#">↑</a>
+    </p>
 
 
 
-
-        </div>
-
-
-
-
-
-
-
-
-
-
-        <!--/#contents2-->
-
-        <!--ページの上部に戻る「↑」ボタン-->
-        <p class="nav-fix-pos-pagetop">
-            <a href="#">↑</a>
-        </p>
-
-
-
-    </form>
+</form>
 </body>
 
 

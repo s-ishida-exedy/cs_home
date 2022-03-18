@@ -133,7 +133,6 @@ Partial Class cs_home
         If strExecMode = "01" Then
             '更新
 
-
             strSQL = ""
             strSQL = strSQL & "UPDATE T_EXL_SHIPPINGMEMOLIST SET"
             strSQL = strSQL & " REV_ETD = '" & REV_ETD & "' "
@@ -146,21 +145,8 @@ Partial Class cs_home
             strSQL = strSQL & "AND BOOKING_NO = '" & strbkg & "' "
 
         ElseIf strExecMode = "02" Then
-            'データ削除
-            'strSQL = ""
-            'strSQL = strSQL & "DELETE FROM M_EXL_LCL_DEC_MAIL "
-            'strSQL = strSQL & "WHERE CODE = '" & strCode & "' "
 
         ElseIf strExecMode = "03" Then
-            '登録
-            'strCode = Label1.Text
-
-            'strSQL = ""
-            'strSQL = strSQL & "INSERT INTO M_EXL_LCL_DEC_MAIL VALUES("
-            'strSQL = strSQL & "'" & strMail & "' "
-            'strSQL = strSQL & ",'" & strkbn & "' "
-            'strSQL = strSQL & ",'" & strCc & "' "
-            'strSQL = strSQL & ",'" & strref & "' ) "
 
         End If
 
@@ -200,19 +186,12 @@ Partial Class cs_home
     Protected Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         '更新ボタンクリックイベント
 
-        '入力チェック
-        'If chk_Nyuryoku() = False Then
-        '    Return 
-        'End If
-
         '更新
         Call DB_access("01")        '更新モード
 
         '元の画面に戻る
         Response.Redirect("shippingmemo.aspx")
     End Sub
-
-
 
 End Class
 

@@ -8,13 +8,7 @@ Partial Class yuusen
     Public strRow As String
     Public strProcess As String
 
-
-
-
-
-
     Private Sub GridView1_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
-
 
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
@@ -27,8 +21,6 @@ Partial Class yuusen
         Dim str03 As String = ""
         Dim str04 As String = ""
         Dim str05 As String = ""
-
-
 
         If e.Row.RowType = DataControlRowType.DataRow Then
             If e.Row.Cells(11).Text = "月またぎ" Then
@@ -121,8 +113,6 @@ Partial Class yuusen
                 End If
             End If
 
-
-
             '接続文字列の作成
             Dim ConnectionString As String = String.Empty
             'SQL Server認証
@@ -157,9 +147,6 @@ Partial Class yuusen
 
 
         End If
-
-
-
 
     End Sub
 

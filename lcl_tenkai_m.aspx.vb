@@ -22,29 +22,6 @@ Partial Class cs_home
             e.Row.BackColor = Drawing.Color.DarkGray
         End If
 
-        'e.Row.Cells(0).Width = 10
-        'e.Row.Cells(1).Width = 90
-        'e.Row.Cells(2).Width = 90
-        'e.Row.Cells(3).Width = 40
-        'e.Row.Cells(4).Width = 100
-        'e.Row.Cells(5).Width = 70
-        'e.Row.Cells(6).Width = 70
-        'e.Row.Cells(7).Width = 110
-        'e.Row.Cells(8).Width = 140
-        'e.Row.Cells(9).Width = 70
-        'e.Row.Cells(10).Width = 70
-        'e.Row.Cells(11).Width = 70
-        'e.Row.Cells(12).Width = 50
-        'e.Row.Cells(13).Width = 60
-        'e.Row.Cells(14).Width = 60
-        'e.Row.Cells(15).Width = 110
-        'e.Row.Cells(16).Width = 10
-        'e.Row.Cells(17).Width = 110
-        'e.Row.Cells(18).Width = 10
-
-        'e.Row.Cells(19).Width = 600
-        'e.Row.Cells(20).Width = 30
-
         e.Row.Cells(7).Visible = False
         e.Row.Cells(8).Visible = False
         e.Row.Cells(11).Visible = False
@@ -54,8 +31,6 @@ Partial Class cs_home
         e.Row.Cells(20).Visible = False
 
     End Sub
-
-
 
     Protected Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
@@ -83,16 +58,13 @@ Partial Class cs_home
         For I = 0 To GridView1.Rows.Count - 1
             If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
 
-
                 'FIN_FLGを更新
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET FLG03 ='1' "
                 strSQL = strSQL & ",FLG05 ='" & dt1.ToShortDateString & "' "
-
                 strSQL = strSQL & "WHERE CUST = '" & GridView1.Rows(I).Cells(5).Text & "'"
                 strSQL = strSQL & "AND ETD = '" & GridView1.Rows(I).Cells(10).Text & "'"
                 strSQL = strSQL & "AND LCL_SIZE = '" & GridView1.Rows(I).Cells(12).Text & "'"
-
 
                 Command.CommandText = strSQL
                 ' SQLの実行
@@ -101,8 +73,6 @@ Partial Class cs_home
                 Call GET_IVDATA(GridView1.Rows(I).Cells(7).Text, 1)
                 Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(6).Text, 4), 1)
                 Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(6).Text, 4), GridView1.Rows(I).Cells(7).Text, 1)
-
-
 
                 strSQL = ""
                 strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_LCLCUSTPREADS WHERE "
@@ -114,62 +84,35 @@ Partial Class cs_home
                 dataread = dbcmd.ExecuteReader()
 
                 While (dataread.Read())
-
                     intCnt = dataread("RecCnt")
-
                 End While
 
                 'クローズ処理 
                 dataread.Close()
                 dbcmd.Dispose()
 
-
                 If intCnt > 0 Then
-
-
-
                     strSQL = ""
                     strSQL = strSQL & "UPDATE T_EXL_LCLCUSTPREADS SET ADDRESS ='" & GridView1.Rows(I).Cells(19).Text & "' "
                     strSQL = strSQL & "WHERE CUSTCODE = '" & GridView1.Rows(I).Cells(5).Text & "'"
-
-
                 Else
-
                     strSQL = ""
                     strSQL = strSQL & "INSERT INTO T_EXL_LCLCUSTPREADS VALUES("
-
                     strSQL = strSQL & "'" & GridView1.Rows(I).Cells(5).Text & "' "
                     strSQL = strSQL & ",'" & GridView1.Rows(I).Cells(19).Text & "' "
-
-
-
                     strSQL = strSQL & ")"
-
                 End If
-
                 Command.CommandText = strSQL
                 ' SQLの実行
                 Command.ExecuteNonQuery()
-
-
-
-
-
             Else
-
-
 
             End If
         Next
 
-
-
         GridView1.DataBind()
 
-
     End Sub
-
-
 
     Protected Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
@@ -184,21 +127,13 @@ Partial Class cs_home
         Dim strSQL As String = ""
         Dim ivno As String = ""
 
-
-
         'データベース接続を開く
         cnn.Open()
-
-
-
 
         '非表示ボタン　FLG03は非表示
         Dim I As Integer
         For I = 0 To GridView1.Rows.Count - 1
             If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
-
-
-
 
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET FLG03 ='' "
@@ -210,29 +145,16 @@ Partial Class cs_home
                 ' SQLの実行
                 Command.ExecuteNonQuery()
 
-                '            Response.Redirect("anken_booking02.aspx")
-
-
                 Call GET_IVDATA(GridView1.Rows(I).Cells(7).Text, 2)
                 Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(6).Text, 4), 2)
                 Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(6).Text, 4), GridView1.Rows(I).Cells(7).Text, 2)
-
             Else
-
-
-
             End If
         Next
 
-
         GridView1.DataBind()
 
-
-
-
     End Sub
-
-
 
     Private Sub GET_IVDATA(bkgno As String, A As String)
 
@@ -260,8 +182,6 @@ Partial Class cs_home
         'データベース接続を開く
         cnn.Open()
 
-
-
         strSQL = "SELECT T_INV_HD_TB.OLD_INVNO "
         strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
         strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
@@ -271,8 +191,6 @@ Partial Class cs_home
         'strSQL = strSQL & "AND Sum(T_INV_BD_TB.KIN) >= 1 "
         'strSQL = strSQL & "order by T_INV_HD_TB.CUTDATE Decs "
 
-
-
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
         'ＳＱＬ文実行 
@@ -281,20 +199,12 @@ Partial Class cs_home
         strDate = ""
         '結果を取り出す 
         While (dataread.Read())
-
             strinv = Convert.ToString(dataread("OLD_INVNO"))        'ETD(計上日)
-
             If A = "1" Then
-
-
                 Call INS_LCL(strinv, bkgno)
-
             Else
-
                 Call DEL_LCL(strinv, bkgno)
-
             End If
-
         End While
 
         'クローズ処理 
@@ -321,7 +231,6 @@ Partial Class cs_home
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
 
-
         Dim dt1 As DateTime = DateTime.Now
 
         Dim ts1 As New TimeSpan(100, 0, 0, 0)
@@ -333,7 +242,6 @@ Partial Class cs_home
         'データベース接続を開く
         cnn.Open()
 
-
         strSQL = "SELECT distinct T_INV_HD_TB.BOOKINGNO "
         strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
 
@@ -342,12 +250,7 @@ Partial Class cs_home
         strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE "
         strSQL = strSQL & "HAVING T_INV_HD_TB.OLD_INVNO like '%" & strinv & "%' "
 
-
         strSQL = strSQL & "AND BOOKINGNO is not null "
-
-
-
-
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -357,9 +260,7 @@ Partial Class cs_home
         strDate = ""
         '結果を取り出す 
         While (dataread.Read())
-
             bkgno = Convert.ToString(dataread("BOOKINGNO"))        'ETD(計上日)
-
         End While
 
         'クローズ処理 
@@ -367,11 +268,7 @@ Partial Class cs_home
         dbcmd.Dispose()
 
         If bkgno = "" Or IsNothing(bkgno) = True Then
-
-
         Else
-
-
 
             strSQL = "SELECT T_INV_HD_TB.OLD_INVNO "
             strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
@@ -382,8 +279,6 @@ Partial Class cs_home
             'strSQL = strSQL & "AND Sum(T_INV_BD_TB.KIN) >= 1 "
             'strSQL = strSQL & "order by T_INV_HD_TB.CUTDATE Decs "
 
-
-
             'ＳＱＬコマンド作成 
             dbcmd = New SqlCommand(strSQL, cnn)
             'ＳＱＬ文実行 
@@ -392,26 +287,16 @@ Partial Class cs_home
             strDate = ""
             '結果を取り出す 
             While (dataread.Read())
-
                 strinv = Convert.ToString(dataread("OLD_INVNO"))        'ETD(計上日)
-
                 If A = "1" Then
-
-
                     Call INS_LCL(strinv, bkgno)
-
                 Else
-
                     Call DEL_LCL(strinv, bkgno)
-
                 End If
-
             End While
-
             'クローズ処理 
             dataread.Close()
             dbcmd.Dispose()
-
         End If
 
         cnn.Close()
@@ -434,7 +319,6 @@ Partial Class cs_home
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
 
-
         Dim dt1 As DateTime = DateTime.Now
 
         Dim ts1 As New TimeSpan(100, 0, 0, 0)
@@ -442,30 +326,16 @@ Partial Class cs_home
         Dim dt2 As DateTime = dt1 + ts1
         Dim dt3 As DateTime = dt1 - ts1
 
-
         'データベース接続を開く
         cnn.Open()
 
-
         If strbkg = "" Or IsNothing(strbkg) = True Then
-
-
         Else
-
-
-
             If A = "1" Then
-
                 Call INS_LCL(strinv, strbkg)
-
             Else
-
                 Call DEL_LCL(strinv, strbkg)
-
             End If
-
-
-
         End If
 
         cnn.Close()
@@ -496,16 +366,9 @@ Partial Class cs_home
         'データベース接続を開く
         cnn.Open()
 
-
         If bkgno = "" Or IsNothing(bkgno) = True Then
 
-
         Else
-
-            'strSQL = ""
-            'strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
-            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_INVNO = '" & strinv & "' "
-            'strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.LCLFIN_BKGNO = '" & bkgno & "' "
 
             strSQL = ""
             strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
@@ -513,33 +376,20 @@ Partial Class cs_home
             strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
             strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
 
-
-
             'ＳＱＬコマンド作成 
             dbcmd = New SqlCommand(strSQL, cnn)
             'ＳＱＬ文実行 
             dataread = dbcmd.ExecuteReader()
 
             While (dataread.Read())
-
                 intCnt = dataread("RecCnt")
-
             End While
 
             'クローズ処理 
             dataread.Close()
             dbcmd.Dispose()
 
-
             If intCnt > 0 Then
-
-                'strSQL = ""
-                'strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
-                'strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_INVNO = '" & strinv & "', "
-                'strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
-                'strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_BKGNO = '" & bkgno & "' "
-                'strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.LCLFIN_INVNO ='" & strinv & "' "
-
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_WORKSTATUS00 SET "
                 strSQL = strSQL & "T_EXL_WORKSTATUS00.INVNO = '" & strinv & "', "
@@ -548,37 +398,7 @@ Partial Class cs_home
                 strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.INVNO ='" & strinv & "' "
                 strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
                 strSQL = strSQL & "AND T_EXL_WORKSTATUS00.ID = '005' "
-
             Else
-
-                strSQL = ""
-                strSQL = strSQL & "INSERT INTO T_EXL_CSWORKSTATUS VALUES("
-
-                strSQL = strSQL & " '" & "' "
-                strSQL = strSQL & ",'" & " ' "
-                strSQL = strSQL & ",'" & " ' "
-
-                strSQL = strSQL & ",'" & strinv & "' "
-                strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
-                strSQL = strSQL & ",'" & bkgno & "' "
-
-                strSQL = strSQL & ",'" & " ' "
-                strSQL = strSQL & ",'" & " ' "
-                strSQL = strSQL & ",'" & " ' "
-
-
-
-                strSQL = strSQL & ",'" & " ' "
-                strSQL = strSQL & ",'" & " ' "
-                strSQL = strSQL & ",'" & " ' "
-
-                strSQL = strSQL & ",'" & " ' "
-                strSQL = strSQL & ",'" & " ' "
-                strSQL = strSQL & ",'" & " ' "
-
-
-                strSQL = strSQL & ")"
-
 
                 strSQL = ""
                 strSQL = strSQL & "INSERT INTO T_EXL_WORKSTATUS00 VALUES("
@@ -587,14 +407,11 @@ Partial Class cs_home
                 strSQL = strSQL & ",'" & bkgno & "' "
                 strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
                 strSQL = strSQL & ")"
-
-
             End If
 
             Command.CommandText = strSQL
             ' SQLの実行
             Command.ExecuteNonQuery()
-
 
         End If
 
@@ -627,18 +444,9 @@ Partial Class cs_home
         'データベース接続を開く
         cnn.Open()
 
-
         If bkgno = "" Or IsNothing(bkgno) = True Then
 
-
         Else
-
-
-
-            '    strSQL = ""
-            'strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
-            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_INVNO = '" & strinv & "' "
-            'strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.LCLFIN_BKGNO = '" & bkgno & "' "
 
             strSQL = ""
             strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
@@ -646,32 +454,20 @@ Partial Class cs_home
             strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
             strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
 
-
-
             'ＳＱＬコマンド作成 
             dbcmd = New SqlCommand(strSQL, cnn)
-        'ＳＱＬ文実行 
-        dataread = dbcmd.ExecuteReader()
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
 
-        While (dataread.Read())
+            While (dataread.Read())
+                intCnt = dataread("RecCnt")
+            End While
 
-            intCnt = dataread("RecCnt")
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
 
-        End While
-
-        'クローズ処理 
-        dataread.Close()
-        dbcmd.Dispose()
-
-
-        If intCnt > 0 Then
-
-                'strSQL = ""
-                'strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
-                'strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_INVNO = '', "
-                'strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_REGDATE = '', "
-                'strSQL = strSQL & "T_EXL_CSWORKSTATUS.LCLFIN_BKGNO = '' "
-                'strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.LCLFIN_INVNO ='" & strinv & "' "
+            If intCnt > 0 Then
 
                 strSQL = ""
                 strSQL = strSQL & "DELETE FROM T_EXL_WORKSTATUS00 "
@@ -679,22 +475,12 @@ Partial Class cs_home
                 strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
                 strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
 
-
-
                 Command.CommandText = strSQL
-            ' SQLの実行
-            Command.ExecuteNonQuery()
-
-        Else
-
-
-
+                ' SQLの実行
+                Command.ExecuteNonQuery()
+            Else
+            End If
         End If
-
-
-        End If
-
-
 
         cnn.Close()
         cnn.Dispose()
@@ -715,27 +501,16 @@ Partial Class cs_home
         Dim strfrom As String = "r-fukao@exedy.com"
         Dim strto As String = "r-fukao@exedy.com"
 
-        'TextBox1.Text = "aaaaa"
-
-        'メールの件名
-        'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
-
         'メールの件名
         Dim subject As String = "TEST<通知>LCL案件展開　変更・追加・連絡" '"【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
-        'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
         Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>LCL出荷案件の内容に変更、追加がございましたのでご連絡いたします。</p>下記URLに重量の登録をお願いいたします。</p>http://kbhwpm01/exp/cs_home/lcl_tenkai.aspx</p></body></html>" ' UriBodyC()
 
-
-
         Dim t As String = "<html><body><Table border='1' style='Font-Size:11px;'><tr><td>備考</td><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
 
         For I = 0 To GridView1.Rows.Count - 1
-
             t = t & "<tr><td >" & GridView1.Rows(I).Cells(2).Text & "</td><td>" & GridView1.Rows(I).Cells(5).Text & "</td><td>" & GridView1.Rows(I).Cells(6).Text & "</td><td>" & GridView1.Rows(I).Cells(9).Text & "</td><td>" & GridView1.Rows(I).Cells(11).Text & "</td><td>" & GridView1.Rows(I).Cells(12).Text & "</td><td>" & GridView1.Rows(I).Cells(13).Text & "</td><td>" & GridView1.Rows(I).Cells(14).Text & "</td><td>" & GridView1.Rows(I).Cells(15).Text & "</td><td>" & GridView1.Rows(I).Cells(16).Text & "</td><td>" & GridView1.Rows(I).Cells(17).Text & "</td><td>" & GridView1.Rows(I).Cells(18).Text & "</td><td>" & GridView1.Rows(I).Cells(19).Text & "</td></tr>"
-
-
         Next
 
         t = t & "</Table></body></html>"
@@ -749,12 +524,6 @@ Partial Class cs_home
         body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
         body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
-
-
-
-        'Dim strFilePath As String = "" '"C:\exp\cs_home\upload\" & Session("strFile")
-
-        'Using stream = File.OpenRead(strFilePath)
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
 
@@ -764,12 +533,6 @@ Partial Class cs_home
 
         ' 宛先情報  
         message.To.Add(MailboxAddress.Parse(strto))
-        'If Session("strCC") <> "" Then
-
-        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
-
-        'End If
-
 
         ' 表題  
         message.Subject = subject
@@ -779,21 +542,9 @@ Partial Class cs_home
         textPart.Text = body
         message.Body = textPart
 
-
-        ''添付ファイル
-        'Dim path = strFilePath     '添付したいファイル
-        '    Dim attachment = New MimeKit.MimePart("application", "pdf") _
-        '    With {
-        '        .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
-        '        .ContentDisposition = New MimeKit.ContentDisposition(),
-        '        .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
-        '        .FileName = System.IO.Path.GetFileName(path)
-        '    }
-
         Dim multipart = New MimeKit.Multipart("mixed")
 
         multipart.Add(textPart)
-        'multipart.Add(attachment)
 
         message.Body = multipart
 
@@ -804,12 +555,9 @@ Partial Class cs_home
             client.Dispose()
             message.Dispose()
         End Using
+
         Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
 
-        'stream.Dispose()
-        'End Using
-
-        'File.Delete(strFilePath)
         TextBox1.Text = ""
 
 
@@ -818,15 +566,9 @@ Partial Class cs_home
 
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 
-
         Button3.Attributes.Add("onclick", "return confirm('メールを送付します。よろしいですか？');")
 
     End Sub
-
-
-
-
-
 
     Private Function GET_ToAddress(strkbn As String, strtocc As String) As String
         'BCCメールアドレス情報を取得
@@ -860,7 +602,6 @@ Partial Class cs_home
         '結果を取り出す 
         While (dataread.Read())
             GET_ToAddress += dataread("MAIL_ADD") + ","
-
         End While
 
         'クローズ処理 
@@ -870,7 +611,6 @@ Partial Class cs_home
         cnn.Dispose()
 
     End Function
-
 
 
 End Class

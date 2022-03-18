@@ -63,7 +63,6 @@ Partial Class yuusen
                 If Trim(e.Row.Cells(9).Text) = strbkg Then
                     Call itaku(e.Row.Cells(9).Text)
                 End If
-
             End While
 
             'クローズ処理
@@ -101,7 +100,6 @@ Partial Class yuusen
         e.Row.Cells(17).Visible = False
         e.Row.Cells(18).Visible = False
 
-
         cnn.Close()
         cnn.Dispose()
 
@@ -137,11 +135,8 @@ Partial Class yuusen
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         Dim madef01 As String = ""
-
         Call makefld(madef01)
-
         Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('" & madef01 & "');</script>", False)
-
 
     End Sub
     Private Function get_itakuhanntei(ivno As String) As String
@@ -168,18 +163,14 @@ Partial Class yuusen
         Dim dt2 As DateTime = dt1 + ts1
         Dim dt3 As DateTime = dt1 - ts1
 
-
         'データベース接続を開く
         cnn.Open()
-
 
         strSQL = ""
         strSQL = strSQL & "SELECT INVNO FROM T_EXL_WORKSTATUS00 WHERE "
         strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001' "
         strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & ivno & "' "
         strSQL = strSQL & "AND T_EXL_WORKSTATUS00.REGDATE > '" & dt3 & "' "
-
-
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -191,11 +182,8 @@ Partial Class yuusen
         While (dataread.Read())
             strinv = Convert.ToString(dataread("INVNO"))        'ETD(計上日)
             If strinv = "" Then
-
             Else
-
                 get_itakuhanntei = 1
-
             End If
         End While
 
@@ -223,24 +211,18 @@ Partial Class yuusen
         Dim cnn = New SqlConnection(ConnectionString)
 
         Dim dt1 As DateTime = DateTime.Now
-
         Dim ts1 As New TimeSpan(100, 0, 0, 0)
         Dim ts2 As New TimeSpan(100, 0, 0, 0)
         Dim dt2 As DateTime = dt1 + ts1
         Dim dt3 As DateTime = dt1 - ts1
 
-
         'データベース接続を開く
         cnn.Open()
-
-
-
 
         strSQL = "SELECT distinct T_INV_HD_TB.CUSTCODE,T_INV_HD_TB.CUSTNAME "
         strSQL = strSQL & "FROM T_INV_HD_TB "
         strSQL = strSQL & "WHERE T_INV_HD_TB.OLD_INVNO like '%" & iptbx & "%' "
         strSQL = strSQL & "AND T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
-
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -251,10 +233,8 @@ Partial Class yuusen
         Ccode = ""
         '結果を取り出す 
         While (dataread.Read())
-
             Cname = Trim(Convert.ToString(dataread("CUSTNAME")))        '客先目
             Ccode = Trim(Convert.ToString(dataread("CUSTCODE")))        '客先コード
-
         End While
 
         'クローズ処理 
@@ -280,7 +260,6 @@ Partial Class yuusen
         Dim cnn = New SqlConnection(ConnectionString)
 
         Dim dt1 As DateTime = DateTime.Now
-
         Dim ts1 As New TimeSpan(100, 0, 0, 0)
         Dim ts2 As New TimeSpan(100, 0, 0, 0)
         Dim dt2 As DateTime = dt1 + ts1
@@ -289,7 +268,6 @@ Partial Class yuusen
 
         'データベース接続を開く
         cnn.Open()
-
 
         strSQL = ""
         strSQL = strSQL & "SELECT * FROM T_BOOKING "
@@ -303,12 +281,10 @@ Partial Class yuusen
         strinv = ""
         '結果を取り出す 
         While (dataread.Read())
-
             niuke = Convert.ToString(dataread("PLACE_OF_RECEIPT"))
             tsumi = Convert.ToString(dataread("LOADING_PORT"))
             ageti = Convert.ToString(dataread("DISCHARGING_PORT"))
             haisou = Convert.ToString(dataread("PLACE_OF_DELIVERY"))
-
         End While
 
         'クローズ処理 
@@ -319,7 +295,6 @@ Partial Class yuusen
 
     End Sub
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -340,7 +315,7 @@ Partial Class yuusen
                 'FIN_FLGを更新
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG02 ='1' "
-        strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView1.Rows(I).Cells(9).Text & "'"
+                strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView1.Rows(I).Cells(9).Text & "'"
 
                 Command.CommandText = strSQL
                 ' SQLの実行
@@ -406,7 +381,6 @@ Partial Class yuusen
         Dim cnn = New SqlConnection(ConnectionString)
 
         Dim dt1 As DateTime = DateTime.Now
-
         Dim ts1 As New TimeSpan(100, 0, 0, 0)
         Dim ts2 As New TimeSpan(100, 0, 0, 0)
         Dim dt2 As DateTime = dt1 + ts1
@@ -462,7 +436,6 @@ Partial Class yuusen
         Dim ivno As String = ""
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
-
         Dim dataread2 As SqlDataReader
         Dim dbcmd2 As SqlCommand
 
@@ -473,18 +446,11 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
-        'strSQL = ""
-        'strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
-        'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "' "
-        'strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
-
         strSQL = ""
         strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
         strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001' "
         strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
         strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
-
-
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -501,13 +467,6 @@ Partial Class yuusen
 
         If intCnt > 0 Then
 
-            'strSQL = ""
-            'strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
-            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "', "
-            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
-            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
-            'strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.ITK_INVNO ='" & strinv & "' "
-
             strSQL = ""
             strSQL = strSQL & "UPDATE T_EXL_WORKSTATUS00 SET "
 
@@ -519,30 +478,6 @@ Partial Class yuusen
             strSQL = strSQL & "AND T_EXL_WORKSTATUS00.ID = '001' "
 
         Else
-            'strSQL = ""
-            'strSQL = strSQL & "INSERT INTO T_EXL_CSWORKSTATUS VALUES("
-
-            'strSQL = strSQL & " '" & "' "
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-
-            'strSQL = strSQL & ",'" & strinv & "' "
-            'strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
-            'strSQL = strSQL & ",'" & bkgno & "' "
-
-            'strSQL = strSQL & ")"
 
             strSQL = ""
             strSQL = strSQL & "INSERT INTO T_EXL_WORKSTATUS00 VALUES("
@@ -551,8 +486,6 @@ Partial Class yuusen
             strSQL = strSQL & ",'" & bkgno & "' "
             strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
             strSQL = strSQL & ")"
-
-
 
         End If
 
@@ -588,18 +521,11 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
-        'strSQL = ""
-        'strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
-        'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "' "
-        'strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
-
         strSQL = ""
         strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
         strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001' "
         strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
         strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
-
-
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -615,17 +541,12 @@ Partial Class yuusen
         dbcmd.Dispose()
 
         If intCnt > 0 Then
-            'strSQL = ""
-            'strSQL = strSQL & "DELETE FROM T_EXL_CSWORKSTATUS "
-            'strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.ITK_INVNO ='" & strinv & "' "
-            'strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO ='" & bkgno & "' "
 
             strSQL = ""
             strSQL = strSQL & "DELETE FROM T_EXL_WORKSTATUS00 "
             strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.ID = '001' "
             strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
             strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO ='" & bkgno & "' "
-
 
             Command.CommandText = strSQL
             ' SQLの実行
@@ -680,8 +601,7 @@ Partial Class yuusen
         dataread.Close()
         dbcmd.Dispose()
 
-        cnn.Close()
-        cnn.Dispose()
+
 
         If Label3.Text = "" Then
             If strkd = "1" Then
@@ -732,12 +652,78 @@ Partial Class yuusen
 
             Call makefld(madef01)
             Label10.Visible = True
+            Label11.Visible = False
 
 
         Else
             Label7.Text = "×"
             Label10.Visible = False
+            Label11.Visible = True
+
         End If
+
+
+        Button4.Attributes.Add("onclick", "return confirm('メール送信します。よろしいですか？');")
+
+
+
+        Dim strupddate00 As Date
+        Dim strupddate01 As Date
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT T_EXL_DATA_UPD.DATA_UPD FROM T_EXL_DATA_UPD "
+        strSQL = strSQL & "WHERE T_EXL_DATA_UPD.DATA_CD ='008' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            strupddate00 = Trim(dataread("DATA_UPD"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT T_EXL_DATA_UPD.DATA_UPD FROM T_EXL_DATA_UPD "
+        strSQL = strSQL & "WHERE T_EXL_DATA_UPD.DATA_CD ='012' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            strupddate01 = Trim(dataread("DATA_UPD"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        Dim dt00 As String = dt1.ToShortDateString
+        Dim dt01 As String = strupddate00.ToShortDateString
+        Dim dt02 As String = strupddate01.ToShortDateString
+
+
+        If dt00 = dt01 And dt02 = dt00 Then
+
+            Panel1.Visible = True
+            Panel2.Visible = False
+
+        Else
+
+            Panel1.Visible = False
+            Panel2.Visible = True
+
+        End If
+
+        cnn.Close()
+        cnn.Dispose()
 
     End Sub
 
@@ -792,8 +778,9 @@ Partial Class yuusen
 
         If CheckBox1.Checked = True Then
             Label3.Text = "済"
-            Call Mail03(kbn)
-
+            Dim struid As String = Session("UsrId")
+            Call Mail030(kbn, struid)
+            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('登録し通知メールを送信しました。');</script>", False)
         Else
             Label3.Text = "未"
         End If
@@ -850,10 +837,14 @@ Partial Class yuusen
 
         If CheckBox2.Checked = True Then
             Label4.Text = "済"
-            Call Mail03(kbn)
+            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('登録し通知メールを送信しました。');</script>", False)
+            Dim struid As String = Session("UsrId")
+            Call Mail030(kbn, struid)
         Else
             Label4.Text = "未"
         End If
+
+
 
     End Sub
 
@@ -868,9 +859,7 @@ Partial Class yuusen
         Dim wno As Long
         Dim wday As String
         Dim wday2 As String
-
         Dim Kaika00 As String
-
         Dim deccnt As Long
         Dim lng14 As Long
         Dim lng15 As Long
@@ -881,7 +870,6 @@ Partial Class yuusen
 
         Dim dt1 As DateTime = DateTime.Now
 
-
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
@@ -891,8 +879,6 @@ Partial Class yuusen
 
         'データベース接続を開く
         cnn.Open()
-
-
 
         strSQL = ""
         strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY_NO FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY <= '" & dt1.ToShortDateString & "' "
@@ -905,16 +891,12 @@ Partial Class yuusen
 
         '結果を取り出す 
         While (dataread.Read())
-
             WDAYNO00 = dataread("WORKDAY_NO")
-
         End While
-
 
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
-
 
         strSQL = ""
         strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 1 & "' "
@@ -927,16 +909,12 @@ Partial Class yuusen
 
         '結果を取り出す 
         While (dataread.Read())
-
             WDAY00 = dataread("WORKDAY")
-
         End While
-
 
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
-
 
         strSQL = ""
         strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 2 & "' "
@@ -946,82 +924,57 @@ Partial Class yuusen
         'ＳＱＬ文実行 
         dataread = dbcmd.ExecuteReader()
 
-
         '結果を取り出す 
         While (dataread.Read())
-
             WDAY01 = dataread("WORKDAY")
-
         End While
-
 
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
-
         cnn.Close()
         cnn.Dispose()
-
 
         Dim yusen As String = ""
         Dim kin As String = ""
         Dim nihontoran As String = ""
         Dim nitsu As String = ""
 
-        Call Mail01(WDAY00, WDAY01, yusen)
-        Call Mail02(WDAY00, WDAY01, kin)
-        Call Mail03(WDAY00, WDAY01, nihontoran)
-        Call Mail04(WDAY00, WDAY01, nitsu)
+        Dim struid As String = Session("UsrId")
+        Call Mail01(WDAY00, WDAY01, yusen, struid)
+        Call Mail02(WDAY00, WDAY01, kin, struid)
+        Call Mail03(WDAY00, WDAY01, nihontoran, struid)
+        Call Mail04(WDAY00, WDAY01, nitsu, struid)
 
         Dim mailmsg As String = ""
         If yusen <> "" Then
-
             mailmsg = mailmsg & "," & "郵船"
-
         End If
 
         If kin <> "" Then
-
             mailmsg = mailmsg & "," & "近鉄"
-
         End If
 
         If nihontoran <> "" Then
-
             mailmsg = mailmsg & "," & "日本トランス"
-
         End If
 
         If nitsu <> "" Then
-
             mailmsg = mailmsg & "," & "日通"
-
         End If
 
         If mailmsg = "" Then
-
             Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('対象なしです。');</script>", False)
-
-
-
         Else
-
             mailmsg = "対象：" & mailmsg
             Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('" & mailmsg & "にメールを送信しました。');</script>", False)
-
-
-
         End If
-
-
-
 
     End Sub
 
 
-    Sub Mail01(WDAY00 As String, WDAY01 As String, ByRef r As String)
+    Sub Mail01(WDAY00 As String, WDAY01 As String, ByRef r As String, struid As String)
         '郵船
-
 
         'メールの送信に必要な情報
         Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
@@ -1029,14 +982,17 @@ Partial Class yuusen
 
         ' メールの内容
 
-        Dim strfrom2 As String = GET_ToAddress(2, 1)
-        Dim strto2 As String = GET_ToAddress(2, 0)
+        Dim strfrom As String = GET_from(struid)
+        Dim strto As String = GET_from(struid)
+        Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
 
-        Dim strfrom As String = "r-fukao@exedy.com"
-        Dim strto As String = "r-fukao@exedy.com"
+        Dim strfrom2 As String = GET_from(struid)
+        Dim strto2 As String = GET_ToAddress(2, 1)
+        Dim strcc2 As String = GET_ToAddress(2, 0) + "," + GET_from(struid)
+
+        Dim strsyomei As String = GET_syomei(struid)
 
         Dim f As String = ""
-
 
         'メールの件名
         'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
@@ -1046,9 +1002,7 @@ Partial Class yuusen
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
-        Dim body As String = "<html><body><p>郵船ロジスティクス ご担当者様<p>いつもお世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
-
-
+        Dim body As String = "<html><body>郵船ロジスティクス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY00 & "弊社CUT分で通関委託がございます。<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
         t = t & body01("郵船")
@@ -1058,46 +1012,35 @@ Partial Class yuusen
 
         body = body & t
 
-        Dim body2 As String = "</p>" ' UriBodyC()
+        Dim body2 As String = "<br>" ' UriBodyC()
 
-        body = body & body2 & "</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>"
+        body = body & body2 & "お忙しい中とは存じますが、宜しくお願い申し上げます。<br>以上になります。<br><br></body></html>" & strsyomei
 
         body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
         body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
-
-
         If f = "" Then
-
-
-            body = "たいしょうなし"
-
-
+            body = "<html><body>郵船ロジスティクス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY00 & "弊社CUT分で通関委託案件はございません。<br>（LCL案件は全て委託となります。）<br><br>宜しくお願い申し上げます。<br>以上になります。<br><br></body></html>" & strsyomei
+            body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
+            body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
         End If
 
-
-
-
-
-
-        'Dim strFilePath As String = "" '"C:\exp\cs_home\upload\" & Session("strFile")
-
-        'Using stream = File.OpenRead(strFilePath)
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
 
         ' 送り元情報  
         message.From.Add(MailboxAddress.Parse(strfrom))
 
-
         ' 宛先情報  
         message.To.Add(MailboxAddress.Parse(strto))
-        'If Session("strCC") <> "" Then
 
-        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
-
-        'End If
-
+        If strcc <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
 
         ' 表題  
         message.Subject = subject
@@ -1107,21 +1050,9 @@ Partial Class yuusen
         textPart.Text = body
         message.Body = textPart
 
-
-        ''添付ファイル
-        'Dim path = strFilePath     '添付したいファイル
-        '    Dim attachment = New MimeKit.MimePart("application", "pdf") _
-        '    With {
-        '        .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
-        '        .ContentDisposition = New MimeKit.ContentDisposition(),
-        '        .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
-        '        .FileName = System.IO.Path.GetFileName(path)
-        '    }
-
         Dim multipart = New MimeKit.Multipart("mixed")
 
         multipart.Add(textPart)
-        'multipart.Add(attachment)
 
         message.Body = multipart
 
@@ -1134,17 +1065,9 @@ Partial Class yuusen
             r = "1y"
         End Using
 
-
-        'stream.Dispose()
-        'End Using
-
-        'File.Delete(strFilePath)
-
-
-
     End Sub
 
-    Sub Mail02(WDAY00 As String, WDAY01 As String, ByRef r As String)
+    Sub Mail02(WDAY00 As String, WDAY01 As String, ByRef r As String, struid As String)
 
 
 
@@ -1154,32 +1077,26 @@ Partial Class yuusen
 
         ' メールの内容
 
-        Dim strfrom2 As String = GET_ToAddress(3, 1)
-        Dim strto2 As String = GET_ToAddress(3, 0)
+        Dim strfrom As String = GET_from(struid)
+        Dim strto As String = GET_from(struid)
+        Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
 
-        Dim strfrom As String = "r-fukao@exedy.com"
-        Dim strto As String = "r-fukao@exedy.com"
+
+        Dim strfrom2 As String = GET_from(struid)
+        Dim strto2 As String = GET_ToAddress(3, 1)
+        Dim strcc2 As String = GET_ToAddress(3, 0) + "," + GET_from(struid)
+
+        Dim strsyomei As String = GET_syomei(struid)
+
         Dim f As String = ""
 
-
         'メールの件名
-        'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
-
-        'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY00 & "分"
-        'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
+        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
 
         'メールの本文
-        Dim body As String = "<html><body><p>近鉄エクスプレス ご担当者様<p>いつもお世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
-
-
-
-
-
-
+        Dim body As String = "<html><body>近鉄エクスプレス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
 
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
-
 
         t = t & body01("近鉄")
         f = body02("近鉄")
@@ -1188,34 +1105,29 @@ Partial Class yuusen
 
         body = body & t
 
-        Dim body2 As String = "</p>" ' UriBodyC()
+        Dim body2 As String = "<br>" ' UriBodyC()
 
-        body = body & body2 & "</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>"
+        body = body & body2 & "お忙しい中とは存じますが、宜しくお願い申し上げます。<br>以上になります。<br></body></html>" & strsyomei
 
-        body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
-        body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+        body = "<font size=" & Chr(34) & " 2" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
-
-
-
-        'Dim strFilePath As String = "" '"C:\exp\cs_home\upload\" & Session("strFile")
-
-        'Using stream = File.OpenRead(strFilePath)
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
 
         ' 送り元情報  
         message.From.Add(MailboxAddress.Parse(strfrom))
 
-
         ' 宛先情報  
         message.To.Add(MailboxAddress.Parse(strto))
-        'If Session("strCC") <> "" Then
 
-        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
-
-        'End If
-
+        If strcc <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
 
         ' 表題  
         message.Subject = subject
@@ -1225,27 +1137,13 @@ Partial Class yuusen
         textPart.Text = body
         message.Body = textPart
 
-
-        ''添付ファイル
-        'Dim path = strFilePath     '添付したいファイル
-        '    Dim attachment = New MimeKit.MimePart("application", "pdf") _
-        '    With {
-        '        .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
-        '        .ContentDisposition = New MimeKit.ContentDisposition(),
-        '        .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
-        '        .FileName = System.IO.Path.GetFileName(path)
-        '    }
-
         Dim multipart = New MimeKit.Multipart("mixed")
 
         multipart.Add(textPart)
-        'multipart.Add(attachment)
 
         message.Body = multipart
 
         If f <> "" Then
-
-
             Using client As New MailKit.Net.Smtp.SmtpClient()
                 client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
                 client.Send(message)
@@ -1254,26 +1152,12 @@ Partial Class yuusen
                 message.Dispose()
                 r = "1k"
             End Using
-
         Else
-
-
-
         End If
-
-
-        'stream.Dispose()
-        'End Using
-
-        'File.Delete(strFilePath)
-
-
 
     End Sub
 
-    Sub Mail03(WDAY00 As String, WDAY01 As String, ByRef r As String)
-
-
+    Sub Mail03(WDAY00 As String, WDAY01 As String, ByRef r As String, struid As String)
 
         'メールの送信に必要な情報
         Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
@@ -1281,32 +1165,24 @@ Partial Class yuusen
 
         ' メールの内容
 
-        Dim strfrom2 As String = GET_ToAddress(4, 1)
-        Dim strto2 As String = GET_ToAddress(4, 0)
+        Dim strfrom As String = GET_from(struid)
+        Dim strto As String = GET_from(struid)
+        Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
 
-        Dim strfrom As String = "r-fukao@exedy.com"
-        Dim strto As String = "r-fukao@exedy.com"
+        Dim strfrom2 As String = GET_from(struid)
+        Dim strto2 As String = GET_ToAddress(4, 1)
+        Dim strcc2 As String = GET_ToAddress(4, 0) + "," + GET_from(struid)
+
+        Dim strsyomei As String = GET_syomei(struid)
+
         Dim f As String = ""
 
-
         'メールの件名
-        'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
-
-        'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY00 & "分"
-        'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
+        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
 
         'メールの本文
-        Dim body As String = "<html><body><p>日本トランスポート ご担当者様<p>いつもお世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
-
-
-
-
-
-
-
+        Dim body As String = "<html><body>日本トランスポート ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
-
 
         t = t & body01("日ト")
         f = body02("日ト")
@@ -1315,34 +1191,29 @@ Partial Class yuusen
 
         body = body & t
 
-        Dim body2 As String = "</p>" ' UriBodyC()
+        Dim body2 As String = "<br>" ' UriBodyC()
 
-        body = body & body2 & "</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>"
+        body = body & body2 & "お忙しい中とは存じますが、宜しくお願い申し上げます。<br>以上になります。<br><br></body></html>" & strsyomei
 
-        body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
-        body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+        body = "<font size=" & Chr(34) & " 2" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
-
-
-
-        'Dim strFilePath As String = "" '"C:\exp\cs_home\upload\" & Session("strFile")
-
-        'Using stream = File.OpenRead(strFilePath)
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
 
         ' 送り元情報  
         message.From.Add(MailboxAddress.Parse(strfrom))
 
-
         ' 宛先情報  
         message.To.Add(MailboxAddress.Parse(strto))
-        'If Session("strCC") <> "" Then
 
-        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
-
-        'End If
-
+        If strcc <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
 
         ' 表題  
         message.Subject = subject
@@ -1352,27 +1223,13 @@ Partial Class yuusen
         textPart.Text = body
         message.Body = textPart
 
-
-        ''添付ファイル
-        'Dim path = strFilePath     '添付したいファイル
-        '    Dim attachment = New MimeKit.MimePart("application", "pdf") _
-        '    With {
-        '        .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
-        '        .ContentDisposition = New MimeKit.ContentDisposition(),
-        '        .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
-        '        .FileName = System.IO.Path.GetFileName(path)
-        '    }
-
         Dim multipart = New MimeKit.Multipart("mixed")
 
         multipart.Add(textPart)
-        'multipart.Add(attachment)
 
         message.Body = multipart
 
         If f <> "" Then
-
-
             Using client As New MailKit.Net.Smtp.SmtpClient()
                 client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
                 client.Send(message)
@@ -1381,26 +1238,12 @@ Partial Class yuusen
                 message.Dispose()
                 r = "1k"
             End Using
-
         Else
-
-
-
         End If
-
-
-        'stream.Dispose()
-        'End Using
-
-        'File.Delete(strFilePath)
-
-
 
     End Sub
 
-    Sub Mail04(WDAY00 As String, WDAY01 As String, ByRef r As String)
-
-
+    Sub Mail04(WDAY00 As String, WDAY01 As String, ByRef r As String, struid As String)
 
         'メールの送信に必要な情報
         Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
@@ -1408,28 +1251,25 @@ Partial Class yuusen
 
         ' メールの内容
 
-        Dim strfrom2 As String = GET_ToAddress(5, 1)
-        Dim strto2 As String = GET_ToAddress(5, 0)
+        Dim strfrom As String = GET_from(struid)
+        Dim strto As String = GET_from(struid)
+        Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
 
-        Dim strfrom As String = "r-fukao@exedy.com"
-        Dim strto As String = "r-fukao@exedy.com"
+        Dim strfrom2 As String = GET_from(struid)
+        Dim strto2 As String = GET_ToAddress(5, 1)
+        Dim strcc2 As String = GET_ToAddress(5, 0) + "," + GET_from(struid)
+
+        Dim strsyomei As String = GET_syomei(struid)
+
         Dim f As String = ""
 
-
         'メールの件名
-        'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
-
-        'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY00 & "分"
-        'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
+        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
 
         'メールの本文
-        Dim body As String = "<html><body><p>日本通運 ご担当者様<p>いつもお世話になっております。<p>" & WDAY01 & "弊社CUT分で通関委託がございます。</p>" ' UriBodyC()
-
-
+        Dim body As String = "<html><body>日本通運 ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br><br>" ' UriBodyC()
 
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
-
 
         t = t & body01("日通")
         f = body02("日通")
@@ -1438,34 +1278,29 @@ Partial Class yuusen
 
         body = body & t
 
-        Dim body2 As String = "</p>" ' UriBodyC()
+        Dim body2 As String = "<br>" ' UriBodyC()
 
-        body = body & body2 & "</p>お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>"
+        body = body & body2 & "お忙しい中とは存じますが、宜しくお願い申し上げます。<br>以上になります。<br><br></body></html>" & strsyomei
 
-        body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
-        body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+        body = "<font size=" & Chr(34) & " 2" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
-
-
-
-        'Dim strFilePath As String = "" '"C:\exp\cs_home\upload\" & Session("strFile")
-
-        'Using stream = File.OpenRead(strFilePath)
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
 
         ' 送り元情報  
         message.From.Add(MailboxAddress.Parse(strfrom))
 
-
         ' 宛先情報  
         message.To.Add(MailboxAddress.Parse(strto))
-        'If Session("strCC") <> "" Then
 
-        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
-
-        'End If
-
+        If strcc <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
 
         ' 表題  
         message.Subject = subject
@@ -1475,27 +1310,13 @@ Partial Class yuusen
         textPart.Text = body
         message.Body = textPart
 
-
-        ''添付ファイル
-        'Dim path = strFilePath     '添付したいファイル
-        '    Dim attachment = New MimeKit.MimePart("application", "pdf") _
-        '    With {
-        '        .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
-        '        .ContentDisposition = New MimeKit.ContentDisposition(),
-        '        .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
-        '        .FileName = System.IO.Path.GetFileName(path)
-        '    }
-
         Dim multipart = New MimeKit.Multipart("mixed")
 
         multipart.Add(textPart)
-        'multipart.Add(attachment)
 
         message.Body = multipart
 
         If f <> "" Then
-
-
             Using client As New MailKit.Net.Smtp.SmtpClient()
                 client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
                 client.Send(message)
@@ -1504,25 +1325,12 @@ Partial Class yuusen
                 message.Dispose()
                 r = "1k"
             End Using
-
         Else
-
-
-
         End If
-
-
-        'stream.Dispose()
-        'End Using
-
-        'File.Delete(strFilePath)
-
-
 
     End Sub
 
     Private Function body01(A As String) As String
-
 
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
@@ -1555,24 +1363,17 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
-
-
-
         strSQL = ""
-        strSQL = strSQL & "SELECT T_EXL_CSANKEN.CUST, T_EXL_CSANKEN.INVOICE, T_EXL_CSANKEN.BOOKING_NO, T_EXL_CSANKEN.DISCHARGING_PORT, T_EXL_CSANKEN.PLACE_OF_DELIVERY "
+        strSQL = strSQL & "SELECT T_EXL_CSANKEN.CUST, T_EXL_CSANKEN.INVOICE, T_EXL_CSANKEN.BOOKING_NO, T_EXL_CSANKEN.LOADING_PORT, T_EXL_CSANKEN.PLACE_OF_DELIVERY "
         strSQL = strSQL & "FROM T_EXL_CSANKEN "
         strSQL = strSQL & "WHERE T_EXL_CSANKEN.FLG01 ='1' "
         strSQL = strSQL & "AND T_EXL_CSANKEN.FLG02 ='1' "
         strSQL = strSQL & "AND T_EXL_CSANKEN.FORWARDER ='" & A & "' "
 
-
-
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
         'ＳＱＬ文実行 
         dataread = dbcmd.ExecuteReader()
-
-
 
         CUST = ""
         INVOICE = ""
@@ -1582,36 +1383,25 @@ Partial Class yuusen
 
         '結果を取り出す 
         While (dataread.Read())
-
             CUST = Convert.ToString(dataread("CUST"))
             INVOICE = Convert.ToString(dataread("INVOICE"))
             BOOKING_NO = Convert.ToString(dataread("BOOKING_NO"))
-            DISCHARGING_PORT = Convert.ToString(dataread("DISCHARGING_PORT"))
+            DISCHARGING_PORT = Convert.ToString(dataread("LOADING_PORT"))
             PLACE_OF_DELIVERY = Convert.ToString(dataread("PLACE_OF_DELIVERY"))
-
-
-            body01 = body01 & "<tr><td >" & CUST & "</td><td>" & INVOICE & " / " & BOOKING_NO & "</td><td>" & DISCHARGING_PORT & "</td><td>" & PLACE_OF_DELIVERY & "</td></tr>"
-
-
-
+            body01 = body01 & "<tr><td>" & CUST & "</td><td>" & INVOICE & " / " & BOOKING_NO & "</td><td>" & DISCHARGING_PORT & "</td><td>" & PLACE_OF_DELIVERY & "</td></tr>"
         End While
 
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
 
-
-
         cnn.Close()
         cnn.Dispose()
-
 
     End Function
 
 
-
     Private Function body02(A As String) As String
-
 
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
@@ -1638,9 +1428,6 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
-
-
-
         strSQL = ""
         strSQL = strSQL & "SELECT T_EXL_CSANKEN.CUST, T_EXL_CSANKEN.INVOICE, T_EXL_CSANKEN.BOOKING_NO, T_EXL_CSANKEN.DISCHARGING_PORT, T_EXL_CSANKEN.PLACE_OF_DELIVERY "
         strSQL = strSQL & "FROM T_EXL_CSANKEN "
@@ -1648,86 +1435,59 @@ Partial Class yuusen
         strSQL = strSQL & "AND T_EXL_CSANKEN.FLG02 ='1' "
         strSQL = strSQL & "AND T_EXL_CSANKEN.FORWARDER ='" & A & "' "
 
-
-
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
         'ＳＱＬ文実行 
         dataread = dbcmd.ExecuteReader()
 
-
-
         '結果を取り出す 
         While (dataread.Read())
-
             body02 = "1"
-
-
-
         End While
 
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
 
-
-
         cnn.Close()
         cnn.Dispose()
-
 
     End Function
 
     Sub makefld(ByRef madef01 As String)
 
-
         Dim strPath00(3) As String      '依頼書、タイムスケジュールのパスと作成先のパス
         Dim strPath01(3) As String      '
-
 
         Dim MyStr As String
         Dim MyDate As Date
         Dim j, k As Long
         Dim lngEndRow As Long   '最終行
-
         Dim strLog As String            '問題報告ログ
         Dim strFile0 As String           'ファイル名(依頼書)
         Dim strFile1 As String           'ファイル名(タイムスケジュール)
         Dim strFol As String             'フォルダ名
         Dim iptbx As String             'フォルダ名
-
         Dim strfol001 As String
-
         Dim CODE1 As String
         Dim CODE2 As String
-
-
 
         Dim myPath As String
         Dim F_dir As String
         Dim itkflg As String
-
         Dim Ccode As String = ""
-
         Dim Cname As String = ""
-
         Dim strirai As String
-
         Dim hensyuuiraisyo As String
-
         Dim madef00 As String = ""
 
         madef01 = "処理履歴："
 
-
         strPath00(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\a)自社通関依頼書（客先別）WEB\"
         strPath00(1) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\b)タイムスケジュール（客先別）\"
-
         strPath01(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\WEB_test\"
         'strPath01(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\"
         strPath01(1) = "\\svnas201\EXD06101\DISC_COMMON\自社通関輸出書類\"
-
-
 
         '問題報告ログ初期化
         strLog = ""
@@ -1739,9 +1499,7 @@ Partial Class yuusen
             strFile0 = Dir(strPath00(0) & "自社通関依頼書　EXEDY *(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*.xlsx", vbNormal)
             If strFile0 = "" Then
                 strLog = strLog & Right("0000" & I, 5) & ",原紙なし" & Chr(10)
-
                 madef00 = 0
-
                 GoTo Step00
             End If
 
@@ -1750,22 +1508,16 @@ Partial Class yuusen
             itkflg = get_itakuhanntei(Left(GridView1.Rows(I).Cells(5).Text, 4))
 
             If itkflg = "1" Then
-
                 madef00 = 1
-
                 GoTo Step00
-
             End If
-
-
 
             '1_________________________________________________
 
             strfol001 = Dir(strPath01(0) & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-"), vbDirectory)
 
-
             'If strfol001 <> "" Then
-            madef00 = 2
+            'madef00 = 2
             '    GoTo Step00
 
             'End If
@@ -1774,7 +1526,7 @@ Partial Class yuusen
 
 
             'If strfol001 <> "" Then
-            madef00 = 2
+            'madef00 = 2
             '    GoTo Step00
 
             'End If
@@ -1784,7 +1536,7 @@ Partial Class yuusen
 
 
             'If strfol001 <> "" Then
-            madef00 = 2
+            'madef00 = 2
             '    GoTo Step00
 
             'End If
@@ -1794,7 +1546,7 @@ Partial Class yuusen
 
 
             'If strfol001 <> "" Then
-            madef00 = 2
+            'madef00 = 2
             '    GoTo Step00
 
             'End If
@@ -1803,14 +1555,10 @@ Partial Class yuusen
 
 
             'If strfol001 <> "" Then
-            madef00 = 2
+            'madef00 = 2
             '    GoTo Step00
 
             'End If
-
-
-
-
 
             '2_________________________________________________
 
@@ -1829,22 +1577,13 @@ Partial Class yuusen
             If MyStr <> "" Then
                 strLog = strLog & Right("0000" & I, 5) & ",同一フォルダ有り" & Chr(10)
                 madef00 = 2
-
                 GoTo Step00
             End If
 
             'MkDir strFol                                                                                   '格納先
             My.Computer.FileSystem.CreateDirectory(strFol)
 
-
-
-
-
-
-
             '3_________________________________________________
-
-
 
             '追加 住所ファイル
 
@@ -1859,25 +1598,17 @@ Partial Class yuusen
                 '処理
                 'objFSO.CopyFile myPath & "\" & F_dir, strFol & "\" & F_dir, True
                 System.IO.File.Copy(myPath & "\" & F_dir, strFol & "\" & F_dir)
-
             Else
 
                 F_dir = Dir(myPath & "\*" & Cname & "*", vbDirectory)
 
                 If F_dir <> "" Then
-
                     '処理
                     'objFSO.CopyFile myPath & "\" & F_dir, strFol & "\" & F_dir, True
                     System.IO.File.Copy(myPath & "\" & F_dir, strFol & "\" & F_dir)
-
-
-
                 Else
-
                 End If
-
             End If
-
 
             '4_________________________________________________
 
@@ -1887,19 +1618,10 @@ Partial Class yuusen
 
             System.IO.File.Copy(strPath00(0) & strirai, strFol & "\" & MyStr)
 
-
             hensyuuiraisyo = strFol & "\" & MyStr
 
             Dim workbook = New XLWorkbook(hensyuuiraisyo)
             Dim ws1 As IXLWorksheet = workbook.Worksheet(1)
-
-
-
-
-
-
-
-
 
 
             '転記
@@ -1939,7 +1661,6 @@ Partial Class yuusen
 
             '港チェック(現段階では相違があれば、色を付ける→後々は訂正をする方向で)
 
-
             Dim erflg As Long = 0
             'PLACE OF RECEIPT(荷受地)
             If ws1.Cell(16, 1).Value <> GridView1.Rows(I).Cells(14).Text Then
@@ -1962,11 +1683,6 @@ Partial Class yuusen
                 ws1.Cell(16, 7).Style.Fill.BackgroundColor = XLColor.Red
                 erflg = 1
             End If
-
-
-
-
-
 
             '------------　18/04追記  港コードも色付け　--------------
             If ws1.Cell(16, 3).Style.Fill.BackgroundColor = XLColor.Red Then
@@ -2006,8 +1722,6 @@ Partial Class yuusen
                 ws1.Cell(4, 11).Value = "揚げ港"
                 ws1.Cell(5, 11).Value = "配送先"
 
-
-
                 'Call Minatocode01(ageti, CODE1)
                 'Call Minatocode02(haisou, CODE2)
 
@@ -2017,84 +1731,52 @@ Partial Class yuusen
 
             End If
 
-
             workbook.SaveAs(hensyuuiraisyo)
 
-
             If erflg = 1 Then
-
                 My.Computer.FileSystem.RenameFile(hensyuuiraisyo, "E_" & MyStr)
-
             End If
-
-
-
 
 Step00:
 
-
             'madef00 = 0　依頼書雛形無し,madef00 = 1　委託,madef00 = 2　同一フォルダあり
 
-
-
-
             If madef00 = "" Then
-
                 madef01 = madef01 & "\n" & "作成済み　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(5).Text
-
             ElseIf madef00 = "0" Then
-
                 madef01 = madef01 & "\n" & "依頼書なし　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(5).Text
-
             ElseIf madef00 = "1" Then
                 madef01 = madef01 & "\n" & "委託案件　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(5).Text
-
             ElseIf madef00 = "2" Then
-
                 madef01 = madef01 & "\n" & "同一フォルダあり 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(5).Text
-
             End If
             madef00 = ""
-
         Next
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     End Sub
 
 
-    Sub Mail03(kbn As String)
+    Sub Mail030(kbn As String, struid As String)
         '通知メール
 
+        Dim strfrom As String = GET_from(struid)
+        Dim strto As String = GET_from(struid)
+        Dim strcc As String = GET_from(struid) + "," + GET_from(struid) + "," + "r-fukao@exedy.com"
+
+        Dim strsyomei As String = GET_syomei(struid)
 
         'メールの送信に必要な情報
         Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
         Dim smtpPort As Integer = 25
 
         ' メールの内容
-        Dim strfrom As String = "r-fukao@exedy.com"
-        Dim strto As String = "r-fukao@exedy.com"
 
-        Dim strfrom2 As String = GET_ToAddress(0, 1)
-        Dim strto2 As String = GET_ToAddress(0, 0)
+        Dim strto2 As String = GET_ToAddress(0, 1) '宛先
+        Dim strcc2 As String = GET_ToAddress(0, 0) + "," + GET_from(struid)  'CC 
 
         Dim f As String = ""
         Dim dt1 As DateTime = DateTime.Now
-
-        'メールの件名
-        'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
-
 
         If kbn = "A" Then
 
@@ -2106,35 +1788,31 @@ Step00:
 
         End If
 
-
-
         'メールの件名
         Dim subject As String = "【ご連絡・自動配信】" & kbn & " LS ７or９「試作限定」有無確認完了　" & dt1.ToShortDateString
-        'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
-        Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>" & kbn & " 登録完了いたしました。</p>以上になります。</p>" & kbn & "担当</body></html>" ' UriBodyC()
+        Dim body As String = "<html><body>各位<br>お世話になっております。<br><br>" & kbn & " 登録完了いたしました。<br><br>以上になります。<br>" & kbn & "担当</body></html>" ' UriBodyC()
 
+        body = "<font size=" & Chr(34) & " 3" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
-
-        'Dim strFilePath As String = "" '"C:\exp\cs_home\upload\" & Session("strFile")
-
-        'Using stream = File.OpenRead(strFilePath)
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
 
         ' 送り元情報  
         message.From.Add(MailboxAddress.Parse(strfrom))
 
-
         ' 宛先情報  
         message.To.Add(MailboxAddress.Parse(strto))
-        'If Session("strCC") <> "" Then
 
-        '    message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
-
-        'End If
-
+        If strcc <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
 
         ' 表題  
         message.Subject = subject
@@ -2144,21 +1822,9 @@ Step00:
         textPart.Text = body
         message.Body = textPart
 
-
-        ''添付ファイル
-        'Dim path = strFilePath     '添付したいファイル
-        '    Dim attachment = New MimeKit.MimePart("application", "pdf") _
-        '    With {
-        '        .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
-        '        .ContentDisposition = New MimeKit.ContentDisposition(),
-        '        .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
-        '        .FileName = System.IO.Path.GetFileName(path)
-        '    }
-
         Dim multipart = New MimeKit.Multipart("mixed")
 
         multipart.Add(textPart)
-        'multipart.Add(attachment)
 
         message.Body = multipart
 
@@ -2168,18 +1834,11 @@ Step00:
             client.Disconnect(True)
             client.Dispose()
             message.Dispose()
-
         End Using
 
-
-        'stream.Dispose()
-        'End Using
-
-        'File.Delete(strFilePath)
-
-
-
     End Sub
+
+
 
     Private Function GET_ToAddress(strkbn As String, strtocc As String) As String
         'BCCメールアドレス情報を取得
@@ -2213,7 +1872,6 @@ Step00:
         '結果を取り出す 
         While (dataread.Read())
             GET_ToAddress += dataread("MAIL_ADD") + ","
-
         End While
 
         'クローズ処理 
@@ -2224,4 +1882,155 @@ Step00:
 
     End Function
 
+
+    Private Function GET_from(struid As String) As String
+        'BCCメールアドレス情報を取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+
+        GET_from = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = strSQL & "SELECT e_mail FROM M_EXL_USR "
+        strSQL = strSQL & "WHERE uid = '" & struid & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strDate = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            GET_from += dataread("e_mail")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
+
+
+    Private Function GET_syomei(struid As String) As String
+        'BCCメールアドレス情報を取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+
+        GET_syomei = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = strSQL & "SELECT MEMBER_NAME,COMPANY,TEAM,TEL_NO,E_MAIL FROM M_EXL_CS_MEMBER "
+        strSQL = strSQL & "WHERE code = '" & struid & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strDate = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            GET_syomei += "<html><body>******************************<p></p>" + "" + dataread("MEMBER_NAME") + "<p></p>" + dataread("COMPANY") + "<p></p>" + dataread("TEL_NO") + "<p></p>" + dataread("E_MAIL") + "<p></p>" + "******************************</body></html>"
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+
+
+
+        Dim struid As String = Session("UsrId")
+        Dim strfrom As String = GET_from(struid)
+        '        Dim strto As String = "r-fukao@exedy.com,s-ishida@exedy.com"
+        Dim strto As String = "r-fukao@exedy.com,r-fukao@exedy.com"
+
+        Dim strsyomei As String = GET_syomei(struid)
+
+        'メールの送信に必要な情報
+        Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
+        Dim smtpPort As Integer = 25
+
+        ' メールの内容
+
+
+        'メールの件名
+        Dim subject As String = "【異常報告】案件抽出ページ"
+
+        'メールの本文
+        Dim body As String = "<html><body>案件抽出ページから異常報告です。<br>http://kbhwpm01/EXP/cs_home/anken_booking02.aspx</body></html>" ' UriBodyC()
+
+        body = "<font size=" & Chr(34) & " 3" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
+
+        ' MailKit におけるメールの情報
+        Dim message = New MimeKit.MimeMessage()
+
+        ' 送り元情報  
+        message.From.Add(MailboxAddress.Parse(strfrom))
+
+
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
+
+        ' 表題  
+        message.Subject = subject
+
+        ' 本文
+        Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
+        textPart.Text = body
+        message.Body = textPart
+
+        Dim multipart = New MimeKit.Multipart("mixed")
+
+        multipart.Add(textPart)
+
+        message.Body = multipart
+
+        Using client As New MailKit.Net.Smtp.SmtpClient()
+            client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
+            client.Send(message)
+            client.Disconnect(True)
+            client.Dispose()
+            message.Dispose()
+        End Using
+
+        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
+
+    End Sub
 End Class

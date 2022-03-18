@@ -40,108 +40,101 @@
 
 
 
-h2 {
-  padding-left: 45px;
-  position: relative;
-  border-radius: 10px; /* 角を丸くする */
-}
-h2:before {
-  content: "";
-  background-color: #6fbfd1;
-  border-radius: 50%;
-  opacity: 0.5;
-  width: 35px;
-  height: 35px;
-  left: 5px;
-  top: 0px;
-  position: absolute;
-}
-h2:after{
-  content: "";
-  background-color: #6fbfd1;
-  border-radius: 50%;
-  opacity: 0.5;
-  width: 20px;
-  height: 20px;
-  left: 25px;
-  top:15px;
-  position: absolute;
-}
+        h2 {
+          padding-left: 45px;
+          position: relative;
+          border-radius: 10px; /* 角を丸くする */
+        }
+        h2:before {
+          content: "";
+          background-color: #6fbfd1;
+          border-radius: 50%;
+          opacity: 0.5;
+          width: 35px;
+          height: 35px;
+          left: 5px;
+          top: 0px;
+          position: absolute;
+        }
+        h2:after{
+          content: "";
+          background-color: #6fbfd1;
+          border-radius: 50%;
+          opacity: 0.5;
+          width: 20px;
+          height: 20px;
+          left: 25px;
+          top:15px;
+          position: absolute;
+        }
+        .design01 {
+         width: 65%;
+         text-align: center;
+         border-collapse: collapse;
+         border-spacing: 0;
+         border: solid 1px #778ca3;
+        }
+        .design01 tr {
+         border-top: dashed 1px #778ca3;
+        }
+        .design01 th {
+         padding: 10px;
+         background: #e9faf9;
+        }
+        .design01 td {
+         padding: 10px;
+        }
 
+        .design02 table {
+          border-collapse: collapse;
+          width: 100%; /* 幅 */
+        }
+        .design02 th, .design02 td {
 
+          border: solid 1px #333;
+        }
+        .col-blue {
 
+          border: solid 2px #288cda;
+        }
 
+        .col-blue2 {
 
-.design01 {
- width: 65%;
- text-align: center;
- border-collapse: collapse;
- border-spacing: 0;
- border: solid 1px #778ca3;
-}
-.design01 tr {
- border-top: dashed 1px #778ca3;
-}
-.design01 th {
- padding: 10px;
- background: #e9faf9;
-}
-.design01 td {
- padding: 10px;
-}
+          border: solid 2px #ed4223;
+        }
 
-.design02 table {
-  border-collapse: collapse;
-  width: 100%; /* 幅 */
-}
-.design02 th, .design02 td {
+        .col-blue3 {
 
-  border: solid 1px #333;
-}
-.col-blue {
+          border: solid 2px #4ba339;
+        }
+        table.sample1  thead  tr {
+            background: #B0E0E6;
+            text-align: right;
+        }
+        table.sample1  tfoot  tr {
+            background: #EEFFCD;
+            text-align: right;
+        }
+        table.sample1  tbody  tr {
+            background: #ffffff;
+            text-align: right;
+        }
 
-  border: solid 2px #288cda;
-}
-
-.col-blue2 {
-
-  border: solid 2px #ed4223;
-}
-
-.col-blue3 {
-
-  border: solid 2px #4ba339;
-}
-
-
-table.sample1  thead  tr {
-    background: #B0E0E6;
-    text-align: right;
-}
-table.sample1  tfoot  tr {
-    background: #EEFFCD;
-    text-align: right;
-}
-table.sample1  tbody  tr {
-    background: #ffffff;
-    text-align: right;
-}
-
-.second1 {  
-  background-color: rgba(255,0,0, 0.2);
-}
-.second2 {  
-  background-color: rgba(0,255,0, 0.2);
-}
-.second3 {  
-  background-color: rgba(0,0,255, 0.2);
-}
-.second4 {  
-  background-color: rgba(0,0,0, 0.2);
-}
-.second5 {  
-  background-color: rgba(255, 152, 0, 0.2);
-}
+        .second1 {  
+          background-color: rgba(255,0,0, 0.2);
+        }
+        .second2 {  
+          background-color: rgba(0,255,0, 0.2);
+        }
+        .second3 {  
+          background-color: rgba(0,0,255, 0.2);
+        }
+        .second4 {  
+          background-color: rgba(0,0,0, 0.2);
+        }
+        .second5 {  
+          background-color: rgba(255, 152, 0, 0.2);
+        }
 
 
     </style>
@@ -177,8 +170,6 @@ table.sample1  tbody  tr {
 </script>
 
 
-
-   
  <script>
      $(document).ready(function () {
 
@@ -200,11 +191,6 @@ table.sample1  tbody  tr {
          gData[13] = $("#TextBox14").val();
          gData[14] = $("#TextBox15").val();
          gData[15] = $("#TextBox16").val();
-
-         //window.alert(gData[13]);
-
-
-
 
                  $.ajax({
                      type: "POST",
@@ -258,14 +244,7 @@ table.sample1  tbody  tr {
                          dataarr5.push(val.value5);
                          dataarr6.push(val.value6);
 
-
                          Labelarr.push(val.label);
-
-                         //window.alert('KK3');
-                         //window.alert(Labelarr[0]);
-                         //window.alert(Labelarr[1]);
-                         //window.alert(Labelarr[2]);
-
 
                          lstr = Labelarr[0];
                          lstr2 = Labelarr[1];
@@ -292,10 +271,6 @@ table.sample1  tbody  tr {
                          str16 = dataarr5[2];
                          str17 = dataarr6[2];
 
-
-
-
-                         //Colorarr.push(val.color);
                      });
 
                      //1____________________________________________________________________________________________
@@ -477,12 +452,6 @@ table.sample1  tbody  tr {
                      }
                  };
 
-
-
-
-
-
-
                      //2____________________________________________________________________________________________
 
                      // 背景色                
@@ -654,10 +623,6 @@ table.sample1  tbody  tr {
                          }
                      }
                  };
-
-
-
-
 
                      //3____________________________________________________________________________________________
 
@@ -832,14 +797,6 @@ table.sample1  tbody  tr {
                  };
 
 
-
-
-
-
-
-
-
-
                  var myPieChart = new Chart(ctx, config);
                  var myPieChart2 = new Chart(ctx2, config2);
                  var myPieChart3 = new Chart(ctx3, config3);
@@ -911,11 +868,6 @@ table.sample1  tbody  tr {
              }
 
 
-
-
-
-
-
              $.ajax({
                  type: "POST",
                  //url: "getTrafficSourceData",
@@ -926,7 +878,6 @@ table.sample1  tbody  tr {
                  success: OnSuccess2_,
                  error: OnErrorCall2_
              });
-
 
              function OnSuccess2_(response) {
                  var aDataZ = response.d;
@@ -960,9 +911,6 @@ table.sample1  tbody  tr {
 
                      },
 
-
-
-
                      options: {
                          responsive: true,
                          title: {                           // タイトル
@@ -976,17 +924,12 @@ table.sample1  tbody  tr {
                  };
 
 
-
-
                  var myPieChartZ = new Chart(ctxZ, configZ);
              }
              function OnErrorCall2_(response) {
                  window.alert('エラーです');
              }
 
-
-
-         
              $.ajax({
                  type: "POST",
                  //url: "getTrafficSourceData",
@@ -1032,9 +975,6 @@ table.sample1  tbody  tr {
 
                      },
 
-
-
-
                      options: {
                          responsive: true,
                          title: {                           // タイトル
@@ -1047,9 +987,6 @@ table.sample1  tbody  tr {
                      }
                  };
 
-
-
-
                  var myPieChartZ2 = new Chart(ctxZ2, configZ2);
              }
 
@@ -1057,21 +994,10 @@ table.sample1  tbody  tr {
                  window.alert('エラーです');
              }
 
-
-
-
              e.preventDefault();
      });
          //});
     </script>
-
-
-
-
-
-
-
-
 
 
 </head>
@@ -1087,231 +1013,164 @@ table.sample1  tbody  tr {
 <% End If %>
        
 <div id="contents2" class="inner2">
-<table >
-<tr>
-<td style="width:450px;Font-Size:25px;" >
-<h2>出荷進捗グラフ</h2>
-</td>
-</tr>
-</table>
 
-
-<table >
-
-
-<tr>
-
-<td style="width:1000px;Font-Size:25px;" >
-
-</td>
-
-    <td >
-<strong>
-    <asp:Label style="Font-Size:13px;Color:red" ID="Label85" runat="server" Text="赤線：各週の出荷予定金額"></asp:Label>
-<%--    <asp:Label style="Font-Size:12px;" CssClass ="second1" ID="Label80" runat="server" Text="1週目予定金額"></asp:Label>
-    <asp:Label style="Font-Size:12px;" CssClass ="second2" ID="Label82" runat="server" Text="2週目予定金額"></asp:Label>
-    <asp:Label style="Font-Size:12px;" CssClass ="second3" ID="Label83" runat="server" Text="3週目予定金額"></asp:Label>
-    <asp:Label style="Font-Size:12px;" CssClass ="second4" ID="Label84" runat="server" Text="4週目予定金額"></asp:Label>
-    <asp:Label style="Font-Size:12px;" CssClass ="second5" ID="Label81" runat="server" Text="5週目予定金額"></asp:Label>--%>
-</strong>
-    </td>
-
-</tr>
-</table>
-
-<table>
-<tr>
-
-
-<td style="width:1500px;Font-Size:25px;" >
-
-<canvas id="myChart" width="160" height="15"></canvas>
-</td>
-
-</tr>
-
-<tr>
-
-
-<td style="width:1500px;Font-Size:25px;" >
-    <canvas id="myChart2" width="160" height="11"></canvas>
+    <table >
+        <tr>
+            <td style="width:450px;Font-Size:25px;" >
+                <h2>出荷進捗グラフ</h2>
             </td>
+        </tr>
+    </table>
 
+    <table >
+        <tr>
+            <td style="width:1000px;Font-Size:25px;" >
+            </td>
+            <td >
+                <strong>
+                    <asp:Label style="Font-Size:13px;Color:red" ID="Label85" runat="server" Text="赤線：各週の出荷予定金額"></asp:Label>
+                </strong>
+            </td>
+        </tr>
+    </table>
 
-</tr>   
+    <table>
+        <tr>
+            <td style="width:1500px;Font-Size:25px;" >
+                <canvas id="myChart" width="160" height="15"></canvas>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:1500px;Font-Size:25px;" >
+                <canvas id="myChart2" width="160" height="11"></canvas>
+            </td>
+        </tr>   
+        <tr>
+            <td style="width:1500px;Font-Size:25px;" >
+                <canvas id="myChart3" width="160" height="11"></canvas>
+            </td>
+        </tr>
+    </table>
 
-<tr>
+    <table align="center" border='1' style="width:1300px;Font-Size:11px;" class ="sample1">
+        <colgroup span="1" class="col-blue"></colgroup>
+        <!-- 👇3列目を装飾 -->
+        <colgroup span="5" class="col-blue"></colgroup>
+        <colgroup span="6" class="col-blue"></colgroup>
+        <colgroup span="3" class="col-blue"></colgroup>
+        <thead>
+            <tr >
+                <td colspan="1" style="width:50px;"><asp:Label ID="Label49" runat="server" Text=""></asp:Label></td>
+                <td colspan="5" style="width:50px;"><asp:Label ID="Label46" runat="server" Text="受注金額　※調整納期金額は受注金額合計に含まれない"></asp:Label></td>
+                <td colspan="6" style="width:50px;"><asp:Label ID="Label47" runat="server" Text="出荷金額　 (当月出港予定インボイス作成済み金額)"></asp:Label></td>
+                <td colspan="4" style="width:50px;"><asp:Label ID="Label48" runat="server" Text="残金額　単位:千円"></asp:Label></td>
+            </tr>
+            <tr >
+                <td style="width:50px;"><asp:Label ID="Label50" runat="server" Text="区分"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label51" runat="server" Text="BO<p></p>(前月以前未納)"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label52" runat="server" Text="当月分<p></p>(別月から調整)"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label53" runat="server" Text="当月分<p></p>(オリジナル)"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label54" runat="server" Text="合計<p></p>(BO金額+当月)"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label55" runat="server" Text="調整納期<p></p>(当→翌以降)"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label56" runat="server" Text="前月先行出荷分"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label57" runat="server" Text="当月分<p></p>(別月から調整)"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label58" runat="server" Text="当月分<p></p>(オリジナル)"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label59" runat="server" Text="当月分合計"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label60" runat="server" Text="翌月以降納期分<p></p>(先行出荷)"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label61" runat="server" Text="合計<p></p>(先行出荷含)"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label62" runat="server" Text="当月分"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label63" runat="server" Text="調整納期<p></p>(当→翌以降)"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label64" runat="server" Text="合計<p></p>(調整納期含)"></asp:Label></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr >
+                <td style="width:50px;"><asp:Label ID="Label1" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label2" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label3" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label4" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label5" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label6" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label7" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label8" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label9" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label10" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label11" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label12" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label13" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label14" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;"><asp:Label ID="Label15" runat="server" Text="Label"></asp:Label></td>
+            </tr>
+            <tr>
+                <td><asp:Label ID="Label16" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label17" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label18" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label19" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label20" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label21" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label22" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label23" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label24" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label25" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label26" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label27" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label28" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label29" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label30" runat="server" Text="Label"></asp:Label></td>
+            </tr>
+            <tr>
+                <td><asp:Label ID="Label31" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label32" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label33" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label34" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label35" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label36" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label37" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label38" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label39" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label40" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label41" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label42" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label43" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label44" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label45" runat="server" Text="Label"></asp:Label></td>   
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td><asp:Label ID="Label79" runat="server" Text="合計"></asp:Label></td>
+                <td><asp:Label ID="Label65" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label66" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label67" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label68" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label69" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label70" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label71" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label72" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label73" runat="server" Text="Label"></asp:Label></t>
+                <td><asp:Label ID="Label74" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label75" runat="server" Text="Label"></asp:Label></td>
+                <td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label76" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label77" runat="server" Text="Label"></asp:Label></td>
+                <td><asp:Label ID="Label78" runat="server" Text="Label"></asp:Label></td>
+            </tr>
+        </tfoot>
+    </table>
 
-<td style="width:1500px;Font-Size:25px;" >
-        <canvas id="myChart3" width="160" height="11"></canvas>
-                </td>
+    <table style="height:50px;">
+    </table>
 
-</tr>
-
-</table>
-
-
-<%--<table style="height:10px;">
-</table>--%>
-
-<table align="center" border='1' style="width:1300px;Font-Size:11px;" class ="sample1">
-
-  <colgroup span="1" class="col-blue"></colgroup>
-  <!-- 👇3列目を装飾 -->
-  <colgroup span="5" class="col-blue"></colgroup>
-
-
-
-
-  <colgroup span="6" class="col-blue"></colgroup>
-
-  <colgroup span="3" class="col-blue"></colgroup>
-    　<thead>
-<tr >
-
-<td colspan="1" style="width:50px;"><asp:Label ID="Label49" runat="server" Text=""></asp:Label></td>
-<td colspan="5" style="width:50px;"><asp:Label ID="Label46" runat="server" Text="受注金額　※調整納期金額は受注金額合計に含まれない"></asp:Label></td>
-<td colspan="6" style="width:50px;"><asp:Label ID="Label47" runat="server" Text="出荷金額　 (当月出港予定インボイス作成済み金額)"></asp:Label></td>
-<td colspan="4" style="width:50px;"><asp:Label ID="Label48" runat="server" Text="残金額　単位:千円"></asp:Label></td>
-
-
-
-</tr>
-
-
-<tr >
-
-<td style="width:50px;"><asp:Label ID="Label50" runat="server" Text="区分"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label51" runat="server" Text="BO<p></p>(前月以前未納)"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label52" runat="server" Text="当月分<p></p>(別月から調整)"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label53" runat="server" Text="当月分<p></p>(オリジナル)"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label54" runat="server" Text="合計<p></p>(BO金額+当月)"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label55" runat="server" Text="調整納期<p></p>(当→翌以降)"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label56" runat="server" Text="前月先行出荷分"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label57" runat="server" Text="当月分<p></p>(別月から調整)"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label58" runat="server" Text="当月分<p></p>(オリジナル)"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label59" runat="server" Text="当月分合計"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label60" runat="server" Text="翌月以降納期分<p></p>(先行出荷)"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label61" runat="server" Text="合計<p></p>(先行出荷含)"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label62" runat="server" Text="当月分"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label63" runat="server" Text="調整納期<p></p>(当→翌以降)"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label64" runat="server" Text="合計<p></p>(調整納期含)"></asp:Label></td>
-
-</tr>
-
-　</thead>
-　<tbody>
-
-<tr >
-
-<td style="width:50px;"><asp:Label ID="Label1" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label2" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label3" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label4" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label5" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label6" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label7" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label8" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label9" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label10" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label11" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label12" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label13" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label14" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;"><asp:Label ID="Label15" runat="server" Text="Label"></asp:Label></td>
-
-</tr>
-
-<tr>
-
-<td><asp:Label ID="Label16" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label17" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label18" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label19" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label20" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label21" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label22" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label23" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label24" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label25" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label26" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label27" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label28" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label29" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label30" runat="server" Text="Label"></asp:Label></td>
-
-</tr>
-
-<tr>
-
-<td><asp:Label ID="Label31" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label32" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label33" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label34" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label35" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label36" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label37" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label38" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label39" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label40" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label41" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label42" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label43" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label44" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label45" runat="server" Text="Label"></asp:Label></td>
-
-</tr>
-
-    　</tbody>
-    　<tfoot>
-<tr>
-
-<td><asp:Label ID="Label79" runat="server" Text="合計"></asp:Label></td>
-<td><asp:Label ID="Label65" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label66" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label67" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label68" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label69" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label70" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label71" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label72" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label73" runat="server" Text="Label"></asp:Label></t>
-<td><asp:Label ID="Label74" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label75" runat="server" Text="Label"></asp:Label></td>
-<td style="width:100px;color:red;font-weight:bold;"><asp:Label ID="Label76" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label77" runat="server" Text="Label"></asp:Label></td>
-<td><asp:Label ID="Label78" runat="server" Text="Label"></asp:Label></td>
-
-
-</tr>
-
-         　</tfoot>
-
-</table>
-
-
-<table style="height:50px;">
-</table>
-
-
-<table >
-<tr>
-
-<td style="width:650px;Font-Size:25px;height:20px;" >
-<canvas id="myChartZ2" width="160" height="70"></canvas>
-</td>
-
-<td style="width:650px;Font-Size:25px;height:20px;" >
-<canvas id="myChartZ" width="160" height="70"></canvas>
-</td>
-
-
-</tr>
-</table>
-
+    <table >
+        <tr>
+            <td style="width:650px;Font-Size:25px;height:20px;" >
+                <canvas id="myChartZ2" width="160" height="70"></canvas>
+            </td>
+            <td style="width:650px;Font-Size:25px;height:20px;" >
+                <canvas id="myChartZ" width="160" height="70"></canvas>
+            </td>
+        </tr>
+    </table>
 </div>
-
-
 
 <asp:TextBox ID="TextBox1" runat="server" Text="10"></asp:TextBox>
 <asp:TextBox ID="TextBox2" runat="server" Text="50"></asp:TextBox>

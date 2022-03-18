@@ -8,8 +8,6 @@ Partial Class yuusen
     Public strRow As String
     Public strProcess As String
 
-
-
     Protected Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         'Dim strtxt As String = TextBox1.Text
@@ -17,8 +15,6 @@ Partial Class yuusen
         Dim strbkgno As String
 
         Call GET_BKGNO(strdrp, strbkgno, "1")
-
-        'TextBox1.Text = "Input"
 
         DropDownList1.Items.Clear()
         DropDownList1.DataBind()
@@ -52,7 +48,6 @@ Partial Class yuusen
 
         Call INS_ITKCUST(strtxt)
 
-
         DropDownList2.Items.Clear()
         DropDownList2.DataBind()
         DropDownList2.Items.Insert(0, "Please select")
@@ -81,8 +76,8 @@ Partial Class yuusen
     Protected Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
 
         Dim strtxt As String = DropDownList5.Text
-        Call INS_ITKKAIKA(strtxt)
 
+        Call INS_ITKKAIKA(strtxt)
 
         DropDownList3.Items.Clear()
         DropDownList3.DataBind()
@@ -136,15 +131,11 @@ Partial Class yuusen
 
         strSQL = "SELECT distinct T_INV_HD_TB.BOOKINGNO "
         strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
-
         strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE > '" & dt3.ToShortDateString & "' "
-
         strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE "
         strSQL = strSQL & "HAVING T_INV_HD_TB.OLD_INVNO like '%" & strivno & "%' "
 
         strSQL = strSQL & "AND BOOKINGNO is not null "
-
-
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -154,27 +145,17 @@ Partial Class yuusen
         strDate = ""
         '結果を取り出す 
         While (dataread.Read())
-
             strbkgno = Convert.ToString(dataread("BOOKINGNO"))        'ETD(計上日)
-
-
         End While
 
         If strbkgno <> "" Then
-
             If flg01 = "1" Then
-
                 Call GET_IVDATA(strbkgno, "1")
-
             ElseIf flg01 = "2" Then
-
                 Call GET_IVDATA(strbkgno, "2")
-
             End If
-
         Else
-
-            End If
+        End If
 
         'クローズ処理 
         dataread.Close()
@@ -205,10 +186,8 @@ Partial Class yuusen
         Dim dt2 As DateTime = dt1 + ts1
         Dim dt3 As DateTime = dt1 - ts1
 
-
         'データベース接続を開く
         cnn.Open()
-
 
         strSQL = "SELECT T_INV_HD_TB.OLD_INVNO "
         strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
@@ -218,8 +197,6 @@ Partial Class yuusen
 
         strSQL = strSQL & "order by T_INV_HD_TB.CUTDATE DESC "
 
-
-
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
         'ＳＱＬ文実行 
@@ -228,20 +205,12 @@ Partial Class yuusen
         strDate = ""
         '結果を取り出す 
         While (dataread.Read())
-
             strinv = Convert.ToString(dataread("OLD_INVNO"))        'ETD(計上日)
-
             If flg = "1" Then
-
                 Call INS_ITK(strinv, bkgno)
-
             ElseIf flg = "2"
-
                 Call DEL_ITKIVNO(strinv, bkgno)
-
             End If
-
-
         End While
 
         'クローズ処理 
@@ -276,19 +245,11 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
-
-        'strSQL = ""
-        'strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSWORKSTATUS WHERE "
-        'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "' "
-        'strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
-
         strSQL = ""
         strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
         strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001' "
         strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
         strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
-
-
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -296,24 +257,14 @@ Partial Class yuusen
         dataread = dbcmd.ExecuteReader()
 
         While (dataread.Read())
-
             intCnt = dataread("RecCnt")
-
         End While
 
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
 
-
         If intCnt > 0 Then
-
-            'strSQL = ""
-            'strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
-            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '" & strinv & "', "
-            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
-            'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_BKGNO = '" & bkgno & "' "
-            'strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.ITK_INVNO ='" & strinv & "' "
 
             strSQL = ""
             strSQL = strSQL & "UPDATE T_EXL_WORKSTATUS00 SET "
@@ -327,35 +278,6 @@ Partial Class yuusen
 
         Else
 
-            'strSQL = ""
-            'strSQL = strSQL & "INSERT INTO T_EXL_CSWORKSTATUS VALUES("
-
-            'strSQL = strSQL & " '" & "' "
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-
-
-
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-
-
-
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-
-            'strSQL = strSQL & ",'" & strinv & "' "
-            'strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
-            'strSQL = strSQL & ",'" & bkgno & "' "
-
-            'strSQL = strSQL & ")"
-
             strSQL = ""
             strSQL = strSQL & "INSERT INTO T_EXL_WORKSTATUS00 VALUES("
             strSQL = strSQL & " '001' "
@@ -364,14 +286,11 @@ Partial Class yuusen
             strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
             strSQL = strSQL & ")"
 
-
         End If
 
         Command.CommandText = strSQL
         ' SQLの実行
         Command.ExecuteNonQuery()
-
-
 
         cnn.Close()
         cnn.Dispose()
@@ -394,7 +313,6 @@ Partial Class yuusen
 
         Dim dataread2 As SqlDataReader
         Dim dbcmd2 As SqlCommand
-
         Dim intCnt As Long
 
         Dim dt1 As DateTime = DateTime.Now
@@ -402,27 +320,15 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
-        'strSQL = ""
-        'strSQL = strSQL & "UPDATE T_EXL_CSWORKSTATUS SET "
-        'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_INVNO = '', "
-        'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_REGDATE = '', "
-        'strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_BKGNO = '' "
-        'strSQL = strSQL & "WHERE T_EXL_CSWORKSTATUS.ITK_INVNO ='" & strinv & "' "
-        'strSQL = strSQL & "AND T_EXL_CSWORKSTATUS.ITK_BKGNO ='" & bkgno & "' "
-
         strSQL = ""
         strSQL = strSQL & "DELETE FROM T_EXL_WORKSTATUS00 "
         strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.ID = '001' "
         strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO ='" & strinv & "' "
         strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO ='" & bkgno & "' "
 
-
-
         Command.CommandText = strSQL
         ' SQLの実行
         Command.ExecuteNonQuery()
-
-
 
         cnn.Close()
         cnn.Dispose()
@@ -452,11 +358,9 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
-
         strSQL = ""
         strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_ITAKU WHERE "
         strSQL = strSQL & "T_EXL_ITAKU.CUST_CD = '" & strcust & "' "
-
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -464,27 +368,20 @@ Partial Class yuusen
         dataread = dbcmd.ExecuteReader()
 
         While (dataread.Read())
-
             intCnt = dataread("RecCnt")
-
         End While
 
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
 
-
         If intCnt > 0 Then
-
-
         Else
 
             strSQL = ""
             strSQL = strSQL & "INSERT INTO T_EXL_ITAKU VALUES("
-
             strSQL = strSQL & "'" & strcust & "' "
             strSQL = strSQL & ",'" & " ' "
-
             strSQL = strSQL & ")"
 
             Command.CommandText = strSQL
@@ -492,10 +389,6 @@ Partial Class yuusen
             Command.ExecuteNonQuery()
 
         End If
-
-
-
-
 
         cnn.Close()
         cnn.Dispose()
@@ -524,11 +417,9 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
-
         strSQL = ""
         strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_ITAKU WHERE "
         strSQL = strSQL & "T_EXL_ITAKU.FORWARDER = '" & strkik & "' "
-
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -536,28 +427,19 @@ Partial Class yuusen
         dataread = dbcmd.ExecuteReader()
 
         While (dataread.Read())
-
             intCnt = dataread("RecCnt")
-
         End While
 
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
 
-
         If intCnt > 0 Then
-
-
         Else
-
             strSQL = ""
             strSQL = strSQL & "INSERT INTO T_EXL_ITAKU VALUES("
-
             strSQL = strSQL & "'" & " ' "
-
             strSQL = strSQL & ",'" & strkik & "' "
-
             strSQL = strSQL & ")"
 
             Command.CommandText = strSQL
@@ -565,10 +447,6 @@ Partial Class yuusen
             Command.ExecuteNonQuery()
 
         End If
-
-
-
-
 
         cnn.Close()
         cnn.Dispose()
@@ -609,8 +487,6 @@ Partial Class yuusen
         ' SQLの実行
         Command.ExecuteNonQuery()
 
-
-
         cnn.Close()
         cnn.Dispose()
 
@@ -628,7 +504,6 @@ Partial Class yuusen
         Dim ivno As String = ""
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
-
         Dim dataread2 As SqlDataReader
         Dim dbcmd2 As SqlCommand
 
@@ -648,8 +523,6 @@ Partial Class yuusen
         ' SQLの実行
         Command.ExecuteNonQuery()
 
-
-
         cnn.Close()
         cnn.Dispose()
 
@@ -657,14 +530,7 @@ Partial Class yuusen
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
 
-
         Response.Redirect("\\svnas201\EXD06101\DISC_COMMON\登録用_カレンダマスタ.xls")
-        'Dim p As New System.Diagnostics.Process
-        'p.StartInfo.FileName = “\\kbhwpm01\exp\登録用_T_EXL_CSWORKSTATUS.xls”
-        'p.Start()
-
-
-
 
     End Sub
 End Class
