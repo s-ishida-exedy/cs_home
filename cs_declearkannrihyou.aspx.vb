@@ -482,7 +482,7 @@ Partial Class cs_home
 
             Panel1.Visible = False
             Panel2.Visible = True
-            Me.Label5.Text = "全案件"
+            Me.Label5.Text = "申告済等"
 
         ElseIf Panel2.Visible = True Then
 

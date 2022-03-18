@@ -303,7 +303,7 @@
 
         <asp:BoundField DataField="PICKINPLACE" HeaderText="搬入先" SortExpression="PICKINPLACE" />
         <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
-
+        <asp:BoundField DataField="BOOKING_NO" HeaderText="BKG#" SortExpression="BOOKING_NO" />
 
         </Columns>
         <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
