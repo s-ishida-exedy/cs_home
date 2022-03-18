@@ -359,6 +359,7 @@ Partial Class cs_home
 
             If strtype = "1" Then
                 Call DEL_ITK(strinv, bkgno)
+                Call DEL_ITK2(strinv, bkgno)
             ElseIf strtype = "2" Then
             End If
         End While
@@ -409,6 +410,71 @@ Partial Class cs_home
 
     End Sub
 
+
+    Private Sub DEL_ITK2(strinv As String, bkgno As String)
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim dataread2 As SqlDataReader
+        Dim dbcmd2 As SqlCommand
+
+        Dim intCnt As Long
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
+        strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            intCnt = dataread("RecCnt")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        If intCnt > 0 Then
+
+            strSQL = ""
+            strSQL = strSQL & "DELETE FROM T_EXL_WORKSTATUS00 "
+            strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.ID = '001' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO ='" & strinv & "' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO ='" & bkgno & "' "
+
+        Else
+
+
+        End If
+
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+        cnn.Close()
+        cnn.Dispose()
+
+
+    End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
 
