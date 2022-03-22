@@ -21,6 +21,8 @@ Partial Class yuusen
         If e.Row.RowType = DataControlRowType.DataRow Then
             If e.Row.Cells(12).Text = "月またぎ" Then
                 e.Row.BackColor = Drawing.Color.DarkSalmon
+            ElseIf e.Row.Cells(12).Text = "月またぎP" Then
+                e.Row.BackColor = Drawing.Color.DarkOrange
             ElseIf e.Row.Cells(12).Text = "出港済み" Then
                 e.Row.BackColor = Drawing.Color.LightBlue
             End If
