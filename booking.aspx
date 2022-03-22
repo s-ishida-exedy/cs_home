@@ -187,27 +187,25 @@
 <%--<div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">--%>
 
 
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="SEQ_NO02,CUST_CD" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="1980px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" AllowSorting="True">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" width="2980px" DataKeyNames="SEQ_NO02,CUST_CD" DataSourceID="SqlDataSource1" 
+            BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" AllowColSizing="True">
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
             <Columns>
                 <asp:BoundField DataField="STATUS" SortExpression="STATUS" HeaderText="ｽﾃｰﾀｽ" >
-                <HeaderStyle Width="60px" />
+                <HeaderStyle Width="100px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="Forwarder" HeaderText="海貨業者" SortExpression="Forwarder" >
-                <HeaderStyle Width="100px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
-                <asp:BoundField DataField="CUST_CD" HeaderText="客先" ReadOnly="True" SortExpression="CUST_CD" >
+                <asp:BoundField DataField="CUST_CD" HeaderText="客先" SortExpression="CUST_CD" >
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="CONSIGNEE" HeaderText="荷受先名" SortExpression="CONSIGNEE" >
-                <HeaderStyle Width="250px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" >
-                <HeaderStyle Width="100px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="INVOICE_NO" HeaderText="IVNO" SortExpression="INVOICE_NO" >
@@ -223,27 +221,32 @@
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="TWENTY_FEET" HeaderText="20FT" SortExpression="TWENTY_FEET" >
-                <HeaderStyle Width="80px" />
+                <HeaderStyle Width="100px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="FOURTY_FEET" HeaderText="40FT" SortExpression="FOURTY_FEET" >
-                <HeaderStyle Width="80px" />
+                <HeaderStyle Width="100px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="LCL_QTY" HeaderText="LCL" SortExpression="LCL_QTY" >
-                <HeaderStyle Width="80px" />
+                <HeaderStyle Width="100px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="BOOKING_NO" HeaderText="ﾌﾞｯｷﾝｸﾞNO" SortExpression="BOOKING_NO" >
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="VESSEL_NAME" HeaderText="船名" SortExpression="VESSEL_NAME" >
+                <HeaderStyle Width="200px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="VOYAGE_NO" HeaderText="VoyNo" SortExpression="VOYAGE_NO" >
+                <HeaderStyle Width="100px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="SEQ_NO02" HeaderText="近鉄はHBLNO" SortExpression="SEQ_NO02" >
+                <ItemStyle Font-Size="Small" />
+                </asp:BoundField>
+                <asp:BoundField DataField="PONO" HeaderText="PONO" >
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
             </Columns>
@@ -251,10 +254,6 @@
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
             <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
             <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-<%--            <SortedAscendingCellStyle BackColor="#F1F1F1" />
-            <SortedAscendingHeaderStyle BackColor="#0000A9" />
-            <SortedDescendingCellStyle BackColor="#CAC9C9" />
-            <SortedDescendingHeaderStyle BackColor="#000065" />--%>
         </asp:GridView>
 
 </tbody>
