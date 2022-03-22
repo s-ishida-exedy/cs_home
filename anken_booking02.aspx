@@ -270,7 +270,7 @@
             </td>
             <td class="third-cell">
                 <% If Session("Role") = "admin" Or Session("Role") = "csusr" Then %>
-                    <a href="./anken_booking.aspx">全案件へ</a>
+                    <a href="./anken_booking.aspx">案件管理表へ</a>
                 <% Else %>
 
                 <% End If %>                
