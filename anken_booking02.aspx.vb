@@ -90,6 +90,21 @@ Partial Class yuusen
             End If
         End If
 
+
+        If e.Row.RowType = DataControlRowType.DataRow Then
+
+            If Trim(e.Row.Cells(19).Text) = "LCL" Then
+
+            Else
+
+                e.Row.Cells(19).Text = "FCL"
+
+            End If
+
+
+
+        End If
+
         e.Row.Cells(10).Visible = False
         e.Row.Cells(11).Visible = False
         e.Row.Cells(12).Visible = False
