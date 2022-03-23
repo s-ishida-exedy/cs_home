@@ -258,7 +258,7 @@ Partial Class cs_home
 
     Private Function chk_Nyuryoku() As Boolean
         '入力チェック
-        Dim strMode As String = Session("strMode")
+        Dim strMode As String = Request.QueryString("strMode")
 
         chk_Nyuryoku = True
         Label11.Text = ""
@@ -344,8 +344,8 @@ Partial Class cs_home
         cnn.Open()
 
         'パラメータ取得
-        Dim strId As String = Session("strId")
-        Dim strMode As String = Session("strMode")
+        Dim strId As String = Request.QueryString("strId")
+        Dim strMode As String = Request.QueryString("strMode")
 
         If strUpdMode = "upd" Then
             'データ更新
