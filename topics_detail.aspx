@@ -166,7 +166,7 @@
     </td>
     <td>
         投稿者：
-        <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" AutoPostBack="true" DataSourceID="SqlDataSource2" DataTextField="NAME_AB" DataValueField="NAME_AB" Width="170px" ></asp:DropDownList>
+        <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" AutoPostBack="True" DataSourceID="SqlDataSource2" DataTextField="MEMBER_NAME" DataValueField="NAME_AB" Width="170px" ></asp:DropDownList>
     </td>
 </tr>
 <tr>
