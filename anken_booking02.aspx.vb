@@ -1433,6 +1433,7 @@ Partial Class yuusen
         strSQL = strSQL & "FROM T_EXL_CSANKEN "
         strSQL = strSQL & "WHERE T_EXL_CSANKEN.FLG01 ='1' "
         strSQL = strSQL & "AND T_EXL_CSANKEN.FLG02 ='1' "
+        strSQL = strSQL & "AND T_EXL_CSANKEN.LCL_QTY <>'LCL' "
         strSQL = strSQL & "AND T_EXL_CSANKEN.FORWARDER ='" & A & "' "
 
         'ＳＱＬコマンド作成 

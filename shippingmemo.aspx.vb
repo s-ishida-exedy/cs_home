@@ -548,6 +548,12 @@ Partial Class yuusen
             GridView1.DataBind()
 
         Else
+
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = SqlDataSource1
+
+            GridView1.DataBind()
+
         End If
 
         DropDownList1.Items.Clear()
