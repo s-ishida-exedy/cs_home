@@ -335,6 +335,7 @@
     <table style="width:320px;height:20px;" >
         <tr>
             <p><asp:Label  ID="Label9" runat="server" Text="※作業完了後、チェックを入れてください。" Font-Size="12px" /></p>
+            <p><asp:Label  ID="Label14" runat="server" Text="※LCL案件は委託メールが作成されません。" Font-Size="12px" /></p>
             <asp:Label  ID="Label13" runat="server" Text="※作業は8:30以降にしてください。" Font-Size="12px" ForeColor="red" />
         </tr>
     </table>
@@ -400,7 +401,7 @@
     <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="揚港" SortExpression="DISCHARGING_PORT" />
     <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="配送先" SortExpression="PLACE_OF_DELIVERY" />
     <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" />
-
+    <asp:BoundField DataField="LCL_QTY" HeaderText="出荷形態" SortExpression="LCL_QTY" />
 
     </Columns>
     <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
