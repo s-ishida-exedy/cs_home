@@ -172,7 +172,7 @@
 </thead>
 <tbody>
 <%--<div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">--%>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" Width="1500px" CellPadding="4" GridLines="Vertical" DataKeyNames="BLDATE,INV" ForeColor="#333333" >
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" Width="1500px" CellPadding="4" GridLines="Vertical" DataKeyNames="BLDATE,INV" ForeColor="#333333" AllowSorting="True" >
             <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="White" />
             <Columns>
