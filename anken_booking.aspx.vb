@@ -215,7 +215,7 @@ Partial Class yuusen
                 strbkg += dataread("BKGNO")
                 '書類作成状況
                 If Trim(e.Row.Cells(26).Text) = strbkg Then
-                    e.Row.BackColor = Drawing.Color.DarkSalmon
+                    e.Row.BackColor = Drawing.Color.Khaki
                     e.Row.Cells(1).Text = e.Row.Cells(1).Text & " " & "書類済"
                 End If
             End While
