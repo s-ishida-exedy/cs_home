@@ -572,23 +572,66 @@ Partial Class yuusen
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
+        Dim t As Integer
+        t = 1
+        Dim cnt As Integer = 0
 
-        Dim dt As New DataTable("GridView_Data")
-        For Each cell As TableCell In GridView1.HeaderRow.Cells
-            dt.Columns.Add(cell.Text)
-        Next
-        For Each row As GridViewRow In GridView1.Rows
-            dt.Rows.Add()
-            For i As Integer = 0 To row.Cells.Count - 1
-                dt.Rows(dt.Rows.Count - 1)(i) = Replace(row.Cells(i).Text, "&nbsp;", "")
+        Dim val01 As String = ""
+
+        Using wb As XLWorkbook = New XLWorkbook()
+            Dim ws As IXLWorksheet = wb.AddWorksheet("sipping")
+            For Each cell As TableCell In GridView1.HeaderRow.Cells
+
+                If cnt = 0 Then
+                    cnt = 1
+                Else
+                    val01 = Trim(Replace(cell.Text, "&nbsp;", ""))
+                    ws.Cell(1, t).Value = val01
+                    t = t + 1
+                End If
             Next
-        Next
-        Using wb As New XLWorkbook()
-            wb.Worksheets.Add(dt)
-            wb.SaveAs("C:\Users\T43529\OneDrive - 株式会社エクセディ\デスクトップ\新ツール\SHIPPINGMEMO_" & Now.ToString(“yyyyMMddhh”) & ".xlsx")
+
+            cnt = 0
+            t = 2
+            For Each row As GridViewRow In GridView1.Rows
+
+                If cnt = 0 Then
+                    cnt = 1
+                Else
+                    For i As Integer = 1 To row.Cells.Count - 1
+                        val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
+                        Select Case i
+
+                            Case 4 To 7, 9 To 11, 15
+
+                                If IsDate(val01) = True Then
+                                    ws.Cell(t, i).SetValue(DateValue(val01))
+                                Else
+                                    ws.Cell(t, i).SetValue(val01)
+                                End If
+
+                            Case 16 To 18
+                                If IsNumeric(val01) = True Then
+                                    ws.Cell(t, i).SetValue(Val(val01))
+                                Else
+                                    ws.Cell(t, i).SetValue(val01)
+                                End If
+                            Case Else
+                                ws.Cell(t, i).SetValue(val01)
+                        End Select
+                    Next
+                    t = t + 1
+                End If
+            Next
+
+            ws.Style.Font.FontName = "Meiryo UI"
+            ws.Columns.AdjustToContents()
+            ws.SheetView.FreezeRows(1)
+
+            Dim struid As String = Session("UsrId")
+            wb.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\SHIPPINGMEMO_" & Now.ToString(“yyyyMMddhhmmss”) & "_PIC_" & struid & ".xlsx")
 
         End Using
-
 
     End Sub
 

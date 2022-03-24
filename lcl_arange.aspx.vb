@@ -776,26 +776,26 @@ Partial Class cs_home
 
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
 
-        If Panel1.Visible = True Then
+    '    If Panel1.Visible = True Then
 
-            Panel1.Visible = False
-            Panel2.Visible = True
-            Me.Label3.Text = "未確定"
+    '        Panel1.Visible = False
+    '        Panel2.Visible = True
+    '        Me.Label3.Text = "未確定"
 
-        ElseIf Panel2.Visible = True Then
+    '    ElseIf Panel2.Visible = True Then
 
-            Panel1.Visible = True
-            Panel2.Visible = False
-            Me.Label3.Text = "進捗"
+    '        Panel1.Visible = True
+    '        Panel2.Visible = False
+    '        Me.Label3.Text = "進捗"
 
-        End If
+    '    End If
 
 
 
-    End Sub
+    'End Sub
 
 
     Private Sub GridView2_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView2.RowDataBound

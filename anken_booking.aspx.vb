@@ -1293,4 +1293,70 @@ Step00:
 
     End Function
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        Dim t As Integer
+        t = 1
+        Dim cnt As Integer = 0
+
+        Dim val01 As String = ""
+
+        Using wb As XLWorkbook = New XLWorkbook()
+            Dim ws As IXLWorksheet = wb.AddWorksheet("管理表")
+            For Each cell As TableCell In GridView1.HeaderRow.Cells
+
+                If cnt = 0 Then
+                    cnt = 1
+                Else
+                    val01 = Trim(Replace(cell.Text, "&nbsp;", ""))
+                    ws.Cell(1, t).Value = val01
+                    t = t + 1
+                End If
+            Next
+
+            cnt = 0
+            t = 2
+            For Each row As GridViewRow In GridView1.Rows
+
+                If cnt = 0 Then
+                    cnt = 1
+                Else
+                    For i As Integer = 1 To row.Cells.Count - 1
+                        val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
+                        Select Case i
+
+                            Case 7 To 9, 14 To 25
+
+                                If IsDate(val01) = True Then
+                                    ws.Cell(t, i).SetValue(DateValue(val01))
+                                Else
+                                    ws.Cell(t, i).SetValue(val01)
+                                End If
+
+                            Case 10 To 13
+                                If IsNumeric(val01) = True Then
+                                    ws.Cell(t, i).SetValue(Val(val01))
+                                Else
+                                    ws.Cell(t, i).SetValue(val01)
+                                End If
+                            Case Else
+                                ws.Cell(t, i).SetValue(val01)
+                        End Select
+                    Next
+                    t = t + 1
+                End If
+            Next
+
+            ws.Style.Font.FontName = "Meiryo UI"
+            ws.Columns.AdjustToContents()
+            ws.SheetView.FreezeRows(1)
+
+
+            Dim struid As String = Session("UsrId")
+            wb.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\出荷案件管理表" & Now.ToString(“yyyyMMddhhmmss”) & "_PIC_" & struid & ".xlsx")
+
+        End Using
+
+
+    End Sub
 End Class

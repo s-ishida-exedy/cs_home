@@ -302,7 +302,8 @@
             <tr>
                 <td style="width:1500px;" >
                 <%--<asp:Button  ID="Button2" CssClass="btn00" runat="server" Text="フォルダ作成登録" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />--%> 
-                <asp:Button  ID="Button3" CssClass="btn00" runat="server" Text="フォルダ作成" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
+                <asp:Button  ID="Button3" CssClass="btn00" runat="server" Text="フォルダ作成" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
+                <asp:Button ID="Button2" runat="server" Text="エクセル出力" Width="120px" Height="30px" Font-Size="13px" />
                 <p></p>
                 <%--<asp:Label ID="Label1" runat="server" Text="※チェック後にボタンを押す。(チェックボックスが緑のものはフォルダ作成可能)"  Font-Size="10px"></asp:Label>--%>
                 </td>
