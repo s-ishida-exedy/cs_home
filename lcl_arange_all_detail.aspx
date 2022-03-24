@@ -1,11 +1,11 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="shippingmemo_detail.aspx.vb" Inherits="cs_home" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="lcl_arange_all_detail.aspx.vb" Inherits="cs_home" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>ポータルサイト(シッピングメモ記録編集)</title>
+<title>ポータルサイト(LCL関係メール配信)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -148,7 +148,7 @@
     <table class="header-ta" >
         <tr>
             <td class="first-cell">
-                <h2>シッピングメモ記録編集</h2>  
+                <h2>LCL関係メール配信</h2>  
             </td>
             <td class="second-cell">
 
@@ -157,84 +157,29 @@
                 <asp:Label ID="Label3" runat="server" Text="Label" Class="err"></asp:Label>
             </td>
             <td class="third-cell">
-                <a href="./shippingmemo.aspx">一覧に戻る</a>
+                <a href="./lcl_arange_all.aspx">一覧に戻る</a>
             </td>
         </tr>
     </table>
 <div id="main2" style="width:100%; height:450px;border:None;">
-        <table class="ta3">
+        <table class="ta3" style="width:1000px">
             <tr>
                 <th></th>
                 <td>
-                <asp:Button ID="Button7" runat="server" Text="更　新" style="width:120px" Font-Size="Small" />
-                </td>
-                <th>客先コード</th>
-                <td>
-                    <asp:Label ID="Label1" runat="server" Text="Label" style="width:195px"></asp:Label>
+                <asp:Button ID="Button7" runat="server" Text="送　信" style="width:120px" Font-Size="Small" />
                 </td>
             </tr>
             <tr>
-                <th>IVNO</th>
+                <th>メール本文</th>
                 <td>
-                    <asp:Label ID="Label2" runat="server" Text="Label" style="width:195px"></asp:Label>
-                </td>
-                <th>BKGNO</th>
-                <td>
-                    <asp:Label ID="Label4" runat="server" Text="Label" style="width:195px"></asp:Label>
+                <asp:TextBox ID="TextBox2" runat="server" Width="500px" Height="300px" TextMode="MultiLine" CssClass="" Font-Size="13px" AutoPostBack="True"  AppendDataBoundItems="true" ></asp:TextBox>
                 </td>
              </tr>
-                 <tr>
-                <th>修正後ETD</th>
-                <td>
-                    <asp:TextBox ID="TextBox2" runat="server" class="txtb"></asp:TextBox>
-                </td>
-                <th>修正後ETA</th>
-                <td>
-                    <asp:TextBox ID="TextBox3" runat="server" class="txtb"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <th>BL回収日</th>
-                <td>
-                    <asp:TextBox ID="TextBox4" runat="server" class="txtb"></asp:TextBox>
-                </td>
-                <th>BL日付</th>
-                <td>
-                   <asp:TextBox ID="TextBox5" runat="server" class="txtb"></asp:TextBox>
-                </td>
-             </tr>
-             <tr>
-                <th>売上計上日</th>
-                <td>
-                   <asp:TextBox ID="TextBox6" runat="server" class="txtb"></asp:TextBox>
-                </td>
-                <th>ステータス</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList2" runat="server" class="cmb">
-                        <asp:ListItem></asp:ListItem>
-                        <asp:ListItem>不要</asp:ListItem>
-                        <asp:ListItem>出港済み</asp:ListItem>
-                        <asp:ListItem>月またぎ</asp:ListItem>
-                        <asp:ListItem>月またぎP</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-             </tr>
+
+
 
         </table>
 
-
-
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT 
-CASE KBN
- WHEN '0' THEN '販促品'
- WHEN '1' THEN 'LCL展開'
- WHEN '2' THEN '郵船委託'
- WHEN '3' THEN '近鉄委託'
- WHEN '4' THEN '日ト委託'
- WHEN '5' THEN '日通委託'
-END AS KBN
-FROM M_EXL_LCL_DEC_MAIL
-ORDER BY KBN DESC"></asp:SqlDataSource>
 
 
 </div>

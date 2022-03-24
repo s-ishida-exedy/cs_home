@@ -781,7 +781,7 @@ Partial Class cs_home
             Session("strbkg") = strbkg
 
 
-            Response.Redirect("shippingmemo_detail.aspx")
+            Response.Redirect("lcl_arange_all_detail.aspx")
 
         End If
 

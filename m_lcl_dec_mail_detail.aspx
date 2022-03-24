@@ -199,6 +199,8 @@ CASE KBN
  WHEN '3' THEN '近鉄委託'
  WHEN '4' THEN '日ト委託'
  WHEN '5' THEN '日通委託'
+ WHEN '6' THEN 'LCL準備_C258'
+ WHEN '7' THEN 'LCL準備_C6G0'
 END AS KBN
 FROM M_EXL_LCL_DEC_MAIL
 ORDER BY KBN DESC"></asp:SqlDataSource>
