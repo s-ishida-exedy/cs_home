@@ -358,7 +358,7 @@ Partial Class cs_home
 
         If e.Row.RowType = DataControlRowType.DataRow Then
 
-            Dim str1 As String = Left(e.Row.Cells(1).Text, 4)
+            Dim str1 As String = Left(e.Row.Cells(2).Text, 4)
             Select Case str1
                 Case "C258"
                     cno = 8
@@ -368,14 +368,14 @@ Partial Class cs_home
                     cno = 7
             End Select
 
-            If e.Row.Cells(5).Text = "" Or e.Row.Cells(5).Text = "&nbsp;" Then
+            If e.Row.Cells(6).Text = "" Or e.Row.Cells(6).Text = "&nbsp;" Then
 
-                Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
+                Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(7).Text)
                 Dim ts1 As New TimeSpan(cno, 0, 0, 0)
                 Dim dt2 As DateTime = dt3 - ts1
-                e.Row.Cells(9).Text = "CUT日未記入"
+                e.Row.Cells(10).Text = "CUT日未記入"
 
-                e.Row.Cells(5).Text = dt2
+                e.Row.Cells(6).Text = dt2
 
             End If
 
@@ -400,7 +400,7 @@ Partial Class cs_home
 
             '対象の日付以下の日付の最大値を取得
 
-            strSQL = "SELECT MAX(WORKDAY) AS WDAY01 FROM [T_EXL_CSWORKDAY] WHERE [T_EXL_CSWORKDAY].WORKDAY < '" & e.Row.Cells(5).Text & "' "
+            strSQL = "SELECT MAX(WORKDAY) AS WDAY01 FROM [T_EXL_CSWORKDAY] WHERE [T_EXL_CSWORKDAY].WORKDAY < '" & e.Row.Cells(6).Text & "' "
 
             'ＳＱＬコマンド作成 
             dbcmd = New SqlCommand(strSQL, cnn)
@@ -420,35 +420,35 @@ Partial Class cs_home
 
             If e.Row.RowType = DataControlRowType.DataRow Then
 
-                e.Row.Cells(4).Text = wday2
+                e.Row.Cells(5).Text = wday2
 
-                Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(4).Text)
+                Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
                 Dim ts1 As New TimeSpan(cno, 0, 0, 0)
                 Dim dt2 As DateTime = dt1 + ts1
 
                 If dt3 < dt2 Then
                     e.Row.BackColor = Drawing.Color.Salmon
-                    If (e.Row.Cells(9).Text.Length = 6) And dt3 < dt2 Then
-                        e.Row.Cells(9).Text = "AC要"
-                        e.Row.Cells(9).BackColor = Drawing.Color.Red
-                        e.Row.Cells(9).ForeColor = Drawing.Color.White
+                    If (e.Row.Cells(10).Text.Length = 6) And dt3 < dt2 Then
+                        e.Row.Cells(10).Text = "AC要"
+                        e.Row.Cells(10).BackColor = Drawing.Color.Red
+                        e.Row.Cells(10).ForeColor = Drawing.Color.White
                     End If
                 End If
-                e.Row.Cells(4).Text = e.Row.Cells(4).Text & " (" & dt3.ToString("ddd") & ")"
+                e.Row.Cells(5).Text = e.Row.Cells(5).Text & " (" & dt3.ToString("ddd") & ")"
             End If
 
             'クローズ処理 
             dataread.Close()
             dbcmd.Dispose()
 
-            If e.Row.Cells(9).Text = "CUT日未記入" Then
-                e.Row.Cells(9).BackColor = Drawing.Color.SkyBlue
+            If e.Row.Cells(10).Text = "CUT日未記入" Then
+                e.Row.Cells(10).BackColor = Drawing.Color.SkyBlue
             End If
         End If
 
 
         'strSQL = "SELECT LCLARGD_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLARGD_INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
-        strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(2).Text, 4) & "' "
+        strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
         strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '004' "
         strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].REGDATE BETWEEN '" & dt003 & "' AND '" & dt002 & "' "
 
@@ -463,10 +463,10 @@ Partial Class cs_home
         While (dataread.Read())
             strinv += dataread("INVNO")
             '書類作成状況
-            If Left(e.Row.Cells(2).Text, 4) = strinv Then
+            If Left(e.Row.Cells(3).Text, 4) = strinv Then
                 aflg = 1
-                If e.Row.Cells(9).Text = "AC要" Then
-                    e.Row.Cells(9).Text = " Booking依頼済み"
+                If e.Row.Cells(10).Text = "AC要" Then
+                    e.Row.Cells(10).Text = " Booking依頼済み"
 
                 End If
             End If
@@ -477,9 +477,9 @@ Partial Class cs_home
         dbcmd.Dispose()
 
 
-        strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(2).Text, 4) & "' "
+        strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
         strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '002' "
-        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO ='" & e.Row.Cells(9).Text & "' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO ='" & e.Row.Cells(10).Text & "' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -491,7 +491,7 @@ Partial Class cs_home
         While (dataread.Read())
             strinv += dataread("INVNO")
             '書類作成状況
-            If Left(e.Row.Cells(2).Text, 4) = strinv Then
+            If Left(e.Row.Cells(3).Text, 4) = strinv Then
                 e.Row.BackColor = Drawing.Color.LightGray
             End If
         End While
@@ -505,10 +505,6 @@ Partial Class cs_home
 
         Dim icnt As Integer = 0
 
-        If e.Row.Cells(10).Text = "" Or e.Row.Cells(10).Text = "&nbsp;" Then
-            icnt = 1
-        End If
-
         If e.Row.Cells(11).Text = "" Or e.Row.Cells(11).Text = "&nbsp;" Then
             icnt = 1
         End If
@@ -521,9 +517,13 @@ Partial Class cs_home
             icnt = 1
         End If
 
+        If e.Row.Cells(14).Text = "" Or e.Row.Cells(14).Text = "&nbsp;" Then
+            icnt = 1
+        End If
+
         If icnt = 1 Then
-            e.Row.Cells(0).BackColor = Drawing.Color.Purple
-            e.Row.Cells(0).ForeColor = Drawing.Color.White
+            e.Row.Cells(1).BackColor = Drawing.Color.Purple
+            e.Row.Cells(1).ForeColor = Drawing.Color.White
         End If
 
 
@@ -532,21 +532,30 @@ Partial Class cs_home
 
         If aflg = 1 Then
         Else
-            If Left(e.Row.Cells(1).Text, 4) = "C6G0" Then
-                e.Row.Cells(1).BackColor = Drawing.Color.LightGreen
+            If Left(e.Row.Cells(2).Text, 4) = "C6G0" Then
+                e.Row.Cells(2).BackColor = Drawing.Color.LightGreen
             End If
-            If Left(e.Row.Cells(1).Text, 4) = "C255" Or Left(e.Row.Cells(1).Text, 4) = "C257" Or Left(e.Row.Cells(1).Text, 4) = "C258" Then
-                e.Row.Cells(1).BackColor = Drawing.Color.Khaki
+            If Left(e.Row.Cells(2).Text, 4) = "C255" Or Left(e.Row.Cells(2).Text, 4) = "C257" Or Left(e.Row.Cells(2).Text, 4) = "C258" Then
+                e.Row.Cells(2).BackColor = Drawing.Color.Khaki
             End If
         End If
 
         If e.Row.RowType = DataControlRowType.DataRow Then
-            Dim dt05 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
+            Dim dt05 As DateTime = DateTime.Parse(e.Row.Cells(7).Text)
             If dt04 < dt05 Then
-                e.Row.Cells(6).BackColor = Drawing.Color.Gray
+                e.Row.Cells(7).BackColor = Drawing.Color.Gray
             End If
         End If
 
+
+
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            Dim dltButton As ImageButton = e.Row.FindControl("ImageButton1")
+            'ボタンが存在する場合のみセット
+            If Not (dltButton Is Nothing) Then
+                dltButton.CommandArgument = e.Row.RowIndex.ToString()
+            End If
+        End If
 
     End Sub
 
@@ -746,5 +755,36 @@ Partial Class cs_home
         cnn.Dispose()
 
     End Function
+
+    Private Sub GridView1_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView2.RowCommand
+        If e.CommandName = "edt" Then
+            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+            Dim strcust = Me.GridView2.Rows(index).Cells(2).Text
+            Dim striv = Me.GridView2.Rows(index).Cells(3).Text
+            Dim strhan = Me.GridView2.Rows(index).Cells(5).Text
+            Dim strcut = Me.GridView2.Rows(index).Cells(6).Text
+            Dim stretd = Me.GridView2.Rows(index).Cells(7).Text
+            Dim streta = Me.GridView2.Rows(index).Cells(8).Text
+            Dim strniryou = Me.GridView2.Rows(index).Cells(9).Text
+            Dim strbkg = Me.GridView2.Rows(index).Cells(10).Text
+
+
+
+            Session("strMode") = "0"    '更新モード
+            Session("strcust") = strcust
+            Session("striv") = striv
+            Session("strhan") = strhan
+            Session("strcut") = strcut
+            Session("stretd") = stretd
+            Session("streta") = streta
+            Session("strniryou") = strniryou
+            Session("strbkg") = strbkg
+
+
+            Response.Redirect("shippingmemo_detail.aspx")
+
+        End If
+
+    End Sub
 
 End Class

@@ -226,6 +226,14 @@
     <Columns>
 
 
+        <asp:TemplateField ShowHeader="False">
+        <ItemTemplate>
+        <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="false" CommandName="edt" ImageUrl="~/icon/write.png" Text="編集" width = "15" height = "15" />
+        </ItemTemplate>
+        <HeaderStyle BackColor="#6B696B" />
+        </asp:TemplateField>
+
+
     <asp:BoundField DataField="Forwarder" HeaderText="海貨" SortExpression="Forwarder" />
 
     <%--<asp:BoundField DataField="STATUS" HeaderText="状況" SortExpression="STATUS" />--%>
