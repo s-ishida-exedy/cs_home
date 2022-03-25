@@ -46,6 +46,7 @@ Partial Class cs_home
                 strSQL = strSQL & "   WHEN '5' THEN '日通委託' "
                 strSQL = strSQL & "   WHEN '6' THEN 'LCL準備_C258' "
                 strSQL = strSQL & "   WHEN '7' THEN 'LCL準備_C6G0' "
+                strSQL = strSQL & "   WHEN '8' THEN 'LCLBKG_C258' "
                 strSQL = strSQL & "   End As KBN "
                 strSQL = strSQL & "  , TO_CC "
                 strSQL = strSQL & "  , REF "
@@ -151,6 +152,9 @@ Partial Class cs_home
             Case "LCL準備_C6G0"
                 strkbn = "7"
                 strref = "LCL準備_C6G0"
+            Case "LCLBKG_C258"
+                strkbn = "8"
+                strref = "LCLBKG_C258"
         End Select
 
         '画面入力情報を変数に代入

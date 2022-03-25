@@ -60,7 +60,7 @@ Partial Class yuusen
                             str03 = "○"
                             Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str03)
                         Else
-                            str03 = "×"
+                            str03 = "Ｘ"
                             Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str03)
                         End If
                     End If
@@ -73,7 +73,7 @@ Partial Class yuusen
                             str04 = "○"
                             Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str04)
                         Else
-                            str04 = "×"
+                            str04 = "Ｘ"
                             Call UPD_MEMO03(Trim(e.Row.Cells(13).Text), str04)
                         End If
                     End If

@@ -135,10 +135,37 @@
             };
         });
     });
+
+
+    </script>
+
+    <script>
+
+    function checkfile() {
+        //getElementByIdで上記のhtmlのID id="file_input"　から選択されたファイルの情報を読み込む。
+        var file_name = document.getElementById("file_input").files;
+        //変数定義
+        var list = "";
+        //for文で入っているファイルの文だけファイル名を取得する
+        for (var i = 0; i < file_name.length; i++) {
+            list += file_name[i].name + " ,"
+        }
+        //list の文字列の末尾の一文字を削除する
+        var result = list.substr(0, list.length - 1);
+        //document.getElementByIdで idを selectfile に指定してdocument.getElementById("selectfile").valueで中身を変数resultで指定する
+        document.getElementById("selectfile").value = result;
+    }
+
+
+
+
 </script>
+
+
 </head>
 <body class="c2">
-<form id="form1" runat="server" autocomplete="off">
+<form id="form1" runat="server" autocomplete="off" >
+<%--<form id="form2" runat="server" autocomplete="off"  enctype="multipart/form-data">--%>
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.aspxで行う -->
@@ -162,23 +189,44 @@
         </tr>
     </table>
 <div id="main2" style="width:100%; height:450px;border:None;">
-        <table class="ta3" style="width:1000px">
+        <table class="ta3" style="width:900px">
             <tr>
-                <th></th>
+                <th>タイトル</th>
+                <td colspan="2">
+                    <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                </td>
+             </tr>
+            <tr>
+                <th><asp:CheckBox ID="CheckBox1" runat="server" Text="切替" AutoPostBack="true" Visible="false" /></th>
                 <td>
                 <asp:Button ID="Button7" runat="server" Text="送　信" style="width:120px" Font-Size="Small" />
+                </td>
+                <td>
+                <asp:Button ID="Button1" runat="server" Text="登　録" style="width:120px" Font-Size="Small" />
                 </td>
             </tr>
             <tr>
                 <th>メール本文</th>
-                <td>
-                <asp:TextBox ID="TextBox2" runat="server" Width="500px" Height="300px" TextMode="MultiLine" CssClass="" Font-Size="13px" AutoPostBack="True"  AppendDataBoundItems="true" ></asp:TextBox>
+                <td colspan="2">
+                <asp:TextBox ID="TextBox2" runat="server" Width="500px" Height="200px" TextMode="MultiLine" CssClass="" Font-Size="13px" AutoPostBack="True"  AppendDataBoundItems="true" ></asp:TextBox>
                 </td>
              </tr>
-
+<%--             <tr>
+                <th>添付ファイル<br/>(PDFのみ)</th>
+                <td colspan="2">
+                    <input id="file_input" type="file" multiple="multiple" name="userfile" accept="application/pdf" onchange=checkfile() />
+                </td>
+            </tr>
+            <tr>
+                <th>添付ファイル名</th>
+                <td colspan="2">
+                    <input id="selectfile" type="text" name="selectFile" value="" size="60" disabled="disabled"/>
+                </td>
+            </tr>--%>
 
 
         </table>
+
 
 
 

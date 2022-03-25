@@ -1,8 +1,8 @@
 ﻿Imports System.Data.SqlClient
 Imports mod_function
 Imports MimeKit
-Imports MimeKit.Text
-Imports System.IO
+'Imports MimeKit.Text
+'Imports System.IO
 
 Partial Class cs_home
     Inherits System.Web.UI.Page
@@ -26,6 +26,9 @@ Partial Class cs_home
         Label3.Text = ""
 
         If IsPostBack Then
+
+
+
             ' そうでない時処理
         Else
             'パラメータ取得
@@ -43,6 +46,8 @@ Partial Class cs_home
             If strcust = "C258" Then
                 If strMode = "0" Then
 
+                    Label1.Text = "C258 プロフォーマインボイス登録メール（EXL）"
+
                     TextBox2.Text = "EXL 内田L殿"
                     TextBox2.Text = TextBox2.Text & vbLf
                     TextBox2.Text = TextBox2.Text & "いつもお世話になります。"
@@ -56,12 +61,15 @@ Partial Class cs_home
                     TextBox2.Text = TextBox2.Text & "Bookingに影響しますのでなるべく早くご対応いただければと存じます。 "
                     TextBox2.Text = TextBox2.Text & vbLf & vbLf
                     TextBox2.Text = TextBox2.Text & "以上、宜しくお願いします。"
+                    CheckBox1.Visible = False
                 Else
                 End If
 
             ElseIf strcust = "C6G0" Then
 
                 If strMode = "0" Then
+
+                    Label1.Text = "C6G0 引取り日連絡メール"
 
                     TextBox2.Text = "島田TL殿、内田L殿"
                     TextBox2.Text = TextBox2.Text & vbLf
@@ -78,7 +86,7 @@ Partial Class cs_home
                     TextBox2.Text = TextBox2.Text & "※海貨業者引き取り日：" & strhan
                     TextBox2.Text = TextBox2.Text & vbLf & vbLf
                     TextBox2.Text = TextBox2.Text & "お手数ですが宜しくお願いいたします。"
-
+                    CheckBox1.Visible = False
                 Else
                 End If
 
@@ -88,25 +96,48 @@ Partial Class cs_home
         End If
 
         Button7.Attributes.Add("onclick", "return confirm('メール送信します。よろしいですか？');")
+        Button1.Attributes.Add("onclick", "return confirm('登録します。よろしいですか？');")
 
     End Sub
 
 
 
-    Sub Mail01(struid As String, flg As Long)
+    Sub Mail01(struid As String, flg As Long, flg02 As Long)
 
         Dim subject As String = ""
         Dim body As String = ""
-
         Dim stretd As String = ""
-
         stretd = Session("stretd")
+        Dim l As Long = 1
 
+        'Dim strFilePath() As String
 
         'メールの送信に必要な情報
         Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
         Dim smtpPort As Integer = 25
 
+        '添付ファイルをサーバーにアップロード
+        'Dim posted As HttpFileCollection = Request.Files
+
+        'For i As Integer = 0 To posted.Count - 1
+        '    Dim hpf As HttpPostedFile = posted(i)
+
+        '    If hpf.ContentLength > 0 Then
+
+        '        hpf.SaveAs("C:\Users\T43529\Source\Repos\s-ishida-exedy\cs_home\upload\" & System.IO.Path.GetFileName(hpf.FileName))
+        '        Session("strFile" & l) = System.IO.Path.GetFileName(hpf.FileName)
+        '        l = l + 1
+        '    End If
+
+        '    Next
+
+
+
+
+        'For i As Integer = 1 To l
+
+        '    strFilePath(i) = "C:\exp\cs_home\upload\" & Session("strFile" & i)
+        'Next
         ' メールの内容
 
         Dim strfrom As String = GET_from(struid)
@@ -117,8 +148,15 @@ Partial Class cs_home
         If flg = 1 Then 'C258
 
             Dim strfrom2 As String = GET_from(struid)
-            Dim strto2 As String = GET_ToAddress(6, 1)
-            Dim strcc2 As String = GET_ToAddress(6, 0) + "," + GET_from(struid)
+
+            If flg02 = 1 Then
+                Dim strto2 As String = GET_ToAddress(8, 1)
+                Dim strcc2 As String = GET_ToAddress(8, 0) + "," + GET_from(struid)
+
+            Else
+                Dim strto2 As String = GET_ToAddress(6, 1)
+                Dim strcc2 As String = GET_ToAddress(6, 0) + "," + GET_from(struid)
+            End If
 
             Dim strsyomei As String = GET_syomei(struid)
 
@@ -193,6 +231,34 @@ Partial Class cs_home
         multipart.Add(textPart)
 
         message.Body = multipart
+
+
+        'If flg = 1 Then 'C258
+        '    If flg02 = 1 Then
+
+
+        '        '添付ファイル
+        '        If Session("strFile1") <> "" Then
+
+
+        '            For i As Integer = 1 To l
+        '                Dim path = strFilePath(i)     '添付したいファイル
+        '                Dim attachment = New MimeKit.MimePart("application", "pdf") _
+        '                With {
+        '                    .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
+        '                    .ContentDisposition = New MimeKit.ContentDisposition(),
+        '                    .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
+        '                    .FileName = System.IO.Path.GetFileName(path)
+        '                }
+        '                multipart.Add(attachment)
+        '            Next
+
+        '        End If
+
+
+        '    End If
+        'End If
+
 
         Using client As New MailKit.Net.Smtp.SmtpClient()
             client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
@@ -338,6 +404,7 @@ Partial Class cs_home
 
         Dim strcust As String
         Dim flg As Long
+        Dim flg02 As Long
 
         Dim struid As String = Session("UsrId")
         strcust = Left(Session("strcust"), 4)
@@ -352,7 +419,196 @@ Partial Class cs_home
 
         End If
 
-        Call Mail01(struid, flg)
+        If CheckBox1.Checked = True Then
+
+            flg02 = 1
+
+        Else
+
+            flg02 = 2
+
+        End If
+
+        Call Mail01(struid, flg, flg02)
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim strbkg As String = ""
+        Dim strMode As String = ""
+        Dim strcust As String = ""
+        Dim striv As String = ""
+        Dim strhan As String = ""
+        Dim strcut As String = ""
+        Dim stretd As String = ""
+        Dim stretd02 As Date
+        Dim streta As String = ""
+        Dim strniryou As String = ""
+
+        strMode = Session("strMode")
+        strcust = Left(Session("strcust"), 4)
+        striv = Session("striv")
+        strhan = Session("strhan")
+        strcut = Session("strcut")
+        stretd = Session("stretd")
+        streta = Session("streta")
+        strniryou = Session("strniryou")
+        strbkg = Session("strbkg")
+        stretd02 = Session("stretd")
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+
+        Dim intCnt As Long
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
+        strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '004' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & striv & "' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & strbkg & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            intCnt = dataread("RecCnt")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        If intCnt > 0 Then
+
+            strSQL = ""
+            strSQL = strSQL & "UPDATE T_EXL_WORKSTATUS00 SET "
+
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.INVNO = '" & striv & "', "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.BKGNO = '" & strbkg & "' "
+            strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.INVNO ='" & striv & "' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & strbkg & "' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.ID = '004' "
+
+        Else
+
+            strSQL = ""
+            strSQL = strSQL & "INSERT INTO T_EXL_WORKSTATUS00 VALUES("
+            strSQL = strSQL & " '004' "
+            strSQL = strSQL & ",'" & striv & "' "
+            strSQL = strSQL & ",'" & strbkg & "' "
+            strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
+            strSQL = strSQL & ")"
+
+        End If
+
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+        cnn.Close()
+        cnn.Dispose()
+
+
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+
+
+
+        Dim strinv As String = ""
+        Dim strbkg As String = ""
+        Dim strSQL As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strMode As String = ""
+        Dim strcust As String = ""
+        Dim striv As String = ""
+        Dim strhan As String = ""
+        Dim strcut As String = ""
+        Dim stretd As String = ""
+        Dim stretd02 As Date
+        Dim streta As String = ""
+        Dim strniryou As String = ""
+
+
+
+        'パラメータ取得
+        strMode = Session("strMode")
+            strcust = Left(Session("strcust"), 4)
+            striv = Session("striv")
+            strhan = Session("strhan")
+            strcut = Session("strcut")
+            stretd = Session("stretd")
+            streta = Session("streta")
+            strniryou = Session("strniryou")
+            strbkg = Session("strbkg")
+            stretd02 = Session("stretd")
+
+        If CheckBox1.Checked = True Then
+
+            Label1.Text = "C258 ブッキング依頼メール（Ceva）"
+
+            TextBox2.Text = "CEVA 小川様"
+            TextBox2.Text = TextBox2.Text & vbLf
+            TextBox2.Text = TextBox2.Text & "いつもお世話になります。"
+            TextBox2.Text = TextBox2.Text & vbLf & vbLf
+            TextBox2.Text = TextBox2.Text & stretd & "ETD希望でNIJMEGEN向けに出荷がございます。"
+            TextBox2.Text = TextBox2.Text & vbLf & vbLf
+            TextBox2.Text = TextBox2.Text & "お手数ですが手配をお願い申し上げます。"
+            TextBox2.Text = TextBox2.Text & vbLf & vbLf
+            TextBox2.Text = TextBox2.Text & "パスワード:exedy"
+            TextBox2.Text = TextBox2.Text & vbLf
+            TextBox2.Text = TextBox2.Text & "荷量は" & strniryou & "となります。"
+            TextBox2.Text = TextBox2.Text & vbLf & vbLf
+            TextBox2.Text = TextBox2.Text & "以上です。"
+
+
+        Else
+
+            Label1.Text = "C258 プロフォーマインボイス登録メール（EXL）"
+
+            TextBox2.Text = "EXL 内田L殿"
+            TextBox2.Text = TextBox2.Text & vbLf
+            TextBox2.Text = TextBox2.Text & "いつもお世話になります。"
+            TextBox2.Text = TextBox2.Text & vbLf & vbLf
+            TextBox2.Text = TextBox2.Text & strcust & "向けに" & stretd & "ETDでオーダーがございます。"
+            TextBox2.Text = TextBox2.Text & vbLf & vbLf
+            TextBox2.Text = TextBox2.Text & "IV-" & striv & "にて登録致しました。"
+            TextBox2.Text = TextBox2.Text & vbLf & vbLf
+            TextBox2.Text = TextBox2.Text & "お手数ですがプロフォーマーインボイス用の仮登録をお願いします。"
+            TextBox2.Text = TextBox2.Text & vbLf
+            TextBox2.Text = TextBox2.Text & "Bookingに影響しますのでなるべく早くご対応いただければと存じます。 "
+            TextBox2.Text = TextBox2.Text & vbLf & vbLf
+            TextBox2.Text = TextBox2.Text & "以上、宜しくお願いします。"
+
+        End If
+
+
+
+
+
+
+
+
+
 
     End Sub
 End Class
