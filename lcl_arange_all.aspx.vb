@@ -442,7 +442,8 @@ Partial Class cs_home
             dbcmd.Dispose()
 
             If e.Row.Cells(10).Text = "CUT日未記入" Then
-                e.Row.Cells(10).BackColor = Drawing.Color.SkyBlue
+                e.Row.Cells(10).BackColor = Drawing.Color.Red
+                e.Row.Cells(10).ForeColor = Drawing.Color.White
             End If
         End If
 
@@ -475,6 +476,34 @@ Partial Class cs_home
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
+
+
+
+
+
+        strSQL = "SELECT INVOICE_NO FROM [T_EXL_LCLTENKAI] WHERE [T_EXL_LCLTENKAI].INVOICE_NO = '" & e.Row.Cells(3).Text & "' "
+        strSQL = strSQL & "AND [T_EXL_LCLTENKAI].FLG03 = '1' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strinv = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            strinv += dataread("INVOICE_NO")
+            '書類作成状況
+            If e.Row.Cells(3).Text = strinv Then
+                e.Row.BackColor = Drawing.Color.LightBlue
+            End If
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
 
 
         strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "

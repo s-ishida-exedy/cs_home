@@ -127,6 +127,16 @@
 
 
     </style>
+
+    <script type="text/javascript">
+      function LinkClick2() {
+          var url = 'm_lcl_dec_mail.aspx?q='
+          confirm('別ウインドウでメールアドレス管理ページを開きます');
+        window.open(url, null);
+      }
+
+    </script>
+
 <script>
     $(document).ready(function () {
         var text = getParam('id');
@@ -179,6 +189,11 @@
 <%--                <asp:Button class="btn00"  ID="Button2" runat="server" Text="切替" Width="50px" Height="30px" AutoPostBack="True" Font-Size="13px"/>       
                 :<asp:Label id="Label3" Text="進捗" Font-Size="10" runat="server"></asp:Label>--%>
             </td>
+           <td style="width:80px;" >
+                    <div class="button04">
+                        <a href="javascript:void(0);" onclick="LinkClick2()">メール登録</a>
+                    </div>  
+            </td>
             <td style="width:80px;" >
                 <div class="button04">
                     <a href="lcl_tenkai.aspx?id={0}">展開済案件</a>
@@ -196,19 +211,50 @@
 
     <asp:Panel ID="Panel2" runat="server"  Font-Size="12px" >
 
-    <table>
+    <table border="1" style="width:900px;Font-Size:11px;" >
         <tr>
-            <td style="width:500px;Font-Size:12px;" >
-                <p>※Bookingシート上にCUT日が記載されていない案件</p>
-                ※CUT日を入力すると手配状況の画面に表示される
+            <td  colspan="3" >
+                <div style="background-color:white;text-align: center;">
+                    説明　※CUT日が空白の場合：C258 ETDの8日前、C255 ETDの10日前、その他 ETDの7日前に自動で設定
+                </div>
             </td>
-            <td style="width:500px;Font-Size:12px;" >
-                <p>＜下表のCUT日は自動で設定されている＞</p>
-                C258 ETDの8日前、C255 ETDの10日前、その他 ETDの7日前
+        </tr>
+        <tr>
+            <td >
+                <div style="background-color:lightgray;text-align: center;">
+                書類送付済み
+                </div>
+            </td>
+            <td >
+                <div style="background-color:lightblue;text-align: center;">
+                引取り依頼済み
+                </div>
+            </td>
+            <td >
+                <div style="background-color:Salmon;text-align: center;">
+                今週引取り依頼必要
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td >
+                <div style="background-color:red;color:White;text-align: center;">
+                AC要:引取り依頼が必要だがBooking未確定
+                </div>
+            </td>
+            <td >
+                <div style="background-color:red;color:White;text-align: center;">
+                CUT日未記入:BooingシートにCUT日が入力されていない。
+                </div>
+            </td>
+            <td >
+                <div style="background-color:purple;color:White;text-align: center;">
+                荷受地～仕向地までのどこかが空欄
+                </div>
             </td>
         </tr>
     </table>
-
+        	
 
     <div class="wrapper">
     <table class="sticky">
