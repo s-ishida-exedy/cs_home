@@ -793,9 +793,16 @@ Partial Class yuusen
 
         If CheckBox1.Checked = True Then
             Label3.Text = "済"
-            Dim struid As String = Session("UsrId")
-            Call Mail030(kbn, struid)
-            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('登録し通知メールを送信しました。');</script>", False)
+
+            If Label3.Text = "済" And Label4.Text = "済" Then
+
+                Dim struid As String = Session("UsrId")
+                Call Mail030(kbn, struid)
+                Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('登録し通知メールを送信しました。');</script>", False)
+
+
+            End If
+
         Else
             Label3.Text = "未"
         End If
@@ -852,11 +859,17 @@ Partial Class yuusen
 
         If CheckBox2.Checked = True Then
             Label4.Text = "済"
-            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('登録し通知メールを送信しました。');</script>", False)
-            Dim struid As String = Session("UsrId")
-            Call Mail030(kbn, struid)
+
+            If Label3.Text = "済" And Label4.Text = "済" Then
+
+                Dim struid As String = Session("UsrId")
+                Call Mail030(kbn, struid)
+                Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('登録し通知メールを送信しました。');</script>", False)
+
+
+            End If
         Else
-            Label4.Text = "未"
+                Label4.Text = "未"
         End If
 
 
@@ -1017,7 +1030,7 @@ Partial Class yuusen
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
         'メールの本文
-        Dim body As String = "<html><body>郵船ロジスティクス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY00 & "弊社CUT分で通関委託がございます。<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+        Dim body As String = "<html><body>郵船ロジスティクス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY00 & "弊社CUT分で通関委託がございます。<br>（LCL案件は全て委託となります。）<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
         t = t & body01("郵船")
@@ -1109,7 +1122,7 @@ Partial Class yuusen
         Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
 
         'メールの本文
-        Dim body As String = "<html><body>近鉄エクスプレス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+        Dim body As String = "<html><body>近鉄エクスプレス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br>（LCL案件は全て委託となります。）<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
 
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
@@ -1196,7 +1209,7 @@ Partial Class yuusen
         Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
 
         'メールの本文
-        Dim body As String = "<html><body>日本トランスポート ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+        Dim body As String = "<html><body>日本トランスポート ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br>（LCL案件は全て委託となります。）<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
         t = t & body01("日ト")
@@ -1282,7 +1295,7 @@ Partial Class yuusen
         Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
 
         'メールの本文
-        Dim body As String = "<html><body>日本通運 ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br><br>" ' UriBodyC()
+        Dim body As String = "<html><body>日本通運 ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br>（LCL案件は全て委託となります。）<br><br>" ' UriBodyC()
 
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
@@ -1805,10 +1818,11 @@ Step00:
         End If
 
         'メールの件名
-        Dim subject As String = "【ご連絡・自動配信】" & kbn & " LS ７or９「試作限定」有無確認完了　" & dt1.ToShortDateString
+        'Dim subject As String = "【ご連絡・自動配信】" & kbn & " LS ７or９「試作限定」有無確認完了　" & dt1.ToShortDateString
+        Dim subject As String = "【ご連絡・自動配信 LS ７or９「試作限定」有無確認完了　" & dt1.ToShortDateString
 
         'メールの本文
-        Dim body As String = "<html><body>各位<br>お世話になっております。<br><br>" & kbn & " 登録完了いたしました。<br><br>以上になります。<br>" & kbn & "担当</body></html>" ' UriBodyC()
+        Dim body As String = "<html><body>各位<br>お世話になっております。<br><br>" & "KDとｱﾌﾀ登録完了いたしました。<br>以上になります。<br><br>" & kbn & "担当<br><br>※KDとｱﾌﾀのどちらともの登録が完了した際に配信されます。</body></html>" ' UriBodyC()
 
         body = "<font size=" & Chr(34) & " 3" & Chr(34) & ">" & body & "</font>"
         body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
@@ -1875,7 +1889,7 @@ Step00:
         'データベース接続を開く
         cnn.Open()
 
-        strSQL = strSQL & "SELECT MAIL_ADD FROM M_EXL_LCL_DEC_MAIL "
+        strSQL = strSQL & "Select MAIL_ADD FROM M_EXL_LCL_DEC_MAIL "
         strSQL = strSQL & "WHERE kbn = '" & strkbn & "' "
         strSQL = strSQL & "AND TO_CC = '" & strtocc & "' "
 

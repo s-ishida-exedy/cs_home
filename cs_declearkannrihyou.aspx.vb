@@ -2,6 +2,7 @@
 Imports System.Data.SqlClient
 Imports System.Data.Common
 Imports System.IO
+Imports ClosedXML.Excel
 
 Partial Class cs_home
     Inherits System.Web.UI.Page
@@ -495,6 +496,67 @@ Partial Class cs_home
         'Grid再表示
         GridView1.DataBind()
         GridView2.DataBind()
+
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+
+
+        Dim t As Integer
+        t = 1
+        Dim cnt As Integer = 0
+
+        Dim val01 As String = ""
+
+        Using wb As XLWorkbook = New XLWorkbook()
+            Dim ws As IXLWorksheet = wb.AddWorksheet("管理表")
+            For Each cell As TableCell In GridView2.HeaderRow.Cells
+
+                If cnt < 2 Then
+                    cnt = cnt + 1
+                Else
+                    val01 = Trim(Replace(cell.Text, "&nbsp;", ""))
+                    ws.Cell(1, t).Value = val01
+                    t = t + 1
+                End If
+            Next
+
+            cnt = 0
+            t = 2
+            For Each row As GridViewRow In GridView2.Rows
+
+
+                For i As Integer = 2 To row.Cells.Count - 1
+
+                    val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
+                    Select Case i
+
+                        Case 1 To 2
+
+                            If IsDate(val01) = True Then
+                                ws.Cell(t, i - 1).SetValue(DateValue(val01))
+                            Else
+                                ws.Cell(t, i - 1).SetValue(val01)
+                            End If
+
+                        Case Else
+                            ws.Cell(t, i - 1).SetValue(val01)
+                    End Select
+
+                Next
+                t = t + 1
+
+            Next
+
+            ws.Style.Font.FontName = "Meiryo UI"
+            ws.Columns.AdjustToContents()
+            ws.SheetView.FreezeRows(1)
+
+            Dim struid As String = Session("UsrId")
+            wb.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\特定輸出管理表_" & Now.ToString(“yyyyMMddhhmmss”) & "_PIC_" & struid & ".xlsx")
+
+        End Using
+
 
     End Sub
 End Class

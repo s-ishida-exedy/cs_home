@@ -52,6 +52,12 @@ Partial Class cs_home
                 strkbn = "4"
             Case "日通委託"
                 strkbn = "5"
+            Case "LCL準備_C258"
+                strkbn = "6"
+            Case "LCL準備_C6G0"
+                strkbn = "7"
+            Case "LCLBKG_C258"
+                strkbn = "8"
         End Select
 
         'データの取得

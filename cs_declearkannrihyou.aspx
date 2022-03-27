@@ -217,7 +217,7 @@
     </ItemTemplate>
     </asp:TemplateField>
             
-    <asp:TemplateField HeaderText="EDITMENU">
+    <asp:TemplateField HeaderText="">
     <ItemTemplate>
     <asp:Button runat="server" CommandName="Edit" Text="編集" />
     </ItemTemplate>
@@ -278,6 +278,7 @@
         <tr>
             <td  >
                 <asp:Button ID="Button3" width="120" Font-Size="10" runat="server" Text="管理表に表示する" AutoPostBack="True" />
+                <asp:Button ID="Button5" runat="server" Text="エクセル出力" />
             </td>
             <td style="width:1000px;Font-Size:15px;">
             </td>

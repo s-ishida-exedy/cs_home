@@ -192,7 +192,7 @@
             <HeaderStyle BackColor="#6B696B" Width="400px" />
             </asp:BoundField>
             <asp:BoundField DataField="KBN" HeaderText="区分" SortExpression="KBN" >
-            <HeaderStyle BackColor="#6B696B" Width="100px" />
+            <HeaderStyle BackColor="#6B696B" Width="150px" />
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
             <asp:BoundField DataField="TO_CC" HeaderText="宛先、CC" SortExpression="TO_CC" >
@@ -219,6 +219,10 @@ CASE KBN
  WHEN '3' THEN '近鉄委託'
  WHEN '4' THEN '日ト委託'
  WHEN '5' THEN '日通委託'
+ WHEN '6' THEN 'LCL準備_C258'
+ WHEN '7' THEN 'LCL準備_C6G0'
+ WHEN '8' THEN 'LCLBKG_C258'
+        
 END AS KBN
 ,CASE TO_CC
  WHEN '0' THEN 'CC'
@@ -242,6 +246,9 @@ CASE KBN
  WHEN '3' THEN '近鉄委託'
  WHEN '4' THEN '日ト委託'
  WHEN '5' THEN '日通委託'
+ WHEN '6' THEN 'LCL準備_C258'
+ WHEN '7' THEN 'LCL準備_C6G0'
+ WHEN '8' THEN 'LCLBKG_C258'
 END AS KBN
 FROM M_EXL_LCL_DEC_MAIL
 ORDER BY KBN DESC"></asp:SqlDataSource>

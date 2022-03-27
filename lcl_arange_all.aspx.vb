@@ -16,457 +16,8 @@ Partial Class cs_home
     Public strRow As String
     Public strProcess As String
 
-    Private Sub GridView1_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
 
-        '最終更新年月日取得
-        Dim dataread As SqlDataReader
-        Dim dbcmd As SqlCommand
-        Dim strSQL As String
-        Dim strinv As String
-        Dim cno As Long
-        Dim wno As Long
-        Dim wday As String
-        Dim wday2 As String
-        Dim dt1 As DateTime = DateTime.Now
 
-        '搬入日作成
-
-        '接続文字列の作成
-        Dim ConnectionString As String = String.Empty
-        'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
-        'SqlConnectionクラスの新しいインスタンスを初期化
-        Dim cnn = New SqlConnection(ConnectionString)
-
-        'データベース接続を開く
-        cnn.Open()
-
-        'ヘッダー以外に処理
-        If e.Row.RowType = DataControlRowType.DataRow Then
-
-            '対象の日付以下の日付の最大値を取得
-            strSQL = "SELECT MAX(WORKDAY) AS WDAY01 FROM [T_EXL_CSWORKDAY] WHERE [T_EXL_CSWORKDAY].WORKDAY < '" & e.Row.Cells(6).Text & "' "
-
-            'ＳＱＬコマンド作成 
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行 
-            dataread = dbcmd.ExecuteReader()
-
-            '結果を取り出す 
-            While (dataread.Read())
-                wday2 = dataread("WDAY01")
-            End While
-
-            If Weekday(dt1) > 6 Then
-                cno = 7 - Weekday(dt1) + 6
-            Else
-                cno = 6 - Weekday(dt1) + 7
-            End If
-
-            If e.Row.RowType = DataControlRowType.DataRow Then
-
-                e.Row.Cells(6).Text = wday2
-
-                Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
-                Dim ts1 As New TimeSpan(cno, 0, 0, 0)
-                Dim dt2 As DateTime = dt1 + ts1
-
-                If dt3 < dt2 Then
-                    e.Row.BackColor = Drawing.Color.Salmon
-                    If (e.Row.Cells(11).Text.Length = 6) And dt3 < dt2 Then
-                        e.Row.Cells(11).Text = "AC要"
-                        e.Row.Cells(11).BackColor = Drawing.Color.Red
-                        e.Row.Cells(11).ForeColor = Drawing.Color.White
-                    End If
-                End If
-                e.Row.Cells(6).Text = e.Row.Cells(6).Text & " (" & dt3.ToString("ddd") & ")"
-            End If
-
-            'クローズ処理 
-            dataread.Close()
-            dbcmd.Dispose()
-        End If
-
-
-        strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
-        strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '004' "
-
-        'ＳＱＬコマンド作成 
-        dbcmd = New SqlCommand(strSQL, cnn)
-        'ＳＱＬ文実行 
-        dataread = dbcmd.ExecuteReader()
-
-        strinv = ""
-        '結果を取り出す 
-        While (dataread.Read())
-            strinv += dataread("INVNO")
-            '書類作成状況
-            If Left(e.Row.Cells(4).Text, 4) = strinv Then
-                If e.Row.Cells(11).Text = "AC要" Then
-                    e.Row.Cells(11).Text = " Booking依頼済み"
-                End If
-            End If
-        End While
-
-        'クローズ処理 
-        dataread.Close()
-        dbcmd.Dispose()
-
-        If e.Row.Cells(11).Text = "" Or e.Row.Cells(11).Text = "&nbsp;" Then
-            e.Row.Cells(11).Text = Left(e.Row.Cells(3).Text, 4) & Replace(e.Row.Cells(8).Text, "/", "")
-        End If
-
-        If e.Row.Cells(11).Text = "AC要" Or e.Row.Cells(11).Text = " Booking依頼済み" Then
-            e.Row.Cells(11).Text = e.Row.Cells(11).Text & Left(e.Row.Cells(3).Text, 4) & Replace(e.Row.Cells(8).Text, "/", "")
-        End If
-
-        strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
-        strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '005' "
-        strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].BKGNO = '" & e.Row.Cells(11).Text & "' "
-
-        'ＳＱＬコマンド作成 
-        dbcmd = New SqlCommand(strSQL, cnn)
-        'ＳＱＬ文実行 
-        dataread = dbcmd.ExecuteReader()
-
-        strinv = ""
-        '結果を取り出す 
-        While (dataread.Read())
-            strinv += dataread("INVNO")
-            '出荷手配状況
-            If Left(e.Row.Cells(4).Text, 4) = strinv Then
-                e.Row.BackColor = Drawing.Color.LightBlue
-            End If
-        End While
-
-        'クローズ処理 
-        dataread.Close()
-        dbcmd.Dispose()
-
-        strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
-        strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '002' "
-
-        'ＳＱＬコマンド作成 
-        dbcmd = New SqlCommand(strSQL, cnn)
-        'ＳＱＬ文実行 
-        dataread = dbcmd.ExecuteReader()
-
-        strinv = ""
-        '結果を取り出す 
-        While (dataread.Read())
-            strinv += dataread("INVNO")
-            '書類作成状況
-            If Left(e.Row.Cells(4).Text, 4) = strinv Then
-                e.Row.BackColor = Drawing.Color.DarkGray
-            End If
-        End While
-
-        'クローズ処理 
-        dataread.Close()
-        dbcmd.Dispose()
-
-        cnn.Close()
-        cnn.Dispose()
-
-        e.Row.Cells(5).Visible = False
-        e.Row.Cells(9).Visible = False
-
-    End Sub
-
-
-
-    Protected Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-        '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        '既存案件火のチェックをBKGNOのみからIVNO、その他のキーを考えてカウントを追加する
-        '＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞
-
-
-        '接続文字列の作成
-        Dim ConnectionString As String = String.Empty
-        'SQL Server認証
-        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
-        'SqlConnectionクラスの新しいインスタンスを初期化
-        Dim cnn = New SqlConnection(ConnectionString)
-        Dim Command = cnn.CreateCommand
-        Dim strSQL As String = ""
-        Dim ivno As String = ""
-        Dim dataread As SqlDataReader
-        Dim dbcmd As SqlCommand
-        Dim strDate As String
-        Dim cno As Long
-        Dim wno As Long
-        Dim wday As String
-        Dim wday2 As String
-        Dim WEIGHT As String
-        Dim QTY As String
-        Dim PICKUP01 As String
-        Dim PICKUP02 As String
-        Dim MOVEIN01 As String
-        Dim MOVEIN02 As String
-        Dim OTHERS01 As String
-        Dim FLG01 As String
-        Dim FLG02 As String
-        Dim FLG03 As String
-        Dim FLG04 As String
-        Dim FLG05 As String
-        Dim PICKINPLACE As String
-        Dim bkgno01 As String
-        Dim intCnt As Long
-        Dim straddress As String
-        Dim strbkck As String
-
-        Dim dt1 As DateTime = DateTime.Now
-
-        'データベース接続を開く
-        cnn.Open()
-
-        '非表示ボタン　FLG03は非表示
-        Dim I As Integer
-        For I = 0 To GridView1.Rows.Count - 1
-            If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
-                bkgno01 = ""
-
-                '対象の日付以下の日付の最大値を取得
-
-                strSQL = "SELECT MAX(WORKDAY) AS WDAY01 FROM [T_EXL_CSWORKDAY] WHERE [T_EXL_CSWORKDAY].WORKDAY < '" & GridView1.Rows(I).Cells(7).Text & "' "
-
-                'ＳＱＬコマンド作成 
-                dbcmd = New SqlCommand(strSQL, cnn)
-                'ＳＱＬ文実行 
-                dataread = dbcmd.ExecuteReader()
-
-                '結果を取り出す 
-                While (dataread.Read())
-                    wday2 = dataread("WDAY01")
-                End While
-
-                Dim dt3 As DateTime = DateTime.Parse(wday2)
-
-                wday2 = wday2 & " (" & dt3.ToString("ddd") & ")"
-
-                'クローズ処理 
-                dataread.Close()
-                dbcmd.Dispose()
-
-                If Convert.ToString(GridView1.Rows(I).Cells(11).Text) = "AC要" Or GridView1.Rows(I).Cells(11).Text = "Booking依頼済み" Or GridView1.Rows(I).Cells(11).Text = "" Or GridView1.Rows(I).Cells(11).Text = "&nbsp;" Then
-                    bkgno01 = Left(GridView1.Rows(I).Cells(3).Text, 4) & Replace(GridView1.Rows(I).Cells(8).Text, "/", "")
-                Else
-                    bkgno01 = GridView1.Rows(I).Cells(11).Text
-                End If
-
-                strSQL = ""
-                strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_LCLTENKAI WHERE "
-                strSQL = strSQL & "T_EXL_LCLTENKAI.BOOKING_NO = '" & bkgno01 & "' "
-
-
-                'ＳＱＬコマンド作成 
-                dbcmd = New SqlCommand(strSQL, cnn)
-                'ＳＱＬ文実行 
-                dataread = dbcmd.ExecuteReader()
-
-                While (dataread.Read())
-                    intCnt = dataread("RecCnt")
-                End While
-
-                'クローズ処理 
-                dataread.Close()
-                dbcmd.Dispose()
-
-                strSQL = ""
-                strSQL = strSQL & "SELECT ADDRESS FROM T_EXL_LCLCUSTPREADS WHERE "
-                strSQL = strSQL & "T_EXL_LCLCUSTPREADS.CUSTCODE = '" & Left(Convert.ToString(GridView1.Rows(I).Cells(3).Text), 4) & "' "
-
-
-                'ＳＱＬコマンド作成 
-                dbcmd = New SqlCommand(strSQL, cnn)
-                'ＳＱＬ文実行 
-                dataread = dbcmd.ExecuteReader()
-
-                straddress = ""
-
-                While (dataread.Read())
-                    straddress = dataread("ADDRESS")
-                End While
-
-                'クローズ処理 
-                dataread.Close()
-                dbcmd.Dispose()
-
-                If straddress = "" Then
-
-                    strSQL = ""
-                    strSQL = strSQL & "SELECT ADDRESS FROM T_EXL_LCLCUSTPREADS WHERE "
-                    strSQL = strSQL & "T_EXL_LCLCUSTPREADS.CUSTCODE = 'その他' "
-
-
-                    'ＳＱＬコマンド作成 
-                    dbcmd = New SqlCommand(strSQL, cnn)
-                    'ＳＱＬ文実行 
-                    dataread = dbcmd.ExecuteReader()
-
-                    straddress = ""
-
-                    While (dataread.Read())
-                        straddress = dataread("ADDRESS")
-                    End While
-
-                    'クローズ処理 
-                    dataread.Close()
-                    dbcmd.Dispose()
-
-                End If
-
-                If intCnt > 0 Then
-
-                    strSQL = ""
-                    strSQL = strSQL & "SELECT * FROM T_EXL_LCLTENKAI WHERE "
-                    strSQL = strSQL & "T_EXL_LCLTENKAI.BOOKING_NO = '" & bkgno01 & "' "
-
-
-                    'ＳＱＬコマンド作成 
-                    dbcmd = New SqlCommand(strSQL, cnn)
-                    'ＳＱＬ文実行 
-                    dataread = dbcmd.ExecuteReader()
-
-                    While (dataread.Read())
-                        WEIGHT = Convert.ToString(dataread("WEIGHT"))
-                        QTY = Convert.ToString(dataread("QTY"))
-                        PICKUP01 = Convert.ToString(dataread("PICKUP01"))
-                        PICKUP02 = Convert.ToString(dataread("PICKUP02"))
-                        MOVEIN01 = Convert.ToString(dataread("MOVEIN01"))
-                        MOVEIN02 = Convert.ToString(dataread("MOVEIN02"))
-                        OTHERS01 = Convert.ToString(dataread("OTHERS01"))
-                        FLG01 = Convert.ToString(dataread("FLG01"))
-                        FLG02 = Convert.ToString(dataread("FLG02"))
-                        FLG03 = Convert.ToString(dataread("FLG03"))
-                        FLG04 = Convert.ToString(dataread("FLG04"))
-                        FLG05 = Convert.ToString(dataread("FLG05"))
-                        PICKINPLACE = Convert.ToString(dataread("PICKINPLACE"))
-                    End While
-
-                    'クローズ処理 
-                    dataread.Close()
-                    dbcmd.Dispose()
-
-                    strSQL = ""
-                    strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET "
-                    strSQL = strSQL & "CONSIGNEE = '" & GridView1.Rows(I).Cells(1).Text & "', "
-                    strSQL = strSQL & "DESTINATION = '" & GridView1.Rows(I).Cells(2).Text & "', "
-                    strSQL = strSQL & "CUST = '" & Left(GridView1.Rows(I).Cells(3).Text, 4) & "', "
-                    strSQL = strSQL & "INVOICE_NO = '" & Replace(Convert.ToString(GridView1.Rows(I).Cells(4).Text), "&nbsp;", "") & "', "
-                    strSQL = strSQL & "BOOKING_NO = '" & bkgno01 & "', "
-                    strSQL = strSQL & "OFFICIAL_QUOT = '" & GridView1.Rows(I).Cells(5).Text & "', "
-                    strSQL = strSQL & "CUT_DATE = '" & GridView1.Rows(I).Cells(7).Text & "', "
-                    strSQL = strSQL & "ETD = '" & GridView1.Rows(I).Cells(8).Text & "', "
-                    strSQL = strSQL & "ETA = '" & Replace(GridView1.Rows(I).Cells(9).Text, "&nbsp;", "") & "', "
-                    strSQL = strSQL & "LCL_SIZE = '" & GridView1.Rows(I).Cells(10).Text & "', "
-                    strSQL = strSQL & "WEIGHT = '" & WEIGHT & "', "
-                    strSQL = strSQL & "QTY = '" & QTY & "', "
-                    strSQL = strSQL & "PICKUP01 = '" & PICKUP01 & "', "
-                    strSQL = strSQL & "PICKUP02 = '" & PICKUP02 & "', "
-                    strSQL = strSQL & "MOVEIN01 = '" & MOVEIN01 & "', "
-                    strSQL = strSQL & "MOVEIN02 = '" & MOVEIN02 & "', "
-                    strSQL = strSQL & "OTHERS01 = '" & OTHERS01 & "', "
-                    strSQL = strSQL & "FLG01 = '" & FLG01 & "', "
-                    strSQL = strSQL & "FLG02 = '" & FLG02 & "', "
-                    strSQL = strSQL & "FLG03 = '" & FLG03 & "', "
-                    strSQL = strSQL & "FLG04 = '" & FLG04 & "', "
-                    strSQL = strSQL & "FLG05 = '" & FLG05 & "', "
-                    strSQL = strSQL & "PICKINPLACE = '" & straddress & "' "
-                    strSQL = strSQL & "WHERE BOOKING_NO ='" & bkgno01 & "' "
-
-                Else
-
-                    strSQL = ""
-                    strSQL = strSQL & "SELECT * FROM T_EXL_LCLTENKAI WHERE "
-                    strSQL = strSQL & "T_EXL_LCLTENKAI.BOOKING_NO like '%" & Left(Convert.ToString(GridView1.Rows(I).Cells(3).Text), 4) & Replace(Convert.ToString(GridView1.Rows(I).Cells(8).Text), "/", "") & "%' "
-
-
-                    'ＳＱＬコマンド作成 
-                    dbcmd = New SqlCommand(strSQL, cnn)
-                    'ＳＱＬ文実行 
-                    dataread = dbcmd.ExecuteReader()
-
-                    strbkck = ""
-
-                    While (dataread.Read())
-                        strbkck = dataread("BOOKING_NO")
-                        WEIGHT = Convert.ToString(dataread("WEIGHT"))
-                        QTY = Convert.ToString(dataread("QTY"))
-                        PICKUP01 = Convert.ToString(dataread("PICKUP01"))
-                        PICKUP02 = Convert.ToString(dataread("PICKUP02"))
-                        MOVEIN01 = Convert.ToString(dataread("MOVEIN01"))
-                        MOVEIN02 = Convert.ToString(dataread("MOVEIN02"))
-                        OTHERS01 = Convert.ToString(dataread("OTHERS01"))
-                        FLG01 = Convert.ToString(dataread("FLG01"))
-                        FLG02 = Convert.ToString(dataread("FLG02"))
-                        FLG03 = Convert.ToString(dataread("FLG03"))
-                        FLG04 = Convert.ToString(dataread("FLG04"))
-                        FLG05 = Convert.ToString(dataread("FLG05"))
-                        PICKINPLACE = Convert.ToString(dataread("PICKINPLACE"))
-                    End While
-
-                    'クローズ処理 
-                    dataread.Close()
-                    dbcmd.Dispose()
-
-                    If strbkck = "" Or strbkck = "&nbsp;" Then
-
-                        strSQL = ""
-                        strSQL = strSQL & "INSERT INTO T_EXL_LCLTENKAI VALUES('" & GridView1.Rows(I).Cells(1).Text & "','" & GridView1.Rows(I).Cells(2).Text & "','" & Left(GridView1.Rows(I).Cells(3).Text, 4)
-                        strSQL = strSQL & "','" & Replace(Convert.ToString(GridView1.Rows(I).Cells(4).Text), "&nbsp;", "") & "','" & bkgno01
-                        strSQL = strSQL & "','" & GridView1.Rows(I).Cells(5).Text & "','" & GridView1.Rows(I).Cells(7).Text
-                        strSQL = strSQL & "','" & GridView1.Rows(I).Cells(8).Text & "','" & Replace(GridView1.Rows(I).Cells(9).Text, "&nbsp;", "") & "','" & GridView1.Rows(I).Cells(10).Text
-                        strSQL = strSQL & "','','',' " & wday2 & " ','AM',' " & wday2 & "','PM','','','','','','','" & straddress & "')"
-
-                    Else
-
-                        strSQL = ""
-                        strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET "
-                        strSQL = strSQL & "CONSIGNEE = '" & GridView1.Rows(I).Cells(1).Text & "', "
-                        strSQL = strSQL & "DESTINATION = '" & GridView1.Rows(I).Cells(2).Text & "', "
-                        strSQL = strSQL & "CUST = '" & Left(GridView1.Rows(I).Cells(3).Text, 4) & "', "
-                        strSQL = strSQL & "INVOICE_NO = '" & Replace(Convert.ToString(GridView1.Rows(I).Cells(4).Text), "&nbsp;", "") & "', "
-                        strSQL = strSQL & "BOOKING_NO = '" & bkgno01 & "', "
-                        strSQL = strSQL & "OFFICIAL_QUOT = '" & GridView1.Rows(I).Cells(5).Text & "', "
-                        strSQL = strSQL & "CUT_DATE = '" & GridView1.Rows(I).Cells(7).Text & "', "
-                        strSQL = strSQL & "ETD = '" & GridView1.Rows(I).Cells(8).Text & "', "
-                        strSQL = strSQL & "ETA = '" & Replace(GridView1.Rows(I).Cells(9).Text, "&nbsp;", "") & "', "
-                        strSQL = strSQL & "LCL_SIZE = '" & GridView1.Rows(I).Cells(10).Text & "', "
-                        strSQL = strSQL & "WEIGHT = '" & WEIGHT & "', "
-                        strSQL = strSQL & "QTY = '" & QTY & "', "
-                        strSQL = strSQL & "PICKUP01 = '" & PICKUP01 & "', "
-                        strSQL = strSQL & "PICKUP02 = '" & PICKUP02 & "', "
-                        strSQL = strSQL & "MOVEIN01 = '" & MOVEIN01 & "', "
-                        strSQL = strSQL & "MOVEIN02 = '" & MOVEIN02 & "', "
-                        strSQL = strSQL & "OTHERS01 = '" & OTHERS01 & "', "
-                        strSQL = strSQL & "FLG01 = '" & FLG01 & "', "
-                        strSQL = strSQL & "FLG02 = '" & FLG02 & "', "
-                        strSQL = strSQL & "FLG03 = '" & FLG03 & "', "
-                        strSQL = strSQL & "FLG04 = '" & FLG04 & "', "
-                        strSQL = strSQL & "FLG05 = '" & FLG05 & "', "
-                        strSQL = strSQL & "PICKINPLACE = '" & straddress & "' "
-                        strSQL = strSQL & "WHERE BOOKING_NO like '%" & Left(Convert.ToString(GridView1.Rows(I).Cells(3).Text), 4) & Replace(Convert.ToString(GridView1.Rows(I).Cells(8).Text), "/", "") & "%' "
-                    End If
-                End If
-
-                Command.CommandText = strSQL
-                ' SQLの実行
-                Command.ExecuteNonQuery()
-
-                If FLG03 = "1" Then
-                    Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(4).Text, 4), "1")
-                End If
-            Else
-            End If
-        Next
-
-        '案件展開後、展開済みの場合（FLG03 ＝１）の場合はCSSTATUSに追加する。（IVNO、BOOKINGNO）
-        GridView1.DataBind()
-
-
-    End Sub
 
     Private Sub GET_IVDATA(bkgno As String)
 
@@ -767,7 +318,6 @@ Partial Class cs_home
         If dt00 = dt01 Then
             Panel3.Visible = False
         Else
-            Panel1.Visible = False
             Panel3.Visible = True
         End If
 
@@ -776,26 +326,6 @@ Partial Class cs_home
 
     End Sub
 
-    'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
-
-    '    If Panel1.Visible = True Then
-
-    '        Panel1.Visible = False
-    '        Panel2.Visible = True
-    '        Me.Label3.Text = "未確定"
-
-    '    ElseIf Panel2.Visible = True Then
-
-    '        Panel1.Visible = True
-    '        Panel2.Visible = False
-    '        Me.Label3.Text = "進捗"
-
-    '    End If
-
-
-
-    'End Sub
 
 
     Private Sub GridView2_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView2.RowDataBound
@@ -809,8 +339,22 @@ Partial Class cs_home
         Dim wno As Long
         Dim wday As String
         Dim wday2 As String
-
+        Dim aflg As Long = 0
         Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts01 As New TimeSpan(100, 0, 0, 0)
+        Dim ts02 As New TimeSpan(100, 0, 0, 0)
+        Dim dt02 As DateTime = dt1 + ts01
+        Dim dt03 As DateTime = dt1 - ts01
+
+        Dim dt002 As String
+        Dim dt003 As String
+
+        dt002 = dt02.ToString("yyyy/MM/dd")
+        dt003 = dt03.ToString("yyyy/MM/dd")
+
+        Dim ts03 As New TimeSpan(30, 0, 0, 0)
+        Dim dt04 As DateTime = dt1 + ts03
 
         If e.Row.RowType = DataControlRowType.DataRow Then
 
@@ -824,11 +368,16 @@ Partial Class cs_home
                     cno = 7
             End Select
 
-            Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(7).Text)
-            Dim ts1 As New TimeSpan(cno, 0, 0, 0)
-            Dim dt2 As DateTime = dt3 - ts1
+            If e.Row.Cells(6).Text = "" Or e.Row.Cells(6).Text = "&nbsp;" Then
 
-            e.Row.Cells(6).Text = dt2
+                Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(7).Text)
+                Dim ts1 As New TimeSpan(cno, 0, 0, 0)
+                Dim dt2 As DateTime = dt3 - ts1
+                e.Row.Cells(10).Text = "CUT日未記入"
+
+                e.Row.Cells(6).Text = dt2
+
+            End If
 
         End If
 
@@ -878,9 +427,7 @@ Partial Class cs_home
                 Dim dt2 As DateTime = dt1 + ts1
 
                 If dt3 < dt2 Then
-
                     e.Row.BackColor = Drawing.Color.Salmon
-
                     If (e.Row.Cells(10).Text.Length = 6) And dt3 < dt2 Then
                         e.Row.Cells(10).Text = "AC要"
                         e.Row.Cells(10).BackColor = Drawing.Color.Red
@@ -894,11 +441,74 @@ Partial Class cs_home
             dataread.Close()
             dbcmd.Dispose()
 
+            If e.Row.Cells(10).Text = "CUT日未記入" Then
+                e.Row.Cells(10).BackColor = Drawing.Color.Red
+                e.Row.Cells(10).ForeColor = Drawing.Color.White
+            End If
         End If
+
 
         'strSQL = "SELECT LCLARGD_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLARGD_INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
         strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
         strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '004' "
+        strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].REGDATE BETWEEN '" & dt003 & "' AND '" & dt002 & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        aflg = 0
+        strinv = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            strinv += dataread("INVNO")
+            '書類作成状況
+            If Left(e.Row.Cells(3).Text, 4) = strinv Then
+                aflg = 1
+                If e.Row.Cells(10).Text = "AC要" Then
+                    e.Row.Cells(10).Text = " Booking依頼済み"
+
+                End If
+            End If
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+
+
+
+        strSQL = "SELECT INVOICE_NO FROM [T_EXL_LCLTENKAI] WHERE [T_EXL_LCLTENKAI].INVOICE_NO = '" & e.Row.Cells(3).Text & "' "
+        strSQL = strSQL & "AND [T_EXL_LCLTENKAI].FLG03 = '1' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strinv = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            strinv += dataread("INVOICE_NO")
+            '書類作成状況
+            If e.Row.Cells(3).Text = strinv Then
+                e.Row.BackColor = Drawing.Color.LightBlue
+            End If
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+
+
+        strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
+        strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '002' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO ='" & e.Row.Cells(10).Text & "' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -911,9 +521,7 @@ Partial Class cs_home
             strinv += dataread("INVNO")
             '書類作成状況
             If Left(e.Row.Cells(3).Text, 4) = strinv Then
-                If e.Row.Cells(10).Text = "AC要" Then
-                    e.Row.Cells(10).Text = " Booking依頼済み"
-                End If
+                e.Row.BackColor = Drawing.Color.LightGray
             End If
         End While
 
@@ -924,8 +532,59 @@ Partial Class cs_home
         cnn.Close()
         cnn.Dispose()
 
-        e.Row.Cells(4).Visible = False
-        e.Row.Cells(8).Visible = False
+        Dim icnt As Integer = 0
+
+        If e.Row.Cells(11).Text = "" Or e.Row.Cells(11).Text = "&nbsp;" Then
+            icnt = 1
+        End If
+
+        If e.Row.Cells(12).Text = "" Or e.Row.Cells(12).Text = "&nbsp;" Then
+            icnt = 1
+        End If
+
+        If e.Row.Cells(13).Text = "" Or e.Row.Cells(13).Text = "&nbsp;" Then
+            icnt = 1
+        End If
+
+        If e.Row.Cells(14).Text = "" Or e.Row.Cells(14).Text = "&nbsp;" Then
+            icnt = 1
+        End If
+
+        If icnt = 1 Then
+            e.Row.Cells(1).BackColor = Drawing.Color.Purple
+            e.Row.Cells(1).ForeColor = Drawing.Color.White
+        End If
+
+
+
+
+
+        If aflg = 1 Then
+        Else
+            If Left(e.Row.Cells(2).Text, 4) = "C6G0" Then
+                e.Row.Cells(2).BackColor = Drawing.Color.LightGreen
+            End If
+            If Left(e.Row.Cells(2).Text, 4) = "C255" Or Left(e.Row.Cells(2).Text, 4) = "C257" Or Left(e.Row.Cells(2).Text, 4) = "C258" Then
+                e.Row.Cells(2).BackColor = Drawing.Color.Khaki
+            End If
+        End If
+
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            Dim dt05 As DateTime = DateTime.Parse(e.Row.Cells(7).Text)
+            If dt04 < dt05 Then
+                e.Row.Cells(7).BackColor = Drawing.Color.Gray
+            End If
+        End If
+
+
+
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            Dim dltButton As ImageButton = e.Row.FindControl("ImageButton1")
+            'ボタンが存在する場合のみセット
+            If Not (dltButton Is Nothing) Then
+                dltButton.CommandArgument = e.Row.RowIndex.ToString()
+            End If
+        End If
 
     End Sub
 
@@ -1125,5 +784,36 @@ Partial Class cs_home
         cnn.Dispose()
 
     End Function
+
+    Private Sub GridView1_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView2.RowCommand
+        If e.CommandName = "edt" Then
+            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+            Dim strcust = Me.GridView2.Rows(index).Cells(2).Text
+            Dim striv = Me.GridView2.Rows(index).Cells(3).Text
+            Dim strhan = Me.GridView2.Rows(index).Cells(5).Text
+            Dim strcut = Me.GridView2.Rows(index).Cells(6).Text
+            Dim stretd = Me.GridView2.Rows(index).Cells(7).Text
+            Dim streta = Me.GridView2.Rows(index).Cells(8).Text
+            Dim strniryou = Me.GridView2.Rows(index).Cells(9).Text
+            Dim strbkg = Me.GridView2.Rows(index).Cells(10).Text
+
+
+
+            Session("strMode") = "0"    '更新モード
+            Session("strcust") = strcust
+            Session("striv") = striv
+            Session("strhan") = strhan
+            Session("strcut") = strcut
+            Session("stretd") = stretd
+            Session("streta") = streta
+            Session("strniryou") = strniryou
+            Session("strbkg") = strbkg
+
+
+            Response.Redirect("lcl_arange_all_detail.aspx")
+
+        End If
+
+    End Sub
 
 End Class
