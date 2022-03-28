@@ -183,23 +183,23 @@
             <td style="width:300px;Font-Size:15px;" >
                 <asp:Label id="Label1" Text="＜ラベル＞" runat="server"></asp:Label>
             </td>
-            <td style="width:50px;Font-Size:15px;" >
+            <td style="width:10px;Font-Size:15px;" >
             </td>
             <td style="width:80px;" >
 <%--                <asp:Button class="btn00"  ID="Button2" runat="server" Text="切替" Width="50px" Height="30px" AutoPostBack="True" Font-Size="13px"/>       
                 :<asp:Label id="Label3" Text="進捗" Font-Size="10" runat="server"></asp:Label>--%>
             </td>
-           <td style="width:80px;" >
-                    <div class="button04">
-                        <a href="javascript:void(0);" onclick="LinkClick2()">メール登録</a>
-                    </div>  
+           <td style="width:70px;" >
+                <div class="button04">
+                    <a href="javascript:void(0);" onclick="LinkClick2()">メール登録</a>
+                </div>  
             </td>
-            <td style="width:80px;" >
+            <td style="width:70px;" >
                 <div class="button04">
                     <a href="lcl_tenkai.aspx?id={0}">展開済案件</a>
                 </div>
             </td>
-            <td style="width:80px;" >
+            <td style="width:70px;" >
                 <div class="button04">
                     <a href="lcl_arange.aspx?id={0}">進捗一覧</a>
                 </div>
@@ -213,9 +213,14 @@
 
     <table border="1" style="width:900px;Font-Size:11px;" >
         <tr>
-            <td  colspan="3" >
+            <td  colspan="2" >
                 <div style="background-color:white;text-align: center;">
                     説明　※CUT日が空白の場合：C258 ETDの8日前、C255 ETDの10日前、その他 ETDの7日前に自動で設定
+                </div>
+            </td>
+            <td >
+                <div style="background-color:Khaki;text-align: center;">
+                メール対応必要
                 </div>
             </td>
         </tr>
