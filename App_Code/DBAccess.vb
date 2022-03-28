@@ -608,7 +608,7 @@ Public Class DBAccess
     End Function
 
     Public Function GET_RESULT_EPA(strValue As String) As DataSet
-        'CSメンバーマスタ取得
+        'EPA情報取得
         Conn = Me.Dbconnect
         Cmd = Conn.CreateCommand
 
