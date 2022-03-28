@@ -158,6 +158,10 @@
             text-align :center;
             font-size :small;
         }
+        .txtb{
+            padding: 5px;
+            font-size :small ;
+        }
 </style>
 <script>
     // カレンダー
@@ -302,8 +306,8 @@ ORDER BY NOUKI"></asp:SqlDataSource>
 </tbody>
 </table>
 <div class="right">
-    <asp:Label ID="Label13" runat="server" Text="更新者："></asp:Label>&nbsp;
-    <asp:DropDownList ID="DropDownList1" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="NAME_AB" DataValueField="NAME_AB" Width="120px"></asp:DropDownList><br />
+    <asp:Label ID="Label13" runat="server" Text="EXL宛先："></asp:Label>&nbsp;
+    <asp:TextBox ID="TextBox12" runat="server" Class ="txtb" ></asp:TextBox><br/>
     <asp:Label ID="Label1" runat="server" Text="更新対象："></asp:Label>&nbsp;
     <asp:Button ID="Button1" runat="server" Text="まとめて更新" width="200px" Font-Size="Small" />
     <table class="tab1">
@@ -423,17 +427,6 @@ ORDER BY NOUKI"></asp:SqlDataSource>
             </td>
         </tr>
     </table>
-
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT *
-FROM M_EXL_CS_MEMBER
-WHERE PLACE LIKE '%H%'
-AND CODE LIKE 'T%'
-UNION
-SELECT *
-FROM M_EXL_CS_MEMBER
-WHERE PLACE LIKE '%H%'
-AND CODE LIKE 'E%'"></asp:SqlDataSource>
-
 </div>
 
 </div>

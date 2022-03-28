@@ -26,7 +26,7 @@ Partial Class cs_home
 
             Literal1.Text = UriBodyC()              '本文
             Literal2.Text = GET_CS_Member(6)        'CC
-            Literal4.Text = "r-uchida@exedy.com"    'TO
+            Literal4.Text = Session("strTO")        'TO
             Literal5.Text = "AIR " & Mid(strCust, 1, Len(strCust) - 1) & "荷量確認" & Mid(strIvno, 1, Len(strIvno) - 1)
         End If
 
@@ -76,7 +76,6 @@ Partial Class cs_home
 
         'セッションキーをクリアする
         Session.Remove("strOdrCtrl")
-        Session.Remove("strTan")
 
         '前の画面へ遷移
         Response.Redirect("air_exclusive.aspx")
@@ -90,7 +89,7 @@ Partial Class cs_home
     End Sub
 
     Public Function UriBodyC() As String
-        'メール本文の作成
+        'メール本文の作成（画面用）
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
         Dim strSQL As String = ""
@@ -128,6 +127,10 @@ Partial Class cs_home
 
         Dim Bdy As String = ""
 
+        Bdy = Bdy + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        Bdy = Bdy + "このメールはシステムから送信されています。<br/>"
+        Bdy = Bdy + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
+        Bdy = Bdy + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
         Bdy = Bdy + "お世話になります。<BR>"
         Bdy = Bdy + "ＡＩＲ専用客先オーダーを下記の通り登録しました。<BR>"
 
@@ -171,6 +174,92 @@ Partial Class cs_home
         Return Bdy
     End Function
 
+    Public Function UriBodyC2() As String
+        'メール本文の作成（メール用）
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = strSQL & ""
+        strSQL = strSQL & "SELECT DISTINCT "
+        strSQL = strSQL & "  CUST_CD  "
+        strSQL = strSQL & "  , NOUKI "
+        strSQL = strSQL & "  , LS_TYP "
+        strSQL = strSQL & "  , CUST_ODR_NO "
+        strSQL = strSQL & "  , SALESNOTENO "
+        strSQL = strSQL & "  , a.ODR_CTL_NO AS ODR_CTL_NO "
+        strSQL = strSQL & "  , b.IVNO AS IVNO "
+        strSQL = strSQL & "FROM "
+        strSQL = strSQL & "  T_EXL_AIR_EXC_ODR a "
+        strSQL = strSQL & "  LEFT JOIN T_EXL_AIR_EXCLUSIVE b "
+        strSQL = strSQL & "    ON a.ODR_CTL_NO = b.ODR_CTL_NO "
+        strSQL = strSQL & "WHERE a.ODR_CTL_NO IN (" & Session("strOdrCtrl") & ") "
+        strSQL = strSQL & "ORDER BY NOUKI "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        Dim Bdy As String = ""
+
+        Bdy = Bdy + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        Bdy = Bdy + "このメールはシステムから送信されています。<br/>"
+        Bdy = Bdy + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
+        Bdy = Bdy + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        Bdy = Bdy + "お世話になります。<BR>"
+        Bdy = Bdy + "ＡＩＲ専用客先オーダーを下記の通り登録しました。<BR>"
+
+        '表の作成
+        Bdy = Bdy + "<table width=75% border=""1"" style=""border-collapse: collapse"">"
+        Bdy = Bdy + "    <tr>"
+        Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">客先</td>"
+        Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">納期</td>"
+        Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">LS</td>"
+        Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">客先注文番号</td>"
+        Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">セールスノート</td>"
+        Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">受注管理番号</td>"
+        Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">インボイス番号</td>"
+        Bdy = Bdy + "    </tr>"
+
+        '結果を取り出す 
+        While (dataread.Read())
+            Bdy = Bdy + "    <tr>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & dataread("CUST_CD") & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & dataread("NOUKI") & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & dataread("LS_TYP") & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & dataread("CUST_ODR_NO") & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & dataread("SALESNOTENO") & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & dataread("ODR_CTL_NO") & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & dataread("IVNO") & "</td>"
+            Bdy = Bdy + "    </tr>"
+        End While
+
+        Bdy = Bdy + "</table>"
+
+        Bdy = Bdy + "お手数ですが、明細登録および荷量の確認をお願いします。<BR>"
+        Bdy = Bdy + "以上、よろしくお願いします。"
+
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+        Return Bdy
+    End Function
+
     Private Function GET_CS_Member(intMode As Integer) As String
         'CSメンバー情報を取得
         Dim dataread As SqlDataReader
@@ -191,7 +280,7 @@ Partial Class cs_home
         cnn.Open()
 
         strSQL = strSQL & "Select * FROM M_EXL_CS_MEMBER "
-        strSQL = strSQL & "WHERE NAME_AB = '" & Session("strTan") & "' "
+        strSQL = strSQL & "WHERE CODE = '" & Session("UsrId") & "' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -242,7 +331,7 @@ Partial Class cs_home
         Dim subject As String = "AIR " & Mid(strCust, 1, Len(strCust) - 1) & "荷量確認" & Mid(strCust, 1, Len(strIvno) - 1)
 
         'メールの本文
-        Dim body As String = UriBodyC()
+        Dim body As String = UriBodyC2()
 
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
@@ -251,10 +340,8 @@ Partial Class cs_home
         message.From.Add(MailboxAddress.Parse(strfrom))
 
         ' 宛先情報  
-        message.To.Add(MailboxAddress.Parse("r-uchida@exedy.com"))
-        If Session("strCC") <> "" Then
-            message.Cc.Add(MailboxAddress.Parse(Session("strCC")))
-        End If
+        message.To.Add(MailboxAddress.Parse(Session("strTO")))
+        message.Cc.Add(MailboxAddress.Parse(GET_CS_Member(6)))      'CCはログインしているCS担当者
 
         ' 表題  
         message.Subject = subject

@@ -16,7 +16,8 @@ Partial Class cs_home
             ' そうでない時処理
             Dim i As String = ""
         Else
-            Me.DropDownList1.Items.Insert(0, "-select-") '先頭にタイトル行追加
+            '宛先の初期値
+            TextBox12.Text = "r-uchida@exedy.com"
 
             'AIR専用客先のセールスノート情報取得
             Call Get_SN_Data()
@@ -329,7 +330,7 @@ Partial Class cs_home
         If strOdrCtrl <> "" Then
             '新規登録があった場合、EXL担当者にメール送信
             Session("strOdrCtrl") = Mid(strOdrCtrl, 1, Len(strOdrCtrl) - 1)
-            Session("strTan") = DropDownList1.SelectedValue
+            Session("strTO") = TextBox12.Text
             Response.Redirect("./air_exc_comfirm.aspx")
         Else
             '新規登録以外は、再表示
@@ -438,11 +439,6 @@ Partial Class cs_home
            Label6.Text = "" And Label7.Text = "" And Label8.Text = "" And Label9.Text = "" And
            Label10.Text = "" And Label11.Text = "" Then
             Label12.Text = "更新対象がありません。"
-            Chk_IVNO = False
-        End If
-
-        If DropDownList1.SelectedValue = "" Then
-            Label12.Text = "更新者が選択されていません。"
             Chk_IVNO = False
         End If
 
