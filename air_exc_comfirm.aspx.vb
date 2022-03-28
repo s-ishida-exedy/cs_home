@@ -221,7 +221,7 @@ Partial Class cs_home
         Bdy = Bdy + "ＡＩＲ専用客先オーダーを下記の通り登録しました。<BR>"
 
         '表の作成
-        Bdy = Bdy + "<table width=75% border=""1"" style=""border-collapse: collapse"">"
+        Bdy = Bdy + "<table width=80% border=""1"" style=""border-collapse: collapse"">"
         Bdy = Bdy + "    <tr>"
         Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">客先</td>"
         Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">納期</td>"
