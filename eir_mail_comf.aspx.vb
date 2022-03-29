@@ -161,7 +161,7 @@ Partial Class cs_home
     End Sub
 
     Public Function UriBodyC() As String
-        'メール本文の作成
+        'メール本文の作成（画面用）
 
         Dim Bdy As String = ""
 
@@ -225,6 +225,71 @@ Partial Class cs_home
         Return Bdy
     End Function
 
+    Public Function UriBodyC2() As String
+        'メール本文の作成（メール用）
+
+        Dim Bdy As String = ""
+
+        Bdy = Bdy + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        Bdy = Bdy + "このメールはシステムから送信されています。<br/>"
+        Bdy = Bdy + "心当たりが無い場合、ポータルサイト管理者までご連絡ください。<br/>"
+        Bdy = Bdy + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        Bdy = Bdy + "ＣＳチーム　担当者殿<BR>"
+        Bdy = Bdy + "お世話になります。<BR>"
+        Bdy = Bdy + "主題の件、下記ご確認お願いいたします。<BR>"
+
+        '表の作成
+        Bdy = Bdy + "<table width=75% border=""1"" style=""border-collapse: collapse"">"
+        Bdy = Bdy + "    <tr>"
+        Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#87E7AD"" style =""font-weight:bold""></td>"
+        Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">確定情報</td>"
+        Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">搬入票</td>"
+        Bdy = Bdy + "    </tr>"
+        If Session("strVoy2") <> "" Then
+            Bdy = Bdy + "    <tr>"
+            Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">VoyNo</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Session("strVoy1") & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Session("strVoy2") & "</td>"
+            Bdy = Bdy + "    </tr>"
+        End If
+        If Session("strVess2") <> "" Then
+            Bdy = Bdy + "    <tr>"
+            Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">船　名</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Session("strVess1") & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Session("strVess2") & "</td>"
+            Bdy = Bdy + "    </tr>"
+        End If
+        If Session("strBook2") <> "" Then
+            Bdy = Bdy + "    <tr>"
+            Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">BOOKING NO</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Session("strBook1") & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Session("strBook2") & "</td>"
+            Bdy = Bdy + "    </tr>"
+        End If
+        If Session("strCont2") <> "" Then
+            Bdy = Bdy + "    <tr>"
+            Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">コンテナサイズ</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Session("strCont1") & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Session("strCont2") & "</td>"
+            Bdy = Bdy + "    </tr>"
+        End If
+        If Session("strEtc2") <> "" Then
+            Bdy = Bdy + "    <tr>"
+            Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">その他</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Session("strEtc1") & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Session("strEtc2") & "</td>"
+            Bdy = Bdy + "    </tr>"
+        End If
+        Bdy = Bdy + "</table><br/>"
+
+        Bdy = Bdy + "以上、よろしくお願いします。"
+        Bdy = Bdy + "<br/><br/>"
+        Bdy = Bdy + "【ＣＳ担当者はＣＳポータルにログインし、対応してください。】"
+
+
+        Return Bdy
+    End Function
+
     Private Sub Send_Mail()
         'メールの送信に必要な情報
         Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
@@ -239,7 +304,7 @@ Partial Class cs_home
         Dim subject As String = "【ご確認】" & strTime & "バンニング " & strCust & "向け"
 
         'メールの本文
-        Dim body As String = UriBodyC()
+        Dim body As String = UriBodyC2()
 
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
@@ -287,9 +352,13 @@ Partial Class cs_home
         message.Subject = subject
 
         ' 本文
-        Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
-        textPart.Text = body
-        message.Body = textPart
+        'Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
+        'textPart.Text = body
+        'message.Body = textPart
+
+        Dim bodyBuilder As New BodyBuilder
+        bodyBuilder.HtmlBody = body
+        message.Body = bodyBuilder.ToMessageBody
 
         Using client As New MailKit.Net.Smtp.SmtpClient()
             client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)

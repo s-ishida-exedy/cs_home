@@ -133,7 +133,7 @@
             background:#ffffff;
         }
         .td3 {
-            width: 54pt;
+            width:25%;
             color: black;
             font-size: 10pt;
             font-weight: 700;
@@ -148,7 +148,6 @@
             padding-right: 1px;
             padding-top: 1px;
             background:#ffffff;
-            width:25%;
         }
         .err{
             color:red;
