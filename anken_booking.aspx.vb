@@ -646,288 +646,298 @@ Partial Class yuusen
         Dim I As Integer
 
         For I = 0 To GridView1.Rows.Count - 1
-                If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
-                    If GridView1.Rows(I).Cells(26).Text = "&nbsp;" Or GridView1.Rows(I).Cells(6).Text = "&nbsp;" Then
-                        MsgBox("未確定のためフォルダを作成できません。" & vbCrLf & "客先:" & GridView1.Rows(I).Cells(4).Text & vbCrLf & "ETD:" & vbCrLf & GridView1.Rows(I).Cells(8).Text)
+            If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
+                If GridView1.Rows(I).Cells(26).Text = "&nbsp;" Or GridView1.Rows(I).Cells(6).Text = "&nbsp;" Then
+                    madef00 = "3"
+                Else
+
+                    strPath00(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\a)自社通関依頼書（客先別）WEB\"
+                    strPath00(1) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\b)タイムスケジュール（客先別）\"
+                    strPath01(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\WEB_test\"
+                    'strPath01(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\"
+                    strPath01(1) = "\\svnas201\EXD06101\DISC_COMMON\自社通関輸出書類\"
+
+                    '問題報告ログ初期化
+                    strLog = ""
+
+                    'ファイル検索
+                    strFile0 = Dir(strPath00(0) & "自社通関依頼書　EXEDY *(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*.xlsx", vbNormal)
+                    If strFile0 = "" Then
+                        strLog = strLog & Right("0000" & I, 5) & ",原紙なし" & Chr(10)
+                        madef00 = 0
+                        GoTo Step00
+                    End If
+
+                    '委託検索
+                    itkflg = ""
+                    itkflg = get_itakuhanntei(GridView1.Rows(I).Cells(6).Text)
+
+                    If itkflg = "1" Then
+                        'Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('委託：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
+                        madef00 = 1
+                        GoTo Step00
+                    End If
+
+                    '1_________________________________________________
+
+                    strfol001 = Dir(strPath01(0) & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-"), vbDirectory)
+
+                    'If strfol001 <> "" Then
+                    '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
+                    'madef00 = 2
+                    '    GoTo Step00
+
+                    'End If
+
+                    'strfol001 = Dir(strPath01(1) & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
+
+
+                    'If strfol001 <> "" Then
+                    '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
+                    'madef00 = 2
+                    '    GoTo Step00
+
+                    'End If
+
+
+                    'strfol001 = Dir(strPath01(1) & Format(DateAdd("m", -1, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
+
+
+                    'If strfol001 <> "" Then
+                    '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
+                    'madef00 = 2
+                    '    GoTo Step00
+
+                    'End If
+
+
+                    'strfol001 = Dir(strPath01(1) & Format(DateAdd("m", 0, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
+
+
+                    'If strfol001 <> "" Then
+                    '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
+                    'madef00 = 2
+                    '    GoTo Step00
+
+                    'End If
+
+                    'strfol001 = Dir(strPath01(1) & Format(DateAdd("m", 1, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
+
+
+                    'If strfol001 <> "" Then
+                    '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
+                    'madef00 = 2
+                    '    GoTo Step00
+
+                    'End If
+
+                    '2_________________________________________________
+
+                    'フォルダ作成(既にあればスキップ)
+                    '検索したファイル名から作成
+                    strFol = Replace(strFile0, "自社通関依頼書　EXEDY ", "-")
+                    strFol = Replace(strFol, "IV-0000", "IV-" & GridView1.Rows(I).Cells(6).Text)
+                    strFol = Replace(strFol, "/", "-")
+
+                    'ここを帰るとフォルダ作成先が変わる
+                    Dim dt1 As DateTime = DateTime.Parse(GridView1.Rows(I).Cells(7).Text)
+                    strFol = strPath01(0) & Format(dt1, "yyMMdd") & strFol ' Wb0.Path & "\" & Format(Ws0.Cells(i, 1), "yymmdd") & strFol
+
+                    strFol = Left(strFol, Len(strFol) - 4)
+                    MyStr = Dir(strFol, vbDirectory)
+                    If MyStr <> "" Then
+                        strLog = strLog & Right("0000" & I, 5) & ",同一フォルダ有り" & Chr(10)
+                        madef00 = 2
+                        GoTo Step00
+                    End If
+
+                    'MkDir strFol                                                                                   '格納先
+                    My.Computer.FileSystem.CreateDirectory(strFol)
+
+
+                    '3_________________________________________________
+
+
+
+                    '追加 住所ファイル
+
+                    myPath = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\q_住所" '--- フォルダを作成した場所のパス
+
+                    iptbx = Left(Replace(GridView1.Rows(I).Cells(6).Text, "IV-", ""), 4)
+                    Call copy_custfile(iptbx, Cname, Ccode)
+
+                    F_dir = Dir(myPath & "\" & Ccode & "*", vbDirectory)
+
+                    If F_dir <> "" Then
+                        '処理
+                        'objFSO.CopyFile myPath & "\" & F_dir, strFol & "\" & F_dir, True 
+                        System.IO.File.Copy(myPath & "\" & F_dir, strFol & "\" & F_dir)
                     Else
 
-                        strPath00(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\a)自社通関依頼書（客先別）WEB\"
-                        strPath00(1) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\b)タイムスケジュール（客先別）\"
-                        strPath01(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\WEB_test\"
-                        'strPath01(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\"
-                        strPath01(1) = "\\svnas201\EXD06101\DISC_COMMON\自社通関輸出書類\"
-
-                        '問題報告ログ初期化
-                        strLog = ""
-
-                        'ファイル検索
-                        strFile0 = Dir(strPath00(0) & "自社通関依頼書　EXEDY *(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*.xlsx", vbNormal)
-                        If strFile0 = "" Then
-                            strLog = strLog & Right("0000" & I, 5) & ",原紙なし" & Chr(10)
-                            madef00 = 0
-                            GoTo Step00
-                        End If
-
-                        '委託検索
-                        itkflg = ""
-                        itkflg = get_itakuhanntei(GridView1.Rows(I).Cells(6).Text)
-
-                        If itkflg = "1" Then
-                            'Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('委託：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
-                            madef00 = 1
-                            GoTo Step00
-                        End If
-
-                        '1_________________________________________________
-
-                        strfol001 = Dir(strPath01(0) & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-"), vbDirectory)
-
-                        'If strfol001 <> "" Then
-                        '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
-                        'madef00 = 2
-                        '    GoTo Step00
-
-                        'End If
-
-                        'strfol001 = Dir(strPath01(1) & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
-
-
-                        'If strfol001 <> "" Then
-                        '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
-                        'madef00 = 2
-                        '    GoTo Step00
-
-                        'End If
-
-
-                        'strfol001 = Dir(strPath01(1) & Format(DateAdd("m", -1, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
-
-
-                        'If strfol001 <> "" Then
-                        '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
-                        'madef00 = 2
-                        '    GoTo Step00
-
-                        'End If
-
-
-                        'strfol001 = Dir(strPath01(1) & Format(DateAdd("m", 0, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
-
-
-                        'If strfol001 <> "" Then
-                        '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
-                        'madef00 = 2
-                        '    GoTo Step00
-
-                        'End If
-
-                        'strfol001 = Dir(strPath01(1) & Format(DateAdd("m", 1, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
-
-
-                        'If strfol001 <> "" Then
-                        '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
-                        'madef00 = 2
-                        '    GoTo Step00
-
-                        'End If
-
-                        '2_________________________________________________
-
-                        'フォルダ作成(既にあればスキップ)
-                        '検索したファイル名から作成
-                        strFol = Replace(strFile0, "自社通関依頼書　EXEDY ", "-")
-                        strFol = Replace(strFol, "IV-0000", "IV-" & GridView1.Rows(I).Cells(6).Text)
-                        strFol = Replace(strFol, "/", "-")
-
-                        'ここを帰るとフォルダ作成先が変わる
-                        Dim dt1 As DateTime = DateTime.Parse(GridView1.Rows(I).Cells(7).Text)
-                            strFol = strPath01(0) & Format(dt1, "yyMMdd") & strFol ' Wb0.Path & "\" & Format(Ws0.Cells(i, 1), "yymmdd") & strFol
-
-                        strFol = Left(strFol, Len(strFol) - 4)
-                        MyStr = Dir(strFol, vbDirectory)
-                        If MyStr <> "" Then
-                            strLog = strLog & Right("0000" & I, 5) & ",同一フォルダ有り" & Chr(10)
-                            madef00 = 2
-                            GoTo Step00
-                        End If
-
-                        'MkDir strFol                                                                                   '格納先
-                        My.Computer.FileSystem.CreateDirectory(strFol)
-
-
-                        '3_________________________________________________
-
-
-
-                        '追加 住所ファイル
-
-                        myPath = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\q_住所" '--- フォルダを作成した場所のパス
-
-                        iptbx = Left(Replace(GridView1.Rows(I).Cells(6).Text, "IV-", ""), 4)
-                        Call copy_custfile(iptbx, Cname, Ccode)
-
-                        F_dir = Dir(myPath & "\" & Ccode & "*", vbDirectory)
+                        F_dir = Dir(myPath & "\*" & Cname & "*", vbDirectory)
 
                         If F_dir <> "" Then
                             '処理
-                            'objFSO.CopyFile myPath & "\" & F_dir, strFol & "\" & F_dir, True 
+                            'objFSO.CopyFile myPath & "\" & F_dir, strFol & "\" & F_dir, True
                             System.IO.File.Copy(myPath & "\" & F_dir, strFol & "\" & F_dir)
                         Else
-
-                            F_dir = Dir(myPath & "\*" & Cname & "*", vbDirectory)
-
-                            If F_dir <> "" Then
-                                '処理
-                                'objFSO.CopyFile myPath & "\" & F_dir, strFol & "\" & F_dir, True
-                                System.IO.File.Copy(myPath & "\" & F_dir, strFol & "\" & F_dir)
-                            Else
-                            End If
                         End If
+                    End If
 
 
-                        '4_________________________________________________
+                    '4_________________________________________________
 
 
-                        strirai = Dir(strPath00(0) & "*自社通関依頼書*" & Ccode & "*xlsx")
-                        MyStr = Replace(strFile0, "IV-0000", "IV-" & GridView1.Rows(I).Cells(6).Text)
+                    strirai = Dir(strPath00(0) & "*自社通関依頼書*" & Ccode & "*xlsx")
+                    MyStr = Replace(strFile0, "IV-0000", "IV-" & GridView1.Rows(I).Cells(6).Text)
 
-                        System.IO.File.Copy(strPath00(0) & strirai, strFol & "\" & MyStr)
+                    System.IO.File.Copy(strPath00(0) & strirai, strFol & "\" & MyStr)
 
-                        hensyuuiraisyo = strFol & "\" & MyStr
+                    hensyuuiraisyo = strFol & "\" & MyStr
 
-                        Dim workbook = New XLWorkbook(hensyuuiraisyo)
-                        Dim ws1 As IXLWorksheet = workbook.Worksheet(1)
-
-
-                        '転記
-                        ws1.Cell(4, 1).Value = GridView1.Rows(I).Cells(7).Text   '通関予定日
-                        '        ws2.Range("B1") = Ws0.Cells(i, 2)   '通関予定日
-
-                        ws1.Cell(11, 6).Value = GridView1.Rows(I).Cells(7).Text  'カット日 
-                        '        ws2.Range("B20") = Ws0.Cells(i, 2)   '通関予定日
-
-                        ws1.Cell(11, 7).Value = GridView1.Rows(I).Cells(8).Text  'POSITION(ETD)
-                        '        ws2.Range("B7") = Ws0.Cells(i, 9)   'POSITION(ETD)
-                        '        ws2.Range("B7").NumberFormatLocal = "yyyy/m/d"
-
-                        ws1.Cell(11, 8).Value = GridView1.Rows(I).Cells(9).Text 'ETA 
-                        '        ws2.Range("B21") = Ws0.Cells(i, 10)  'ETA
-
-                        ws1.Cell(14, 2).Value = "'" & GridView1.Rows(I).Cells(26).Text  'BOOKING NO.
-                        '        ws2.Range("B8") = "'" & Ws0.Cells(i, 13)  'BOOKING NO.
-
-                        ws1.Cell(11, 9).Value = GridView1.Rows(I).Cells(27).Text  'CARRIER(船社)
-                        '        ws2.Range("B22") = Ws0.Cells(i, 14)  'CARRIER(船社)
-
-                        ws1.Cell(11, 1).Value = GridView1.Rows(I).Cells(28).Text & " ()" 'VESSEL(船舶コード） '船舶コード課題
-                        '        ws2.Range("B5") = Ws0.Cells(i, 11) 'VESSEL(船舶コード） '船舶コード課題
-
-                        ws1.Cell(11, 4).Value = GridView1.Rows(I).Cells(29).Text  'VOY.NO.(航海番号)
-                        '        ws2.Range("B6") = Ws0.Cells(i, 12)  'VOY.NO.(航海番号)
-
-                        'MyStr = "確認要"           'REF番号
-                        'MyStr = Left(MyStr, InStr(1, MyStr, "-"))
-                        'ws1.Cell(4, 5).Value = MyStr
-                        '        ws2.Range("C1") = MyStr
-
-                        Dim MyStr2 As String = "---" 'REF番号
-                        ws1.Cell(4, 6).Value = MyStr
-                        '        ws2.Range("D1") = MyStr
-
-                        '港チェック(現段階では相違があれば、色を付ける→後々は訂正をする方向で)
-                        Dim erflg As Long = 0
-                        'PLACE OF RECEIPT(荷受地)
-                        If ws1.Cell(16, 1).Value <> GridView1.Rows(I).Cells(30).Text Then
-
-                            ws1.Cell(16, 1).Style.Fill.BackgroundColor = XLColor.Red
-                            erflg = 1
-                        End If
-                        'PORT OF LOADING(積出港)
-                        If ws1.Cell(16, 3).Value <> GridView1.Rows(I).Cells(31).Text Then
-                            ws1.Cell(16, 3).Style.Fill.BackgroundColor = XLColor.Red
-                            erflg = 1
-                        End If
-                        'PORT OF DISCHARGE(揚地)
-                        If ws1.Cell(16, 5).Value <> GridView1.Rows(I).Cells(32).Text Then
-                            ws1.Cell(16, 5).Style.Fill.BackgroundColor = XLColor.Red
-                            erflg = 1
-                        End If
-                        'PLACE OF DELIVERY(配送先)
-                        If ws1.Cell(16, 7).Value <> GridView1.Rows(I).Cells(33).Text Then
-                            ws1.Cell(16, 7).Style.Fill.BackgroundColor = XLColor.Red
-                            erflg = 1
-                        End If
+                    Dim workbook = New XLWorkbook(hensyuuiraisyo)
+                    Dim ws1 As IXLWorksheet = workbook.Worksheet(1)
 
 
-                        '------------　18/04追記  港コードも色付け　--------------
-                        If ws1.Cell(16, 3).Style.Fill.BackgroundColor = XLColor.Red Then
-                            ws1.Cell(25, 1).Style.Fill.BackgroundColor = XLColor.Red
-                            erflg = 1
-                        End If
+                    '転記
+                    ws1.Cell(4, 1).Value = GridView1.Rows(I).Cells(7).Text   '通関予定日
+                    '        ws2.Range("B1") = Ws0.Cells(i, 2)   '通関予定日
 
-                        If ws1.Cell(16, 5).Style.Fill.BackgroundColor = XLColor.Red Then
-                            ws1.Cell(25, 6).Style.Fill.BackgroundColor = XLColor.Red
-                            erflg = 1
-                        End If
+                    ws1.Cell(11, 6).Value = GridView1.Rows(I).Cells(7).Text  'カット日 
+                    '        ws2.Range("B20") = Ws0.Cells(i, 2)   '通関予定日
 
-                        If ws1.Cell(16, 7).Style.Fill.BackgroundColor = XLColor.Red Then
-                            ws1.Cell(30, 1).Style.Fill.BackgroundColor = XLColor.Red
-                            erflg = 1
-                        End If
-                        '---------------------------------------------------------
+                    ws1.Cell(11, 7).Value = GridView1.Rows(I).Cells(8).Text  'POSITION(ETD)
+                    '        ws2.Range("B7") = Ws0.Cells(i, 9)   'POSITION(ETD)
+                    '        ws2.Range("B7").NumberFormatLocal = "yyyy/m/d"
 
-                        '------------　21/03追記  Bookingsheetからデータ取得　--------------
-                        If erflg = 1 Then
+                    ws1.Cell(11, 8).Value = GridView1.Rows(I).Cells(9).Text 'ETA 
+                    '        ws2.Range("B21") = Ws0.Cells(i, 10)  'ETA
 
-                            Dim niuke As String = ""
-                            Dim tsumi As String = ""
-                            Dim ageti As String = ""
-                            Dim haisou As String = ""
+                    ws1.Cell(14, 2).Value = "'" & GridView1.Rows(I).Cells(26).Text  'BOOKING NO.
+                    '        ws2.Range("B8") = "'" & Ws0.Cells(i, 13)  'BOOKING NO.
 
-                            Call get_bookingdata(I, niuke, tsumi, ageti, haisou, GridView1.Rows(I).Cells(6).Text)
+                    ws1.Cell(11, 9).Value = GridView1.Rows(I).Cells(27).Text  'CARRIER(船社)
+                    '        ws2.Range("B22") = Ws0.Cells(i, 14)  'CARRIER(船社)
 
-                            ws1.Cell(2, 12).Value = niuke
-                            ws1.Cell(3, 12).Value = tsumi
-                            ws1.Cell(4, 12).Value = ageti
-                            ws1.Cell(5, 12).Value = haisou
+                    ws1.Cell(11, 1).Value = GridView1.Rows(I).Cells(28).Text & " ()" 'VESSEL(船舶コード） '船舶コード課題
+                    '        ws2.Range("B5") = Ws0.Cells(i, 11) 'VESSEL(船舶コード） '船舶コード課題
 
-                            ws1.Cell(2, 11).Value = "荷受地"
-                            ws1.Cell(3, 11).Value = "積出港"
-                            ws1.Cell(4, 11).Value = "揚げ港"
-                            ws1.Cell(5, 11).Value = "配送先"
+                    ws1.Cell(11, 4).Value = GridView1.Rows(I).Cells(29).Text  'VOY.NO.(航海番号)
+                    '        ws2.Range("B6") = Ws0.Cells(i, 12)  'VOY.NO.(航海番号)
 
-                            'Call Minatocode01(ageti, CODE1)
-                            'Call Minatocode02(haisou, CODE2)
+                    'MyStr = "確認要"           'REF番号
+                    'MyStr = Left(MyStr, InStr(1, MyStr, "-"))
+                    'ws1.Cell(4, 5).Value = MyStr
+                    '        ws2.Range("C1") = MyStr
 
-                            'ws1.Cell(4, 13).Value = CODE1
-                            'ws1.Cell(5, 13).Value = CODE2
-                            'ws1.Cell(1, 13).Value = "過去実績"
+                    Dim MyStr2 As String = "---" 'REF番号
+                    ws1.Cell(4, 6).Value = MyStr
+                    '        ws2.Range("D1") = MyStr
 
-                        End If
+                    '港チェック(現段階では相違があれば、色を付ける→後々は訂正をする方向で)
+                    Dim erflg As Long = 0
+                    'PLACE OF RECEIPT(荷受地)
+                    If ws1.Cell(16, 1).Value <> GridView1.Rows(I).Cells(30).Text Then
 
-                        workbook.SaveAs(hensyuuiraisyo)
+                        ws1.Cell(16, 1).Style.Fill.BackgroundColor = XLColor.Red
+                        erflg = 1
+                    End If
+                    'PORT OF LOADING(積出港)
+                    If ws1.Cell(16, 3).Value <> GridView1.Rows(I).Cells(31).Text Then
+                        ws1.Cell(16, 3).Style.Fill.BackgroundColor = XLColor.Red
+                        erflg = 1
+                    End If
+                    'PORT OF DISCHARGE(揚地)
+                    If ws1.Cell(16, 5).Value <> GridView1.Rows(I).Cells(32).Text Then
+                        ws1.Cell(16, 5).Style.Fill.BackgroundColor = XLColor.Red
+                        erflg = 1
+                    End If
+                    'PLACE OF DELIVERY(配送先)
+                    If ws1.Cell(16, 7).Value <> GridView1.Rows(I).Cells(33).Text Then
+                        ws1.Cell(16, 7).Style.Fill.BackgroundColor = XLColor.Red
+                        erflg = 1
+                    End If
 
-                        If erflg = 1 Then
-                            My.Computer.FileSystem.RenameFile(hensyuuiraisyo, "E_" & MyStr)
-                        End If
+
+                    '------------　18/04追記  港コードも色付け　--------------
+                    If ws1.Cell(16, 3).Style.Fill.BackgroundColor = XLColor.Red Then
+                        ws1.Cell(25, 1).Style.Fill.BackgroundColor = XLColor.Red
+                        erflg = 1
+                    End If
+
+                    If ws1.Cell(16, 5).Style.Fill.BackgroundColor = XLColor.Red Then
+                        ws1.Cell(25, 6).Style.Fill.BackgroundColor = XLColor.Red
+                        erflg = 1
+                    End If
+
+                    If ws1.Cell(16, 7).Style.Fill.BackgroundColor = XLColor.Red Then
+                        ws1.Cell(30, 1).Style.Fill.BackgroundColor = XLColor.Red
+                        erflg = 1
+                    End If
+                    '---------------------------------------------------------
+
+                    '------------　21/03追記  Bookingsheetからデータ取得　--------------
+                    If erflg = 1 Then
+
+                        Dim niuke As String = ""
+                        Dim tsumi As String = ""
+                        Dim ageti As String = ""
+                        Dim haisou As String = ""
+
+                        Call get_bookingdata(I, niuke, tsumi, ageti, haisou, GridView1.Rows(I).Cells(6).Text)
+
+                        ws1.Cell(2, 12).Value = niuke
+                        ws1.Cell(3, 12).Value = tsumi
+                        ws1.Cell(4, 12).Value = ageti
+                        ws1.Cell(5, 12).Value = haisou
+
+                        ws1.Cell(2, 11).Value = "荷受地"
+                        ws1.Cell(3, 11).Value = "積出港"
+                        ws1.Cell(4, 11).Value = "揚げ港"
+                        ws1.Cell(5, 11).Value = "配送先"
+
+                        'Call Minatocode01(ageti, CODE1)
+                        'Call Minatocode02(haisou, CODE2)
+
+                        'ws1.Cell(4, 13).Value = CODE1
+                        'ws1.Cell(5, 13).Value = CODE2
+                        'ws1.Cell(1, 13).Value = "過去実績"
+
+                    End If
+
+                    workbook.SaveAs(hensyuuiraisyo)
+
+                    If erflg = 1 Then
+                        My.Computer.FileSystem.RenameFile(hensyuuiraisyo, "E_" & MyStr)
+                    End If
 
 Step00:
 
-                        If madef00 = "" Then
-                            madef01 = madef01 & "\n" & "作成済み　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
-                        ElseIf madef00 = "0" Then
-                            madef01 = madef01 & "\n" & "依頼書なし　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
-                        ElseIf madef00 = "1" Then
-                            madef01 = madef01 & "\n" & "委託案件　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
-                        ElseIf madef00 = "2" Then
-                            madef01 = madef01 & "\n" & "同一フォルダあり 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
-                        End If
-                        madef00 = ""
 
-                    End If
-                Else
+
+                    Call Get_allinv_k(GridView1.Rows(I).Cells(6).Text, GridView1.Rows(I).Cells(26).Text)
+
                 End If
-            Next
+
+                If madef00 = "" Then
+                    madef01 = madef01 & "\n" & "作成済み　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
+                ElseIf madef00 = "0" Then
+                    madef01 = madef01 & "\n" & "依頼書なし　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
+                ElseIf madef00 = "1" Then
+                    madef01 = madef01 & "\n" & "委託案件　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
+                ElseIf madef00 = "2" Then
+                    madef01 = madef01 & "\n" & "同一フォルダあり 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
+                ElseIf madef00 = "3" Then
+                    madef01 = madef01 & "\n" & "Booking未 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
+                End If
+                madef00 = ""
+
+            Else
+            End If
+
+
+
+        Next
 
             GridView1.DataBind()
 
@@ -1359,4 +1369,302 @@ Step00:
 
 
     End Sub
+
+    Private Sub Get_allinv_k(strInv As String, strbkg As String)
+
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = "SELECT T_INV_HD_TB.OLD_INVNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
+        strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+        strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE "
+        strSQL = strSQL & "HAVING T_INV_HD_TB.BOOKINGNO like '%" & strbkg & "%' "
+
+        strSQL = strSQL & "order by T_INV_HD_TB.CUTDATE Desc "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+
+        '結果を取り出す 
+        While (dataread.Read())
+            Call addRecord_K(dataread("OLD_INVNO"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+
+    End Sub
+
+    Private Sub addRecord_K(strIVNO As String)
+
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim TDATE As String = ""
+        Dim CUT As String = ""
+        Dim CUST As String = ""
+        Dim SUMMARY_INVO As String = ""
+        Dim INVOICE_NO As String = ""
+        Dim LOADING_PORT As String = ""
+        Dim DESTINATION As String = ""
+        Dim KANNRINO As String = ""
+        Dim BOOKING_NO As String = ""
+        Dim IFLG As String = ""
+        Dim IV_COUNT As String = ""
+        Dim CONTAINER As String = ""
+        Dim REF01 As String = ""
+        Dim REF02 As String = ""
+        Dim REV_KANNRINO As String = ""
+        Dim SALES As String = ""
+        Dim CHECK01 As String = ""
+        Dim itkcnt As String = ""
+        Dim LCLF As String = ""
+
+        Dim intCnt As Integer
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT * FROM T_EXL_DECKANRIHYO WHERE "
+        strSQL = strSQL & "T_EXL_DECKANRIHYO.INVOICE_NO = '" & strIVNO & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+
+        '結果を取り出す 
+        While (dataread.Read())
+
+            TDATE = dataread("TDATE")
+            CUT = dataread("CUT")
+            CUST = dataread("CUST")
+            SUMMARY_INVO = dataread("SUMMARY_INVO")
+            INVOICE_NO = dataread("INVOICE_NO")
+            LOADING_PORT = dataread("LOADING_PORT")
+            DESTINATION = dataread("DESTINATION")
+            KANNRINO = dataread("KANNRINO")
+            BOOKING_NO = dataread("BOOKING_NO")
+            IFLG = dataread("IFLG")
+            IV_COUNT = dataread("IV_COUNT")
+            CONTAINER = dataread("CONTAINER")
+            REF01 = dataread("REF01")
+            REF02 = dataread("REF02")
+            REV_KANNRINO = dataread("REV_KANNRINO")
+            SALES = dataread("SALES")
+            CHECK01 = dataread("CHECK01")
+
+            intCnt = 1
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT * FROM T_EXL_CSANKEN WHERE "
+        strSQL = strSQL & "T_EXL_CSANKEN.INVOICE like '%" & strIVNO & "%' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+
+        '結果を取り出す 
+        While (dataread.Read())
+
+            TDATE = Format(Now(), "yyyy/MM/dd")
+            CUT = dataread("CUT_DATE")
+            CUST = dataread("CUST")
+            SUMMARY_INVO = dataread("INVOICE")
+            INVOICE_NO = strIVNO
+            LOADING_PORT = dataread("LOADING_PORT")
+            DESTINATION = dataread("DESTINATION")
+            KANNRINO = ""
+            BOOKING_NO = dataread("BOOKING_NO")
+            IFLG = ""
+            IV_COUNT = ""
+            CONTAINER = dataread("CONTAINER")
+            REF01 = ""
+            REF02 = ""
+            REV_KANNRINO = ""
+            SALES = ""
+            CHECK01 = ""
+            LCLF = dataread("LCL_QTY")
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+
+
+        '既存データの検索
+        strSQL = ""
+        strSQL = strSQL & "SELECT ITK_BKGNO FROM T_EXL_CSWORKSTATUS WHERE "
+        strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_BKGNO like '%" & BOOKING_NO & "%' "
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT BKGNO FROM T_EXL_WORKSTATUS00 WHERE "
+        strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & BOOKING_NO & "' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.REGDATE > '" & Format(dt3, "yyyy/MM/dd") & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+
+        '結果を取り出す 
+        While (dataread.Read())
+
+            itkcnt = dataread("bkgno")
+
+        End While
+
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        If itkcnt <> "" Then
+
+            IFLG = "1"
+
+        End If
+
+        If LCLF = "LCL" Then
+
+            IFLG = "1"
+
+        End If
+
+
+
+        '既存データの有無を判定
+        If intCnt > 0 Then
+
+            '既存データありの場合、UPDATE
+            strSQL = ""
+            strSQL = strSQL & "UPDATE T_EXL_DECKANRIHYO SET "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.TDATE = '" & TDATE & "', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.CUT = '" & CUT & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.CUST = '" & CUST & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.SUMMARY_INVO = '" & SUMMARY_INVO & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.INVOICE_NO = '" & Trim(strIVNO) & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.LOADING_PORT = '" & LOADING_PORT & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.DESTINATION = '" & DESTINATION & " ', "
+
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.BOOKING_NO = '" & BOOKING_NO & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.IFLG = '" & IIf(IFLG = "", 0, IFLG) & "', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.IV_COUNT = '" & IV_COUNT & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.CONTAINER = '" & CONTAINER & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.REF01 = '" & REF01 & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.Ref02 = '" & "" & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.REV_KANNRINO = '" & "" & " ' "
+            strSQL = strSQL & "WHERE T_EXL_DECKANRIHYO.INVOICE_NO = '" & Trim(strIVNO) & "' "
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+
+
+
+        Else
+
+
+            '既存データが無いのでINSERTする
+            strSQL = ""
+            strSQL = strSQL & "INSERT INTO T_EXL_DECKANRIHYO VALUES("
+            strSQL = strSQL & " '" & TDATE & "', "
+            strSQL = strSQL & " '" & IIf(CUT = "", "", CUT) & "', "
+            strSQL = strSQL & " '" & IIf(CUST = "", "", CUST) & "', "
+            strSQL = strSQL & " '" & IIf(SUMMARY_INVO = "", "", SUMMARY_INVO) & "', "
+            strSQL = strSQL & " '" & Trim(strIVNO) & "', "
+            strSQL = strSQL & " '" & IIf(LOADING_PORT = "", "", LOADING_PORT) & "', "
+            strSQL = strSQL & " '" & IIf(DESTINATION = "", "", DESTINATION) & "', "
+            strSQL = strSQL & " '" & IIf(KANNRINO = "", "", KANNRINO) & "', "
+            strSQL = strSQL & " '" & IIf(BOOKING_NO = "", "", BOOKING_NO) & "', "
+            strSQL = strSQL & " '" & IIf(IFLG = "", "0", IFLG) & "', "
+            strSQL = strSQL & " '" & IIf(IV_COUNT = "", "", IV_COUNT) & "', "
+            strSQL = strSQL & " '" & IIf(CONTAINER = "", "", CONTAINER) & "', "
+            strSQL = strSQL & " '" & IIf(REF01 = "", "", REF01) & "', "
+            strSQL = strSQL & " '" & "" & "', "
+            strSQL = strSQL & " '" & "" & "', "
+            strSQL = strSQL & " '" & "" & "', "
+            strSQL = strSQL & " '" & "" & "' "
+            strSQL = strSQL & ")"
+
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+
+        End If
+
+
+
+
+
+        cnn.Close()
+        cnn.Dispose()
+
+
+    End Sub
+
 End Class

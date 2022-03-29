@@ -1524,6 +1524,8 @@ Partial Class yuusen
         Dim I As Integer
         For I = 0 To GridView1.Rows.Count - 1
 
+
+
             'ファイル検索
             strFile0 = Dir(strPath00(0) & "自社通関依頼書　EXEDY *(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*.xlsx", vbNormal)
             If strFile0 = "" Then
