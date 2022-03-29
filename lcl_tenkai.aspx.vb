@@ -22,7 +22,7 @@ Partial Class cs_home
             e.Row.BackColor = Drawing.Color.DarkGray
         End If
 
-        e.Row.Cells(0).Width = 10
+
         e.Row.Cells(1).Width = 90
         e.Row.Cells(2).Width = 90
         e.Row.Cells(3).Width = 40

@@ -297,7 +297,7 @@
         </asp:TemplateField>
 
 
-        <asp:TemplateField HeaderText="EDITMENU">
+        <asp:TemplateField HeaderText="">
         <ItemTemplate>
         <asp:Button runat="server" CommandName="Edit" Text="編集" />
         </ItemTemplate>
