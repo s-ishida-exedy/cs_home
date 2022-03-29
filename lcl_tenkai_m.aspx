@@ -234,7 +234,7 @@
 
         <tbody>
 
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" hight = "500px" Width = "2200px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" hight = "500px" Width = "2500px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
 
         <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
 
@@ -246,10 +246,10 @@
         <asp:CheckBox ID="cb" Checked="false" runat="server"  />
 
         </ItemTemplate>
-<%--        <HeaderStyle Width="20px" />--%>
+        <HeaderStyle Width="20px" />
         </asp:TemplateField>
 
-        <asp:TemplateField HeaderText="">
+        <asp:TemplateField HeaderText="EDITMENU">
         <ItemTemplate>
         <asp:Button runat="server" CommandName="Edit" Text="編集" />
         </ItemTemplate>
