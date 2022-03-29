@@ -673,7 +673,6 @@ Partial Class yuusen
                     itkflg = get_itakuhanntei(GridView1.Rows(I).Cells(6).Text)
 
                     If itkflg = "1" Then
-                        'Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('委託：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
                         madef00 = 1
                         GoTo Step00
                     End If
@@ -683,7 +682,6 @@ Partial Class yuusen
                     strfol001 = Dir(strPath01(0) & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-"), vbDirectory)
 
                     'If strfol001 <> "" Then
-                    '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
                     'madef00 = 2
                     '    GoTo Step00
 
@@ -693,7 +691,6 @@ Partial Class yuusen
 
 
                     'If strfol001 <> "" Then
-                    '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
                     'madef00 = 2
                     '    GoTo Step00
 
@@ -704,7 +701,6 @@ Partial Class yuusen
 
 
                     'If strfol001 <> "" Then
-                    '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
                     'madef00 = 2
                     '    GoTo Step00
 
@@ -715,7 +711,6 @@ Partial Class yuusen
 
 
                     'If strfol001 <> "" Then
-                    '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
                     'madef00 = 2
                     '    GoTo Step00
 
@@ -725,7 +720,6 @@ Partial Class yuusen
 
 
                     'If strfol001 <> "" Then
-                    '    Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成済み：客先：" & Replace(GridView1.Rows(I).Cells(4).Text, " / ", " - ") & "、IV-" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "');</script>", False)
                     'madef00 = 2
                     '    GoTo Step00
 
@@ -911,24 +905,23 @@ Partial Class yuusen
                         My.Computer.FileSystem.RenameFile(hensyuuiraisyo, "E_" & MyStr)
                     End If
 
+                    Call Get_allinv_k(GridView1.Rows(I).Cells(6).Text, GridView1.Rows(I).Cells(26).Text)
+
 Step00:
 
-
-
-                    Call Get_allinv_k(GridView1.Rows(I).Cells(6).Text, GridView1.Rows(I).Cells(26).Text)
 
                 End If
 
                 If madef00 = "" Then
-                    madef01 = madef01 & "\n" & "作成済み　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
+                    madef01 = madef01 & "\n" & "＜作成無し＞作成済み　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
                 ElseIf madef00 = "0" Then
-                    madef01 = madef01 & "\n" & "依頼書なし　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
+                    madef01 = madef01 & "\n" & "＜作成無し＞依頼書なし　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
                 ElseIf madef00 = "1" Then
-                    madef01 = madef01 & "\n" & "委託案件　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
+                    madef01 = madef01 & "\n" & "＜作成無し＞委託案件　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
                 ElseIf madef00 = "2" Then
-                    madef01 = madef01 & "\n" & "同一フォルダあり 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
+                    madef01 = madef01 & "\n" & "＜作成無し＞同一フォルダあり 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
                 ElseIf madef00 = "3" Then
-                    madef01 = madef01 & "\n" & "Booking未 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
+                    madef01 = madef01 & "\n" & "＜作成無し＞Booking未 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
                 End If
                 madef00 = ""
 
@@ -943,7 +936,7 @@ Step00:
 
 
 
-        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成完了しました。フィルタがクリアされ全件表示します。\n" & madef01 & "');</script>", False)
+        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成完了しました。フィルタがクリアされ全件表示します。\n\n" & madef01 & "');</script>", False)
 
     End Sub
 
