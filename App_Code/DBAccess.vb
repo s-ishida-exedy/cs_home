@@ -264,11 +264,15 @@ Public Class DBAccess
         StrSQL = StrSQL & ", FLG03 "
         StrSQL = StrSQL & ", FLG04 "
         StrSQL = StrSQL & ", FLG05 "
+        StrSQL = StrSQL & ", iif(len(REV_ETD)=10,REV_ETD,ETD) AS ETD02 "
+        StrSQL = StrSQL & ", iif(len(REV_ETD)=10,ETD,'') AS ETD03 "
+
+
 
         StrSQL = StrSQL & "FROM "
         StrSQL = StrSQL & "  [T_EXL_SHIPPINGMEMOLIST] "
 
-        StrSQL = StrSQL & "WHERE ETD BETWEEN '" & strstart & "' AND '" & strend & "' "
+        StrSQL = StrSQL & "WHERE iif(len(REV_ETD)=10,REV_ETD,ETD) BETWEEN '" & strstart & "' AND '" & strend & "' "
         StrSQL = StrSQL & "AND CUSTCODE Not In ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530') "
 
         If strd1 = "未回収" Then
@@ -279,7 +283,7 @@ Public Class DBAccess
             StrSQL = StrSQL & "AND REV_STATUS = '" & strd2 & "' "
         End If
 
-        StrSQL = StrSQL & "ORDER BY ETD "
+        StrSQL = StrSQL & "ORDER BY iif(len(REV_ETD)=10,REV_ETD,ETD) "
 
         Cmd.CommandText = StrSQL
 

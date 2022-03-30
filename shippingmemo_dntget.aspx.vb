@@ -102,7 +102,7 @@ Partial Class yuusen
 
                     If dt4 <= dt01 Then
                         e.Row.BackColor = Drawing.Color.Red
-                        e.Row.Cells(23).Text = "E"
+                        e.Row.Cells(25).Text = "E"
                     Else
                     End If
                 Else
@@ -111,7 +111,7 @@ Partial Class yuusen
 
                     If dt3 <= dt01 Then
                         e.Row.BackColor = Drawing.Color.Red
-                        e.Row.Cells(23).Text = "E"
+                        e.Row.Cells(25).Text = "E"
                     Else
                     End If
                 End If
