@@ -166,7 +166,10 @@
             <tr>
                 <th>ステータス</th>
                 <td>
-                    <asp:Label ID="Label7" runat="server" Text="未" style="width:164px"></asp:Label>
+                    <asp:DropDownList ID="DropDownList1" runat="server" style="width:195px">
+                        <asp:ListItem Value="01">未</asp:ListItem>
+                        <asp:ListItem Value="08">再発給</asp:ListItem>
+                    </asp:DropDownList>
                 </td>
                 <th>ETD</th>
                 <td>
