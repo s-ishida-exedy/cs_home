@@ -302,7 +302,7 @@
              <td class ="design02"  style="width:270px;Font-Size:15px;text-align:left;" >
                     &nbsp;&nbsp;
                     <asp:Label  ID="Label4" runat="server" Text="[期間指定]" Height="13px"  Font-Size="13px" /> 
-                    <asp:CheckBox   ID="CheckBox1" runat="server" Height="13px"  Font-Size="13px" />
+                    <asp:CheckBox   ID="CheckBox1" runat="server" Height="13px"  Font-Size="13px" AutoPostBack="true" />
                     <asp:TextBox class="button01"  ID="TextBox1" runat="server"  type="date" Width="120px" Height="13px" AutoPostBack="false" Font-Size="13px"></asp:TextBox>
                     <asp:TextBox class="button01"  ID="TextBox2" runat="server"  type="date" Width="120px" Height="13px" AutoPostBack="false" Font-Size="13px"></asp:TextBox>
                     <p> &nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Font-Size="8" Text="※日付を選択後、チェックを入れる"></asp:Label></p>
