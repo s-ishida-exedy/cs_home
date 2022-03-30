@@ -25,6 +25,8 @@ Partial Class yuusen
                 e.Row.BackColor = Drawing.Color.DarkOrange
             ElseIf e.Row.Cells(12).Text = "出港済み" Then
                 e.Row.BackColor = Drawing.Color.LightBlue
+            ElseIf e.Row.Cells(12).Text = "月またぎ前月" Then
+                e.Row.BackColor = Drawing.Color.LightGreen
             End If
 
             If IsPostBack = True Then
@@ -646,6 +648,8 @@ Partial Class yuusen
         If CheckBox1.Checked = True Then
             If TextBox1.Text = "" Or TextBox2.Text = "" Then
                 Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('日付を指定してください。');</script>", False)
+                CheckBox1.Checked = False
+                Label1.Text = "フィルタ 全案件"
             Else
                 Label1.Text = "フィルタ 期間指定"
             End If

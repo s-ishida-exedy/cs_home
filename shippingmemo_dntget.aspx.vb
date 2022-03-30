@@ -29,6 +29,8 @@ Partial Class yuusen
                 e.Row.BackColor = Drawing.Color.DarkOrange
             ElseIf e.Row.Cells(11).Text = "出港済み" Then
                 e.Row.BackColor = Drawing.Color.LightBlue
+            ElseIf e.Row.Cells(11).Text = "月またぎ前月" Then
+                e.Row.BackColor = Drawing.Color.LightGreen
             End If
 
             If e.Row.Cells(8).Text = "" Or e.Row.Cells(8).Text = "&nbsp;" Then
@@ -100,7 +102,7 @@ Partial Class yuusen
 
                     If dt4 <= dt01 Then
                         e.Row.BackColor = Drawing.Color.Red
-                        e.Row.Cells(23).Text = "E"
+                        e.Row.Cells(25).Text = "E"
                     Else
                     End If
                 Else
@@ -109,7 +111,7 @@ Partial Class yuusen
 
                     If dt3 <= dt01 Then
                         e.Row.BackColor = Drawing.Color.Red
-                        e.Row.Cells(23).Text = "E"
+                        e.Row.Cells(25).Text = "E"
                     Else
                     End If
                 End If

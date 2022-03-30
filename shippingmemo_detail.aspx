@@ -216,6 +216,7 @@
                         <asp:ListItem>出港済み</asp:ListItem>
                         <asp:ListItem>月またぎ</asp:ListItem>
                         <asp:ListItem>月またぎP</asp:ListItem>
+                        <asp:ListItem>月またぎ前月</asp:ListItem>
                     </asp:DropDownList>
                 </td>
              </tr>
