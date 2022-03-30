@@ -283,7 +283,7 @@ Public Class DBAccess
             StrSQL = StrSQL & "AND REV_STATUS = '" & strd2 & "' "
         End If
 
-        StrSQL = StrSQL & "ORDER BY iif(len(REV_ETD)=10,REV_ETD,ETD) "
+        StrSQL = StrSQL & "ORDER BY iif(len(REV_ETD)=10,REV_ETD,ETD),INVOICE_NO "
 
         Cmd.CommandText = StrSQL
 
