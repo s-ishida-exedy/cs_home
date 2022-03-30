@@ -28,7 +28,7 @@ Partial Class cs_home
             ' そうでない時処理
         Else
             Dim strUPrevUrl As String = Request.ServerVariables("HTTP_REFERER")
-            If strUPrevUrl = "http://localhost:49375/epa_request_detail.aspx" Or strUPrevUrl = "http://localhost:49375/epa_request_detail_ins.aspx" Then
+            If strUPrevUrl = "http://kbhwpm01/EXP/cs_home/epa_request_detail.aspx" Or strUPrevUrl = "http://kbhwpm01/EXP/cs_home/epa_request_detail_ins.aspx" Then
                 '遷移元ページがEPA発給申請管理明細の場合、セッションからチェック状況を取得する。
                 If Session("strEpaChk") = "True" Then
                     CheckBox1.Checked = True
