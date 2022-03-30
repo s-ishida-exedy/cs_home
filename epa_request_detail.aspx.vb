@@ -39,6 +39,8 @@ Partial Class cs_home
                 Case "ｷｬﾝｾﾙ"
                     strVal = "04"
                 Case "再発給"
+                    strVal = "08"
+                Case "再発済"
                     strVal = "09"
             End Select
 
@@ -153,6 +155,8 @@ Partial Class cs_home
             Case "ｷｬﾝｾﾙ"
                 strVal = "04"
             Case "再発給"
+                strVal = "08"
+            Case "再発済"
                 strVal = "09"
         End Select
 

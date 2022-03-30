@@ -172,7 +172,8 @@
                         <asp:ListItem Value="02">済</asp:ListItem>
                         <asp:ListItem Value="03">対象ﾅｼ</asp:ListItem>
                         <asp:ListItem Value="04">ｷｬﾝｾﾙ</asp:ListItem>
-                        <asp:ListItem Value="09">再発給</asp:ListItem>
+                        <asp:ListItem Value="08">再発給</asp:ListItem>
+                        <asp:ListItem Value="09">再発済</asp:ListItem>
                     </asp:DropDownList>
                 </td>
                 <th>ETD</th>

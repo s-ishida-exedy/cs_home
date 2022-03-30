@@ -623,7 +623,8 @@ Public Class DBAccess
         StrSQL = StrSQL & "  	WHEN '02' THEN '済' "
         StrSQL = StrSQL & "  	WHEN '03' THEN '対象ﾅｼ' "
         StrSQL = StrSQL & "  	WHEN '04' THEN 'ｷｬﾝｾﾙ' "
-        StrSQL = StrSQL & "  	WHEN '09' THEN '再発給' "
+        StrSQL = StrSQL & "  	WHEN '08' THEN '再発給' "
+        StrSQL = StrSQL & "  	WHEN '09' THEN '再発済' "
         StrSQL = StrSQL & "  END AS STATUS "
         StrSQL = StrSQL & "  , CASE BLDATE WHEN '' THEN '' ELSE FORMAT(CONVERT(DATETIME,BLDATE ),'MM/dd') END  AS BLDATE "
         StrSQL = StrSQL & "  , INV  "
@@ -647,7 +648,7 @@ Public Class DBAccess
         StrSQL = StrSQL & "  , TRK_NO  "
         StrSQL = StrSQL & "FROM T_EXL_EPA_KANRI "
         If strValue = "False" Then
-            StrSQL = StrSQL & "WHERE STATUS = '01' "
+            StrSQL = StrSQL & "WHERE STATUS IN ('01','08') "
         End If
         StrSQL = StrSQL & "ORDER BY BLDATE, INV"
 

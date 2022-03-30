@@ -37,7 +37,7 @@ Partial Class cs_home
         cnn.Open()
 
         'ステータスのドロップダウン
-        Dim strDropDownList As String = "01"
+        Dim strDropDownList As String = DropDownList1.SelectedValue
 
         '画面入力情報を変数に代入
         Dim strSenmei As String = TextBox1.Text
@@ -90,17 +90,17 @@ Partial Class cs_home
         chk_Nyuryoku = True
 
         '必須チェック
-        If Trim(TextBox2.Text) = "" Then
+        If Trim(TextBox12.Text) = "" Then
             Label2.Text = "ETDは必須入力です。"
             chk_Nyuryoku = False
         End If
-        If Trim(TextBox3.Text) = "" Then
+        If Trim(TextBox13.Text) = "" Then
             Label2.Text = "IVは必須入力です。"
         End If
-        If Trim(TextBox4.Text) = "" Then
+        If Trim(TextBox14.Text) = "" Then
             Label2.Text = "客先は必須入力です。"
         End If
-        If Trim(TextBox5.Text) = "" Then
+        If Trim(TextBox15.Text) = "" Then
             Label2.Text = "客先コードは必須入力です。"
         End If
 

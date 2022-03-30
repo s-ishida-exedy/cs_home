@@ -24,6 +24,24 @@ Partial Class cs_home
 
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 
+        If IsPostBack Then
+            ' そうでない時処理
+        Else
+            Dim strUPrevUrl As String = Request.ServerVariables("HTTP_REFERER")
+            If strUPrevUrl = "http://kbhwpm01/EXP/cs_home/epa_request_detail.aspx" Or strUPrevUrl = "http://kbhwpm01/EXP/cs_home/epa_request_detail_ins.aspx" Then
+                '遷移元ページがEPA発給申請管理明細の場合、セッションからチェック状況を取得する。
+                If Session("strEpaChk") = "True" Then
+                    CheckBox1.Checked = True
+                    Call Get_Data_Chk()
+                Else
+                    Session.Remove("strEpaChk")
+                End If
+            Else
+                Session.Remove("strEpaChk")
+            End If
+        End If
+
+
         AddHandler GridView1.RowCommand, AddressOf GridView1_RowCommand
     End Sub
 
@@ -34,6 +52,11 @@ Partial Class cs_home
             Dim data2 = Me.GridView1.Rows(index).Cells(3).Text
             Dim data3 = Me.GridView1.Rows(index).Cells(5).Text
             Dim data4 = Me.GridView1.Rows(index).Cells(1).Text
+            If CheckBox1.Checked = True Then
+                Session("strEpaChk") = "True"
+            Else
+                Session("strEpaChk") = ""
+            End If
 
             Session("strEtd") = data1
             Session("strIvno") = data2
@@ -43,13 +66,9 @@ Partial Class cs_home
         End If
     End Sub
 
-    Protected Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        '追加登録ボタン押下
-        Response.Redirect("epa_request_detail_ins.aspx")
-    End Sub
+    Private Sub Get_Data_Chk()
+        'チェックボックスON/OFFによるデータ取得
 
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-        'チェックボックスの制御
         Dim strValue As String = ""
 
         If CheckBox1.Checked = True Then
@@ -68,6 +87,23 @@ Partial Class cs_home
             GridView1.DataSource = ds
             GridView1.DataBind()
         End If
+    End Sub
+
+    Protected Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        '追加登録ボタン押下
+        If CheckBox1.Checked = True Then
+            Session("strEpaChk") = "True"
+        Else
+            Session("strEpaChk") = ""
+        End If
+        Response.Redirect("epa_request_detail_ins.aspx")
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        'チェックボックスの制御
+
+        Call Get_Data_Chk()
+
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
