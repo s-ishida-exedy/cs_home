@@ -7,6 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>ポータルサイト(EIR,Booking差異 ｺﾝﾃﾅﾔｰﾄﾞ確認)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<%--リロード設定--%>
+<meta http-equiv="refresh" content="30"/>
+<%--リロード設定--%>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
 <script src="js/fixmenu.js"></script>
@@ -21,27 +24,43 @@
 <%--コンテナヤードではマウス、キーボード操作を行わない為、ヘッダなし--%>
        
 <div id="contents2" class="inner2">
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" Width="1300px" CellPadding="3" GridLines="Vertical" ForeColor="Black" BackColor="White"  >
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" Width="1300px" CellPadding="3" GridLines="Vertical" ForeColor="Black" BackColor="White" ShowHeaderWhenEmpty="True"  >
         <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
         <AlternatingRowStyle BackColor="#CCCCCC" />
         <Columns>
             <asp:BoundField DataField="VAN_DATE" HeaderText="VAN日" SortExpression="VAN_DATE" >
-            <HeaderStyle Width="60px" />
+            <HeaderStyle HorizontalAlign="Center" Width="100px" />
             </asp:BoundField>
             <asp:BoundField DataField="MAIL_TITLE" HeaderText="タイトル" SortExpression="MAIL_TITLE" >
-            <HeaderStyle Width="180px" />
+            <HeaderStyle HorizontalAlign="Center" Width="180px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="STATUS" HeaderText="確認" SortExpression="STATUS">
+            <HeaderStyle HorizontalAlign="Center" Width="50px" />
+            <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
             <asp:BoundField DataField="VOYNO02" HeaderText="VoyNO" SortExpression="VOYNO02">
+            <HeaderStyle HorizontalAlign="Center" Width="195px" />
+            <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
             <asp:BoundField DataField="VESSEL02" HeaderText="本船名" SortExpression="VESSEL02">
+            <HeaderStyle HorizontalAlign="Center" Width="195px" />
+            <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
-            <asp:BoundField DataField="BOOKING02" HeaderText="ブッキングNO" SortExpression="BOOKING02">
+            <asp:BoundField DataField="BOOKING02" HeaderText="ﾌﾞｯｷﾝｸﾞNO" SortExpression="BOOKING02">
+            <HeaderStyle HorizontalAlign="Center" Width="195px" />
+            <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
-            <asp:BoundField DataField="CONTAINER02" HeaderText="コンテナサイズ" SortExpression="CONTAINER02">
+            <asp:BoundField DataField="CONTAINER02" HeaderText="ｺﾝﾃﾅｻｲｽﾞ" SortExpression="CONTAINER02">
+            <HeaderStyle HorizontalAlign="Center" Width="195px" />
+            <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
             <asp:BoundField DataField="ETC01" HeaderText="その他(誤)" SortExpression="ETC01">
+            <HeaderStyle HorizontalAlign="Center" Width="195px" />
+            <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
             <asp:BoundField DataField="ETC02" HeaderText="その他(正)" SortExpression="ETC02">
+            <HeaderStyle HorizontalAlign="Center" Width="195px" />
+            <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
         </Columns>
         <FooterStyle BackColor="#CCCCCC" />
@@ -54,10 +73,10 @@
     </asp:GridView>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" 
-SelectCommand="SELECT VAN_DATE, MAIL_TITLE, VOYNO02, VESSEL02, BOOKING02, CONTAINER02, ETC01, ETC02
+SelectCommand="SELECT VAN_DATE, MAIL_TITLE, VOYNO02, VESSEL02, BOOKING02, CONTAINER02, ETC01, ETC02,
+CASE STATUS WHEN '1' THEN '済' ELSE '未' END AS STATUS 
 FROM T_EXL_EIR_COMF
-WHERE STATUS = '1'
-AND VAN_DATE = CONVERT(NVARCHAR,  GETDATE(), 111)
+WHERE VAN_DATE = CONVERT(NVARCHAR,  GETDATE(), 111)
 ORDER BY MAIL_TITLE">
     </asp:SqlDataSource>
 </div>    

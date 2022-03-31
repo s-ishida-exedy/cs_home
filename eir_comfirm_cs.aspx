@@ -151,6 +151,7 @@
             </td>
             <td class="second-cell">
                 <asp:CheckBox ID="CheckBox1" runat="server" AutoPostBack ="true" Text ="「未対応」以外も表示する。"/>
+                <asp:CheckBox ID="CheckBox2" runat="server" AutoPostBack ="true" Text ="過去分も表示する。"/>
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
@@ -172,9 +173,12 @@
                 <HeaderStyle Width="50px" />
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:ButtonField>
-                <asp:BoundField DataField="CODE" />
+                <asp:BoundField DataField="CODE" >
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
                 <asp:BoundField DataField="STATUS" HeaderText="ｽﾃｰﾀｽ" SortExpression="STATUS" >
                 <HeaderStyle Width="80px" />
+                <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="REGPERSON" HeaderText="依頼者" SortExpression="REGPERSON">
                 <HeaderStyle Width="100px" />
@@ -207,6 +211,7 @@ FROM T_EXL_EIR_COMF a
 LEFT JOIN M_EXL_USR b
 ON a.REGPERSON = b.uid
 WHERE STATUS = '0'
+AND VAN_DATE = CONVERT(NVARCHAR, GETDATE(), 111) 
 ORDER BY REGSTAMP">
         </asp:SqlDataSource>
     
