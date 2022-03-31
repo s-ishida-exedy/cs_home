@@ -216,6 +216,8 @@
                 <asp:Label ID="Label12" runat="server" Text="" Class="err"></asp:Label>
                 <br/>
                 <asp:CheckBox ID="CheckBox2" runat="server" text="IVNOが割り振られていない案件のみ表示" Font-Size="Small" AutoPostBack="true"  />
+                &nbsp;&nbsp;
+                <asp:Button ID="Button14" runat="server" Text=" ﾘｾｯﾄ " Font-Size="Small" Width ="80" />
             </td>
             <td class="ex-cell">
                 &nbsp;
