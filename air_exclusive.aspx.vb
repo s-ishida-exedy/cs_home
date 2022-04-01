@@ -247,6 +247,8 @@ Partial Class cs_home
             Dim data1 = Me.GridView1.Rows(index).Cells(6).Text
             Dim data2 = Me.GridView1.Rows(index).Cells(7).Text
 
+            Me.GridView1.Rows(index).BackColor = Drawing.Color.Aqua
+
             If data2 = "&nbsp;" Then
                 data2 = ""
             End If
@@ -571,5 +573,33 @@ Partial Class cs_home
         Call Make_Grid()
 
         DropDownList2.DataBind()
+    End Sub
+
+    Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
+        'リセットボタン押下
+
+        CheckBox2.Checked = False
+        TextBox2.Text = ""
+        TextBox3.Text = ""
+        TextBox4.Text = ""
+        TextBox5.Text = ""
+        TextBox6.Text = ""
+        TextBox7.Text = ""
+        TextBox8.Text = ""
+        TextBox9.Text = ""
+        TextBox10.Text = ""
+        TextBox11.Text = ""
+        Label2.Text = ""
+        Label3.Text = ""
+        Label4.Text = ""
+        Label5.Text = ""
+        Label6.Text = ""
+        Label7.Text = ""
+        Label8.Text = ""
+        Label9.Text = ""
+        Label10.Text = ""
+        Label11.Text = ""
+
+        Call Make_Grid()
     End Sub
 End Class

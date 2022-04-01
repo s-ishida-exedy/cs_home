@@ -43,6 +43,7 @@ Partial Class cs_home
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
         'チェックボックスの制御
         Dim strValue As String = ""
+        Dim strChk02 As String = ""
 
         If CheckBox1.Checked = True Then
             '「未対応」以外も表示する。
@@ -50,11 +51,46 @@ Partial Class cs_home
         Else
             strValue = "'0'"
         End If
+        If CheckBox2.Checked = True Then
+            '過去分も表示する。
+            strChk02 = "1"
+        Else
+            strChk02 = "0"
+        End If
 
         Dim Dataobj As New DBAccess
 
         'データの取得
-        Dim ds As DataSet = Dataobj.GET_RESULT_EIR(strValue)
+        Dim ds As DataSet = Dataobj.GET_RESULT_EIR(strValue, strChk02)
+        If ds.Tables.Count > 0 Then
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = ds
+            GridView1.DataBind()
+        End If
+    End Sub
+
+    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
+        'チェックボックスの制御
+        Dim strValue As String = ""
+        Dim strChk02 As String = ""
+
+        If CheckBox1.Checked = True Then
+            '「未対応」以外も表示する。
+            strValue = "'0','1'"
+        Else
+            strValue = "'0'"
+        End If
+        If CheckBox2.Checked = True Then
+            '過去分も表示する。
+            strChk02 = "1"
+        Else
+            strChk02 = "0"
+        End If
+
+        Dim Dataobj As New DBAccess
+
+        'データの取得
+        Dim ds As DataSet = Dataobj.GET_RESULT_EIR(strValue, strChk02)
         If ds.Tables.Count > 0 Then
             GridView1.DataSourceID = ""
             GridView1.DataSource = ds

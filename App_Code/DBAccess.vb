@@ -781,8 +781,10 @@ Public Class DBAccess
         Return Ds
     End Function
 
-    Public Function GET_RESULT_EIR(strValue As String) As DataSet
+    Public Function GET_RESULT_EIR(strValue As String, strChk02 As String) As DataSet
         'EIR情報取得
+        Dim strDate As String = Format(Now, "yyyy/MM/dd")
+
         Conn = Me.Dbconnect
         Cmd = Conn.CreateCommand
 
@@ -797,6 +799,10 @@ Public Class DBAccess
         StrSQL = StrSQL & "LEFT JOIN M_EXL_USR b "
         StrSQL = StrSQL & "ON a.REGPERSON = b.uid "
         StrSQL = StrSQL & "WHERE STATUS IN (" & strValue & ") "
+        If strChk02 = "0" Then
+            '過去分非表示
+            StrSQL = StrSQL & " AND VAN_DATE >= '" & strDate & "' "
+        End If
         StrSQL = StrSQL & "ORDER BY REGSTAMP "
 
         Cmd.CommandText = StrSQL

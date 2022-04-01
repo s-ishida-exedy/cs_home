@@ -187,9 +187,9 @@
             <tr>
                 <th>権限</th>
                 <td>
-                    <asp:RadioButton ID="RadioButton1" runat="server" text="：admin（管理者）" />&nbsp;
-                    <asp:RadioButton ID="RadioButton2" runat="server" text="：csusr（CSメンバー）" />&nbsp;
-                    <asp:RadioButton ID="RadioButton3" runat="server" text="：usr（その他）" />
+                    <asp:RadioButton ID="RadioButton1" runat="server" text="：admin（管理者）" AutoPostBack ="true"  />&nbsp;
+                    <asp:RadioButton ID="RadioButton2" runat="server" text="：csusr（CSメンバー）" AutoPostBack ="true"  />&nbsp;
+                    <asp:RadioButton ID="RadioButton3" runat="server" text="：usr（その他）" AutoPostBack ="true"  />
                 </td>
             </tr>
         </table>
