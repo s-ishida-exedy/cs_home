@@ -419,7 +419,6 @@ Partial Class yuusen
         Dim dt1 As DateTime = DateTime.Now
 
 
-
         'If IsPostBack = True Then
         'Else
 
@@ -935,8 +934,11 @@ Step00:
             GridView1.DataBind()
 
 
+        'RegisterClientScriptBlock　ページ描写前
 
-        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成完了しました。フィルタがクリアされ全件表示します。\n\n" & madef01 & "');</script>", False)
+        'RegisterStartupScript べージ描写後
+
+        Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('フォルダ作成完了しました。フィルタがクリアされ全件表示します。\n\n" & madef01 & "');</script>", False)
 
     End Sub
 
@@ -1164,7 +1166,7 @@ Step00:
             message.Dispose()
         End Using
 
-        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
+        Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
 
     End Sub
 

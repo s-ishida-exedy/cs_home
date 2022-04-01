@@ -151,7 +151,8 @@ Partial Class yuusen
 
         Dim madef01 As String = ""
         Call makefld(madef01)
-        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('" & madef01 & "');</script>", False)
+
+        Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('" & madef01 & "');</script>", False)
 
     End Sub
     Private Function get_itakuhanntei(ivno As String) As String
@@ -798,7 +799,8 @@ Partial Class yuusen
 
                 Dim struid As String = Session("UsrId")
                 Call Mail030(kbn, struid)
-                Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('登録し通知メールを送信しました。');</script>", False)
+
+                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('登録し通知メールを送信しました。');</script>", False)
 
 
             End If
@@ -864,7 +866,7 @@ Partial Class yuusen
 
                 Dim struid As String = Session("UsrId")
                 Call Mail030(kbn, struid)
-                Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('登録し通知メールを送信しました。');</script>", False)
+                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('登録し通知メールを送信しました。');</script>", False)
 
 
             End If
@@ -992,10 +994,10 @@ Partial Class yuusen
         End If
 
         If mailmsg = "" Then
-            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('対象なしです。');</script>", False)
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('対象なしです。');</script>", False)
         Else
             mailmsg = "対象：" & mailmsg
-            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('" & mailmsg & "にメールを送信しました。');</script>", False)
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('" & mailmsg & "にメールを送信しました。');</script>", False)
         End If
 
     End Sub
@@ -1016,7 +1018,9 @@ Partial Class yuusen
 
         Dim strfrom2 As String = GET_from(struid)
         Dim strto2 As String = GET_ToAddress(2, 1)
-        Dim strcc2 As String = GET_ToAddress(2, 0) + "," + GET_from(struid)
+        strto2 = Left(strto, Len(strto) - 1)
+
+        Dim strcc2 As String = GET_ToAddress(2, 0) + GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -1029,8 +1033,16 @@ Partial Class yuusen
         Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY00 & "分"
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
+
         'メールの本文
-        Dim body As String = "<html><body>郵船ロジスティクス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY00 & "弊社CUT分で通関委託がございます。<br>（LCL案件は全て委託となります。）<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+        Dim body As String = ""
+
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        body = body + "このメールはシステムから送信されています。<br/>"
+        body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+
+        body = body & "<html><body>郵船ロジスティクス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY00 & "弊社CUT分で通関委託がございます。<br>（LCL案件は全て委託となります。）<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
         t = t & body01("郵船")
@@ -1060,7 +1072,13 @@ Partial Class yuusen
         message.From.Add(MailboxAddress.Parse(strfrom))
 
         ' 宛先情報  
-        message.To.Add(MailboxAddress.Parse(strto))
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
 
         If strcc <> "" Then
             'カンマ区切りをSPLIT
@@ -1112,7 +1130,9 @@ Partial Class yuusen
 
         Dim strfrom2 As String = GET_from(struid)
         Dim strto2 As String = GET_ToAddress(3, 1)
-        Dim strcc2 As String = GET_ToAddress(3, 0) + "," + GET_from(struid)
+        strto2 = Left(strto, Len(strto) - 1)
+
+        Dim strcc2 As String = GET_ToAddress(3, 0) + GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -1122,7 +1142,14 @@ Partial Class yuusen
         Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
 
         'メールの本文
-        Dim body As String = "<html><body>近鉄エクスプレス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br>（LCL案件は全て委託となります。）<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+        Dim body As String = ""
+
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        body = body + "このメールはシステムから送信されています。<br/>"
+        body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+
+        body = body & "<html><body>近鉄エクスプレス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br>（LCL案件は全て委託となります。）<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
 
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
@@ -1147,7 +1174,13 @@ Partial Class yuusen
         message.From.Add(MailboxAddress.Parse(strfrom))
 
         ' 宛先情報  
-        message.To.Add(MailboxAddress.Parse(strto))
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
 
         If strcc <> "" Then
             'カンマ区切りをSPLIT
@@ -1199,7 +1232,9 @@ Partial Class yuusen
 
         Dim strfrom2 As String = GET_from(struid)
         Dim strto2 As String = GET_ToAddress(4, 1)
-        Dim strcc2 As String = GET_ToAddress(4, 0) + "," + GET_from(struid)
+        strto2 = Left(strto, Len(strto) - 1)
+
+        Dim strcc2 As String = GET_ToAddress(4, 0) + GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -1208,8 +1243,16 @@ Partial Class yuusen
         'メールの件名
         Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
 
+
         'メールの本文
-        Dim body As String = "<html><body>日本トランスポート ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br>（LCL案件は全て委託となります。）<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
+        Dim body As String = ""
+
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        body = body + "このメールはシステムから送信されています。<br/>"
+        body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+
+        body = body & "<html><body>日本トランスポート ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br>（LCL案件は全て委託となります。）<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
         t = t & body01("日ト")
@@ -1233,7 +1276,13 @@ Partial Class yuusen
         message.From.Add(MailboxAddress.Parse(strfrom))
 
         ' 宛先情報  
-        message.To.Add(MailboxAddress.Parse(strto))
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
 
         If strcc <> "" Then
             'カンマ区切りをSPLIT
@@ -1285,7 +1334,9 @@ Partial Class yuusen
 
         Dim strfrom2 As String = GET_from(struid)
         Dim strto2 As String = GET_ToAddress(5, 1)
-        Dim strcc2 As String = GET_ToAddress(5, 0) + "," + GET_from(struid)
+        strto2 = Left(strto, Len(strto) - 1)
+
+        Dim strcc2 As String = GET_ToAddress(5, 0) + GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -1294,8 +1345,18 @@ Partial Class yuusen
         'メールの件名
         Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
 
+
         'メールの本文
-        Dim body As String = "<html><body>日本通運 ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br>（LCL案件は全て委託となります。）<br><br>" ' UriBodyC()
+        Dim body As String = ""
+
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        body = body + "このメールはシステムから送信されています。<br/>"
+        body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+
+
+        'メールの本文
+        body = body & "<html><body>日本通運 ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br>（LCL案件は全て委託となります。）<br><br>" ' UriBodyC()
 
         Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
@@ -1320,7 +1381,14 @@ Partial Class yuusen
         message.From.Add(MailboxAddress.Parse(strfrom))
 
         ' 宛先情報  
-        message.To.Add(MailboxAddress.Parse(strto))
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
+
 
         If strcc <> "" Then
             'カンマ区切りをSPLIT
@@ -1792,8 +1860,6 @@ Step00:
         '通知メール
 
         Dim strfrom As String = GET_from(struid)
-        Dim strto As String = GET_from(struid)
-        Dim strcc As String = GET_from(struid) + "," + GET_from(struid) + "," + "r-fukao@exedy.com"
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -1803,8 +1869,10 @@ Step00:
 
         ' メールの内容
 
-        Dim strto2 As String = GET_ToAddress(0, 1) '宛先
-        Dim strcc2 As String = GET_ToAddress(0, 0) + "," + GET_from(struid)  'CC 
+        Dim strto As String = GET_ToAddress(0, 1) '宛先
+        strto = Left(strto, Len(strto) - 1)
+
+        Dim strcc As String = GET_ToAddress(0, 0) + GET_from(struid)  'CC 
 
         Dim f As String = ""
         Dim dt1 As DateTime = DateTime.Now
@@ -1821,10 +1889,18 @@ Step00:
 
         'メールの件名
         'Dim subject As String = "【ご連絡・自動配信】" & kbn & " LS ７or９「試作限定」有無確認完了　" & dt1.ToShortDateString
-        Dim subject As String = "【ご連絡・自動配信 LS ７or９「試作限定」有無確認完了　" & dt1.ToShortDateString
+        Dim subject As String = "【ご連絡・自動配信】 LS ７or９「試作限定」有無確認完了　" & dt1.ToShortDateString
 
         'メールの本文
-        Dim body As String = "<html><body>各位<br>お世話になっております。<br><br>" & "KDとｱﾌﾀ登録完了いたしました。<br>以上になります。<br><br>" & kbn & "担当<br><br>※KDとｱﾌﾀのどちらともの登録が完了した際に配信されます。</body></html>" ' UriBodyC()
+        Dim body As String = ""
+
+        body = body + "TEST<br/>"
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        body = body + "このメールはシステムから送信されています。<br/>"
+        body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+
+        body = body & "<html><body>各位<br>お世話になっております。<br><br>" & "KDとｱﾌﾀ登録完了いたしました。<br>以上になります。<br><br>" & kbn & "担当<br><br>※KDとｱﾌﾀのどちらともの登録が完了した際に配信されます。</body></html>" ' UriBodyC()
 
         body = "<font size=" & Chr(34) & " 3" & Chr(34) & ">" & body & "</font>"
         body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
@@ -1836,7 +1912,14 @@ Step00:
         message.From.Add(MailboxAddress.Parse(strfrom))
 
         ' 宛先情報  
-        message.To.Add(MailboxAddress.Parse(strto))
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
+
 
         If strcc <> "" Then
             'カンマ区切りをSPLIT
@@ -2004,8 +2087,8 @@ Step00:
 
         Dim struid As String = Session("UsrId")
         Dim strfrom As String = GET_from(struid)
-        '        Dim strto As String = "r-fukao@exedy.com,s-ishida@exedy.com"
-        Dim strto As String = "r-fukao@exedy.com,r-fukao@exedy.com"
+        Dim strto As String = "r-fukao@exedy.com,s-ishida@exedy.com"
+        'Dim strto As String = "r-fukao@exedy.com,r-fukao@exedy.com"
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -2062,7 +2145,7 @@ Step00:
             message.Dispose()
         End Using
 
-        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
+        Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
 
     End Sub
 End Class
