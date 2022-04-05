@@ -263,7 +263,7 @@
                 <th>木材</th>
                 <td>
                     <asp:DropDownList ID="DropDownList6" runat="server" Width ="80px">
-                        <asp:ListItem Value="01">○</asp:ListItem>
+                        <asp:ListItem Value="○">○</asp:ListItem>
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
                 </td>
