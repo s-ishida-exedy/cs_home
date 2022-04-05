@@ -594,6 +594,10 @@ Partial Class yuusen
         Dim strkd As String
         Dim stram As String
 
+        Dim ercnt00 As Long
+
+        Dim ercnt01 As Long
+
         Dim dt1 As DateTime = DateTime.Now
 
         'データベース接続を開く
@@ -720,21 +724,63 @@ Partial Class yuusen
         dataread.Close()
         dbcmd.Dispose()
 
+        strSQL = ""
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_BOOKING "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            ercnt00 = Trim(dataread("RecCnt"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_CSANKEN "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            ercnt01 = Trim(dataread("RecCnt"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
 
         Dim dt00 As String = dt1.ToShortDateString
         Dim dt01 As String = strupddate00.ToShortDateString
         Dim dt02 As String = strupddate01.ToShortDateString
 
 
-        If dt00 = dt01 And dt02 = dt00 Then
-
-            Panel1.Visible = True
-            Panel2.Visible = False
-
-        Else
+        If ercnt00 = 0 Or ercnt01 = 0 Then
 
             Panel1.Visible = False
             Panel2.Visible = True
+
+        Else
+
+            If dt00 = dt01 And dt02 = dt00 Then
+
+                Panel1.Visible = True
+                Panel2.Visible = False
+
+            Else
+
+                Panel1.Visible = False
+                Panel2.Visible = True
+
+            End If
 
         End If
 

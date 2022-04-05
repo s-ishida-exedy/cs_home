@@ -407,6 +407,7 @@ Partial Class yuusen
 
         Dim Kaika00 As String = ""
         Dim deccnt As Long
+        Dim ercnt As Long
         Dim lng14 As Long
         Dim lng15 As Long
         Dim WDAYNO00 As String = ""
@@ -550,16 +551,42 @@ Partial Class yuusen
 
 
 
+        strSQL = ""
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_BOOKING "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            ercnt = Trim(dataread("RecCnt"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+
         Dim dt00 As String = dt1.ToShortDateString
         Dim dt01 As String = strupddate00.ToShortDateString
 
+        If ercnt = 0 Then
 
-
-        If dt00 = dt01 Then
-            Panel3.Visible = False
-        Else
             Panel1.Visible = False
             Panel3.Visible = True
+
+        Else
+
+            If dt00 = dt01 Then
+                Panel3.Visible = False
+            Else
+                Panel1.Visible = False
+                Panel3.Visible = True
+            End If
+
+
         End If
 
         cnn.Close()
