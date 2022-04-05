@@ -499,8 +499,11 @@ Public Class DBAccess
         StrSQL = StrSQL & "  T_EXL_AIR_EXC_ODR a "
         StrSQL = StrSQL & "  LEFT JOIN T_EXL_AIR_EXCLUSIVE b "
         StrSQL = StrSQL & "    ON a.ODR_CTL_NO = b.ODR_CTL_NO "
+        StrSQL = StrSQL & "  Left Join V_T_INV_HD_TB INV "
+        StrSQL = StrSQL & "    ON b.IVNO = INV.OLD_INVNO "
+        StrSQL = StrSQL & "WHERE  INV.SALESFLG Is NULL "
         If strMode = "1" Then
-            StrSQL = StrSQL & "WHERE b.IVNO IS NULL "
+            StrSQL = StrSQL & "AND b.IVNO IS NULL "
         End If
         StrSQL = StrSQL & "ORDER BY NOUKI "
 
