@@ -107,7 +107,9 @@ Partial Class cs_home
         Dim subject As String = ""
         Dim body As String = ""
         Dim stretd As String = ""
+        Dim striv As String = ""
         stretd = Session("stretd")
+        striv = Session("striv")
         Dim l As Long = 1
 
         'Dim strFilePath() As String
@@ -163,7 +165,7 @@ Partial Class cs_home
             Dim f As String = ""
 
             'メールの件名
-            subject = "【明細登録依頼】C258」NIJMEGEN向け　" & stretd & "ETD"
+            subject = "【明細登録依頼】C258」NIJMEGEN向け　" & stretd & "ETD" & " IV-" & striv
 
             'メールの本文
             body = TextBox2.Text.Replace(vbCrLf, "<br/>")
@@ -185,7 +187,7 @@ Partial Class cs_home
             Dim f As String = ""
 
             'メールの件名
-            subject = "【ご確認】C6G0 搬入予定"
+            subject = "【ご確認】C6G0 搬入予定" & " IV-" & striv
 
             'メールの本文
             body = TextBox2.Text.Replace(vbCrLf, "<br/>")

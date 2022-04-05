@@ -904,7 +904,7 @@ Partial Class yuusen
                         My.Computer.FileSystem.RenameFile(hensyuuiraisyo, "E_" & MyStr)
                     End If
 
-                    Call Get_allinv_k(GridView1.Rows(I).Cells(6).Text, GridView1.Rows(I).Cells(26).Text)
+                    Call Get_allinv_k(Trim(GridView1.Rows(I).Cells(6).Text), Trim(GridView1.Rows(I).Cells(26).Text))
 
 Step00:
 

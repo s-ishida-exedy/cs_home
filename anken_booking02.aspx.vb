@@ -1836,7 +1836,10 @@ Partial Class yuusen
                 My.Computer.FileSystem.RenameFile(hensyuuiraisyo, "E_" & MyStr)
             End If
 
+
 Step00:
+
+            Call Get_allinv_k(Trim(GridView1.Rows(I).Cells(5).Text), Trim(GridView1.Rows(I).Cells(9).Text))
 
             'madef00 = 0　依頼書雛形無し,madef00 = 1　委託,madef00 = 2　同一フォルダあり
 
@@ -2148,4 +2151,303 @@ Step00:
         Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
 
     End Sub
+
+
+    Private Sub Get_allinv_k(strInv As String, strbkg As String)
+
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = "SELECT T_INV_HD_TB.OLD_INVNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
+        strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+        strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE "
+        strSQL = strSQL & "HAVING T_INV_HD_TB.BOOKINGNO like '%" & strbkg & "%' "
+
+        strSQL = strSQL & "order by T_INV_HD_TB.CUTDATE Desc "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+
+        '結果を取り出す 
+        While (dataread.Read())
+            Call addRecord_K(dataread("OLD_INVNO"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+
+    End Sub
+
+    Private Sub addRecord_K(strIVNO As String)
+
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim TDATE As String = ""
+        Dim CUT As String = ""
+        Dim CUST As String = ""
+        Dim SUMMARY_INVO As String = ""
+        Dim INVOICE_NO As String = ""
+        Dim LOADING_PORT As String = ""
+        Dim DESTINATION As String = ""
+        Dim KANNRINO As String = ""
+        Dim BOOKING_NO As String = ""
+        Dim IFLG As String = ""
+        Dim IV_COUNT As String = ""
+        Dim CONTAINER As String = ""
+        Dim REF01 As String = ""
+        Dim REF02 As String = ""
+        Dim REV_KANNRINO As String = ""
+        Dim SALES As String = ""
+        Dim CHECK01 As String = ""
+        Dim itkcnt As String = ""
+        Dim LCLF As String = ""
+
+        Dim intCnt As Integer
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT * FROM T_EXL_DECKANRIHYO WHERE "
+        strSQL = strSQL & "T_EXL_DECKANRIHYO.INVOICE_NO = '" & strIVNO & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+
+        '結果を取り出す 
+        While (dataread.Read())
+
+            TDATE = dataread("TDATE")
+            CUT = dataread("CUT")
+            CUST = dataread("CUST")
+            SUMMARY_INVO = dataread("SUMMARY_INVO")
+            INVOICE_NO = dataread("INVOICE_NO")
+            LOADING_PORT = dataread("LOADING_PORT")
+            DESTINATION = dataread("DESTINATION")
+            KANNRINO = dataread("KANNRINO")
+            BOOKING_NO = dataread("BOOKING_NO")
+            IFLG = dataread("IFLG")
+            IV_COUNT = dataread("IV_COUNT")
+            CONTAINER = dataread("CONTAINER")
+            REF01 = dataread("REF01")
+            REF02 = dataread("REF02")
+            REV_KANNRINO = dataread("REV_KANNRINO")
+            SALES = dataread("SALES")
+            CHECK01 = dataread("CHECK01")
+
+            intCnt = 1
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT * FROM T_EXL_CSANKEN WHERE "
+        strSQL = strSQL & "T_EXL_CSANKEN.INVOICE like '%" & strIVNO & "%' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+
+        '結果を取り出す 
+        While (dataread.Read())
+
+            TDATE = Format(Now(), "yyyy/MM/dd")
+            CUT = dataread("CUT_DATE")
+            CUST = dataread("CUST")
+            SUMMARY_INVO = dataread("INVOICE")
+            INVOICE_NO = strIVNO
+            LOADING_PORT = dataread("LOADING_PORT")
+            DESTINATION = dataread("DESTINATION")
+            KANNRINO = ""
+            BOOKING_NO = dataread("BOOKING_NO")
+            IFLG = ""
+            IV_COUNT = ""
+            CONTAINER = dataread("CONTAINER")
+            REF01 = ""
+            REF02 = ""
+            REV_KANNRINO = ""
+            SALES = ""
+            CHECK01 = ""
+            LCLF = dataread("LCL_QTY")
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+
+
+        '既存データの検索
+        strSQL = ""
+        strSQL = strSQL & "SELECT ITK_BKGNO FROM T_EXL_CSWORKSTATUS WHERE "
+        strSQL = strSQL & "T_EXL_CSWORKSTATUS.ITK_BKGNO like '%" & BOOKING_NO & "%' "
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT BKGNO FROM T_EXL_WORKSTATUS00 WHERE "
+        strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & BOOKING_NO & "' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.REGDATE > '" & Format(dt3, "yyyy/MM/dd") & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+
+        '結果を取り出す 
+        While (dataread.Read())
+
+            itkcnt = dataread("bkgno")
+
+        End While
+
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        If itkcnt <> "" Then
+
+            IFLG = "1"
+
+        End If
+
+        If LCLF = "LCL" Then
+
+            IFLG = "1"
+
+        End If
+
+
+
+        '既存データの有無を判定
+        If intCnt > 0 Then
+
+            '既存データありの場合、UPDATE
+            strSQL = ""
+            strSQL = strSQL & "UPDATE T_EXL_DECKANRIHYO SET "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.TDATE = '" & TDATE & "', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.CUT = '" & CUT & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.CUST = '" & CUST & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.SUMMARY_INVO = '" & SUMMARY_INVO & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.INVOICE_NO = '" & Trim(strIVNO) & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.LOADING_PORT = '" & LOADING_PORT & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.DESTINATION = '" & DESTINATION & " ', "
+
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.BOOKING_NO = '" & BOOKING_NO & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.IFLG = '" & IIf(IFLG = "", 0, IFLG) & "', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.IV_COUNT = '" & IV_COUNT & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.CONTAINER = '" & CONTAINER & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.REF01 = '" & REF01 & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.Ref02 = '" & "" & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.REV_KANNRINO = '" & "" & " ' "
+            strSQL = strSQL & "WHERE T_EXL_DECKANRIHYO.INVOICE_NO = '" & Trim(strIVNO) & "' "
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+
+
+
+        Else
+
+
+            '既存データが無いのでINSERTする
+            strSQL = ""
+            strSQL = strSQL & "INSERT INTO T_EXL_DECKANRIHYO VALUES("
+            strSQL = strSQL & " '" & TDATE & "', "
+            strSQL = strSQL & " '" & IIf(CUT = "", "", CUT) & "', "
+            strSQL = strSQL & " '" & IIf(CUST = "", "", CUST) & "', "
+            strSQL = strSQL & " '" & IIf(SUMMARY_INVO = "", "", SUMMARY_INVO) & "', "
+            strSQL = strSQL & " '" & Trim(strIVNO) & "', "
+            strSQL = strSQL & " '" & IIf(LOADING_PORT = "", "", LOADING_PORT) & "', "
+            strSQL = strSQL & " '" & IIf(DESTINATION = "", "", DESTINATION) & "', "
+            strSQL = strSQL & " '" & IIf(KANNRINO = "", "", KANNRINO) & "', "
+            strSQL = strSQL & " '" & IIf(BOOKING_NO = "", "", BOOKING_NO) & "', "
+            strSQL = strSQL & " '" & IIf(IFLG = "", "0", IFLG) & "', "
+            strSQL = strSQL & " '" & IIf(IV_COUNT = "", "", IV_COUNT) & "', "
+            strSQL = strSQL & " '" & IIf(CONTAINER = "", "", CONTAINER) & "', "
+            strSQL = strSQL & " '" & IIf(REF01 = "", "", REF01) & "', "
+            strSQL = strSQL & " '" & "" & "', "
+            strSQL = strSQL & " '" & "" & "', "
+            strSQL = strSQL & " '" & "" & "', "
+            strSQL = strSQL & " '" & "" & "' "
+            strSQL = strSQL & ")"
+
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+
+        End If
+
+
+
+
+
+        cnn.Close()
+        cnn.Dispose()
+
+
+    End Sub
+
 End Class
