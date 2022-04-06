@@ -93,6 +93,7 @@ Partial Class cs_home
                 TextBox3.Enabled = True
                 TextBox2.Text = "EXEDY SINGAPORE PTE. LTD."
                 TextBox3.Text = "45 UBI ROAD 1, #02-01, SINGAPORE 408696"
+                Label1.Text = ""
             Else
                 Label1.Text = "第三国インボイスはESPのみ選択可能です。"
                 RadioButton1.Checked = False
