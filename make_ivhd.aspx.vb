@@ -40,7 +40,7 @@ Partial Class yuusen
         If e.Row.RowType = DataControlRowType.DataRow Then
 
             '請求書コード
-            e.Row.Cells(0).Text = Left(e.Row.Cells(0).Text, 4)
+            e.Row.Cells(0).Text = Trim(Left(e.Row.Cells(0).Text, 4))
 
             'PORTOF LOADING(積み出し港)	4
             intval = 0
@@ -49,7 +49,7 @@ Partial Class yuusen
                 intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(4).Text, "→")
             Loop
-            e.Row.Cells(4).Text = Mid(e.Row.Cells(4).Text, intval + 1, Len(e.Row.Cells(4).Text) - intval)
+            e.Row.Cells(4).Text = Trim(Mid(e.Row.Cells(4).Text, intval + 1, Len(e.Row.Cells(4).Text) - intval))
             intCnt = 0
 
             'PORTOF DEISCHARGE(揚地)	5
@@ -59,7 +59,7 @@ Partial Class yuusen
                 intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(5).Text, "→")
             Loop
-            e.Row.Cells(5).Text = Mid(e.Row.Cells(5).Text, intval + 1, Len(e.Row.Cells(5).Text) - intval)
+            e.Row.Cells(5).Text = Trim(Mid(e.Row.Cells(5).Text, intval + 1, Len(e.Row.Cells(5).Text) - intval))
             intCnt = 0
 
             'PALECE OF DELIVERY(配送先)	6
@@ -69,7 +69,7 @@ Partial Class yuusen
                 intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(6).Text, "→")
             Loop
-            e.Row.Cells(6).Text = Mid(e.Row.Cells(6).Text, intval + 1, Len(e.Row.Cells(6).Text) - intval)
+            e.Row.Cells(6).Text = Trim(Mid(e.Row.Cells(6).Text, intval + 1, Len(e.Row.Cells(6).Text) - intval))
             intCnt = 0
 
             '荷受地	7
@@ -79,7 +79,7 @@ Partial Class yuusen
                 intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(7).Text, "→")
             Loop
-            e.Row.Cells(7).Text = Mid(e.Row.Cells(7).Text, intval + 1, Len(e.Row.Cells(7).Text) - intval)
+            e.Row.Cells(7).Text = Trim(Mid(e.Row.Cells(7).Text, intval + 1, Len(e.Row.Cells(7).Text) - intval))
             intCnt = 0
 
             'PLACE OF DELIVERY BY CARRIER(配送者責任送り先)	8
@@ -89,7 +89,7 @@ Partial Class yuusen
                 intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(8).Text, "→")
             Loop
-            e.Row.Cells(8).Text = Mid(e.Row.Cells(8).Text, intval + 1, Len(e.Row.Cells(8).Text) - intval)
+            e.Row.Cells(8).Text = Trim(Mid(e.Row.Cells(8).Text, intval + 1, Len(e.Row.Cells(8).Text) - intval))
             intCnt = 0
 
 
@@ -100,7 +100,7 @@ Partial Class yuusen
                 intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(16).Text, "→")
             Loop
-            e.Row.Cells(16).Text = Mid(e.Row.Cells(16).Text, intval + 1, Len(e.Row.Cells(16).Text) - intval)
+            e.Row.Cells(16).Text = Trim(Mid(e.Row.Cells(16).Text, intval + 1, Len(e.Row.Cells(16).Text) - intval))
             intCnt = 0
 
             '船社	17
@@ -110,7 +110,7 @@ Partial Class yuusen
                 intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(17).Text, "→")
             Loop
-            e.Row.Cells(17).Text = Mid(e.Row.Cells(17).Text, intval + 1, Len(e.Row.Cells(17).Text) - intval)
+            e.Row.Cells(17).Text = Trim(Mid(e.Row.Cells(17).Text, intval + 1, Len(e.Row.Cells(17).Text) - intval))
             intCnt = 0
 
             'BOOKING_NO	    21
@@ -120,7 +120,7 @@ Partial Class yuusen
                 intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(21).Text, "→")
             Loop
-            e.Row.Cells(21).Text = Mid(e.Row.Cells(21).Text, intval + 1, Len(e.Row.Cells(21).Text) - intval)
+            e.Row.Cells(21).Text = Trim(Mid(e.Row.Cells(21).Text, intval + 1, Len(e.Row.Cells(21).Text) - intval))
             intCnt = 0
 
             '船名	22
@@ -130,7 +130,7 @@ Partial Class yuusen
                 intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(22).Text, "→")
             Loop
-            e.Row.Cells(22).Text = Mid(e.Row.Cells(22).Text, intval + 1, Len(e.Row.Cells(22).Text) - intval)
+            e.Row.Cells(22).Text = Trim(Mid(e.Row.Cells(22).Text, intval + 1, Len(e.Row.Cells(22).Text) - intval))
             intCnt = 0
 
             'place of delivery SI	25
@@ -140,7 +140,7 @@ Partial Class yuusen
                 intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(25).Text, "→")
             Loop
-            e.Row.Cells(25).Text = Mid(e.Row.Cells(25).Text, intval + 1, Len(e.Row.Cells(25).Text) - intval)
+            e.Row.Cells(25).Text = Trim(Mid(e.Row.Cells(25).Text, intval + 1, Len(e.Row.Cells(25).Text) - intval))
             intCnt = 0
 
             '20Ft	
@@ -152,7 +152,7 @@ Partial Class yuusen
             Loop
             e.Row.Cells(33).Text = Mid(e.Row.Cells(33).Text, intval + 1, Len(e.Row.Cells(33).Text) - intval)
             intCnt = 0
-            e.Row.Cells(33).Text = Left(Trim(e.Row.Cells(33).Text), 1)
+            e.Row.Cells(33).Text = Trim(Left(Trim(e.Row.Cells(33).Text), 1))
             If IsNumeric(e.Row.Cells(33).Text) = True Then
             Else
                 e.Row.Cells(33).Text = 0
@@ -167,7 +167,7 @@ Partial Class yuusen
             Loop
             e.Row.Cells(34).Text = Mid(e.Row.Cells(34).Text, intval + 1, Len(e.Row.Cells(34).Text) - intval)
             intCnt = 0
-            e.Row.Cells(34).Text = Left(Trim(e.Row.Cells(34).Text), 1)
+            e.Row.Cells(34).Text = Trim(Left(Trim(e.Row.Cells(34).Text), 1))
             If IsNumeric(e.Row.Cells(34).Text) = True Then
             Else
                 e.Row.Cells(34).Text = 0
@@ -186,7 +186,7 @@ Partial Class yuusen
             'M3以外は数量を算出
             If e.Row.Cells(35).Text Like "*M3*" Then
             Else
-                e.Row.Cells(35).Text = Left(Trim(e.Row.Cells(35).Text), 1)
+                e.Row.Cells(35).Text = Trim(Left(Trim(e.Row.Cells(35).Text), 1))
                 If IsNumeric(e.Row.Cells(35).Text) = True Then
                 Else
                     e.Row.Cells(35).Text = 0
@@ -483,7 +483,8 @@ Partial Class yuusen
                                 If IsDate(val01) = True Then
                                     ws.Cell(t, i + 1).SetValue(DateValue(val01))
                                 Else
-                                    ws.Cell(t, i + 1).SetValue(val01)
+                                    ws.Cell(t, i + 1).SetValue("日付エラー")
+                                    ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Red
                                 End If
 
                             Case Else
