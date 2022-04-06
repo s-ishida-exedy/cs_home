@@ -453,52 +453,61 @@ Partial Class yuusen
 
         Dim val01 As String = ""
 
-        Using wb As XLWorkbook = New XLWorkbook()
-            Dim ws As IXLWorksheet = wb.AddWorksheet("INVHDSHEET")
-            For Each cell As TableCell In GridView1.HeaderRow.Cells
+        If GridView1.Controls.Count > 1 Then
 
-                If cnt > 31 Then
+            Using wb As XLWorkbook = New XLWorkbook()
+                Dim ws As IXLWorksheet = wb.AddWorksheet("INVHDSHEET")
 
 
-                Else
-                    ws.Cell(1, t).Value = cell.Text
-                    t = t + 1
-                    cnt = cnt + 1
-                End If
-            Next
 
-            cnt = 0
-            t = 2
-            For Each row As GridViewRow In GridView1.Rows
-                For i As Integer = 0 To row.Cells.Count - 5
-                    val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
-                    Select Case i
+                For Each cell As TableCell In GridView1.HeaderRow.Cells
 
-                        Case 1, 9 To 12
-                            If IsDate(val01) = True Then
-                                ws.Cell(t, i + 1).SetValue(DateValue(val01))
-                            Else
-                                ws.Cell(t, i + 1).SetValue(val01)
-                            End If
+                    If cnt > 31 Then
 
-                        Case Else
-                            ws.Cell(t, i + 1).SetValue(val01)
-                    End Select
 
+                    Else
+                        ws.Cell(1, t).Value = cell.Text
+                        t = t + 1
+                        cnt = cnt + 1
+                    End If
                 Next
-                t = t + 1
-            Next
 
-            ws.Style.Font.FontName = "Meiryo UI"
-            ws.Columns.AdjustToContents()
-            ws.SheetView.FreezeRows(1)
+                cnt = 0
+                t = 2
+                For Each row As GridViewRow In GridView1.Rows
+                    For i As Integer = 0 To row.Cells.Count - 5
+                        val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
+                        Select Case i
 
-            Dim struid As String = Session("UsrId")
-            wb.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\Mak_ivhd_" & Now.ToString(“yyMMdd”) & "_P_" & struid & ".xlsx")
+                            Case 1, 9 To 12
+                                If IsDate(val01) = True Then
+                                    ws.Cell(t, i + 1).SetValue(DateValue(val01))
+                                Else
+                                    ws.Cell(t, i + 1).SetValue(val01)
+                                End If
 
-        End Using
+                            Case Else
+                                ws.Cell(t, i + 1).SetValue(val01)
+                        End Select
 
+                    Next
+                    t = t + 1
+                Next
 
+                ws.Style.Font.FontName = "Meiryo UI"
+                ws.Columns.AdjustToContents()
+                ws.SheetView.FreezeRows(1)
+
+                Dim struid As String = Session("UsrId")
+                wb.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\Mak_ivhd_" & Now.ToString(“yyMMdd”) & "_P_" & struid & ".xlsx")
+
+            End Using
+
+        Else
+
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('対象無し');</script>", False)
+
+        End If
 
 
     End Sub
