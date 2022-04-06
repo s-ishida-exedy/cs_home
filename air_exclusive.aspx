@@ -287,7 +287,8 @@
             <SortedDescendingHeaderStyle BackColor="#000065" />
     </asp:GridView>
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="
+        SELECT DISTINCT
   CUST_CD 
   , NOUKI
   , LS_TYP
@@ -299,6 +300,10 @@ FROM
   T_EXL_AIR_EXC_ODR a
   LEFT JOIN T_EXL_AIR_EXCLUSIVE b
     ON a.ODR_CTL_NO = b.ODR_CTL_NO
+  LEFT JOIN V_T_INV_HD_TB INV
+    ON b.IVNO = INV.OLD_INVNO
+WHERE 
+  INV.SALESFLG IS NULL
 ORDER BY NOUKI"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [M_EXL_AIR_EXC_CST]"></asp:SqlDataSource>
 <%--</div>--%>
