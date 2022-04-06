@@ -368,8 +368,6 @@
                         <asp:BoundField DataField="LCL_QTY" HeaderText="LCL/40Ft" SortExpression="LCL_QTY" />
 
 
-
-
                         </Columns>
                         <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
                         <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
