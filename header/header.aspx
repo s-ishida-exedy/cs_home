@@ -43,9 +43,18 @@
         <a href="#" class="init-bottom">CS業務<span>CS work</span></a>
         <ul class="menu__second-level">
             <!-- 第一階層 -->
-            <li data-id='["home","van_sche.aspx"]'><a href="#">本日のバンニング予定</a></li>
-            <li data-id='["home","doc_final.aspx"]'><a href="#">書類最終一覧</a></li>
-            <li data-id='["home","eir_comfirm_cs.aspx"]'><a href="#">EIR,Booking差異 CS対応</a></li>
+            <li data-id='["aaa",""]'>
+                <a href="#" class="init-right">書類作成</a>
+                <ul class="menu__third-level">
+                    <!-- 第二階層 -->
+                    <li data-id='["home","van_sche.aspx"]'><a href="#">本日のバンニング予定</a></li>
+                    <li data-id='["home","doc_final.aspx"]'><a href="#">書類最終一覧</a></li>
+                    <li data-id='["home","make_ivhd.aspx"]'><a href="#">ｲﾝﾎﾞｲｽﾍｯﾀﾞファイル作成</a></li>
+                    <li data-id='["home","register_csstatus.aspx"]'><a href="#">委託登録・マスタ変更</a></li>
+                    <li data-id='["home","eir_comfirm_cs.aspx"]'><a href="#">EIR,Booking差異 CS対応</a></li>
+                    <li data-id='["home","iv_booking.aspx"]'><a href="#">ﾌﾞｯｷﾝｸﾞｼｰﾄ vs I/Vﾍｯﾀﾞ 比較結果</a></li>
+                </ul>
+            </li>
             <li data-id='["aaa",""]'>
                 <a href="#" class="init-right">LCL</a>
                 <ul class="menu__third-level">
@@ -73,8 +82,6 @@
                     <li data-id='["home","cs_declearkannrihyou.aspx"]'><a href="#">特定輸出申告管理表</a></li>
                 </ul>
             </li>
-            <li data-id='["home","register_csstatus.aspx"]'><a href="#">委託登録・マスタ変更</a></li>
-            <li data-id='["home","shippingmemo.aspx"]'><a href="#">シッピングメモ記録</a></li>
             <li data-id='["aaa",""]'>
                 <a href="#" class="init-right">EPA</a>
                 <ul class="menu__third-level">
@@ -83,8 +90,14 @@
                     <li data-id='["home","epa_make_tsv.aspx"]'><a href="#">EPA発給TSVﾌｧｲﾙ作成</a></li>
                 </ul>
             </li>
-            <li data-id='["home","iv_booking.aspx"]'><a href="#">ﾌﾞｯｷﾝｸﾞｼｰﾄ vs I/Vﾍｯﾀﾞ 比較結果</a></li>
-            <li data-id='["home","sales_comfirm.aspx"]'><a href="#">海外売上確定チェック</a></li>
+            <li data-id='["aaa",""]'>
+                <a href="#" class="init-right">その他</a>
+                <ul class="menu__third-level">
+                    <!-- 第二階層 -->
+                    <li data-id='["home","shippingmemo.aspx"]'><a href="#">シッピングメモ記録</a></li>
+                    <li data-id='["home","sales_comfirm.aspx"]'><a href="#">海外売上確定チェック</a></li>
+                </ul>
+            </li>
         </ul>
     </li>
     <li class="menu__multi">
