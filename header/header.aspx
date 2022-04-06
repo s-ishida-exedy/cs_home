@@ -58,9 +58,9 @@
                 <a href="#" class="init-right">AIR</a>
                 <ul class="menu__third-level">
                     <!-- 第二階層 -->
-                    <li data-id='["home","air_estimate.aspx"]'><a href="#">AIR見積り依頼</a></li>
                     <li data-id='["home","air_management.aspx"]'><a href="#">AIR管理表</a></li>
                     <li data-id='["home","air_exclusive.aspx"]'><a href="#">AIR専用客先オーダー確認</a></li>
+                    <li data-id='["home","air_estimate.aspx"]'><a href="#">AIR見積り依頼</a></li>
                     <li data-id='["home","./air_shipbase.aspx"]'><a href="#">AIR出荷場所相違チェック</a></li>
                 </ul>
             </li>
@@ -75,7 +75,14 @@
             </li>
             <li data-id='["home","register_csstatus.aspx"]'><a href="#">委託登録・マスタ変更</a></li>
             <li data-id='["home","shippingmemo.aspx"]'><a href="#">シッピングメモ記録</a></li>
-            <li data-id='["home","epa_request.aspx"]'><a href="#">ＥＰＡ申請状況</a></li>
+            <li data-id='["aaa",""]'>
+                <a href="#" class="init-right">EPA</a>
+                <ul class="menu__third-level">
+                    <!-- 第二階層 -->
+                    <li data-id='["home","epa_request.aspx"]'><a href="#">ＥＰＡ申請状況</a></li>
+                    <li data-id='["home","epa_make_tsv.aspx"]'><a href="#">EPA発給TSVﾌｧｲﾙ作成</a></li>
+                </ul>
+            </li>
             <li data-id='["home","iv_booking.aspx"]'><a href="#">ﾌﾞｯｷﾝｸﾞｼｰﾄ vs I/Vﾍｯﾀﾞ 比較結果</a></li>
             <li data-id='["home","sales_comfirm.aspx"]'><a href="#">海外売上確定チェック</a></li>
         </ul>
