@@ -467,6 +467,7 @@ Partial Class cs_home
         Dim strShip As String = ""
         Dim strCust As String = ""
         Dim strPrt As String = ""
+        Dim strVoyNo As String = ""
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -488,12 +489,13 @@ Partial Class cs_home
         strSQL = strSQL & "  , IVH.SHIPPEDPER  "
         strSQL = strSQL & "  , IVH.CUSTCODE  "
         strSQL = strSQL & "  , IVH.INVPRTDATE　"
+        strSQL = strSQL & "  , IVH.VOYAGENO　"
         strSQL = strSQL & "FROM "
         strSQL = strSQL & "  V_T_INV_HD_TB IVH  "
         strSQL = strSQL & "WHERE "
         strSQL = strSQL & "  IVH.INVOICENO =   "
-        strSQL = strSQL & "    (SELECT "
-        strSQL = strSQL & "      MAX(a.INVOICENO) AS IVNO  "
+        strSQL = strSQL & "    (Select "
+        strSQL = strSQL & "      MAX(a.INVOICENO) As IVNO  "
         strSQL = strSQL & "    FROM "
         strSQL = strSQL & "      V_T_INV_HD_TB a  "
         strSQL = strSQL & "    WHERE "
@@ -514,22 +516,29 @@ Partial Class cs_home
             strShip = Trim(dataread("SHIPPEDPER"))
             strCust = Trim(dataread("CUSTCODE"))
             strPrt = Replace(Left(Trim(dataread("INVPRTDATE")), 10), "/", "")
+            strVoyNo = Trim(dataread("VOYAGENO"))
         End While
 
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
 
-        'メキシコの場合、コンサイニー住所の最後に国名を追加
-        If strAgree = "01" Then
-            strCneeAD = strCneeAD & ", MEXICO"
-        End If
+        '客先名を取得
+        Dim strCstNm As String = GET_CUST_INFO(strCust)
 
-        'RCEP(中国)の場合、客先コードから客先、住所を検索し、指定する。
-        If GET_CUST_INFO(strCust) = "EDS" Then
-            strCneeAD = "1399# Chenqiao Road Fengxian District, Shanghai, 201400, China"
-        ElseIf GET_CUST_INFO(strCust) = "EXC" Then
-            strCneeAD = "NO.4 LONGJING ROAD NORTH NEW DISTRICT CHONGQING, 400020, China"
+        '客先名から住所取得
+        Select Case strCstNm
+            Case "EDM", "EXM", "EXT", "EMI", "EDS", "EXC"
+                strCneeAD = Get_CST_ADD("", strCstNm)
+            Case "ELA", "ESP"
+                If Get_CST_ADD(strCust, "") <> "" Then
+                    strCneeAD = Get_CST_ADD(strCust, "")
+                End If
+        End Select
+
+        'インドネシアの場合、本船名＋VoｙNo
+        If strAgree = "05" Then
+            strShip = strShip & " " & strVoyNo
         End If
 
         'TSVファイル（ヘッダ）
@@ -700,10 +709,16 @@ Partial Class cs_home
             End If
         End If
 
-
-
         'TSVファイル（明細）
-        Call Make_SQL(strIVNO, strSQL, strAgree)
+
+        '明細取得用のＳＱＬ作成
+        If Get_Search_Method(strAgree) <> "03" Then
+            '品番　ＯＲ　品名
+            Call Make_SQL(strIVNO, strSQL, strAgree)
+        Else
+            '品番　＆　品名
+            Call Make_SQL_Name(strIVNO, strSQL, strAgree)
+        End If
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -808,7 +823,7 @@ Partial Class cs_home
     End Sub
 
     Private Sub Make_SQL(strIVNO As String, ByRef strSQL As String, strAgree As String)
-        '各国用明細のSQL作成
+        '各国用明細のSQL作成（検索条件が品番または品名）
 
         strSQL = ""
         strSQL = strSQL & "SELECT "
@@ -838,9 +853,6 @@ Partial Class cs_home
             Case "02"
                 strSQL = strSQL & "      LEFT JOIN M_EXL_ORIGIN_ITM ORI  "
                 strSQL = strSQL & "        On IVB.PRODNAME = ORI.ITM_NAME  "
-            Case "03"
-                strSQL = strSQL & "      LEFT JOIN M_EXL_ORIGIN_ITM ORI  "
-                strSQL = strSQL & "        On IVB.CUSTMPN = ORI.CST_ITM_CODE OR IVB.PRODNAME = ORI.ITM_NAME "
         End Select
 
         strSQL = strSQL & "      LEFT JOIN V_M_UNIT_TB UNI  "
@@ -863,6 +875,103 @@ Partial Class cs_home
         strSQL = strSQL & "  SEL.ORI_JDG_NO "
         strSQL = strSQL & "  , SEL.UNIT "
         strSQL = strSQL & "  , SEL.ORI_ITM_NAME "
+
+    End Sub
+
+    Private Sub Make_SQL_Name(strIVNO As String, ByRef strSQL As String, strAgree As String)
+        '各国用明細のSQL作成（検索条件が品番と品名）
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT "
+        strSQL = strSQL & "  SEL.ORI_JDG_NO "
+        strSQL = strSQL & "  , SUM(SEL.QTY) As ITM_QTY "
+        strSQL = strSQL & "  , Case  "
+        strSQL = strSQL & "    When SUM(SEL.QTY) = 1  "
+        strSQL = strSQL & "      Then d.SINGULARNAME  "
+        strSQL = strSQL & "    Else d.PLURALNAME  "
+        strSQL = strSQL & "    End As UNIT "
+        strSQL = strSQL & "  , SEL.ORI_ITM_NAME  "
+        strSQL = strSQL & "FROM "
+        strSQL = strSQL & "  (  "
+        strSQL = strSQL & "    Select  "
+        strSQL = strSQL & "      INVOICENO "
+        strSQL = strSQL & "      , IVB.SERIALNO "
+        strSQL = strSQL & "      , RTRIM(IVB.CUSTMPN) As CUSTMPN "
+        strSQL = strSQL & "      , IVB.UNITCD "
+        strSQL = strSQL & "      , IVB.QTY "
+        strSQL = strSQL & "	  , IVB.PRODNAME "
+        strSQL = strSQL & "      , ORI.ITM_NAME "
+        strSQL = strSQL & "      , ORI.ORI_ITM_NAME "
+        strSQL = strSQL & "      , ORI.ORI_JDG_NO  "
+        strSQL = strSQL & "    FROM "
+        strSQL = strSQL & "      V_T_INV_BD_TB IVB  "
+        strSQL = strSQL & "      LEFT JOIN M_EXL_ORIGIN_ITM ORI   "
+        strSQL = strSQL & "        On IVB.CUSTMPN = ORI.CST_ITM_CODE  "
+        strSQL = strSQL & "    WHERE "
+        strSQL = strSQL & "      IVB.INVOICENO = (  "
+        strSQL = strSQL & "        Select "
+        strSQL = strSQL & "          MAX(a.INVOICENO) As IVNO  "
+        strSQL = strSQL & "        FROM "
+        strSQL = strSQL & "          V_T_INV_HD_TB b  "
+        strSQL = strSQL & "          INNER JOIN V_T_INV_BD_TB a  "
+        strSQL = strSQL & "            On a.INVOICENO = b.INVOICENO  "
+        strSQL = strSQL & "        WHERE "
+        strSQL = strSQL & "          b.OLD_INVNO = '" & strIVNO & "' "
+        strSQL = strSQL & "          AND a.QTY > 0 "
+        strSQL = strSQL & "      )  "
+        strSQL = strSQL & "      AND ORI.CODE = '" & strAgree & "' "
+        strSQL = strSQL & "  ) SEL  "
+        strSQL = strSQL & "  LEFT JOIN V_M_UNIT_TB d  "
+        strSQL = strSQL & "    ON SEL.UNITCD = d.UNITCD  "
+        strSQL = strSQL & "GROUP BY "
+        strSQL = strSQL & "  SEL.ORI_ITM_NAME "
+        strSQL = strSQL & "  , SEL.ORI_JDG_NO "
+        strSQL = strSQL & "  , d.SINGULARNAME "
+        strSQL = strSQL & "  , d.PLURALNAME "
+        strSQL = strSQL & "  , SEL.ORI_ITM_NAME "
+        strSQL = strSQL & "UNION "
+        strSQL = strSQL & "SELECT DISTINCT "
+        strSQL = strSQL & "  ORI2.ORI_JDG_NO "
+        strSQL = strSQL & "  , SUM(SEL.QTY) AS QTY "
+        strSQL = strSQL & "  , CASE  "
+        strSQL = strSQL & "    WHEN SUM(SEL.QTY) = 1  "
+        strSQL = strSQL & "      THEN d.SINGULARNAME  "
+        strSQL = strSQL & "    ELSE d.PLURALNAME  "
+        strSQL = strSQL & "    END AS UNIT "
+        strSQL = strSQL & "  , ORI2.ORI_ITM_NAME "
+        strSQL = strSQL & "FROM "
+        strSQL = strSQL & "    (SELECT DISTINCT "
+        strSQL = strSQL & "      IVB.* "
+        strSQL = strSQL & "    FROM "
+        strSQL = strSQL & "      V_T_INV_BD_TB IVB  "
+        strSQL = strSQL & "      LEFT JOIN M_EXL_ORIGIN_ITM ORI  "
+        strSQL = strSQL & "        On IVB.CUSTMPN = ORI.CST_ITM_CODE "
+        strSQL = strSQL & "    WHERE "
+        strSQL = strSQL & "      IVB.INVOICENO  = (  "
+        strSQL = strSQL & "        SELECT "
+        strSQL = strSQL & "          MAX(a.INVOICENO) AS IVNO  "
+        strSQL = strSQL & "        FROM "
+        strSQL = strSQL & "          V_T_INV_HD_TB b  "
+        strSQL = strSQL & "          INNER JOIN V_T_INV_BD_TB a  "
+        strSQL = strSQL & "            ON a.INVOICENO = b.INVOICENO  "
+        strSQL = strSQL & "        WHERE "
+        strSQL = strSQL & "          b.OLD_INVNO = '" & strIVNO & "' "
+        strSQL = strSQL & "          AND a.QTY > 0)  "
+        strSQL = strSQL & "      AND ORI.ORI_JDG_NO is null) SEL "
+        strSQL = strSQL & "	INNER JOIN M_EXL_ORIGIN_ITM ORI2 "
+        strSQL = strSQL & "	ON SEL.PRODNAME = ORI2.ITM_NAME "
+        strSQL = strSQL & "	 "
+        strSQL = strSQL & "	LEFT JOIN V_M_UNIT_TB d  "
+        strSQL = strSQL & "    ON SEL.UNITCD = d.UNITCD  "
+        strSQL = strSQL & "WHERE "
+        strSQL = strSQL & "  ORI2.CODE = '" & strAgree & "' "
+        strSQL = strSQL & "  AND ORI2.REMARKS = '01' "
+        strSQL = strSQL & "GROUP BY "
+        strSQL = strSQL & "  ORI2.ORI_ITM_NAME "
+        strSQL = strSQL & "  , ORI2.ORI_JDG_NO "
+        strSQL = strSQL & "  , d.SINGULARNAME "
+        strSQL = strSQL & "  , d.PLURALNAME "
+        strSQL = strSQL & "  , ORI2.ORI_ITM_NAME "
 
     End Sub
 
@@ -937,6 +1046,53 @@ Partial Class cs_home
         '結果を取り出す 
         While (dataread.Read())
             Get_Search_Method = dataread("JDG_METHOD")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+    End Function
+
+    Private Function Get_CST_ADD(strCstCd As String, strCust As String) As String
+        '客先住所を取得
+
+        Dim strSQL As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Get_CST_ADD = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT CUST_ADD FROM M_EXL_EPA_ADD "
+        If strCust = "" Then
+            '客先名が空白の場合、EXDG以外
+            strSQL = strSQL & "WHERE CUST_CD = '" & strCstCd & "' "
+
+        ElseIf strCust <> "" Then
+            '客先名が空白で無い場合、EXDG
+            strSQL = strSQL & "WHERE CUST = '" & strCust & "' "
+        End If
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            Get_CST_ADD = dataread("CUST_ADD")
         End While
 
         'クローズ処理 
