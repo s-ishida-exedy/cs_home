@@ -903,4 +903,40 @@ Public Class DBAccess
         Return Ds
 
     End Function
+
+    Public Function GET_RESULT_EPA_ADDS(strCust As String, strCstCd As String) As DataSet
+        'EPA用住所マスタ取得
+        Conn = Me.Dbconnect
+        Dim cmd = New SqlCommand()
+
+        cmd.Connection = Conn
+        cmd.CommandType = System.Data.CommandType.Text
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  CUST "
+        StrSQL = StrSQL & " ,CUST_CD  "
+        StrSQL = StrSQL & " ,CUST_ADD  "
+        StrSQL = StrSQL & "FROM M_EXL_EPA_ADD "
+        StrSQL = StrSQL & "WHERE CUST LIKE @CUST "
+        StrSQL = StrSQL & " AND   CUST_CD LIKE @CSTCD "
+
+        cmd.CommandText = StrSQL
+        cmd.Parameters.Clear()
+        'パラメータ値を設定
+        cmd.Parameters.Add("@CUST", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strCust & "%"
+        cmd.Parameters.Add("@CSTCD", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strCstCd & "%"
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = cmd
+
+        cmd.Dispose()
+        Conn.Close()
+
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+
+
+    End Function
 End Class
