@@ -148,7 +148,7 @@
     <table class="header-ta" >
         <tr>
             <td class="first-cell">
-                <h2>EPA用客先住所ﾏｽﾀマスタ詳細</h2>  
+                <h2>EPA用客先住所マスタ詳細</h2>  
             </td>
             <td class="second-cell">
                 <asp:Button ID="Button1" runat="server" Text="登　録" style="width:120px" Font-Size="Small" />&nbsp;
