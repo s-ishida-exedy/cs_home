@@ -419,7 +419,7 @@
         <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
 
    
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM T_BOOKING WHERE STATUS <> 'キャンセル' AND INVOICE_NO ='' AND BOOKING_NO <>'' "></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM T_BOOKING WHERE STATUS <> 'キャンセル' AND INVOICE_NO ='' AND BOOKING_NO <>''"></asp:SqlDataSource>
 
         <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM T_BOOKING WHERE STATUS <> 'キャンセル' AND INVOICE_NO ='' AND BOOKING_NO <>'' "></asp:SqlDataSource>--%>
 

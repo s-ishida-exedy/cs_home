@@ -25,16 +25,19 @@ Partial Class yuusen
         Dim strbkg As String = ""
 
 
-        Dim wday As String = ""
-        Dim wday2 As String = ""
-        Dim wday3 As String = ""
-        Dim dt1 As DateTime = DateTime.Now
-        Dim Kaika00 As String = ""
-
         Dim code As String = ""
-
         Dim intval As Integer
         Dim intCnt As Integer
+
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(180, 0, 0, 0)
+        Dim ts2 As New TimeSpan(180, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        Dim dt00 As String = dt3.ToShortDateString
 
 
         If e.Row.RowType = DataControlRowType.DataRow Then
@@ -235,14 +238,8 @@ Partial Class yuusen
                 e.Row.Cells(14).Text = "01"
 
             Else
-
                 e.Row.Cells(14).Text = "-"
-
             End If
-
-
-
-
 
 
             '出荷拠点		　15
@@ -264,8 +261,6 @@ Partial Class yuusen
 
             'コンテナ情報登録					　30
             e.Row.Cells(30).Text = "有り"
-
-
 
 
             '接続文字列の作成
@@ -302,7 +297,6 @@ Partial Class yuusen
                 e.Row.Cells(19).Text += dataread(60)
                 '乙仲担当者	 20
                 e.Row.Cells(20).Text += dataread(61)
-
                 'consinerr name of SI		 23
                 e.Row.Cells(23).Text += dataread(54)
                 'consiner address of SI		 24
@@ -320,12 +314,84 @@ Partial Class yuusen
             dataread.Close()
             dbcmd.Dispose()
 
+
+
+
+            If IsDate(e.Row.Cells(1).Text) = False Then
+                e.Row.Cells(0).Text = "日付エラー02行目"
+                e.Row.BackColor = Drawing.Color.Red
+            Else
+                '半年移行前の日付の場合は翌年にする
+                If DateValue(e.Row.Cells(1).Text) < dt00 Then
+                    e.Row.Cells(1).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(1).Text)), "yyyy") & Format(DateValue(e.Row.Cells(1).Text), "/mm/dd"))
+                End If
+            End If
+
+            If IsDate(e.Row.Cells(9).Text) = False Then
+                e.Row.Cells(0).Text = "日付エラー10行目"
+                e.Row.BackColor = Drawing.Color.Red
+            Else
+                '半年移行前の日付の場合は翌年にする
+                If DateValue(e.Row.Cells(9).Text) < dt00 Then
+                    e.Row.Cells(9).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(9).Text)), "yyyy") & Format(DateValue(e.Row.Cells(9).Text), "/mm/dd"))
+                End If
+            End If
+
+            If IsDate(e.Row.Cells(10).Text) = False Then
+                e.Row.Cells(0).Text = "日付エラー11行目"
+                e.Row.BackColor = Drawing.Color.Red
+            Else
+                '半年移行前の日付の場合は翌年にする
+                If DateValue(e.Row.Cells(10).Text) < dt00 Then
+                    e.Row.Cells(10).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(10).Text)), "yyyy") & Format(DateValue(e.Row.Cells(10).Text), "/mm/dd"))
+                End If
+            End If
+
+            If IsDate(e.Row.Cells(11).Text) = False Then
+                e.Row.Cells(0).Text = "日付エラー12行目"
+                e.Row.BackColor = Drawing.Color.Red
+            Else
+                '半年移行前の日付の場合は翌年にする
+                If DateValue(e.Row.Cells(11).Text) < dt00 Then
+                    e.Row.Cells(11).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(11).Text)), "yyyy") & Format(DateValue(e.Row.Cells(11).Text), "/mm/dd"))
+                End If
+            End If
+
+            If e.Row.Cells(12).Text <> "&nbsp;" Then
+
+                '対象の日付以下の日付の最大値を取得
+                strSQL = "SELECT MAX(WORKDAY) AS WDAY01 FROM [T_EXL_CSWORKDAY] WHERE [T_EXL_CSWORKDAY].WORKDAY < '" & e.Row.Cells(12).Text & "' "
+
+                'ＳＱＬコマンド作成 
+                dbcmd = New SqlCommand(strSQL, cnn)
+                'ＳＱＬ文実行 
+                dataread = dbcmd.ExecuteReader()
+
+                '結果を取り出す 
+                While (dataread.Read())
+                    e.Row.Cells(12).Text = dataread("WDAY01")
+                End While
+
+                dataread.Close()
+                dbcmd.Dispose()
+
+            End If
+
             cnn.Close()
-            cnn.Dispose()
+                cnn.Dispose()
 
 
+                If IsDate(e.Row.Cells(12).Text) = False Then
+                    e.Row.Cells(0).Text = "日付エラー13行目"
+                    e.Row.BackColor = Drawing.Color.Red
+                Else
+                    '半年移行前の日付の場合は翌年にする
+                    If DateValue(e.Row.Cells(12).Text) < dt00 Then
+                        e.Row.Cells(12).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(12).Text)), "yyyy") & Format(DateValue(e.Row.Cells(12).Text), "/mm/dd"))
+                    End If
+                End If
 
-        End If
+            End If
 
 
 
@@ -451,9 +517,16 @@ Partial Class yuusen
         t = 1
         Dim cnt As Integer = 0
 
+        Dim lastRow As Integer
+        Dim lastCol As Integer
+
+        Dim lastRow2 As Integer
+        Dim ro As Integer
+        Dim co As Integer
+
         Dim val01 As String = ""
 
-        If GridView1.Controls.Count > 1 Then
+        If GridView1.Rows.Count > 1 Then
 
             Using wb As XLWorkbook = New XLWorkbook()
                 Dim ws As IXLWorksheet = wb.AddWorksheet("INVHDSHEET")
@@ -498,6 +571,128 @@ Partial Class yuusen
                 ws.Style.Font.FontName = "Meiryo UI"
                 ws.Columns.AdjustToContents()
                 ws.SheetView.FreezeRows(1)
+
+
+
+                lastRow = ws.LastRowUsed().RowNumber()
+                lastCol = ws.LastColumnUsed().ColumnNumber()
+
+                For ro = 2 To lastRow
+
+
+                    Select Case Left(ws.Cell(ro, 1).Value, 4)
+
+                        Case "E211"
+                            lastRow2 = ws.LastRowUsed().RowNumber()
+                            For co = 1 To lastCol
+                                If co = 1 Then
+                                    ws.Cell(lastRow2 + 1, co).SetValue("E213")
+                                    ws.Cell(lastRow2 + 2, co).SetValue("E214")
+                                    ws.Cell(lastRow2 + 3, co).SetValue("E215")
+                                    ws.Cell(lastRow2 + 4, co).SetValue("K52C")
+                                Else
+                                    ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
+                                    ws.Cell(lastRow2 + 2, co).SetValue(ws.Cell(ro, co).Value)
+                                    ws.Cell(lastRow2 + 3, co).SetValue(ws.Cell(ro, co).Value)
+                                    ws.Cell(lastRow2 + 4, co).SetValue(ws.Cell(ro, co).Value)
+                                End If
+                            Next
+
+                        Case "E153"
+                            lastRow2 = ws.LastRowUsed().RowNumber()
+                            For co = 1 To lastCol
+                                If co = 1 Then
+                                    ws.Cell(lastRow2 + 1, co).SetValue("E156")
+                                    ws.Cell(lastRow2 + 2, co).SetValue("K501")
+                                    ws.Cell(lastRow2 + 3, co).SetValue("E15A")
+                                Else
+                                    ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
+                                    ws.Cell(lastRow2 + 2, co).SetValue(ws.Cell(ro, co).Value)
+                                    ws.Cell(lastRow2 + 3, co).SetValue(ws.Cell(ro, co).Value)
+                                End If
+                            Next
+
+                        Case "E242"
+                            lastRow2 = ws.LastRowUsed().RowNumber()
+                            For co = 1 To lastCol
+                                If co = 1 Then
+                                    ws.Cell(lastRow2 + 1, co).SetValue("E243")
+                                    ws.Cell(lastRow2 + 2, co).SetValue("E244")
+                                    ws.Cell(lastRow2 + 3, co).SetValue("E248")
+                                Else
+                                    ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
+                                    ws.Cell(lastRow2 + 2, co).SetValue(ws.Cell(ro, co).Value)
+                                    ws.Cell(lastRow2 + 3, co).SetValue(ws.Cell(ro, co).Value)
+                                End If
+                            Next
+
+                        Case "E290"
+                            lastRow2 = ws.LastRowUsed().RowNumber()
+                            For co = 1 To lastCol
+                                If co = 1 Then
+                                    ws.Cell(lastRow2 + 1, co).SetValue("K51R")
+                                Else
+                                    ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
+                                End If
+                            Next
+
+                        Case "B261"
+                            lastRow2 = ws.LastRowUsed().RowNumber()
+                            For co = 1 To lastCol
+                                If co = 1 Then
+                                    ws.Cell(lastRow2 + 1, co).SetValue("K561")
+                                Else
+                                    ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
+                                End If
+                            Next
+
+                        Case "E410"
+                            lastRow2 = ws.LastRowUsed().RowNumber()
+                            For co = 1 To lastCol
+                                If co = 1 Then
+                                    ws.Cell(lastRow2 + 1, co).SetValue("K580")
+                                Else
+                                    ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
+                                End If
+                            Next
+
+                        Case "E231"
+                            lastRow2 = ws.LastRowUsed().RowNumber()
+                            For co = 1 To lastCol
+                                If co = 1 Then
+                                    ws.Cell(lastRow2 + 1, co).SetValue("E230")
+                                Else
+                                    ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
+                                End If
+                            Next
+                    End Select
+                Next
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 Dim struid As String = Session("UsrId")
                 wb.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\Mak_ivhd_" & Now.ToString(“yyMMdd”) & "_P_" & struid & ".xlsx")
