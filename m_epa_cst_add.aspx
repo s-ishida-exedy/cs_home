@@ -104,7 +104,7 @@
         }
         .wrapper {
           overflow: scroll;
-          height: 500px;
+          height: 480px;
         }
 </style>
 <script>
