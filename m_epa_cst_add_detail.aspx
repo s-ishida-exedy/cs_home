@@ -157,7 +157,7 @@
                 <asp:Label ID="Label3" runat="server" Text="Label" Class="err"></asp:Label>
             </td>
             <td class="third-cell">
-                <a href="./m_cs_member.aspx">一覧に戻る</a>
+                <a href="./m_epa_cst_add.aspx">一覧に戻る</a>
             </td>
         </tr>
     </table>
