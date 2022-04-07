@@ -165,13 +165,13 @@
         </tr>
     </table>
 
-<%--<div class="wrapper">
+<div class="wrapper">
 <table class="sticky">
 <thead class="fixed">
 
 </thead>
 
-<tbody>--%>
+<tbody>
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Vertical" DataKeyNames="CODE">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
