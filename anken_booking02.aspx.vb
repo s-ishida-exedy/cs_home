@@ -1059,14 +1059,13 @@ Partial Class yuusen
         ' メールの内容
 
         Dim strfrom As String = GET_from(struid)
-        Dim strto As String = GET_from(struid)
-        Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
+        'Dim strto As String = GET_from(struid)
+        'Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
 
-        Dim strfrom2 As String = GET_from(struid)
-        Dim strto2 As String = GET_ToAddress(2, 1)
-        strto2 = Left(strto, Len(strto) - 1)
+        Dim strto As String = GET_ToAddress(2, 1)
+        strto = Left(strto, Len(strto) - 1)
 
-        Dim strcc2 As String = GET_ToAddress(2, 0) + GET_from(struid)
+        Dim strcc As String = GET_ToAddress(2, 0) + GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -1083,7 +1082,7 @@ Partial Class yuusen
         'メールの本文
         Dim body As String = ""
 
-        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        body = body + "testのためメールを送付させていただいております。－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
         body = body + "このメールはシステムから送信されています。<br/>"
         body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
         body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
@@ -1170,15 +1169,12 @@ Partial Class yuusen
         ' メールの内容
 
         Dim strfrom As String = GET_from(struid)
-        Dim strto As String = GET_from(struid)
-        Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
+        'Dim strto As String = GET_from(struid)
+        'Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
+        Dim strto As String = GET_ToAddress(3, 1)
+        strto = Left(strto, Len(strto) - 1)
 
-
-        Dim strfrom2 As String = GET_from(struid)
-        Dim strto2 As String = GET_ToAddress(3, 1)
-        strto2 = Left(strto, Len(strto) - 1)
-
-        Dim strcc2 As String = GET_ToAddress(3, 0) + GET_from(struid)
+        Dim strcc As String = GET_ToAddress(3, 0) + GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -1190,7 +1186,7 @@ Partial Class yuusen
         'メールの本文
         Dim body As String = ""
 
-        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        body = body + "テストのためメールを送付させていただいております。－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
         body = body + "このメールはシステムから送信されています。<br/>"
         body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
         body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
@@ -1273,14 +1269,13 @@ Partial Class yuusen
         ' メールの内容
 
         Dim strfrom As String = GET_from(struid)
-        Dim strto As String = GET_from(struid)
-        Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
+        ' Dim strto As String = GET_from(struid)
+        ' Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
 
-        Dim strfrom2 As String = GET_from(struid)
-        Dim strto2 As String = GET_ToAddress(4, 1)
-        strto2 = Left(strto, Len(strto) - 1)
+        Dim strto As String = GET_ToAddress(4, 1)
+        strto = Left(strto, Len(strto) - 1)
 
-        Dim strcc2 As String = GET_ToAddress(4, 0) + GET_from(struid)
+        Dim strcc As String = GET_ToAddress(4, 0) + GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -1293,7 +1288,7 @@ Partial Class yuusen
         'メールの本文
         Dim body As String = ""
 
-        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        body = body + "testのためメールを送付させていただいております。－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
         body = body + "このメールはシステムから送信されています。<br/>"
         body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
         body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
@@ -1375,14 +1370,13 @@ Partial Class yuusen
         ' メールの内容
 
         Dim strfrom As String = GET_from(struid)
-        Dim strto As String = GET_from(struid)
-        Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
+        'Dim strto As String = GET_from(struid)
+        'Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
 
-        Dim strfrom2 As String = GET_from(struid)
-        Dim strto2 As String = GET_ToAddress(5, 1)
-        strto2 = Left(strto, Len(strto) - 1)
+        Dim strto As String = GET_ToAddress(5, 1)
+        strto = Left(strto, Len(strto) - 1)
 
-        Dim strcc2 As String = GET_ToAddress(5, 0) + GET_from(struid)
+        Dim strcc As String = GET_ToAddress(5, 0) + GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -1628,8 +1622,8 @@ Partial Class yuusen
 
         strPath00(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\a)自社通関依頼書（客先別）WEB\"
         strPath00(1) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\b)タイムスケジュール（客先別）\"
-        strPath01(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\WEB_test\"
-        'strPath01(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\"
+        'strPath01(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\WEB_test\"
+        strPath01(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\"
         strPath01(1) = "\\svnas201\EXD06101\DISC_COMMON\自社通関輸出書類\"
 
         '問題報告ログ初期化
@@ -1661,49 +1655,49 @@ Partial Class yuusen
 
             strfol001 = Dir(strPath01(0) & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-"), vbDirectory)
 
-            'If strfol001 <> "" Then
-            'madef00 = 2
-            '    GoTo Step00
+            If strfol001 <> "" Then
+                madef00 = 2
+                GoTo Step00
 
-            'End If
+            End If
 
-            'strfol001 = Dir(strPath01(1) & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
-
-
-            'If strfol001 <> "" Then
-            'madef00 = 2
-            '    GoTo Step00
-
-            'End If
+            strfol001 = Dir(strPath01(1) & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
 
 
-            'strfol001 = Dir(strPath01(1) & Format(DateAdd("m", -1, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
+            If strfol001 <> "" Then
+                madef00 = 2
+                GoTo Step00
+
+            End If
 
 
-            'If strfol001 <> "" Then
-            'madef00 = 2
-            '    GoTo Step00
-
-            'End If
+            strfol001 = Dir(strPath01(1) & Format(DateAdd("m", -1, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
 
 
-            'strfol001 = Dir(strPath01(1) & Format(DateAdd("m", 0, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
+            If strfol001 <> "" Then
+                madef00 = 2
+                GoTo Step00
+
+            End If
 
 
-            'If strfol001 <> "" Then
-            'madef00 = 2
-            '    GoTo Step00
-
-            'End If
-
-            'strfol001 = Dir(strPath01(1) & Format(DateAdd("m", 1, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
+            strfol001 = Dir(strPath01(1) & Format(DateAdd("m", 0, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
 
 
-            'If strfol001 <> "" Then
-            'madef00 = 2
-            '    GoTo Step00
+            If strfol001 <> "" Then
+                madef00 = 2
+                GoTo Step00
 
-            'End If
+            End If
+
+            strfol001 = Dir(strPath01(1) & Format(DateAdd("m", 1, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
+
+
+            If strfol001 <> "" Then
+                madef00 = 2
+                GoTo Step00
+
+            End If
 
             '2_________________________________________________
 
@@ -1943,7 +1937,7 @@ Step00:
         'メールの本文
         Dim body As String = ""
 
-        body = body + "TEST<br/>"
+        body = body + "<br/>"
         body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
         body = body + "このメールはシステムから送信されています。<br/>"
         body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
