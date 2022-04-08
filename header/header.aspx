@@ -113,6 +113,7 @@
                     <li data-id='["home","m_cs_member.aspx"]'><a href="#">ＣＳメンバー マスタ</a></li>
                     <li data-id='["home","m_air_mail.aspx"]'><a href="#">AIR用海貨業者アドレスマスタ</a></li>
                     <li data-id='["home","m_epa_cst_add.aspx"]'><a href="#">ＥＰＡ用客先住所マスタ</a></li>
+                    <li data-id='["home","m_epa_itm.aspx"]'><a href="#">ＥＰＡ対象品目マスタ</a></li>
                 </ul>
             </li>
         </ul>

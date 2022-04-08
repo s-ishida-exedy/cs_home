@@ -936,7 +936,67 @@ Public Class DBAccess
         Ds = New DataSet
         Da.Fill(Ds)
         Return Ds
+    End Function
 
+    Public Function GET_RESULT_EPA_ITEM(strCode As String, strItmCd As String, strItmNm As String, strOriNo As String) As DataSet
+        'EPA対象品目マスタ取得
+        Conn = Me.Dbconnect
+        Dim cmd = New SqlCommand()
 
+        cmd.Connection = Conn
+        cmd.CommandType = System.Data.CommandType.Text
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  UNF_CODE "
+        StrSQL = StrSQL & "  , CASE ITM.CODE  "
+        StrSQL = StrSQL & "     WHEN '01' THEN '日メキシコ' "
+        StrSQL = StrSQL & "     WHEN '02' THEN '日マレーシア' "
+        StrSQL = StrSQL & "     WHEN '03' THEN '日チリ' "
+        StrSQL = StrSQL & "     WHEN '04' THEN '日タイ' "
+        StrSQL = StrSQL & "     WHEN '05' THEN '日インドネシア' "
+        StrSQL = StrSQL & "     WHEN '06' THEN '日ブルネイ' "
+        StrSQL = StrSQL & "     WHEN '07' THEN '日フィリピン' "
+        StrSQL = StrSQL & "     WHEN '08' THEN '日スイス' "
+        StrSQL = StrSQL & "     WHEN '09' THEN '日ベトナム' "
+        StrSQL = StrSQL & "     WHEN '10' THEN '日インド' "
+        StrSQL = StrSQL & "     WHEN '11' THEN '日ペルー' "
+        StrSQL = StrSQL & "     WHEN '12' THEN '日オーストラリア' "
+        StrSQL = StrSQL & "     WHEN '13' THEN '日モンゴル' "
+        StrSQL = StrSQL & "     WHEN '14' THEN '日アセアン' "
+        StrSQL = StrSQL & "     WHEN '15' THEN 'ＲＣＥＰ' "
+        StrSQL = StrSQL & "  END CODE "
+        StrSQL = StrSQL & "  , CST_ITM_CODE "
+        StrSQL = StrSQL & "  , ITM_NAME "
+        StrSQL = StrSQL & "  , ORI_ITM_NAME "
+        StrSQL = StrSQL & "  , ORI_JDG_NO "
+        StrSQL = StrSQL & "  , HS_CODE "
+        StrSQL = StrSQL & "  , CASE REMARKS "
+        StrSQL = StrSQL & "     WHEN '01' THEN '対象' "
+        StrSQL = StrSQL & "  END REMARKS "
+        StrSQL = StrSQL & "FROM M_EXL_ORIGIN_ITM ITM "
+        StrSQL = StrSQL & "WHERE ITM.CODE LIKE @CODE "
+        StrSQL = StrSQL & "AND CST_ITM_CODE LIKE @CST_ITM_CODE "
+        StrSQL = StrSQL & "AND ITM_NAME LIKE @ITM_NAME "
+        StrSQL = StrSQL & "AND ORI_JDG_NO LIKE @ORI_JDG_NO "
+        StrSQL = StrSQL & "ORDER BY ITM.CODE "
+
+        cmd.CommandText = StrSQL
+        cmd.Parameters.Clear()
+        'パラメータ値を設定
+        cmd.Parameters.Add("@CODE", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strCode & "%"
+        cmd.Parameters.Add("@CST_ITM_CODE", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strItmCd & "%"
+        cmd.Parameters.Add("@ITM_NAME", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strItmNm & "%"
+        cmd.Parameters.Add("@ORI_JDG_NO", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strOriNo & "%"
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = cmd
+
+        cmd.Dispose()
+        Conn.Close()
+
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
     End Function
 End Class
