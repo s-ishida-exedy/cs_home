@@ -670,13 +670,18 @@ Partial Class yuusen
 
             Dim madef01 As String
 
-            Call makefld(madef01)
+            If IsPostBack = True Then
+
+            Else
+                Call makefld(madef01)
+            End If
+
             Label10.Visible = True
-            Label11.Visible = False
+                Label11.Visible = False
 
 
-        Else
-            Label7.Text = "×"
+            Else
+                Label7.Text = "×"
             Label10.Visible = False
             Label11.Visible = True
 
@@ -1879,7 +1884,8 @@ Partial Class yuusen
 
 Step00:
 
-            Call Get_allinv_k(Trim(GridView1.Rows(I).Cells(5).Text), Trim(GridView1.Rows(I).Cells(9).Text))
+            '恐らく不要
+            'Call Get_allinv_k(Trim(GridView1.Rows(I).Cells(5).Text), Trim(GridView1.Rows(I).Cells(9).Text))
 
             'madef00 = 0　依頼書雛形無し,madef00 = 1　委託,madef00 = 2　同一フォルダあり
 
