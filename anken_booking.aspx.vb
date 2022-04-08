@@ -939,7 +939,7 @@ Step00:
                 End If
 
                 If madef00 = "" Then
-                    madef01 = madef01 & "\n" & "＜作成無し＞作成済み　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
+                    madef01 = madef01 & "\n" & "作成済み　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
                 ElseIf madef00 = "0" Then
                     madef01 = madef01 & "\n" & "＜作成無し＞依頼書なし　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
                 ElseIf madef00 = "1" Then
