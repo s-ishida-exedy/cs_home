@@ -296,7 +296,14 @@ Partial Class yuusen
                 '乙仲名	 19
                 e.Row.Cells(19).Text += dataread(60)
                 '乙仲担当者	 20
-                e.Row.Cells(20).Text += dataread(61)
+                If dataread(61) = "" Then
+                    e.Row.Cells(20).Text += "-"
+                Else
+                    e.Row.Cells(20).Text += dataread(61)
+
+                End If
+
+
                 'consinerr name of SI		 23
                 e.Row.Cells(23).Text += dataread(54)
                 'consiner address of SI		 24
@@ -507,6 +514,8 @@ Partial Class yuusen
 
         cnn.Close()
         cnn.Dispose()
+
+        Button1.Attributes.Add("onclick", "return confirm('ファイルを出力します。よろしいですか？');")
 
     End Sub
 
