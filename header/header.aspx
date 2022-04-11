@@ -7,14 +7,7 @@
             <li data-id='["home","situation.aspx"]'><a href="#">EXL概況</a></li>
             <li data-id='["home","make_graph_odr.aspx"]'><a href="#">受注台数</a></li>
             <li data-id='["home","make_graph_con.aspx"]'><a href="#">コンテナ本数(AF)</a></li>
-            <li data-id='["aaa",""]'>
-                <a href="#" class="init-right">ブッキング</a>
-                <ul class="menu__third-level">
-                    <!-- 第二階層 -->
-                    <li data-id='["home","booking_situation.aspx"]'><a href="#">コンテナ確保状況</a></li>
-                    <li data-id='["home","booking.aspx"]'><a href="#">ブッキングシート</a></li>
-                </ul>
-            </li>
+            <li data-id='["home","booking.aspx"]'><a href="#">ブッキングシート</a></li>
             <li data-id='["home","make_graph_nizoroi.aspx"]'><a href="#">荷揃え状況(AF)</a></li>
             <li data-id='["home","4f_floor.aspx"]'><a href="#">４Ｆフロア状況</a></li>
             <li data-id='["aaa",""]'>

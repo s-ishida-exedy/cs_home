@@ -42,8 +42,8 @@ Partial Class cs_home
         While (dataread.Read())
             Select Case dataread("DATA_CD")
                 Case "001"
-                    Literal1.Text = Trim(StrConv(dataread("DATA_OKNG"), VbStrConv.Wide))
-                    Literal2.Text = "更新日時：" + dataread("DATA_UPD")
+                    'Literal1.Text = Trim(StrConv(dataread("DATA_OKNG"), VbStrConv.Wide))
+                    'Literal2.Text = "更新日時：" + dataread("DATA_UPD")
                 Case "002"
                     Literal3.Text = Trim(StrConv(dataread("DATA_OKNG"), VbStrConv.Wide))
                     Literal4.Text = "更新日時：" + dataread("DATA_UPD")
