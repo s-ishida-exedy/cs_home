@@ -287,6 +287,8 @@
             <tr>
                 <td style="width:1500px;" >
                     <asp:Button ID="Button1" CssClass ="btn00" runat="server" Text="エクセル出力" />
+                    <asp:Button ID="Button2" CssClass ="btn00" runat="server" Text="LCL表示" />
+                    <asp:Button ID="Button3" CssClass ="btn00" runat="server" Text="FCL表示" />
                 </td>
             </tr>
         </table>
