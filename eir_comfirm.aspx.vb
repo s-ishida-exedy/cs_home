@@ -33,6 +33,12 @@ Partial Class cs_home
             End If
 
         End If
+
+        Label2.Visible = False
+        TextBox1.Visible = False
+        Label17.Visible = False
+        TextBox8.Visible = False
+
         Button1.Attributes.Add("onclick", "return confirm('確認を依頼します。よろしいですか？');")
     End Sub
 
@@ -162,7 +168,7 @@ Partial Class cs_home
         TextBox5.Text = ""
         TextBox6.Text = ""
         TextBox7.Text = ""
-
+        Label16.Text = ""
     End Sub
 
 
