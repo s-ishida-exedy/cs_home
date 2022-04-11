@@ -679,8 +679,8 @@ Partial Class yuusen
 
                     strPath00(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\a)自社通関依頼書（客先別）WEB\"
                     strPath00(1) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\b)タイムスケジュール（客先別）\"
-                    strPath01(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\WEB_test\"
-                    'strPath01(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\"
+                    'strPath01(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\WEB_test\"
+                    strPath01(0) = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\"
                     strPath01(1) = "\\svnas201\EXD06101\DISC_COMMON\自社通関輸出書類\"
 
                     '問題報告ログ初期化
@@ -707,49 +707,49 @@ Partial Class yuusen
 
                     strfol001 = Dir(strPath01(0) & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-"), vbDirectory)
 
-                    'If strfol001 <> "" Then
-                    'madef00 = 2
-                    '    GoTo Step00
+                    If strfol001 <> "" Then
+                        madef00 = 2
+                        GoTo Step00
 
-                    'End If
+                    End If
 
-                    'strfol001 = Dir(strPath01(1) & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
-
-
-                    'If strfol001 <> "" Then
-                    'madef00 = 2
-                    '    GoTo Step00
-
-                    'End If
+                    strfol001 = Dir(strPath01(1) & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "*", vbDirectory)
 
 
-                    'strfol001 = Dir(strPath01(1) & Format(DateAdd("m", -1, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
+                    If strfol001 <> "" Then
+                        madef00 = 2
+                        GoTo Step00
+
+                    End If
 
 
-                    'If strfol001 <> "" Then
-                    'madef00 = 2
-                    '    GoTo Step00
-
-                    'End If
+                    strfol001 = Dir(strPath01(1) & Format(DateAdd("m", -1, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "*", vbDirectory)
 
 
-                    'strfol001 = Dir(strPath01(1) & Format(DateAdd("m", 0, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
+                    If strfol001 <> "" Then
+                        madef00 = 2
+                        GoTo Step00
+
+                    End If
 
 
-                    'If strfol001 <> "" Then
-                    'madef00 = 2
-                    '    GoTo Step00
-
-                    'End If
-
-                    'strfol001 = Dir(strPath01(1) & Format(DateAdd("m", 1, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(5).Text, "/", "-") & "*", vbDirectory)
+                    strfol001 = Dir(strPath01(1) & Format(DateAdd("m", 0, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "*", vbDirectory)
 
 
-                    'If strfol001 <> "" Then
-                    'madef00 = 2
-                    '    GoTo Step00
+                    If strfol001 <> "" Then
+                        madef00 = 2
+                        GoTo Step00
 
-                    'End If
+                    End If
+
+                    strfol001 = Dir(strPath01(1) & Format(DateAdd("m", 1, Now()), "yyyyMM") & "\" & "*(" & Replace(GridView1.Rows(I).Cells(4).Text, "/", "-") & ")*" & Replace(GridView1.Rows(I).Cells(6).Text, "/", "-") & "*", vbDirectory)
+
+
+                    If strfol001 <> "" Then
+                        madef00 = 2
+                        GoTo Step00
+
+                    End If
 
                     '2_________________________________________________
 
@@ -939,7 +939,7 @@ Step00:
                 End If
 
                 If madef00 = "" Then
-                    madef01 = madef01 & "\n" & "＜作成無し＞作成済み　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
+                    madef01 = madef01 & "\n" & "作成済み　　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
                 ElseIf madef00 = "0" Then
                     madef01 = madef01 & "\n" & "＜作成無し＞依頼書なし　　　 客先：" & GridView1.Rows(I).Cells(4).Text & " IVNO：" & GridView1.Rows(I).Cells(6).Text
                 ElseIf madef00 = "1" Then
