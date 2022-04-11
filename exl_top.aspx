@@ -145,12 +145,6 @@
 <h2>ＥＸＬ概況</h2>
 <table class="ta2">
 <tr>
-    <!-- 担当：西浦SM -->
-    <th data-id='["home","booking_situation.aspx"]'><a href="#">コンテナ確保状況</a></th>
-    <td><asp:Literal ID="Literal1" runat="server"></asp:Literal></td>
-    <td><asp:Literal ID="Literal2" runat="server"></asp:Literal></td>
-</tr>
-<tr>
     <!-- 担当：田邊G、尼嵜TL -->
     <th data-id='["home","./van_result.aspx"]'><a href="#">本社バンニング</a></th>
     <td><asp:Literal ID="Literal3" runat="server"></asp:Literal></td>
