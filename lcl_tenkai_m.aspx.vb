@@ -70,9 +70,9 @@ Partial Class cs_home
                 ' SQLの実行
                 Command.ExecuteNonQuery()
 
-                Call GET_IVDATA(GridView1.Rows(I).Cells(7).Text, 1)
+                Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(7).Text), 1)
                 Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(6).Text, 4), 1)
-                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(6).Text, 4), GridView1.Rows(I).Cells(7).Text, 1)
+                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(6).Text, 4), Trim(GridView1.Rows(I).Cells(7).Text), 1)
 
                 strSQL = ""
                 strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_LCLCUSTPREADS WHERE "
@@ -145,9 +145,9 @@ Partial Class cs_home
                 ' SQLの実行
                 Command.ExecuteNonQuery()
 
-                Call GET_IVDATA(GridView1.Rows(I).Cells(7).Text, 2)
+                Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(7).Text), 2)
                 Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(6).Text, 4), 2)
-                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(6).Text, 4), GridView1.Rows(I).Cells(7).Text, 2)
+                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(6).Text, 4), Trim(GridView1.Rows(I).Cells(7).Text), 2)
             Else
             End If
         Next

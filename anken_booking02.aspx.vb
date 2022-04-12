@@ -60,7 +60,7 @@ Partial Class yuusen
             While (dataread.Read())
                 strbkg += dataread("BKGNO")
                 '書類作成状況
-                If Trim(e.Row.Cells(9).Text) = strbkg Then
+                If Trim(e.Row.Cells(9).Text) = Trim(strbkg) Then
                     Call itaku(e.Row.Cells(9).Text)
                 End If
             End While
@@ -139,7 +139,7 @@ Partial Class yuusen
         'FIN_FLGを更新
         strSQL = ""
         strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG02 ='1' "
-        strSQL = strSQL & "WHERE BOOKING_NO = '" & bkgno & "'"
+        strSQL = strSQL & "WHERE BOOKING_NO = '" & Trim(bkgno) & "'"
 
         Command.CommandText = strSQL
         ' SQLの実行
@@ -331,13 +331,13 @@ Partial Class yuusen
                 'FIN_FLGを更新
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG02 ='1' "
-                strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView1.Rows(I).Cells(9).Text & "'"
+                strSQL = strSQL & "WHERE BOOKING_NO = '" & Trim(GridView1.Rows(I).Cells(9).Text) & "'"
 
                 Command.CommandText = strSQL
                 ' SQLの実行
                 Command.ExecuteNonQuery()
 
-                Call GET_IVDATA(GridView1.Rows(I).Cells(9).Text, "1")
+                Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(9).Text), "1")
             Else
             End If
         Next
@@ -367,13 +367,13 @@ Partial Class yuusen
                 'FIN_FLGを更新
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG02 ='' "
-                strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView1.Rows(I).Cells(9).Text & "'"
+                strSQL = strSQL & "WHERE BOOKING_NO = '" & Trim(GridView1.Rows(I).Cells(9).Text) & "'"
 
                 Command.CommandText = strSQL
                 ' SQLの実行
                 Command.ExecuteNonQuery()
 
-                Call GET_IVDATA(GridView1.Rows(I).Cells(9).Text, "2")
+                Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(9).Text), "2")
             Else
             End If
         Next

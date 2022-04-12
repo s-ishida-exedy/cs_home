@@ -115,7 +115,7 @@ Partial Class cs_home
         strDate = ""
         '結果を取り出す 
         While (dataread.Read())
-            bkgno = Convert.ToString(dataread("BOOKINGNO"))        'ETD(計上日)
+            bkgno = Trim(Convert.ToString(dataread("BOOKINGNO")))        'ETD(計上日)
         End While
 
         'クローズ処理 
@@ -508,7 +508,7 @@ Partial Class cs_home
 
         strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
         strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '002' "
-        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO ='" & e.Row.Cells(10).Text & "' "
+        strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO ='" & Trim(e.Row.Cells(10).Text) & "' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
