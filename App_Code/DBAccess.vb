@@ -999,4 +999,27 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
+
+    Public Function GET_CS_RESULT_MAKE_IV(strcust As String) As DataSet
+        'シッピングメモデータ取得時
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  * "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "  [T_BOOKING] "
+        StrSQL = StrSQL & "WHERE LEFT(CUST_CD,4) IN (" & strcust & ") "
+        StrSQL = StrSQL & "AND (INVOICE_NO IS NULL OR INVOICE_NO ='') "
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class

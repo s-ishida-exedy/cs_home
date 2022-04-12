@@ -40,7 +40,7 @@ Partial Class cs_home
             stretd = Session("stretd")
             streta = Session("streta")
             strniryou = Session("strniryou")
-            strbkg = Session("strbkg")
+            strbkg = Trim(Session("strbkg"))
             stretd02 = Session("stretd")
 
             If strcust = "C258" Then
@@ -456,7 +456,7 @@ Partial Class cs_home
         stretd = Session("stretd")
         streta = Session("streta")
         strniryou = Session("strniryou")
-        strbkg = Session("strbkg")
+        strbkg = Trim(Session("strbkg"))
         stretd02 = Session("stretd")
 
         '接続文字列の作成
@@ -554,15 +554,17 @@ Partial Class cs_home
 
         'パラメータ取得
         strMode = Session("strMode")
-            strcust = Left(Session("strcust"), 4)
-            striv = Session("striv")
-            strhan = Session("strhan")
-            strcut = Session("strcut")
-            stretd = Session("stretd")
-            streta = Session("streta")
-            strniryou = Session("strniryou")
-            strbkg = Session("strbkg")
-            stretd02 = Session("stretd")
+        strcust = Left(Session("strcust"), 4)
+
+        striv = Session("striv")
+        strhan = Session("strhan")
+        strcut = Session("strcut")
+        stretd = Session("stretd")
+        streta = Session("streta")
+        strniryou = Session("strniryou")
+
+        strbkg = Trim(Session("strbkg"))
+        stretd02 = Session("stretd")
 
         If CheckBox1.Checked = True Then
 

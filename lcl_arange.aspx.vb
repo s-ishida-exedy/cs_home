@@ -122,7 +122,7 @@ Partial Class cs_home
 
         strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(4).Text, 4) & "' "
         strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '005' "
-        strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].BKGNO = '" & e.Row.Cells(11).Text & "' "
+        strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(11).Text) & "' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -252,7 +252,7 @@ Partial Class cs_home
                 If Convert.ToString(GridView1.Rows(I).Cells(11).Text) = "AC要" Or GridView1.Rows(I).Cells(11).Text = "Booking依頼済み" Or GridView1.Rows(I).Cells(11).Text = "" Or GridView1.Rows(I).Cells(11).Text = "&nbsp;" Then
                     bkgno01 = Left(GridView1.Rows(I).Cells(3).Text, 4) & Replace(GridView1.Rows(I).Cells(8).Text, "/", "")
                 Else
-                    bkgno01 = GridView1.Rows(I).Cells(11).Text
+                    bkgno01 = Trim(GridView1.Rows(I).Cells(11).Text)
                 End If
 
                 strSQL = ""
@@ -564,7 +564,7 @@ Partial Class cs_home
         strDate = ""
         '結果を取り出す 
         While (dataread.Read())
-            bkgno = Convert.ToString(dataread("BOOKINGNO"))        'ETD(計上日)
+            bkgno = Trim(Convert.ToString(dataread("BOOKINGNO")))        'ETD(計上日)
         End While
 
         'クローズ処理 
@@ -799,27 +799,6 @@ Partial Class cs_home
         cnn.Dispose()
 
     End Sub
-
-    'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
-
-    '    If Panel1.Visible = True Then
-
-    '        Panel1.Visible = False
-    '        Panel2.Visible = True
-    '        Me.Label3.Text = "未確定"
-
-    '    ElseIf Panel2.Visible = True Then
-
-    '        Panel1.Visible = True
-    '        Panel2.Visible = False
-    '        Me.Label3.Text = "進捗"
-
-    '    End If
-
-
-
-    'End Sub
 
 
     Private Sub GridView2_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView2.RowDataBound

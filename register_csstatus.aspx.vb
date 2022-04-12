@@ -145,7 +145,7 @@ Partial Class yuusen
         strDate = ""
         '結果を取り出す 
         While (dataread.Read())
-            strbkgno = Convert.ToString(dataread("BOOKINGNO"))        'ETD(計上日)
+            strbkgno = Trim(Convert.ToString(dataread("BOOKINGNO")))        'ETD(計上日)
         End While
 
         If strbkgno <> "" Then

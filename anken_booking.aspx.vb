@@ -60,7 +60,7 @@ Partial Class yuusen
             While (dataread.Read())
                 strbkg += dataread("BKGNO")
                 '書類作成状況
-                If Trim(e.Row.Cells(26).Text) = strbkg Then
+                If Trim(e.Row.Cells(26).Text) = Trim(strbkg) Then
 
                     If e.Row.Cells(1).Text = "EXDCUT" Then
 
@@ -97,7 +97,7 @@ Partial Class yuusen
             While (dataread.Read())
                 strbkg += dataread("BKGNO")
                 '書類作成状況
-                If Trim(e.Row.Cells(26).Text) = strbkg Then
+                If Trim(e.Row.Cells(26).Text) = Trim(strbkg) Then
                     e.Row.BackColor = Drawing.Color.DarkGray
                     e.Row.Cells(1).Text = "通関済"
                 End If
@@ -122,7 +122,7 @@ Partial Class yuusen
             While (dataread.Read())
                 strbkg += dataread("BKGNO")
                 '書類作成状況
-                If Trim(e.Row.Cells(26).Text) = strbkg Then
+                If Trim(e.Row.Cells(26).Text) = Trim(strbkg) Then
                     e.Row.BackColor = Drawing.Color.DarkGray
                     e.Row.Cells(1).Text = "通関委託"
                 End If
@@ -330,78 +330,13 @@ Partial Class yuusen
         'FIN_FLGを更新
         strSQL = ""
         strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG02 ='1' "
-        strSQL = strSQL & "WHERE BOOKING_NO = '" & bkgno & "'"
+        strSQL = strSQL & "WHERE BOOKING_NO = '" & Trim(bkgno) & "'"
 
         Command.CommandText = strSQL
         ' SQLの実行
         Command.ExecuteNonQuery()
 
     End Sub
-
-    'Protected Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
-    '    '接続文字列の作成
-    '    Dim ConnectionString As String = String.Empty
-    '    'SQL Server認証
-    '    ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
-    '    'SqlConnectionクラスの新しいインスタンスを初期化
-    '    Dim cnn = New SqlConnection(ConnectionString)
-    '    Dim Command = cnn.CreateCommand
-    '    Dim strSQL As String = ""
-    '    Dim ivno As String = ""
-
-    '    'データベース接続を開く
-    '    cnn.Open()
-
-    '    Dim I As Integer
-
-    '    For I = 0 To GridView1.Rows.Count - 1
-    '            If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
-    '                If GridView1.Rows(I).Cells(26).Text = "&nbsp;" Or GridView1.Rows(I).Cells(6).Text = "&nbsp;" Then
-    '                    MsgBox("未確定のためフォルダを作成できません。" & vbCrLf & "客先:" & GridView1.Rows(I).Cells(4).Text & vbCrLf & "ETD:" & vbCrLf & GridView1.Rows(I).Cells(8).Text)
-    '                Else
-
-    '                    'FIN_FLGを更新
-    '                    strSQL = ""
-    '                    strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG03 ='1' "
-    '                    strSQL = strSQL & "WHERE BOOKING_NO = '" & GridView1.Rows(I).Cells(26).Text & "'"
-
-    '                    Command.CommandText = strSQL
-    '                    ' SQLの実行
-    '                    Command.ExecuteNonQuery()
-
-    '                End If
-    '            Else
-    '            End If
-    '        Next
-
-    '        GridView1.DataBind()
-
-
-    '    If DropDownList1.Text = "進捗状況" Then
-
-    '        GridView1.DataSource = SqlDataSource1
-    '        GridView1.DataBind()
-
-    '    ElseIf DropDownList1.Text = "シート" Then
-
-    '        GridView1.DataSource = SqlDataSource5
-    '        GridView1.DataBind()
-
-    '    ElseIf DropDownList1.Text = "海貨業者" Then
-
-    '        GridView1.DataSource = SqlDataSource6
-    '        GridView1.DataBind()
-
-    '    ElseIf DropDownList1.Text = "客先コード" Then
-
-    '        GridView1.DataSource = SqlDataSource9
-    '        GridView1.DataBind()
-
-    '    End If
-
-
-    'End Sub
 
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 
@@ -494,7 +429,7 @@ Partial Class yuusen
         For I = 0 To GridView1.Rows.Count - 1
 
             deccnt = 0
-            deccnt = DEC_GET(GridView1.Rows(I).Cells(26).Text)
+            deccnt = DEC_GET(Trim(GridView1.Rows(I).Cells(26).Text))
 
             If Left(GridView1.Rows(I).Cells(2).Text, 2) = "上野" Then
                 If GridView1.Rows(I).Cells(7).Text <= WDAY00 Then
@@ -833,7 +768,7 @@ Partial Class yuusen
                     ws1.Cell(11, 8).Value = GridView1.Rows(I).Cells(9).Text 'ETA 
                     '        ws2.Range("B21") = Ws0.Cells(i, 10)  'ETA
 
-                    ws1.Cell(14, 2).Value = "'" & GridView1.Rows(I).Cells(26).Text  'BOOKING NO.
+                    ws1.Cell(14, 2).Value = "'" & Trim(GridView1.Rows(I).Cells(26).Text)  'BOOKING NO.
                     '        ws2.Range("B8") = "'" & Ws0.Cells(i, 13)  'BOOKING NO.
 
                     ws1.Cell(11, 9).Value = GridView1.Rows(I).Cells(27).Text  'CARRIER(船社)
@@ -1494,6 +1429,7 @@ Step00:
         strSQL = ""
         strSQL = strSQL & "SELECT * FROM T_EXL_DECKANRIHYO WHERE "
         strSQL = strSQL & "T_EXL_DECKANRIHYO.INVOICE_NO = '" & strIVNO & "' "
+        strSQL = strSQL & "AND T_EXL_DECKANRIHYO.CUT BETWEEN '" & Format(dt3, "yyyy/MM/dd") & "' AND '" & Format(dt2, "yyyy/MM/dd") & "' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -1512,7 +1448,7 @@ Step00:
             LOADING_PORT = dataread("LOADING_PORT")
             DESTINATION = dataread("DESTINATION")
             KANNRINO = dataread("KANNRINO")
-            BOOKING_NO = dataread("BOOKING_NO")
+            BOOKING_NO = Trim(dataread("BOOKING_NO"))
             IFLG = dataread("IFLG")
             IV_COUNT = dataread("IV_COUNT")
             CONTAINER = dataread("CONTAINER")
@@ -1553,7 +1489,7 @@ Step00:
             LOADING_PORT = dataread("LOADING_PORT")
             DESTINATION = dataread("DESTINATION")
             KANNRINO = ""
-            BOOKING_NO = dataread("BOOKING_NO")
+            BOOKING_NO = Trim(dataread("BOOKING_NO"))
             IFLG = ""
             IV_COUNT = ""
             CONTAINER = dataread("CONTAINER")
@@ -1630,7 +1566,7 @@ Step00:
             strSQL = strSQL & "T_EXL_DECKANRIHYO.LOADING_PORT = '" & LOADING_PORT & " ', "
             strSQL = strSQL & "T_EXL_DECKANRIHYO.DESTINATION = '" & DESTINATION & " ', "
 
-            strSQL = strSQL & "T_EXL_DECKANRIHYO.BOOKING_NO = '" & BOOKING_NO & " ', "
+            strSQL = strSQL & "T_EXL_DECKANRIHYO.BOOKING_NO = '" & Trim(BOOKING_NO) & " ', "
             strSQL = strSQL & "T_EXL_DECKANRIHYO.IFLG = '" & IIf(IFLG = "", 0, IFLG) & "', "
             strSQL = strSQL & "T_EXL_DECKANRIHYO.IV_COUNT = '" & IV_COUNT & " ', "
             strSQL = strSQL & "T_EXL_DECKANRIHYO.CONTAINER = '" & CONTAINER & " ', "
@@ -1638,6 +1574,7 @@ Step00:
             strSQL = strSQL & "T_EXL_DECKANRIHYO.Ref02 = '" & "" & " ', "
             strSQL = strSQL & "T_EXL_DECKANRIHYO.REV_KANNRINO = '" & "" & " ' "
             strSQL = strSQL & "WHERE T_EXL_DECKANRIHYO.INVOICE_NO = '" & Trim(strIVNO) & "' "
+            strSQL = strSQL & "AND T_EXL_DECKANRIHYO.CUT BETWEEN '" & Format(dt3, "yyyy/MM/dd") & "' AND '" & Format(dt2, "yyyy/MM/dd") & "' "
 
             Command.CommandText = strSQL
             ' SQLの実行
@@ -1660,7 +1597,7 @@ Step00:
             strSQL = strSQL & " '" & IIf(LOADING_PORT = "", "", LOADING_PORT) & "', "
             strSQL = strSQL & " '" & IIf(DESTINATION = "", "", DESTINATION) & "', "
             strSQL = strSQL & " '" & IIf(KANNRINO = "", "", KANNRINO) & "', "
-            strSQL = strSQL & " '" & IIf(BOOKING_NO = "", "", BOOKING_NO) & "', "
+            strSQL = strSQL & " '" & IIf(BOOKING_NO = "", "", Trim(BOOKING_NO)) & "', "
             strSQL = strSQL & " '" & IIf(IFLG = "", "0", IFLG) & "', "
             strSQL = strSQL & " '" & IIf(IV_COUNT = "", "", IV_COUNT) & "', "
             strSQL = strSQL & " '" & IIf(CONTAINER = "", "", CONTAINER) & "', "
