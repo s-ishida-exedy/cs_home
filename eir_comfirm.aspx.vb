@@ -121,12 +121,12 @@ Partial Class cs_home
             strConSize = dataread("CON_SIZE")
         End If
 
+        'インボイスNOをセッションに入れておく
+        Session("strIvno") = Left(dataread("IVNO"), 7)
+
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
-
-        'インボイスNOをセッションに入れておく
-        Session("strIvno") = strIvno
 
         '取得したインボイスNOを元にT_BOOKINGよりデータ取得
         strSQL = ""
