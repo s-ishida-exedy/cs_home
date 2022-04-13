@@ -8,7 +8,7 @@
 <title>ポータルサイト(EIR,Booking差異 ｺﾝﾃﾅﾔｰﾄﾞ確認)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <%--リロード設定--%>
-<meta http-equiv="refresh" content="30"/>
+<meta http-equiv="refresh" content="300"/>
 <%--リロード設定--%>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
