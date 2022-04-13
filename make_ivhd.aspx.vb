@@ -350,10 +350,18 @@ Partial Class yuusen
 
 
 
-                If IsDate(e.Row.Cells(1).Text) = False Then
+            If IsDate(e.Row.Cells(1).Text) = False Then
+
+                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+
+                Else
+
                     e.Row.Cells(0).Text = "日付エラー02行目"
                     e.Row.BackColor = Drawing.Color.Red
-                Else
+
+                End If
+
+            Else
                     '半年移行前の日付の場合は翌年にする
                     If DateValue(e.Row.Cells(1).Text) < dt00 Then
                         e.Row.Cells(1).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(1).Text)), "yyyy") & Format(DateValue(e.Row.Cells(1).Text), "/mm/dd"))
@@ -361,9 +369,15 @@ Partial Class yuusen
                 End If
 
                 If IsDate(e.Row.Cells(9).Text) = False Then
+                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+
+                Else
+
                     e.Row.Cells(0).Text = "日付エラー10行目"
                     e.Row.BackColor = Drawing.Color.Red
-                Else
+
+                End If
+            Else
                     '半年移行前の日付の場合は翌年にする
                     If DateValue(e.Row.Cells(9).Text) < dt00 Then
                         e.Row.Cells(9).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(9).Text)), "yyyy") & Format(DateValue(e.Row.Cells(9).Text), "/mm/dd"))
@@ -371,9 +385,15 @@ Partial Class yuusen
                 End If
 
                 If IsDate(e.Row.Cells(10).Text) = False Then
+                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+
+                Else
+
                     e.Row.Cells(0).Text = "日付エラー11行目"
                     e.Row.BackColor = Drawing.Color.Red
-                Else
+
+                End If
+            Else
                     '半年移行前の日付の場合は翌年にする
                     If DateValue(e.Row.Cells(10).Text) < dt00 Then
                         e.Row.Cells(10).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(10).Text)), "yyyy") & Format(DateValue(e.Row.Cells(10).Text), "/mm/dd"))
@@ -381,9 +401,15 @@ Partial Class yuusen
                 End If
 
                 If IsDate(e.Row.Cells(11).Text) = False Then
+                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+
+                Else
+
                     e.Row.Cells(0).Text = "日付エラー12行目"
                     e.Row.BackColor = Drawing.Color.Red
-                Else
+
+                End If
+            Else
                     '半年移行前の日付の場合は翌年にする
                     If DateValue(e.Row.Cells(11).Text) < dt00 Then
                         e.Row.Cells(11).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(11).Text)), "yyyy") & Format(DateValue(e.Row.Cells(11).Text), "/mm/dd"))
@@ -561,7 +587,7 @@ Partial Class yuusen
 
         Dim val01 As String = ""
 
-        If GridView1.Rows.Count > 1 Then
+        If GridView1.Rows.Count >= 1 Then
 
             Using wb As XLWorkbook = New XLWorkbook()
                 Dim ws As IXLWorksheet = wb.AddWorksheet("INVHDSHEET")
@@ -591,8 +617,14 @@ Partial Class yuusen
                                 If IsDate(val01) = True Then
                                     ws.Cell(t, i + 1).SetValue(DateValue(val01))
                                 Else
-                                    ws.Cell(t, i + 1).SetValue("日付エラー")
-                                    ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Red
+
+                                    If row.Cells(0).Text = "C258" Or row.Cells(0).Text = "C255" Then
+                                        ws.Cell(t, i + 1).SetValue(DateValue(row.Cells(11).Text))
+                                    Else
+
+                                        ws.Cell(t, i + 1).SetValue("日付エラー")
+                                        ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Red
+                                    End If
                                 End If
 
                             Case Else
@@ -703,9 +735,6 @@ Partial Class yuusen
                             Next
                     End Select
                 Next
-
-
-
 
 
                 Dim struid As String = Session("UsrId")

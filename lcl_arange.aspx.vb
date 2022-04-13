@@ -28,6 +28,7 @@ Partial Class cs_home
         Dim wday As String
         Dim wday2 As String
         Dim dt1 As DateTime = DateTime.Now
+        Dim upflg As Long = 0
 
         '搬入日作成
 
@@ -37,10 +38,11 @@ Partial Class cs_home
         ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
-
+        Dim cnn2 = New SqlConnection(ConnectionString)
+        Dim Command = cnn2.CreateCommand
         'データベース接続を開く
         cnn.Open()
-
+        cnn2.Open()
         'ヘッダー以外に処理
         If e.Row.RowType = DataControlRowType.DataRow Then
 
@@ -130,12 +132,14 @@ Partial Class cs_home
         dataread = dbcmd.ExecuteReader()
 
         strinv = ""
+        upflg = 0
         '結果を取り出す 
         While (dataread.Read())
             strinv += dataread("INVNO")
             '出荷手配状況
             If Left(e.Row.Cells(4).Text, 4) = strinv Then
                 e.Row.BackColor = Drawing.Color.LightBlue
+                upflg = 1
             End If
         End While
 
@@ -165,8 +169,47 @@ Partial Class cs_home
         dataread.Close()
         dbcmd.Dispose()
 
+        If upflg = 1 Then
+
+            strSQL = "SELECT BOOKING_NO FROM [T_EXL_LCLTENKAI] WHERE [T_EXL_LCLTENKAI].INVOICE_NO like '%" & Left(e.Row.Cells(4).Text, 4) & "%' "
+
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+            strinv = ""
+            '結果を取り出す 
+            While (dataread.Read())
+                strinv += dataread("BOOKING_NO")
+                '書類作成状況
+                If Trim(e.Row.Cells(11).Text) <> strinv Then
+
+                    strSQL = ""
+                    strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET "
+                    strSQL = strSQL & "BOOKING_NO = '" & Trim(e.Row.Cells(11).Text) & "' "
+                    strSQL = strSQL & "WHERE INVOICE_NO like '%" & Left(e.Row.Cells(4).Text, 4) & "%' "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                End If
+            End While
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+
+        End If
+
+
         cnn.Close()
         cnn.Dispose()
+
+        cnn2.Close()
+        cnn2.Dispose()
 
         e.Row.Cells(5).Visible = False
         e.Row.Cells(9).Visible = False

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="make_ivhd.aspx.vb" Inherits="yuusen" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="make_si.aspx.vb" Inherits="yuusen" %>
 
 <%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
@@ -8,7 +8,7 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <title>ポータルサイト(IVヘッダー取り込みファイル作成)</title>
+    <title>ポータルサイト(SI作成)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -269,16 +269,31 @@
     <div id="contents2" class="inner2">
         <table style="height:10px;">
             <tr>
-                <td style="width:550px;Font-Size:25px;" >
-                    <h2>IVヘッダー取り込みファイル作成</h2>
+                <td style="width:250px;Font-Size:25px;" >
+                    <h2>SI作成</h2>
                 </td>
                 <td style="width:100px;" >
                 </td>
-                <td style="width:250px;">
+                <td style="width:550px;">
+                    <h1>フィルタ</h1>
+                    <p></p>
+                    <asp:DropDownList ID="DropDownList1" runat="server" Width="100px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" >
+                    <asp:ListItem>--Select--</asp:ListItem>
+                    <asp:ListItem>進捗状況</asp:ListItem>
+                    <asp:ListItem>シート</asp:ListItem>
+                    <asp:ListItem>海貨業者</asp:ListItem>
+                    <asp:ListItem>客先コード</asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:DropDownList ID="DropDownList2" runat="server" Width="140px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" ></asp:DropDownList>
+                    <asp:Button CssClass ="button01" ID="Button1" runat="server" Text="全件表示" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+                    <%--<asp:CheckBox   ID="CheckBox1" runat="server" Height="13px" Text="自社通関"  Font-Size="13px" />--%>
                 </td>
                 <td style="width:150px;" >
                 </td>
                 <td style="width:150px;" >
+                    <div class="button04">
+                    <a href="anken_booking02.aspx?id={0}">案件抽出</a>
+                    </div>
                 </td>
             </tr>
         </table>    
@@ -286,12 +301,12 @@
         <table style="height:10px;">
             <tr>
                 <td style="width:1500px;" >
-                    <asp:Button ID="Button1" CssClass ="btn00" runat="server" Text="エクセル出力" />
-                    <asp:Button ID="Button2" CssClass ="btn00" runat="server" Text="LCL表示" />
-                    <asp:Button ID="Button3" CssClass ="btn00" runat="server" Text="FCL表示" />
-
+                <%--<asp:Button  ID="Button2" CssClass="btn00" runat="server" Text="フォルダ作成登録" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />--%> 
+                <asp:Button  ID="Button3" CssClass="btn00" runat="server" Text="SI作成" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
+                <asp:Button  ID="Button4" CssClass="btn00" runat="server" Text="MEMO作成" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
+                <p></p>
+                <%--<asp:Label ID="Label1" runat="server" Text="※チェック後にボタンを押す。(チェックボックスが緑のものはフォルダ作成可能)"  Font-Size="10px"></asp:Label>--%>
                 </td>
-                                    <a href="make_si.aspx?id={0}">SI</a>
             </tr>
         </table>
 
@@ -302,75 +317,53 @@
                     </thead>
 
                     <tbody>
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="10000px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource7" Width="2000px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
                         <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
                         <HeaderStyle CssClass="Freezing"></HeaderStyle>
 
                         <Columns>
-<%--                        <asp:TemplateField>
+                        <asp:TemplateField>
                         <ItemTemplate>
                         <asp:CheckBox ID="cb" Checked="false" runat="server"/>
                         </ItemTemplate>
-                        </asp:TemplateField>--%>
-
-
-
-
-
-                        <asp:BoundField DataField="CUST_CD02" HeaderText="請求客先コード" SortExpression="CUST_CD02" />
-                        <asp:BoundField DataField="ETD" HeaderText="Sailing On/About(計上日)" SortExpression="ETD" />
-
-                        <asp:BoundField DataField="" HeaderText="Finaldestination(届け先名)" SortExpression="" />
-                        <asp:BoundField DataField="" HeaderText="Finaldestination ADDRESS(届け先住所)" SortExpression="" />
-
-                        <asp:BoundField DataField="LOADING_PORT" HeaderText="PORTOF LOADING(積み出し港)" SortExpression="LOADING_PORT" />
-                        <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="PORTOF DEISCHARGE(揚地)" SortExpression="DISCHARGING_PORT" />
-                        <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="PALECE OF DELIVERY(配送先)" SortExpression="PLACE_OF_DELIVERY" />
-                        <asp:BoundField DataField="PLACE_OF_RECEIPT" HeaderText="荷受地" SortExpression="PLACE_OF_RECEIPT" />
-
-                        <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="PLACE OF DELIVERY BY CARRIER(配送者責任送り先)" SortExpression="PLACE_OF_DELIVERY" />
-                        <asp:BoundField DataField="CUT_DATE" HeaderText="CUT日" SortExpression="CUT_DATE" />
-                        <asp:BoundField DataField="ETA" HeaderText="到着日" SortExpression="ETA" />
-                        <asp:BoundField DataField="ETD" HeaderText="入出港日" SortExpression="ETD" />
-                        <asp:BoundField DataField="ETD" HeaderText="搬入日" SortExpression="ETD" />
-
-                        <asp:BoundField DataField="" HeaderText="出荷元ストアコード" SortExpression="" />
-                        <asp:BoundField DataField="" HeaderText="出荷方法" SortExpression="" />
-                        <asp:BoundField DataField="" HeaderText="出荷拠点" SortExpression="" />
-
-
-                        <asp:BoundField DataField="VOYAGE_NO" HeaderText="voyage" SortExpression="VOYAGE_NO" />
-                        <asp:BoundField DataField="BOOK_TO" HeaderText="船社" SortExpression="BOOK_TO" />
-
-                        <asp:BoundField DataField="" HeaderText="船社担当者" SortExpression="" />
-
-                        <asp:BoundField DataField="" HeaderText="乙仲名" SortExpression="" />
-                        <asp:BoundField DataField="" HeaderText="乙仲担当者" SortExpression="" />
-
-                        <asp:BoundField DataField="BOOKING_NO" HeaderText="booking no" SortExpression="BOOKING_NO" />
-                        <asp:BoundField DataField="VESSEL_NAME" HeaderText="船名(ocean vessll)" SortExpression="VESSEL_NAME" />
-
-                        <asp:BoundField DataField="" HeaderText="consinerr name of SI" SortExpression="" />
-                        <asp:BoundField DataField="" HeaderText="consiner address of SI" SortExpression="" />
-
-
-                        <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="place of delivery SI" SortExpression="PLACE_OF_DELIVERY" />
-
-                        <asp:BoundField DataField="" HeaderText="Nortify address" SortExpression="" />
-
-                        <asp:BoundField DataField="" HeaderText="通関方法" SortExpression="" />
-                        <asp:BoundField DataField="" HeaderText="ベアリング帳票出力" SortExpression="" />
-                        <asp:BoundField DataField="" HeaderText="船積スケジュール登録" SortExpression="" />
-                        <asp:BoundField DataField="" HeaderText="コンテナ情報登録" SortExpression="" />
-                        <asp:BoundField DataField="" HeaderText="INVOICE内訳自動計算" SortExpression="" />
-
-
-
-                        <asp:BoundField DataField="Forwarder" HeaderText="海貨業者" SortExpression="Forwarder" />
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="STATUS" HeaderText="進捗状況" SortExpression="STATUS" />
+                        <asp:BoundField DataField="FORWARDER" HeaderText="シート" SortExpression="FORWARDER" />
+                        <asp:BoundField DataField="FORWARDER02" HeaderText="海貨業者" SortExpression="FORWARDER02" />
+                        <asp:BoundField DataField="CUST" HeaderText="客先コード" SortExpression="CUST" />
+                        <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" />
+                        <asp:BoundField DataField="INVOICE" HeaderText="INVOICE" SortExpression="INVOICE" />
+                        <asp:BoundField DataField="CUT_DATE" HeaderText="CUT" SortExpression="CUT_DATE" />
+                        <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" />
+                        <asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" />
                         <asp:BoundField DataField="TWENTY_FEET" HeaderText="20Ft" SortExpression="TWENTY_FEET" />
                         <asp:BoundField DataField="FOURTY_FEET" HeaderText="40Ft" SortExpression="FOURTY_FEET" />
                         <asp:BoundField DataField="LCL_QTY" HeaderText="LCL/40Ft" SortExpression="LCL_QTY" />
-
+                        <asp:BoundField DataField="CONTAINER" HeaderText="コンテナ" SortExpression="CONTAINER" />
+                        <asp:BoundField DataField="DAY01" HeaderText="VAN01" SortExpression="DAY01" />
+                        <asp:BoundField DataField="DAY02" HeaderText="VAN02" SortExpression="DAY02" />
+                        <asp:BoundField DataField="DAY03" HeaderText="VAN03" SortExpression="DAY03" />
+                        <asp:BoundField DataField="DAY04" HeaderText="VAN04" SortExpression="DAY04" />
+                        <asp:BoundField DataField="DAY05" HeaderText="VAN05" SortExpression="DAY05" />
+                        <asp:BoundField DataField="DAY06" HeaderText="VAN06" SortExpression="DAY06" />
+                        <asp:BoundField DataField="DAY07" HeaderText="VAN07" SortExpression="DAY07" />
+                        <asp:BoundField DataField="DAY08" HeaderText="VAN08" SortExpression="DAY08" />
+                        <asp:BoundField DataField="DAY09" HeaderText="VAN09" SortExpression="DAY09" />
+                        <asp:BoundField DataField="DAY10" HeaderText="VAN10" SortExpression="DAY10" />
+                        <asp:BoundField DataField="DAY11" HeaderText="VAN11" SortExpression="DAY11" />
+                        <asp:BoundField DataField="FINALVANDATE" HeaderText="最終バン日" SortExpression="FINALVANDATE" />
+                        <asp:BoundField DataField="BOOKING_NO" HeaderText="BOOKING_NO" SortExpression="BOOKING_NO" />
+                        <asp:BoundField DataField="BOOK_TO" HeaderText="BOOK_TO" SortExpression="BOOK_TO" />
+                        <asp:BoundField DataField="VESSEL_NAME" HeaderText="船名" SortExpression="VESSEL_NAME" />
+                        <asp:BoundField DataField="VOYAGE_NO" HeaderText="VOYAGE_NO" SortExpression="VOYAGE_NO" />
+                        <asp:BoundField DataField="PLACE_OF_RECEIPT" HeaderText="荷受港" SortExpression="PLACE_OF_RECEIPT" />
+                        <asp:BoundField DataField="LOADING_PORT" HeaderText="積出港" SortExpression="LOADING_PORT" />
+                        <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="揚港" SortExpression="DISCHARGING_PORT" />
+                        <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="配送先" SortExpression="PLACE_OF_DELIVERY" />
+                        <asp:BoundField DataField="FLG01" HeaderText="FLG01" SortExpression="FLG01" />
+                        <asp:BoundField DataField="FLG02" HeaderText="FLG02" SortExpression="FLG02" />
+                        <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
+                        <asp:BoundField DataField="FLG04" HeaderText="FLG04" SortExpression="FLG04" />
 
                         </Columns>
                         <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
@@ -422,13 +415,36 @@
         <!--ページの上部に戻る「↑」ボタン-->
         <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
 
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([STATUS] = @STATUS) ORDER BY CUT_DATE">
+        <SelectParameters>
+        <asp:ControlParameter ControlID="DropDownList2" Name="STATUS" PropertyName="SelectedValue" Type="String" />
+        </SelectParameters>
+        </asp:SqlDataSource>
+
+        <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([FORWARDER] = @FORWARDER) ORDER BY CUT_DATE">
+        <SelectParameters>
+        <asp:ControlParameter ControlID="DropDownList2" Name="FORWARDER" PropertyName="SelectedValue" Type="String" />
+        </SelectParameters>
+        </asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([FORWARDER02] = @FORWARDER02) ORDER BY CUT_DATE">
+        <SelectParameters>
+        <asp:ControlParameter ControlID="DropDownList2" Name="FORWARDER02" PropertyName="SelectedValue" Type="String" />
+        </SelectParameters>
+        </asp:SqlDataSource>
+    
+        <asp:SqlDataSource ID="SqlDataSource9" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([CUST] = @CUST) ORDER BY CUT_DATE">
+        <SelectParameters>
+        <asp:ControlParameter ControlID="DropDownList2" Name="CUST" PropertyName="SelectedValue" Type="String" />
+        </SelectParameters>
+        </asp:SqlDataSource>
    
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM T_BOOKING WHERE STATUS <> 'キャンセル' AND INVOICE_NO ='' AND BOOKING_NO <>'' "></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [STATUS] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [FORWARDER] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [FORWARDER02] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource8" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [CUST] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN]  ORDER BY CUT_DATE"></asp:SqlDataSource>
 
-        <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM T_BOOKING WHERE STATUS <> 'キャンセル' AND INVOICE_NO ='' AND BOOKING_NO <>'' "></asp:SqlDataSource>--%>
 
-       
-<%--    SELECT T_BOOKING.STATUS, T_BOOKING.Forwarder, T_BOOKING.CUST_CD02, T_BOOKING.LOADING_PORT, T_BOOKING.DISCHARGING_PORT, T_BOOKING.PLACE_OF_DELIVERY, T_BOOKING.PLACE_OF_RECEIPT, T_BOOKING.CUT_DATE, T_BOOKING.ETA, T_BOOKING.ETD, T_BOOKING.ETD, T_BOOKING.TWENTY_FEET, T_BOOKING.FOURTY_FEET, T_BOOKING.LCL_QTY, T_BOOKING.VOYAGE_NO, T_BOOKING.BOOK_TO, T_BOOKING.BOOKING_NO, T_BOOKING.VESSEL_NAME FROM T_BOOKING--%>
 
     </form> 
 
