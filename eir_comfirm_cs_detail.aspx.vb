@@ -42,7 +42,7 @@ Partial Class cs_home
 
             '結果を取り出す 
             While (dataread.Read())
-                Label1.Text = dataread("MAIL_TITLE")
+                Label1.Text = dataread("MAIL_TITLE") & " " & dataread("IVNO")
                 Label4.Text = dataread("VOYNO01")
                 Label5.Text = dataread("VESSEL01")
                 Label6.Text = dataread("BOOKING01")

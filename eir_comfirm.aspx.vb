@@ -125,6 +125,9 @@ Partial Class cs_home
         dataread.Close()
         dbcmd.Dispose()
 
+        'インボイスNOをセッションに入れておく
+        Session("strIvno") = strIvno
+
         '取得したインボイスNOを元にT_BOOKINGよりデータ取得
         strSQL = ""
         strSQL = strSQL & "SELECT VOYAGE_NO, VESSEL_NAME, BOOKING_NO  "
@@ -169,6 +172,8 @@ Partial Class cs_home
         TextBox6.Text = ""
         TextBox7.Text = ""
         Label16.Text = ""
+
+        Session.Remove("strIvno")
     End Sub
 
 
