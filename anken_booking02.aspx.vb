@@ -322,20 +322,47 @@ Partial Class yuusen
         Dim strSQL As String = ""
         Dim ivno As String = ""
 
+        'トランザクションの開始
+        Dim tran As SqlTransaction = Nothing
+
+
+
         'データベース接続を開く
         cnn.Open()
 
         Dim I As Integer
         For I = 0 To GridView1.Rows.Count - 1
             If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
+
+
+                '★
+                tran = cnn.BeginTransaction
+
                 'FIN_FLGを更新
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG02 ='1' "
                 strSQL = strSQL & "WHERE BOOKING_NO = '" & Trim(GridView1.Rows(I).Cells(9).Text) & "'"
 
-                Command.CommandText = strSQL
-                ' SQLの実行
-                Command.ExecuteNonQuery()
+                '★
+                Try
+                    Command.CommandText = strSQL
+                    'トランザクションの設定
+                    Command.Transaction = tran
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+                    'トランザクションの実行
+                    tran.Commit()
+                Catch ex As Exception
+                    'トランザクションをキャンセル
+                    If tran IsNot Nothing Then
+                        tran.Rollback()
+                    End If
+
+                    Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('処理が失敗しました。" & ex.Message & ex.StackTrace & "');</script>", False)
+
+                Finally
+                    tran.Dispose()
+                End Try
 
                 Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(9).Text), "1")
             Else

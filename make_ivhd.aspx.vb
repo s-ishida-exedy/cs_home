@@ -123,30 +123,24 @@ Partial Class yuusen
                 intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(21).Text, "→")
             Loop
-            e.Row.Cells(21).Text = Trim(Mid(e.Row.Cells(21).Text, intval + 1, Len(e.Row.Cells(21).Text) - intval))
+            e.Row.Cells(21).Text = Trim(Replace(Mid(e.Row.Cells(21).Text, intval + 1, Len(e.Row.Cells(21).Text) - intval), vbLf, ""))
             intCnt = 0
 
 
             If e.Row.Cells(0).Text = "C255" Then
 
-                e.Row.Cells(21).Text = "C255" & Format(e.Row.Cells(11).Text, "yyyymmdd")          'booking no
+                e.Row.Cells(21).Text = "C255" & Format(DateValue(e.Row.Cells(11).Text), "yyyyMMdd")          'booking no
 
-                e.Row.Cells(4).Text = "-"
-                e.Row.Cells(5).Text = "-"
-                e.Row.Cells(6).Text = "-"
-                e.Row.Cells(7).Text = "-"
-                e.Row.Cells(17).Text = "-"
+
+
                 e.Row.Cells(16).Text = "-"
                 e.Row.Cells(22).Text = "-"
 
             ElseIf e.Row.Cells(0).Text = "C258" Then
 
-                e.Row.Cells(21).Text = "C258" & Format(e.Row.Cells(11).Text, "yyyymmdd")          'booking no
-                e.Row.Cells(4).Text = "-"
-                e.Row.Cells(5).Text = "-"
-                e.Row.Cells(6).Text = "-"
-                e.Row.Cells(7).Text = "-"
-                e.Row.Cells(17).Text = "-"
+                e.Row.Cells(21).Text = "C258" & Format(DateValue(e.Row.Cells(11).Text), "yyyyMMdd")          'booking no
+
+
                 e.Row.Cells(16).Text = "-"
                 e.Row.Cells(22).Text = "-"
 

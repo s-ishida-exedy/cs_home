@@ -283,6 +283,9 @@
                     <asp:ListItem>シート</asp:ListItem>
                     <asp:ListItem>海貨業者</asp:ListItem>
                     <asp:ListItem>客先コード</asp:ListItem>
+                    <asp:ListItem>IVNO</asp:ListItem>
+                    <asp:ListItem>CUT日</asp:ListItem>
+                    <asp:ListItem>書類作成予定日</asp:ListItem>
                     </asp:DropDownList>
                     <asp:DropDownList ID="DropDownList2" runat="server" Width="140px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" ></asp:DropDownList>
                     <asp:Button CssClass ="button01" ID="Button1" runat="server" Text="全件表示" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" />
@@ -351,7 +354,7 @@
                         <asp:BoundField DataField="DAY09" HeaderText="VAN09" SortExpression="DAY09" />
                         <asp:BoundField DataField="DAY10" HeaderText="VAN10" SortExpression="DAY10" />
                         <asp:BoundField DataField="DAY11" HeaderText="VAN11" SortExpression="DAY11" />
-                        <asp:BoundField DataField="FINALVANDATE" HeaderText="最終バン日" SortExpression="FINALVANDATE" />
+                        <asp:BoundField DataField="FINALVANDATE" HeaderText="書類作成予定日" SortExpression="FINALVANDATE" />
                         <asp:BoundField DataField="BOOKING_NO" HeaderText="BOOKING_NO" SortExpression="BOOKING_NO" />
                         <asp:BoundField DataField="BOOK_TO" HeaderText="BOOK_TO" SortExpression="BOOK_TO" />
                         <asp:BoundField DataField="VESSEL_NAME" HeaderText="船名" SortExpression="VESSEL_NAME" />
@@ -437,12 +440,35 @@
         <asp:ControlParameter ControlID="DropDownList2" Name="CUST" PropertyName="SelectedValue" Type="String" />
         </SelectParameters>
         </asp:SqlDataSource>
+
+
+         <asp:SqlDataSource ID="SqlDataSource10" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([INVOICE] = @INVOICE) ORDER BY CUT_DATE">
+        <SelectParameters>
+        <asp:ControlParameter ControlID="DropDownList2" Name="INVOICE" PropertyName="SelectedValue" Type="String" />
+        </SelectParameters>
+        </asp:SqlDataSource>
+
+         <asp:SqlDataSource ID="SqlDataSource11" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([CUT_DATE] = @CUT_DATE) ORDER BY CUT_DATE">
+        <SelectParameters>
+        <asp:ControlParameter ControlID="DropDownList2" Name="CUT_DATE" PropertyName="SelectedValue" Type="String" />
+        </SelectParameters>
+        </asp:SqlDataSource>
+
+        <asp:SqlDataSource ID="SqlDataSource14" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN] WHERE ([FINALVANDATE] = @FINALVANDATE) ORDER BY CUT_DATE">
+        <SelectParameters>
+        <asp:ControlParameter ControlID="DropDownList2" Name="FINALVANDATE" PropertyName="SelectedValue" Type="String" />
+        </SelectParameters>
+        </asp:SqlDataSource>
    
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [STATUS] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [FORWARDER] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [FORWARDER02] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource8" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [CUST] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSANKEN]  ORDER BY CUT_DATE"></asp:SqlDataSource>
+
+            <asp:SqlDataSource ID="SqlDataSource12" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [INVOICE] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource13" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [CUT_DATE] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource15" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [FINALVANDATE] FROM [T_EXL_CSANKEN]"></asp:SqlDataSource>
 
 
 
