@@ -147,6 +147,7 @@ Partial Class cs_home
         Session.Remove("strCont2")
         Session.Remove("strEtc1")
         Session.Remove("strEtc2")
+        Session.Remove("strIvno")
 
         '前の画面へ遷移
         Response.Redirect("eir_comfirm.aspx")
@@ -405,6 +406,7 @@ Partial Class cs_home
         Dim strCont02 As String = Session("strCont2")
         Dim strEtc01 As String = Session("strEtc1")
         Dim strEtc02 As String = Session("strEtc2")
+        Dim strIvno As String = Session("strIvno")
 
         'データ更新
         strSQL = ""
@@ -426,6 +428,7 @@ Partial Class cs_home
         strSQL = strSQL & " ,'" & 0 & "' "
         strSQL = strSQL & " ,'' "
         strSQL = strSQL & " ,'" & datRegT & "' "
+        strSQL = strSQL & " ,'" & strIvno & "' "
         strSQL = strSQL & ") "
 
         Command.CommandText = strSQL

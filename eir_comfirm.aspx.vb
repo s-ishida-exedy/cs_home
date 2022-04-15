@@ -121,6 +121,9 @@ Partial Class cs_home
             strConSize = dataread("CON_SIZE")
         End If
 
+        'インボイスNOをセッションに入れておく
+        Session("strIvno") = Left(dataread("IVNO"), 7)
+
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
@@ -169,6 +172,8 @@ Partial Class cs_home
         TextBox6.Text = ""
         TextBox7.Text = ""
         Label16.Text = ""
+
+        Session.Remove("strIvno")
     End Sub
 
 
