@@ -511,12 +511,12 @@ Partial Class cs_home
             strCneeNM = Trim(dataread("CONSIGNEENAME"))
             strCneeAD = StrConv(Replace(Replace(Trim(dataread("CONSIGNEEADDRESS")), vbCrLf, " "), "　", " "), VbStrConv.Narrow)
             strBLDATE = Trim(dataread("BLDATE2"))
-            strINVFrom = Trim(dataread("INVFROM"))
+            strINVFrom = StrConv(Trim(dataread("INVFROM")), VbStrConv.Narrow)
             strINVTo = Trim(dataread("INVTO"))
-            strShip = Trim(dataread("SHIPPEDPER"))
+            strShip = StrConv(Trim(dataread("SHIPPEDPER")), VbStrConv.Narrow)
             strCust = Trim(dataread("CUSTCODE"))
             strPrt = Replace(Left(Trim(dataread("INVPRTDATE")), 10), "/", "")
-            strVoyNo = Trim(dataread("VOYAGENO"))
+            strVoyNo = StrConv(Trim(dataread("VOYAGENO")), VbStrConv.Narrow)
         End While
 
         'クローズ処理 
