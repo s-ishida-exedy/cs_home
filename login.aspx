@@ -105,7 +105,7 @@
     </style>
 </head>
 <body>
-<form runat="Server" class="form">
+<form id="form1" runat="Server" class="form">
 
 <div class="form-wrapper">
   <h1>Sign In</h1>
@@ -131,28 +131,5 @@
 </body>
 </html>
 
-
-
-
-
-
-<%--<html>
-<head>
-<title>フォーム認証ログイン</title>
-</head>
-<body>
-<form runat="Server">
-<h1>ログイン</h1>
-<hr />
-<b>ユーザーID：</b>
-<asp:TextBox id="txtUsr" runat="Server" Columns="12" /><br />
-<b>パスワード：</b>
-<asp:TextBox id="txtPass" runat="Server" Columns="11" TextMode="Password" />
-<br />
-<asp:Button id="objBtn" runat="Server" Text="ログイン" /><br />
-<asp:Label id="objLbl" runat="Server" ForeColor="Red" />
-</form>
-</body>
-</html>--%>
 
 

@@ -5,6 +5,15 @@ Imports mod_function
 Partial Class cs_home
     Inherits System.Web.UI.Page
 
+    Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
+        If Page.IsPostBack = False Then
+            Session.Abandon()
+            If Request.QueryString("mode") = "timeout" Then     'タイムアウト
+                objLbl.Text = "セッションが切れました。再ログインしてください。"
+            End If
+        End If
+    End Sub
+
     Private Sub objBtn_Click(sender As Object, e As EventArgs) Handles objBtn.Click
         ' 入力されたユーザーID、パスワードでusrテーブル内のレコードを検索
         Dim strSQL As String = ""

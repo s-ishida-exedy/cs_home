@@ -3,6 +3,19 @@
 <%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="System.Data.SqlClient" %>
 <script Language="VB" runat="Server">
+
+    Sub Session_Start(ByVal sender As Object, ByVal e As EventArgs)
+        ' セッションが開始されたときに発生します。
+
+        'セッションが切れていたらログインページにリダイレクト
+        If Me.Request.RawUrl.IndexOf("login.aspx") < 0 Then
+            If Session("UsrId") = "" Then
+                Response.Redirect("login.aspx?mode=timeout")
+            End If
+        End If
+
+    End Sub
+
     Sub Application_OnAuthorizeRequest(sender As Object, e As EventArgs)
         ' アクセスの可否を判定するためのフラグ（初期値は「不可」）
         Dim flag As Boolean = False
@@ -56,6 +69,7 @@
             End If
         End If
         objDb.Close()
+
     End Sub
 
 </script>
