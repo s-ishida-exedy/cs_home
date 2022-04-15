@@ -48,7 +48,7 @@ Partial Class yuusen
             cnn.Open()
 
             'strSQL = "SELECT DOCFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(26).Text, vbLf, "")) & "' "
             strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '002' "
 
             'ＳＱＬコマンド作成
@@ -84,7 +84,7 @@ Partial Class yuusen
             dbcmd.Dispose()
 
             'strSQL = "SELECT DECFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DECFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(26).Text, vbLf, "")) & "' "
             strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '003' "
 
             'ＳＱＬコマンド作成
@@ -110,7 +110,7 @@ Partial Class yuusen
 
 
             'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(26).Text, vbLf, "")) & "' "
             strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '001' "
 
             'ＳＱＬコマンド作成
@@ -224,6 +224,33 @@ Partial Class yuusen
 
             DropDownList2.Items.Insert(0, "--Select--")
 
+        ElseIf DropDownList1.Text = "IVNO" Then
+            DropDownList2.Items.Clear()
+            DropDownList2.DataSource = SqlDataSource12
+            DropDownList2.DataTextField = "INVOICE"
+            DropDownList2.DataValueField = "INVOICE"
+            DropDownList2.DataBind()
+
+            DropDownList2.Items.Insert(0, "--Select--")
+
+        ElseIf DropDownList1.Text = "CUT日" Then
+            DropDownList2.Items.Clear()
+            DropDownList2.DataSource = SqlDataSource13
+            DropDownList2.DataTextField = "CUT_DATE"
+            DropDownList2.DataValueField = "CUT_DATE"
+            DropDownList2.DataBind()
+
+            DropDownList2.Items.Insert(0, "--Select--")
+
+        ElseIf DropDownList1.Text = "書類作成予定日" Then
+            DropDownList2.Items.Clear()
+            DropDownList2.DataSource = SqlDataSource15
+            DropDownList2.DataTextField = "FINALVANDATE"
+            DropDownList2.DataValueField = "FINALVANDATE"
+            DropDownList2.DataBind()
+
+            DropDownList2.Items.Insert(0, "--Select--")
+
         End If
 
     End Sub
@@ -285,6 +312,48 @@ Partial Class yuusen
 
             DropDownList2.Items.Insert(0, "--Select--")
 
+        ElseIf DropDownList1.Text = "IVNO" Then
+
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = SqlDataSource10
+            GridView1.DataBind()
+
+            DropDownList2.Items.Clear()
+            DropDownList2.DataSource = SqlDataSource12
+            DropDownList2.DataTextField = "INVOICE"
+            DropDownList2.DataValueField = "INVOICE"
+            DropDownList2.DataBind()
+
+            DropDownList2.Items.Insert(0, "--Select--")
+
+        ElseIf DropDownList1.Text = "CUT日" Then
+
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = SqlDataSource11
+            GridView1.DataBind()
+
+            DropDownList2.Items.Clear()
+            DropDownList2.DataSource = SqlDataSource13
+            DropDownList2.DataTextField = "CUT_DATE"
+            DropDownList2.DataValueField = "CUT_DATE"
+            DropDownList2.DataBind()
+
+            DropDownList2.Items.Insert(0, "--Select--")
+
+        ElseIf DropDownList1.Text = "書類作成予定日" Then
+
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = SqlDataSource14
+            GridView1.DataBind()
+
+            DropDownList2.Items.Clear()
+            DropDownList2.DataSource = SqlDataSource15
+            DropDownList2.DataTextField = "FINALVANDATE"
+            DropDownList2.DataValueField = "FINALVANDATE"
+            DropDownList2.DataBind()
+
+            DropDownList2.Items.Insert(0, "--Select--")
+
         End If
 
 
@@ -299,6 +368,8 @@ Partial Class yuusen
         DropDownList1.Items.Insert(2, "シート")
         DropDownList1.Items.Insert(3, "海貨業者")
         DropDownList1.Items.Insert(4, "客先コード")
+        DropDownList1.Items.Insert(5, "IVNO")
+        DropDownList1.Items.Insert(6, "CUT日")
 
         DropDownList2.Items.Clear()
         DropDownList2.Items.Insert(0, "--Select--")

@@ -332,7 +332,7 @@
                         <asp:BoundField DataField="CUT_DATE" HeaderText="CUT日" SortExpression="CUT_DATE" />
                         <asp:BoundField DataField="ETA" HeaderText="到着日" SortExpression="ETA" />
                         <asp:BoundField DataField="ETD" HeaderText="入出港日" SortExpression="ETD" />
-                        <asp:BoundField DataField="ETD" HeaderText="搬入日" SortExpression="ETD" />
+                        <asp:BoundField DataField="CUT_DATE" HeaderText="搬入日" SortExpression="CUT_DATE" />
 
                         <asp:BoundField DataField="" HeaderText="出荷元ストアコード" SortExpression="" />
                         <asp:BoundField DataField="" HeaderText="出荷方法" SortExpression="" />
