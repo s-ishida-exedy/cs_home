@@ -185,6 +185,7 @@ Partial Class cs_home
             strSQL = strSQL & "  , IsNull(T_INV_HD_TB.REACHDATE,'') AS  ETA "
             strSQL = strSQL & "  , IsNull(T_INV_HD_TB.CUTDATE,'') AS  CUTDATE "
             strSQL = strSQL & "  , IsNull(T_INV_HD_TB.VOYAGENO,'') AS VOYAGENO  "
+            strSQL = strSQL & "  , IsNull(REGPERSON,'') AS REGPERSON  "
             strSQL = strSQL & "FROM "
             strSQL = strSQL & "  T_INV_HD_TB  "
             strSQL = strSQL & "WHERE "
@@ -203,6 +204,7 @@ Partial Class cs_home
             strSQL = strSQL & "  , T_INV_HD_TB.REACHDATE "
             strSQL = strSQL & "  , T_INV_HD_TB.CUTDATE "
             strSQL = strSQL & "  , T_INV_HD_TB.VOYAGENO  "
+            strSQL = strSQL & "  , T_INV_HD_TB.REGPERSON  "
             strSQL = strSQL & "ORDER BY "
             strSQL = strSQL & "  T_INV_HD_TB.BLDATE "
             strSQL = strSQL & "  , T_INV_HD_TB.CUSTCODE "
@@ -214,7 +216,7 @@ Partial Class cs_home
             dataread = dbcmd.ExecuteReader()
 
             Dim strSTATUS, strBLDATE, strINVP, strCUSTNAME, strCUSTCODE, strSALESFLG, strSHIPPEDPER,
-                strBOOKINGNO, strETA, strCUTDATE, strVOYAGENO As String
+                strBOOKINGNO, strETA, strCUTDATE, strVOYAGENO, strREGPERSON As String
 
             cnn2.Open()
 
@@ -237,11 +239,12 @@ Partial Class cs_home
                 strETA = Trim(dataread("ETA"))
                 strCUTDATE = Trim(dataread("CUTDATE"))
                 strVOYAGENO = Trim(dataread("VOYAGENO"))
+                strREGPERSON = Trim(dataread("REGPERSON"))
 
                 'T_EXL_AIR_EXCLUSIVEにINSERT
                 strSQL = ""
                 strSQL = strSQL & "INSERT INTO T_EXL_IV_HD_EPA "
-                strSQL = strSQL & "(STATUS , BLDATE , INV , CUSTNAME , CUSTCODE , SALESFLG , SHIPPEDPER , BOOKINGNO , ETA , CUTDATE , VOYAGENO ) "
+                strSQL = strSQL & "(STATUS , BLDATE , INV , CUSTNAME , CUSTCODE , SALESFLG , SHIPPEDPER , BOOKINGNO , ETA , CUTDATE , VOYAGENO, REGPERSON ) "
                 strSQL = strSQL & "VALUES(  "
                 strSQL = strSQL & "'" & strSTATUS & "' "
                 strSQL = strSQL & ",'" & strBLDATE & "' "
@@ -254,6 +257,7 @@ Partial Class cs_home
                 strSQL = strSQL & ",'" & strETA & "' "
                 strSQL = strSQL & ",'" & strCUTDATE & "' "
                 strSQL = strSQL & ",'" & strVOYAGENO & "' "
+                strSQL = strSQL & ",'" & strREGPERSON & "' "
                 strSQL = strSQL & ") "
 
                 Command.CommandText = strSQL
@@ -341,6 +345,8 @@ Partial Class cs_home
             strSQL = strSQL & "  T_EXL_IV_HD_EPA  "
             strSQL = strSQL & "  INNER JOIN T_EXL_CSMANUAL  "
             strSQL = strSQL & "    ON T_EXL_IV_HD_EPA.CUSTCODE = T_EXL_CSMANUAL.NEW_CODE  "
+            strSQL = strSQL & "  INNER JOIN M_EXL_CS_MEMBER  "
+            strSQL = strSQL & "    ON T_EXL_IV_HD_EPA.REGPERSON = M_EXL_CS_MEMBER.CODE  "
             strSQL = strSQL & "WHERE "
             strSQL = strSQL & "  T_EXL_CSMANUAL.EPA_NECE = '○'  "
             strSQL = strSQL & "  AND NOT EXISTS (  "
