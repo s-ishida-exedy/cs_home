@@ -10,6 +10,8 @@ Partial Class cs_home
             Session.Abandon()
             If Request.QueryString("mode") = "timeout" Then     'タイムアウト
                 objLbl.Text = "セッションが切れました。再ログインしてください。"
+            ElseIf Request.QueryString("mode") = "logout" Then
+                objLbl.Text = "ログアウトしました。"
             End If
         End If
     End Sub

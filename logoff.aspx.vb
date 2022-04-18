@@ -10,6 +10,7 @@ Partial Class logoff
         Session.RemoveAll()
 
         'ログイン画面へ遷移
-        Response.Redirect("login.aspx")
+        'Response.Redirect("login.aspx")
+        Response.Redirect("login.aspx?mode=logout")
     End Sub
 End Class
