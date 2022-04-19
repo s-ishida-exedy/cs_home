@@ -125,8 +125,8 @@ Partial Class cs_home
 
         '画面入力情報を変数に代入
         Dim strCstItm As String = TextBox1.Text
-        Dim strItmNm As String = TextBox2.Text
-        Dim strEpaNm As String = TextBox3.Text
+        Dim strItmNm As String = Replace(TextBox2.Text, "'", "''")
+        Dim strEpaNm As String = Replace(TextBox3.Text, "'", "''")
         Dim strOriNo As String = TextBox4.Text
         Dim strHsCd As String = TextBox5.Text
         Dim strRema As String = ""
