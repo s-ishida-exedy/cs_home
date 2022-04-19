@@ -3,6 +3,7 @@ Imports System.Data.SqlClient
 Imports System.Data.Common
 Imports System.Web.UI.WebControls
 Imports System.Activities.Expressions
+Imports mod_function
 
 Partial Class cs_home
     Inherits System.Web.UI.Page
@@ -78,16 +79,14 @@ Partial Class cs_home
         Dim dbcmd As SqlCommand
         Dim strSQL As String = ""
 
-        Dim lngHAll As Long = 0
-        Dim lngHAf As Long = 0
-        Dim lngHKd As Long = 0
-        Dim lngHAll2 As Long = 0
-        Dim lngHAf2 As Long = 0
-        Dim lngHKd2 As Long = 0
-        Dim lngU As Long = 0
-        Dim lngU2 As Long = 0
-        Dim lngAir As Long = 0
-        Dim lngAir2 As Long = 0
+        Dim lngHAf As Long = 0      '本社AF　当日
+        Dim lngHKd As Long = 0      '本社KD　当日
+        Dim lngHAf2 As Long = 0　　 '本社AF　翌日
+        Dim lngHKd2 As Long = 0     '本社KD　翌日
+        Dim lngU As Long = 0        '上野　当日
+        Dim lngU2 As Long = 0　　　 '上野　翌日
+        Dim lngAir As Long = 0      'AIR　当日
+        Dim lngAir2 As Long = 0     'AIR　翌日
         Dim lngJishT As Long = 0
         Dim lngJishT2 As Long = 0
         Dim lngTsukI As Long = 0
@@ -96,6 +95,10 @@ Partial Class cs_home
         Dim StrA As String = ""
         Dim StrJ As String = ""
         Dim StrT As String = ""
+
+        Dim intToday As Integer = 0
+        Dim strTody As String = Now.ToString("yyyy/MM/dd")
+        Dim strTomm As String = GET_SHITEI_EIGYOBI(Now.ToString("yyyy/MM/dd"), 2)
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -108,7 +111,55 @@ Partial Class cs_home
         cnn.Open()
 
         strSQL = ""
-        strSQL = strSQL & "SELECT * FROM T_EXL_POR_CNT ORDER BY DATA_CD "
+        strSQL = strSQL & "SELECT * FROM T_EXL_VAN_SCH_DETAIL "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            Select Case dataread("PLACE")
+                Case "0H"
+                    If strTody = dataread("VAN_DATE") And Left(Right(dataread("CUST_NM"), 5), 1) = "K" Then
+                        '当日　本社　AF
+                        lngHAf += 1
+                    ElseIf strTody = dataread("VAN_DATE") And Left(Right(dataread("CUST_NM"), 5), 1) <> "K" Then
+                        '当日　本社　KD
+                        lngHKd += 1
+                    ElseIf strTomm = dataread("VAN_DATE") And Left(Right(dataread("CUST_NM"), 5), 1) = "K" Then
+                        '翌日　本社　AF
+                        lngHAf2 += 1
+                    ElseIf strTomm = dataread("VAN_DATE") And Left(Right(dataread("CUST_NM"), 5), 1) <> "K" Then
+                        '翌日　本社　KD
+                        lngHKd2 += 1
+                    End If
+                Case "1U"
+                    If strTody = dataread("VAN_DATE") Then
+                        '当日　上野
+                        lngU += 1
+                    ElseIf strTomm = dataread("VAN_DATE") Then
+                        '翌日　上野
+                        lngU2 += 1
+                    End If
+                Case "2A"
+                    If strTody = dataread("VAN_DATE") Then
+                        '当日　AIR
+                        lngAir += 1
+                    ElseIf strTomm = dataread("VAN_DATE") Then
+                        '翌日　AIR
+                        lngAir2 += 1
+                    End If
+            End Select
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        '自社通関と通関委託の件数取得
+        strSQL = ""
+        strSQL = strSQL & "SELECT * FROM T_EXL_POR_CNT WHERE DATA_CD IN ('011','012','013') "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -117,26 +168,6 @@ Partial Class cs_home
 
         While (dataread.Read())
             Select Case dataread("DATA_CD")
-                Case "001"
-                    lngHAll = dataread("DATA_CNT")
-                Case "002"
-                    lngHAf = dataread("DATA_CNT")
-                Case "003"
-                    lngHKd = dataread("DATA_CNT")
-                Case "004"
-                    lngHAll2 = dataread("DATA_CNT")
-                Case "005"
-                    lngHAf2 = dataread("DATA_CNT")
-                Case "006"
-                    lngHKd2 = dataread("DATA_CNT")
-                Case "007"
-                    lngU = dataread("DATA_CNT")
-                Case "008"
-                    lngU2 = dataread("DATA_CNT")
-                Case "009"
-                    lngAir = dataread("DATA_CNT")
-                Case "010"
-                    lngAir2 = dataread("DATA_CNT")
                 Case "011"
                     lngJishT = dataread("DATA_CNT")
                 Case "012"
@@ -145,6 +176,10 @@ Partial Class cs_home
                     lngTsukI = dataread("DATA_CNT")
             End Select
         End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
 
         Literal1.Text = StrConv(lngHAf, VbStrConv.Wide) + "件"
         Literal6.Text = StrConv(lngHAf2, VbStrConv.Wide) + "件"
@@ -167,6 +202,7 @@ Partial Class cs_home
         dbcmd.Dispose()
 
 
+        '更新日時取得処理
         strSQL = ""
         strSQL = strSQL & "SELECT * FROM T_EXL_DATA_UPD ORDER BY DATA_CD "
 
