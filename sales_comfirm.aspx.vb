@@ -26,6 +26,8 @@ Partial Class cs_home
             TextBox2.Text = dtLDM
         End If
 
+        Label2.Text = ""
+
         '初期データ取得
         Call GET_DATA()
 
@@ -53,6 +55,12 @@ Partial Class cs_home
 
         'データの取得
         Dim ds As DataSet = Dataobj.GET_RESULT_SALES(Me.TextBox1.Text, Me.TextBox2.Text, strCode, strShukka, strChk)
+        Dim dtCnt As Integer = ds.Tables("dt_Product").Rows.Count
+
+        If dtCnt = 0 Then
+            Label2.Text = "売上未確定のものはありません。"
+        End If
+
         If ds.Tables.Count > 0 Then
             GridView1.DataSourceID = ""
             GridView1.DataSource = ds

@@ -351,7 +351,10 @@ Public Class DBAccess
         Da = Factroy.CreateDataAdapter()
         Da.SelectCommand = Cmd
         Ds = New DataSet
-        Da.Fill(Ds)
+        Da.Fill(Ds, "dt_Product")
+
+        Dim dtCnt As Integer = Ds.Tables("dt_Product").Rows.Count
+
         Return Ds
     End Function
 

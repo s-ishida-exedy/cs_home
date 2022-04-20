@@ -99,6 +99,10 @@
             text-align :center;
             font-size :small;
         }
+        .err{
+            color:red;
+            font-weight :700;
+        }
 </style>
 <script>
     // カレンダー
@@ -163,6 +167,8 @@
                 &nbsp;&nbsp;
                 <asp:Button ID="Button3" runat="server" Text="検　索" Font-Size="Small" Width ="100px" />&nbsp;
                 <asp:Button ID="Button1" runat="server" Text="リセット" Font-Size="Small" Width ="100px" />
+                &nbsp;
+                <asp:Label ID="Label2" runat="server" Text="" Class="err"></asp:Label>
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
