@@ -20,10 +20,20 @@ Partial Class cs_home
 
         End If
 
+        Dim strIraiN As String = ""
+        Select Case Session("strIrai")
+            Case "0"
+                strIraiN = "見積り"
+            Case "1"
+                strIraiN = "集荷"
+            Case "2"
+                strIraiN = "集荷見積り"
+        End Select
+
         Literal1.Text = UriBodyC()
         Literal2.Text = Session("strCC")
         Literal4.Text = GET_CS_Member(6)
-        Literal5.Text = "【AIR " & Session("strIrai") & "依頼" & Session("strCust") & "向け】"
+        Literal5.Text = "【AIR " & strIraiN & "依頼　" & Session("strCust") & "向け】"
         Literal6.Text = Session("strFile")
         If Session("strPlac") = "0" Then
             Literal3.Text = GET_BccAddress("0")
