@@ -197,15 +197,19 @@
 FROM
   ( 
     SELECT
-        a.BLDATE2
+        CONVERT(VARCHAR,a.BLDATE2,111) AS BLDATE2
       , a.CUSTCODE
       , a.OLD_INVNO
       , CASE a.STORECD 
-          WHEN '0BNA' THEN 'O' 
-          WHEN '0LNF' THEN 'U'
+          WHEN '0BNA' THEN '本社' 
+          WHEN '0LNF' THEN '上野'
 		  ELSE '' 
         END AS STORE_CD
-      , a.SHIPBASE
+      , CASE a.SHIPBASE 
+          WHEN 'O' THEN '本社' 
+          WHEN 'U' THEN '上野'
+		  ELSE '' 
+        END AS SHIPBASE
       , a.SHIPCD
       , a.TATENECD 
 	  , a.REGPERSON
