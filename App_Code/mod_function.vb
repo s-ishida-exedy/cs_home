@@ -137,41 +137,41 @@ Public Class mod_function
         GET_SHITEI_EIGYOBI = ""
 
         'データベースへの接続を開く
-        Dim conn As New OracleConnection
-        conn.ConnectionString = "User Id=EXL;Password=EXL;Data Source=EUCDB"
-        conn.Open()
-        Dim cmmd As New OracleCommand
-        cmmd.Connection = conn
+        'Dim conn As New OracleConnection
+        'conn.ConnectionString = "User Id=EXL;Password=EXL;Data Source=EUCDB"
+        'conn.Open()
+        'Dim cmmd As New OracleCommand
+        'cmmd.Connection = conn
 
-        '対象データ件数を取得する
-        StrSQL = ""
-        StrSQL = StrSQL & "SELECT "
-        StrSQL = StrSQL & "  CAL_DATE "
-        StrSQL = StrSQL & "FROM "
-        StrSQL = StrSQL & "  EXPJ.M_CAL "
-        StrSQL = StrSQL & "WHERE "
-        StrSQL = StrSQL & "  CAL_NO = 1 "
-        StrSQL = StrSQL & "  AND HOLIDAY_FLG = 0 "
-        StrSQL = StrSQL & "  AND CAL_DATE >= '" & strDate & "' "
-        StrSQL = StrSQL & "ORDER BY CAL_DATE"
+        ''対象データ件数を取得する
+        'StrSQL = ""
+        'StrSQL = StrSQL & "SELECT "
+        'StrSQL = StrSQL & "  CAL_DATE "
+        'StrSQL = StrSQL & "FROM "
+        'StrSQL = StrSQL & "  EXPJ.M_CAL "
+        'StrSQL = StrSQL & "WHERE "
+        'StrSQL = StrSQL & "  CAL_NO = 1 "
+        'StrSQL = StrSQL & "  AND HOLIDAY_FLG = 0 "
+        'StrSQL = StrSQL & "  AND CAL_DATE >= '" & strDate & "' "
+        'StrSQL = StrSQL & "ORDER BY CAL_DATE"
 
 
-        cmmd.CommandText = StrSQL
-        Dim dr As OracleDataReader = cmmd.ExecuteReader
+        'cmmd.CommandText = StrSQL
+        'Dim dr As OracleDataReader = cmmd.ExecuteReader
 
-        i = 1
+        'i = 1
 
-        While (dr.Read())
-            If intTarget = i Then
-                GET_SHITEI_EIGYOBI = dr("CAL_DATE")
-            End If
+        'While (dr.Read())
+        '    If intTarget = i Then
+        '        GET_SHITEI_EIGYOBI = dr("CAL_DATE")
+        '    End If
 
-            i += 1
+        '    i += 1
 
-        End While
+        'End While
 
-        dr.Close()
-        conn.Close()
+        'dr.Close()
+        'conn.Close()
 
     End Function
 End Class
