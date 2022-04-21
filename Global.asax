@@ -7,13 +7,15 @@
     Sub Session_Start(ByVal sender As Object, ByVal e As EventArgs)
         ' セッションが開始されたときに発生します。
 
-        'セッションが切れていたらログインページにリダイレクト
-        If Me.Request.RawUrl.IndexOf("login.aspx") < 0 Then
-            If Session("UsrId") = "" Then
-                Response.Redirect("login.aspx?mode=timeout")
+        'ユーザー登録とパスワード再設定画面遷移時はリダイレクトしない。
+        If Me.Request.RawUrl.IndexOf("UsrCtrl/create_acc.aspx") <> 1 And Me.Request.RawUrl.IndexOf("UsrCtrl/re_pass.aspx") <> 1 Then
+            'セッションが切れていたらログインページにリダイレクト
+            If Me.Request.RawUrl.IndexOf("login.aspx") < 0 Then
+                If Session("UsrId") = "" Then
+                    Response.Redirect("login.aspx?mode=timeout")
+                End If
             End If
         End If
-
     End Sub
 
     Sub Application_OnAuthorizeRequest(sender As Object, e As EventArgs)
