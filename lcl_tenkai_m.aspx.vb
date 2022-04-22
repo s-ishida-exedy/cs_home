@@ -22,13 +22,28 @@ Partial Class cs_home
             e.Row.BackColor = Drawing.Color.DarkGray
         End If
 
-        e.Row.Cells(5).Visible = False
+        If e.Row.RowType = DataControlRowType.DataRow Then
+
+            'e.Row.Cells(16).Text = Replace(e.Row.Cells(16).Text, "__", "<br>")
+            e.Row.Cells(17).Text = Replace(e.Row.Cells(17).Text, "__", "<br>")
+
+        End If
+
+
         e.Row.Cells(6).Visible = False
         e.Row.Cells(9).Visible = False
         e.Row.Cells(10).Visible = False
         e.Row.Cells(11).Visible = False
         e.Row.Cells(12).Visible = False
         e.Row.Cells(18).Visible = False
+
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            Dim dltButton As ImageButton = e.Row.FindControl("ImageButton1")
+            'ボタンが存在する場合のみセット
+            If Not (dltButton Is Nothing) Then
+                dltButton.CommandArgument = e.Row.RowIndex.ToString()
+            End If
+        End If
 
     End Sub
 
@@ -61,21 +76,21 @@ Partial Class cs_home
                 'FIN_FLGを更新
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET FLG03 ='1' "
-                strSQL = strSQL & "WHERE CUST = '" & GridView1.Rows(I).Cells(5).Text & "'"
-                strSQL = strSQL & "AND ETD = '" & GridView1.Rows(I).Cells(10).Text & "'"
-                strSQL = strSQL & "AND LCL_SIZE = '" & GridView1.Rows(I).Cells(12).Text & "'"
+                strSQL = strSQL & "WHERE CUST = '" & GridView1.Rows(I).Cells(3).Text & "'"
+                strSQL = strSQL & "AND ETD = '" & GridView1.Rows(I).Cells(8).Text & "'"
+                strSQL = strSQL & "AND LCL_SIZE = '" & GridView1.Rows(I).Cells(10).Text & "'"
 
                 Command.CommandText = strSQL
                 ' SQLの実行
                 Command.ExecuteNonQuery()
 
-                Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(7).Text), 1)
-                Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(6).Text, 4), 1)
-                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(6).Text, 4), Trim(GridView1.Rows(I).Cells(7).Text), 1)
+                Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(5).Text), 1)
+                Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(4).Text, 4), 1)
+                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(4).Text, 4), Trim(GridView1.Rows(I).Cells(5).Text), 1)
 
                 strSQL = ""
                 strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_LCLCUSTPREADS WHERE "
-                strSQL = strSQL & "T_EXL_LCLCUSTPREADS.CUSTCODE = '" & GridView1.Rows(I).Cells(5).Text & "' "
+                strSQL = strSQL & "T_EXL_LCLCUSTPREADS.CUSTCODE = '" & GridView1.Rows(I).Cells(3).Text & "' "
 
                 'ＳＱＬコマンド作成 
                 dbcmd = New SqlCommand(strSQL, cnn)
@@ -92,13 +107,13 @@ Partial Class cs_home
 
                 If intCnt > 0 Then
                     strSQL = ""
-                    strSQL = strSQL & "UPDATE T_EXL_LCLCUSTPREADS SET ADDRESS ='" & GridView1.Rows(I).Cells(19).Text & "' "
-                    strSQL = strSQL & "WHERE CUSTCODE = '" & GridView1.Rows(I).Cells(5).Text & "'"
+                    strSQL = strSQL & "UPDATE T_EXL_LCLCUSTPREADS SET ADDRESS ='" & Replace(GridView1.Rows(I).Cells(17).Text, "<br>", "__") & "' "
+                    strSQL = strSQL & "WHERE CUSTCODE = '" & GridView1.Rows(I).Cells(3).Text & "'"
                 Else
                     strSQL = ""
                     strSQL = strSQL & "INSERT INTO T_EXL_LCLCUSTPREADS VALUES("
-                    strSQL = strSQL & "'" & GridView1.Rows(I).Cells(5).Text & "' "
-                    strSQL = strSQL & ",'" & GridView1.Rows(I).Cells(19).Text & "' "
+                    strSQL = strSQL & "'" & GridView1.Rows(I).Cells(3).Text & "' "
+                    strSQL = strSQL & ",'" & GridView1.Rows(I).Cells(17).Text & "' "
                     strSQL = strSQL & ")"
                 End If
                 Command.CommandText = strSQL
@@ -136,17 +151,17 @@ Partial Class cs_home
 
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET FLG03 ='' "
-                strSQL = strSQL & "WHERE CUST = '" & GridView1.Rows(I).Cells(5).Text & "'"
-                strSQL = strSQL & "AND ETD = '" & GridView1.Rows(I).Cells(10).Text & "'"
-                strSQL = strSQL & "AND LCL_SIZE = '" & GridView1.Rows(I).Cells(12).Text & "'"
+                strSQL = strSQL & "WHERE CUST = '" & GridView1.Rows(I).Cells(3).Text & "'"
+                strSQL = strSQL & "AND ETD = '" & GridView1.Rows(I).Cells(8).Text & "'"
+                strSQL = strSQL & "AND LCL_SIZE = '" & GridView1.Rows(I).Cells(10).Text & "'"
 
                 Command.CommandText = strSQL
                 ' SQLの実行
                 Command.ExecuteNonQuery()
 
-                Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(7).Text), 2)
-                Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(6).Text, 4), 2)
-                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(6).Text, 4), Trim(GridView1.Rows(I).Cells(7).Text), 2)
+                Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(5).Text), 2)
+                Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(4).Text, 4), 2)
+                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(4).Text, 4), Trim(GridView1.Rows(I).Cells(5).Text), 2)
             Else
             End If
         Next
@@ -566,7 +581,7 @@ Partial Class cs_home
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 
         Button3.Attributes.Add("onclick", "return confirm('メールを送付します。よろしいですか？');")
-
+        GridView1.Columns(16).ItemStyle.Wrap = True
     End Sub
 
     Private Function GET_ToAddress(strkbn As String, strtocc As String) As String
@@ -611,5 +626,58 @@ Partial Class cs_home
 
     End Function
 
+
+    Private Sub GridView1_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView1.RowCommand
+
+        If e.CommandName = "edt" Then
+            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+            Dim data0 = Me.GridView1.Rows(index).Cells(2).Text
+            Dim data1 = Me.GridView1.Rows(index).Cells(3).Text
+            Dim data2 = Me.GridView1.Rows(index).Cells(4).Text
+            Dim data3 = Me.GridView1.Rows(index).Cells(5).Text
+            Dim data4 = Me.GridView1.Rows(index).Cells(7).Text
+            Dim data5 = Me.GridView1.Rows(index).Cells(8).Text
+            Dim data6 = Me.GridView1.Rows(index).Cells(9).Text
+
+            Dim data7 = Me.GridView1.Rows(index).Cells(10).Text
+            Dim data8 = Me.GridView1.Rows(index).Cells(11).Text
+            Dim data9 = Me.GridView1.Rows(index).Cells(12).Text
+
+            Dim data10 = Me.GridView1.Rows(index).Cells(13).Text
+            Dim data11 = Me.GridView1.Rows(index).Cells(14).Text
+            Dim data12 = Me.GridView1.Rows(index).Cells(15).Text
+            Dim data13 = Me.GridView1.Rows(index).Cells(16).Text
+            Dim data14 = Me.GridView1.Rows(index).Cells(17).Text
+            Dim data15 = Me.GridView1.Rows(index).Cells(18).Text
+
+            Session("strMode") = "0"    '更新モード
+
+            Session("lstrbokou") = data0
+            Session("lstrcust") = data1
+            Session("lstrinv") = data2
+            Session("lstrbkg") = data3
+            Session("lstrcut") = data4
+            Session("lstretd") = data5
+            Session("lstreta") = data6
+            Session("lstrm3") = data7
+            Session("lstrwhg") = data8
+            Session("lstrpkg") = data9
+            Session("lstrp1") = data10
+            Session("lstrp2") = data11
+            Session("lstrm1") = data12
+            Session("lstrm2") = data13
+            Session("lstrpp") = data14
+            Session("lstrf3") = data15
+
+            'Dim clientScript As String = "<script language='JavaScript'> window.open('shippingmemo_detail.aspx', '', 'width=1500,height=450','scrollbars=no','status=no','toolbar=no','location=no','menubar=no','resizable=no') <" + "/script>"
+            'Dim startupScript As String = "<script language='JavaScript'>  window.open('shippingmemo_detail.aspx') <" + "/script>"
+
+            'RegisterClientScriptBlock("client", clientScript)
+
+            Response.Redirect("lcl_tenkai_m_detail.aspx")
+
+        End If
+
+    End Sub
 
 End Class

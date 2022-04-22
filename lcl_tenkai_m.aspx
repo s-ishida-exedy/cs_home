@@ -234,7 +234,7 @@
 
         <tbody>
 
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" hight = "500px" Width = "2500px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" hight = "500px" Width = "1300px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
 
         <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
 
@@ -246,10 +246,11 @@
         <asp:CheckBox ID="cb" Checked="false" runat="server"  />
 
         </ItemTemplate>
-        <HeaderStyle Width="20px" />
+        <HeaderStyle BackColor="#6B696B" />
+        <HeaderStyle Width="10px" />
         </asp:TemplateField>
 
-        <asp:TemplateField HeaderText="EDITMENU">
+<%--        <asp:TemplateField HeaderText="EDITMENU">
         <ItemTemplate>
         <asp:Button runat="server" CommandName="Edit" Text="編集" />
         </ItemTemplate>
@@ -260,23 +261,29 @@
         <asp:Button runat="server" CommandName="Delete" Text="削除" />
         </EditItemTemplate>
         <HeaderStyle Width="100px" />
+        </asp:TemplateField>--%>
+
+        <asp:TemplateField ShowHeader="False">
+        <ItemTemplate>
+        <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="false" CommandName="edt" ImageUrl="~/icon/write.png" Text="編集" width = "20" height = "20" />
+        </ItemTemplate>
+        <HeaderStyle BackColor="#6B696B" />
+        <HeaderStyle Width="10px" />
         </asp:TemplateField>
+
+
         <asp:BoundField DataField="OTHERS01" HeaderText="備考" SortExpression="OTHERS01"  >
         <HeaderStyle Width="120px" />
         </asp:BoundField>
-<%--        <asp:BoundField DataField="FLG05" HeaderText="追加/更新日" SortExpression="FLG05" ReadOnly ="true">
-        <HeaderStyle Width="80px" />
-        </asp:BoundField>
-        <asp:BoundField DataField="FLG04" HeaderText="追加/更新メモ" SortExpression="FLG04" >
-        <HeaderStyle Width="120px" />
-        </asp:BoundField>--%>
         <asp:BoundField DataField="CUST" HeaderText="客先" SortExpression="CUST" >
         <HeaderStyle Width="80px" />
         </asp:BoundField>
         <asp:BoundField DataField="INVOICE_NO" HeaderText="IN_NO" SortExpression="INVOICE_NO" >
         <HeaderStyle Width="100px" />
         </asp:BoundField>
-        <asp:BoundField DataField="BOOKING_NO" HeaderText="BKG_NO" SortExpression="BOOKING_NO" ReadOnly ="true" />
+        <asp:BoundField DataField="BOOKING_NO" HeaderText="BKG" SortExpression="BOOKING_NO" >
+        <HeaderStyle Width="100px" />
+        </asp:BoundField>
         <asp:BoundField DataField="OFFICIAL_QUOT" HeaderText="TATENE" SortExpression="OFFICIAL_QUOT"/>
         <asp:BoundField DataField="CUT_DATE" HeaderText="カット日" SortExpression="CUT_DATE" >
         <HeaderStyle Width="80px" />
@@ -289,21 +296,19 @@
         <asp:BoundField DataField="WEIGHT" HeaderText="重量" SortExpression="WEIGHT" />
         <asp:BoundField DataField="QTY" HeaderText="荷量" SortExpression="QTY" />
         <asp:BoundField DataField="PICKUP01" HeaderText="引取希望日" SortExpression="PICKUP01" >
-        <HeaderStyle Width="110px" />
+        <HeaderStyle Width="100px" />
         </asp:BoundField>
         <asp:BoundField DataField="PICKUP02" HeaderText="" SortExpression="PICKUP02" >
         <HeaderStyle Width="20px" />
         </asp:BoundField>
         <asp:BoundField DataField="MOVEIN01" HeaderText="搬入希望日" SortExpression="MOVEIN01" >
-        <HeaderStyle Width="110px" />
+        <HeaderStyle Width="100px" />
         </asp:BoundField>
         <asp:BoundField DataField="MOVEIN02" HeaderText="" SortExpression="MOVEIN02" >
         <HeaderStyle Width="20px" />
         </asp:BoundField>
-
         <asp:BoundField DataField="PICKINPLACE" HeaderText="搬入先" SortExpression="PICKINPLACE" />
         <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
-        <asp:BoundField DataField="BOOKING_NO" HeaderText="BKG#" SortExpression="BOOKING_NO" />
 
         </Columns>
         <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
@@ -322,7 +327,7 @@
 
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CONSIGNEE], [DESTINATION], [CUST], [INVOICE_NO], [BOOKING_NO], [OFFICIAL_QUOT], [CUT_DATE], [ETD], [ETA], [LCL_SIZE], [WEIGHT], [QTY], [PICKUP01], [PICKUP02], [MOVEIN01], [MOVEIN02], [OTHERS01], [FLG01], [FLG02], [FLG03], [FLG04], [FLG05],[PICKINPLACE] FROM [T_EXL_LCLTENKAI]"
-        UpdateCommand="UPDATE T_EXL_LCLTENKAI SET [CUST]=@CUST, [INVOICE_NO]=@INVOICE_NO,[OFFICIAL_QUOT]=@OFFICIAL_QUOT, [CUT_DATE]=@CUT_DATE, [ETD]=@ETD, [ETA]=@WEIGHT, [LCL_SIZE]=@LCL_SIZE, [WEIGHT]=@WEIGHT, [QTY]=@QTY, [PICKUP01]=@PICKUP01, [PICKUP02]=@PICKUP02, [MOVEIN01]=@MOVEIN01, [MOVEIN02]=@MOVEIN02, [OTHERS01]=@OTHERS01, [PICKINPLACE]=@PICKINPLACE,[FLG04]=@FLG04, [FLG05]=format(GETDATE(),'yyyy/MM/dd') WHERE BOOKING_NO=@BOOKING_NO"
+        UpdateCommand="UPDATE T_EXL_LCLTENKAI SET [CUST]=@CUST, [INVOICE_NO]=@INVOICE_NO,[OFFICIAL_QUOT]=@OFFICIAL_QUOT, [CUT_DATE]=@CUT_DATE, [ETD]=@ETD, [ETA]=@WEIGHT, [LCL_SIZE]=@LCL_SIZE, [WEIGHT]=@WEIGHT, [QTY]=@QTY, [PICKUP01]=@PICKUP01, [PICKUP02]=@PICKUP02, [MOVEIN01]=@MOVEIN01, [MOVEIN02]=@MOVEIN02, [OTHERS01]=@OTHERS01, [PICKINPLACE]=@PICKINPLACE,[FLG04]=@FLG04 WHERE BOOKING_NO=@BOOKING_NO"
         DeleteCommand="DELETE FROM T_EXL_LCLTENKAI WHERE BOOKING_NO=@BOOKING_NO"></asp:SqlDataSource>
 
 
