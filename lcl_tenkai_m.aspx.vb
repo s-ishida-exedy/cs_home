@@ -18,17 +18,17 @@ Partial Class cs_home
 
     Private Sub GridView1_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
 
-        If e.Row.Cells(20).Text = "1" Then
+        If e.Row.Cells(18).Text = "1" Then
             e.Row.BackColor = Drawing.Color.DarkGray
         End If
 
-        e.Row.Cells(7).Visible = False
-        e.Row.Cells(8).Visible = False
+        e.Row.Cells(5).Visible = False
+        e.Row.Cells(6).Visible = False
+        e.Row.Cells(9).Visible = False
+        e.Row.Cells(10).Visible = False
         e.Row.Cells(11).Visible = False
         e.Row.Cells(12).Visible = False
-        e.Row.Cells(13).Visible = False
-        e.Row.Cells(14).Visible = False
-        e.Row.Cells(20).Visible = False
+        e.Row.Cells(18).Visible = False
 
     End Sub
 
@@ -61,7 +61,6 @@ Partial Class cs_home
                 'FIN_FLGを更新
                 strSQL = ""
                 strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET FLG03 ='1' "
-                strSQL = strSQL & ",FLG05 ='" & dt1.ToShortDateString & "' "
                 strSQL = strSQL & "WHERE CUST = '" & GridView1.Rows(I).Cells(5).Text & "'"
                 strSQL = strSQL & "AND ETD = '" & GridView1.Rows(I).Cells(10).Text & "'"
                 strSQL = strSQL & "AND LCL_SIZE = '" & GridView1.Rows(I).Cells(12).Text & "'"
