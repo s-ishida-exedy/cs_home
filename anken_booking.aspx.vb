@@ -370,6 +370,7 @@ Partial Class yuusen
         DropDownList1.Items.Insert(4, "客先コード")
         DropDownList1.Items.Insert(5, "IVNO")
         DropDownList1.Items.Insert(6, "CUT日")
+        DropDownList1.Items.Insert(7, "書類作成予定日")
 
         DropDownList2.Items.Clear()
         DropDownList2.Items.Insert(0, "--Select--")

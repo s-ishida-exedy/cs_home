@@ -264,12 +264,12 @@
         <asp:BoundField DataField="OTHERS01" HeaderText="備考" SortExpression="OTHERS01"  >
         <HeaderStyle Width="120px" />
         </asp:BoundField>
-        <asp:BoundField DataField="FLG05" HeaderText="追加/更新日" SortExpression="FLG05" ReadOnly ="true">
+<%--        <asp:BoundField DataField="FLG05" HeaderText="追加/更新日" SortExpression="FLG05" ReadOnly ="true">
         <HeaderStyle Width="80px" />
         </asp:BoundField>
         <asp:BoundField DataField="FLG04" HeaderText="追加/更新メモ" SortExpression="FLG04" >
         <HeaderStyle Width="120px" />
-        </asp:BoundField>
+        </asp:BoundField>--%>
         <asp:BoundField DataField="CUST" HeaderText="客先" SortExpression="CUST" >
         <HeaderStyle Width="80px" />
         </asp:BoundField>

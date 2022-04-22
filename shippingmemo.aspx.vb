@@ -32,7 +32,7 @@ Partial Class yuusen
             If IsPostBack = True Then
 
                 If e.Row.Cells(9).Text = "" Or e.Row.Cells(9).Text = "&nbsp;" Then
-                    Call GET_IVDATA(Trim(e.Row.Cells(13).Text), Trim(e.Row.Cells(3).Text))
+                    Call GET_IVDATA(Trim(e.Row.Cells(13).Text), Trim(e.Row.Cells(3).Text), e.Row.Cells(4).Text)
                 End If
 
                 Dim dt0 As DateTime = DateTime.Parse(e.Row.Cells(4).Text)
@@ -135,7 +135,7 @@ Partial Class yuusen
         '非表示ボタン　FLG03は非表示
         Dim I As Integer
         For I = 0 To GridView1.Rows.Count - 1
-            Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(12).Text), Trim(GridView1.Rows(I).Cells(2).Text))
+            Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(13).Text), Trim(GridView1.Rows(I).Cells(3).Text), GridView1.Rows(I).Cells(4).Text)
         Next
 
         'Grid再表示
@@ -153,7 +153,7 @@ Partial Class yuusen
 
     End Sub
 
-    Private Sub GET_IVDATA(bkgno As String, ivno As String)
+    Private Sub GET_IVDATA(bkgno As String, ivno As String, strETD As Date)
 
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
@@ -172,10 +172,17 @@ Partial Class yuusen
 
         Dim dt1 As DateTime = DateTime.Now
 
+
         Dim ts1 As New TimeSpan(400, 0, 0, 0)
         Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim ts3 As New TimeSpan(30, 0, 0, 0)
+
         Dim dt2 As DateTime = dt1 + ts1
         Dim dt3 As DateTime = dt1 - ts1
+
+        Dim dt4 As DateTime = strETD + ts3
+        Dim dt5 As DateTime = strETD - ts3
+
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -194,7 +201,7 @@ Partial Class yuusen
         '    strSQL = strSQL & "T_INV_HD_TB.SALESFLG = '1' "
         '    strSQL = strSQL & "AND T_INV_HD_TB.BOOKINGNO is not null "
         strSQL = strSQL & " T_INV_HD_TB.BOOKINGNO is not null "
-        strSQL = strSQL & " AND T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+        strSQL = strSQL & " AND T_INV_HD_TB.BLDATE BETWEEN '" & dt5 & "' AND '" & dt4 & "' "
 
         strSQL = strSQL & "GROUP BY T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.BLDATE,T_INV_HD_TB.INVOICENO,T_INV_HD_TB.STAMP,T_INV_HD_TB.RATE,T_INV_HD_TB.BOOKINGNO,T_INV_HD_TB.SHIPPEDPER,T_INV_HD_TB.SHIPBASE,T_INV_HD_TB.INVFROM,T_INV_HD_TB.INVON,T_INV_HD_TB.VOYAGENO "
 
