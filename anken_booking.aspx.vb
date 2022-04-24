@@ -1439,7 +1439,7 @@ Step00:
 
         '結果を取り出す 
         While (dataread.Read())
-            Call addRecord_K(dataread("OLD_INVNO"))
+            Call addRecord_K(dataread("OLD_INVNO"), strbkg)
         End While
 
         'クローズ処理 
@@ -1451,7 +1451,7 @@ Step00:
 
     End Sub
 
-    Private Sub addRecord_K(strIVNO As String)
+    Private Sub addRecord_K(strIVNO As String, strbkg As String)
 
         Dim strSQL As String = ""
         Dim ivno As String = ""
@@ -1542,7 +1542,7 @@ Step00:
 
         strSQL = ""
         strSQL = strSQL & "SELECT * FROM T_EXL_CSANKEN WHERE "
-        strSQL = strSQL & "T_EXL_CSANKEN.INVOICE like '%" & strIVNO & "%' "
+        strSQL = strSQL & "T_EXL_CSANKEN.BOOKING_NO like '%" & strbkg & "%' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)

@@ -258,6 +258,7 @@ Partial Class cs_home
         Dim intCnt As Long
         Dim straddress As String
         Dim strbkck As String
+        Dim drage As String
 
         Dim dt1 As DateTime = DateTime.Now
 
