@@ -219,7 +219,7 @@ CASE PLACE
  WHEN '1' THEN '上野'
 END AS PLACE
 , GYOSHA
- FROM [M_EXL_AIR_MAIL]"></asp:SqlDataSource>
+ FROM [M_EXL_AIR_MAIL] ORDER BY GYOSHA, PLACE DESC, MAIL_ADD "></asp:SqlDataSource>
     
     
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT
