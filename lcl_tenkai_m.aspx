@@ -44,7 +44,7 @@
         }
         .wrapper {
           overflow: scroll;
-          height: 250px;
+          height: 400px;
         }
 
         h2 {

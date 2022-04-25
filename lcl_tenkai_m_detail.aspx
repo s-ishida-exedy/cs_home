@@ -186,17 +186,17 @@
             <tr>
                 <th>CUT</th>
                 <td>
-                     <asp:TextBox ID="TextBox5" runat="server" class="txtb"></asp:TextBox>
+                     <asp:TextBox ID="TextBox5" runat="server" type="date" class="txtb"></asp:TextBox>
                 </td>
                 <th>ETD</th>
                 <td>
-                    <asp:TextBox ID="TextBox6" runat="server" class="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox6" runat="server" type="date" class="txtb"></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <th>ETA</th>
                 <td>
-                     <asp:TextBox ID="TextBox7" runat="server" class="txtb"></asp:TextBox>
+                     <asp:TextBox ID="TextBox7" runat="server" type="date" class="txtb"></asp:TextBox>
                 </td>
                 <th>M3</th>
                 <td>
@@ -216,27 +216,33 @@
             <tr>
                 <th>引取り01</th>
                 <td>
-                     <asp:TextBox ID="TextBox11" runat="server" class="txtb"></asp:TextBox>
+                     <asp:TextBox ID="TextBox11" runat="server" type="date" class="txtb"></asp:TextBox>
                 </td>
                 <th>引取り02</th>
                 <td>
-                    <asp:TextBox ID="TextBox12" runat="server" class="txtb"></asp:TextBox>
+                    <asp:DropDownList ID="DropDownList1" runat="server" class="cmb">
+                        <asp:ListItem>AM</asp:ListItem>
+                        <asp:ListItem>PM</asp:ListItem>
+                    </asp:DropDownList>
                 </td>
             </tr>
             <tr>
                 <th>搬入01</th>
                 <td>
-                     <asp:TextBox ID="TextBox13" runat="server" class="txtb"></asp:TextBox>
+                     <asp:TextBox ID="TextBox13" runat="server" type="date" class="txtb"></asp:TextBox>
                 </td>
                 <th>搬入02</th>
                 <td>
-                    <asp:TextBox ID="TextBox14" runat="server" class="txtb"></asp:TextBox>
+                    <asp:DropDownList ID="DropDownList2" runat="server" class="cmb">
+                        <asp:ListItem>AM</asp:ListItem>
+                        <asp:ListItem>PM</asp:ListItem>
+                    </asp:DropDownList>
                 </td>
             </tr>
             <tr>
                 <th>搬入先</th>
                 <td>
-                     <asp:TextBox ID="TextBox15" runat="server" class="txtb"></asp:TextBox>
+                    <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="SqlDataSource1" DataTextField="ADDRESS" DataValueField="ADDRESS" class="cmb"></asp:DropDownList>    
                 </td>
                 <th>展開 1:展開済み</th>
                 <td>
@@ -245,6 +251,8 @@
             </tr>
  
         </table>
+
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT ADDRESS FROM T_EXL_LCLADDRESS"></asp:SqlDataSource>
 
 </div>
 <!--/#main2-->

@@ -374,7 +374,7 @@ Partial Class yuusen
         Dim a As Integer
 
         a = sumval17 / 100
-        a = (a * 100) + 100
+        a = (a * 100) + 300
 
         TextBox16.Text = a
 

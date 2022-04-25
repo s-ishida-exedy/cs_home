@@ -521,10 +521,10 @@ Partial Class cs_home
         'メールの本文
         Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>LCL出荷案件の内容に変更、追加がございましたのでご連絡いたします。</p>下記URLに重量の登録をお願いいたします。</p>http://kbhwpm01/exp/cs_home/lcl_tenkai.aspx</p></body></html>" ' UriBodyC()
 
-        Dim t As String = "<html><body><Table border='1' style='Font-Size:11px;'><tr><td>備考</td><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
+        Dim t As String = "<html><body><Table border='1' style='Font-Size:13px;'><tr><td>備考</td><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
 
         For I = 0 To GridView1.Rows.Count - 1
-            t = t & "<tr><td >" & GridView1.Rows(I).Cells(2).Text & "</td><td>" & GridView1.Rows(I).Cells(5).Text & "</td><td>" & GridView1.Rows(I).Cells(6).Text & "</td><td>" & GridView1.Rows(I).Cells(9).Text & "</td><td>" & GridView1.Rows(I).Cells(11).Text & "</td><td>" & GridView1.Rows(I).Cells(12).Text & "</td><td>" & GridView1.Rows(I).Cells(13).Text & "</td><td>" & GridView1.Rows(I).Cells(14).Text & "</td><td>" & GridView1.Rows(I).Cells(15).Text & "</td><td>" & GridView1.Rows(I).Cells(16).Text & "</td><td>" & GridView1.Rows(I).Cells(17).Text & "</td><td>" & GridView1.Rows(I).Cells(18).Text & "</td><td>" & GridView1.Rows(I).Cells(19).Text & "</td></tr>"
+            t = t & "<tr><td >" & GridView1.Rows(I).Cells(2).Text & "</td><td>" & GridView1.Rows(I).Cells(3).Text & "</td><td>" & GridView1.Rows(I).Cells(4).Text & "</td><td>" & GridView1.Rows(I).Cells(7).Text & "</td><td>" & GridView1.Rows(I).Cells(9).Text & "</td><td>" & GridView1.Rows(I).Cells(10).Text & "</td><td>" & GridView1.Rows(I).Cells(11).Text & "</td><td>" & GridView1.Rows(I).Cells(12).Text & "</td><td>" & GridView1.Rows(I).Cells(13).Text & "</td><td>" & GridView1.Rows(I).Cells(14).Text & "</td><td>" & GridView1.Rows(I).Cells(15).Text & "</td><td>" & GridView1.Rows(I).Cells(16).Text & "</td><td>" & GridView1.Rows(I).Cells(17).Text & "</td></tr>"
         Next
 
         t = t & "</Table></body></html>"

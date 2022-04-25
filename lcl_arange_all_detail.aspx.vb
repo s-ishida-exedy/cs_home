@@ -408,6 +408,9 @@ Partial Class cs_home
         Dim flg As Long
         Dim flg02 As Long
 
+        Dim striv As String = Session("striv")
+        Dim strbkg As String = Trim(Session("strbkg"))
+
         Dim struid As String = Session("UsrId")
         strcust = Left(Session("strcust"), 4)
 
@@ -432,32 +435,27 @@ Partial Class cs_home
         End If
 
         Call Mail01(struid, flg, flg02)
+        Call reg_004(striv, strbkg)
+
+        Session.Remove("strMode")
+        Session.Remove("strcust")
+        Session.Remove("striv")
+        Session.Remove("strhan")
+        Session.Remove("strcut")
+        Session.Remove("stretd")
+        Session.Remove("streta")
+        Session.Remove("strniryou")
+        Session.Remove("strbkg")
+
+
+        '前の画面へ遷移
+        Response.Redirect("lcl_arange_all.aspx")
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub reg_004(striv As String, strbkg As String)
 
-        Dim strbkg As String = ""
-        Dim strMode As String = ""
-        Dim strcust As String = ""
-        Dim striv As String = ""
-        Dim strhan As String = ""
-        Dim strcut As String = ""
-        Dim stretd As String = ""
-        Dim stretd02 As Date
-        Dim streta As String = ""
-        Dim strniryou As String = ""
 
-        strMode = Session("strMode")
-        strcust = Left(Session("strcust"), 4)
-        striv = Session("striv")
-        strhan = Session("strhan")
-        strcut = Session("strcut")
-        stretd = Session("stretd")
-        streta = Session("streta")
-        strniryou = Session("strniryou")
-        strbkg = Trim(Session("strbkg"))
-        stretd02 = Session("stretd")
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -528,8 +526,8 @@ Partial Class cs_home
         cnn.Close()
         cnn.Dispose()
 
-
     End Sub
+
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
 

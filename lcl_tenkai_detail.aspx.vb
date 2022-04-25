@@ -168,6 +168,20 @@ Partial Class cs_home
         '更新
         Call DB_access()        '更新モード
 
+
+
+        Session.Remove("lstrcust")
+        Session.Remove("lstrinv")
+        Session.Remove("lstrbkg")
+        Session.Remove("lstrcut")
+        Session.Remove("lstretd")
+        Session.Remove("lstrM3")
+        Session.Remove("lstrwgt")
+        Session.Remove("lstrpkg")
+        Session.Remove("lstrin")
+        Session.Remove("lstrdr")
+
+
         '元の画面に戻る
         Response.Redirect("lcl_tenkai.aspx")
     End Sub

@@ -189,6 +189,12 @@ Partial Class cs_home
         '更新
         Call DB_access("01")        '更新モード
 
+
+
+        Session.Remove("strMode")
+        Session.Remove("strinv")
+        Session.Remove("strbkg")
+
         '元の画面に戻る
         Response.Redirect("shippingmemo.aspx")
     End Sub

@@ -462,7 +462,7 @@ Partial Class cs_home
                         strSQL = strSQL & "','" & Replace(Convert.ToString(GridView1.Rows(I).Cells(4).Text), "&nbsp;", "") & "','" & bkgno01
                         strSQL = strSQL & "','" & GridView1.Rows(I).Cells(5).Text & "','" & GridView1.Rows(I).Cells(7).Text
                         strSQL = strSQL & "','" & GridView1.Rows(I).Cells(8).Text & "','" & Replace(GridView1.Rows(I).Cells(9).Text, "&nbsp;", "") & "','" & GridView1.Rows(I).Cells(10).Text
-                        strSQL = strSQL & "','','',' " & wday2 & " ','AM',' " & wday2 & "','PM','','','','','','','" & straddress & "')"
+                        strSQL = strSQL & "','','','" & Left(wday2, 10) & "','AM','" & Left(wday2, 10) & "','PM','','','','','','','" & straddress & "')"
 
                     Else
 

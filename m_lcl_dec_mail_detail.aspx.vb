@@ -234,6 +234,10 @@ Partial Class cs_home
         '更新
         Call DB_access("01")        '更新モード
 
+
+        Session.Remove("strMode")
+        Session.Remove("strCode")
+
         '元の画面に戻る
         Response.Redirect("m_lcl_dec_mail.aspx")
     End Sub
@@ -242,6 +246,10 @@ Partial Class cs_home
 
         '削除
         Call DB_access("02")        '削除モード
+
+
+        Session.Remove("strMode")
+        Session.Remove("strCode")
 
         '元の画面に戻る
         Response.Redirect("m_lcl_dec_mail.aspx")
@@ -260,6 +268,9 @@ Partial Class cs_home
 
         '登録
         Call DB_access("03")        '登録モード
+
+
+        Session.Remove("strMode")
 
         '元の画面に戻る
         Response.Redirect("m_lcl_dec_mail.aspx")

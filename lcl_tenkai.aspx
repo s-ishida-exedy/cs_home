@@ -44,7 +44,7 @@
         }
         .wrapper {
           overflow: scroll;
-          height: 250px;
+          height: 400px;
         }
         
         h2 {
@@ -256,10 +256,14 @@
         <table >
             <tr>
                 <td style="width:800px;Font-Size:13px;" >
-                    <p><b><asp:Label Font-Size="11" id="Label2" Text="引き取り・搬入予定LCL貨物の情報を展開しておりますので、荷量の追記、トラック手配をお願いいたします。" runat="server"></asp:Label></b></p>
-                    <p><asp:Label Font-Size="8" id="Label3" Text="・重量、荷量は編集ボタンを押して登録してください。" runat="server"></asp:Label></p>
+                    <p><b><asp:Label Font-Size="11" id="Label2" Text="引き取り・搬入予定LCL貨物の情報を展開しておりますので、重量・荷量の追記、トラック手配をお願いいたします。" runat="server"></asp:Label></b></p>
+<%--                    <p><asp:Label Font-Size="8" id="Label3" Text="・重量、荷量は編集ボタンを押して登録してください。" runat="server"></asp:Label></p>--%>
                     <p><asp:Label Font-Size="8" id="Label4" Text="・出荷後、リストから削除されていきます。" runat="server"></asp:Label></p>
 <%--                    <asp:Label Font-Size="8" id="Label5" Text="・毎週水曜更新　（それ以外に追加・変更などの更新する場合はメールで通知します。）" runat="server"></asp:Label>--%>
+                    <p></p>
+                    重量登録通知メール：<asp:Button ID="Button5" runat="server" Text="KD" width="100" Height="30" />
+                    <asp:Button ID="Button6" runat="server" Text="ｱﾌﾀ" width="100" Height="30" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    ドレージ登録通知メール：<asp:Button ID="Button1" runat="server" Text="輸送T" width="100" Height="30" />
                 </td>
             </tr>
         </table>
@@ -340,12 +344,6 @@
         </table>
         </div>
 
-        <asp:Label Font-Size="8" id="Label6" Text="※当日追加・更新分は 追加/更新日 と 追加/更新メモ が赤くマークされます。" runat="server"></asp:Label>
-
-
-        <p></p>
-        重量登録通知メール：<asp:Button ID="Button5" runat="server" Text="KD" width="100" Height="30" />
-        <asp:Button ID="Button6" runat="server" Text="ｱﾌﾀ" width="100" Height="30" />
 
         </asp:Panel>   
 

@@ -60,9 +60,9 @@ Partial Class cs_home
         e.Row.Cells(8).Width = 60
         e.Row.Cells(9).Width = 50
         e.Row.Cells(10).Width = 50
-        e.Row.Cells(11).Width = 90
+        e.Row.Cells(11).Width = 70
         e.Row.Cells(12).Width = 10
-        e.Row.Cells(13).Width = 90
+        e.Row.Cells(13).Width = 70
         e.Row.Cells(14).Width = 10
         e.Row.Cells(15).Width = 110
         e.Row.Cells(16).Width = 300
@@ -92,6 +92,11 @@ Partial Class cs_home
 
         Dim kbn As String = "ｱﾌﾀ"
         Call niryoumail(kbn)
+
+    End Sub
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Call dragemail()
 
     End Sub
     Private Sub niryoumail(kbn As String)
@@ -176,7 +181,88 @@ Partial Class cs_home
 
 
     End Sub
+    Private Sub dragemail()
 
+        'メールの送信に必要な情報
+        Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
+        Dim smtpPort As Integer = 25
+
+        ' メールの内容
+        Dim struid As String = Session("UsrId")
+        Dim strfrom2 As String = GET_from(struid)
+        Dim strto2 As String = GET_ToAddress(1, 1)
+
+        Dim strfrom As String = GET_from(struid)
+        Dim strto As String = GET_from(struid)
+        Dim strcc As String = GET_from(struid) + "," + GET_from(struid) + "," + "r-fukao@exedy.com"
+
+        'メールの件名
+        Dim subject As String = "<通知>LCL案件展開　ドレージ手配 "
+
+        'メールの本文
+        Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>ドレージ手配が完了いたしました。</p>http://kbhwpm01/exp/cs_home/lcl_tenkai.aspx</p></body></html>" ' UriBodyC()
+
+        Dim t As String = "<html><body><Table border='1' style='Font-Size:13px;'><tr><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td><td><font style=" & Chr(34) & " background-color:yellow" & Chr(34) & ">ドレージ</font></td></tr>"
+
+        GridView2.DataBind()
+
+        For I = 0 To GridView2.Rows.Count - 1
+            t = t & "<tr><td>" & GridView2.Rows(I).Cells(1).Text & "</td><td>" & GridView2.Rows(I).Cells(2).Text & "</td><td>" & GridView2.Rows(I).Cells(5).Text & "</td><td>" & GridView2.Rows(I).Cells(6).Text & "</td><td>" & GridView2.Rows(I).Cells(8).Text & "</td><td>" & Trim(GridView2.Rows(I).Cells(9).Text) & "</td><td>" & Trim(GridView2.Rows(I).Cells(10).Text) & "</td><td>" & GridView2.Rows(I).Cells(11).Text & "</td><td>" & GridView2.Rows(I).Cells(12).Text & "</td><td>" & GridView2.Rows(I).Cells(13).Text & "</td><td>" & GridView2.Rows(I).Cells(14).Text & "</td><td>" & Replace(GridView2.Rows(I).Cells(16).Text, "__", "<br>") & "</td><td><font style=" & Chr(34) & " background-color:yellow" & Chr(34) & ">" & Replace(GridView2.Rows(I).Cells(17).Text, "__", "<br>") & "</font></td>"
+        Next
+
+        t = t & "</Table></body></html>"
+
+        body = body & t
+
+        Dim body2 As String = "</p>" ' UriBodyC()
+
+        body = body & body2
+
+        body = "<font size=" & Chr(34) & " 2" & Chr(34) & ">" & body & "</font>"
+        body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
+
+        ' MailKit におけるメールの情報
+        Dim message = New MimeKit.MimeMessage()
+
+        ' 送り元情報  
+        message.From.Add(MailboxAddress.Parse(strfrom))
+
+        ' 宛先情報  
+        message.To.Add(MailboxAddress.Parse(strto))
+        If strcc <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
+
+        ' 表題  
+        message.Subject = subject
+
+        ' 本文
+        Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
+        textPart.Text = body
+        message.Body = textPart
+
+
+        Dim multipart = New MimeKit.Multipart("mixed")
+
+        multipart.Add(textPart)
+
+        message.Body = multipart
+
+        Using client As New MailKit.Net.Smtp.SmtpClient()
+            client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
+            client.Send(message)
+            client.Disconnect(True)
+            client.Dispose()
+            message.Dispose()
+        End Using
+        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
+
+
+    End Sub
 
     Private Function GET_ToAddress(strkbn As String, strtocc As String) As String
         'BCCメールアドレス情報を取得

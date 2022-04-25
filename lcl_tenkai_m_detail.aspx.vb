@@ -56,17 +56,17 @@ Partial Class cs_home
                 TextBox2.Text = Replace(lstrcust, "&nbsp;", "")
                 TextBox3.Text = Replace(lstrinv, "&nbsp;", "")
                 Label1.Text = Replace(lstrbkg, "&nbsp;", "")
-                TextBox5.Text = Replace(lstrcut, "&nbsp;", "")
-                TextBox6.Text = Replace(lstretd, "&nbsp;", "")
-                TextBox7.Text = Replace(lstreta, "&nbsp;", "")
+                TextBox5.Text = Replace(Replace(lstrcut, "&nbsp;", ""), "/", "-")
+                TextBox6.Text = Replace(Replace(lstretd, "&nbsp;", ""), "/", "-")
+                TextBox7.Text = Replace(Replace(lstreta, "&nbsp;", ""), "/", "-")
                 TextBox8.Text = Replace(lstrm3, "&nbsp;", "")
                 TextBox9.Text = Replace(lstrwhg, "&nbsp;", "")
                 TextBox10.Text = Replace(lstrpkg, "&nbsp;", "")
-                TextBox11.Text = Replace(lstrp1, "&nbsp;", "")
-                TextBox12.Text = Replace(lstrp2, "&nbsp;", "")
-                TextBox13.Text = Replace(lstrm1, "&nbsp;", "")
-                TextBox14.Text = Replace(lstrm2, "&nbsp;", "")
-                TextBox15.Text = Replace(Replace(lstrpp, "&nbsp;", ""), "<br>", "__")
+                TextBox11.Text = Replace(Replace(lstrp1, "&nbsp;", ""), "/", "-")
+                DropDownList1.SelectedValue = Replace(lstrp2, "&nbsp;", "")
+                TextBox13.Text = Replace(Replace(lstrm1, "&nbsp;", ""), "/", "-")
+                DropDownList2.SelectedValue = Replace(lstrm2, "&nbsp;", "")
+                DropDownList3.SelectedValue = Replace(Replace(lstrpp, "&nbsp;", ""), "<br>", "__")
                 Label2.Text = Replace(lstrf3, "&nbsp;", "")
 
 
@@ -102,17 +102,17 @@ Partial Class cs_home
         Dim lstrcust As String = TextBox2.Text
         Dim lstrinv As String = TextBox3.Text
         Dim lstrbkg As String = Label1.Text
-        Dim lstrcut As String = TextBox5.Text
-        Dim lstretd As String = TextBox6.Text
-        Dim lstreta As String = TextBox7.Text
+        Dim lstrcut As String = Replace(TextBox5.Text, "-", "/")
+        Dim lstretd As String = Replace(TextBox6.Text, "-", "/")
+        Dim lstreta As String = Replace(TextBox7.Text, "-", "/")
         Dim lstrm3 As String = TextBox8.Text
         Dim lstrwhg As String = TextBox9.Text
         Dim lstrpkg As String = TextBox10.Text
-        Dim lstrp1 As String = TextBox11.Text
-        Dim lstrp2 As String = TextBox12.Text
-        Dim lstrm1 As String = TextBox13.Text
-        Dim lstrm2 As String = TextBox14.Text
-        Dim lstrpp As String = TextBox15.Text
+        Dim lstrp1 As String = Replace(TextBox11.Text, "-", "/")
+        Dim lstrp2 As String = DropDownList1.Text
+        Dim lstrm1 As String = Replace(TextBox13.Text, "-", "/")
+        Dim lstrm2 As String = DropDownList2.Text
+        Dim lstrpp As String = DropDownList3.Text
 
 
         If strExecMode = "01" Then
@@ -181,6 +181,26 @@ Partial Class cs_home
         '更新
         Call DB_access("01")        '更新モード
 
+
+        Session.Remove("lstrbokou")
+        Session.Remove("lstrcust")
+        Session.Remove("lstrinv")
+        Session.Remove("lstrbkg")
+        Session.Remove("strMode")
+        Session.Remove("lstrcut")
+        Session.Remove("lstretd")
+        Session.Remove("lstreta")
+        Session.Remove("lstrm3")
+        Session.Remove("lstrwhg")
+        Session.Remove("lstrpkg")
+        Session.Remove("lstrp1")
+        Session.Remove("lstrp2")
+        Session.Remove("lstrm1")
+        Session.Remove("lstrm2")
+        Session.Remove("lstrpp")
+        Session.Remove("lstrf3")
+
+
         '元の画面に戻る
         Response.Redirect("lcl_tenkai_m.aspx")
     End Sub
@@ -189,6 +209,24 @@ Partial Class cs_home
 
         '削除
         Call DB_access("02")        '削除モード
+
+        Session.Remove("lstrbokou")
+        Session.Remove("lstrcust")
+        Session.Remove("lstrinv")
+        Session.Remove("lstrbkg")
+        Session.Remove("strMode")
+        Session.Remove("lstrcut")
+        Session.Remove("lstretd")
+        Session.Remove("lstreta")
+        Session.Remove("lstrm3")
+        Session.Remove("lstrwhg")
+        Session.Remove("lstrpkg")
+        Session.Remove("lstrp1")
+        Session.Remove("lstrp2")
+        Session.Remove("lstrm1")
+        Session.Remove("lstrm2")
+        Session.Remove("lstrpp")
+        Session.Remove("lstrf3")
 
         '元の画面に戻る
         Response.Redirect("lcl_tenkai_m.aspx")
