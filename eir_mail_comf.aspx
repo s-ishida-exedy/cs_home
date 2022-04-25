@@ -262,6 +262,7 @@ SELECT CODE, MEMBER_NAME
 FROM M_EXL_CS_MEMBER
 WHERE PLACE LIKE '%H%'
 AND CODE LIKE 'E%'
+AND TEAM = 'CSチーム'
 "></asp:SqlDataSource>
 
 </form>
