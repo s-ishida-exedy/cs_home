@@ -117,10 +117,20 @@ Partial Class cs_home
                 wday2 = dataread("WDAY01")
             End While
 
+            '稼働日で7日先を取得
             If Weekday(dt1) > 6 Then
-                cno = 7 - Weekday(dt1) + 6
+                If lhlflg = "1" Then
+                    cno = 7 - Weekday(dt1) + 6 + 7
+                ElseIf lhlflg = "2" Then
+                    cno = 7 - Weekday(dt1) + 6
+                End If
             Else
-                cno = 6 - Weekday(dt1) + 7
+                If lhlflg = "1" Then
+                    cno = 6 - Weekday(dt1) + 7 + 7
+                ElseIf lhlflg = "2" Then
+                    cno = 6 - Weekday(dt1) + 7
+                End If
+
             End If
 
             If e.Row.RowType = DataControlRowType.DataRow Then
@@ -131,8 +141,8 @@ Partial Class cs_home
                 Dim ts1 As New TimeSpan(cno, 0, 0, 0)
                 Dim dt2 As DateTime = dt1 + ts1 '金曜（最大値）
 
-                If lhlflg = "1" Then
-                    If dt3 < strwd2 Then
+
+                If dt3 < dt2 Then
                         e.Row.BackColor = Drawing.Color.Salmon
                         If (e.Row.Cells(11).Text.Length = 6) And dt3 < dt2 Then
                             e.Row.Cells(11).Text = "AC要"
@@ -140,16 +150,6 @@ Partial Class cs_home
                             e.Row.Cells(11).ForeColor = Drawing.Color.White
                         End If
                     End If
-                Else
-                    If dt3 < dt2 Then
-                        e.Row.BackColor = Drawing.Color.Salmon
-                        If (e.Row.Cells(11).Text.Length = 6) And dt3 < dt2 Then
-                            e.Row.Cells(11).Text = "AC要"
-                            e.Row.Cells(11).BackColor = Drawing.Color.Red
-                            e.Row.Cells(11).ForeColor = Drawing.Color.White
-                        End If
-                    End If
-                End If
 
 
                 e.Row.Cells(6).Text = e.Row.Cells(6).Text & " (" & dt3.ToString("ddd") & ")"
