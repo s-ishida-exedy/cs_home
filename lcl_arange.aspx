@@ -277,67 +277,6 @@
 
 </div>
 
-<div id="contents2" class="inner2">
-
-    <asp:Panel ID="Panel2" runat="server"  Font-Size="12px" Visible ="false">
-
-    <table>
-        <tr>
-            <td style="width:500px;Font-Size:12px;" >
-                <p>※Bookingシート上にCUT日が記載されていない案件</p>
-                ※CUT日を入力すると手配状況の画面に表示される
-            </td>
-            <td style="width:500px;Font-Size:12px;" >
-                <p>＜下表のCUT日は自動で設定されている＞</p>
-                C258 ETDの8日前、C255 ETDの10日前、その他 ETDの7日前
-            </td>
-        </tr>
-    </table>
-
-
-    <div class="wrapper">
-    <table class="sticky">
-    <thead class="fixed">
-
-    </thead>
-
-    <tbody>
-
-    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource2" Width="1200px" BackColor="White" BorderColor="#555555" BorderStyle="none" BorderWidth="3px" CellPadding="3" GridLines="Both">
-
-    <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK" > </HeaderStyle>
-    <HeaderStyle CssClass="Freezing"></HeaderStyle>
-
-    <Columns>
-
-    <asp:BoundField DataField="CONSIGNEE" HeaderText="客先" SortExpression="CONSIGNEE" />
-    <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" />
-    <asp:BoundField DataField="CUST_CD" HeaderText="客先コード" SortExpression="CUSTCODE" />
-    <asp:BoundField DataField="INVOICE_NO" HeaderText="INVOICE_NO" SortExpression="INVOICE_NO" />
-    <asp:BoundField DataField="OFFICIAL_QUOT" HeaderText="建値" SortExpression="TATENE" />
-    <asp:BoundField DataField="CUT_DATE2" HeaderText="搬入日" SortExpression="CUT2" />
-    <asp:BoundField DataField="CUT_DATE" HeaderText="CUT" SortExpression="CUT" />
-    <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" />
-    <asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" />
-    <asp:BoundField DataField="LCL_QTY" HeaderText="荷量" SortExpression="VOLUME" />
-    <asp:BoundField DataField="BOOKING_NO" HeaderText="ブッキング＃" SortExpression="BOOKING_NO" />
-
-    </Columns>
-    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-    <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-    <RowStyle BackColor="#FFFFFF" ForeColor="Black" />
-    <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-    <SortedAscendingCellStyle BackColor="#F1F1F1" />
-    <SortedAscendingHeaderStyle BackColor="#0000A9" />
-    <SortedDescendingCellStyle BackColor="#CAC9C9" />
-    <SortedDescendingHeaderStyle BackColor="#000065" />
-    </asp:GridView>
-
-    </tbody>
-    </table>
-    </div>
-
-    </asp:Panel>
 
     <asp:Panel ID="Panel3" runat="server"  Font-Size="20px" Visible ="false">
 
@@ -355,7 +294,6 @@
 
     </asp:Panel>
 
-</div>
 
 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CONSIGNEE], [CUST_CD], [DESTINATION], [INVOICE_NO], [CUT_DATE], [CUT_DATE]AS CUT_DATE2, [ETD], [ETA], [LCL_QTY], [OFFICIAL_QUOT],[BOOKING_NO] FROM [T_BOOKING] WHERE [LCL_QTY] like '%M3%' AND [CUT_DATE] <>'' AND [CUT_DATE] IS NOT NULL AND [CUT_DATE] > GETDATE()-3 AND [CUT_DATE] < GETDATE()+45  ORDER BY [CUT_DATE]  "></asp:SqlDataSource>
 <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CONSIGNEE], [CUST_CD], [DESTINATION], [INVOICE_NO], [CUT_DATE], [CUT_DATE]AS CUT_DATE2, [ETD], [ETA], [LCL_QTY], [OFFICIAL_QUOT],[BOOKING_NO] FROM [T_BOOKING] WHERE [LCL_QTY] like '%M3%' AND [CUT_DATE] =''  AND [CUT_DATE] IS NOT NULL AND [ETD] < GETDATE()+45   ORDER BY [ETD]  "></asp:SqlDataSource>

@@ -18,6 +18,7 @@ Partial Class cs_home
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 
         Button5.Attributes.Add("onclick", "return confirm('メールを送付します。よろしいですか？');")
+        Button1.Attributes.Add("onclick", "return confirm('メールを送付します。よろしいですか？');")
         Button6.Attributes.Add("onclick", "return confirm('メールを送付します。よろしいですか？');")
         GridView2.Columns(16).ItemStyle.Wrap = True
 
@@ -120,12 +121,12 @@ Partial Class cs_home
         'メールの本文
         Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>荷量を追加いたしました。</p>http://kbhwpm01/exp/cs_home/lcl_tenkai.aspx</p></body></html>" ' UriBodyC()
 
-        Dim t As String = "<html><body><Table border='1' style='Font-Size:13px;'><tr><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td><font style=" & Chr(34) & " background-color:yellow" & Chr(34) & ">重量</font></td><td><font style=" & Chr(34) & " background-color:yellow" & Chr(34) & ">荷量</font></td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
+        Dim t As String = "<html><body><Table border='1' style='Font-Size:14px;'><tr style='background-color: #6fbfd1;'><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
 
         GridView2.DataBind()
 
         For I = 0 To GridView2.Rows.Count - 1
-            t = t & "<tr><td>" & GridView2.Rows(I).Cells(1).Text & "</td><td>" & GridView2.Rows(I).Cells(2).Text & "</td><td>" & GridView2.Rows(I).Cells(5).Text & "</td><td>" & GridView2.Rows(I).Cells(6).Text & "</td><td>" & GridView2.Rows(I).Cells(8).Text & "</td><td><font style=" & Chr(34) & " background-color:yellow" & Chr(34) & ">" & Trim(GridView2.Rows(I).Cells(9).Text) & "</font></td><td><font style=" & Chr(34) & " background-color:yellow" & Chr(34) & ">" & Trim(GridView2.Rows(I).Cells(10).Text) & "</font></td><td>" & GridView2.Rows(I).Cells(11).Text & "</td><td>" & GridView2.Rows(I).Cells(12).Text & "</td><td>" & GridView2.Rows(I).Cells(13).Text & "</td><td>" & GridView2.Rows(I).Cells(14).Text & "</td><td>" & Replace(GridView2.Rows(I).Cells(16).Text, "__", "<br>") & "</td>"
+            t = t & "<tr><td>" & GridView2.Rows(I).Cells(1).Text & "</td><td>" & GridView2.Rows(I).Cells(2).Text & "</td><td>" & GridView2.Rows(I).Cells(5).Text & "</td><td>" & GridView2.Rows(I).Cells(6).Text & "</td><td>" & GridView2.Rows(I).Cells(8).Text & "</td><td style='background-color: Khaki;'>" & Trim(GridView2.Rows(I).Cells(9).Text) & "</td><td style='background-color: Khaki;'>" & Trim(GridView2.Rows(I).Cells(10).Text) & "</td><td>" & GridView2.Rows(I).Cells(11).Text & "</td><td>" & GridView2.Rows(I).Cells(12).Text & "</td><td>" & GridView2.Rows(I).Cells(13).Text & "</td><td>" & GridView2.Rows(I).Cells(14).Text & "</td><td>" & Replace(GridView2.Rows(I).Cells(16).Text, "__", "<br>") & "</td>"
         Next
 
         t = t & "</Table></body></html>"
@@ -202,12 +203,12 @@ Partial Class cs_home
         'メールの本文
         Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>ドレージ手配が完了いたしました。</p>http://kbhwpm01/exp/cs_home/lcl_tenkai.aspx</p></body></html>" ' UriBodyC()
 
-        Dim t As String = "<html><body><Table border='1' style='Font-Size:13px;'><tr><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td><td><font style=" & Chr(34) & " background-color:yellow" & Chr(34) & ">ドレージ</font></td></tr>"
+        Dim t As String = "<html><body><Table border='1' style='Font-Size:14px;'><tr style='background-color: #6fbfd1;'><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td><td>ドレージ</td></tr>"
 
         GridView2.DataBind()
 
         For I = 0 To GridView2.Rows.Count - 1
-            t = t & "<tr><td>" & GridView2.Rows(I).Cells(1).Text & "</td><td>" & GridView2.Rows(I).Cells(2).Text & "</td><td>" & GridView2.Rows(I).Cells(5).Text & "</td><td>" & GridView2.Rows(I).Cells(6).Text & "</td><td>" & GridView2.Rows(I).Cells(8).Text & "</td><td>" & Trim(GridView2.Rows(I).Cells(9).Text) & "</td><td>" & Trim(GridView2.Rows(I).Cells(10).Text) & "</td><td>" & GridView2.Rows(I).Cells(11).Text & "</td><td>" & GridView2.Rows(I).Cells(12).Text & "</td><td>" & GridView2.Rows(I).Cells(13).Text & "</td><td>" & GridView2.Rows(I).Cells(14).Text & "</td><td>" & Replace(GridView2.Rows(I).Cells(16).Text, "__", "<br>") & "</td><td><font style=" & Chr(34) & " background-color:yellow" & Chr(34) & ">" & Replace(GridView2.Rows(I).Cells(17).Text, "__", "<br>") & "</font></td>"
+            t = t & "<tr><td>" & GridView2.Rows(I).Cells(1).Text & "</td><td>" & GridView2.Rows(I).Cells(2).Text & "</td><td>" & GridView2.Rows(I).Cells(5).Text & "</td><td>" & GridView2.Rows(I).Cells(6).Text & "</td><td>" & GridView2.Rows(I).Cells(8).Text & "</td><td>" & Trim(GridView2.Rows(I).Cells(9).Text) & "</td><td>" & Trim(GridView2.Rows(I).Cells(10).Text) & "</td><td>" & GridView2.Rows(I).Cells(11).Text & "</td><td>" & GridView2.Rows(I).Cells(12).Text & "</td><td>" & GridView2.Rows(I).Cells(13).Text & "</td><td>" & GridView2.Rows(I).Cells(14).Text & "</td><td>" & Replace(GridView2.Rows(I).Cells(16).Text, "__", "<br>") & "</td><td style='background-color: Khaki;'>" & Replace(GridView2.Rows(I).Cells(17).Text, "__", "<br>") & "</td>"
         Next
 
         t = t & "</Table></body></html>"
