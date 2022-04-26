@@ -877,13 +877,16 @@ Public Class DBAccess
         StrSQL = StrSQL & "  , INVOICE_NO "
         StrSQL = StrSQL & "  , CUT_DATE "
         StrSQL = StrSQL & "  , ETD  )AAA "
-        If strDate <> "" Then
-            StrSQL = StrSQL & "WHERE    FINAL_VAN = @VAN_DATE  "
-        End If
-        If strPlace <> "" Then
-            StrSQL = StrSQL & "And Forwarder  = @PLACE "
-        End If
-        StrSQL = StrSQL & "ORDER BY "
+        StrSQL = StrSQL & " WHERE    FINAL_VAN LIKE @VAN_DATE  "
+        StrSQL = StrSQL & " And Forwarder LIKE @PLACE "
+
+        'If strDate <> "" Then
+        '    StrSQL = StrSQL & " WHERE    FINAL_VAN = @VAN_DATE  "
+        'End If
+        'If strPlace <> "" Then
+        '    StrSQL = StrSQL & " And Forwarder  = @PLACE "
+        'End If
+        StrSQL = StrSQL & " ORDER BY "
         StrSQL = StrSQL & "  FINAL_VAN "
         StrSQL = StrSQL & "  , Forwarder DESC "
         StrSQL = StrSQL & "  , CUT_DATE "
@@ -892,8 +895,8 @@ Public Class DBAccess
         cmd.CommandText = StrSQL
         cmd.Parameters.Clear()
         'パラメータ値を設定
-        cmd.Parameters.Add("@VAN_DATE", System.Data.SqlDbType.NVarChar, 50).Value = strDate
-        cmd.Parameters.Add("@PLACE", System.Data.SqlDbType.NVarChar, 50).Value = strPlace
+        cmd.Parameters.Add("@VAN_DATE", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strDate & "%"
+        cmd.Parameters.Add("@PLACE", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strPlace & "%"
 
         Da = Factroy.CreateDataAdapter()
         Da.SelectCommand = cmd
