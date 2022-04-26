@@ -29,6 +29,12 @@ Partial Class cs_home
         Dim wday2 As String
         Dim dt1 As DateTime = DateTime.Now
         Dim upflg As Long = 0
+        Dim strwd As String
+        Dim strwd2 As Date
+        Dim myMon01 As Date
+        Dim myMon02 As Date
+
+        Dim lhlflg As String = ""
 
         '搬入日作成
 
@@ -46,6 +52,58 @@ Partial Class cs_home
         'ヘッダー以外に処理
         If e.Row.RowType = DataControlRowType.DataRow Then
 
+            strSQL = ""
+            strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY_NO FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY = '" & Format(Now(), "yyyy/MM/dd") & "' "
+
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+            While (dataread.Read())
+                strwd = Trim(dataread("WORKDAY_NO"))
+            End While
+
+
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+
+
+            strSQL = ""
+            strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(strwd) + 5 & "' "
+
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+            While (dataread.Read())
+                strwd2 = Trim(dataread("WORKDAY"))
+            End While
+
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+
+            Dim ts2 As New TimeSpan(9, 0, 0, 0)
+            Dim ts4 As New TimeSpan(6, 0, 0, 0)
+            Dim ts3 As New TimeSpan(Weekday(dt1), 0, 0, 0)
+            Dim dt4 As DateTime = dt1 + ts2
+
+
+            myMon02 = dt4 - ts3 + ts4
+
+            If strwd2 >= myMon02 Then
+                lhlflg = "1"
+            Else
+                lhlflg = "2"
+            End If
+
             '対象の日付以下の日付の最大値を取得
             strSQL = "SELECT MAX(WORKDAY) AS WDAY01 FROM [T_EXL_CSWORKDAY] WHERE [T_EXL_CSWORKDAY].WORKDAY < '" & e.Row.Cells(6).Text & "' "
 
@@ -59,10 +117,20 @@ Partial Class cs_home
                 wday2 = dataread("WDAY01")
             End While
 
+            '稼働日で7日先を取得
             If Weekday(dt1) > 6 Then
-                cno = 7 - Weekday(dt1) + 6
+                If lhlflg = "1" Then
+                    cno = 7 - Weekday(dt1) + 6 + 7
+                ElseIf lhlflg = "2" Then
+                    cno = 7 - Weekday(dt1) + 6
+                End If
             Else
-                cno = 6 - Weekday(dt1) + 7
+                If lhlflg = "1" Then
+                    cno = 6 - Weekday(dt1) + 7 + 7
+                ElseIf lhlflg = "2" Then
+                    cno = 6 - Weekday(dt1) + 7
+                End If
+
             End If
 
             If e.Row.RowType = DataControlRowType.DataRow Then
@@ -71,16 +139,19 @@ Partial Class cs_home
 
                 Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
                 Dim ts1 As New TimeSpan(cno, 0, 0, 0)
-                Dim dt2 As DateTime = dt1 + ts1
+                Dim dt2 As DateTime = dt1 + ts1 '金曜（最大値）
+
 
                 If dt3 < dt2 Then
-                    e.Row.BackColor = Drawing.Color.Salmon
-                    If (e.Row.Cells(11).Text.Length = 6) And dt3 < dt2 Then
-                        e.Row.Cells(11).Text = "AC要"
-                        e.Row.Cells(11).BackColor = Drawing.Color.Red
-                        e.Row.Cells(11).ForeColor = Drawing.Color.White
+                        e.Row.BackColor = Drawing.Color.Salmon
+                        If (e.Row.Cells(11).Text.Length = 6) And dt3 < dt2 Then
+                            e.Row.Cells(11).Text = "AC要"
+                            e.Row.Cells(11).BackColor = Drawing.Color.Red
+                            e.Row.Cells(11).ForeColor = Drawing.Color.White
+                        End If
                     End If
-                End If
+
+
                 e.Row.Cells(6).Text = e.Row.Cells(6).Text & " (" & dt3.ToString("ddd") & ")"
             End If
 
@@ -462,7 +533,7 @@ Partial Class cs_home
                         strSQL = strSQL & "','" & Replace(Convert.ToString(GridView1.Rows(I).Cells(4).Text), "&nbsp;", "") & "','" & bkgno01
                         strSQL = strSQL & "','" & GridView1.Rows(I).Cells(5).Text & "','" & GridView1.Rows(I).Cells(7).Text
                         strSQL = strSQL & "','" & GridView1.Rows(I).Cells(8).Text & "','" & Replace(GridView1.Rows(I).Cells(9).Text, "&nbsp;", "") & "','" & GridView1.Rows(I).Cells(10).Text
-                        strSQL = strSQL & "','','',' " & wday2 & " ','AM',' " & wday2 & "','PM','','','','','','','" & straddress & "')"
+                        strSQL = strSQL & "','','','" & Left(wday2, 10) & "','AM','" & Left(wday2, 10) & "','PM','','','','','','','" & straddress & "')"
 
                     Else
 
@@ -759,16 +830,89 @@ Partial Class cs_home
         Dim intCnt As Long
         Dim strkd As String
         Dim stram As String
+        Dim strwd As String
+        Dim strwd2 As Date
+        Dim myMon01 As Date
+        Dim myMon02 As Date
 
         Dim ercnt As Long
+        Dim lhlflg As String = ""
 
         Dim dt1 As DateTime = DateTime.Now
 
 
-        If Weekday(dt1) > 6 Then
-            cno = 7 - Weekday(dt1) + 6
+        '稼働日で7日先を取得
+        'データベース接続を開く
+        cnn.Open()
+
+
+        strSQL = ""
+        strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY_NO FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY = '" & Format(Now(), "yyyy/MM/dd") & "' "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            strwd = Trim(dataread("WORKDAY_NO"))
+        End While
+
+
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        strSQL = ""
+        strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(strwd) + 5 & "' "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            strwd2 = Trim(dataread("WORKDAY"))
+        End While
+
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        Dim ts2 As New TimeSpan(9, 0, 0, 0)
+        Dim ts4 As New TimeSpan(6, 0, 0, 0)
+        Dim ts3 As New TimeSpan(Weekday(dt1), 0, 0, 0)
+        Dim dt3 As DateTime = dt1 + ts2
+
+
+        myMon02 = dt3 - ts3 + ts4
+
+        If strwd2 >= myMon02 Then
+            lhlflg = "1"
         Else
-            cno = 6 - Weekday(dt1) + 7
+            lhlflg = "2"
+        End If
+
+
+        '稼働日で7日先を取得
+        If Weekday(dt1) > 6 Then
+            If lhlflg = "1" Then
+                cno = 7 - Weekday(dt1) + 6 + 7
+            ElseIf lhlflg = "2" Then
+                cno = 7 - Weekday(dt1) + 6
+            End If
+        Else
+            If lhlflg = "1" Then
+                cno = 6 - Weekday(dt1) + 7 + 7
+            ElseIf lhlflg = "2" Then
+                cno = 6 - Weekday(dt1) + 7
+            End If
+
         End If
 
         Dim ts1 As New TimeSpan(cno, 0, 0, 0)
@@ -783,8 +927,7 @@ Partial Class cs_home
         Dim strupddate00 As Date
         Dim strupddate01 As Date
 
-        'データベース接続を開く
-        cnn.Open()
+
 
         strSQL = ""
         strSQL = strSQL & "SELECT T_EXL_DATA_UPD.DATA_UPD FROM T_EXL_DATA_UPD "
@@ -839,140 +982,14 @@ Partial Class cs_home
 
         End If
 
-        cnn.Close()
-        cnn.Dispose()
-
-    End Sub
+        If lhlflg = "1" Then
 
 
-    Private Sub GridView2_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView2.RowDataBound
-
-        '最終更新年月日取得
-        Dim dataread As SqlDataReader
-        Dim dbcmd As SqlCommand
-        Dim strSQL As String
-        Dim strinv As String
-        Dim cno As Long
-        Dim wno As Long
-        Dim wday As String
-        Dim wday2 As String
-
-        Dim dt1 As DateTime = DateTime.Now
-
-        If e.Row.RowType = DataControlRowType.DataRow Then
-
-            Dim str1 As String = Left(e.Row.Cells(2).Text, 4)
-            Select Case str1
-                Case "C258"
-                    cno = 8
-                Case "C255"
-                    cno = 10
-                Case Else
-                    cno = 7
-            End Select
-
-            Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(7).Text)
-            Dim ts1 As New TimeSpan(cno, 0, 0, 0)
-            Dim dt2 As DateTime = dt3 - ts1
-
-            e.Row.Cells(6).Text = dt2
 
         End If
 
-
-
-        '搬入日作成
-
-        '接続文字列の作成
-        Dim ConnectionString As String = String.Empty
-        'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
-        'SqlConnectionクラスの新しいインスタンスを初期化
-        Dim cnn = New SqlConnection(ConnectionString)
-
-        'データベース接続を開く
-        cnn.Open()
-
-        'ヘッダー以外に処理
-        If e.Row.RowType = DataControlRowType.DataRow Then
-
-            '対象の日付以下の日付の最大値を取得
-
-            strSQL = "SELECT MAX(WORKDAY) AS WDAY01 FROM [T_EXL_CSWORKDAY] WHERE [T_EXL_CSWORKDAY].WORKDAY < '" & e.Row.Cells(6).Text & "' "
-
-            'ＳＱＬコマンド作成 
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行 
-            dataread = dbcmd.ExecuteReader()
-
-            '結果を取り出す 
-            While (dataread.Read())
-                wday2 = dataread("WDAY01")
-            End While
-
-            If Weekday(dt1) > 6 Then
-                cno = 7 - Weekday(dt1) + 6
-            Else
-                cno = 6 - Weekday(dt1) + 7
-            End If
-
-            If e.Row.RowType = DataControlRowType.DataRow Then
-
-                e.Row.Cells(5).Text = wday2
-
-                Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
-                Dim ts1 As New TimeSpan(cno, 0, 0, 0)
-                Dim dt2 As DateTime = dt1 + ts1
-
-                If dt3 < dt2 Then
-
-                    e.Row.BackColor = Drawing.Color.Salmon
-
-                    If (e.Row.Cells(10).Text.Length = 6) And dt3 < dt2 Then
-                        e.Row.Cells(10).Text = "AC要"
-                        e.Row.Cells(10).BackColor = Drawing.Color.Red
-                        e.Row.Cells(10).ForeColor = Drawing.Color.White
-                    End If
-                End If
-                e.Row.Cells(5).Text = e.Row.Cells(5).Text & " (" & dt3.ToString("ddd") & ")"
-            End If
-
-            'クローズ処理 
-            dataread.Close()
-            dbcmd.Dispose()
-
-        End If
-
-        'strSQL = "SELECT LCLARGD_INVNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].LCLARGD_INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
-        strSQL = "SELECT INVNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].INVNO = '" & Left(e.Row.Cells(3).Text, 4) & "' "
-        strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '004' "
-
-        'ＳＱＬコマンド作成 
-        dbcmd = New SqlCommand(strSQL, cnn)
-        'ＳＱＬ文実行 
-        dataread = dbcmd.ExecuteReader()
-
-        strinv = ""
-        '結果を取り出す 
-        While (dataread.Read())
-            strinv += dataread("INVNO")
-            '書類作成状況
-            If Left(e.Row.Cells(3).Text, 4) = strinv Then
-                If e.Row.Cells(10).Text = "AC要" Then
-                    e.Row.Cells(10).Text = " Booking依頼済み"
-                End If
-            End If
-        End While
-
-        'クローズ処理 
-        dataread.Close()
-        dbcmd.Dispose()
-
         cnn.Close()
         cnn.Dispose()
-
-        e.Row.Cells(4).Visible = False
-        e.Row.Cells(8).Visible = False
 
     End Sub
 
