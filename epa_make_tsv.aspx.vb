@@ -958,7 +958,7 @@ Partial Class cs_home
         strSQL = strSQL & "        WHERE "
         strSQL = strSQL & "          b.OLD_INVNO = '" & strIVNO & "' "
         strSQL = strSQL & "          AND a.QTY > 0 "
-        strSQL = strSQL & "      )  "
+        strSQL = strSQL & "      ) "
         strSQL = strSQL & "	  AND NOT EXISTS ( "
         strSQL = strSQL & "	  SELECT "
         strSQL = strSQL & "        RTRIM(IVB.CUSTMPN) As CUSTMPN "
