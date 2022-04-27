@@ -238,8 +238,13 @@
     <script type="text/javascript">
       function LinkClick() {
           var url = 'm_lcl_dec_mail.aspx?q='
-          confirm('別ウインドウでメールアドレス管理ページを開きます');
-        window.open(url, null);
+          var result = confirm('別ウインドウでメールアドレス管理ページを開きます');
+
+          if (result) {
+              window.open(url, null);
+          }
+          else {
+          }
       }
 
     </script>
