@@ -333,10 +333,10 @@ Public Class DBAccess
         StrSQL = StrSQL & "  , T_INV_HD_TB.SALESFLG  "
         StrSQL = StrSQL & "HAVING "
         StrSQL = StrSQL & "    T_INV_HD_TB.CUSTCODE <> '111' And T_INV_HD_TB.CUSTCODE <> 'A121' "
-        StrSQL = StrSQL & "    AND T_INV_HD_TB.REGPERSON IN (" & strCode & ") "
+        StrSQL = StrSQL & "    AND (T_INV_HD_TB.REGPERSON IN (" & strCode & ") OR T_INV_HD_TB.ALLOUTSTAMP IS NOT NULL) "
         StrSQL = StrSQL & "    AND T_INV_HD_TB.SALESFLG Is Null "
         If strDate1 <> "" And strDate2 <> "" Then
-            StrSQL = StrSQL & "    AND T_INV_HD_TB.BLDATE >= '" & strDate1 & "' And T_INV_HD_TB.BLDATE <= '" & strDate2 & "' "
+            StrSQL = StrSQL & "    AND T_INV_HD_TB.BLDATE BETWEEN '" & strDate1 & "' And '" & strDate2 & "' "
         End If
         If strShukka <> "" Then
             StrSQL = StrSQL & "    AND T_INV_HD_TB.SHIPCD = '" & strShukka & "' "
