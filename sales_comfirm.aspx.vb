@@ -192,4 +192,20 @@ Partial Class cs_home
 
         Call GET_DATA()
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        '前月ボタン押下
+
+        'テキストボックスに月初と月末をセット
+        Dim dtToday As DateTime = DateTime.Today
+
+        Dim dtFDM = New DateTime(dtToday.Year, dtToday.Month, 1).AddMonths(-1)
+        Dim dtLDM = New DateTime(dtToday.Year, dtToday.Month, 1).AddDays(-1)
+
+        TextBox1.Text = dtFDM
+        TextBox2.Text = dtLDM
+
+        Call GET_DATA()
+
+    End Sub
 End Class
