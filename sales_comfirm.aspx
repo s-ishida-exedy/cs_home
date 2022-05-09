@@ -103,6 +103,10 @@
             color:red;
             font-weight :700;
         }
+        .date2{
+            text-align :center;
+            font-size:small ;
+        }
 </style>
 <script>
     // カレンダー
@@ -159,9 +163,10 @@
                     <asp:ListItem Value="U">上野</asp:ListItem>
                 </asp:DropDownList>
                 <asp:DropDownList ID="DropDownList2" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="SHIPCD" DataValueField="SHIPCD" AutoPostBack ="true" Width ="150px"></asp:DropDownList> 
-                <asp:TextBox ID="TextBox1" runat="server" Width="160px" Height="18px" class="date2" Font-Size="small"></asp:TextBox>
+                <asp:TextBox ID="TextBox1" runat="server" Width="120px" Height="18px" class="date2"></asp:TextBox>
                 <asp:Label ID="Label1" runat="server" Text="～"></asp:Label>
-                <asp:TextBox ID="TextBox2" runat="server" Width="160px" Height="18px" class="date2" Font-Size="small"></asp:TextBox>
+                <asp:TextBox ID="TextBox2" runat="server" Width="120px" Height="18px" class="date2"></asp:TextBox>
+                <asp:Button ID="Button2" runat="server" Text="前月" Font-Size="Small" Width ="60px" />&nbsp;
                 <br />
                 <asp:CheckBox ID="CheckBox1" runat="server" text="一括出力済みのみ表示する" Font-Size="Small" AutoPostBack ="true" />
                 &nbsp;&nbsp;
