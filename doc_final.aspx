@@ -209,8 +209,8 @@ WHERE
   AND VAN_DATE &gt;= CONVERT(NVARCHAR,  GETDATE(), 111)
   AND INVOICE_NO NOT LIKE '%ヒョウコウ%'
 GROUP BY 
-  Forwarder, Forwarder, CUST_CD , INVOICE_NO  , CUT_DATE  , ETD
-ORDER BY FINAL_VAN, CUT_DATE  , ETD"></asp:SqlDataSource>
+  Forwarder, CUST_CD , INVOICE_NO  , CUT_DATE  , ETD
+ORDER BY FINAL_VAN, Forwarder DESC, CUT_DATE"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="
 SELECT DISTINCT
 CASE LEFT(Forwarder,2) 
