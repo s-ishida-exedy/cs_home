@@ -54,6 +54,9 @@ Partial Class cs_home
 
             e.Row.Cells(8).Text = Mid(e.Row.Cells(8).Text, intval + 1, Len(e.Row.Cells(8).Text) - intval)
 
+            e.Row.Cells(9).BackColor = Drawing.Color.Khaki
+            e.Row.Cells(10).BackColor = Drawing.Color.Khaki
+            e.Row.Cells(17).BackColor = Drawing.Color.Khaki
         End If
 
         e.Row.Cells(0).Width = 10
@@ -67,8 +70,8 @@ Partial Class cs_home
         e.Row.Cells(6).Width = 70
         e.Row.Cells(7).Width = 70
         e.Row.Cells(8).Width = 30
-        e.Row.Cells(9).Width = 30
-        e.Row.Cells(10).Width = 30
+        e.Row.Cells(9).Width = 50
+        e.Row.Cells(10).Width = 50
         e.Row.Cells(11).Width = 70
         e.Row.Cells(12).Width = 10
         e.Row.Cells(13).Width = 70
