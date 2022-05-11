@@ -285,10 +285,10 @@
         <HeaderStyle Width="120px" />
         </asp:BoundField>
         <asp:BoundField DataField="CUST" HeaderText="客先" SortExpression="CUST" >
-        <HeaderStyle Width="80px" />
+        <HeaderStyle Width="40px" />
         </asp:BoundField>
         <asp:BoundField DataField="INVOICE_NO" HeaderText="IN_NO" SortExpression="INVOICE_NO" >
-        <HeaderStyle Width="100px" />
+        <HeaderStyle Width="40px" />
         </asp:BoundField>
         <asp:BoundField DataField="BOOKING_NO" HeaderText="BKG" SortExpression="BOOKING_NO" >
         <HeaderStyle Width="100px" />

@@ -112,52 +112,33 @@ Partial Class cs_home
         striv = Session("striv")
         Dim l As Long = 1
 
+        Dim strfrom As String = ""
+        Dim strto As String = ""
+        Dim strcc As String = ""
+
         'Dim strFilePath() As String
 
         'メールの送信に必要な情報
         Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
         Dim smtpPort As Integer = 25
 
-        '添付ファイルをサーバーにアップロード
-        'Dim posted As HttpFileCollection = Request.Files
 
-        'For i As Integer = 0 To posted.Count - 1
-        '    Dim hpf As HttpPostedFile = posted(i)
-
-        '    If hpf.ContentLength > 0 Then
-
-        '        hpf.SaveAs("C:\Users\T43529\Source\Repos\s-ishida-exedy\cs_home\upload\" & System.IO.Path.GetFileName(hpf.FileName))
-        '        Session("strFile" & l) = System.IO.Path.GetFileName(hpf.FileName)
-        '        l = l + 1
-        '    End If
-
-        '    Next
-
-
-
-
-        'For i As Integer = 1 To l
-
-        '    strFilePath(i) = "C:\exp\cs_home\upload\" & Session("strFile" & i)
-        'Next
         ' メールの内容
 
-        Dim strfrom As String = GET_from(struid)
-        Dim strto As String = GET_from(struid)
-        Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
+
 
 
         If flg = 1 Then 'C258
 
-            Dim strfrom2 As String = GET_from(struid)
+            strfrom = GET_from(struid)
 
             If flg02 = 1 Then
-                Dim strto2 As String = GET_ToAddress(8, 1)
-                Dim strcc2 As String = GET_ToAddress(8, 0) + "," + GET_from(struid)
+                strto = GET_ToAddress(8, 1)
+                strcc = GET_ToAddress(8, 0) + "," + GET_from(struid)
 
             Else
-                Dim strto2 As String = GET_ToAddress(6, 1)
-                Dim strcc2 As String = GET_ToAddress(6, 0) + "," + GET_from(struid)
+                strto = GET_ToAddress(6, 1)
+                strcc = GET_ToAddress(6, 0) + "," + GET_from(struid)
             End If
 
             Dim strsyomei As String = GET_syomei(struid)
@@ -178,9 +159,9 @@ Partial Class cs_home
 
         ElseIf flg = 2 Then 'C6G0
 
-            Dim strfrom2 As String = GET_from(struid)
-            Dim strto2 As String = GET_ToAddress(7, 1)
-            Dim strcc2 As String = GET_ToAddress(7, 0) + "," + GET_from(struid)
+            strfrom = GET_from(struid)
+            strto = GET_ToAddress(7, 1)
+            strcc = GET_ToAddress(7, 0) + "," + GET_from(struid)
 
             Dim strsyomei As String = GET_syomei(struid)
 
@@ -234,32 +215,6 @@ Partial Class cs_home
 
         message.Body = multipart
 
-
-        'If flg = 1 Then 'C258
-        '    If flg02 = 1 Then
-
-
-        '        '添付ファイル
-        '        If Session("strFile1") <> "" Then
-
-
-        '            For i As Integer = 1 To l
-        '                Dim path = strFilePath(i)     '添付したいファイル
-        '                Dim attachment = New MimeKit.MimePart("application", "pdf") _
-        '                With {
-        '                    .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
-        '                    .ContentDisposition = New MimeKit.ContentDisposition(),
-        '                    .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
-        '                    .FileName = System.IO.Path.GetFileName(path)
-        '                }
-        '                multipart.Add(attachment)
-        '            Next
-
-        '        End If
-
-
-        '    End If
-        'End If
 
 
         Using client As New MailKit.Net.Smtp.SmtpClient()

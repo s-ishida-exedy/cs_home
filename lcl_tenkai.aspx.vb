@@ -51,10 +51,10 @@ Partial Class cs_home
         e.Row.Cells(0).Width = 10
         'e.Row.Cells(1).Width = 40
         'e.Row.Cells(2).Width = 100
-        e.Row.Cells(1).Width = 70
-        e.Row.Cells(2).Width = 70
-        e.Row.Cells(3).Width = 110
-        e.Row.Cells(4).Width = 140
+        e.Row.Cells(1).Width = 40
+        e.Row.Cells(2).Width = 40
+        e.Row.Cells(3).Width = 100
+        e.Row.Cells(4).Width = 100
         e.Row.Cells(5).Width = 70
         e.Row.Cells(6).Width = 70
         e.Row.Cells(7).Width = 70
@@ -66,7 +66,7 @@ Partial Class cs_home
         e.Row.Cells(13).Width = 70
         e.Row.Cells(14).Width = 10
         e.Row.Cells(15).Width = 110
-        e.Row.Cells(16).Width = 400
+        e.Row.Cells(16).Width = 350
         e.Row.Cells(17).Width = 300
 
         e.Row.Cells(3).Visible = False
