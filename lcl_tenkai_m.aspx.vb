@@ -554,7 +554,22 @@ Partial Class cs_home
 
 
         ' 宛先情報  
-        message.To.Add(MailboxAddress.Parse(strto))
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
+
+
+        If strcc <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
 
         ' 表題  
         message.Subject = subject

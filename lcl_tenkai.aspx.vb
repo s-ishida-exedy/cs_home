@@ -57,6 +57,15 @@ Partial Class cs_home
             e.Row.Cells(9).BackColor = Drawing.Color.Khaki
             e.Row.Cells(10).BackColor = Drawing.Color.Khaki
             e.Row.Cells(17).BackColor = Drawing.Color.Khaki
+
+            If e.Row.Cells(15).Text = "" Or e.Row.Cells(15).Text = "&nbsp;" Then
+            Else
+                e.Row.Cells(15).BackColor = Drawing.Color.Red
+                e.Row.Cells(15).ForeColor = Drawing.Color.White
+                e.Row.Cells(15).Font.Bold = True
+            End If
+
+
         End If
 
         e.Row.Cells(0).Width = 10
