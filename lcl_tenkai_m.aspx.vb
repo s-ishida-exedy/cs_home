@@ -79,6 +79,7 @@ Partial Class cs_home
                 strSQL = strSQL & "WHERE CUST = '" & GridView1.Rows(I).Cells(3).Text & "'"
                 strSQL = strSQL & "AND ETD = '" & GridView1.Rows(I).Cells(8).Text & "'"
                 strSQL = strSQL & "AND LCL_SIZE = '" & GridView1.Rows(I).Cells(10).Text & "'"
+                strSQL = strSQL & "AND FLG01 <> '1' "
 
                 Command.CommandText = strSQL
                 ' SQLの実行
@@ -91,6 +92,7 @@ Partial Class cs_home
                 strSQL = ""
                 strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_LCLCUSTPREADS WHERE "
                 strSQL = strSQL & "T_EXL_LCLCUSTPREADS.CUSTCODE = '" & GridView1.Rows(I).Cells(3).Text & "' "
+
 
                 'ＳＱＬコマンド作成 
                 dbcmd = New SqlCommand(strSQL, cnn)
@@ -154,6 +156,7 @@ Partial Class cs_home
                 strSQL = strSQL & "WHERE CUST = '" & GridView1.Rows(I).Cells(3).Text & "'"
                 strSQL = strSQL & "AND ETD = '" & GridView1.Rows(I).Cells(8).Text & "'"
                 strSQL = strSQL & "AND LCL_SIZE = '" & GridView1.Rows(I).Cells(10).Text & "'"
+                strSQL = strSQL & "AND FLG01 <> '1' "
 
                 Command.CommandText = strSQL
                 ' SQLの実行

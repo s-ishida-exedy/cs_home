@@ -147,6 +147,7 @@ Partial Class cs_home
         strSQL = strSQL & "WHERE CUST = '" & strcust & "' "
         strSQL = strSQL & "AND INVOICE_NO = '" & strinv & "' "
         strSQL = strSQL & "AND BOOKING_NO = '" & strbkg & "' "
+        strSQL = strSQL & "AND FLG01 <> '1' "
 
         Command.CommandText = strSQL
         ' SQLの実行
