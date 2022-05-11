@@ -119,12 +119,14 @@ Partial Class cs_home
 
         ' メールの内容
         Dim struid As String = Session("UsrId")
-        Dim strfrom2 As String = GET_from(struid)
-        Dim strto2 As String = GET_ToAddress(1, 1)
-
         Dim strfrom As String = GET_from(struid)
-        Dim strto As String = GET_from(struid)
-        Dim strcc As String = GET_from(struid) + "," + GET_from(struid) + "," + "r-fukao@exedy.com"
+
+
+        Dim strto As String = GET_ToAddress(1, 1) '宛先
+        strto = Left(strto, Len(strto) - 1)
+
+        Dim strcc As String = GET_ToAddress(1, 0) + GET_from(struid)  'CC 
+
 
         'メールの件名
         Dim subject As String = "<通知>LCL案件展開　荷量追加 " & kbn '"【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
@@ -158,7 +160,15 @@ Partial Class cs_home
         message.From.Add(MailboxAddress.Parse(strfrom))
 
         ' 宛先情報  
-        message.To.Add(MailboxAddress.Parse(strto))
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
+
+
         If strcc <> "" Then
             'カンマ区切りをSPLIT
             Dim strVal() As String = strcc.Split(",")
@@ -201,12 +211,14 @@ Partial Class cs_home
 
         ' メールの内容
         Dim struid As String = Session("UsrId")
-        Dim strfrom2 As String = GET_from(struid)
-        Dim strto2 As String = GET_ToAddress(1, 1)
-
         Dim strfrom As String = GET_from(struid)
-        Dim strto As String = GET_from(struid)
-        Dim strcc As String = GET_from(struid) + "," + GET_from(struid) + "," + "r-fukao@exedy.com"
+
+
+        Dim strto As String = GET_ToAddress(1, 1) '宛先
+        strto = Left(strto, Len(strto) - 1)
+
+        Dim strcc As String = GET_ToAddress(1, 0) + GET_from(struid)  'CC 
+
 
         'メールの件名
         Dim subject As String = "<通知>LCL案件展開　ドレージ手配 "
@@ -240,7 +252,15 @@ Partial Class cs_home
         message.From.Add(MailboxAddress.Parse(strfrom))
 
         ' 宛先情報  
-        message.To.Add(MailboxAddress.Parse(strto))
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
+
+
         If strcc <> "" Then
             'カンマ区切りをSPLIT
             Dim strVal() As String = strcc.Split(",")

@@ -512,17 +512,22 @@ Partial Class cs_home
 
         ' メールの内容
 
-        Dim strfrom2 As String = GET_ToAddress(1, 1)
-        Dim strto2 As String = GET_ToAddress(1, 0)
+        Dim struid As String = Session("UsrId")
+        Dim strfrom As String = GET_from(struid)
 
-        Dim strfrom As String = "r-fukao@exedy.com"
-        Dim strto As String = "r-fukao@exedy.com"
+
+        Dim strto As String = GET_ToAddress(1, 1) '宛先
+        strto = Left(strto, Len(strto) - 1)
+
+        Dim strcc As String = GET_ToAddress(1, 0) + GET_from(struid)  'CC 
+
+
 
         'メールの件名
-        Dim subject As String = "TEST<通知>LCL案件展開　変更・追加・連絡" '"【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
+        Dim subject As String = "<通知>LCL案件展開　変更・追加・連絡" '"【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
 
         'メールの本文
-        Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>LCL出荷案件の内容に変更、追加がございましたのでご連絡いたします。</p>下記URLに重量の登録をお願いいたします。</p>http://kbhwpm01/exp/cs_home/lcl_tenkai.aspx</p></body></html>" ' UriBodyC()
+        Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>LCL出荷案件を展開させていただきます。</p><p>荷量の記入・希望引き取り日時・港搬入用のトラック手配をお願いいたします。</p><p>下記URLにて重量の登録をお願いいたします。登録完了後に通知メールを送信してください。</p>http://kbhwpm01/exp/cs_home/lcl_tenkai.aspx</p><p></p></body></html>" ' UriBodyC()
 
         Dim t As String = "<html><body><Table border='1' style='Font-Size:14px;'><tr style='background-color: #6fbfd1;'><td>備考</td><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
 
@@ -619,6 +624,47 @@ Partial Class cs_home
         '結果を取り出す 
         While (dataread.Read())
             GET_ToAddress += dataread("MAIL_ADD") + ","
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
+
+    Private Function GET_from(struid As String) As String
+        'BCCメールアドレス情報を取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+
+        GET_from = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = strSQL & "SELECT e_mail FROM M_EXL_USR "
+        strSQL = strSQL & "WHERE uid = '" & struid & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strDate = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            GET_from += dataread("e_mail")
         End While
 
         'クローズ処理 
