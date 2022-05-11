@@ -35,6 +35,8 @@ Partial Class cs_home
         Dim wno As Long
         Dim wday As String
         Dim wday2 As String
+        Dim intval As Integer
+        Dim intCnt As Integer
 
         Dim dt1 As DateTime = DateTime.Now.ToShortDateString
 
@@ -42,25 +44,31 @@ Partial Class cs_home
 
             e.Row.Cells(16).Text = Replace(e.Row.Cells(16).Text, "__", "<br>")
             e.Row.Cells(17).Text = Replace(e.Row.Cells(17).Text, "__", "<br>")
-            'If e.Row.Cells(1).Text = dt1.ToShortDateString Then
-            '    e.Row.Cells(1).BackColor = Drawing.Color.Salmon
-            '    e.Row.Cells(2).BackColor = Drawing.Color.Salmon
-            'End If
+
+            intval = 0
+            intCnt = InStr(intCnt + 1, e.Row.Cells(8).Text, "→")
+            Do While intCnt > 0
+                intval = intCnt
+                intCnt = InStr(intCnt + 1, e.Row.Cells(8).Text, "→")
+            Loop
+
+            e.Row.Cells(8).Text = Mid(e.Row.Cells(8).Text, intval + 1, Len(e.Row.Cells(8).Text) - intval)
+
         End If
 
         e.Row.Cells(0).Width = 10
         'e.Row.Cells(1).Width = 40
         'e.Row.Cells(2).Width = 100
-        e.Row.Cells(1).Width = 40
+        e.Row.Cells(1).Width = 30
         e.Row.Cells(2).Width = 40
         e.Row.Cells(3).Width = 100
         e.Row.Cells(4).Width = 100
         e.Row.Cells(5).Width = 70
         e.Row.Cells(6).Width = 70
         e.Row.Cells(7).Width = 70
-        e.Row.Cells(8).Width = 60
-        e.Row.Cells(9).Width = 50
-        e.Row.Cells(10).Width = 50
+        e.Row.Cells(8).Width = 30
+        e.Row.Cells(9).Width = 30
+        e.Row.Cells(10).Width = 30
         e.Row.Cells(11).Width = 70
         e.Row.Cells(12).Width = 10
         e.Row.Cells(13).Width = 70
