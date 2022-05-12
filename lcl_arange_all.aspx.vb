@@ -629,6 +629,7 @@ Partial Class cs_home
 
         strSQL = "SELECT INVOICE_NO FROM [T_EXL_LCLTENKAI] WHERE [T_EXL_LCLTENKAI].INVOICE_NO = '" & e.Row.Cells(3).Text & "' "
         strSQL = strSQL & "AND [T_EXL_LCLTENKAI].FLG03 = '1' "
+        strSQL = strSQL & "AND FLG01 <> '1' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)

@@ -124,7 +124,12 @@ Partial Class yuusen
                 '書類作成状況
                 If Trim(e.Row.Cells(26).Text) = Trim(strbkg) Then
                     e.Row.BackColor = Drawing.Color.DarkGray
-                    e.Row.Cells(1).Text = "通関委託"
+
+                    If e.Row.Cells(1).Text Like "*書類済*" Then
+                        e.Row.Cells(1).Text = "通関委託" & " " & "書類済"
+                    Else
+                        e.Row.Cells(1).Text = "通関委託"
+                    End If
                 End If
             End While
 

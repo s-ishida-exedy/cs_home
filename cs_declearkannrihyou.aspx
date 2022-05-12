@@ -292,7 +292,7 @@
 
     <tbody>
 
-    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" Width = "1250px" DataSourceID="SqlDataSource2" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" Width = "1550px" DataSourceID="SqlDataSource2" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
 
     <HeaderStyle BackColor="#ffffe0" Font-Bold="True" ForeColor="White" />
     <AlternatingRowStyle BackColor="#ffffe0" />

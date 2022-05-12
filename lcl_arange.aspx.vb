@@ -243,6 +243,7 @@ Partial Class cs_home
         If upflg = 1 Then
 
             strSQL = "SELECT BOOKING_NO FROM [T_EXL_LCLTENKAI] WHERE [T_EXL_LCLTENKAI].INVOICE_NO like '%" & Left(e.Row.Cells(4).Text, 4) & "%' "
+            strSQL = strSQL & "AND FLG01 <> '1' "
 
 
             'ＳＱＬコマンド作成 
@@ -261,6 +262,7 @@ Partial Class cs_home
                     strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET "
                     strSQL = strSQL & "BOOKING_NO = '" & Trim(e.Row.Cells(11).Text) & "' "
                     strSQL = strSQL & "WHERE INVOICE_NO like '%" & Left(e.Row.Cells(4).Text, 4) & "%' "
+                    strSQL = strSQL & "AND FLG01 <> '1' "
 
                     Command.CommandText = strSQL
                     ' SQLの実行
@@ -373,7 +375,7 @@ Partial Class cs_home
                 strSQL = ""
                 strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_LCLTENKAI WHERE "
                 strSQL = strSQL & "T_EXL_LCLTENKAI.BOOKING_NO = '" & bkgno01 & "' "
-
+                strSQL = strSQL & "AND FLG01 <> '1' "
 
                 'ＳＱＬコマンド作成 
                 dbcmd = New SqlCommand(strSQL, cnn)
@@ -391,7 +393,7 @@ Partial Class cs_home
                 strSQL = ""
                 strSQL = strSQL & "SELECT ADDRESS FROM T_EXL_LCLCUSTPREADS WHERE "
                 strSQL = strSQL & "T_EXL_LCLCUSTPREADS.CUSTCODE = '" & Left(Convert.ToString(GridView1.Rows(I).Cells(3).Text), 4) & "' "
-
+                strSQL = strSQL & "AND FLG01 <> '1' "
 
                 'ＳＱＬコマンド作成 
                 dbcmd = New SqlCommand(strSQL, cnn)
@@ -437,7 +439,7 @@ Partial Class cs_home
                     strSQL = ""
                     strSQL = strSQL & "SELECT * FROM T_EXL_LCLTENKAI WHERE "
                     strSQL = strSQL & "T_EXL_LCLTENKAI.BOOKING_NO = '" & bkgno01 & "' "
-
+                    strSQL = strSQL & "AND FLG01 <> '1' "
 
                     'ＳＱＬコマンド作成 
                     dbcmd = New SqlCommand(strSQL, cnn)
@@ -490,6 +492,7 @@ Partial Class cs_home
                     strSQL = strSQL & "FLG05 = '" & FLG05 & "', "
                     strSQL = strSQL & "PICKINPLACE = '" & straddress & "' "
                     strSQL = strSQL & "WHERE BOOKING_NO ='" & bkgno01 & "' "
+                    strSQL = strSQL & "AND FLG01 <> '1' "
 
                 Else
 
@@ -563,6 +566,7 @@ Partial Class cs_home
                         strSQL = strSQL & "FLG05 = '" & FLG05 & "', "
                         strSQL = strSQL & "PICKINPLACE = '" & straddress & "' "
                         strSQL = strSQL & "WHERE BOOKING_NO like '%" & Left(Convert.ToString(GridView1.Rows(I).Cells(3).Text), 4) & Replace(Convert.ToString(GridView1.Rows(I).Cells(8).Text), "/", "") & "%' "
+                        strSQL = strSQL & "AND FLG01 <> '1' "
                     End If
                 End If
 

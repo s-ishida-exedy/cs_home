@@ -35,6 +35,8 @@ Partial Class cs_home
         Dim wno As Long
         Dim wday As String
         Dim wday2 As String
+        Dim intval As Integer
+        Dim intCnt As Integer
 
         Dim dt1 As DateTime = DateTime.Now.ToShortDateString
 
@@ -42,23 +44,41 @@ Partial Class cs_home
 
             e.Row.Cells(16).Text = Replace(e.Row.Cells(16).Text, "__", "<br>")
             e.Row.Cells(17).Text = Replace(e.Row.Cells(17).Text, "__", "<br>")
-            'If e.Row.Cells(1).Text = dt1.ToShortDateString Then
-            '    e.Row.Cells(1).BackColor = Drawing.Color.Salmon
-            '    e.Row.Cells(2).BackColor = Drawing.Color.Salmon
-            'End If
+
+            intval = 0
+            intCnt = InStr(intCnt + 1, e.Row.Cells(8).Text, "→")
+            Do While intCnt > 0
+                intval = intCnt
+                intCnt = InStr(intCnt + 1, e.Row.Cells(8).Text, "→")
+            Loop
+
+            e.Row.Cells(8).Text = Mid(e.Row.Cells(8).Text, intval + 1, Len(e.Row.Cells(8).Text) - intval)
+
+            e.Row.Cells(9).BackColor = Drawing.Color.Khaki
+            e.Row.Cells(10).BackColor = Drawing.Color.Khaki
+            e.Row.Cells(17).BackColor = Drawing.Color.Khaki
+
+            If e.Row.Cells(15).Text = "" Or e.Row.Cells(15).Text = "&nbsp;" Then
+            Else
+                e.Row.Cells(15).BackColor = Drawing.Color.Red
+                e.Row.Cells(15).ForeColor = Drawing.Color.White
+                e.Row.Cells(15).Font.Bold = True
+            End If
+
+
         End If
 
         e.Row.Cells(0).Width = 10
         'e.Row.Cells(1).Width = 40
         'e.Row.Cells(2).Width = 100
-        e.Row.Cells(1).Width = 70
-        e.Row.Cells(2).Width = 70
-        e.Row.Cells(3).Width = 110
-        e.Row.Cells(4).Width = 140
+        e.Row.Cells(1).Width = 30
+        e.Row.Cells(2).Width = 40
+        e.Row.Cells(3).Width = 100
+        e.Row.Cells(4).Width = 100
         e.Row.Cells(5).Width = 70
         e.Row.Cells(6).Width = 70
         e.Row.Cells(7).Width = 70
-        e.Row.Cells(8).Width = 60
+        e.Row.Cells(8).Width = 30
         e.Row.Cells(9).Width = 50
         e.Row.Cells(10).Width = 50
         e.Row.Cells(11).Width = 70
@@ -66,7 +86,7 @@ Partial Class cs_home
         e.Row.Cells(13).Width = 70
         e.Row.Cells(14).Width = 10
         e.Row.Cells(15).Width = 110
-        e.Row.Cells(16).Width = 300
+        e.Row.Cells(16).Width = 350
         e.Row.Cells(17).Width = 300
 
         e.Row.Cells(3).Visible = False
@@ -108,12 +128,14 @@ Partial Class cs_home
 
         ' メールの内容
         Dim struid As String = Session("UsrId")
-        Dim strfrom2 As String = GET_from(struid)
-        Dim strto2 As String = GET_ToAddress(1, 1)
-
         Dim strfrom As String = GET_from(struid)
-        Dim strto As String = GET_from(struid)
-        Dim strcc As String = GET_from(struid) + "," + GET_from(struid) + "," + "r-fukao@exedy.com"
+
+
+        Dim strto As String = GET_ToAddress(1, 1) '宛先
+        strto = Left(strto, Len(strto) - 1)
+
+        Dim strcc As String = GET_ToAddress(1, 0) + GET_from(struid)  'CC 
+
 
         'メールの件名
         Dim subject As String = "<通知>LCL案件展開　荷量追加 " & kbn '"【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
@@ -147,7 +169,15 @@ Partial Class cs_home
         message.From.Add(MailboxAddress.Parse(strfrom))
 
         ' 宛先情報  
-        message.To.Add(MailboxAddress.Parse(strto))
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
+
+
         If strcc <> "" Then
             'カンマ区切りをSPLIT
             Dim strVal() As String = strcc.Split(",")
@@ -190,12 +220,14 @@ Partial Class cs_home
 
         ' メールの内容
         Dim struid As String = Session("UsrId")
-        Dim strfrom2 As String = GET_from(struid)
-        Dim strto2 As String = GET_ToAddress(1, 1)
-
         Dim strfrom As String = GET_from(struid)
-        Dim strto As String = GET_from(struid)
-        Dim strcc As String = GET_from(struid) + "," + GET_from(struid) + "," + "r-fukao@exedy.com"
+
+
+        Dim strto As String = GET_ToAddress(1, 1) '宛先
+        strto = Left(strto, Len(strto) - 1)
+
+        Dim strcc As String = GET_ToAddress(1, 0) + GET_from(struid)  'CC 
+
 
         'メールの件名
         Dim subject As String = "<通知>LCL案件展開　ドレージ手配 "
@@ -229,7 +261,15 @@ Partial Class cs_home
         message.From.Add(MailboxAddress.Parse(strfrom))
 
         ' 宛先情報  
-        message.To.Add(MailboxAddress.Parse(strto))
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
+
+
         If strcc <> "" Then
             'カンマ区切りをSPLIT
             Dim strVal() As String = strcc.Split(",")

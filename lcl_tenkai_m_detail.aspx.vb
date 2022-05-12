@@ -135,6 +135,7 @@ Partial Class cs_home
             strSQL = strSQL & ",OTHERS01 = '" & lstrbokou & "' "
             strSQL = strSQL & ",PICKINPLACE = '" & lstrpp & "' "
             strSQL = strSQL & "WHERE BOOKING_NO = '" & lstrbkg & "' "
+            strSQL = strSQL & "AND FLG01 <> '1' "
 
             Command.CommandText = strSQL
             ' SQLの実行
