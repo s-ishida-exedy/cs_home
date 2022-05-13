@@ -488,7 +488,8 @@ Partial Class cs_home
         strSQL = strSQL & "  , IVH.INVTO "
         strSQL = strSQL & "  , IVH.SHIPPEDPER  "
         strSQL = strSQL & "  , IVH.CUSTCODE  "
-        strSQL = strSQL & "  , IVH.INVPRTDATE　"
+        strSQL = strSQL & "  , IVH.ALLOUTSTAMP　"
+        '        strSQL = strSQL & "  , IVH.INVPRTDATE　"
         strSQL = strSQL & "  , IVH.VOYAGENO　"
         strSQL = strSQL & "FROM "
         strSQL = strSQL & "  V_T_INV_HD_TB IVH  "
@@ -515,7 +516,8 @@ Partial Class cs_home
             strINVTo = Trim(dataread("INVTO"))
             strShip = StrConv(Trim(dataread("SHIPPEDPER")), VbStrConv.Narrow)
             strCust = Trim(dataread("CUSTCODE"))
-            strPrt = Replace(Left(Trim(dataread("INVPRTDATE")), 10), "/", "")
+            strPrt = Replace(Left(Trim(dataread("ALLOUTSTAMP")), 10), "/", "")
+            '            strPrt = Replace(Left(Trim(dataread("INVPRTDATE")), 10), "/", "")
             strVoyNo = StrConv(Trim(dataread("VOYAGENO")), VbStrConv.Narrow)
         End While
 
