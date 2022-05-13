@@ -393,7 +393,6 @@ Partial Class cs_home
                 strSQL = ""
                 strSQL = strSQL & "SELECT ADDRESS FROM T_EXL_LCLCUSTPREADS WHERE "
                 strSQL = strSQL & "T_EXL_LCLCUSTPREADS.CUSTCODE = '" & Left(Convert.ToString(GridView1.Rows(I).Cells(3).Text), 4) & "' "
-                strSQL = strSQL & "AND FLG01 <> '1' "
 
                 'ＳＱＬコマンド作成 
                 dbcmd = New SqlCommand(strSQL, cnn)
