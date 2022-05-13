@@ -187,6 +187,10 @@ Partial Class cs_home
         DropDownList7.Visible = False
         DropDownList8.Visible = False
         CheckBox1.Checked = False
+
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+
         Call Make_Grid()
     End Sub
 
@@ -297,7 +301,12 @@ Partial Class cs_home
         Dim strChanged As String    'サーバー上のフルパス
         Dim strFileNm As String     'ファイル名
 
-        Dim dt = GetNorthwindProductTable()
+        Dim dtToday As DateTime = DateTime.Today
+
+        Dim dtFDM As Date = New DateTime(dtToday.Year, dtToday.Month, 1).AddMonths(-1)      '前月初日
+        Dim dtTDM As Date = New DateTime(dtToday.Year, dtToday.Month, 1).AddDays(-1)        '前月末日
+
+        Dim dt = GetNorthwindProductTable(dtFDM, dtTDM)
         Dim workbook = New XLWorkbook()
         Dim worksheet = workbook.Worksheets.Add(dt)
         workbook.SaveAs(strPath & strFile)
@@ -328,15 +337,11 @@ Partial Class cs_home
 
     End Sub
 
-    Private Shared Function GetNorthwindProductTable() As DataTable
+    Private Shared Function GetNorthwindProductTable(dtFDM As Date, dtTDM As Date) As DataTable
         'EXCELファイル出力
         Dim strSQL As String = ""
         Dim strSDate As String = ""
         Dim strEDate As String = ""
-        Dim dtToday As DateTime = DateTime.Today
-
-        Dim dtFDM As Date = New DateTime(dtToday.Year, dtToday.Month, 1).AddMonths(-1)      '前月初日
-        Dim dtTDM As Date = New DateTime(dtToday.Year, dtToday.Month, 1).AddDays(-1)        '前月末日
 
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
@@ -350,6 +355,7 @@ Partial Class cs_home
             strSQL = strSQL & "SELECT * FROM T_EXL_AIR_MANAGE "
             strSQL = strSQL & "WHERE ETD BETWEEN '" & Format(dtFDM, "yyyy/MM/dd") & "' "
             strSQL = strSQL & "AND '" & Format(dtTDM, "yyyy/MM/dd") & "' "
+            strSQL = strSQL & "ORDER BY ETD "
 
             cmd.CommandText = strSQL
             Dim sda = New SqlDataAdapter(cmd)
@@ -358,4 +364,43 @@ Partial Class cs_home
 
         Return dt
     End Function
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        '期間指定してﾀﾞｳﾝﾛｰﾄﾞボタン押下
+
+        Dim strFile As String = Format(Now, "yyyyMMdd") & "_air_previous.xlsx"
+        Dim strPath As String = "C:\exp\cs_home\files\"
+        Dim strChanged As String    'サーバー上のフルパス
+        Dim strFileNm As String     'ファイル名
+
+        Dim dt = GetNorthwindProductTable(TextBox1.Text, TextBox2.Text)
+        Dim workbook = New XLWorkbook()
+        Dim worksheet = workbook.Worksheets.Add(dt)
+        workbook.SaveAs(strPath & strFile)
+
+        'ファイル名を取得する
+        Dim strTxtFiles() As String = IO.Directory.GetFiles(strPath, "*_air_previous.xlsx")
+
+        strChanged = strTxtFiles(0)
+        strFileNm = Path.GetFileName(strChanged)
+
+        'Contentをクリア
+        Response.ClearContent()
+
+        'Contentを設定
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+        Response.ContentType = "application/vnd.ms-excel"
+
+        '表示ファイル名を指定
+        Dim fn As String = HttpUtility.UrlEncode(strFileNm)
+        Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
+
+        'ダウンロード対象ファイルを指定
+        Response.WriteFile(strChanged)
+
+        'ダウンロード実行
+        Response.Flush()
+        Response.End()
+
+    End Sub
 End Class

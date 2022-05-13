@@ -14,6 +14,11 @@
 <script src="js/ddmenu_min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="js/default.js"></script>
+<%--Datepicker用--%>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="https://code.jquery.com/jquery-1.10.2.js"  integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo="  crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI=" crossorigin="anonymous"></script>
+<%--Datepicker用--%>
 <style type="text/css">
         .header-ta {
             width: 1300px;
@@ -111,8 +116,18 @@
             width :100px;
             text-align :center;
         }
+        .date2{
+            text-align :center;
+        }
 </style>
 <script>
+    // カレンダー
+    jQuery(function ($) {
+        $(".date2").datepicker({
+            dateFormat: 'yy/mm/dd',
+            showButtonPanel: true
+        });
+    });
     $(document).ready(function () {
         var text = getParam('id');
         $('.result').text(text);
@@ -165,9 +180,13 @@
                 <asp:DropDownList ID="DropDownList7" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource8" DataTextField="REQUESTER" DataValueField="REQUESTER" AutoPostBack="True"></asp:DropDownList>
                 <asp:DropDownList ID="DropDownList8" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource9" DataTextField="IVNO" DataValueField="IVNO" AutoPostBack="True"></asp:DropDownList>
                 <asp:Button ID="Button2" runat="server" Text=" ﾘｾｯﾄ " Font-Size="Small" Width ="80" />
-                <asp:CheckBox ID="CheckBox1" runat="server" Text =" 集荷済みも表示する"  AutoPostBack="True"/>&nbsp;
+                <asp:CheckBox ID="CheckBox1" runat="server" Text =" 集荷済みも表示する"  AutoPostBack="True"/>
                 <asp:Button ID="Button4" runat="server" Text="新規登録" Font-Size="Small" Width="120px" />
-                <asp:Button ID="Button5" runat="server" Text="前月分ﾀﾞｳﾝﾛｰﾄﾞ" Font-Size="Small" Width="120px" />
+                <asp:Button ID="Button5" runat="server" Text="前月分ﾀﾞｳﾝﾛｰﾄﾞ" Font-Size="Small" Width="120px" />&nbsp;
+                <asp:TextBox ID="TextBox1" runat="server" Class="date2" Width="130px"></asp:TextBox>
+                <asp:Label ID="Label2" runat="server" Text="～"></asp:Label>
+                <asp:TextBox ID="TextBox2" runat="server" Class="date2" Width="130px"></asp:TextBox>
+                <asp:Button ID="Button6" runat="server" Text="期間指定してﾀﾞｳﾝﾛｰﾄﾞ" Font-Size="Small" Width="200px" />&nbsp;
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>

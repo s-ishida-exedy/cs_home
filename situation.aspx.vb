@@ -51,11 +51,11 @@ Partial Class cs_home
                     Literal5.Text = Trim(StrConv(dataread("DATA_OKNG"), VbStrConv.Wide))
                     Literal6.Text = "更新日時：" + dataread("DATA_UPD")
                 Case "004"
-                    Literal7.Text = Trim(StrConv(dataread("DATA_OKNG"), VbStrConv.Wide))
-                    Literal8.Text = "更新日時：" + dataread("DATA_UPD")
-                Case "005"
                     Literal9.Text = Trim(StrConv(dataread("DATA_OKNG"), VbStrConv.Wide))
                     Literal10.Text = "更新日時：" + dataread("DATA_UPD")
+                Case "005"
+                    Literal7.Text = Trim(StrConv(dataread("DATA_OKNG"), VbStrConv.Wide))
+                    Literal8.Text = "更新日時：" + dataread("DATA_UPD")
             End Select
         End While
 
