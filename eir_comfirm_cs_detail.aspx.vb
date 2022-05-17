@@ -108,7 +108,7 @@ Partial Class cs_home
             strSQL = strSQL & ",ETC01 = '" & strEtc01 & "' "
             strSQL = strSQL & ",ETC02 = '" & strEtc02 & "' "
             strSQL = strSQL & ",STATUS = '" & 1 & "' "
-            strSQL = strSQL & ",UPDPERSON = '" & Session("strUsr") & "' "
+            strSQL = strSQL & ",UPDPERSON = '" & Session("UsrId") & "' "
             strSQL = strSQL & ",UPDTIME = '" & strNow & "' "
             strSQL = strSQL & "WHERE CODE = '" & strCode & "' "
 
