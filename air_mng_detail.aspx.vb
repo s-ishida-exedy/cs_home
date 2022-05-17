@@ -88,6 +88,7 @@ Partial Class cs_home
         '画面入力情報をテーブルへ登録
         Dim strSQL As String
         Dim strVal As String = ""
+        Dim dtNow As DateTime = DateTime.Now
 
         'パラメータ取得
         Dim strEtd As String = Session("strEtd")
@@ -123,6 +124,8 @@ Partial Class cs_home
             strSQL = strSQL & "  , PICKUP =  '" & DropDownList2.SelectedValue & "' "
             strSQL = strSQL & "  , PLACE =  '" & DropDownList3.SelectedValue & "' "
             strSQL = strSQL & "  , REMARKS =  '" & LTrim(RTrim(TextBox10.Text)) & "' "
+            strSQL = strSQL & "  , UPD_DATE = '" & dtNow & "' "
+            strSQL = strSQL & "  , UPD_PERSON = '" & Session("UsrId") & "' "
             strSQL = strSQL & "WHERE "
             strSQL = strSQL & "       ETD =  '" & strEtd & "' "
             strSQL = strSQL & "  AND IVNO =  '" & strIvno & "' "
@@ -149,6 +152,8 @@ Partial Class cs_home
             strSQL = strSQL & "  , '" & DropDownList2.SelectedValue & "' "
             strSQL = strSQL & "  , '" & DropDownList3.SelectedValue & "' "
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox10.Text)) & "' "
+            strSQL = strSQL & "  , '" & dtNow & "' "
+            strSQL = strSQL & "  , '" & Session("UsrId") & "' "
             strSQL = strSQL & ") "
         End If
 
