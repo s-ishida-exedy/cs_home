@@ -31,6 +31,11 @@ Partial Class yuusen
         Dim dt1 As DateTime = DateTime.Now
         Dim Kaika00 As String = ""
 
+        Dim ts1 As New TimeSpan(80, 0, 0, 0)
+        Dim ts2 As New TimeSpan(80, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
         If e.Row.RowType = DataControlRowType.DataRow Then
 
 
@@ -46,6 +51,17 @@ Partial Class yuusen
 
             'データベース接続を開く
             cnn.Open()
+
+            'FIN_FLGを更新
+            strSQL = ""
+            strSQL = strSQL & "UPDATE T_EXL_WORKSTATUS00 SET BKGNO = '" & Trim(Replace(e.Row.Cells(26).Text, vbLf, "")) & "' "
+            strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.INVNO = '" & Left(Trim(Replace(e.Row.Cells(6).Text, vbLf, "")), 4) & "'"
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.REGDATE  between '" & dt3 & "' AND '" & dt2 & "' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.ID = '001' "
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
 
             'strSQL = "SELECT DOCFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DOCFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
             strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(26).Text, vbLf, "")) & "' "
@@ -122,7 +138,7 @@ Partial Class yuusen
             While (dataread.Read())
                 strbkg += dataread("BKGNO")
                 '書類作成状況
-                If Trim(e.Row.Cells(26).Text) = Trim(strbkg) Then
+                If Trim(e.Row.Cells(26).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
                     e.Row.BackColor = Drawing.Color.DarkGray
 
                     If e.Row.Cells(1).Text Like "*書類済*" Then
