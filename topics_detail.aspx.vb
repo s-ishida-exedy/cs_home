@@ -22,8 +22,12 @@ Partial Class cs_home
 
             '表示モード(01)と更新/削除モード(02)の時のみ、データ取得
             If strMode = "01" Or strMode = "02" Then
-                'トピックスの明細取得、表示
-                Call GET_TOPICS_DETAIL(strId, strMode)
+
+                'タイトル存在する場合のみ遷移。
+                If Mid(strId, 1, 4) <> "Link" Then
+                    'トピックスの明細取得、表示
+                    Call GET_TOPICS_DETAIL(strId, strMode)
+                End If
             ElseIf strMode = "03" Then
                 TextBox1.Text = Format(Now, "yyyy/MM/dd")
                 TextBox2.Text = Format(Now, "HH:mm")
