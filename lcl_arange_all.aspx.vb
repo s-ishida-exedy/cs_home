@@ -729,9 +729,18 @@ Partial Class cs_home
             Dim dltButton As ImageButton = e.Row.FindControl("ImageButton1")
             'ボタンが存在する場合のみセット
             If Not (dltButton Is Nothing) Then
-                dltButton.CommandArgument = e.Row.RowIndex.ToString()
+
+                If Left(e.Row.Cells(2).Text, 4) = "C258" Or Left(e.Row.Cells(2).Text, 4) = "C255" Or Left(e.Row.Cells(2).Text, 4) = "C6G0" Then
+
+                    dltButton.CommandArgument = e.Row.RowIndex.ToString()
+
+                Else
+
+                    dltButton.Visible = False
+
+                End If
             End If
-        End If
+            End If
 
     End Sub
 

@@ -87,9 +87,19 @@ Partial Class cs_home
                     TextBox2.Text = TextBox2.Text & vbLf & vbLf
                     TextBox2.Text = TextBox2.Text & "お手数ですが宜しくお願いいたします。"
                     CheckBox1.Visible = False
+
                 Else
                 End If
+            ElseIf strcust = "C255" Then
 
+                If strMode = "0" Then
+
+                    Label1.Text = "C255 Booking依頼完了登録"
+                    TextBox2.Visible = False
+                    Button7.Visible = False
+                    CheckBox1.Visible = False
+                Else
+                End If
             Else
                 Response.Redirect("lcl_arange_all.aspx")
             End If
