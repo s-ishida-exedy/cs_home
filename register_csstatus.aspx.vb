@@ -284,7 +284,7 @@ Partial Class yuusen
             strSQL = strSQL & ",'" & strinv & "' "
             strSQL = strSQL & ",'" & bkgno & "' "
             strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
-            'strSQL = strSQL & ",'" & Session("UsrId") & "_08" & "' "
+            strSQL = strSQL & ",'" & Session("UsrId") & "_08" & "' "
             strSQL = strSQL & ")"
 
         End If

@@ -793,6 +793,7 @@ Partial Class cs_home
             strSQL = strSQL & ",'" & strinv & "' "
             strSQL = strSQL & ",'" & bkgno & "' "
             strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
+            strSQL = strSQL & ",'" & Session("UsrId") & "_04" & "' "
             strSQL = strSQL & ")"
 
 

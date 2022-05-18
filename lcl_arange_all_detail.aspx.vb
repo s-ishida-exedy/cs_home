@@ -480,6 +480,7 @@ Partial Class cs_home
             strSQL = strSQL & ",'" & striv & "' "
             strSQL = strSQL & ",'" & strbkg & "' "
             strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
+            strSQL = strSQL & ",'" & Session("UsrId") & "_06" & "' "
             strSQL = strSQL & ")"
 
         End If
