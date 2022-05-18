@@ -270,9 +270,13 @@ Partial Class cs_home
         'フラグをUPDATE
         If strFlg = "doc_fin" Then
             strSQL = strSQL & "UPDATE T_EXL_AIR_MANAGE SET DOC_FIN = '作成済み' "
+            strSQL = strSQL & ", UPD_DATE = '" & dtNow & "' "
+            strSQL = strSQL & ", UPD_PERSON = '" & Session("UsrId") & "' "
             strSQL = strSQL & "WHERE ETD = '" & strEtd & "' AND IVNO = '" & strIvno & "' "
         ElseIf strFlg = "pic_fin" Then
             strSQL = strSQL & "UPDATE T_EXL_AIR_MANAGE SET PICKUP = '集荷済み' "
+            strSQL = strSQL & ", UPD_DATE = '" & dtNow & "' "
+            strSQL = strSQL & ", UPD_PERSON = '" & Session("UsrId") & "' "
             strSQL = strSQL & "WHERE ETD = '" & strEtd & "' AND IVNO = '" & strIvno & "' "
         End If
 
