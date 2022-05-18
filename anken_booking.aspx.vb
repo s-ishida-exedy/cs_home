@@ -52,7 +52,7 @@ Partial Class yuusen
             'データベース接続を開く
             cnn.Open()
 
-            'FIN_FLGを更新
+            '委託登録済み案件のUPDATE
             strSQL = ""
             strSQL = strSQL & "UPDATE T_EXL_WORKSTATUS00 SET BKGNO = '" & Trim(Replace(e.Row.Cells(26).Text, vbLf, "")) & "' "
             strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.INVNO = '" & Left(Trim(Replace(e.Row.Cells(6).Text, vbLf, "")), 4) & "'"
