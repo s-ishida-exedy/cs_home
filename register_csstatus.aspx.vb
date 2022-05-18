@@ -284,6 +284,7 @@ Partial Class yuusen
             strSQL = strSQL & ",'" & strinv & "' "
             strSQL = strSQL & ",'" & bkgno & "' "
             strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
+            'strSQL = strSQL & ",'" & Session("UsrId") & "_08" & "' "
             strSQL = strSQL & ")"
 
         End If
@@ -359,8 +360,9 @@ Partial Class yuusen
         cnn.Open()
 
         strSQL = ""
-        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_ITAKU WHERE "
-        strSQL = strSQL & "T_EXL_ITAKU.CUST_CD = '" & strcust & "' "
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_ITAKU00 WHERE "
+        strSQL = strSQL & "T_EXL_ITAKU00.ITKNAME = '" & strcust & "' "
+        strSQL = strSQL & "AND T_EXL_ITAKU00.KBN = '002' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -379,9 +381,9 @@ Partial Class yuusen
         Else
 
             strSQL = ""
-            strSQL = strSQL & "INSERT INTO T_EXL_ITAKU VALUES("
-            strSQL = strSQL & "'" & strcust & "' "
-            strSQL = strSQL & ",'" & " ' "
+            strSQL = strSQL & "INSERT INTO T_EXL_ITAKU00 VALUES("
+            strSQL = strSQL & "'002' "
+            strSQL = strSQL & ",'" & strcust & "' "
             strSQL = strSQL & ")"
 
             Command.CommandText = strSQL
@@ -418,8 +420,9 @@ Partial Class yuusen
         cnn.Open()
 
         strSQL = ""
-        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_ITAKU WHERE "
-        strSQL = strSQL & "T_EXL_ITAKU.FORWARDER = '" & strkik & "' "
+        strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_ITAKU00 WHERE "
+        strSQL = strSQL & "T_EXL_ITAKU00.ITKNAME = '" & strkik & "' "
+        strSQL = strSQL & "AND T_EXL_ITAKU00.KBN = '001' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -437,8 +440,8 @@ Partial Class yuusen
         If intCnt > 0 Then
         Else
             strSQL = ""
-            strSQL = strSQL & "INSERT INTO T_EXL_ITAKU VALUES("
-            strSQL = strSQL & "'" & " ' "
+            strSQL = strSQL & "INSERT INTO T_EXL_ITAKU00 VALUES("
+            strSQL = strSQL & "'001' "
             strSQL = strSQL & ",'" & strkik & "' "
             strSQL = strSQL & ")"
 
@@ -478,10 +481,14 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
+
+
         strSQL = ""
-        strSQL = strSQL & "UPDATE T_EXL_ITAKU SET "
-        strSQL = strSQL & "T_EXL_ITAKU.CUST_CD = '' "
-        strSQL = strSQL & "WHERE T_EXL_ITAKU.CUST_CD ='" & strcust & "' "
+        strSQL = strSQL & "DELETE FROM T_EXL_ITAKU00 "
+        strSQL = strSQL & "WHERE T_EXL_ITAKU00.KBN = '002' "
+        strSQL = strSQL & "AND T_EXL_ITAKU00.ITKNAME ='" & strcust & "' "
+
+
 
         Command.CommandText = strSQL
         ' SQLの実行
@@ -514,10 +521,11 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
+
         strSQL = ""
-        strSQL = strSQL & "UPDATE T_EXL_ITAKU SET "
-        strSQL = strSQL & "T_EXL_ITAKU.FORWARDER = '' "
-        strSQL = strSQL & "WHERE T_EXL_ITAKU.FORWARDER ='" & strkik & "' "
+        strSQL = strSQL & "DELETE FROM T_EXL_ITAKU00 "
+        strSQL = strSQL & "WHERE T_EXL_ITAKU00.KBN = '001' "
+        strSQL = strSQL & "AND T_EXL_ITAKU00.ITKNAME ='" & strkik & "' "
 
         Command.CommandText = strSQL
         ' SQLの実行
