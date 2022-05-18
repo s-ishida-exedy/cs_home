@@ -261,7 +261,7 @@
                     <asp:Button class="btn-radius-gradient-wrap"  ID="Button3" runat="server" Text="登録" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" ></asp:Button>
                 </td>
                 <td style="width:200px;Font-Size:15px;" >
-                    <asp:DropDownList ID="DropDownList2" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource2" DataTextField="CUST_CD" DataValueField="CUST_CD" AppendDataBoundItems="true" >
+                    <asp:DropDownList ID="DropDownList2" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource2" DataTextField="ITKNAME" DataValueField="ITKNAME" AppendDataBoundItems="true" >
                     <asp:ListItem Text="Please select" Value="" />
                     </asp:DropDownList>
                     <asp:Button class="btn-radius-gradient-wrap"  ID="Button4" runat="server" Text="削除" Width="100" Height="40px" AutoPostBack="True" Font-Size="13px" ></asp:Button>
@@ -278,7 +278,7 @@
                     <asp:Button class="btn-radius-gradient-wrap"  ID="Button5" runat="server" Text="登録" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" ></asp:Button>
                 </td>
                 <td style="width:200px;Font-Size:15px;" >
-                    <asp:DropDownList ID="DropDownList3" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource3" DataTextField="FORWARDER" DataValueField="FORWARDER" AppendDataBoundItems="true" >
+                    <asp:DropDownList ID="DropDownList3" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource3" DataTextField="ITKNAME" DataValueField="ITKNAME" AppendDataBoundItems="true" >
                     <asp:ListItem Text="Please select" Value="" />
                     </asp:DropDownList>
                     <asp:Button class="btn-radius-gradient-wrap"  ID="Button6" runat="server" Text="削除" Width="100" Height="40px" AutoPostBack="True" Font-Size="13px" ></asp:Button>
@@ -318,8 +318,8 @@
 
 
 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [INVNO] FROM [T_EXL_WORKSTATUS00 ] WHERE INVNO <>'' AND REGDATE  > GETDATE()-60 AND ID='001' ORDER BY [INVNO] "></asp:SqlDataSource>
-<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [ITKNAME] FROM [T_EXL_ITAKU00] WHERE KBN='002' ORDER BY CUST_CD "></asp:SqlDataSource>
-<asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [ITKNAME] FROM [T_EXL_ITAKU00] WHERE KBN='001' ORDER BY [FORWARDER] "></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [ITKNAME] FROM [T_EXL_ITAKU00] WHERE KBN='002' ORDER BY ITKNAME "></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [ITKNAME] FROM [T_EXL_ITAKU00] WHERE KBN='001' ORDER BY [ITKNAME] "></asp:SqlDataSource>
 <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT left([CUST_CD],4) AS C FROM [T_BOOKING] ORDER BY C" ></asp:SqlDataSource>
 <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [FORWARDER02] FROM [T_EXL_CSANKEN] ORDER BY [FORWARDER02]"></asp:SqlDataSource>
  
