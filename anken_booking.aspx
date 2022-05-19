@@ -408,7 +408,7 @@
         <table style="width:1500px;height:10px;">
             <tr>
                 <td style="width:1500px;" >
-                    <asp:Label ID="Label1" runat="server" Text="Bookingシート更新中"></asp:Label>
+                    <asp:Label ID="Label1" runat="server" Text="Bookingシート更新中のため操作できません。 更新時間："></asp:Label>
                     <asp:Label ID="Label2" runat="server" Text="08:00-08:10"></asp:Label>
                     <asp:Label ID="Label3" runat="server" Text="11:50-12:00"></asp:Label>
                     <asp:Label ID="Label4" runat="server" Text="14:55-15:05"></asp:Label>
