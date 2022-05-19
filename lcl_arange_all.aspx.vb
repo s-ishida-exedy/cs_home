@@ -404,9 +404,10 @@ Partial Class cs_home
         Dim dt0B = DateTime.Parse("11:50:00")
         Dim dt1B = DateTime.Parse("12:00:00")
 
+        'Dim dt0C = DateTime.Parse("14:55:00")
+        'Dim dt1C = DateTime.Parse("15:05:00")
         Dim dt0C = DateTime.Parse("14:55:00")
-        Dim dt1C = DateTime.Parse("15:05:00")
-
+        Dim dt1C = DateTime.Parse("16:05:00")
 
         If dt1 < dt1A And dt1 > dt0A Then
 
