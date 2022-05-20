@@ -151,6 +151,12 @@
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
         <Columns>
+            <asp:TemplateField ShowHeader="False">
+                <ItemTemplate>
+                    <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="edt" Text="更新" />
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
             <asp:BoundField DataField="場所" HeaderText="場所" ReadOnly="True" SortExpression="場所" >
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
@@ -174,6 +180,10 @@
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
             <asp:BoundField DataField="最終" HeaderText="最終" SortExpression="最終">
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
+            <asp:BoundField DataField="UPD_FLG" HeaderText="VanRepo">
+            <HeaderStyle Width="100px" />
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
         </Columns>
@@ -200,6 +210,10 @@
   , CUT_DATE AS カット日
   , ETD AS ＥＴＤ
   , '' AS 最終
+  ,  CASE UPD_FLG
+  	WHEN '0' THEN '未作成'
+  	WHEN '1' THEN '作成済み'
+  END AS UPD_FLG
 FROM
   T_EXL_VAN_SCH_DETAIL
 ORDER BY VAN_DATE, PLACE"></asp:SqlDataSource>

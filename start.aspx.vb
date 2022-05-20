@@ -236,6 +236,172 @@ Partial Class cs_home
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
+
+        '書類最終情報取得処理
+        strSQL = ""
+        strSQL = strSQL & "SELECT "
+        strSQL = strSQL & "   COUNT(CASE  WHEN AA.Forwarder = '上野' THEN 1 ELSE NULL END) AS Rec01 "
+        strSQL = strSQL & "  ,COUNT(CASE  WHEN AA.Forwarder = '本社' THEN 1 ELSE NULL END) AS Rec02 "
+        strSQL = strSQL & "FROM "
+        strSQL = strSQL & "( "
+        strSQL = strSQL & "SELECT DISTINCT "
+        strSQL = strSQL & "  CASE LEFT(Forwarder,2)  "
+        strSQL = strSQL & "    WHEN 'AT' THEN '上野' "
+        strSQL = strSQL & "    ELSE '本社' "
+        strSQL = strSQL & "  END AS Forwarder "
+        strSQL = strSQL & "  , CUST_CD  "
+        strSQL = strSQL & "  , INVOICE_NO  "
+        strSQL = strSQL & "  , MAX(VAN_DATE) AS FINAL_VAN  "
+        strSQL = strSQL & "  , CUT_DATE "
+        strSQL = strSQL & "  , ETD "
+        strSQL = strSQL & "FROM  "
+        strSQL = strSQL & "  ( SELECT Forwarder, CUST_CD, INVOICE_NO, DAY01 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        strSQL = strSQL & "    UNION ALL   "
+        strSQL = strSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY02 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        strSQL = strSQL & "    UNION ALL   "
+        strSQL = strSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY03 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        strSQL = strSQL & "    UNION ALL   "
+        strSQL = strSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY04 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        strSQL = strSQL & "    UNION ALL   "
+        strSQL = strSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY05 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        strSQL = strSQL & "    UNION ALL   "
+        strSQL = strSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY06 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        strSQL = strSQL & "    UNION ALL   "
+        strSQL = strSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY07 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        strSQL = strSQL & "    UNION ALL   "
+        strSQL = strSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY08 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        strSQL = strSQL & "    UNION ALL   "
+        strSQL = strSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY09 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        strSQL = strSQL & "    UNION ALL   "
+        strSQL = strSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY10 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING  "
+        strSQL = strSQL & "    UNION ALL   "
+        strSQL = strSQL & "    SELECT Forwarder, CUST_CD, INVOICE_NO, DAY11 AS VAN_DATE, CUT_DATE  , ETD FROM T_BOOKING) AS TBL   "
+        strSQL = strSQL & "WHERE  "
+        strSQL = strSQL & "  INVOICE_NO <> ''   "
+        strSQL = strSQL & "  AND VAN_DATE <> ''  "
+        strSQL = strSQL & "  AND VAN_DATE >= CONVERT(NVARCHAR,  GETDATE(), 111) "
+        strSQL = strSQL & "  AND INVOICE_NO NOT LIKE '%ヒョウコウ%' "
+        strSQL = strSQL & "GROUP BY  "
+        strSQL = strSQL & "  Forwarder, CUST_CD , INVOICE_NO  , CUT_DATE  , ETD "
+        strSQL = strSQL & "  ) AA "
+        strSQL = strSQL & "WHERE  "
+        strSQL = strSQL & "  AA.FINAL_VAN = CONVERT(NVARCHAR,  GETDATE(), 111) "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        Dim intRec01 As Integer = 0
+        Dim intRec02 As Integer = 0
+
+        While (dataread.Read())
+            intRec01 = dataread("Rec01")
+            intRec02 = dataread("Rec02")
+        End While
+
+        Literal12.Text = StrConv(intRec02, VbStrConv.Wide) + "件"
+        Literal20.Text = StrConv(intRec01, VbStrConv.Wide) + "件"
+        Literal19.Text = StrH
+        Literal22.Text = StrH
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        'バンレポの作成状況を取得
+        strSQL = ""
+        strSQL = strSQL & "SELECT "
+        strSQL = strSQL & "   COUNT(CASE  WHEN PLACE = '0H' AND SUBSTRING(RIGHT(CUST_NM,5),1,1) = 'K' THEN 1 ELSE NULL END) AS Rec01 "
+        strSQL = strSQL & "  ,COUNT(CASE  WHEN PLACE = '0H' AND SUBSTRING(RIGHT(CUST_NM,5),1,1) <> 'K' THEN 1 ELSE NULL END) AS Rec02 "
+        strSQL = strSQL & "  ,COUNT(CASE  WHEN PLACE = '1U' THEN 1 ELSE NULL END) AS Rec03 "
+        strSQL = strSQL & "FROM  "
+        strSQL = strSQL & "  T_EXL_VAN_SCH_DETAIL "
+        strSQL = strSQL & "WHERE  "
+        strSQL = strSQL & "  VAN_DATE = CONVERT(NVARCHAR,  GETDATE(), 111) "
+        strSQL = strSQL & "  AND UPD_FLG = '1' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        intRec01 = 0
+        intRec02 = 0
+        Dim intRec03 As Integer = 0
+
+        While (dataread.Read())
+            intRec01 = dataread("Rec01")
+            intRec02 = dataread("Rec02")
+            intRec03 = dataread("Rec03")
+        End While
+
+        Literal23.Text = StrConv(intRec01, VbStrConv.Wide) + "件"
+        Literal24.Text = StrConv(intRec02, VbStrConv.Wide) + "件"
+        Literal25.Text = StrConv(intRec03, VbStrConv.Wide) + "件"
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        '書類の作成状況を取得
+        strSQL = ""
+        strSQL = strSQL & "SELECT  "
+        strSQL = strSQL & "   COUNT(CASE  WHEN PLACE = '本社' THEN 1 ELSE NULL END) AS Rec01 "
+        strSQL = strSQL & "  ,COUNT(CASE  WHEN PLACE = '上野' THEN 1 ELSE NULL END) AS Rec02 "
+        strSQL = strSQL & "FROM  "
+        strSQL = strSQL & "  T_EXL_FIN_DOC "
+        strSQL = strSQL & "WHERE  "
+        strSQL = strSQL & "  FIN_VAN = CONVERT(NVARCHAR,  GETDATE(), 111) "
+        strSQL = strSQL & "  AND UPD_FLG = '1' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        intRec01 = 0
+        intRec02 = 0
+
+        While (dataread.Read())
+            intRec01 = dataread("Rec01")
+            intRec02 = dataread("Rec02")
+        End While
+
+        Literal26.Text = StrConv(intRec01, VbStrConv.Wide) + "件"
+        Literal27.Text = StrConv(intRec02, VbStrConv.Wide) + "件"
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        'ＡＩＲ書類の作成状況を取得
+        strSQL = ""
+        strSQL = strSQL & "SELECT "
+        strSQL = strSQL & "   COUNT(*) AS Rec01 "
+        strSQL = strSQL & "FROM  "
+        strSQL = strSQL & "  T_EXL_AIR_MANAGE "
+        strSQL = strSQL & "WHERE  "
+        strSQL = strSQL & "  ETD = CONVERT(NVARCHAR,  GETDATE(), 111) "
+        strSQL = strSQL & "  AND DOC_FIN = '作成済み' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        intRec01 = 0
+
+        While (dataread.Read())
+            intRec01 = dataread("Rec01")
+        End While
+
+        Literal28.Text = StrConv(intRec01, VbStrConv.Wide) + "件"
+
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
         cnn.Close()
         cnn.Dispose()
 

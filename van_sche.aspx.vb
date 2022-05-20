@@ -45,7 +45,7 @@ Partial Class cs_home
         strDate = ""
         '結果を取り出す 
         While (dataread.Read())
-            strDate += dataread("UPDATE_TIME")
+            strDate = dataread("UPDATE_TIME")
         End While
 
         'クローズ処理 
@@ -220,7 +220,7 @@ Partial Class cs_home
             '結果を取り出す 
             While (dataread.Read())
                 '最終列に値セット
-                e.Row.Cells(8).Text = "★"
+                e.Row.Cells(9).Text = "★"
             End While
 
             'クローズ処理 
@@ -228,6 +228,11 @@ Partial Class cs_home
             dbcmd.Dispose()
             cnn.Close()
             cnn.Dispose()
+
+            '未作成の場合、フォントカラーをREDに設定
+            If e.Row.Cells(10).Text = "未作成" Then
+                e.Row.Cells(10).ForeColor = Drawing.Color.Red
+            End If
         End If
     End Sub
 
@@ -247,6 +252,89 @@ Partial Class cs_home
 
         'Grid再表示
         GridView1.DataBind()
+
+    End Sub
+
+    Private Sub GridView1_RowCreated(sender As Object, e As GridViewRowEventArgs) Handles GridView1.RowCreated
+
+        'ボタンに行数をセット
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            Dim dltButton As Button = e.Row.FindControl("Button1")
+            'ボタンが存在する場合のみセット
+            If Not (dltButton Is Nothing) Then
+                dltButton.CommandArgument = e.Row.RowIndex.ToString()
+            End If
+        End If
+    End Sub
+
+    Private Sub GridView1_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView1.RowCommand
+        'GridViewのボタン押下処理
+        If e.CommandName = "edt" Then
+            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+            Dim data1 = Me.GridView1.Rows(index).Cells(6).Text
+
+            'インボイス番号をキーにデータを更新
+            Call Update_FLG(data1)
+
+            'Grid再表示
+            GridView1.DataBind()
+        End If
+    End Sub
+
+    Private Sub Update_FLG(strIVNO As String)
+        'レコードのフラグを取得する。
+        Dim strSQL As String
+        Dim dtNow As DateTime = DateTime.Now
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strFlg As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        'データベース接続を開く
+        cnn.Open()
+
+        'フラグを確認し、１（作成済み）なら０（未作成）にUPDATEする。
+        strSQL = ""
+        strSQL = strSQL & "SELECT UPD_FLG FROM T_EXL_VAN_SCH_DETAIL "
+        strSQL = strSQL & "WHERE IVNO = '" & strIVNO & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            strFlg = dataread("UPD_FLG")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        'フラグをUPDATE
+        strSQL = ""
+        strSQL = strSQL & "UPDATE T_EXL_VAN_SCH_DETAIL  "
+        If strFlg = "0" Then
+            strSQL = strSQL & "SET UPD_FLG = '1', UPDATE_TIME = '" & dtNow & "', UPD_PERSON = '" & Session("UsrId") & "'  "
+        ElseIf strFlg = "1" Then
+            strSQL = strSQL & "SET UPD_FLG = '0', UPDATE_TIME = '" & dtNow & "', UPD_PERSON = '" & Session("UsrId") & "' "
+        End If
+        strSQL = strSQL & "WHERE IVNO = '" & strIVNO & "' "
+
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+        cnn.Close()
+        cnn.Dispose()
 
     End Sub
 End Class

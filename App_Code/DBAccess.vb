@@ -202,6 +202,10 @@ Public Class DBAccess
         StrSQL = StrSQL & "  , CUT_DATE AS カット日 "
         StrSQL = StrSQL & "  , ETD AS ＥＴＤ  "
         StrSQL = StrSQL & "  , '' AS 最終  "
+        StrSQL = StrSQL & "  , CASE UPD_FLG "
+        StrSQL = StrSQL & "  WHEN '0' THEN '未作成' "
+        StrSQL = StrSQL & "  WHEN '1' THEN '作成済み' "
+        StrSQL = StrSQL & "  End As UPD_FLG "
         StrSQL = StrSQL & "FROM "
         StrSQL = StrSQL & "  T_EXL_VAN_SCH_DETAIL  "
         If strDate <> "" And strPlace <> "" Then

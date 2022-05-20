@@ -118,6 +118,9 @@
         .cop{
             font-size :1px;
         }
+        .ta1 td {
+            padding: 5px;
+        }
 </style>
 </head>
 
@@ -167,6 +170,7 @@
         <asp:Literal ID="Literal1" runat="server"></asp:Literal>
     </td>
     <td>
+        <asp:Literal ID="Literal23" runat="server"></asp:Literal>
     </td>
     <td>
         <asp:Literal ID="Literal6" runat="server"></asp:Literal>
@@ -181,6 +185,7 @@
         <asp:Literal ID="Literal16" runat="server"></asp:Literal>
     </td>
     <td>
+        <asp:Literal ID="Literal24" runat="server"></asp:Literal>
     </td>
     <td>
         <asp:Literal ID="Literal17" runat="server"></asp:Literal>
@@ -190,11 +195,27 @@
     </td>
 </tr>
 <tr>
+    <th>書類作成（本社）</th>
+    <td>
+        <asp:Literal ID="Literal12" runat="server"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal26" runat="server"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal14" runat="server" Text="－"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal19" runat="server"></asp:Literal>
+    </td>
+</tr>
+<tr>
     <th>ＶＡＮ（上野）</th>
     <td>
         <asp:Literal ID="Literal2" runat="server"></asp:Literal>
     </td>
     <td>
+        <asp:Literal ID="Literal25" runat="server"></asp:Literal>
     </td>
     <td>
         <asp:Literal ID="Literal8" runat="server"></asp:Literal>
@@ -204,11 +225,27 @@
     </td>
 </tr>
 <tr>
+    <th>書類作成（上野）</th>
+    <td>
+        <asp:Literal ID="Literal20" runat="server"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal27" runat="server"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal21" runat="server" Text="－"></asp:Literal>
+    </td>
+    <td>
+        <asp:Literal ID="Literal22" runat="server"></asp:Literal>
+    </td>
+</tr>
+<tr>
     <th>ＡＩＲ</th>
     <td>
         <asp:Literal ID="Literal3" runat="server"></asp:Literal>
     </td>
     <td>
+        <asp:Literal ID="Literal28" runat="server"></asp:Literal>
     </td>
     <td>
         <asp:Literal ID="Literal10" runat="server"></asp:Literal>
@@ -268,7 +305,7 @@ FROM
     <asp:Image id="OKNGimg" class="imgOKNG" runat="server" ImageUrl="#" style="margin-top:8px;margin-left:70px;" />
 </div>
 
-<h2>トピックス</h2>
+<h2>CSチームトピックス</h2>
 
 <div class="list-sub">
 <table class="topic">
@@ -312,6 +349,8 @@ FROM
 </table>  
 </div>
 <p class="c"><a href="./topics.aspx">トピックス一覧</a></p>
+<asp:Label ID="Label15" runat="server" Text="※トピックスはCS専用、他部署は閲覧不可です。"  Font-Size="Small"></asp:Label>
+<asp:Label ID="Label16" runat="server" Text="※連絡事項など自由に使用してください。"  Font-Size="Small"></asp:Label>
 </div>
 <!--/#sub-->
 
