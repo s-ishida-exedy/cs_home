@@ -528,6 +528,7 @@ Partial Class yuusen
             strSQL = strSQL & ",'" & strinv & "' "
             strSQL = strSQL & ",'" & bkgno & "' "
             strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
+            strSQL = strSQL & ",'" & Session("UsrId") & "_02" & "' "
             strSQL = strSQL & ")"
 
         End If
@@ -814,6 +815,41 @@ Partial Class yuusen
 
             End If
 
+        End If
+
+
+        Dim dt0A = DateTime.Parse("08:00:00")
+        Dim dt1A = DateTime.Parse("08:10:00")
+
+        Dim dt0B = DateTime.Parse("11:50:00")
+        Dim dt1B = DateTime.Parse("12:00:00")
+
+        Dim dt0C = DateTime.Parse("14:55:00")
+        Dim dt1C = DateTime.Parse("15:05:00")
+
+
+        If dt1 < dt1A And dt1 > dt0A Then
+
+            Panel1.Visible = False
+            Panel2.Visible = False
+            Panel3.Visible = True
+
+        End If
+
+        If dt1 < dt1B And dt1 > dt0B Then
+
+            Panel1.Visible = False
+            Panel2.Visible = False
+            Panel3.Visible = True
+
+        End If
+
+
+        If dt1 < dt1C And dt1 > dt0C Then
+
+            Panel1.Visible = False
+            Panel2.Visible = False
+            Panel3.Visible = True
         End If
 
         cnn.Close()

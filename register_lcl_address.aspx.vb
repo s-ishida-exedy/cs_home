@@ -228,34 +228,7 @@ Partial Class yuusen
 
         Else
 
-            'strSQL = ""
-            'strSQL = strSQL & "INSERT INTO T_EXL_CSWORKSTATUS VALUES("
 
-            'strSQL = strSQL & " '" & "' "
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-
-
-
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-
-
-
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-            'strSQL = strSQL & ",'" & " ' "
-
-            'strSQL = strSQL & ",'" & strinv & "' "
-            'strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
-            'strSQL = strSQL & ",'" & bkgno & "' "
-
-            'strSQL = strSQL & ")"
 
             strSQL = ""
             strSQL = strSQL & "INSERT INTO T_EXL_WORKSTATUS00 VALUES("
@@ -263,6 +236,7 @@ Partial Class yuusen
             strSQL = strSQL & ",'" & strinv & "' "
             strSQL = strSQL & ",'" & bkgno & "' "
             strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
+            strSQL = strSQL & ",'" & Session("UsrId") & "_09" & "' "
             strSQL = strSQL & ")"
 
 
