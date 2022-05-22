@@ -260,7 +260,7 @@
         <asp:Literal ID="Literal4" runat="server"></asp:Literal>
     </td>
     <td>
-        <asp:Label ID="Label11" runat="server" Text="－"></asp:Label>
+        <asp:Label ID="Label11" runat="server" ></asp:Label>
     </td>
     <td>
         <asp:Label ID="Label12" runat="server" Text="－"></asp:Label>
