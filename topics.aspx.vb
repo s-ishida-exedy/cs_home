@@ -11,6 +11,7 @@ Partial Class cs_home
         If e.Row.RowType = DataControlRowType.DataRow OrElse e.Row.RowType = DataControlRowType.Header Then
             e.Row.Cells(1).Visible = False
             e.Row.Cells(7).Visible = False
+            e.Row.Cells(8).Visible = False
         End If
 
         'ボタンに行数をセット
@@ -40,6 +41,13 @@ Partial Class cs_home
             Dim index As Integer = Convert.ToInt32(e.CommandArgument)
 
             Dim strId As String = Me.GridView1.Rows(index).Cells(1).Text
+            Dim strUsrId As String = Me.GridView1.Rows(index).Cells(8).Text
+
+            '他人のトピックスは編集不可
+            If strUsrId <> Session("UsrId") Then
+                Return
+            End If
+
             '更新/削除モード
             Response.Redirect("topics_detail.aspx?strId=" & strId & "&strMode=02")
         End If

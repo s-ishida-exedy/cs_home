@@ -175,6 +175,7 @@
                 </asp:BoundField>
                 <asp:BoundField DataField="INFO_KBN" HeaderText="INFO_KBN" SortExpression="INFO_KBN" >
                 </asp:BoundField>
+                <asp:BoundField DataField="USR_ID" />
             </Columns>
             <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
@@ -191,6 +192,7 @@ SelectCommand="SELECT
   , INFO_HEADER
   , SUBSTRING(INFO_DETAIL,1,30) + '…' AS INFO_DETAIL
   , INFO_KBN
+  , USR_ID
 FROM
   T_EXL_TOPICS 
 WHERE

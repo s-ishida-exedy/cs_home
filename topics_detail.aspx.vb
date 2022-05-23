@@ -386,7 +386,8 @@ Partial Class cs_home
             strSQL = strSQL & ",       '" & DropDownList1.SelectedValue & "' "
             strSQL = strSQL & ",       '" & TextBox3.Text & "' "
             strSQL = strSQL & ",       '" & strDetail & "' "
-            strSQL = strSQL & ",       '0')"
+            strSQL = strSQL & ",       '0' "
+            strSQL = strSQL & ",       '" & Session("UsrId") & "') "
 
             Command.CommandText = strSQL
             ' SQLの実行
