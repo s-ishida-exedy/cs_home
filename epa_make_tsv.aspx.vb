@@ -805,8 +805,8 @@ Partial Class cs_home
         Response.ClearContent()
 
         'Contentを設定
-        Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")  'Shift-JISで出力したい場合
-        'Response.ContentEncoding = System.Text.Encoding.UTF8  'UTF-8で出力したい場合
+        'Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")  'Shift-JISで出力したい場合
+        Response.ContentEncoding = System.Text.Encoding.UTF8  'UTF-8で出力したい場合
         Response.ContentType = "text/csv"
 
         Dim strFile As String = strCust & "_" & strBLDATE & "_" & strIVNO
