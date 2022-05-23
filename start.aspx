@@ -119,7 +119,7 @@
             font-size :1px;
         }
         .ta1 td {
-            padding: 5px;
+            padding: 2px;
         }
 </style>
 </head>
