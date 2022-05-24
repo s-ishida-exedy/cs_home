@@ -99,6 +99,22 @@
             text-align :center;
             font-size :small;
         }
+       　/*ヘッダー固定用*/
+        table{
+          width: 100%;
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            z-index: 0;
+            background-color: #000084;
+            color: #ffffff;
+        }
+        .wrapper {
+            overflow: scroll;
+            height: 450px;
+        }
 </style>
 <script>
     // カレンダー
@@ -159,7 +175,15 @@
             </td>
         </tr>
     </table>
-<div id="main2" style="width:100%;height:450px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">
+
+<div class="wrapper">
+<table class="sticky">
+<thead class="fixed">
+
+</thead>
+<tbody>
+
+<%--<div id="main2" style="width:100%;height:450px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">--%>
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="1280px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" ShowHeaderWhenEmpty="True" DataKeyNames="SALESNOTENO">
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
@@ -199,6 +223,10 @@
             <SortedDescendingCellStyle BackColor="#CAC9C9" />
             <SortedDescendingHeaderStyle BackColor="#000065" />
     </asp:GridView>
+<%--</div>--%>
+
+</tbody>
+</table>
 </div>
 <!--/#main2-->
 
