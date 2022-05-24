@@ -519,38 +519,38 @@ Partial Class yuusen
 
 
 
-        For I = 0 To GridView1.Rows.Count - 1
+        'For I = 0 To GridView1.Rows.Count - 1
 
-            deccnt = 0
-            deccnt = DEC_GET(Trim(GridView1.Rows(I).Cells(26).Text))
+        '    deccnt = 0
+        '    deccnt = DEC_GET(Trim(GridView1.Rows(I).Cells(26).Text))
 
-            If Left(GridView1.Rows(I).Cells(2).Text, 2) = "上野" Then
-                If GridView1.Rows(I).Cells(7).Text <= WDAY00 Then
-                    If deccnt > 0 Then
-                        lng14 = lng14 + 1
-                    Else
-                    End If
-                ElseIf GridView1.Rows(I).Cells(7).Text <= WDAY00 And GridView1.Rows(I).Cells(7).Text > WDAY00 Then   ' 1稼働日後がEXDCUT 
-                    If deccnt > 0 Then
-                        lng15 = lng15 + 1
-                    Else
-                    End If
-                End If
-            Else
-                If GridView1.Rows(I).Cells(7).Text <= dt1.ToShortDateString Then
-                    If deccnt > 0 Then
-                        lng14 = lng14 + 1
-                    Else
-                    End If
-                ElseIf GridView1.Rows(I).Cells(7).Text <= WDAY00 And GridView1.Rows(I).Cells(7).Text > dt1.ToShortDateString Then ' 1稼働日後がEXDCUT
-                    If deccnt > 0 Then
-                        lng15 = lng15 + 1
-                    Else
-                    End If
-                End If
-            End If
+        '    If Left(GridView1.Rows(I).Cells(2).Text, 2) = "上野" Then
+        '        If GridView1.Rows(I).Cells(7).Text <= WDAY00 Then
+        '            If deccnt > 0 Then
+        '                lng14 = lng14 + 1
+        '            Else
+        '            End If
+        '        ElseIf GridView1.Rows(I).Cells(7).Text <= WDAY00 And GridView1.Rows(I).Cells(7).Text > WDAY00 Then   ' 1稼働日後がEXDCUT 
+        '            If deccnt > 0 Then
+        '                lng15 = lng15 + 1
+        '            Else
+        '            End If
+        '        End If
+        '    Else
+        '        If GridView1.Rows(I).Cells(7).Text <= dt1.ToShortDateString Then
+        '            If deccnt > 0 Then
+        '                lng14 = lng14 + 1
+        '            Else
+        '            End If
+        '        ElseIf GridView1.Rows(I).Cells(7).Text <= WDAY00 And GridView1.Rows(I).Cells(7).Text > dt1.ToShortDateString Then ' 1稼働日後がEXDCUT
+        '            If deccnt > 0 Then
+        '                lng15 = lng15 + 1
+        '            Else
+        '            End If
+        '        End If
+        '    End If
 
-        Next
+        'Next
 
 
 
