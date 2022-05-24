@@ -166,6 +166,11 @@ Partial Class cs_home
                 dltButton.CommandArgument = e.Row.RowIndex.ToString()
             End If
         End If
+
+        'コード列非表示処理
+        If (e.Row.RowType = DataControlRowType.DataRow OrElse e.Row.RowType = DataControlRowType.Header) And Me.CheckBox1.Checked = True Then
+            e.Row.Cells(0).Visible = False
+        End If
     End Sub
 
     Private Function GET_BOOK_INFO(strORDNO As String) As String
