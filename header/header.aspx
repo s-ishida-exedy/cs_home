@@ -89,6 +89,7 @@
                     <!-- 第二階層 -->
                     <li data-id='["home","shippingmemo.aspx"]'><a href="#">シッピングメモ記録</a></li>
                     <li data-id='["home","sales_comfirm.aspx"]'><a href="#">海外売上確定チェック</a></li>
+                    <li data-id='["home","ord_book_chk.aspx"]'><a href="#">ブッキング確認</a></li>
                 </ul>
             </li>
         </ul>
