@@ -98,7 +98,7 @@ Partial Class cs_home
 
         Dim intToday As Integer = 0
         Dim strTody As String = Now.ToString("yyyy/MM/dd")
-        Dim strTomm As String = GET_SHITEI_EIGYOBI(Now.ToString("yyyy/MM/dd"), 2)
+        Dim strTomm As String = GET_SHITEI_EIGYOBI(Now.ToString("yyyy/MM/dd"), 2, "01")
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
