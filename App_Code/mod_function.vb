@@ -2,7 +2,7 @@
 Imports System.Data.Common
 Imports System.Data
 Imports System.Data.SqlClient
-'Imports Oracle.DataAccess.Client
+Imports Oracle.DataAccess.Client
 
 Public Class mod_function
     Dim Factroy As DbProviderFactory
@@ -129,49 +129,57 @@ Public Class mod_function
         End If
     End Function
 
-    Public Shared Function GET_SHITEI_EIGYOBI(strDate As String, intTarget As Integer) As String
-        '引数の日以降の営業日を取得(引数の日含む)
-        'Dim i As Integer
-        'Dim StrSQL As String = ""
+    Public Shared Function GET_SHITEI_EIGYOBI(strDate As String, intTarget As Integer, strMode As String) As String
+        'MODE01: 引数の日以降の営業日を取得(引数の日含む)
+        'MODE02: 引数の日以前の営業日を取得(引数の日含む)
 
-        'GET_SHITEI_EIGYOBI = ""
+        Dim i As Integer
+        Dim StrSQL As String = ""
 
-        ''データベースへの接続を開く
-        'Dim conn As New OracleConnection
-        'conn.ConnectionString = "User Id=EXL;Password=EXL;Data Source=EUCDB"
-        'conn.Open()
-        'Dim cmmd As New OracleCommand
-        'cmmd.Connection = conn
+        GET_SHITEI_EIGYOBI = ""
 
-        ''対象データ件数を取得する
-        'StrSQL = ""
-        'StrSQL = StrSQL & "SELECT "
-        'StrSQL = StrSQL & "  CAL_DATE "
-        'StrSQL = StrSQL & "FROM "
-        'StrSQL = StrSQL & "  EXPJ.M_CAL "
-        'StrSQL = StrSQL & "WHERE "
-        'StrSQL = StrSQL & "  CAL_NO = 1 "
-        'StrSQL = StrSQL & "  AND HOLIDAY_FLG = 0 "
-        'StrSQL = StrSQL & "  AND CAL_DATE >= '" & strDate & "' "
-        'StrSQL = StrSQL & "ORDER BY CAL_DATE"
+        'データベースへの接続を開く
+        Dim conn As New OracleConnection
+        conn.ConnectionString = "User Id=EXL;Password=EXL;Data Source=EUCDB"
+        conn.Open()
+        Dim cmmd As New OracleCommand
+        cmmd.Connection = conn
+
+        '対象データ件数を取得する
+        StrSQL = ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  CAL_DATE "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "  EXPJ.M_CAL "
+        StrSQL = StrSQL & "WHERE "
+        StrSQL = StrSQL & "  CAL_NO = 1 "
+        StrSQL = StrSQL & "  AND HOLIDAY_FLG = 0 "
+        If strMode = "01" Then
+            StrSQL = StrSQL & "  AND CAL_DATE >= '" & strDate & "' "
+            StrSQL = StrSQL & "ORDER BY CAL_DATE"
+        ElseIf strMode = "02" Then
+            StrSQL = StrSQL & "  AND CAL_DATE <= '" & strDate & "' "
+            StrSQL = StrSQL & "ORDER BY CAL_DATE DESC"
+        End If
 
 
-        'cmmd.CommandText = StrSQL
-        'Dim dr As OracleDataReader = cmmd.ExecuteReader
+        cmmd.CommandText = StrSQL
+        Dim dr As OracleDataReader = cmmd.ExecuteReader
 
-        'i = 1
+        i = 1
 
-        'While (dr.Read())
-        '    If intTarget = i Then
-        '        GET_SHITEI_EIGYOBI = dr("CAL_DATE")
-        '    End If
+        While (dr.Read())
+            If intTarget = i Then
+                GET_SHITEI_EIGYOBI = dr("CAL_DATE")
+                Exit While
+            End If
 
-        '    i += 1
+            i += 1
 
-        'End While
+        End While
 
-        'dr.Close()
-        'conn.Close()
+        dr.Close()
+        conn.Close()
 
     End Function
 End Class

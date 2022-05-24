@@ -144,6 +144,12 @@
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
         <Columns>
+            <asp:TemplateField ShowHeader="False">
+                <ItemTemplate>
+                    <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="edt" Text="更新" />
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
             <asp:BoundField DataField="Forwarder" HeaderText="場所" ReadOnly="True" SortExpression="Forwarder" >
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
@@ -158,6 +164,10 @@
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
             <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" ReadOnly="True" >
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
+            <asp:BoundField HeaderText="書類">
+            <HeaderStyle Width="100px" />
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
         </Columns>

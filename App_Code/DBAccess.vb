@@ -2,6 +2,8 @@
 Imports System.Data.SqlClient
 Imports System.Data.Common
 Imports System.Data
+Imports mod_function
+
 Public Class DBAccess
     Dim Factroy As DbProviderFactory
     Dim Conn As DbConnection
@@ -202,6 +204,10 @@ Public Class DBAccess
         StrSQL = StrSQL & "  , CUT_DATE AS カット日 "
         StrSQL = StrSQL & "  , ETD AS ＥＴＤ  "
         StrSQL = StrSQL & "  , '' AS 最終  "
+        StrSQL = StrSQL & "  , CASE UPD_FLG "
+        StrSQL = StrSQL & "  WHEN '0' THEN '未作成' "
+        StrSQL = StrSQL & "  WHEN '1' THEN '作成済み' "
+        StrSQL = StrSQL & "  End As UPD_FLG "
         StrSQL = StrSQL & "FROM "
         StrSQL = StrSQL & "  T_EXL_VAN_SCH_DETAIL  "
         If strDate <> "" And strPlace <> "" Then
@@ -1019,6 +1025,89 @@ Public Class DBAccess
         StrSQL = StrSQL & "  [T_BOOKING] "
         StrSQL = StrSQL & "WHERE LEFT(CUST_CD,4) IN (" & strcust & ") "
         StrSQL = StrSQL & "AND (INVOICE_NO IS NULL OR INVOICE_NO ='') "
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
+
+    Public Function GET_SN_RESULT(strORDNO As String) As DataSet
+        'セールスノートデータ取得時
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        '２営業日前を取得
+        Dim strDate As String = GET_SHITEI_EIGYOBI(Now, 2, "02")
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  AA.SALESNOTENO "
+        StrSQL = StrSQL & "  , AA.CUST_GRP_CD "
+        StrSQL = StrSQL & "  , AA.CUSTCODE "
+        StrSQL = StrSQL & "  , AA.NOKIYMD "
+        StrSQL = StrSQL & "  , AA.PLNO "
+        StrSQL = StrSQL & "  , AA.ORDERNO "
+        StrSQL = StrSQL & "  , AA.FINISHDATE  "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "(Select DISTINCT "
+        StrSQL = StrSQL & "  SNH.SALESNOTENO "
+        StrSQL = StrSQL & "  , CU.CUST_GRP_CD "
+        StrSQL = StrSQL & "  , SNH.CUSTCODE "
+        StrSQL = StrSQL & "  , SNH.NOKIYMD "
+        StrSQL = StrSQL & "  , SNH.PLNO "
+        StrSQL = StrSQL & "  , SNH.ORDERNO "
+        StrSQL = StrSQL & "  , SNH.FINISHDATE  "
+        StrSQL = StrSQL & "From "
+        StrSQL = StrSQL & "  V_T_SN_HD_TB SNH  "
+        StrSQL = StrSQL & "  INNER JOIN V_T_SN_BD_TB SNB  "
+        StrSQL = StrSQL & "    ON SNH.SALESNOTENO = SNB.SALESNOTENO  "
+        StrSQL = StrSQL & "  INNER JOIN M_EXL_CUST CU "
+        StrSQL = StrSQL & "    ON SNH.CUSTCODE = CU.CUST_ANAME "
+        StrSQL = StrSQL & "Where SNH.ORDERNO In (" & strORDNO & ") "
+        StrSQL = StrSQL & "  AND SNB.LS = '2'  "
+        StrSQL = StrSQL & "  AND SNH.NOKIYMD >= CONVERT(NVARCHAR, GETDATE(), 111)  "
+        StrSQL = StrSQL & "  AND SNB.ERRCD = ''  "
+        StrSQL = StrSQL & "  AND SNH.FINISHDATE Is Not NULL  "
+        StrSQL = StrSQL & "  AND SNH.NOKIYMD <> '9999/12/31 0:00:00' "
+        StrSQL = StrSQL & "  AND SNB.LEFTQTY > 0 "
+        StrSQL = StrSQL & "  And SNH.FINISHDATE < '" & strDate & "' "
+        StrSQL = StrSQL & "  AND (SNH.CUSTCODE NOT IN ('C255','E140','E155') AND SNH.CUSTCODE NOT LIKE 'A%' AND SNH.CUSTCODE NOT LIKE 'B%') "
+        StrSQL = StrSQL & "  )AA "
+        StrSQL = StrSQL & "WHERE NOT EXISTS  "
+        StrSQL = StrSQL & "(SELECT 1 FROM T_BOOKING  "
+        StrSQL = StrSQL & "WHERE SUBSTRING(T_BOOKING.CUST_CD,1,4) = AA.CUST_GRP_CD "
+        StrSQL = StrSQL & "AND (T_BOOKING.ETD = AA.NOKIYMD OR T_BOOKING.PODATE = AA.NOKIYMD)) "
+        StrSQL = StrSQL & "And Not EXISTS  "
+        StrSQL = StrSQL & "(SELECT 1 FROM T_EXL_BOOKING_CHK CH "
+        StrSQL = StrSQL & "WHERE AA.SALESNOTENO = CH.SALESNOTENO) "
+        StrSQL = StrSQL & "ORDER BY "
+        StrSQL = StrSQL & "  AA.NOKIYMD "
+        StrSQL = StrSQL & "  , AA.CUST_GRP_CD  "
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
+
+    Public Function GET_SN_COMFIRM() As DataSet
+        'セールスノートデータ取得時（確認済みを表示する）
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        '２営業日前を取得
+        Dim strDate As String = GET_SHITEI_EIGYOBI(Now, 2, "02")
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT *"
+        StrSQL = StrSQL & "FROM T_EXL_BOOKING_CHK "
 
         Cmd.CommandText = StrSQL
 

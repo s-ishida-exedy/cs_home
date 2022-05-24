@@ -236,6 +236,8 @@
 </table>  
 </div>
 <p class="c"><a href="./topics.aspx">トピックス一覧</a></p>
+<asp:Label ID="Label15" runat="server" Text="※トピックスはCS専用、他部署は閲覧不可です。"  Font-Size="Small"></asp:Label>
+<asp:Label ID="Label16" runat="server" Text="※連絡事項など自由に使用してください。"  Font-Size="Small"></asp:Label>
 </div>
 <!--/#sub-->
 
