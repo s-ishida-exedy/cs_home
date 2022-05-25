@@ -2,7 +2,6 @@
 Imports System.Data.Common
 Imports System.Data
 Imports System.Data.SqlClient
-Imports Oracle.DataAccess.Client
 
 Public Class mod_function
     Dim Factroy As DbProviderFactory
@@ -135,51 +134,59 @@ Public Class mod_function
 
         Dim i As Integer
         Dim StrSQL As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
 
         GET_SHITEI_EIGYOBI = ""
 
-        'データベースへの接続を開く
-        Dim conn As New OracleConnection
-        conn.ConnectionString = "User Id=EXL;Password=EXL;Data Source=EUCDB"
-        conn.Open()
-        Dim cmmd As New OracleCommand
-        cmmd.Connection = conn
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        'データベース接続を開く
+        cnn.Open()
+
 
         '対象データ件数を取得する
         StrSQL = ""
         StrSQL = StrSQL & "SELECT "
-        StrSQL = StrSQL & "  CAL_DATE "
+        StrSQL = StrSQL & "  WORKDAY "
         StrSQL = StrSQL & "FROM "
-        StrSQL = StrSQL & "  EXPJ.M_CAL "
-        StrSQL = StrSQL & "WHERE "
-        StrSQL = StrSQL & "  CAL_NO = 1 "
-        StrSQL = StrSQL & "  AND HOLIDAY_FLG = 0 "
+        StrSQL = StrSQL & "  T_EXL_CSWORKDAY "
         If strMode = "01" Then
-            StrSQL = StrSQL & "  AND CAL_DATE >= '" & strDate & "' "
-            StrSQL = StrSQL & "ORDER BY CAL_DATE"
+            StrSQL = StrSQL & "WHERE WORKDAY >= '" & strDate & "' "
+            StrSQL = StrSQL & "ORDER BY WORKDAY"
         ElseIf strMode = "02" Then
-            StrSQL = StrSQL & "  AND CAL_DATE <= '" & strDate & "' "
-            StrSQL = StrSQL & "ORDER BY CAL_DATE DESC"
+            StrSQL = StrSQL & "WHERE WORKDAY <= '" & strDate & "' "
+            StrSQL = StrSQL & "ORDER BY WORKDAY DESC"
         End If
 
-
-        cmmd.CommandText = StrSQL
-        Dim dr As OracleDataReader = cmmd.ExecuteReader
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(StrSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
 
         i = 1
 
-        While (dr.Read())
+        '結果を取り出す 
+        While (dataread.Read())
             If intTarget = i Then
-                GET_SHITEI_EIGYOBI = dr("CAL_DATE")
+                GET_SHITEI_EIGYOBI = dataread("WORKDAY")
                 Exit While
             End If
 
             i += 1
-
         End While
 
-        dr.Close()
-        conn.Close()
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
 
     End Function
 End Class
