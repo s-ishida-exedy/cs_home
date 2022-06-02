@@ -29,6 +29,7 @@ Partial Class yuusen
         Dim intval As Integer
         Dim intCnt As Integer
 
+        Dim byteLength As Integer
 
         Dim dt1 As DateTime = DateTime.Now
 
@@ -36,6 +37,8 @@ Partial Class yuusen
         Dim ts2 As New TimeSpan(180, 0, 0, 0)
         Dim dt2 As DateTime = dt1 + ts1
         Dim dt3 As DateTime = dt1 - ts1
+
+
 
         Dim dt00 As String = dt3.ToShortDateString
 
@@ -55,83 +58,159 @@ Partial Class yuusen
             e.Row.Cells(4).Text = Trim(Mid(e.Row.Cells(4).Text, intval + 1, Len(e.Row.Cells(4).Text) - intval))
             intCnt = 0
 
+            If Len(e.Row.Cells(4).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(4).Text) Then
+                e.Row.BackColor = Drawing.Color.Green
+                e.Row.Cells(4).Text = e.Row.Cells(4).Text & "_全角"
+            End If
+
+            If InStr(e.Row.Cells(4).Text, vbCr) + InStr(e.Row.Cells(4).Text, vbLf) + InStr(e.Row.Cells(4).Text, vbCrLf) > 0 Then
+                e.Row.BackColor = Drawing.Color.Blue
+                e.Row.Cells(4).Text = e.Row.Cells(4).Text & "_改行"
+            End If
+
             'PORTOF DEISCHARGE(揚地)	5
             intval = 0
-            intCnt = InStr(intCnt + 1, e.Row.Cells(5).Text, "→")
-            Do While intCnt > 0
-                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(5).Text, "→")
-            Loop
-            e.Row.Cells(5).Text = Trim(Mid(e.Row.Cells(5).Text, intval + 1, Len(e.Row.Cells(5).Text) - intval))
+                Do While intCnt > 0
+                    intval = intCnt
+                    intCnt = InStr(intCnt + 1, e.Row.Cells(5).Text, "→")
+                Loop
+                e.Row.Cells(5).Text = Trim(Mid(e.Row.Cells(5).Text, intval + 1, Len(e.Row.Cells(5).Text) - intval))
             intCnt = 0
+
+            If Len(e.Row.Cells(5).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(5).Text) Then
+                e.Row.BackColor = Drawing.Color.Green
+                e.Row.Cells(5).Text = e.Row.Cells(5).Text & "_全角"
+            End If
+
+            If InStr(e.Row.Cells(5).Text, vbCr) + InStr(e.Row.Cells(5).Text, vbLf) + InStr(e.Row.Cells(5).Text, vbCrLf) > 0 Then
+                e.Row.BackColor = Drawing.Color.Blue
+                e.Row.Cells(5).Text = e.Row.Cells(5).Text & "_改行"
+            End If
 
             'PALECE OF DELIVERY(配送先)	6
             intval = 0
-            intCnt = InStr(intCnt + 1, e.Row.Cells(6).Text, "→")
-            Do While intCnt > 0
-                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(6).Text, "→")
-            Loop
-            e.Row.Cells(6).Text = Trim(Mid(e.Row.Cells(6).Text, intval + 1, Len(e.Row.Cells(6).Text) - intval))
+                Do While intCnt > 0
+                    intval = intCnt
+                    intCnt = InStr(intCnt + 1, e.Row.Cells(6).Text, "→")
+                Loop
+                e.Row.Cells(6).Text = Trim(Mid(e.Row.Cells(6).Text, intval + 1, Len(e.Row.Cells(6).Text) - intval))
             intCnt = 0
+
+            If Len(e.Row.Cells(6).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(6).Text) Then
+                e.Row.BackColor = Drawing.Color.Green
+                e.Row.Cells(6).Text = e.Row.Cells(6).Text & "_全角"
+            End If
+
+            If InStr(e.Row.Cells(6).Text, vbCr) + InStr(e.Row.Cells(6).Text, vbLf) + InStr(e.Row.Cells(6).Text, vbCrLf) > 0 Then
+                e.Row.BackColor = Drawing.Color.Blue
+                e.Row.Cells(6).Text = e.Row.Cells(6).Text & "_改行"
+            End If
 
             '荷受地	7
             intval = 0
-            intCnt = InStr(intCnt + 1, e.Row.Cells(7).Text, "→")
-            Do While intCnt > 0
-                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(7).Text, "→")
-            Loop
-            e.Row.Cells(7).Text = Trim(Mid(e.Row.Cells(7).Text, intval + 1, Len(e.Row.Cells(7).Text) - intval))
+                Do While intCnt > 0
+                    intval = intCnt
+                    intCnt = InStr(intCnt + 1, e.Row.Cells(7).Text, "→")
+                Loop
+                e.Row.Cells(7).Text = Trim(Mid(e.Row.Cells(7).Text, intval + 1, Len(e.Row.Cells(7).Text) - intval))
             intCnt = 0
+
+            If Len(e.Row.Cells(7).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(7).Text) Then
+                e.Row.BackColor = Drawing.Color.Green
+                e.Row.Cells(7).Text = e.Row.Cells(7).Text & "_全角"
+            End If
+
+            If InStr(e.Row.Cells(7).Text, vbCr) + InStr(e.Row.Cells(7).Text, vbLf) + InStr(e.Row.Cells(7).Text, vbCrLf) > 0 Then
+                e.Row.BackColor = Drawing.Color.Blue
+                e.Row.Cells(7).Text = e.Row.Cells(7).Text & "_改行"
+            End If
 
             'PLACE OF DELIVERY BY CARRIER(配送者責任送り先)	8
             intval = 0
-            intCnt = InStr(intCnt + 1, e.Row.Cells(8).Text, "→")
-            Do While intCnt > 0
-                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(8).Text, "→")
-            Loop
-            e.Row.Cells(8).Text = Trim(Mid(e.Row.Cells(8).Text, intval + 1, Len(e.Row.Cells(8).Text) - intval))
-            intCnt = 0
+                Do While intCnt > 0
+                    intval = intCnt
+                    intCnt = InStr(intCnt + 1, e.Row.Cells(8).Text, "→")
+                Loop
+                e.Row.Cells(8).Text = Trim(Mid(e.Row.Cells(8).Text, intval + 1, Len(e.Row.Cells(8).Text) - intval))
+                intCnt = 0
 
+            If Len(e.Row.Cells(8).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(8).Text) Then
+                e.Row.BackColor = Drawing.Color.Green
+                e.Row.Cells(8).Text = e.Row.Cells(8).Text & "_全角"
+            End If
+
+            If InStr(e.Row.Cells(8).Text, vbCr) + InStr(e.Row.Cells(8).Text, vbLf) + InStr(e.Row.Cells(8).Text, vbCrLf) > 0 Then
+                e.Row.BackColor = Drawing.Color.Blue
+                e.Row.Cells(8).Text = e.Row.Cells(8).Text & "_改行"
+            End If
 
             'voyage 16
             intval = 0
-            intCnt = InStr(intCnt + 1, e.Row.Cells(16).Text, "→")
-            Do While intCnt > 0
-                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(16).Text, "→")
-            Loop
-            e.Row.Cells(16).Text = Trim(Mid(e.Row.Cells(16).Text, intval + 1, Len(e.Row.Cells(16).Text) - intval))
-            intCnt = 0
+                Do While intCnt > 0
+                    intval = intCnt
+                    intCnt = InStr(intCnt + 1, e.Row.Cells(16).Text, "→")
+                Loop
+                e.Row.Cells(16).Text = Trim(Mid(e.Row.Cells(16).Text, intval + 1, Len(e.Row.Cells(16).Text) - intval))
+                intCnt = 0
+
+            If Len(e.Row.Cells(16).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(16).Text) Then
+                e.Row.BackColor = Drawing.Color.Green
+                e.Row.Cells(16).Text = e.Row.Cells(16).Text & "_全角"
+            End If
+
+            If InStr(e.Row.Cells(16).Text, vbCr) + InStr(e.Row.Cells(16).Text, vbLf) + InStr(e.Row.Cells(16).Text, vbCrLf) > 0 Then
+                e.Row.BackColor = Drawing.Color.Blue
+                e.Row.Cells(16).Text = e.Row.Cells(16).Text & "_改行"
+            End If
 
             '船社	17
             intval = 0
-            intCnt = InStr(intCnt + 1, e.Row.Cells(17).Text, "→")
-            Do While intCnt > 0
-                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(17).Text, "→")
-            Loop
-            e.Row.Cells(17).Text = Trim(Mid(e.Row.Cells(17).Text, intval + 1, Len(e.Row.Cells(17).Text) - intval))
+                Do While intCnt > 0
+                    intval = intCnt
+                    intCnt = InStr(intCnt + 1, e.Row.Cells(17).Text, "→")
+                Loop
+                e.Row.Cells(17).Text = Trim(Mid(e.Row.Cells(17).Text, intval + 1, Len(e.Row.Cells(17).Text) - intval))
             intCnt = 0
+
+            If Len(e.Row.Cells(17).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(17).Text) Then
+                e.Row.BackColor = Drawing.Color.Green
+                e.Row.Cells(17).Text = e.Row.Cells(17).Text & "_全角"
+            End If
+
+            If InStr(e.Row.Cells(17).Text, vbCr) + InStr(e.Row.Cells(17).Text, vbLf) + InStr(e.Row.Cells(17).Text, vbCrLf) > 0 Then
+                e.Row.BackColor = Drawing.Color.Blue
+                e.Row.Cells(17).Text = e.Row.Cells(17).Text & "_改行"
+            End If
 
             'BOOKING_NO	    21
             intval = 0
-            intCnt = InStr(intCnt + 1, e.Row.Cells(21).Text, "→")
-            Do While intCnt > 0
-                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(21).Text, "→")
-            Loop
-            e.Row.Cells(21).Text = Trim(Replace(Mid(e.Row.Cells(21).Text, intval + 1, Len(e.Row.Cells(21).Text) - intval), vbLf, ""))
-            intCnt = 0
+                Do While intCnt > 0
+                    intval = intCnt
+                    intCnt = InStr(intCnt + 1, e.Row.Cells(21).Text, "→")
+                Loop
+                e.Row.Cells(21).Text = Trim(Replace(Mid(e.Row.Cells(21).Text, intval + 1, Len(e.Row.Cells(21).Text) - intval), vbLf, ""))
+                intCnt = 0
 
+            If Len(e.Row.Cells(21).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(21).Text) Then
+                e.Row.BackColor = Drawing.Color.Green
+                e.Row.Cells(21).Text = e.Row.Cells(21).Text & "_全角"
+            End If
+
+            If InStr(e.Row.Cells(21).Text, vbCr) + InStr(e.Row.Cells(21).Text, vbLf) + InStr(e.Row.Cells(21).Text, vbCrLf) > 0 Then
+                e.Row.BackColor = Drawing.Color.Blue
+                e.Row.Cells(21).Text = e.Row.Cells(21).Text & "_改行"
+            End If
 
             If e.Row.Cells(0).Text = "C255" Then
 
                 e.Row.Cells(21).Text = "C255" & Format(DateValue(e.Row.Cells(11).Text), "yyyyMMdd")          'booking no
-
-
 
                 e.Row.Cells(16).Text = "-"
                 e.Row.Cells(22).Text = "-"
@@ -140,24 +219,33 @@ Partial Class yuusen
 
                 e.Row.Cells(21).Text = "C258" & Format(DateValue(e.Row.Cells(11).Text), "yyyyMMdd")          'booking no
 
-
                 e.Row.Cells(16).Text = "-"
                 e.Row.Cells(22).Text = "-"
 
             End If
 
-            '船名	22
-            intval = 0
+                '船名	22
+                intval = 0
                 intCnt = InStr(intCnt + 1, e.Row.Cells(22).Text, "→")
                 Do While intCnt > 0
                     intval = intCnt
                     intCnt = InStr(intCnt + 1, e.Row.Cells(22).Text, "→")
                 Loop
                 e.Row.Cells(22).Text = Trim(Mid(e.Row.Cells(22).Text, intval + 1, Len(e.Row.Cells(22).Text) - intval))
-                intCnt = 0
+            intCnt = 0
 
-                'place of delivery SI	25
-                intval = 0
+            If Len(e.Row.Cells(22).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(22).Text) Then
+                e.Row.BackColor = Drawing.Color.Green
+                e.Row.Cells(22).Text = e.Row.Cells(22).Text & "_全角"
+            End If
+
+            If InStr(e.Row.Cells(22).Text, vbCr) + InStr(e.Row.Cells(22).Text, vbLf) + InStr(e.Row.Cells(22).Text, vbCrLf) > 0 Then
+                e.Row.BackColor = Drawing.Color.Blue
+                e.Row.Cells(22).Text = e.Row.Cells(22).Text & "_改行"
+            End If
+
+            'place of delivery SI	25
+            intval = 0
                 intCnt = InStr(intCnt + 1, e.Row.Cells(25).Text, "→")
                 Do While intCnt > 0
                     intval = intCnt
@@ -344,18 +432,18 @@ Partial Class yuusen
 
 
 
-            If IsDate(e.Row.Cells(1).Text) = False Then
+                If IsDate(e.Row.Cells(1).Text) = False Then
 
-                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+                    If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+
+                    Else
+
+                        e.Row.Cells(0).Text = "日付エラー02行目"
+                        e.Row.BackColor = Drawing.Color.Red
+
+                    End If
 
                 Else
-
-                    e.Row.Cells(0).Text = "日付エラー02行目"
-                    e.Row.BackColor = Drawing.Color.Red
-
-                End If
-
-            Else
                     '半年移行前の日付の場合は翌年にする
                     If DateValue(e.Row.Cells(1).Text) < dt00 Then
                         e.Row.Cells(1).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(1).Text)), "yyyy") & Format(DateValue(e.Row.Cells(1).Text), "/mm/dd"))
@@ -363,15 +451,15 @@ Partial Class yuusen
                 End If
 
                 If IsDate(e.Row.Cells(9).Text) = False Then
-                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+                    If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
 
+                    Else
+
+                        e.Row.Cells(0).Text = "日付エラー10行目"
+                        e.Row.BackColor = Drawing.Color.Red
+
+                    End If
                 Else
-
-                    e.Row.Cells(0).Text = "日付エラー10行目"
-                    e.Row.BackColor = Drawing.Color.Red
-
-                End If
-            Else
                     '半年移行前の日付の場合は翌年にする
                     If DateValue(e.Row.Cells(9).Text) < dt00 Then
                         e.Row.Cells(9).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(9).Text)), "yyyy") & Format(DateValue(e.Row.Cells(9).Text), "/mm/dd"))
@@ -379,15 +467,15 @@ Partial Class yuusen
                 End If
 
                 If IsDate(e.Row.Cells(10).Text) = False Then
-                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+                    If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
 
+                    Else
+
+                        e.Row.Cells(0).Text = "日付エラー11行目"
+                        e.Row.BackColor = Drawing.Color.Red
+
+                    End If
                 Else
-
-                    e.Row.Cells(0).Text = "日付エラー11行目"
-                    e.Row.BackColor = Drawing.Color.Red
-
-                End If
-            Else
                     '半年移行前の日付の場合は翌年にする
                     If DateValue(e.Row.Cells(10).Text) < dt00 Then
                         e.Row.Cells(10).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(10).Text)), "yyyy") & Format(DateValue(e.Row.Cells(10).Text), "/mm/dd"))
@@ -395,15 +483,15 @@ Partial Class yuusen
                 End If
 
                 If IsDate(e.Row.Cells(11).Text) = False Then
-                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+                    If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
 
+                    Else
+
+                        e.Row.Cells(0).Text = "日付エラー12行目"
+                        e.Row.BackColor = Drawing.Color.Red
+
+                    End If
                 Else
-
-                    e.Row.Cells(0).Text = "日付エラー12行目"
-                    e.Row.BackColor = Drawing.Color.Red
-
-                End If
-            Else
                     '半年移行前の日付の場合は翌年にする
                     If DateValue(e.Row.Cells(11).Text) < dt00 Then
                         e.Row.Cells(11).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(11).Text)), "yyyy") & Format(DateValue(e.Row.Cells(11).Text), "/mm/dd"))
