@@ -709,6 +709,28 @@ Partial Class yuusen
                                     End If
                                 End If
 
+                            Case 0, 2 To 8, 16 To 26
+                                If Len(row.Cells(i).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(row.Cells(i).Text) Then
+                                    ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Green
+                                    ws.Cell(t, i + 1).Style.Fill.BackgroundColor = XLColor.Green
+                                    ws.Cell(t, i + 1).SetValue("全角エラー")
+                                    ws.Cell(t, 1).SetValue("全角エラー")
+                                Else
+                                    ws.Cell(t, i + 1).SetValue(val01)
+                                End If
+
+                            Case 0, 2, 4 To 8, 16 To 23, 25
+
+                                If InStr(row.Cells(i).Text, vbCr) + InStr(row.Cells(i).Text, vbLf) + InStr(row.Cells(i).Text, vbCrLf) > 0 Then
+                                    ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Blue
+                                    ws.Cell(t, i + 1).Style.Fill.BackgroundColor = XLColor.Blue
+                                    ws.Cell(t, i + 1).SetValue(val01)
+                                    ws.Cell(t, i + 1).SetValue("改行エラー")
+                                    ws.Cell(t, 1).SetValue("改行エラー")
+                                Else
+                                    ws.Cell(t, i + 1).SetValue(val01)
+                                End If
+
                             Case Else
                                 ws.Cell(t, i + 1).SetValue(val01)
                         End Select

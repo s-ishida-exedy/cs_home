@@ -295,6 +295,15 @@
             </tr>
         </table>
 
+        <table style="height:10px;">
+            <tr>
+                <td style="width:1500px;" >
+                    <asp:Label ID="Label1" runat="server" Text="エラー ： 赤：日付異常 / 緑：全角 / 青：改行"></asp:Label>
+                </td>
+            </tr>
+        </table>
+
+
         <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
             <div class="wrapper">
                 <table class="sticky">
@@ -307,14 +316,6 @@
                         <HeaderStyle CssClass="Freezing"></HeaderStyle>
 
                         <Columns>
-<%--                        <asp:TemplateField>
-                        <ItemTemplate>
-                        <asp:CheckBox ID="cb" Checked="false" runat="server"/>
-                        </ItemTemplate>
-                        </asp:TemplateField>--%>
-
-
-
 
 
                         <asp:BoundField DataField="CUST_CD02" HeaderText="請求客先コード" SortExpression="CUST_CD02" />
