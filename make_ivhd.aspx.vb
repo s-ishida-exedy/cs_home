@@ -178,10 +178,10 @@ Partial Class yuusen
                 e.Row.Cells(17).Text = Trim(Mid(e.Row.Cells(17).Text, intval + 1, Len(e.Row.Cells(17).Text) - intval))
             intCnt = 0
 
-            If Len(e.Row.Cells(17).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(17).Text) Then
-                e.Row.BackColor = Drawing.Color.Green
-                e.Row.Cells(17).Text = e.Row.Cells(17).Text & "_全角"
-            End If
+            'If Len(e.Row.Cells(17).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(17).Text) Then
+            '    e.Row.BackColor = Drawing.Color.Green
+            '    e.Row.Cells(17).Text = e.Row.Cells(17).Text & "_全角"
+            'End If
 
             If InStr(e.Row.Cells(17).Text, vbCr) + InStr(e.Row.Cells(17).Text, vbLf) + InStr(e.Row.Cells(17).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
@@ -221,6 +221,8 @@ Partial Class yuusen
 
                 e.Row.Cells(16).Text = "-"
                 e.Row.Cells(22).Text = "-"
+
+
 
             End If
 
@@ -438,8 +440,8 @@ Partial Class yuusen
 
                     Else
 
-                        e.Row.Cells(0).Text = "日付エラー02行目"
-                        e.Row.BackColor = Drawing.Color.Red
+                    e.Row.Cells(0).Text = "日付エラー02行目_" & e.Row.Cells(0).Text
+                    e.Row.BackColor = Drawing.Color.Red
 
                     End If
 
@@ -455,8 +457,8 @@ Partial Class yuusen
 
                     Else
 
-                        e.Row.Cells(0).Text = "日付エラー10行目"
-                        e.Row.BackColor = Drawing.Color.Red
+                    e.Row.Cells(0).Text = "日付エラー10行目_" & e.Row.Cells(0).Text
+                    e.Row.BackColor = Drawing.Color.Red
 
                     End If
                 Else
@@ -471,8 +473,8 @@ Partial Class yuusen
 
                     Else
 
-                        e.Row.Cells(0).Text = "日付エラー11行目"
-                        e.Row.BackColor = Drawing.Color.Red
+                    e.Row.Cells(0).Text = "日付エラー11行目_" & e.Row.Cells(0).Text
+                    e.Row.BackColor = Drawing.Color.Red
 
                     End If
                 Else
@@ -487,8 +489,8 @@ Partial Class yuusen
 
                     Else
 
-                        e.Row.Cells(0).Text = "日付エラー12行目"
-                        e.Row.BackColor = Drawing.Color.Red
+                    e.Row.Cells(0).Text = "日付エラー12行目_" & e.Row.Cells(0).Text
+                    e.Row.BackColor = Drawing.Color.Red
 
                     End If
                 Else
@@ -691,7 +693,12 @@ Partial Class yuusen
                 cnt = 0
                 t = 2
                 For Each row As GridViewRow In GridView1.Rows
-                    For i As Integer = 0 To row.Cells.Count - 5
+
+                    If row.Cells(0).Text Like "*日付エラー*" Then
+
+                    Else
+
+                        For i As Integer = 0 To row.Cells.Count - 5
                         val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
                         Select Case i
 
@@ -709,7 +716,7 @@ Partial Class yuusen
                                     End If
                                 End If
 
-                            Case 0, 2 To 8, 16 To 26
+                            Case 2 To 8, 16, 18 To 26
                                 If Len(row.Cells(i).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(row.Cells(i).Text) Then
                                     ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Green
                                     ws.Cell(t, i + 1).Style.Fill.BackgroundColor = XLColor.Green
@@ -736,7 +743,8 @@ Partial Class yuusen
                         End Select
 
                     Next
-                    t = t + 1
+                        t = t + 1
+                    End If
                 Next
 
                 ws.Style.Font.FontName = "Meiryo UI"
@@ -857,7 +865,7 @@ Partial Class yuusen
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
-        Dim strcust As String = "'C255','C258'"
+        Dim strcust As String = "'C255','C258','C253'"
         Dim Dataobj As New DBAccess
 
         Dim ds As DataSet = Dataobj.GET_CS_RESULT_MAKE_IV(strcust)
