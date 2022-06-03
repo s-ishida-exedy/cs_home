@@ -42,7 +42,7 @@
         }
         .wrapper {
             overflow: scroll;
-            height: 400px;
+            height: 300px;
         }
 
         h2 {
@@ -461,6 +461,58 @@
 
 </div>
 
+<div id="contents2" class="inner2">
+
+
+    <asp:Panel ID="Panel4" runat="server"  Font-Size="12px">
+
+    <asp:Label ID="Label19" runat="server" Text="＜過去履歴＞"></asp:Label>
+
+    <div class="wrapper">
+    <table class="sticky">
+    <thead class="fixed">
+
+    </thead>
+
+    <tbody>
+                                 
+    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BackColor="#6fbfd1" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" DataSourceID="SqlDataSource2" Width="927px">
+    <HeaderStyle BackColor="#6fbfd1" Font-Bold="True" ForeColor="BLACK" />
+    <HeaderStyle CssClass="Freezing" />
+    <Columns>
+
+
+    <asp:BoundField DataField="STATUS" HeaderText="状況" SortExpression="STATUS" />
+    <asp:BoundField DataField="BKGSHEET" HeaderText="シート" SortExpression="BKGSHEET" />
+    <asp:BoundField DataField="FORWARDER" HeaderText="海貨御者" SortExpression="FORWARDER" />
+    <asp:BoundField DataField="CUST" HeaderText="客先コード" SortExpression="CUST" />
+    <asp:BoundField DataField="INVOICE" HeaderText="INVOICE" SortExpression="INVOICE" />
+    <asp:BoundField DataField="CUT" HeaderText="CUT" SortExpression="CUT" />
+    <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" />
+    <asp:BoundField DataField="BKGNO" HeaderText="BKGNO" SortExpression="BKGNO" />
+    <asp:BoundField DataField="SHIP_TYPE" HeaderText="登録・更新日" SortExpression="SHIP_TYPE" />
+
+    </Columns>
+    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+    <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+    <RowStyle BackColor="#FFFFFF" ForeColor="Black" />
+    <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+
+    </asp:GridView>
+
+    </tbody>
+    </table>
+
+    </asp:Panel>
+
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_ANKEN_HISTORY] "></asp:SqlDataSource>
+
+    </div>
+
+
+
+
+</div>
 
 <!--/#contents2-->
 

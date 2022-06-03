@@ -119,6 +119,43 @@ Partial Class yuusen
         cnn.Dispose()
 
     End Sub
+    Private Sub GridView2_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView2.RowDataBound
+
+        '最終更新年月日取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String
+        Dim strinv As String
+        Dim cno As Long
+        Dim wno As Long
+        Dim wno2 As Long
+        Dim wno3 As Long
+        Dim wday As String
+        Dim wday2 As String
+        Dim wday3 As String
+        Dim wday4 As String
+        Dim strbkg As String
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(9).Text) & "' "
+
+            'Dim ts1 As New TimeSpan(60, 0, 0, 0)
+            'Dim ts2 As New TimeSpan(60, 0, 0, 0)
+            'Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
+
+            'Dim dt2 As DateTime = dt4 + ts1
+            'Dim dt3 As DateTime = dt4 - ts1
+
+            If Trim(e.Row.Cells(0).Text) = "委託登録済" Then
+
+                e.Row.BackColor = Drawing.Color.DarkSalmon
+            End If
+        End If
+
+
+    End Sub
 
     Private Sub itaku(bkgno As String)
         '確認完了ボタン押下時
@@ -824,6 +861,7 @@ Partial Class yuusen
         Dim dt0B = DateTime.Parse("11:50:00")
         Dim dt1B = DateTime.Parse("12:00:00")
 
+
         Dim dt0C = DateTime.Parse("14:55:00")
         Dim dt1C = DateTime.Parse("15:05:00")
 
@@ -834,6 +872,14 @@ Partial Class yuusen
             Panel2.Visible = False
             Panel3.Visible = True
 
+            CheckBox1.Visible = False
+            CheckBox2.Visible = False
+
+            Button1.Visible = False
+            Button4.Visible = False
+            Button3.Visible = False
+            Button2.Visible = False
+
         End If
 
         If dt1 < dt1B And dt1 > dt0B Then
@@ -841,6 +887,14 @@ Partial Class yuusen
             Panel1.Visible = False
             Panel2.Visible = False
             Panel3.Visible = True
+
+            CheckBox1.Visible = False
+            CheckBox2.Visible = False
+
+            Button1.Visible = False
+            Button4.Visible = False
+            Button3.Visible = False
+            Button2.Visible = False
 
         End If
 
@@ -850,6 +904,15 @@ Partial Class yuusen
             Panel1.Visible = False
             Panel2.Visible = False
             Panel3.Visible = True
+
+            CheckBox1.Visible = False
+            CheckBox2.Visible = False
+
+            Button1.Visible = False
+            Button4.Visible = False
+            Button3.Visible = False
+            Button2.Visible = False
+
         End If
 
         cnn.Close()
@@ -1986,6 +2049,14 @@ Step00:
 
         Dim strcc As String = GET_ToAddress(0, 0) + GET_from(struid)  'CC 
 
+
+        strto = GET_from(struid)
+        strcc = GET_from(struid)
+
+
+
+
+
         Dim f As String = ""
         Dim dt1 As DateTime = DateTime.Now
 
@@ -2012,10 +2083,52 @@ Step00:
         body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
         body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
 
-        body = body & "<html><body>各位<br>お世話になっております。<br><br>" & "KDとｱﾌﾀ登録完了いたしました。<br>以上になります。<br><br>" & kbn & "担当<br><br>※KDとｱﾌﾀのどちらともの登録が完了した際に配信されます。</body></html>" ' UriBodyC()
+        'body = body & "<html><body>各位<br>お世話になっております。<br><br>" & "KDとｱﾌﾀ登録完了いたしました。<br>以上になります。<br><br>" & kbn & "担当<br><br>※KDとｱﾌﾀのどちらともの登録が完了した際に配信されます。</body></html>" ' UriBodyC()
 
-        body = "<font size=" & Chr(34) & " 3" & Chr(34) & ">" & body & "</font>"
+        'body = "<font size=" & Chr(34) & " 3" & Chr(34) & ">" & body & "</font>"
+        'body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
+
+
+
+
+
+
+        'メールの本文
+        body = body & "<html><body><p>各位<p>お世話になっております。<p>KDとｱﾌﾀ登録完了いたしました。</p></body></html>" ' UriBodyC()
+
+        Dim t As String = ””
+        GridView1.DataBind()
+
+        If GridView1.Rows.Count >= 1 Then
+
+            t = t & "<html><body><Table border='1' style='Font-Size:14px;'><tr style='background-color: #6fbfd1;'><td>状況</td><td>シート</td><td>海貨業者</td><td>客先コード	</td><td>INVOICE</td><td>進捗状況</td><td>CUT</td><td>ETD</td><td>BOOKING_NO</td><td>出荷形態</td></tr>"
+
+            For I = 0 To GridView1.Rows.Count - 1
+                Call iptdata(GridView1.Rows(I).Cells(1).Text, GridView1.Rows(I).Cells(2).Text, GridView1.Rows(I).Cells(3).Text, GridView1.Rows(I).Cells(4).Text, GridView1.Rows(I).Cells(5).Text, Trim(GridView1.Rows(I).Cells(7).Text), GridView1.Rows(I).Cells(8).Text, GridView1.Rows(I).Cells(9).Text, GridView1.Rows(I).Cells(10).Text)
+                If GridView1.Rows(I).Cells(1).Text = "委託登録済" Then
+                    t = t & "<tr><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(1).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(2).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(3).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(4).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(5).Text & "</td><td style='background-color: #FF9E8C;'>" & Trim(GridView1.Rows(I).Cells(6).Text) & "</td><td style='background-color: #FF9E8C;'>" & Trim(GridView1.Rows(I).Cells(7).Text) & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(8).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(9).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(10).Text & "</td>"
+                Else
+                    t = t & "<tr><td>" & GridView1.Rows(I).Cells(1).Text & "</td><td>" & GridView1.Rows(I).Cells(2).Text & "</td><td>" & GridView1.Rows(I).Cells(3).Text & "</td><td>" & GridView1.Rows(I).Cells(4).Text & "</td><td>" & GridView1.Rows(I).Cells(5).Text & "</td><td>" & Trim(GridView1.Rows(I).Cells(6).Text) & "</td><td>" & Trim(GridView1.Rows(I).Cells(7).Text) & "</td><td>" & GridView1.Rows(I).Cells(8).Text & "</td><td>" & GridView1.Rows(I).Cells(9).Text & "</td><td>" & GridView1.Rows(I).Cells(10).Text & "</td>"
+                End If
+            Next
+
+
+        Else
+            t = t & "<p>対象なし<p>"
+        End If
+
+        t = t & "</Table>"
+
+        body = body & t
+
+        Dim body2 As String = "</p>" ' UriBodyC()
+
+        body = body & body2 & "<p>" & kbn & "担当</p><p></p><p></p>※KDとｱﾌﾀのどちらともの登録が完了した際に配信されます。</body></html>"
+
+        body = "<font size=" & Chr(34) & " 2" & Chr(34) & ">" & body & "</font>"
         body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
+
+
 
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
@@ -2313,6 +2426,110 @@ Step00:
 
 
     End Sub
+
+    Private Sub iptdata(strstu As String, strsheet As String, strkaika As String, strcust As String, strinv As String, strcut As String, stretd As String, strbkg As String, strtype As String)
+
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim intCnt As Integer
+        Dim itkcnt As String
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT count(BKGNO) as cnt FROM T_EXL_ANKEN_HISTORY WHERE "
+        strSQL = strSQL & "T_EXL_ANKEN_HISTORY.BKGNO = '" & strbkg & "' "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+
+        '結果を取り出す 
+        While (dataread.Read())
+
+            intCnt = dataread("cnt")
+
+        End While
+
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        '既存データの有無を判定
+        If intCnt > 0 Then
+
+            '既存データありの場合、UPDATE
+            strSQL = ""
+            strSQL = strSQL & "UPDATE T_EXL_ANKEN_HISTORY Set "
+            strSQL = strSQL & "T_EXL_ANKEN_HISTORY.STATUS = '" & Replace(strstu, "&nbsp;", "") & " ', "
+            strSQL = strSQL & "T_EXL_ANKEN_HISTORY.BKGSHEET = '" & strsheet & " ', "
+            strSQL = strSQL & "T_EXL_ANKEN_HISTORY.FORWARDER = '" & strkaika & " ', "
+            strSQL = strSQL & "T_EXL_ANKEN_HISTORY.CUST = '" & strcust & " ', "
+            strSQL = strSQL & "T_EXL_ANKEN_HISTORY.INVOICE = '" & strinv & " ', "
+            strSQL = strSQL & "T_EXL_ANKEN_HISTORY.CUT = '" & strcut & " ', "
+            strSQL = strSQL & "T_EXL_ANKEN_HISTORY.ETD = '" & stretd & " ', "
+            strSQL = strSQL & "T_EXL_ANKEN_HISTORY.SHIP_TYPE = '" & Format(Now, "yyyy/MM/dd") & " ' "
+            strSQL = strSQL & "WHERE T_EXL_ANKEN_HISTORY.BKGNO = '" & Trim(strbkg) & "' "
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+        Else
+
+
+            '既存データが無いのでINSERTする
+            strSQL = ""
+            strSQL = strSQL & "INSERT INTO T_EXL_ANKEN_HISTORY VALUES("
+            strSQL = strSQL & " '" & IIf(Replace(strstu, "&nbsp;", "") = "", "", Replace(strstu, "&nbsp;", "")) & "', "
+            strSQL = strSQL & " '" & IIf(strsheet = "", "", strsheet) & "', "
+            strSQL = strSQL & " '" & IIf(strkaika = "", "", strkaika) & "', "
+            strSQL = strSQL & " '" & IIf(strcust = "", "", strcust) & "', "
+            strSQL = strSQL & " '" & IIf(strinv = "", "", strinv) & "', "
+            strSQL = strSQL & " '" & IIf(strcut = "", "", strcut) & "', "
+            strSQL = strSQL & " '" & IIf(stretd = "", "", stretd) & "', "
+            strSQL = strSQL & " '" & IIf(strbkg = "", "", strbkg) & "', "
+            strSQL = strSQL & " '" & Format(Now, "yyyy/MM/dd") & "' "
+            strSQL = strSQL & ")"
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+
+        End If
+
+        cnn.Close()
+        cnn.Dispose()
+
+
+    End Sub
+
 
     Private Sub addRecord_K(strIVNO As String)
 
