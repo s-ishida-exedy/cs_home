@@ -145,7 +145,14 @@ Partial Class cs_home
         strSQL = strSQL & ",FLG04 = '" & TextBox1.Text & "__" & TextBox2.Text & "__" & TextBox3.Text & "' "
 
         strSQL = strSQL & "WHERE CUST = '" & strcust & "' "
-        strSQL = strSQL & "AND INVOICE_NO = '" & strinv & "' "
+
+        'If strinv = "" Or strinv = "&nbsp;" Then
+        '    'strSQL = strSQL & "AND INVOICE_NO IS NULL "
+        '    strSQL = strSQL & "AND INVOICE_NO = '" & strinv & "' "
+        'Else
+        '    strSQL = strSQL & "AND INVOICE_NO = '" & strinv & "' "
+        'End If
+
         strSQL = strSQL & "AND BOOKING_NO = '" & strbkg & "' "
         strSQL = strSQL & "AND FLG01 <> '1' "
 
