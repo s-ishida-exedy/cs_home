@@ -2050,8 +2050,6 @@ Step00:
         Dim strcc As String = GET_ToAddress(0, 0) + GET_from(struid)  'CC 
 
 
-        strto = GET_from(struid)
-        strcc = GET_from(struid)
 
 
 
