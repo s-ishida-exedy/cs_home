@@ -65,6 +65,17 @@ Partial Class cs_home
                 e.Row.Cells(15).Font.Bold = True
             End If
 
+            If e.Row.Cells(9).Text = "" Or e.Row.Cells(9).Text = "&nbsp;" Then
+                e.Row.Cells(9).BackColor = Drawing.Color.Salmon
+            End If
+
+            If e.Row.Cells(10).Text = "" Or e.Row.Cells(10).Text = "&nbsp;" Then
+                e.Row.Cells(10).BackColor = Drawing.Color.Salmon
+            End If
+
+            If Replace(e.Row.Cells(17).Text, "<br>", "") = "" Or Replace(e.Row.Cells(17).Text, "<br>", "") = "&nbsp;" Then
+                e.Row.Cells(17).BackColor = Drawing.Color.Salmon
+            End If
 
         End If
 
