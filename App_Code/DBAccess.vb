@@ -1117,4 +1117,70 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
+    Public Function GET_RESULT_KNOWLEDGE(strCode As String, strCode2 As String, strCode3 As String _
+                                       , strKeyword As String) As DataSet
+        'EPA対象品目マスタ取得
+        Conn = Me.Dbconnect
+        Dim cmd = New SqlCommand()
+
+        cmd.Connection = Conn
+        cmd.CommandType = System.Data.CommandType.Text
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  KO.SEQ_NO "
+        StrSQL = StrSQL & "  , CA.DESCRIPTION "
+        StrSQL = StrSQL & "  , CA2.DESCRIPTION "
+        StrSQL = StrSQL & "  , CA3.DESCRIPTION "
+        StrSQL = StrSQL & "  , KO.TITLE "
+        StrSQL = StrSQL & "  , KO.SHOW_CNT "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "  T_EXL_KNOWLEDGE KO  "
+        StrSQL = StrSQL & "  INNER JOIN M_EXL_CATEGORY CA  "
+        StrSQL = StrSQL & "    ON KO.CAT_PRI = CA.CODE  "
+        StrSQL = StrSQL & "  INNER JOIN M_EXL_CATEGORY CA2  "
+        StrSQL = StrSQL & "    ON KO.CAT_SEC = CA2.CODE  "
+        StrSQL = StrSQL & "  INNER JOIN M_EXL_CATEGORY CA3  "
+        StrSQL = StrSQL & "    ON KO.CAT_TER = CA3.CODE  "
+        StrSQL = StrSQL & "WHERE KO.CAT_PRI LIKE @CODE "
+        StrSQL = StrSQL & "AND   KO.CAT_SEC LIKE @CODE2 "
+        StrSQL = StrSQL & "AND   KO.CAT_TER LIKE @CODE3 "
+        '配列分だけ条件を追加
+        Dim strAry() As String = strKeyword.Split(",")
+        Dim intCnt As Integer = 0
+        For Each c In strAry
+            If intCnt = 0 Then
+                StrSQL = StrSQL & "AND  (KO.TITLE LIKE @KEYWORD_" & intCnt & " OR KO.CONTENTS LIKE @KEYWORD_" & intCnt & ") "
+            Else
+                StrSQL = StrSQL & "OR   (KO.TITLE LIKE @KEYWORD_" & intCnt & " OR KO.CONTENTS LIKE @KEYWORD_" & intCnt & ") "
+            End If
+            intCnt += 1
+        Next
+        StrSQL = StrSQL & "ORDER BY "
+        StrSQL = StrSQL & "  SHOW_CNT DESC "
+
+        cmd.CommandText = StrSQL
+        cmd.Parameters.Clear()
+        'パラメータ値を設定
+        cmd.Parameters.Add("@CODE", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strCode & "%"
+        cmd.Parameters.Add("@CODE2", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strCode2 & "%"
+        cmd.Parameters.Add("@CODE3", System.Data.SqlDbType.NVarChar, 50).Value = "%" & strCode3 & "%"
+
+        'キーワードを配列にセット
+        intCnt = 0
+        For Each c In strAry
+            cmd.Parameters.Add("@KEYWORD_" & intCnt, System.Data.SqlDbType.NVarChar, 50).Value = "%" & c & "%"
+            intCnt += 1
+        Next
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = cmd
+
+        cmd.Dispose()
+        Conn.Close()
+
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class
