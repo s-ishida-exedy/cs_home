@@ -215,7 +215,9 @@
             <HeaderStyle Width="600px" />
             <ItemStyle Font-Size="Smaller" />
             </asp:HyperLinkField>
-            <asp:BoundField DataField="SHOW_CNT" HeaderText="SHOW_CNT" SortExpression="SHOW_CNT">
+            <asp:BoundField DataField="SHOW_CNT" HeaderText="閲覧回数" SortExpression="SHOW_CNT">
+            <HeaderStyle Width="100px" />
+            <ItemStyle HorizontalAlign="Right" />
             </asp:BoundField>
         </Columns>
         <FooterStyle BackColor="#CCCC99" />

@@ -44,7 +44,6 @@ Partial Class cs_home
         'コード列非表示処理
         If e.Row.RowType = DataControlRowType.DataRow OrElse e.Row.RowType = DataControlRowType.Header Then
             e.Row.Cells(1).Visible = False
-            e.Row.Cells(6).Visible = False
         End If
 
     End Sub
