@@ -529,18 +529,11 @@ Partial Class cs_home
 
         Dim strcc As String = GET_ToAddress(1, 0) + GET_from(struid)  'CC 
 
-
         For I = 0 To GridView1.Rows.Count - 1
-
             If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
-
                 cflg = 1
-
             Else
-
-
             End If
-
         Next
 
         If cflg = 1 Then
@@ -554,18 +547,12 @@ Partial Class cs_home
             Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;font-family:Meiryo UI;'><tr style='background-color: #6fbfd1;'><td>備考</td><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
 
             For I = 0 To GridView1.Rows.Count - 1
-
                 If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
-
                     't = t & "<tr><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(2).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(3).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(4).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(7).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(9).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(10).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(11).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(12).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(13).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(14).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(15).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(16).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(17).Text & "</td></tr>"
                     t = t & "<tr><td>" & GridView1.Rows(I).Cells(2).Text & "</td><td>" & GridView1.Rows(I).Cells(3).Text & "</td><td>" & GridView1.Rows(I).Cells(4).Text & "</td><td>" & GridView1.Rows(I).Cells(7).Text & "</td><td>" & GridView1.Rows(I).Cells(9).Text & "</td><td>" & GridView1.Rows(I).Cells(10).Text & "</td><td>" & GridView1.Rows(I).Cells(11).Text & "</td><td>" & GridView1.Rows(I).Cells(12).Text & "</td><td>" & GridView1.Rows(I).Cells(13).Text & "</td><td>" & GridView1.Rows(I).Cells(14).Text & "</td><td>" & GridView1.Rows(I).Cells(15).Text & "</td><td>" & GridView1.Rows(I).Cells(16).Text & "</td><td>" & GridView1.Rows(I).Cells(17).Text & "</td></tr>"
-
                 Else
-
                     '                    t = t & "<tr><td>" & GridView1.Rows(I).Cells(2).Text & "</td><td>" & GridView1.Rows(I).Cells(3).Text & "</td><td>" & GridView1.Rows(I).Cells(4).Text & "</td><td>" & GridView1.Rows(I).Cells(7).Text & "</td><td>" & GridView1.Rows(I).Cells(9).Text & "</td><td>" & GridView1.Rows(I).Cells(10).Text & "</td><td>" & GridView1.Rows(I).Cells(11).Text & "</td><td>" & GridView1.Rows(I).Cells(12).Text & "</td><td>" & GridView1.Rows(I).Cells(13).Text & "</td><td>" & GridView1.Rows(I).Cells(14).Text & "</td><td>" & GridView1.Rows(I).Cells(15).Text & "</td><td>" & GridView1.Rows(I).Cells(16).Text & "</td><td>" & GridView1.Rows(I).Cells(17).Text & "</td></tr>"
-
                 End If
-
             Next
 
 
