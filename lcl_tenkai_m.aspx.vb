@@ -26,6 +26,12 @@ Partial Class cs_home
 
             'e.Row.Cells(16).Text = Replace(e.Row.Cells(16).Text, "__", "<br>")
             e.Row.Cells(17).Text = Replace(e.Row.Cells(17).Text, "__", "<br>")
+            If Replace(e.Row.Cells(11).Text, "&nbsp;", "") <> "" Or Replace(e.Row.Cells(12).Text, "&nbsp;", "") <> "" Then
+
+            Else
+                e.Row.Cells(0).BackColor = Drawing.Color.Salmon
+                e.Row.Cells(1).BackColor = Drawing.Color.Salmon
+            End If
 
         End If
 
@@ -516,87 +522,109 @@ Partial Class cs_home
         Dim struid As String = Session("UsrId")
         Dim strfrom As String = GET_from(struid)
 
+        Dim cflg As Long
 
         Dim strto As String = GET_ToAddress(1, 1) '宛先
         strto = Left(strto, Len(strto) - 1)
 
         Dim strcc As String = GET_ToAddress(1, 0) + GET_from(struid)  'CC 
 
-
-
-        'メールの件名
-        Dim subject As String = "<通知>LCL案件展開　変更・追加・連絡" '"【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
-
-        'メールの本文
-        Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>LCL出荷案件を展開させていただきます。</p><p>荷量の記入・希望引き取り日時・港搬入用のトラック手配をお願いいたします。</p><p>下記URLにて重量の登録をお願いいたします。登録完了後に通知メールを送信してください。</p>http://kbhwpm01/exp/cs_home/lcl_tenkai.aspx</p><p></p></body></html>" ' UriBodyC()
-
-        Dim t As String = "<html><body><Table border='1' style='Font-Size:14px;'><tr style='background-color: #6fbfd1;'><td>備考</td><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
-
         For I = 0 To GridView1.Rows.Count - 1
-            t = t & "<tr><td >" & GridView1.Rows(I).Cells(2).Text & "</td><td>" & GridView1.Rows(I).Cells(3).Text & "</td><td>" & GridView1.Rows(I).Cells(4).Text & "</td><td>" & GridView1.Rows(I).Cells(7).Text & "</td><td>" & GridView1.Rows(I).Cells(9).Text & "</td><td>" & GridView1.Rows(I).Cells(10).Text & "</td><td>" & GridView1.Rows(I).Cells(11).Text & "</td><td>" & GridView1.Rows(I).Cells(12).Text & "</td><td>" & GridView1.Rows(I).Cells(13).Text & "</td><td>" & GridView1.Rows(I).Cells(14).Text & "</td><td>" & GridView1.Rows(I).Cells(15).Text & "</td><td>" & GridView1.Rows(I).Cells(16).Text & "</td><td>" & GridView1.Rows(I).Cells(17).Text & "</td></tr>"
+            If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
+                cflg = 1
+            Else
+            End If
         Next
 
-        t = t & "</Table></body></html>"
+        If cflg = 1 Then
 
-        body = body & t
+            'メールの件名
+            Dim subject As String = "<通知>LCL案件展開　変更・追加・連絡" '"【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
 
-        Dim body2 As String = "====内容==================================</p>" & TextBox1.Text.Replace(vbCrLf, "<br/>") & "</p>" ' UriBodyC()
+            'メールの本文
+            Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>LCL出荷案件を展開させていただきます。</p><p>荷量の記入・希望引き取り日時・港搬入用のトラック手配をお願いいたします。</p><p>下記URLにて重量の登録をお願いいたします。登録完了後に通知メールを送信してください。</p>http://kbhwpm01/exp/cs_home/lcl_tenkai.aspx</p><p></p></body></html>" ' UriBodyC()
 
-        body = body & body2
+            Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;font-family:Meiryo UI;'><tr style='background-color: #6fbfd1;'><td>備考</td><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
 
-        body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
-        body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
-
-        ' MailKit におけるメールの情報
-        Dim message = New MimeKit.MimeMessage()
-
-        ' 送り元情報  
-        message.From.Add(MailboxAddress.Parse(strfrom))
-
-
-        ' 宛先情報  
-        If strto <> "" Then
-            'カンマ区切りをSPLIT
-            Dim strVal() As String = strto.Split(",")
-            For Each c In strVal
-                message.To.Add(New MailboxAddress("", c))
+            For I = 0 To GridView1.Rows.Count - 1
+                If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
+                    't = t & "<tr><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(2).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(3).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(4).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(7).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(9).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(10).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(11).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(12).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(13).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(14).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(15).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(16).Text & "</td><td style='background-color: #FF9E8C;'>" & GridView1.Rows(I).Cells(17).Text & "</td></tr>"
+                    t = t & "<tr><td>" & GridView1.Rows(I).Cells(2).Text & "</td><td>" & GridView1.Rows(I).Cells(3).Text & "</td><td>" & GridView1.Rows(I).Cells(4).Text & "</td><td>" & GridView1.Rows(I).Cells(7).Text & "</td><td>" & GridView1.Rows(I).Cells(8).Text & "</td><td>" & GridView1.Rows(I).Cells(10).Text & "</td><td>" & GridView1.Rows(I).Cells(11).Text & "</td><td>" & GridView1.Rows(I).Cells(12).Text & "</td><td>" & GridView1.Rows(I).Cells(13).Text & "</td><td>" & GridView1.Rows(I).Cells(14).Text & "</td><td>" & GridView1.Rows(I).Cells(15).Text & "</td><td>" & GridView1.Rows(I).Cells(16).Text & "</td><td>" & GridView1.Rows(I).Cells(17).Text & "</td></tr>"
+                Else
+                    '                    t = t & "<tr><td>" & GridView1.Rows(I).Cells(2).Text & "</td><td>" & GridView1.Rows(I).Cells(3).Text & "</td><td>" & GridView1.Rows(I).Cells(4).Text & "</td><td>" & GridView1.Rows(I).Cells(7).Text & "</td><td>" & GridView1.Rows(I).Cells(9).Text & "</td><td>" & GridView1.Rows(I).Cells(10).Text & "</td><td>" & GridView1.Rows(I).Cells(11).Text & "</td><td>" & GridView1.Rows(I).Cells(12).Text & "</td><td>" & GridView1.Rows(I).Cells(13).Text & "</td><td>" & GridView1.Rows(I).Cells(14).Text & "</td><td>" & GridView1.Rows(I).Cells(15).Text & "</td><td>" & GridView1.Rows(I).Cells(16).Text & "</td><td>" & GridView1.Rows(I).Cells(17).Text & "</td></tr>"
+                End If
             Next
+
+
+            t = t & "</Table></body></html>"
+
+            body = body & t
+
+            Dim body2 As String = "====内容==================================</p>" & TextBox1.Text.Replace(vbCrLf, "<br/>") & "</p>" ' UriBodyC()
+
+            body = body & body2
+
+            body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
+            body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+
+            ' MailKit におけるメールの情報
+            Dim message = New MimeKit.MimeMessage()
+
+            ' 送り元情報  
+            message.From.Add(MailboxAddress.Parse(strfrom))
+
+
+            ' 宛先情報  
+            If strto <> "" Then
+                'カンマ区切りをSPLIT
+                Dim strVal() As String = strto.Split(",")
+                For Each c In strVal
+                    message.To.Add(New MailboxAddress("", c))
+                Next
+            End If
+
+
+            If strcc <> "" Then
+                'カンマ区切りをSPLIT
+                Dim strVal() As String = strcc.Split(",")
+                For Each c In strVal
+                    message.Cc.Add(New MailboxAddress("", c))
+                Next
+            End If
+
+            ' 表題  
+            message.Subject = subject
+
+            ' 本文
+            Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
+            textPart.Text = body
+            message.Body = textPart
+
+            Dim multipart = New MimeKit.Multipart("mixed")
+
+            multipart.Add(textPart)
+
+            message.Body = multipart
+
+            Using client As New MailKit.Net.Smtp.SmtpClient()
+                client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
+                client.Send(message)
+                client.Disconnect(True)
+                client.Dispose()
+                message.Dispose()
+            End Using
+
+            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
+
+            TextBox1.Text = ""
+
+        Else
+
+
+            Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('新規案件にチェックが入っていません。メールは送信されません。');</script>", False)
+
+
         End If
-
-
-        If strcc <> "" Then
-            'カンマ区切りをSPLIT
-            Dim strVal() As String = strcc.Split(",")
-            For Each c In strVal
-                message.Cc.Add(New MailboxAddress("", c))
-            Next
-        End If
-
-        ' 表題  
-        message.Subject = subject
-
-        ' 本文
-        Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
-        textPart.Text = body
-        message.Body = textPart
-
-        Dim multipart = New MimeKit.Multipart("mixed")
-
-        multipart.Add(textPart)
-
-        message.Body = multipart
-
-        Using client As New MailKit.Net.Smtp.SmtpClient()
-            client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
-            client.Send(message)
-            client.Disconnect(True)
-            client.Dispose()
-            message.Dispose()
-        End Using
-
-        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
-
-        TextBox1.Text = ""
 
 
     End Sub
