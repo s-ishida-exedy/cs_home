@@ -222,7 +222,8 @@ UNION
 SELECT *
 FROM M_EXL_CS_MEMBER
 WHERE PLACE LIKE '%H%'
-AND CODE LIKE 'E%'"></asp:SqlDataSource>
+AND CODE LIKE 'E%'
+AND TEAM = 'CSチーム'"></asp:SqlDataSource>
 
 </section>
 
