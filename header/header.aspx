@@ -118,6 +118,7 @@
             <!-- 第一階層 -->
             <li data-id='["home","doc_oversea.aspx"]'><a href="#">海外業務</a></li>
             <li data-id='["home","doc_domestic.aspx"]'><a href="#">国内業務</a></li>
+            <li data-id='["home","knowledge.aspx"]'><a href="#">FAQ</a></li>
         </ul>
     </li>
     <li class="menu__multi">
