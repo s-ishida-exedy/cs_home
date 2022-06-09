@@ -148,13 +148,16 @@ Partial Class cs_home
         Dim strcc As String = GET_ToAddress(1, 0) + GET_from(struid)  'CC 
 
 
+        strto = GET_from(struid)
+        strcc = GET_from(struid)
+
         'メールの件名
         Dim subject As String = "<通知>LCL案件展開　荷量追加 " & kbn '"【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
 
         'メールの本文
         Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>荷量を追加いたしました。</p>http://kbhwpm01/exp/cs_home/lcl_tenkai.aspx</p></body></html>" ' UriBodyC()
 
-        Dim t As String = "<html><body><Table border='1' style='Font-Size:14px;'><tr style='background-color: #6fbfd1;'><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
+        Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;font-family:Meiryo UI;'><tr style='background-color: #6fbfd1;'><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td></tr>"
 
         GridView2.DataBind()
 
@@ -239,6 +242,8 @@ Partial Class cs_home
 
         Dim strcc As String = GET_ToAddress(1, 0) + GET_from(struid)  'CC 
 
+        strto = GET_from(struid)
+        strcc = GET_from(struid)
 
         'メールの件名
         Dim subject As String = "<通知>LCL案件展開　ドレージ手配 "
@@ -246,7 +251,7 @@ Partial Class cs_home
         'メールの本文
         Dim body As String = "<html><body><p>各位<p>お世話になっております。<p>ドレージ手配が完了いたしました。</p>http://kbhwpm01/exp/cs_home/lcl_tenkai.aspx</p></body></html>" ' UriBodyC()
 
-        Dim t As String = "<html><body><Table border='1' style='Font-Size:14px;'><tr style='background-color: #6fbfd1;'><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td><td>ドレージ</td></tr>"
+        Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;font-family:Meiryo UI;'><tr style='background-color: #6fbfd1;'><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td><td>ドレージ</td></tr>"
 
         GridView2.DataBind()
 

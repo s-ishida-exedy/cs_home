@@ -121,7 +121,7 @@ Partial Class cs_home
                     strSQL = ""
                     strSQL = strSQL & "INSERT INTO T_EXL_LCLCUSTPREADS VALUES("
                     strSQL = strSQL & "'" & GridView1.Rows(I).Cells(3).Text & "' "
-                    strSQL = strSQL & ",'" & GridView1.Rows(I).Cells(17).Text & "' "
+                    strSQL = strSQL & ",'" & Replace(GridView1.Rows(I).Cells(17).Text, "<br>", "__") & "' "
                     strSQL = strSQL & ")"
                 End If
                 Command.CommandText = strSQL
