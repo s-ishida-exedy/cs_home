@@ -1198,6 +1198,9 @@ Partial Class yuusen
 
         Dim strcc As String = GET_ToAddress(2, 0) + GET_from(struid)
 
+        'strto = GET_from(struid)
+        'strcc = GET_from(struid)
+
         Dim strsyomei As String = GET_syomei(struid)
 
         Dim f As String = ""
@@ -1309,6 +1312,9 @@ Partial Class yuusen
 
         Dim strsyomei As String = GET_syomei(struid)
 
+        'strto = GET_from(struid)
+        'strcc = GET_from(struid)
+
         Dim f As String = ""
 
         'メールの件名
@@ -1324,7 +1330,7 @@ Partial Class yuusen
 
         body = body & "<html><body>近鉄エクスプレス ご担当者様<br>いつもお世話になっております。<br><br>" & WDAY01 & "弊社CUT分で通関委託がございます。<br>（LCL案件は全て委託となります。）<br><br>" 'お忙しい中とは存じますが、宜しくお願い申し上げます。</p>以上になります。</body></html>" ' UriBodyC()
 
-        Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BKG NO.</td><td>積出港</td><td>仕向地</td></tr>"
+        Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;'><tr><td>客先</td><td>INVOICE NO. / BL NO.</td><td>積出港</td><td>仕向地</td></tr>"
 
         t = t & body01("近鉄")
         f = body02("近鉄")
@@ -1631,7 +1637,7 @@ Partial Class yuusen
         cnn.Open()
 
         strSQL = ""
-        strSQL = strSQL & "SELECT T_EXL_CSANKEN.CUST, T_EXL_CSANKEN.INVOICE, T_EXL_CSANKEN.BOOKING_NO, T_EXL_CSANKEN.LOADING_PORT, T_EXL_CSANKEN.PLACE_OF_DELIVERY "
+        strSQL = strSQL & "SELECT T_EXL_CSANKEN.CUST, T_EXL_CSANKEN.INVOICE, T_EXL_CSANKEN.BOOKING_NO, T_EXL_CSANKEN.FLG05, T_EXL_CSANKEN.LOADING_PORT, T_EXL_CSANKEN.PLACE_OF_DELIVERY "
         strSQL = strSQL & "FROM T_EXL_CSANKEN "
         strSQL = strSQL & "WHERE T_EXL_CSANKEN.FLG01 ='1' "
         strSQL = strSQL & "AND T_EXL_CSANKEN.FLG02 ='1' "
@@ -1652,7 +1658,13 @@ Partial Class yuusen
         While (dataread.Read())
             CUST = Convert.ToString(dataread("CUST"))
             INVOICE = Convert.ToString(dataread("INVOICE"))
-            BOOKING_NO = Convert.ToString(dataread("BOOKING_NO"))
+
+            If A = "近鉄" Then
+                BOOKING_NO = Convert.ToString(dataread("FLG05"))
+            Else
+                BOOKING_NO = Convert.ToString(dataread("BOOKING_NO"))
+            End If
+
             DISCHARGING_PORT = Convert.ToString(dataread("LOADING_PORT"))
             PLACE_OF_DELIVERY = Convert.ToString(dataread("PLACE_OF_DELIVERY"))
             body01 = body01 & "<tr><td>" & CUST & "</td><td>" & INVOICE & " / " & BOOKING_NO & "</td><td>" & DISCHARGING_PORT & "</td><td>" & PLACE_OF_DELIVERY & "</td></tr>"
