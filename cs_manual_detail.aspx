@@ -148,56 +148,64 @@
             </td>
         </tr>
     </table>
-<div id="main2" style="width:100%;height:2000px;overflow:scroll;-webkit-overflow-scrolling:touch;border:solid 1px;">
+<div id="main2" style="width:100%;height:600px;overflow:scroll;-webkit-overflow-scrolling:touch;border:solid 0px;">
         <table class="ta3">
             <tr>
                 <th>新コード</th>
                 <td>
-                    <asp:TextBox ID="TextBox1" runat="server" Width="233px" Class ="txtb"></asp:TextBox>
-                </td>
-                <th>客先コード(旧)（代表）</th>
-                <td>
-                    <asp:TextBox ID="TextBox2" runat="server" Width="233px" Class ="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox1" runat="server" Height="20px" Width="233px" Class ="txtb"></asp:TextBox>
                 </td>
                 <th>客先名</th>
                 <td>
-                    <asp:TextBox ID="TextBox3" runat="server" Width="233px" Class ="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox3" runat="server" Height="20px" Width="233px" Class ="txtb"></asp:TextBox>
                 </td>
-            </tr>
-            <tr>
                 <th>略称</th>
                 <td>
-                    <asp:TextBox ID="TextBox4" runat="server" Width="233px" Class ="txtb"></asp:TextBox>
-                </td>
-                <th>建値</th>
-                <td>
-                    <asp:TextBox ID="TextBox5" runat="server" Width="233px" Class ="txtb"></asp:TextBox>
-                </td>
-                <th>B/L種類</th>
-                <td>
-                    <asp:TextBox ID="TextBox6" runat="server" Width="233px" Class ="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox4" runat="server" Height="20px" Width="233px" Class ="txtb"></asp:TextBox>
                 </td>
             </tr>
         </table>
-        <table class="ta3">
+
+        <table class="ta3" style="display:none" >
             <tr>
-                <th>B/L送付方法</th>
+                <th>旧コード</th>
                 <td>
-                    <asp:TextBox ID="TextBox7" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox2" runat="server" Height="20px" Width="233px" Class ="txtb" disabled="disabled"></asp:TextBox>
                 </td>
-                <th>客先：住所</th>
+                <th>建値</th>
+                <td>
+                    <asp:TextBox ID="TextBox5" runat="server" Height="20px" Width="233px" Class ="txtb" disabled="disabled"></asp:TextBox>
+                </td>
+
+                <th>B/L種類</th>
+                <td>
+                    <asp:TextBox ID="TextBox6" runat="server" Height="20px" Width="233px" Class ="txtb"></asp:TextBox>
+                </td>
+            </tr>
+        </table>
+
+        <table class="ta3" >
+            <tr>
+                <th>Cust<br/>Name/Adress</th>
                 <td >
                     <asp:TextBox ID="TextBox8" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
                 </td>
-            </tr>
-            <tr>
-                <th>CONSIGNEE</th>
+                <th>Consignee<br/>Name/Adress</th>
                 <td>
                     <asp:TextBox ID="TextBox55" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
                 </td>
-                <th>ConsigneeName of S/I</th>
+            </tr>
+        </table>
+
+        <table class="ta3" style="display:none">
+            <tr>
+                <th>乙仲情報</th>
                 <td>
-                    <asp:TextBox ID="TextBox9" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox12" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb" disabled="disabled"></asp:TextBox>
+                </td>
+                <th>お客様要求事項</th>
+                <td>
+                    <asp:TextBox ID="TextBox13" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb" disabled="disabled"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -205,53 +213,79 @@
                 <td>
                     <asp:TextBox ID="TextBox10" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
                 </td>
-                <th>NOTIFY</th>
+                <th>ConsigneeName of S/I</th>
                 <td>
-                    <asp:TextBox ID="TextBox11" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <th>乙仲情報</th>
-                <td>
-                    <asp:TextBox ID="TextBox12" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
-                </td>
-                <th>お客様要求事項</th>
-                <td>
-                    <asp:TextBox ID="TextBox13" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox9" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
                 </td>
             </tr>
         </table>
+
+        <table class="ta3">
+
+            <tr>
+                <th style="background-color:#FF9E8C;color:white">Consignee of SI</th>
+                <td>
+                    <asp:TextBox ID="TextBox41" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
+                </td>
+                <th style="background-color:#FF9E8C;color:white">Consignee of SI Address</th>
+                <td >
+                    <asp:TextBox ID="TextBox42" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <th style="background-color:#FF9E8C;color:white">Final<br/>Destination</th>
+                <td>
+                    <asp:TextBox ID="TextBox43" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
+                </td>
+                <th style="background-color:#FF9E8C;color:white">Final Destination Address</th>
+                <td>
+                    <asp:TextBox ID="TextBox44" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <th style="background-color:#FF9E8C;color:white">NOTIFY</th>
+                <td>
+                    <asp:TextBox ID="TextBox11" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
+                </td>
+                <th style="background-color:#009966;color:white">B/L送付方法</th>
+                <td>
+                    <asp:TextBox ID="TextBox7" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
+                </td>
+            </tr>
+        </table>
+
+
         <table class="ta3">
             <tr>
-                <th>IV</th>
+                <th style="background-color:#009966;color:white">IV</th>
                 <td>
                     <asp:DropDownList ID="DropDownList1" runat="server" Width ="80px">
                         <asp:ListItem Value="○">○</asp:ListItem>
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                <th>PL</th>
+                <th style="background-color:#009966;color:white">PL</th>
                 <td >
                     <asp:DropDownList ID="DropDownList2" runat="server" Width ="80px">
                         <asp:ListItem Value="○">○</asp:ListItem>
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                <th>BL</th>
+                <th style="background-color:#009966;color:white">BL</th>
                 <td>
                     <asp:DropDownList ID="DropDownList3" runat="server" Width ="80px">
                         <asp:ListItem Value="○">○</asp:ListItem>
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                <th>CO</th>
+                <th style="background-color:#009966;color:white">CO</th>
                 <td >
                     <asp:DropDownList ID="DropDownList4" runat="server" Width ="80px">
                         <asp:ListItem Value="○">○</asp:ListItem>
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                <th>EPA</th>
+                <th style="background-color:#009966;color:white">EPA</th>
                 <td >
                     <asp:DropDownList ID="DropDownList5" runat="server" Width ="80px">
                         <asp:ListItem Value="○">○</asp:ListItem>
@@ -260,35 +294,35 @@
                 </td>
             </tr>
             <tr>
-                <th>木材</th>
+                <th style="background-color:#009966;color:white">木材</th>
                 <td>
                     <asp:DropDownList ID="DropDownList6" runat="server" Width ="80px">
                         <asp:ListItem Value="○">○</asp:ListItem>
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                <th>ﾃﾞﾘﾊﾞﾘ</th>
+                <th style="background-color:#009966;color:white">ﾃﾞﾘﾊﾞﾘ</th>
                 <td >
                     <asp:DropDownList ID="DropDownList7" runat="server" Width ="80px">
                         <asp:ListItem Value="○">○</asp:ListItem>
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                <th>検査</th>
+                <th style="background-color:#009966;color:white">検査</th>
                 <td>
                     <asp:DropDownList ID="DropDownList8" runat="server" Width ="80px">
                         <asp:ListItem Value="○">○</asp:ListItem>
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                <th>ERL</th>
+                <th style="background-color:#009966;color:white">ERL</th>
                 <td >
                     <asp:DropDownList ID="DropDownList9" runat="server" Width ="80px">
                         <asp:ListItem Value="○">○</asp:ListItem>
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                <th>ﾍﾞｯｾﾙ</th>
+                <th style="background-color:#009966;color:white">ﾍﾞｯｾﾙ</th>
                 <td >
                     <asp:DropDownList ID="DropDownList10" runat="server" Width ="80px">
                         <asp:ListItem Value="○">○</asp:ListItem>
@@ -296,8 +330,87 @@
                     </asp:DropDownList>
                 </td>
             </tr>
+
+
+            <tr>
+                <th style="background-color:#009966;color:white">IV,PL郵送必要有無</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList13" runat="server" Width ="80px">
+                        <asp:ListItem Value="○">○</asp:ListItem>
+                        <asp:ListItem Value="×">×</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                <th style="background-color:#009966;color:white">FTA</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList14" runat="server" Width ="80px">
+                        <asp:ListItem Value="○">○</asp:ListItem>
+                        <asp:ListItem Value="×">×</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                <th style="background-color:#009966;color:white">適合証明書</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList15" runat="server" Width ="80px">
+                        <asp:ListItem Value="○">○</asp:ListItem>
+                        <asp:ListItem Value="×">×</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                <th style="background-color:#009966;color:white">エジプト査証</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList16" runat="server" Width ="80px">
+                        <asp:ListItem Value="○">○</asp:ListItem>
+                        <asp:ListItem Value="×">×</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+            </tr>
+           <tr>
+                <th style="background-color:#009966;color:white">コンテナ清掃</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList11" runat="server" Width ="80px">
+                        <asp:ListItem Value="○">○</asp:ListItem>
+                        <asp:ListItem Value="×">×</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                <th style="background-color:#009966;color:white">LC取引</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList12" runat="server" Width ="80px">
+                        <asp:ListItem Value="○">○</asp:ListItem>
+                        <asp:ListItem Value="×">×</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                <th style="background-color:#6666FF;color:white">BR帳票出力</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList17" runat="server" Width ="80px">
+                        <asp:ListItem Value="有り">有り</asp:ListItem>
+                        <asp:ListItem Value="無し">無し</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                <th style="background-color:#6666FF;color:white">IV内訳自動計算</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList18" runat="server" Width ="80px">
+                        <asp:ListItem Value="有り">有り</asp:ListItem>
+                        <asp:ListItem Value="無し">無し</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+            </tr>
         </table>
-        <table class="ta3">
+
+        <table class="ta3"  style="display:none">
+ 
+            <tr>
+
+                <th style="background-color:#6666FF;color:white">海貨業者</th>
+                <td>
+                    <asp:TextBox ID="TextBox47" runat="server" Height="20px" Width="233px" Class ="txtb"></asp:TextBox>
+                </td>
+            </tr>
+
+        </table>
+
+
+
+
+
+        <table class="ta3" style="display:none" >
             <tr>
                 <th>営業担当</th>
                 <td>
@@ -429,59 +542,12 @@
                 <td>
                     <asp:TextBox ID="TextBox40" runat="server" Width="233px" Class ="txtb"></asp:TextBox>
                 </td>
-                <th>コンテナ清掃</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList11" runat="server" Width ="80px">
-                        <asp:ListItem Value="○">○</asp:ListItem>
-                        <asp:ListItem Value="×">×</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-                <th>LC取引</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList12" runat="server" Width ="80px">
-                        <asp:ListItem Value="○">○</asp:ListItem>
-                        <asp:ListItem Value="×">×</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
+
             </tr>
         </table>
-        <table class="ta3">
-            <tr>
-                <th>Consignee of SI</th>
-                <td>
-                    <asp:TextBox ID="TextBox41" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
-                </td>
-                <th>Consignee of SI Address</th>
-                <td >
-                    <asp:TextBox ID="TextBox42" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <th>Final<br/>Destination</th>
-                <td>
-                    <asp:TextBox ID="TextBox43" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
-                </td>
-                <th>Final Destination Address</th>
-                <td>
-                    <asp:TextBox ID="TextBox44" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
-                </td>
-            </tr>
-        </table>
-        <table class="ta3">
-            <tr>
-                <th>ベアリング<br/>帳票出力</th>
-                <td>
-                    <asp:TextBox ID="TextBox45" runat="server" Width="233px" Class ="txtb"></asp:TextBox>
-                </td>
-                <th>INVOICE内訳<br/>自動計算</th>
-                <td>
-                    <asp:TextBox ID="TextBox46" runat="server" Width="233px" Class ="txtb"></asp:TextBox>
-                </td>
-                <th>海貨業者</th>
-                <td>
-                    <asp:TextBox ID="TextBox47" runat="server" Width="233px" Class ="txtb"></asp:TextBox>
-                </td>
-            </tr>
+
+        <table class="ta3" style="display:none">
+
             <tr>
                 <th>宛先</th>
                 <td>
@@ -515,39 +581,7 @@
                 <td>
                     <asp:TextBox ID="TextBox54" runat="server" Width="233px" Class ="txtb"></asp:TextBox>
                 </td>
-                <th>IV,PL郵送の<br/>必要有無</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList13" runat="server" Width ="80px">
-                        <asp:ListItem Value="○">○</asp:ListItem>
-                        <asp:ListItem Value="×">×</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-                <th>FTA</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList14" runat="server" Width ="80px">
-                        <asp:ListItem Value="○">○</asp:ListItem>
-                        <asp:ListItem Value="×">×</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-            </tr>
-            <tr>
-                <th>適合証明書</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList15" runat="server" Width ="80px">
-                        <asp:ListItem Value="○">○</asp:ListItem>
-                        <asp:ListItem Value="×">×</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-                <th>エジプト査証</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList16" runat="server" Width ="80px">
-                        <asp:ListItem Value="○">○</asp:ListItem>
-                        <asp:ListItem Value="×">×</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-                <th></th>
-                <td>
-                </td>
+
             </tr>
         </table>
 
