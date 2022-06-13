@@ -110,8 +110,6 @@ Partial Class cs_home
 
     End Sub
 
-
-
     Sub Mail01(struid As String, flg As Long, flg02 As Long)
 
         Dim subject As String = ""
@@ -132,23 +130,20 @@ Partial Class cs_home
         Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
         Dim smtpPort As Integer = 25
 
-
         ' メールの内容
-
-
-
-
         If flg = 1 Then 'C258
 
             strfrom = GET_from(struid)
 
             If flg02 = 1 Then
                 strto = GET_ToAddress(8, 1)
-                strcc = GET_ToAddress(8, 0) + "," + GET_from(struid)
+                strto = Left(strto, Len(strto) - 1)
+                strcc = GET_ToAddress(8, 0) + GET_from(struid)
 
             Else
                 strto = GET_ToAddress(6, 1)
-                strcc = GET_ToAddress(6, 0) + "," + GET_from(struid)
+                strto = Left(strto, Len(strto) - 1)
+                strcc = GET_ToAddress(6, 0) + GET_from(struid)
             End If
 
             Dim strsyomei As String = GET_syomei(struid)
@@ -162,7 +157,7 @@ Partial Class cs_home
             body = TextBox2.Text.Replace(vbCrLf, "<br/>")
 
 
-            body = body & "お忙しい中とは存じますが、宜しくお願い申し上げます。<br>以上になります。<br></body></html>" & strsyomei
+            body = body & "以上、宜しくお願いします。お忙しい中とは存じますが、宜しくお願い申し上げます。<br></body></html>" & strsyomei
 
             body = "<font size=" & Chr(34) & " 2" & Chr(34) & ">" & body & "</font>"
             body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
@@ -171,7 +166,8 @@ Partial Class cs_home
 
             strfrom = GET_from(struid)
             strto = GET_ToAddress(7, 1)
-            strcc = GET_ToAddress(7, 0) + "," + GET_from(struid)
+            strto = Left(strto, Len(strto) - 1)
+            strcc = GET_ToAddress(7, 0) + GET_from(struid)
 
             Dim strsyomei As String = GET_syomei(struid)
 
@@ -183,16 +179,12 @@ Partial Class cs_home
             'メールの本文
             body = TextBox2.Text.Replace(vbCrLf, "<br/>")
 
-            body = body & "お忙しい中とは存じますが、宜しくお願い申し上げます。<br>以上になります。<br></body></html>" & strsyomei
+            body = body & "以上、宜しくお願いします。お忙しい中とは存じますが、宜しくお願い申し上げます。<br></body></html>" & strsyomei
 
             body = "<font size=" & Chr(34) & " 2" & Chr(34) & ">" & body & "</font>"
             body = "<font face=" & Chr(34) & " Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
-
         End If
-
-
-
 
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
@@ -201,7 +193,14 @@ Partial Class cs_home
         message.From.Add(MailboxAddress.Parse(strfrom))
 
         ' 宛先情報  
-        message.To.Add(MailboxAddress.Parse(strto))
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
+
 
         If strcc <> "" Then
             'カンマ区切りをSPLIT
@@ -225,8 +224,6 @@ Partial Class cs_home
 
         message.Body = multipart
 
-
-
         Using client As New MailKit.Net.Smtp.SmtpClient()
             client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
             client.Send(message)
@@ -234,12 +231,9 @@ Partial Class cs_home
             client.Dispose()
             message.Dispose()
         End Using
-
         Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
 
-
     End Sub
-
 
     Private Function GET_ToAddress(strkbn As String, strtocc As String) As String
         'BCCメールアドレス情報を取得
@@ -283,7 +277,6 @@ Partial Class cs_home
 
     End Function
 
-
     Private Function GET_from(struid As String) As String
         'BCCメールアドレス情報を取得
         Dim dataread As SqlDataReader
@@ -325,7 +318,6 @@ Partial Class cs_home
 
     End Function
 
-
     Private Function GET_syomei(struid As String) As String
         'BCCメールアドレス情報を取得
         Dim dataread As SqlDataReader
@@ -366,7 +358,6 @@ Partial Class cs_home
         cnn.Dispose()
 
     End Function
-
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
 
         Dim strcust As String
@@ -380,23 +371,15 @@ Partial Class cs_home
         strcust = Left(Session("strcust"), 4)
 
         If strcust = "C258" Then
-
             flg = 1
-
         ElseIf strcust = "C6G0" Then
-
             flg = 2
-
         End If
 
         If CheckBox1.Checked = True Then
-
             flg02 = 1
-
         Else
-
             flg02 = 2
-
         End If
 
         Call Mail01(struid, flg, flg02)
@@ -412,15 +395,11 @@ Partial Class cs_home
         Session.Remove("strniryou")
         Session.Remove("strbkg")
 
-
         '前の画面へ遷移
         Response.Redirect("lcl_arange_all.aspx")
 
     End Sub
-
     Private Sub reg_004(striv As String, strbkg As String)
-
-
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -432,7 +411,6 @@ Partial Class cs_home
         Dim strSQL As String = ""
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
-
 
         Dim intCnt As Long
 
@@ -493,11 +471,7 @@ Partial Class cs_home
         cnn.Dispose()
 
     End Sub
-
-
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-
-
 
         Dim strinv As String = ""
         Dim strbkg As String = ""
@@ -513,8 +487,6 @@ Partial Class cs_home
         Dim stretd02 As Date
         Dim streta As String = ""
         Dim strniryou As String = ""
-
-
 
         'パラメータ取得
         strMode = Session("strMode")
@@ -548,7 +520,6 @@ Partial Class cs_home
             TextBox2.Text = TextBox2.Text & vbLf & vbLf
             TextBox2.Text = TextBox2.Text & "以上です。"
 
-
         Else
 
             Label1.Text = "C258 プロフォーマインボイス登録メール（EXL）"
@@ -568,15 +539,6 @@ Partial Class cs_home
             TextBox2.Text = TextBox2.Text & "以上、宜しくお願いします。"
 
         End If
-
-
-
-
-
-
-
-
-
 
     End Sub
 End Class
