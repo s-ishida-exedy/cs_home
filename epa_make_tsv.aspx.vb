@@ -807,7 +807,8 @@ Partial Class cs_home
         'Contentを設定
         'Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")  'Shift-JISで出力したい場合
         Response.ContentEncoding = System.Text.Encoding.UTF8  'UTF-8で出力したい場合
-        Response.ContentType = "text/csv"
+        'Response.ContentType = "text/csv"
+        Response.ContentType = "application/octet-stream"
 
         Dim strFile As String = strCust & "_" & strBLDATE & "_" & strIVNO
 
@@ -815,8 +816,13 @@ Partial Class cs_home
         Dim viewFileName As String = HttpUtility.UrlEncode(strFile & ".tsv")
         Response.AddHeader("Content-Disposition", "attachment;filename=" + viewFileName)
 
+        'BOMを送信
+        Dim bom As Byte() = System.Text.Encoding.UTF8.GetPreamble()
+        Response.BinaryWrite(bom)
+
         'CSVデータを書き込み
-        Response.Write(str.ToString)
+        Response.BinaryWrite(Encoding.UTF8.GetBytes(str.ToString))
+        'Response.Write(str.ToString)
 
         'ダウンロード実行
         Response.Flush()
