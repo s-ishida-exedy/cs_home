@@ -153,6 +153,13 @@
                     <HeaderStyle HorizontalAlign="Center" Width="50px" />
                     <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
+                <asp:TemplateField ShowHeader="False">
+                    <ItemTemplate>
+                        <asp:Button ID="Button2" runat="server" CausesValidation="false" CommandName="fin" Text="状況更新" />
+                    </ItemTemplate>
+                    <HeaderStyle Width="50px" />
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
                 <asp:BoundField DataField="INFO_NO" HeaderText="INFO_NO" SortExpression="INFO_NO" InsertVisible="False" ReadOnly="True" >
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
@@ -176,6 +183,10 @@
                 <asp:BoundField DataField="INFO_KBN" HeaderText="INFO_KBN" SortExpression="INFO_KBN" >
                 </asp:BoundField>
                 <asp:BoundField DataField="USR_ID" />
+                <asp:BoundField DataField="FIN_F" HeaderText="状況">
+                <HeaderStyle Width="50px" />
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
             </Columns>
             <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
@@ -193,6 +204,7 @@ SelectCommand="SELECT
   , SUBSTRING(INFO_DETAIL,1,30) + '…' AS INFO_DETAIL
   , INFO_KBN
   , USR_ID
+  , CASE FIN_FLG WHEN '1' THEN '済' END AS FIN_F
 FROM
   T_EXL_TOPICS 
 WHERE
