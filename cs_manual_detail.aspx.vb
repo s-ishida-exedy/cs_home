@@ -112,8 +112,12 @@ Partial Class cs_home
                 TextBox42.Text = dataread("CONSIGNEE_OF_SI_ADDRESS").ToString
                 TextBox43.Text = dataread("FINAL_DES").ToString
                 TextBox44.Text = dataread("FINAL_DES_ADDRESS").ToString
-                TextBox45.Text = dataread("BEARING").ToString
-                TextBox46.Text = dataread("IV_AUTO_CALC").ToString
+                'TextBox45.Text = dataread("BEARING").ToString
+                'TextBox46.Text = dataread("IV_AUTO_CALC").ToString
+
+                DropDownList17.SelectedValue = dataread("BEARING").ToString
+                DropDownList18.SelectedValue = dataread("IV_AUTO_CALC").ToString
+
                 TextBox47.Text = dataread("FORWARDER").ToString
                 TextBox48.Text = dataread("FORWARDER_STAFF").ToString
                 TextBox49.Text = dataread("TO1").ToString
@@ -225,8 +229,8 @@ Partial Class cs_home
             strSQL = strSQL & "  , CONSIGNEE_OF_SI_ADDRESS =  '" & Replace(LTrim(RTrim(TextBox42.Text)), "'", "''") & "' "
             strSQL = strSQL & "  , FINAL_DES =  '" & Replace(LTrim(RTrim(TextBox43.Text)), "'", "''") & "' "
             strSQL = strSQL & "  , FINAL_DES_ADDRESS =  '" & Replace(LTrim(RTrim(TextBox44.Text)), "'", "''") & "' "
-            strSQL = strSQL & "  , BEARING =  '" & Replace(LTrim(RTrim(TextBox45.Text)), "'", "''") & "' "
-            strSQL = strSQL & "  , IV_AUTO_CALC =  '" & Replace(LTrim(RTrim(TextBox46.Text)), "'", "''") & "' "
+            strSQL = strSQL & "  , BEARING =  '" & DropDownList17.SelectedValue & "' "
+            strSQL = strSQL & "  , IV_AUTO_CALC =  '" & DropDownList18.SelectedValue & "' "
             strSQL = strSQL & "  , FORWARDER =  '" & Replace(LTrim(RTrim(TextBox47.Text)), "'", "''") & "' "
             strSQL = strSQL & "  , FORWARDER_STAFF =  '" & Replace(LTrim(RTrim(TextBox48.Text)), "'", "''") & "' "
             strSQL = strSQL & "  , TO1 =  '" & Replace(LTrim(RTrim(TextBox49.Text)), "'", "''") & "' "
@@ -303,8 +307,8 @@ Partial Class cs_home
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox42.Text)) & "' "
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox43.Text)) & "' "
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox44.Text)) & "' "
-            strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox45.Text)) & "' "
-            strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox46.Text)) & "' "
+            strSQL = strSQL & "  , '" & DropDownList17.SelectedValue & "' "
+            strSQL = strSQL & "  , '" & DropDownList18.SelectedValue & "' "
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox47.Text)) & "' "
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox48.Text)) & "' "
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox49.Text)) & "' "
