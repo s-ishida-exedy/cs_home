@@ -123,6 +123,8 @@ Partial Class cs_home
         strSQL = strSQL & "SELECT AA.* "
         strSQL = strSQL & "FROM (SELECT TOP 5 *   "
         strSQL = strSQL & "FROM T_EXL_TOPICS  "
+        strSQL = strSQL & "WHERE INFO_DATE > DATEADD(DAY, -30, GETDATE()) "
+        strSQL = strSQL & "AND   FIN_FLG = '0' "
         strSQL = strSQL & "ORDER BY INFO_DATE DESC, INFO_TIME DESC) AA "
         strSQL = strSQL & "ORDER BY INFO_DATE , INFO_TIME "
 
