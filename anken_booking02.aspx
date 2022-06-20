@@ -505,7 +505,7 @@
 
     </asp:Panel>
 
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_ANKEN_HISTORY] "></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_ANKEN_HISTORY] ORDER BY SHIP_TYPE "></asp:SqlDataSource>
 
     </div>
 
