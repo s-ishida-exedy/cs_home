@@ -272,16 +272,18 @@ Partial Class cs_home
         If e.CommandName = "edt" Then
             Dim index As Integer = Convert.ToInt32(e.CommandArgument)
             Dim data1 = Me.GridView1.Rows(index).Cells(6).Text
+            Dim data2 = Me.GridView1.Rows(index).Cells(3).Text
+            Dim data3 = Me.GridView1.Rows(index).Cells(4).Text
 
             'インボイス番号をキーにデータを更新
-            Call Update_FLG(data1)
+            Call Update_FLG(data1, data2, data3)
 
             'Grid再表示
             GridView1.DataBind()
         End If
     End Sub
 
-    Private Sub Update_FLG(strIVNO As String)
+    Private Sub Update_FLG(strIVNO As String, strDate As String, strTime As String)
         'レコードのフラグを取得する。
         Dim strSQL As String
         Dim dtNow As DateTime = DateTime.Now
@@ -304,6 +306,8 @@ Partial Class cs_home
         strSQL = ""
         strSQL = strSQL & "SELECT UPD_FLG FROM T_EXL_VAN_SCH_DETAIL "
         strSQL = strSQL & "WHERE IVNO = '" & strIVNO & "' "
+        strSQL = strSQL & "AND VAN_DATE = '" & strDate & "' "
+        strSQL = strSQL & "AND VAN_TIME = '" & strTime & "' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -328,6 +332,8 @@ Partial Class cs_home
             strSQL = strSQL & "SET UPD_FLG = '0', UPDATE_TIME = '" & dtNow & "', UPD_PERSON = '" & Session("UsrId") & "' "
         End If
         strSQL = strSQL & "WHERE IVNO = '" & strIVNO & "' "
+        strSQL = strSQL & "AND VAN_DATE = '" & strDate & "' "
+        strSQL = strSQL & "AND VAN_TIME = '" & strTime & "' "
 
         Command.CommandText = strSQL
         ' SQLの実行
