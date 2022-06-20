@@ -1183,4 +1183,40 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
+
+    Public Function GET_CS_RESULT_SHELF(strshelf As String) As DataSet
+        'CSマニュアルデータ取得時
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  SHELFNO "
+        StrSQL = StrSQL & ", DOC_ID "
+        StrSQL = StrSQL & ", KBN02 "
+        StrSQL = StrSQL & ", DEPARTMENT "
+        StrSQL = StrSQL & ", TEAM "
+        StrSQL = StrSQL & ", PIC02 "
+        StrSQL = StrSQL & ", DOCNAME "
+        StrSQL = StrSQL & ", CONTENTS "
+        StrSQL = StrSQL & ", DATE "
+        StrSQL = StrSQL & ", SHELF_LIFE "
+        StrSQL = StrSQL & ", KBN01 "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "  T_EXL_DOC_BOX "
+        StrSQL = StrSQL & "WHERE SHELFNO = '" & strshelf & "' "
+        StrSQL = StrSQL & "Order By DOC_ID "
+
+
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
+
 End Class
