@@ -1184,29 +1184,31 @@ Public Class DBAccess
         Return Ds
     End Function
 
-    Public Function GET_RESULT_TOPICS(strValue As String) As DataSet
-        'EPA情報取得
+
+    Public Function GET_CS_RESULT_SHELF(strshelf As String) As DataSet
+        'CSマニュアルデータ取得時
         Conn = Me.Dbconnect
         Cmd = Conn.CreateCommand
 
         StrSQL = StrSQL & ""
         StrSQL = StrSQL & "SELECT "
-        StrSQL = StrSQL & "    INFO_NO "
-        StrSQL = StrSQL & "  , INFO_DATE "
-        StrSQL = StrSQL & "  , INFO_TIME "
-        StrSQL = StrSQL & "  , CREATE_NM "
-        StrSQL = StrSQL & "  , INFO_HEADER "
-        StrSQL = StrSQL & "  , SUBSTRING(INFO_DETAIL,1,30) + '…' AS INFO_DETAIL "
-        StrSQL = StrSQL & "  , INFO_KBN "
-        StrSQL = StrSQL & "  , USR_ID "
-        StrSQL = StrSQL & "  , CASE FIN_FLG WHEN '1' THEN '済' END AS FIN_F "
+        StrSQL = StrSQL & "  SHELFNO "
+        StrSQL = StrSQL & ", DOC_ID "
+        StrSQL = StrSQL & ", KBN02 "
+        StrSQL = StrSQL & ", DEPARTMENT "
+        StrSQL = StrSQL & ", TEAM "
+        StrSQL = StrSQL & ", PIC02 "
+        StrSQL = StrSQL & ", DOCNAME "
+        StrSQL = StrSQL & ", CONTENTS "
+        StrSQL = StrSQL & ", DATE "
+        StrSQL = StrSQL & ", SHELF_LIFE "
+        StrSQL = StrSQL & ", KBN01 "
         StrSQL = StrSQL & "FROM "
-        StrSQL = StrSQL & "  T_EXL_TOPICS  "
-        If strValue = "False" Then
-            StrSQL = StrSQL & "WHERE FIN_FLG = '0' "
-        End If
-        StrSQL = StrSQL & "ORDER BY "
-        StrSQL = StrSQL & "  INFO_DATE  , INFO_TIME "
+        StrSQL = StrSQL & "  T_EXL_DOC_BOX "
+        StrSQL = StrSQL & "WHERE SHELFNO = '" & strshelf & "' "
+        StrSQL = StrSQL & "Order By DOC_ID "
+
+
 
         Cmd.CommandText = StrSQL
 
@@ -1216,4 +1218,5 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
 End Class
