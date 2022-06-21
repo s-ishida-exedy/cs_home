@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Data
+
 Partial Class cs_home
     Inherits System.Web.UI.Page
 
@@ -122,5 +124,28 @@ Partial Class cs_home
         cnn.Dispose()
 
         GridView1.DataBind()
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        'チェックボックスON/OFFによるデータ取得
+
+        Dim strValue As String = ""
+
+        If CheckBox1.Checked = True Then
+            '「済」も表示する。
+            strValue = "True"
+        Else
+            strValue = "False"
+        End If
+
+        Dim Dataobj As New DBAccess
+
+        'データの取得
+        Dim ds As DataSet = Dataobj.GET_RESULT_TOPICS(strValue)
+        If ds.Tables.Count > 0 Then
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = ds
+            GridView1.DataBind()
+        End If
     End Sub
 End Class

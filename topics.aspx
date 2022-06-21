@@ -90,6 +90,22 @@
             top:15px;
             position: absolute;
         }
+       　/*GridViewヘッダー固定用*/
+        table{
+          width: 100%;
+
+        }
+        th {
+          position: sticky;
+          top: 0;
+          z-index: 0;
+          background-color: #000084;
+          color: #ffffff;
+        }
+        .wrapper {
+          overflow: scroll;
+          height: 450px;
+        }
 </style>
 <script>
     $(document).ready(function () {
@@ -134,14 +150,24 @@
                 <h2>トピックス一覧</h2>  
             </td>
             <td class="second-cell">
-                <asp:Button ID="Button2" runat="server" Text="　新規登録　" style="width:164px" Font-Size="Small" />
+                <asp:Button ID="Button2" runat="server" Text="　新規登録　" style="width:164px" Font-Size="Small" />&nbsp;
+                <asp:CheckBox ID="CheckBox1" runat="server" AutoPostBack ="true" Text ="「済」も表示する。"/>
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
             </td>
         </tr>
     </table>
-<div id="main2" style="width:100%;height:450px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">
+
+<div class="wrapper">
+<table class="sticky">
+<thead class="fixed">
+
+</thead>
+
+<tbody>
+
+<%--<div id="main2" style="width:100%;height:450px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">--%>
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="100%" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical">
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
@@ -209,6 +235,7 @@ FROM
   T_EXL_TOPICS 
 WHERE
   INFO_DATE &gt; DATEADD(DAY, - 30, GETDATE()) 
+  AND FIN_FLG = '0'
 ORDER BY
   INFO_DATE  , INFO_TIME
 ">
@@ -216,8 +243,13 @@ ORDER BY
     
         <br />
     
-</div>
+<%--</div>--%>
 <!--/#main2-->
+
+</tbody>
+</table>
+</div>
+
 
 </div>
 <!--/#contents2-->
