@@ -1219,4 +1219,36 @@ Public Class DBAccess
         Return Ds
     End Function
 
+    Public Function GET_RESULT_TOPICS(strValue As String) As DataSet
+        'EPA情報取得
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "    INFO_NO "
+        StrSQL = StrSQL & "  , INFO_DATE "
+        StrSQL = StrSQL & "  , INFO_TIME "
+        StrSQL = StrSQL & "  , CREATE_NM "
+        StrSQL = StrSQL & "  , INFO_HEADER "
+        StrSQL = StrSQL & "  , SUBSTRING(INFO_DETAIL,1,30) + '…' AS INFO_DETAIL "
+        StrSQL = StrSQL & "  , INFO_KBN "
+        StrSQL = StrSQL & "  , USR_ID "
+        StrSQL = StrSQL & "  , CASE FIN_FLG WHEN '1' THEN '済' END AS FIN_F "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "  T_EXL_TOPICS  "
+        If strValue = "False" Then
+            StrSQL = StrSQL & "WHERE FIN_FLG = '0' "
+        End If
+        StrSQL = StrSQL & "ORDER BY "
+        StrSQL = StrSQL & "  INFO_DATE  , INFO_TIME "
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class
