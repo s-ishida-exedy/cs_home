@@ -42,7 +42,7 @@
         }
         .wrapper {
           overflow: scroll;
-          height: 450px;
+          height: 200px;
         }
 
         h2 {
@@ -311,22 +311,6 @@
                 <td style="width:20px;">
                     <table  border='1'>
                             <tr >
-                                <td style="width:20px;"><asp:Label ID="Label167" runat="server" Text="棚番"></asp:Label></td>
-                                <td style="width:20px;"><asp:Label ID="Label168" runat="server" Text="収容</br>可数"></asp:Label></td>
-                                <td style="width:20px;"><asp:Label ID="Label169" runat="server" Text="収容数"></asp:Label></td>
-                                <td style="width:20px;"><asp:Label ID="Label170" runat="server" Text="期限</br>切数"></asp:Label></td>
-                            </tr>
-                    </table>
-                </td>
-                <td style="width:1px;">
-                    <table  border='0'>
-                            <tr >
-                             </tr>
-                    </table>
-                </td>
-                <td style="width:20px;">
-                    <table  border='1'>
-                            <tr >
                                 <td style="width:20px;"><asp:Label ID="Label171" runat="server" Text="棚番"></asp:Label></td>
                                 <td style="width:20px;"><asp:Label ID="Label172" runat="server" Text="収容</br>可数"></asp:Label></td>
                                 <td style="width:20px;"><asp:Label ID="Label173" runat="server" Text="収容数"></asp:Label></td>
@@ -400,16 +384,6 @@
                     </table>
                 </td>
                 <td style="width:20px;">
-                    <table  border='0'>
-                    </table>
-                </td>
-                <td style="width:1px;">
-                    <table  border='0'>
-                            <tr >
-                             </tr>
-                    </table>
-                </td>
-                <td style="width:20px;">
                     <table  border='1'>
                             <tr >
                                 <td id="A01" style="width:20px;"><asp:Label ID="Label1" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">C0001</a></asp:Label></td>
@@ -469,9 +443,9 @@
                     <table  border='1'>
                             <tr >
                                 <td id="B09" style="width:20px;"><asp:Label ID="Label25" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">D0008</a></asp:Label></td>
-                                <td id="B10" style="width:20px;"><asp:Label ID="Label26" runat="server" Text="A"></asp:Label></td>
-                                <td id="B11" style="width:20px;"><asp:Label ID="Label27" runat="server" Text="A"></asp:Label></td>
-                                <td id="B12" style="width:20px;"><asp:Label ID="Label198" runat="server" Text="A"></asp:Label></td>
+                                <td id="B10" style="width:20px;"><asp:Label ID="Label26" runat="server" Text="00"></asp:Label></td>
+                                <td id="B11" style="width:20px;"><asp:Label ID="Label27" runat="server" Text="0"></asp:Label></td>
+                                <td id="B12" style="width:20px;"><asp:Label ID="Label198" runat="server" Text="0"></asp:Label></td>
                             </tr>
                             <tr >
                                 <td id="B13" style="width:20px;"><asp:Label ID="Label28" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">D0009</a></asp:Label></td>
@@ -529,40 +503,7 @@
                 <td style="width:20px;">
                    <table  border='1'>
                             <tr >
-                                <td id="C17" style="width:20px;"><asp:Label ID="Label49" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">B0000</a></asp:Label></td>
-                                <td id="C18" style="width:20px;"><asp:Label ID="Label50" runat="server" Text="10"></asp:Label></td>
-                                <td id="C19" style="width:20px;"><asp:Label ID="Label51" runat="server" Text="1"></asp:Label></td>
-                                <td id="C20" style="width:20px;"><asp:Label ID="Label206" runat="server" Text="1"></asp:Label></td>
                             </tr>
-                            <tr >
-                                <td id="D01" style="width:20px;"><asp:Label ID="Label52" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">B0000</a></asp:Label></td>
-                                <td id="D02" style="width:20px;"><asp:Label ID="Label53" runat="server" Text="10"></asp:Label></td>
-                                <td id="D03" style="width:20px;"><asp:Label ID="Label54" runat="server" Text="1"></asp:Label></td>
-                                <td id="D04" style="width:20px;"><asp:Label ID="Label207" runat="server" Text="1"></asp:Label></td>
-                            </tr>
-                            <tr >
-                                <td id="D05" style="width:20px;"><asp:Label ID="Label55" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">B0000</a></asp:Label></td>
-                                <td id="D06" style="width:20px;"><asp:Label ID="Label56" runat="server" Text="10"></asp:Label></td>
-                                <td id="D07" style="width:20px;"><asp:Label ID="Label57" runat="server" Text="1"></asp:Label></td>
-                                <td id="D08" style="width:20px;"><asp:Label ID="Label208" runat="server" Text="1"></asp:Label></td>
-                            </tr>
-                            <tr >
-                                <td id="D09" style="width:20px;"><asp:Label ID="Label58" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">B0000</a></asp:Label></td>
-                                <td id="D10" style="width:20px;"><asp:Label ID="Label59" runat="server" Text="10"></asp:Label></td>
-                                <td id="D11" style="width:20px;"><asp:Label ID="Label60" runat="server" Text="1"></asp:Label></td>
-                                <td id="D12" style="width:20px;"><asp:Label ID="Label209" runat="server" Text="1"></asp:Label></td>
-                            </tr>
-                    </table>
-                </td>
-                <td style="width:1px;">
-                    <table  border='0'>
-                            <tr >
-                             </tr>
-                    </table>
-                </td>
-                <td style="width:20px;">
-                     <table  border='0'>
-
                     </table>
                 </td>
                 <td style="width:1px;">
@@ -677,9 +618,9 @@
                             </tr>
                             <tr >
                                 <td id="G13" style="width:20px;"><asp:Label ID="Label106" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">D0018</a></asp:Label></td>
-                                <td id="G14" style="width:20px;"><asp:Label ID="Label107" runat="server" Text="A"></asp:Label></td>
-                                <td id="G15" style="width:20px;"><asp:Label ID="Label108" runat="server" Text="A"></asp:Label></td>
-                                <td id="G16" style="width:20px;"><asp:Label ID="Label225" runat="server" Text="A"></asp:Label></td>
+                                <td id="G14" style="width:20px;"><asp:Label ID="Label107" runat="server" Text="00"></asp:Label></td>
+                                <td id="G15" style="width:20px;"><asp:Label ID="Label108" runat="server" Text="0"></asp:Label></td>
+                                <td id="G16" style="width:20px;"><asp:Label ID="Label225" runat="server" Text="0"></asp:Label></td>
                             </tr>
                     </table>
                 </td>
@@ -690,28 +631,6 @@
                 <td style="width:20px;">
                    <table  border='1'>
                             <tr >
-                                <td id="G17" style="width:20px;"><asp:Label ID="Label109" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">B0000</a></asp:Label></td>
-                                <td id="G18" style="width:20px;"><asp:Label ID="Label110" runat="server" Text="10"></asp:Label></td>
-                                <td id="G19" style="width:20px;"><asp:Label ID="Label111" runat="server" Text="1"></asp:Label></td>
-                                <td id="G20" style="width:20px;"><asp:Label ID="Label226" runat="server" Text="1"></asp:Label></td>
-                            </tr>
-                            <tr >
-                                <td id="H01" style="width:20px;"><asp:Label ID="Label112" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">B0000</a></asp:Label></td>
-                                <td id="H02" style="width:20px;"><asp:Label ID="Label113" runat="server" Text="10"></asp:Label></td>
-                                <td id="H03" style="width:20px;"><asp:Label ID="Label114" runat="server" Text="1"></asp:Label></td>
-                                <td id="H04" style="width:20px;"><asp:Label ID="Label227" runat="server" Text="1"></asp:Label></td>
-                            </tr>
-                            <tr >
-                                <td id="H05" style="width:20px;"><asp:Label ID="Label115" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">B0000</a></asp:Label></td>
-                                <td id="H06" style="width:20px;"><asp:Label ID="Label116" runat="server" Text="10"></asp:Label></td>
-                                <td id="H07" style="width:20px;"><asp:Label ID="Label117" runat="server" Text="1"></asp:Label></td>
-                                <td id="H08" style="width:20px;"><asp:Label ID="Label228" runat="server" Text="1"></asp:Label></td>
-                            </tr>
-                            <tr >
-                                <td id="H09" style="width:20px;"><asp:Label ID="Label118" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">B0000</a></asp:Label></td>
-                                <td id="H10" style="width:20px;"><asp:Label ID="Label119" runat="server" Text="10"></asp:Label></td>
-                                <td id="H11" style="width:20px;"><asp:Label ID="Label120" runat="server" Text="1"></asp:Label></td>
-                                <td id="H12" style="width:20px;"><asp:Label ID="Label229" runat="server" Text="1"></asp:Label></td>
                             </tr>
                     </table>
                 </td>
@@ -721,34 +640,7 @@
                              </tr>
                     </table>
                 </td>
-                <td style="width:20px;">
-                   <table  border='1'>
-                            <tr >
-                                <td id="H13" style="width:20px;"><asp:Label ID="Label121" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">B0000</a></asp:Label></td>
-                                <td id="H14" style="width:20px;"><asp:Label ID="Label122" runat="server" Text="10"></asp:Label></td>
-                                <td id="H15" style="width:20px;"><asp:Label ID="Label123" runat="server" Text="1"></asp:Label></td>
-                                <td id="H16" style="width:20px;"><asp:Label ID="Label230" runat="server" Text="1"></asp:Label></td>
-                            </tr>
-                            <tr >
-                                <td id="H17" style="width:20px;"><asp:Label ID="Label124" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">B0000</a></asp:Label></td>
-                                <td id="H18" style="width:20px;"><asp:Label ID="Label125" runat="server" Text="10"></asp:Label></td>
-                                <td id="H19" style="width:20px;"><asp:Label ID="Label126" runat="server" Text="1"></asp:Label></td>
-                                <td id="H20" style="width:20px;"><asp:Label ID="Label231" runat="server" Text="1"></asp:Label></td>
-                            </tr>
-                            <tr >
-                                <td id="I01" style="width:20px;"><asp:Label ID="Label127" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">B0000</a></asp:Label></td>
-                                <td id="I02" style="width:20px;"><asp:Label ID="Label128" runat="server" Text="10"></asp:Label></td>
-                                <td id="I03" style="width:20px;"><asp:Label ID="Label129" runat="server" Text="1"></asp:Label></td>
-                                <td id="I04" style="width:20px;"><asp:Label ID="Label232" runat="server" Text="1"></asp:Label></td>
-                            </tr>
-                    </table>
-                </td>
-                <td style="width:1px;">
-                    <table  border='0'>
-                            <tr >
-                             </tr>
-                    </table>
-                </td>
+
                 <td style="width:20px;">
                     <table  border='0'>
                             <tr >
@@ -787,9 +679,9 @@
                     <table  border='1'>
                             <tr >
                                 <td id="J05" style="width:20px;"><asp:Label ID="Label145" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">D0001</a></asp:Label></td>
-                                <td id="J06" style="width:20px;"><asp:Label ID="Label146" runat="server" Text="12"></asp:Label></td>
-                                <td id="J07" style="width:20px;"><asp:Label ID="Label147" runat="server" Text="1"></asp:Label></td>
-                                <td id="J08" style="width:20px;"><asp:Label ID="Label238" runat="server" Text="A"></asp:Label></td>
+                                <td id="J06" style="width:20px;"><asp:Label ID="Label146" runat="server" Text="00"></asp:Label></td>
+                                <td id="J07" style="width:20px;"><asp:Label ID="Label147" runat="server" Text="0"></asp:Label></td>
+                                <td id="J08" style="width:20px;"><asp:Label ID="Label238" runat="server" Text="0"></asp:Label></td>
                             </tr>
                             <tr >
                                 <td id="J09" style="width:20px;"><asp:Label ID="Label148" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">D0002</a></asp:Label></td>
@@ -833,21 +725,21 @@
                     <table  border='1'>
                             <tr >
                                 <td id="K01" style="width:20px;"><asp:Label ID="Label157" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">A0001</a></asp:Label></td>
-                                <td id="K02" style="width:20px;"><asp:Label ID="Label158" runat="server" Text="A"></asp:Label></td>
-                                <td id="K03" style="width:20px;"><asp:Label ID="Label159" runat="server" Text="A"></asp:Label></td>
-                                <td id="K04" style="width:20px;"><asp:Label ID="Label242" runat="server" Text="A"></asp:Label></td>
+                                <td id="K02" style="width:20px;"><asp:Label ID="Label158" runat="server" Text="00"></asp:Label></td>
+                                <td id="K03" style="width:20px;"><asp:Label ID="Label159" runat="server" Text="0"></asp:Label></td>
+                                <td id="K04" style="width:20px;"><asp:Label ID="Label242" runat="server" Text="0"></asp:Label></td>
                             </tr>
                             <tr >
                                 <td id="K05" style="width:20px;"><asp:Label ID="Label160" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">A0002</a></asp:Label></td>
-                                <td id="K06" style="width:20px;"><asp:Label ID="Label161" runat="server" Text="A"></asp:Label></td>
-                                <td id="K07" style="width:20px;"><asp:Label ID="Label162" runat="server" Text="A"></asp:Label></td>
-                                <td id="K08" style="width:20px;"><asp:Label ID="Label243" runat="server" Text="A"></asp:Label></td>
+                                <td id="K06" style="width:20px;"><asp:Label ID="Label161" runat="server" Text="10"></asp:Label></td>
+                                <td id="K07" style="width:20px;"><asp:Label ID="Label162" runat="server" Text="1"></asp:Label></td>
+                                <td id="K08" style="width:20px;"><asp:Label ID="Label243" runat="server" Text="1"></asp:Label></td>
                             </tr>
                             <tr >
                                 <td id="K09" style="width:20px;"><asp:Label ID="Label163" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">A0003</a></asp:Label></td>
-                                <td id="K10" style="width:20px;"><asp:Label ID="Label164" runat="server" Text="A"></asp:Label></td>
-                                <td id="K11" style="width:20px;"><asp:Label ID="Label165" runat="server" Text="A"></asp:Label></td>
-                                <td id="K12" style="width:20px;"><asp:Label ID="Label244" runat="server" Text="A"></asp:Label></td>
+                                <td id="K10" style="width:20px;"><asp:Label ID="Label164" runat="server" Text="10"></asp:Label></td>
+                                <td id="K11" style="width:20px;"><asp:Label ID="Label165" runat="server" Text="1"></asp:Label></td>
+                                <td id="K12" style="width:20px;"><asp:Label ID="Label244" runat="server" Text="1"></asp:Label></td>
                             </tr>
                     </table>
                 </td>
@@ -857,18 +749,7 @@
                              </tr>
                     </table>
                 </td>
-                <td style="width:20px;">
-                    <table  border='1'>
-                            <tr >
-                             </tr>
-                    </table>
-                </td>
-                <td style="width:1px;">
-                    <table  border='0'>
-                            <tr >
-                             </tr>
-                    </table>
-                </td>
+
                 <td style="width:20px;">
                     <table  border='1'>
                             <tr >
@@ -919,289 +800,344 @@
 <script>
 
     $(document).ready(function () {
-        if (document.getElementById("A02").innerText == document.getElementById("A03").innerText) {
+
+
+        if (document.getElementById("A03").innerText / document.getElementById("A02").innerText == 1) {
             document.getElementById("A01").style.backgroundColor = 'red';
-        }else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("A03").innerText / document.getElementById("A02").innerText > 0.5) {
+            document.getElementById('A01').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("A06").innerText == document.getElementById("A07").innerText) {
+        if (document.getElementById("A07").innerText / document.getElementById("A06").innerText == 1) {
             document.getElementById("A05").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("A07").innerText / document.getElementById("A06").innerText > 0.5) {
+            document.getElementById('A05').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("A10").innerText == document.getElementById("A11").innerText) {
+        if (document.getElementById("A11").innerText/document.getElementById("A10").innerText == 1) {
             document.getElementById("A09").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("A11").innerText / document.getElementById("A10").innerText > 0.5) {
+            document.getElementById('A09').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("D14").innerText == document.getElementById("D15").innerText) {
+        if (document.getElementById("D15").innerText/document.getElementById("D14").innerText == 1) {
             document.getElementById("D13").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("D15").innerText / document.getElementById("D14").innerText > 0.5) {
+            document.getElementById('D13').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("D18").innerText == document.getElementById("D19").innerText) {
+        if (document.getElementById("D19").innerText/document.getElementById("D18").innerText == 1) {
             document.getElementById("D17").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("D19").innerText / document.getElementById("D18").innerText > 0.5) {
+            document.getElementById('D17').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("E02").innerText == document.getElementById("E03").innerText) {
+        if (document.getElementById("E03").innerText/document.getElementById("E02").innerText == 1) {
             document.getElementById("E01").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("E03").innerText / document.getElementById("E02").innerText > 0.5) {
+            document.getElementById('E01').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("E06").innerText == document.getElementById("E07").innerText) {
+        if (document.getElementById("E07").innerText/document.getElementById("E06").innerText == 1) {
             document.getElementById("E05").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("E07").innerText / document.getElementById("E06").innerText > 0.5) {
+            document.getElementById('E05').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("A14").innerText == document.getElementById("A15").innerText) {
+        if (document.getElementById("A15").innerText/document.getElementById("A14").innerText == 1) {
             document.getElementById("A13").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("A15").innerText / document.getElementById("A14").innerText >0.5) {
+            document.getElementById('A13').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("A18").innerText == document.getElementById("A19").innerText) {
+        if (document.getElementById("A19").innerText/document.getElementById("A18").innerText == 1) {
             document.getElementById("A17").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("A19").innerText / document.getElementById("A18").innerText >0.5) {
+            document.getElementById('A17').style.backgroundColor = 'yellow';
         };
 
-
-        if (document.getElementById("B02").innerText == document.getElementById("B03").innerText) {
+        if (document.getElementById("B03").innerText/document.getElementById("B02").innerText == 1) {
             document.getElementById("B01").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("B03").innerText / document.getElementById("B02").innerText >0.5) {
+            document.getElementById('B01').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("E10").innerText == document.getElementById("E11").innerText) {
+        if (document.getElementById("E11").innerText/document.getElementById("E10").innerText == 1) {
             document.getElementById("E09").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("E11").innerText / document.getElementById("E10").innerText >0.5) {
+            document.getElementById('E09').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("E18").innerText == document.getElementById("E19").innerText) {
+        if (document.getElementById("E19").innerText/document.getElementById("E18").innerText == 1) {
             document.getElementById("E17").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("E19").innerText / document.getElementById("E18").innerText >0.5) {
+            document.getElementById('E17').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("I10").innerText == document.getElementById("I11").innerText) {
+        if (document.getElementById("I11").innerText/document.getElementById("I10").innerText == 1) {
             document.getElementById("I09").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("I11").innerText / document.getElementById("I10").innerText >0.5) {
+            document.getElementById('I09').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("I18").innerText == document.getElementById("I19").innerText) {
+        if (document.getElementById("I19").innerText/document.getElementById("I18").innerText == 1) {
             document.getElementById("I17").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("I19").innerText / document.getElementById("I18").innerText >0.5) {
+            document.getElementById('I17').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("B10").innerText == document.getElementById("B11").innerText) {
-            document.getElementById("B09").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
+        //if (document.getElementById("B11").innerText/document.getElementById("B10").innerText == 1) {
+        //    document.getElementById("B09").style.backgroundColor = 'red';
+        //} else if (document.getElementById("B11").innerText / document.getElementById("B10").innerText >0.5) {
+        //    document.getElementById('B09').style.backgroundColor = 'yellow';
+        //};
 
-        if (document.getElementById("B14").innerText == document.getElementById("B15").innerText) {
+        if (document.getElementById("B15").innerText/document.getElementById("B14").innerText == 1) {
             document.getElementById("B13").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("B15").innerText / document.getElementById("B14").innerText >0.5) {
+            document.getElementById('B13').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("B18").innerText == document.getElementById("B19").innerText) {
+        if (document.getElementById("B19").innerText/document.getElementById("B18").innerText == 1) {
             document.getElementById("B17").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("B19").innerText / document.getElementById("B18").innerText >0.5) {
+            document.getElementById('B17').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("F06").innerText == document.getElementById("F07").innerText) {
+        if (document.getElementById("F07").innerText/document.getElementById("F06").innerText == 1) {
             document.getElementById("F05").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("F07").innerText / document.getElementById("F06").innerText >0.5) {
+            document.getElementById('F05').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("F14").innerText == document.getElementById("F15").innerText) {
+        if (document.getElementById("F15").innerText/document.getElementById("F14").innerText == 1) {
             document.getElementById("F13").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("F15").innerText / document.getElementById("F14").innerText >0.5) {
+            document.getElementById('F13').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("J06").innerText == document.getElementById("J07").innerText) {
-            document.getElementById("J05").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
+        //if (document.getElementById("J07").innerText/document.getElementById("J06").innerText == 1) {
+        //    document.getElementById("J05").style.backgroundColor = 'red';
+        //} else if (document.getElementById("J07").innerText / document.getElementById("J06").innerText >0.5) {
+        //    document.getElementById('J05').style.backgroundColor = 'yellow';
+        //};
 
-        if (document.getElementById("J10").innerText == document.getElementById("J11").innerText) {
+        if (document.getElementById("J11").innerText/document.getElementById("J10").innerText == 1) {
             document.getElementById("J09").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("J11").innerText / document.getElementById("J10").innerText >0.5) {
+            document.getElementById('J09').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("J14").innerText == document.getElementById("J15").innerText) {
+        if (document.getElementById("J15").innerText/document.getElementById("J14").innerText == 1) {
             document.getElementById("J13").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("J15").innerText / document.getElementById("J14").innerText >0.5) {
+            document.getElementById('J13').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("J18").innerText == document.getElementById("J19").innerText) {
+        if (document.getElementById("J19").innerText/document.getElementById("J18").innerText == 1) {
             document.getElementById("J17").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("J19").innerText / document.getElementById("J18").innerText >0.5){
+            document.getElementById('J17').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("C02").innerText == document.getElementById("C03").innerText) {
+        if (document.getElementById("C03").innerText/document.getElementById("C02").innerText == 1) {
             document.getElementById("C01").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("C03").innerText / document.getElementById("C02").innerText >0.5){
+            document.getElementById('C01').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("C06").innerText == document.getElementById("C07").innerText) {
+        if (document.getElementById("C07").innerText/document.getElementById("C06").innerText == 1) {
             document.getElementById("C05").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("C07").innerText / document.getElementById("C06").innerText >0.5) {
+            document.getElementById('C05').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("C10").innerText == document.getElementById("C11").innerText) {
+        if (document.getElementById("C11").innerText/document.getElementById("C10").innerText == 1) {
             document.getElementById("C09").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("C11").innerText / document.getElementById("C10").innerText >0.5) {
+            document.getElementById('C09').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("C14").innerText == document.getElementById("C15").innerText) {
+        if (document.getElementById("C15").innerText/document.getElementById("C14").innerText == 1) {
             document.getElementById("C13").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("C15").innerText / document.getElementById("C14").innerText >0.5) {
+            document.getElementById('C13').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("G02").innerText == document.getElementById("G03").innerText) {
+        if (document.getElementById("G03").innerText/document.getElementById("G02").innerText == 1) {
             document.getElementById("G01").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("G03").innerText / document.getElementById("G02").innerText >0.5) {
+            document.getElementById('G01').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("G06").innerText == document.getElementById("G07").innerText) {
+        if (document.getElementById("G07").innerText/document.getElementById("G06").innerText == 1) {
             document.getElementById("G05").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("G07").innerText / document.getElementById("G06").innerText >0.5) {
+            document.getElementById('G05').style.backgroundColor = 'yellow';
         };
 
 
-        if (document.getElementById("G10").innerText == document.getElementById("G11").innerText) {
+        if (document.getElementById("G11").innerText/document.getElementById("G10").innerText == 1) {
             document.getElementById("G09").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("G11").innerText / document.getElementById("G10").innerText >0.5) {
+            document.getElementById('G09').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("G14").innerText == document.getElementById("G15").innerText) {
-            document.getElementById("G13").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
+        //if (document.getElementById("G15").innerText/document.getElementById("G14").innerText == 1) {
+        //    document.getElementById("G13").style.backgroundColor = 'red';
+        //} else if (document.getElementById("G15").innerText / document.getElementById("G14").innerText >0.5) {
+        //    document.getElementById('G13').style.backgroundColor = 'yellow';
+        //};
 
-        if (document.getElementById("H14").innerText == document.getElementById("H15").innerText) {
-            document.getElementById("H13").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
-
-        if (document.getElementById("H18").innerText == document.getElementById("H19").innerText) {
-            document.getElementById("H17").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
-
-        if (document.getElementById("I02").innerText == document.getElementById("I03").innerText) {
-            document.getElementById("I01").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
-
-
-        if (document.getElementById("C18").innerText == document.getElementById("C19").innerText) {
-            document.getElementById("C17").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
-
-
-        if (document.getElementById("D02").innerText == document.getElementById("D03").innerText) {
-            document.getElementById("D01").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
-
-        if (document.getElementById("D06").innerText == document.getElementById("D07").innerText) {
-            document.getElementById("D05").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
-
-        if (document.getElementById("D10").innerText == document.getElementById("D11").innerText) {
-            document.getElementById("D09").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
-
-        if (document.getElementById("G18").innerText == document.getElementById("G19").innerText) {
-            document.getElementById("G17").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
-
-        if (document.getElementById("H02").innerText == document.getElementById("H03").innerText) {
-            document.getElementById("H01").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
-
-        if (document.getElementById("H06").innerText == document.getElementById("H07").innerText) {
-            document.getElementById("H05").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
-
-        if (document.getElementById("H10").innerText == document.getElementById("H11").innerText) {
-            document.getElementById("H09").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
-
-        if (document.getElementById("K02").innerText == document.getElementById("K03").innerText) {
-            document.getElementById("K01").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
-
-        if (document.getElementById("K06").innerText == document.getElementById("K07").innerText) {
-            document.getElementById("K05").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
-
-        if (document.getElementById("K10").innerText == document.getElementById("K11").innerText) {
-            document.getElementById("K09").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
-        };
-
-        if (document.getElementById("F10").innerText == document.getElementById("F11").innerText) {
+        if (document.getElementById("F11").innerText / document.getElementById("F10").innerText == 1) {
             document.getElementById("F09").style.backgroundColor = 'red';
-        } else {
-            //document.getElementById('A1').style.backgroundColor = 'blue';
+        } else if (document.getElementById("F11").innerText / document.getElementById("F10").innerText > 0.5) {
+            document.getElementById('F09').style.backgroundColor = 'yellow';
         };
+
+        //if (document.getElementById("H15").innerText/document.getElementById("H14").innerText == 1) {
+        //    document.getElementById("H13").style.backgroundColor = 'red';
+        //} else if (document.getElementById("H15").innerText / document.getElementById("H14").innerText >0.5) {
+        //    document.getElementById('H13').style.backgroundColor = 'yellow';
+        //};
+
+
+        //if (document.getElementById("H19").innerText / document.getElementById("H18").innerText == 1) {
+        //    document.getElementById("H17").style.backgroundColor = 'red';
+        //} else if (document.getElementById("H19").innerText / document.getElementById("H18").innerText > 0.5) {
+        //    document.getElementById('H17').style.backgroundColor = 'yellow';
+        //};
+
+
+        //if (document.getElementById("I03").innerText/document.getElementById("I02").innerText == 1) {
+        //    document.getElementById("I01").style.backgroundColor = 'red';
+        //} else if (document.getElementById("I03").innerText / document.getElementById("I02").innerText >0.5) {
+        //    document.getElementById('I01').style.backgroundColor = 'yellow';
+        //};
+
+
+        //if (document.getElementById("C19").innerText/document.getElementById("C18").innerText == 1) {
+        //    document.getElementById("C17").style.backgroundColor = 'red';
+        //} else if (document.getElementById("C19").innerText / document.getElementById("C18").innerText >0.5) {
+        //    document.getElementById('C17').style.backgroundColor = 'yellow';
+        //};
+
+
+        //if (document.getElementById("D03").innerText/document.getElementById("D02").innerText == 1) {
+        //    document.getElementById("D01").style.backgroundColor = 'red';
+        //} else if (document.getElementById("D03").innerText / document.getElementById("D02").innerText >0.5) {
+        //    document.getElementById('D01').style.backgroundColor = 'yellow';
+        //};
+
+        //if (document.getElementById("D07").innerText/document.getElementById("D06").innerText == 1) {
+        //    document.getElementById("D05").style.backgroundColor = 'red';
+        //} else if (document.getElementById("D07").innerText / document.getElementById("D06").innerText >0.5) {
+        //    document.getElementById('D05').style.backgroundColor = 'yellow';
+        //};
+
+        //if (document.getElementById("D11").innerText/document.getElementById("D10").innerText == 1) {
+        //    document.getElementById("D09").style.backgroundColor = 'red';
+        //} else if (document.getElementById("D11").innerText / document.getElementById("D10").innerText >0.5) {
+        //    document.getElementById('D09').style.backgroundColor = 'yellow';
+        //};
+
+        //if (document.getElementById("G19").innerText/document.getElementById("G18").innerText == 1) {
+        //    document.getElementById("G17").style.backgroundColor = 'red';
+        //} else if (document.getElementById("G19").innerText / document.getElementById("G18").innerText >0.5) {
+        //    document.getElementById('G17').style.backgroundColor = 'yellow';
+        //};
+
+        //if (document.getElementById("H03").innerText/document.getElementById("H02").innerText == 1) {
+        //    document.getElementById("H01").style.backgroundColor = 'red';
+        //} else if (document.getElementById("H03").innerText / document.getElementById("H02").innerText >0.5) {
+        //    document.getElementById('H01').style.backgroundColor = 'yellow';
+        //};
+
+        //if (document.getElementById("H07").innerText/document.getElementById("H06").innerText == 1) {
+        //    document.getElementById("H05").style.backgroundColor = 'red';
+        //} else if (document.getElementById("H07").innerText / document.getElementById("H06").innerText >0.5) {
+        //    document.getElementById('H05').style.backgroundColor = 'yellow';
+        //};
+
+        //if (document.getElementById("H11").innerText/document.getElementById("H10").innerText == 1) {
+        //    document.getElementById("H09").style.backgroundColor = 'red';
+        //} else if (document.getElementById("H11").innerText / document.getElementById("H10").innerText >0.5) {
+        //    document.getElementById('H09').style.backgroundColor = 'yellow';
+        //};
+
+
+        //if (document.getElementById("K02").innerText == document.getElementById("K03").innerText) {
+        //    document.getElementById("K01").style.backgroundColor = 'red';
+        //} else {
+        //    //document.getElementById('A1').style.backgroundColor = 'blue';
+        //};
+
+        if (document.getElementById("K07").innerText/document.getElementById("K06").innerText == 1) {
+            document.getElementById("K05").style.backgroundColor = 'red';
+        } else if (document.getElementById("K07").innerText / document.getElementById("K06").innerText >0.5) {
+            document.getElementById("K05").style.backgroundColor = 'yellow';
+        };
+
+        if (document.getElementById("K11").innerText/document.getElementById("K10").innerText == 1) {
+            document.getElementById("K09").style.backgroundColor = 'red';
+        } else if (document.getElementById("K11").innerText/document.getElementById("K10").innerText >0.5) {
+            document.getElementById("K09").style.backgroundColor = 'yellow';
+        };
+
+        document.getElementById("B09").style.backgroundColor = 'blue';
+        document.getElementById("J05").style.backgroundColor = 'blue';
+        document.getElementById("C13").style.backgroundColor = 'blue';
+        document.getElementById("G13").style.backgroundColor = 'blue';
+        document.getElementById("K01").style.backgroundColor = 'blue';
 
     });
 
 </script>
+
+
+    <div id="contents2" class="inner2">
+
+        <asp:Label ID="Label36" runat="server" Text="●廃棄スケジュール"></asp:Label>
+        <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
+            <div class="wrapper">
+                <table class="sticky">
+                    <thead class="fixed">
+                    </thead>
+
+                    <tbody>
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="200px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
+                        <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
+                        <HeaderStyle CssClass="Freezing"></HeaderStyle>
+
+                        <Columns>
+
+                        <asp:BoundField DataField="SHELF_LIFE" HeaderText="廃棄期限" SortExpression="廃棄期限" >
+                        <HeaderStyle Width="10px" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="SHELF_LIFEのカウント" HeaderText="箱数" SortExpression="箱数" >
+                        <HeaderStyle Width="10px" />
+                        </asp:BoundField>
+
+
+
+                        </Columns>
+                        <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+                        <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#FFFFFF" ForeColor="Black" />
+                        <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+                        <SortedAscendingHeaderStyle BackColor="#0000A9" />
+                        </asp:GridView>
+
+                    </tbody>
+                </table>
+            </div>
+        </asp:Panel>
+    </div>
+
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT T_EXL_DOC_BOX.SHELF_LIFE, Count(T_EXL_DOC_BOX.SHELF_LIFE) AS SHELF_LIFEのカウント FROM T_EXL_DOC_BOX GROUP BY T_EXL_DOC_BOX.SHELF_LIFE ORDER BY T_EXL_DOC_BOX.SHELF_LIFE"></asp:SqlDataSource>
+
+
+    
 
     
 <!--/#contents2-->

@@ -156,13 +156,12 @@ Partial Class yuusen
         DropDownList1.Items.Clear()
 
         DropDownList1.Items.Insert(0, "--Select--")
-        DropDownList1.Items.Insert(1, "進捗状況")
-        DropDownList1.Items.Insert(2, "シート")
-        DropDownList1.Items.Insert(3, "海貨業者")
-        DropDownList1.Items.Insert(4, "客先コード")
-        DropDownList1.Items.Insert(5, "IVNO")
-        DropDownList1.Items.Insert(6, "CUT日")
-        DropDownList1.Items.Insert(7, "書類作成予定日")
+        DropDownList1.Items.Insert(1, "棚番号")
+        DropDownList1.Items.Insert(2, "業務区分")
+        DropDownList1.Items.Insert(3, "チーム")
+        DropDownList1.Items.Insert(4, "担当者")
+        DropDownList1.Items.Insert(5, "書類名")
+
 
         DropDownList2.Items.Clear()
         DropDownList2.Items.Insert(0, "--Select--")
