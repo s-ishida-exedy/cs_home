@@ -175,15 +175,23 @@
 <tbody>
 
 <%--<div id="main2" style="width:auto; height:500px;overflow:scroll;border:None;">--%>
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1"  Width="6500px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" AllowSorting="True">
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1"  Width="2250" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" AllowSorting="True">
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
         <Columns>
+
+        <asp:TemplateField ShowHeader="False">
+        <ItemTemplate>
+        <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="false" CommandName="edt" ImageUrl="~/icon/write.png" Text="編集" width = "20" height = "20" />
+        </ItemTemplate>
+        <HeaderStyle BackColor="#6B696B" />
+        </asp:TemplateField>
+
             <asp:BoundField DataField="NEW_CODE" HeaderText="新ｺｰﾄﾞ" SortExpression="NEW_CODE" >
             <HeaderStyle Width="70px" />
             </asp:BoundField>
-            <asp:BoundField DataField="OLD_CODE" HeaderText="旧ｺｰﾄﾞ" SortExpression="OLD_CODE" >
-            <HeaderStyle Width="250px" />
+            <asp:BoundField DataField="OLD_CODE" HeaderText="国名" SortExpression="OLD_CODE" >
+            <HeaderStyle Width="150px" />
             </asp:BoundField>
             <asp:BoundField DataField="CUST_NM" HeaderText="客先名" SortExpression="CUST_NM" >
             <HeaderStyle Width="400px" />
@@ -191,49 +199,10 @@
             <asp:BoundField DataField="CUST_AB" HeaderText="略称" SortExpression="CUST_AB" >
             <HeaderStyle Width="100px" />
             </asp:BoundField>
-            <asp:BoundField DataField="INCOTEM" HeaderText="建値" SortExpression="INCOTEM" >
-            <HeaderStyle Width="100px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="BL_TYPE" HeaderText="BL種類" SortExpression="BL_TYPE" >
-            <HeaderStyle Width="150px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="BL_SEND" HeaderText="BL送付方法" SortExpression="BL_SEND" >
+<%--            <asp:BoundField DataField="BL_SEND" HeaderText="BL送付方法" SortExpression="BL_SEND" >
             <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="CUST_ADDRESS" HeaderText="客先住所" SortExpression="CUST_ADDRESS" >
-            <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="CONSIGNEE" HeaderText="CONSIGNEE" SortExpression="CONSIGNEE" >
-            <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="CNEE_NM_SI" HeaderText="CNEE Name of SI" SortExpression="CNEE_NM_SI" >
-            <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="FIN_DESTINATION" HeaderText="Final DESTINATION" SortExpression="FIN_DESTINATION" >
-            <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="NOTIFY" HeaderText="NOTIFY" SortExpression="NOTIFY" >
-            <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="IV_NECE" HeaderText="IV" SortExpression="IV_NECE" />
-            <asp:BoundField DataField="PL_NECE" HeaderText="PL" SortExpression="PL_NECE" />
-            <asp:BoundField DataField="BL_NECE" HeaderText="BL" SortExpression="BL_NECE" />
-            <asp:BoundField DataField="CO_NECE" HeaderText="CO" SortExpression="CO_NECE" />
-            <asp:BoundField DataField="EPA_NECE" HeaderText="EPA" SortExpression="EPA_NECE" />
-            <asp:BoundField DataField="WOOD_NECE" HeaderText="木材" SortExpression="WOOD_NECE" />
-            <asp:BoundField DataField="DELI_NECE" HeaderText="ﾃﾞﾘﾊﾞﾘ" SortExpression="DELI_NECE" />
-            <asp:BoundField DataField="INSP_NECE" HeaderText="検査" SortExpression="INSP_NECE" />
-            <asp:BoundField DataField="ERL_NECE" HeaderText="ERL" SortExpression="ERL_NECE" />
-            <asp:BoundField DataField="VESS_NECE" HeaderText="ﾍﾞｯｾﾙ" SortExpression="VESS_NECE" />
-            <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" >
-            <HeaderStyle Width="150px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="SHIPMENT_KBN" HeaderText="出荷区分" SortExpression="SHIPMENT_KBN" >
-            <HeaderStyle Width="100px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="LT" HeaderText="LT" SortExpression="LT" />
-            <asp:BoundField DataField="LC" HeaderText="LC" SortExpression="LC" />
-            <asp:BoundField DataField="CONSIGNEE_OF_SI" HeaderText="CNEE OF SI" SortExpression="CONSIGNEE_OF_SI" >
+            </asp:BoundField>--%>
+<%--            <asp:BoundField DataField="CONSIGNEE_OF_SI" HeaderText="CNEE OF SI" SortExpression="CONSIGNEE_OF_SI" >
             <HeaderStyle Width="400px" />
             </asp:BoundField>
             <asp:BoundField DataField="CONSIGNEE_OF_SI_ADDRESS" HeaderText="CNEE OF SI Address" SortExpression="CONSIGNEE_OF_SI_ADDRESS" >
@@ -245,16 +214,91 @@
             <asp:BoundField DataField="FINAL_DES_ADDRESS" HeaderText="FINAL DES ADDRESS" SortExpression="FINAL_DES_ADDRESS" >
             <HeaderStyle Width="400px" />
             </asp:BoundField>
-            <asp:BoundField DataField="FORWARDER_NM" HeaderText="海貨業者" SortExpression="FORWARDER_NM" >
+
+            <asp:BoundField DataField="NOTIFY" HeaderText="NOTIFY" SortExpression="NOTIFY" >
+            <HeaderStyle Width="400px" />
+            </asp:BoundField>--%>
+
+            <asp:BoundField DataField="IV_NECE" HeaderText="IV" SortExpression="IV_NECE" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="PL_NECE" HeaderText="PL" SortExpression="PL_NECE" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="BL_NECE" HeaderText="BL" SortExpression="BL_NECE" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="CO_NECE" HeaderText="CO" SortExpression="CO_NECE" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="EPA_NECE" HeaderText="EPA" SortExpression="EPA_NECE" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="WOOD_NECE" HeaderText="木材" SortExpression="WOOD_NECE" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="DELI_NECE" HeaderText="ﾃﾞﾘﾊﾞﾘ" SortExpression="DELI_NECE" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="INSP_NECE" HeaderText="検査" SortExpression="INSP_NECE" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="ERL_NECE" HeaderText="ERL" SortExpression="ERL_NECE" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="VESS_NECE" HeaderText="ﾍﾞｯｾﾙ" SortExpression="VESS_NECE" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="DOC_NECESSITY" HeaderText="IV/PL送付" SortExpression="DOC_NECESSITY" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="FTA" HeaderText="FTA" SortExpression="FTA" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="CERTIFICATE_OF_CONFORMITY" HeaderText="適合証明" SortExpression="CERTIFICATE_OF_CONFORMITY" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="DOC_OF_EGYPT" HeaderText="ｴｼﾞﾌﾟﾄ" SortExpression="DOC_OF_EGYPT" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>
+
+<%--            <asp:BoundField DataField="LT" HeaderText="LT" SortExpression="LT" />
+            <asp:BoundField DataField="LC" HeaderText="LC" SortExpression="LC" />--%>
+
+<%--            <asp:BoundField DataField="INCOTEM" HeaderText="建値" SortExpression="INCOTEM" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>--%>
+<%--            <asp:BoundField DataField="BL_TYPE" HeaderText="BL種類" SortExpression="BL_TYPE" >
+            <HeaderStyle Width="150px" />
+            </asp:BoundField>--%>
+
+<%--            <asp:BoundField DataField="CUST_ADDRESS" HeaderText="客先住所" SortExpression="CUST_ADDRESS" >
+            <HeaderStyle Width="400px" />
+            </asp:BoundField>--%>
+<%--            <asp:BoundField DataField="CONSIGNEE" HeaderText="CONSIGNEE" SortExpression="CONSIGNEE" >
+            <HeaderStyle Width="400px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="CNEE_NM_SI" HeaderText="CNEE Name of SI" SortExpression="CNEE_NM_SI" >
+            <HeaderStyle Width="400px" />
+            </asp:BoundField>--%>
+<%--            <asp:BoundField DataField="FIN_DESTINATION" HeaderText="Final DESTINATION" SortExpression="FIN_DESTINATION" >
+            <HeaderStyle Width="400px" />
+            </asp:BoundField>--%>
+
+<%--            <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" >
+            <HeaderStyle Width="150px" />
+            </asp:BoundField>
+            <asp:BoundField DataField="SHIPMENT_KBN" HeaderText="出荷区分" SortExpression="SHIPMENT_KBN" >
+            <HeaderStyle Width="100px" />
+            </asp:BoundField>--%>
+
+<%--            <asp:BoundField DataField="FORWARDER_NM" HeaderText="海貨業者" SortExpression="FORWARDER_NM" >
             <HeaderStyle Width="300px" />
             </asp:BoundField>
             <asp:BoundField DataField="FORWARDER_STAFF_NM" HeaderText="担当" SortExpression="FORWARDER_STAFF_NM" >
             <HeaderStyle Width="100px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="DOC_NECESSITY" HeaderText="IV/PL送付" SortExpression="DOC_NECESSITY" />
-            <asp:BoundField DataField="FTA" HeaderText="FTA" SortExpression="FTA" />
-            <asp:BoundField DataField="CERTIFICATE_OF_CONFORMITY" HeaderText="適合証明" SortExpression="CERTIFICATE_OF_CONFORMITY" />
-            <asp:BoundField DataField="DOC_OF_EGYPT" HeaderText="ｴｼﾞﾌﾟﾄ" SortExpression="DOC_OF_EGYPT" />
+            </asp:BoundField>--%>
+
         </Columns>
             <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />

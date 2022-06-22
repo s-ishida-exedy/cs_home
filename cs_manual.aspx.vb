@@ -13,6 +13,8 @@ Partial Class cs_home
 
     End Sub
 
+
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         '表示ボタン押下処理
         Dim Dataobj As New DBAccess
@@ -59,4 +61,32 @@ Partial Class cs_home
         '画面遷移
         Response.Redirect("cs_manual_detail.aspx")
     End Sub
+
+    Private Sub GridView1_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
+
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            Dim dltButton As ImageButton = e.Row.FindControl("ImageButton1")
+            'ボタンが存在する場合のみセット
+            If Not (dltButton Is Nothing) Then
+                dltButton.CommandArgument = e.Row.RowIndex.ToString()
+            End If
+        End If
+
+    End Sub
+
+    Private Sub GridView1_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView1.RowCommand
+        If e.CommandName = "edt" Then
+            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+
+
+            '入力された客先コードをセッションへ
+            Session("strCust") = Trim(Me.GridView1.Rows(index).Cells(1).Text)
+            Session("strMode") = "01"       '更新モード
+
+            Response.Redirect("cs_manual_detail.aspx")
+
+        End If
+
+    End Sub
+
 End Class
