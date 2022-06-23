@@ -16,9 +16,6 @@ Partial Class cs_home
     Public strRow As String
     Public strProcess As String
 
-
-
-
     Private Sub GET_IVDATA(bkgno As String)
 
         Dim dataread As SqlDataReader
@@ -610,12 +607,12 @@ Partial Class cs_home
 
                 If dt3 < dt2 Then
                         e.Row.BackColor = Drawing.Color.Salmon
-                        If (e.Row.Cells(11).Text.Length = 6) And dt3 < dt2 Then
-                            e.Row.Cells(11).Text = "AC要"
-                            e.Row.Cells(11).BackColor = Drawing.Color.Red
-                            e.Row.Cells(11).ForeColor = Drawing.Color.White
-                        End If
+                    If (e.Row.Cells(10).Text.Length = 6) And dt3 < dt2 Then
+                        e.Row.Cells(10).Text = "AC要"
+                        e.Row.Cells(10).BackColor = Drawing.Color.Red
+                        e.Row.Cells(10).ForeColor = Drawing.Color.White
                     End If
+                End If
 
                 e.Row.Cells(5).Text = e.Row.Cells(5).Text & " (" & dt3.ToString("ddd") & ")"
             End If

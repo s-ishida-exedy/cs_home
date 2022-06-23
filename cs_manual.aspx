@@ -158,13 +158,16 @@
                 <asp:Button ID="Button1" runat="server" Text="表示" Font-Size="Small" />&nbsp;
                 <asp:Button ID="Button2" runat="server" Text="詳細表示" Width ="100px" Font-Size="Small" />&nbsp;
                 <asp:Button ID="Button3" runat="server" Text="新規登録" Width ="100px" Font-Size="Small" />&nbsp;
-                <asp:Label ID="Label1" runat="server" Text="※新規登録時、ﾍﾞｰｽの客先CD必須" Font-Size="Small"></asp:Label>
+                <asp:Label ID="Label1" runat="server" Text="※新規登録時、ﾍﾞｰｽの客先CD必須" Font-Size="Small"></asp:Label>&nbsp;
+                <asp:Button ID="Button4" runat="server" Text="エクセル出力" Width ="100px" Font-Size="Small" />
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
             </td>
         </tr>
     </table>
+
+    <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
 <div class="wrapper">
 <table class="sticky">
@@ -175,86 +178,72 @@
 <tbody>
 
 <%--<div id="main2" style="width:auto; height:500px;overflow:scroll;border:None;">--%>
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1"  Width="6500px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" AllowSorting="True">
-            <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
-            <AlternatingRowStyle BackColor="#DCDCDC" />
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1"  Width="870px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3">
+ 
+        <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
+        <AlternatingRowStyle BackColor="#DCDCDC" />
         <Columns>
-            <asp:BoundField DataField="NEW_CODE" HeaderText="新ｺｰﾄﾞ" SortExpression="NEW_CODE" >
+
+        <asp:TemplateField ShowHeader="False">
+        <ItemTemplate>
+        <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="false" CommandName="edt" ImageUrl="~/icon/write.png" Text="編集" width = "20" height = "20" />
+        </ItemTemplate>
+        <HeaderStyle BackColor="#6B696B" />
+        </asp:TemplateField>
+
+            <asp:BoundField DataField="NEW_CODE" HeaderText="客先ｺｰﾄﾞ" SortExpression="NEW_CODE" >
             <HeaderStyle Width="70px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="OLD_CODE" HeaderText="旧ｺｰﾄﾞ" SortExpression="OLD_CODE" >
-            <HeaderStyle Width="250px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="CUST_NM" HeaderText="客先名" SortExpression="CUST_NM" >
-            <HeaderStyle Width="400px" />
             </asp:BoundField>
             <asp:BoundField DataField="CUST_AB" HeaderText="略称" SortExpression="CUST_AB" >
             <HeaderStyle Width="100px" />
             </asp:BoundField>
-            <asp:BoundField DataField="INCOTEM" HeaderText="建値" SortExpression="INCOTEM" >
-            <HeaderStyle Width="100px" />
+            <asp:BoundField DataField="CUST_NM" HeaderText="荷受人名" SortExpression="CUST_NM" >
+            <HeaderStyle Width="500px" />
             </asp:BoundField>
-            <asp:BoundField DataField="BL_TYPE" HeaderText="BL種類" SortExpression="BL_TYPE" >
-            <HeaderStyle Width="150px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="BL_SEND" HeaderText="BL送付方法" SortExpression="BL_SEND" >
-            <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="CUST_ADDRESS" HeaderText="客先住所" SortExpression="CUST_ADDRESS" >
-            <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="CONSIGNEE" HeaderText="CONSIGNEE" SortExpression="CONSIGNEE" >
-            <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="CNEE_NM_SI" HeaderText="CNEE Name of SI" SortExpression="CNEE_NM_SI" >
-            <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="FIN_DESTINATION" HeaderText="Final DESTINATION" SortExpression="FIN_DESTINATION" >
-            <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="NOTIFY" HeaderText="NOTIFY" SortExpression="NOTIFY" >
-            <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="IV_NECE" HeaderText="IV" SortExpression="IV_NECE" />
-            <asp:BoundField DataField="PL_NECE" HeaderText="PL" SortExpression="PL_NECE" />
-            <asp:BoundField DataField="BL_NECE" HeaderText="BL" SortExpression="BL_NECE" />
-            <asp:BoundField DataField="CO_NECE" HeaderText="CO" SortExpression="CO_NECE" />
-            <asp:BoundField DataField="EPA_NECE" HeaderText="EPA" SortExpression="EPA_NECE" />
-            <asp:BoundField DataField="WOOD_NECE" HeaderText="木材" SortExpression="WOOD_NECE" />
-            <asp:BoundField DataField="DELI_NECE" HeaderText="ﾃﾞﾘﾊﾞﾘ" SortExpression="DELI_NECE" />
-            <asp:BoundField DataField="INSP_NECE" HeaderText="検査" SortExpression="INSP_NECE" />
-            <asp:BoundField DataField="ERL_NECE" HeaderText="ERL" SortExpression="ERL_NECE" />
-            <asp:BoundField DataField="VESS_NECE" HeaderText="ﾍﾞｯｾﾙ" SortExpression="VESS_NECE" />
-            <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" >
-            <HeaderStyle Width="150px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="SHIPMENT_KBN" HeaderText="出荷区分" SortExpression="SHIPMENT_KBN" >
-            <HeaderStyle Width="100px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="LT" HeaderText="LT" SortExpression="LT" />
-            <asp:BoundField DataField="LC" HeaderText="LC" SortExpression="LC" />
-            <asp:BoundField DataField="CONSIGNEE_OF_SI" HeaderText="CNEE OF SI" SortExpression="CONSIGNEE_OF_SI" >
-            <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="CONSIGNEE_OF_SI_ADDRESS" HeaderText="CNEE OF SI Address" SortExpression="CONSIGNEE_OF_SI_ADDRESS" >
-            <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="FINAL_DES" HeaderText="FINAL DES" SortExpression="FINAL_DES" >
+            <asp:BoundField DataField="OLD_CODE" HeaderText="国名" SortExpression="OLD_CODE" >
             <HeaderStyle Width="200px" />
             </asp:BoundField>
-            <asp:BoundField DataField="FINAL_DES_ADDRESS" HeaderText="FINAL DES ADDRESS" SortExpression="FINAL_DES_ADDRESS" >
-            <HeaderStyle Width="400px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="FORWARDER_NM" HeaderText="海貨業者" SortExpression="FORWARDER_NM" >
-            <HeaderStyle Width="300px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="FORWARDER_STAFF_NM" HeaderText="担当" SortExpression="FORWARDER_STAFF_NM" >
-            <HeaderStyle Width="100px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="DOC_NECESSITY" HeaderText="IV/PL送付" SortExpression="DOC_NECESSITY" />
+
+            <asp:BoundField DataField="INCOTEM" HeaderText="INCOTEM" SortExpression="INCOTEM" />
+            <asp:BoundField DataField="BL_TYPE" HeaderText="BL_TYPE" SortExpression="BL_TYPE" />
+            <asp:BoundField DataField="BL_SEND" HeaderText="BL_SEND" SortExpression="BL_SEND" />
+            <asp:BoundField DataField="CUST_ADDRESS" HeaderText="CUST_ADDRESS" SortExpression="CUST_ADDRESS" />
+            <asp:BoundField DataField="CONSIGNEE" HeaderText="CONSIGNEE" SortExpression="CONSIGNEE" />
+            <asp:BoundField DataField="CNEE_NM_SI" HeaderText="CNEE_NM_SI" SortExpression="CNEE_NM_SI" />
+            <asp:BoundField DataField="FIN_DESTINATION" HeaderText="FIN_DESTINATION" SortExpression="FIN_DESTINATION" />
+            <asp:BoundField DataField="NOTIFY" HeaderText="NOTIFY" SortExpression="NOTIFY" />
+            <asp:BoundField DataField="FORWARDER_INFO" HeaderText="FORWARDER_INFO" SortExpression="FORWARDER_INFO" />
+            <asp:BoundField DataField="CUST_REQ" HeaderText="CUST_REQ" SortExpression="CUST_REQ" />
+            <asp:BoundField DataField="IV_NECE" HeaderText="IV_NECE" SortExpression="IV_NECE" />
+            <asp:BoundField DataField="PL_NECE" HeaderText="PL_NECE" SortExpression="PL_NECE" />
+            <asp:BoundField DataField="BL_NECE" HeaderText="BL_NECE" SortExpression="BL_NECE" />
+            <asp:BoundField DataField="CO_NECE" HeaderText="CO_NECE" SortExpression="CO_NECE" />
+            <asp:BoundField DataField="EPA_NECE" HeaderText="EPA_NECE" SortExpression="EPA_NECE" />
+            <asp:BoundField DataField="WOOD_NECE" HeaderText="WOOD_NECE" SortExpression="WOOD_NECE" />
+            <asp:BoundField DataField="DELI_NECE" HeaderText="DELI_NECE" SortExpression="DELI_NECE" />
+            <asp:BoundField DataField="INSP_NECE" HeaderText="INSP_NECE" SortExpression="INSP_NECE" />
+            <asp:BoundField DataField="ERL_NECE" HeaderText="ERL_NECE" SortExpression="ERL_NECE" />
+            <asp:BoundField DataField="VESS_NECE" HeaderText="VESS_NECE" SortExpression="VESS_NECE" />
+            <asp:BoundField DataField="SHIP_DAY_OF_WEEK" HeaderText="SHIP_DAY_OF_WEEK" SortExpression="SHIP_DAY_OF_WEEK" />
+            <asp:BoundField DataField="DESTINATION" HeaderText="DESTINATION" SortExpression="DESTINATION" />
+            <asp:BoundField DataField="SHIPMENT_KBN" HeaderText="SHIPMENT_KBN" SortExpression="SHIPMENT_KBN" />
+            <asp:BoundField DataField="LT" HeaderText="LT" SortExpression="LT" />
+            <asp:BoundField DataField="CONTAINER_CLEANING" HeaderText="CONTAINER_CLEANING" SortExpression="CONTAINER_CLEANING" />
+            <asp:BoundField DataField="LC" HeaderText="LC" SortExpression="LC" />
+            <asp:BoundField DataField="CONSIGNEE_OF_SI" HeaderText="CONSIGNEE_OF_SI" SortExpression="CONSIGNEE_OF_SI" />
+            <asp:BoundField DataField="CONSIGNEE_OF_SI_ADDRESS" HeaderText="CONSIGNEE_OF_SI_ADDRESS" SortExpression="CONSIGNEE_OF_SI_ADDRESS" />
+            <asp:BoundField DataField="FINAL_DES" HeaderText="FINAL_DES" SortExpression="FINAL_DES" />
+            <asp:BoundField DataField="FINAL_DES_ADDRESS" HeaderText="FINAL_DES_ADDRESS" SortExpression="FINAL_DES_ADDRESS" />
+            <asp:BoundField DataField="FORWARDER_NM" HeaderText="FORWARDER_NM" SortExpression="FORWARDER_NM" />
+            <asp:BoundField DataField="FORWARDER_STAFF_NM" HeaderText="FORWARDER_STAFF_NM" SortExpression="FORWARDER_STAFF_NM" />
+            <asp:BoundField DataField="DOC_NECESSITY" HeaderText="DOC_NECESSITY" SortExpression="DOC_NECESSITY" />
             <asp:BoundField DataField="FTA" HeaderText="FTA" SortExpression="FTA" />
-            <asp:BoundField DataField="CERTIFICATE_OF_CONFORMITY" HeaderText="適合証明" SortExpression="CERTIFICATE_OF_CONFORMITY" />
-            <asp:BoundField DataField="DOC_OF_EGYPT" HeaderText="ｴｼﾞﾌﾟﾄ" SortExpression="DOC_OF_EGYPT" />
+            <asp:BoundField DataField="CERTIFICATE_OF_CONFORMITY" HeaderText="CERTIFICATE_OF_CONFORMITY" SortExpression="CERTIFICATE_OF_CONFORMITY" />
+            <asp:BoundField DataField="DOC_OF_EGYPT" HeaderText="DOC_OF_EGYPT" SortExpression="DOC_OF_EGYPT" />
+
+
+
+
         </Columns>
             <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
@@ -265,6 +254,7 @@
             <SortedDescendingCellStyle BackColor="#CAC9C9" />
             <SortedDescendingHeaderStyle BackColor="#000065" />
     </asp:GridView>
+
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT
   NEW_CODE                                        
   , OLD_CODE                                      
@@ -316,6 +306,8 @@ ORDER BY NEW_CODE
 </tbody>
 </table>
 </div>
+
+    </asp:Panel>
 
 </div>
 <!--/#contents2-->

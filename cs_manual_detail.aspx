@@ -155,9 +155,9 @@
                 <td>
                     <asp:TextBox ID="TextBox1" runat="server" Height="20px" Width="233px" Class ="txtb"></asp:TextBox>
                 </td>
-                <th>客先名</th>
+                <th>国名</th>
                 <td>
-                    <asp:TextBox ID="TextBox3" runat="server" Height="20px" Width="233px" Class ="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox2" runat="server" Height="20px" Width="233px" Class ="txtb"></asp:TextBox>
                 </td>
                 <th>略称</th>
                 <td>
@@ -168,9 +168,9 @@
 
         <table class="ta3" style="display:none" >
             <tr>
-                <th>旧コード</th>
+                <th>客先</th>
                 <td>
-                    <asp:TextBox ID="TextBox2" runat="server" Height="20px" Width="233px" Class ="txtb" disabled="disabled"></asp:TextBox>
+                    <asp:TextBox ID="TextBox3" runat="server" Height="20px" Width="233px" Class ="txtb" disabled="disabled"></asp:TextBox>
                 </td>
                 <th>建値</th>
                 <td>

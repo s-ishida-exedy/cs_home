@@ -1452,6 +1452,8 @@ Step00:
 
         End Using
 
+        Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('出力が完了しました。');</script>", False)
+
 
     End Sub
 

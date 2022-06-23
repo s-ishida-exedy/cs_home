@@ -644,6 +644,9 @@ Partial Class yuusen
 
         End Using
 
+        Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('出力が完了しました。');</script>", False)
+
+
     End Sub
 
     Public Overrides Sub VerifyRenderingInServerForm(ByVal control As Control)

@@ -541,5 +541,49 @@ Partial Class cs_home
         End If
 
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+
+        Dim strcust As String
+        Dim flg As Long
+        Dim flg02 As Long
+
+        Dim striv As String = Session("striv")
+        Dim strbkg As String = Trim(Session("strbkg"))
+
+        Dim struid As String = Session("UsrId")
+        strcust = Left(Session("strcust"), 4)
+
+        If strcust = "C258" Then
+            flg = 1
+        ElseIf strcust = "C6G0" Then
+            flg = 2
+        End If
+
+        If CheckBox1.Checked = True Then
+            flg02 = 1
+        Else
+            flg02 = 2
+        End If
+
+        Call reg_004(striv, strbkg)
+
+        Session.Remove("strMode")
+        Session.Remove("strcust")
+        Session.Remove("striv")
+        Session.Remove("strhan")
+        Session.Remove("strcut")
+        Session.Remove("stretd")
+        Session.Remove("streta")
+        Session.Remove("strniryou")
+        Session.Remove("strbkg")
+
+        '前の画面へ遷移
+        Response.Redirect("lcl_arange_all.aspx")
+
+
+
+    End Sub
 End Class
 
