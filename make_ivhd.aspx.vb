@@ -854,11 +854,15 @@ Partial Class yuusen
 
             End Using
 
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('出力が完了しました。');</script>", False)
+
+
         Else
 
             Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('対象無し');</script>", False)
 
         End If
+
 
 
     End Sub
