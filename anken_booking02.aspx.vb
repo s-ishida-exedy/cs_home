@@ -32,6 +32,7 @@ Partial Class yuusen
         Dim wday4 As String
         Dim strbkg As String
 
+
         Dim dt1 As DateTime = DateTime.Now
 
         '接続文字列の作成
@@ -118,6 +119,7 @@ Partial Class yuusen
         cnn.Close()
         cnn.Dispose()
 
+
     End Sub
     Private Sub GridView2_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView2.RowDataBound
 
@@ -136,6 +138,7 @@ Partial Class yuusen
         Dim wday4 As String
         Dim strbkg As String
 
+
         Dim dt1 As DateTime = DateTime.Now
 
         If e.Row.RowType = DataControlRowType.DataRow Then
@@ -153,6 +156,7 @@ Partial Class yuusen
                 e.Row.BackColor = Drawing.Color.DarkSalmon
             End If
         End If
+
 
 
     End Sub
@@ -659,11 +663,24 @@ Partial Class yuusen
         Dim strkd As String
         Dim stram As String
 
+        Dim gcnt As Long = 0
+
         Dim ercnt00 As Long
 
         Dim ercnt01 As Long
 
         Dim dt1 As DateTime = DateTime.Now
+
+        gcnt = GridView1.Rows.Count
+
+        If gcnt >= 1 Then
+            Label20.Visible = False
+        Else
+            Label20.Visible = True
+        End If
+
+
+
 
         'データベース接続を開く
         cnn.Open()

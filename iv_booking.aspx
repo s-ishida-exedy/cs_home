@@ -166,6 +166,7 @@
         </tr>
     </table>
 
+    <asp:Panel ID="Panel1" runat="server"  Font-Size="14px">
 
 <div class="wrapper">
 <table class="sticky">
@@ -177,72 +178,72 @@
 
 
 <%--<div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">--%>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="1500px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="1290px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical">
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
             <Columns>
                 <asp:BoundField DataField="FIN_FLG" HeaderText="確認&lt;BR&gt;状況" HtmlEncode="False" SortExpression="FIN_FLG">
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle Font-Bold="True" HorizontalAlign="Center" Width="50px" />
+                <HeaderStyle HorizontalAlign="Center" Width="40px" />
+                <ItemStyle Font-Bold="True" HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="客先コード" SortExpression="客先コード" HeaderText="客先&lt;BR&gt;コード" HtmlEncode="False" >
-                <HeaderStyle HorizontalAlign="Center" Width="70px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:HyperLinkField DataNavigateUrlFields="IVNo" DataTextField="IVNo" HeaderText="IVNo" DataNavigateUrlFormatString="iv_booking_detail.aspx?id={0}">
-                <HeaderStyle HorizontalAlign="Center" Width="60px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:HyperLinkField>
                 <asp:BoundField DataField="計上日" HeaderText="計上日" ReadOnly="True" SortExpression="計上日" >
-                <HeaderStyle HorizontalAlign="Center" Width="70px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
                 </asp:BoundField>
                 <asp:BoundField DataField="積出港" HeaderText="積出港" ReadOnly="True" SortExpression="積出港" >
-                <HeaderStyle HorizontalAlign="Center" Width="70px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
                 </asp:BoundField>
                 <asp:BoundField DataField="揚地" HeaderText="揚地" SortExpression="揚地" ReadOnly="True" >
-                <HeaderStyle HorizontalAlign="Center" Width="70px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
                 </asp:BoundField>
                 <asp:BoundField DataField="配送先" HeaderText="配送先" SortExpression="配送先" ReadOnly="True" >
-                <HeaderStyle HorizontalAlign="Center" Width="70px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
                 </asp:BoundField>
                 <asp:BoundField DataField="荷受地" HeaderText="荷受地" SortExpression="荷受地" ReadOnly="True" >
-                <HeaderStyle HorizontalAlign="Center" Width="70px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
                 </asp:BoundField>
                 <asp:BoundField DataField="配送先責任送り先" HeaderText="配送先&lt;BR&gt;責任&lt;BR&gt;送り先" SortExpression="配送先責任送り先" HtmlEncode="False" ReadOnly="True" >
-                <HeaderStyle HorizontalAlign="Center" Width="70px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
                 </asp:BoundField>
                 <asp:BoundField DataField="カット日" HeaderText="カット日" SortExpression="カット日" ReadOnly="True" >
-                <HeaderStyle HorizontalAlign="Center" Width="70px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
                 </asp:BoundField>
                 <asp:BoundField DataField="到着日" HeaderText="到着日" SortExpression="到着日" ReadOnly="True" >
-                <HeaderStyle HorizontalAlign="Center" Width="70px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
                 </asp:BoundField>
                 <asp:BoundField DataField="入出港日" HeaderText="入出港日" SortExpression="入出港日" >
-                <HeaderStyle HorizontalAlign="Center" Width="70px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
                 </asp:BoundField>
                 <asp:BoundField DataField="VOYAGENo" HeaderText="VOYAGE&lt;BR&gt;No" SortExpression="VOYAGENo" ReadOnly="True" HtmlEncode="False" >
-                <HeaderStyle HorizontalAlign="Center" Width="70px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
                 </asp:BoundField>
                 <asp:BoundField DataField="船社" HeaderText="船社" SortExpression="船社" ReadOnly="True" >
-                <HeaderStyle HorizontalAlign="Center" Width="70px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
                 </asp:BoundField>
                 <asp:BoundField DataField="ﾌﾞｯｷﾝｸﾞNo" HeaderText="ﾌﾞｯｷﾝｸﾞNo" ReadOnly="True" SortExpression="ﾌﾞｯｷﾝｸﾞNo">
-                <HeaderStyle HorizontalAlign="Center" Width="70px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
                 </asp:BoundField>
                 <asp:BoundField DataField="船名" HeaderText="船名" ReadOnly="True" SortExpression="船名">
-                <HeaderStyle HorizontalAlign="Center" Width="70px" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
                 </asp:BoundField>
             </Columns>
@@ -283,6 +284,8 @@ ORDER BY INVOICE_NO "></asp:SqlDataSource>
 </tbody>
 </table>
 </div>
+
+    </asp:Panel>
 
 </div>
 <!--/#contents2-->

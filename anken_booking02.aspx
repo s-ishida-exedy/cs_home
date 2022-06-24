@@ -287,6 +287,7 @@
         <tr>
             <asp:Label  ID="Label10" runat="server" Text="<<登録、フォルダ作成が完了してます>>" Font-Size="15px" forecolor="red" Font-Bold="true" />
             <asp:Label  ID="Label11" runat="server" Text="<<未登録です。登録しチェックを押してください。>>" Font-Size="15px"  Font-Bold="true" />
+
         </tr>
     </table>
 
@@ -362,7 +363,7 @@
 
 
 
-
+    <asp:Label  ID="Label20" runat="server" Text="<<本日は対象案件なしです。>></br><<そのままチェックを入れてください。>>" Font-Size="15px"  Font-Bold="true" ForeColor="red" />
 
 
     <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">

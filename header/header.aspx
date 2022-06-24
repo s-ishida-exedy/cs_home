@@ -90,6 +90,7 @@
                     <li data-id='["home","shippingmemo.aspx"]'><a href="#">シッピングメモ記録</a></li>
                     <li data-id='["home","sales_comfirm.aspx"]'><a href="#">海外売上確定チェック</a></li>
                     <li data-id='["home","ord_book_chk.aspx"]'><a href="#">ブッキング確認</a></li>
+                    <li data-id='["home","shelf_manage.aspx"]'><a href="#">書庫管理</a></li>
                 </ul>
             </li>
         </ul>
@@ -106,6 +107,8 @@
                     <!-- 第二階層 -->
                     <li data-id='["home","m_cs_member.aspx"]'><a href="#">ＣＳメンバー マスタ</a></li>
                     <li data-id='["home","m_air_mail.aspx"]'><a href="#">AIR用海貨業者アドレスマスタ</a></li>
+                    <li data-id='["home","m_lcl_dec_mail.aspx"]'><a href="#">通関・LCL関係ｱﾄﾞﾚｽﾏｽﾀ</a></li>
+                    <li data-id='["home","register_lcl_address.aspx"]'><a href="#">LCL搬入先マスタ</a></li>
                     <li data-id='["home","m_epa_cst_add.aspx"]'><a href="#">ＥＰＡ用客先住所マスタ</a></li>
                     <li data-id='["home","m_epa_itm.aspx"]'><a href="#">ＥＰＡ対象品目マスタ</a></li>
                 </ul>

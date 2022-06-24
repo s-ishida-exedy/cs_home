@@ -8,6 +8,206 @@ Partial Class yuusen
     Public strRow As String
     Public strProcess As String
 
+
+    Protected Sub DropDownList6_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList6.SelectedIndexChanged
+
+        Dim strcust As String = ""
+        Dim strbkg As String = ""
+
+        Call get_ivdata(DropDownList6.Text, strcust, strbkg)
+
+        Label3.Text = strcust
+        Label4.Text = strbkg
+
+    End Sub
+
+    Protected Sub DropDownList1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList1.SelectedIndexChanged
+
+        Dim strcust As String = ""
+        Dim strbkg As String = ""
+
+        Call get_ivdata2(DropDownList1.Text, strcust, strbkg)
+
+
+        Label5.Text = strcust
+        Label6.Text = strbkg
+
+    End Sub
+
+    Private Sub get_ivdata(iptbx As String, ByRef strcust As String, ByRef strbkg As String)
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String = ""
+        Dim strinv As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        Dim ConnectionString2 As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(5, 0, 0, 0)
+        Dim ts2 As New TimeSpan(60, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts2
+        Dim dt3 As DateTime = dt1 - ts1
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        strSQL = "SELECT OLD_INVNO,BOOKINGNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+        strSQL = strSQL & "WHERE OLD_INVNO ='" & iptbx & "' "
+        strSQL = strSQL & "AND BLDATE  between '" & dt3 & "' AND '" & dt2 & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            strbkg = Trim(Convert.ToString(dataread("BOOKINGNO")))        '客先目
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        cnn.Close()
+        cnn.Dispose()
+
+
+        '接続文字列の作成
+        'SQL Server認証
+        ConnectionString2 = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn2 = New SqlConnection(ConnectionString2)
+        'データベース接続を開く
+        cnn2.Open()
+
+
+        strSQL = "SELECT DISTINCT T_INV_HD_TB.CUSTCODE "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+        strSQL = strSQL & "WHERE "
+        strSQL = strSQL & "T_INV_HD_TB.BOOKINGNO = '" & strbkg & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.OLD_INVNO = '" & iptbx & "' "
+
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn2)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            strcust = Trim(Convert.ToString(dataread("CUSTCODE")))        '客先目
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        cnn2.Close()
+        cnn2.Dispose()
+
+
+    End Sub
+
+    Private Sub get_ivdata2(iptbx As String, ByRef strcust As String, ByRef strbkg As String)
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String = ""
+        Dim strinv As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        Dim ConnectionString2 As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(60, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        strSQL = "SELECT INVNO,BKGNO "
+        strSQL = strSQL & "FROM T_EXL_WORKSTATUS00 "
+        strSQL = strSQL & "WHERE INVNO ='" & iptbx & "' "
+        strSQL = strSQL & "AND REGDATE  > '" & dt3 & "' "
+        strSQL = strSQL & "AND ID='001' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            strbkg = Trim(Convert.ToString(dataread("BKGNO")))        '客先目
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        cnn.Close()
+        cnn.Dispose()
+
+
+        '接続文字列の作成
+        'SQL Server認証
+        ConnectionString2 = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn2 = New SqlConnection(ConnectionString2)
+        'データベース接続を開く
+        cnn2.Open()
+
+
+        strSQL = "SELECT DISTINCT T_INV_HD_TB.CUSTCODE "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+        strSQL = strSQL & "WHERE "
+        strSQL = strSQL & "T_INV_HD_TB.BOOKINGNO = '" & strbkg & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.OLD_INVNO = '" & iptbx & "' "
+
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn2)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            strcust = Trim(Convert.ToString(dataread("CUSTCODE")))        '客先目
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        cnn2.Close()
+        cnn2.Dispose()
+
+
+    End Sub
     Protected Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         'Dim strtxt As String = TextBox1.Text
@@ -18,11 +218,11 @@ Partial Class yuusen
 
         DropDownList1.Items.Clear()
         DropDownList1.DataBind()
-        DropDownList1.Items.Insert(0, "Please select")
+        DropDownList1.Items.Insert(0, "Please Select")
 
         DropDownList6.Items.Clear()
         DropDownList6.DataBind()
-        DropDownList6.Items.Insert(0, "Please select")
+        DropDownList6.Items.Insert(0, "Please Select")
 
     End Sub
     Protected Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -34,11 +234,11 @@ Partial Class yuusen
 
         DropDownList1.Items.Clear()
         DropDownList1.DataBind()
-        DropDownList1.Items.Insert(0, "Please select")
+        DropDownList1.Items.Insert(0, "Please Select")
 
         DropDownList6.Items.Clear()
         DropDownList6.DataBind()
-        DropDownList6.Items.Insert(0, "Please select")
+        DropDownList6.Items.Insert(0, "Please Select")
 
 
     End Sub
@@ -50,11 +250,11 @@ Partial Class yuusen
 
         DropDownList2.Items.Clear()
         DropDownList2.DataBind()
-        DropDownList2.Items.Insert(0, "Please select")
+        DropDownList2.Items.Insert(0, "Please Select")
 
         DropDownList4.Items.Clear()
         DropDownList4.DataBind()
-        DropDownList4.Items.Insert(0, "Please select")
+        DropDownList4.Items.Insert(0, "Please Select")
 
     End Sub
 
@@ -66,11 +266,11 @@ Partial Class yuusen
 
         DropDownList2.Items.Clear()
         DropDownList2.DataBind()
-        DropDownList2.Items.Insert(0, "Please select")
+        DropDownList2.Items.Insert(0, "Please Select")
 
         DropDownList4.Items.Clear()
         DropDownList4.DataBind()
-        DropDownList4.Items.Insert(0, "Please select")
+        DropDownList4.Items.Insert(0, "Please Select")
 
     End Sub
     Protected Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
@@ -81,11 +281,11 @@ Partial Class yuusen
 
         DropDownList3.Items.Clear()
         DropDownList3.DataBind()
-        DropDownList3.Items.Insert(0, "Please select")
+        DropDownList3.Items.Insert(0, "Please Select")
 
         DropDownList5.Items.Clear()
         DropDownList5.DataBind()
-        DropDownList5.Items.Insert(0, "Please select")
+        DropDownList5.Items.Insert(0, "Please Select")
 
     End Sub
     Protected Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
@@ -96,11 +296,11 @@ Partial Class yuusen
 
         DropDownList3.Items.Clear()
         DropDownList3.DataBind()
-        DropDownList3.Items.Insert(0, "Please select")
+        DropDownList3.Items.Insert(0, "Please Select")
 
         DropDownList5.Items.Clear()
         DropDownList5.DataBind()
-        DropDownList5.Items.Insert(0, "Please select")
+        DropDownList5.Items.Insert(0, "Please Select")
 
     End Sub
 
@@ -129,8 +329,8 @@ Partial Class yuusen
 
         cnn.Open()
 
-        strSQL = "SELECT distinct T_INV_HD_TB.BOOKINGNO "
-        strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
+        strSQL = "Select distinct T_INV_HD_TB.BOOKINGNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB On T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
         strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE > '" & dt3.ToShortDateString & "' "
         strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE "
         strSQL = strSQL & "HAVING T_INV_HD_TB.OLD_INVNO like '%" & strivno & "%' "
@@ -536,9 +736,4 @@ Partial Class yuusen
 
     End Sub
 
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-
-        Response.Redirect("\\svnas201\EXD06101\DISC_COMMON\登録用_カレンダマスタ.xls")
-
-    End Sub
 End Class

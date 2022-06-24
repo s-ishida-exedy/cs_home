@@ -679,9 +679,9 @@
                     <table  border='1'>
                             <tr >
                                 <td id="J05" style="width:20px;"><asp:Label ID="Label145" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">D0001</a></asp:Label></td>
-                                <td id="J06" style="width:20px;"><asp:Label ID="Label146" runat="server" Text="00"></asp:Label></td>
-                                <td id="J07" style="width:20px;"><asp:Label ID="Label147" runat="server" Text="0"></asp:Label></td>
-                                <td id="J08" style="width:20px;"><asp:Label ID="Label238" runat="server" Text="0"></asp:Label></td>
+                                <td id="J06" style="width:20px;"><asp:Label ID="Label146" runat="server" Text="A"></asp:Label></td>
+                                <td id="J07" style="width:20px;"><asp:Label ID="Label147" runat="server" Text="A"></asp:Label></td>
+                                <td id="J08" style="width:20px;"><asp:Label ID="Label238" runat="server" Text="A"></asp:Label></td>
                             </tr>
                             <tr >
                                 <td id="J09" style="width:20px;"><asp:Label ID="Label148" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">D0002</a></asp:Label></td>
@@ -697,9 +697,9 @@
                             </tr>
                             <tr >
                                 <td id="J17" style="width:20px;"><asp:Label ID="Label154" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">D0004</a></asp:Label></td>
-                                <td id="J18" style="width:20px;"><asp:Label ID="Label155" runat="server" Text="A"></asp:Label></td>
-                                <td id="J19" style="width:20px;"><asp:Label ID="Label156" runat="server" Text="A"></asp:Label></td>
-                                <td id="J20" style="width:20px;"><asp:Label ID="Label241" runat="server" Text="A"></asp:Label></td>
+                                <td id="J18" style="width:20px;"><asp:Label ID="Label155" runat="server" Text="00"></asp:Label></td>
+                                <td id="J19" style="width:20px;"><asp:Label ID="Label156" runat="server" Text="0"></asp:Label></td>
+                                <td id="J20" style="width:20px;"><asp:Label ID="Label241" runat="server" Text="0"></asp:Label></td>
                             </tr>
                     </table>
                 </td>
@@ -717,7 +717,7 @@
                 </td>
             </tr>
 
-            <tr style="height:50px;">
+            <tr style="height:10px;">
             </tr>
 
             <tr >
@@ -916,11 +916,11 @@
             document.getElementById('F13').style.backgroundColor = 'yellow';
         };
 
-        //if (document.getElementById("J07").innerText/document.getElementById("J06").innerText == 1) {
-        //    document.getElementById("J05").style.backgroundColor = 'red';
-        //} else if (document.getElementById("J07").innerText / document.getElementById("J06").innerText >0.5) {
-        //    document.getElementById('J05').style.backgroundColor = 'yellow';
-        //};
+        if (document.getElementById("J07").innerText/document.getElementById("J06").innerText == 1) {
+            document.getElementById("J05").style.backgroundColor = 'red';
+        } else if (document.getElementById("J07").innerText / document.getElementById("J06").innerText >0.5) {
+            document.getElementById('J05').style.backgroundColor = 'yellow';
+        };
 
         if (document.getElementById("J11").innerText/document.getElementById("J10").innerText == 1) {
             document.getElementById("J09").style.backgroundColor = 'red';
@@ -934,11 +934,11 @@
             document.getElementById('J13').style.backgroundColor = 'yellow';
         };
 
-        if (document.getElementById("J19").innerText/document.getElementById("J18").innerText == 1) {
-            document.getElementById("J17").style.backgroundColor = 'red';
-        } else if (document.getElementById("J19").innerText / document.getElementById("J18").innerText >0.5){
-            document.getElementById('J17').style.backgroundColor = 'yellow';
-        };
+        //if (document.getElementById("J19").innerText/document.getElementById("J18").innerText == 1) {
+        //    document.getElementById("J17").style.backgroundColor = 'red';
+        //} else if (document.getElementById("J19").innerText / document.getElementById("J18").innerText >0.5){
+        //    document.getElementById('J17').style.backgroundColor = 'yellow';
+        //};
 
         if (document.getElementById("C03").innerText/document.getElementById("C02").innerText == 1) {
             document.getElementById("C01").style.backgroundColor = 'red';
@@ -1085,7 +1085,7 @@
         };
 
         document.getElementById("B09").style.backgroundColor = 'blue';
-        document.getElementById("J05").style.backgroundColor = 'blue';
+        document.getElementById("J17").style.backgroundColor = 'blue';
         document.getElementById("C13").style.backgroundColor = 'blue';
         document.getElementById("G13").style.backgroundColor = 'blue';
         document.getElementById("K01").style.backgroundColor = 'blue';
