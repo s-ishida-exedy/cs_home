@@ -198,9 +198,6 @@ border: none;
 }
 
 
-
-
-
     </style>
     <script>
     $(document).ready(function () {
@@ -243,216 +240,74 @@ border: none;
        
 <div id="contents2" class="inner2">
 
+    <table >
+        <tr>
+            <td style="width:1000px;Font-Size:25px;" >
+                <h2>LCL住所編集</h2>
+            </td>
+        </tr>
+    </table>
 
-<table >
+    <asp:Label ID="Label1" runat="server" Text="＜LCL 搬入先新住所登録＞"></asp:Label>
 
-<tr>
+    <table class ="design02" style="width:1000px;" >
+        <tr >
+            <td style="Font-Size:12px;">
+                住所登録
+            </td>
 
+            <td style="Font-Size:12px;" >
+                <asp:Button ID="Button1" runat="server" Text="追加" style="width:100px;"/>
+            </td>
+        </tr>
+        <tr >
 
+            <td style="Font-Size:12px;">
+                1.住所1(倉庫名):
+            </td>
 
-<td style="width:1000px;Font-Size:25px;" >
+            <td style="Font-Size:12px;" >
+                <asp:TextBox ID="TextBox1" runat="server" style="width:500px;"></asp:TextBox>
+            </td>
+        </tr>
 
-<h2>LCL住所編集</h2>
-
-</td>
-
-
-
-
-
-</tr>
-
-</table>
-
-
-
-
-<asp:Label ID="Label2" runat="server" Text="＜LCL展開時住所コピー用＞"></asp:Label>
-
-
-
-
-
-<table class ="design02" style="width:1300px;" >
-
-<tr >
-
-
-<td style="Font-Size:12px;">
-
-1.住所呼び出し:
-
-</td>
-
-
-<td >
-
-<asp:DropDownList ID="DropDownList1" runat="server" Width="1000px"  CssClass="DropDown" Font-Size="11px" AutoPostBack="True" DataSourceID="SqlDataSource8" DataTextField="ADDRESS" DataValueField="ADDRESS" AppendDataBoundItems="true" >
-<asp:ListItem Text="Please select" Value="" />
-</asp:DropDownList>
-
-   
-
-
-</td>
-
-</tr>
-
-<tr >
-
-
-<td >
-
-
-
-</td>
+        <tr >
+            <td style="Font-Size:12px;">
+                2.住所2(住所):
+            </td>
     
-<td style="Font-Size:12px;" >
-
-<asp:Label ID="Label3" runat="server" Text="未選択"></asp:Label>
-
-
-</td>
-
-
-</tr>
-
-</table>
-
-
-
-
-
-
-<asp:Label ID="Label1" runat="server" Text="＜LCL 搬入先新住所登録＞"></asp:Label>
-
-
-
-
-
-<table class ="design02" style="width:1000px;" >
-
-
-<tr >
-
-<td style="Font-Size:12px;">
-
-住所登録
-
-</td>
-
-
-<td style="Font-Size:12px;" >
-
-
-    <asp:Button ID="Button1" runat="server" Text="追加" style="width:100px;"/>
-
-</td>
-
-
-</tr>
-
-
-
-<tr >
-
-<td style="Font-Size:12px;">
-
-1.住所1(倉庫名):
-
-</td>
-
-
-<td style="Font-Size:12px;" >
-
-    <asp:TextBox ID="TextBox1" runat="server" style="width:500px;"></asp:TextBox>
-    
-
-
-</td>
-
-</tr>
-
-<tr >
-
-<td style="Font-Size:12px;">
-
-2.住所2(住所):
-
-</td>
-
-    
-<td style="Font-Size:12px;" >
-
-    <asp:TextBox ID="TextBox2" runat="server" style="width:500px;"></asp:TextBox>
-
-
-</td>
-
-
-</tr>
-
-<tr >
-
-
-<td style="Font-Size:12px;">
-
-3.住所3(TELNOなど):
-
-</td>
-    
-<td style="Font-Size:12px;" >
-
-    <asp:TextBox ID="TextBox3" runat="server" style="width:500px;"></asp:TextBox>
-
-
-</td>
-
-
-</tr>
-
-</table>
-
-
-<asp:Label ID="Label5" runat="server" Text="＜LCL搬入先住所削除＞"></asp:Label>
-
+            <td style="Font-Size:12px;" >
+                <asp:TextBox ID="TextBox2" runat="server" style="width:500px;"></asp:TextBox>
+            </td>
+        </tr>
+
+        <tr >
+            <td style="Font-Size:12px;">
+                3.住所3(TELNOなど):
+            </td>
+            <td style="Font-Size:12px;" >
+                <asp:TextBox ID="TextBox3" runat="server" style="width:500px;"></asp:TextBox>
+            </td>
+        </tr>
+    </table>
+
+    <asp:Label ID="Label5" runat="server" Text="＜LCL搬入先住所削除＞"></asp:Label>
     <table class ="design02" style="width:1300px;" >
+        <tr >
+            <td style="Font-Size:12px;">
+                1.削除:
+            </td>
 
-<tr >
-
-
-<td style="Font-Size:12px;">
-
-1.削除:
-
-</td>
-
-<td style="Font-Size:12px;">
-
-    <asp:Button ID="Button2" runat="server" Text="削除" />
-
-
-</td>
-
-<td >
-
-<asp:DropDownList ID="DropDownList2" runat="server" Width="1000px"  CssClass="DropDown" Font-Size="11px" AutoPostBack="True" DataSourceID="SqlDataSource8" DataTextField="ADDRESS" DataValueField="ADDRESS" AppendDataBoundItems="true" >
-<asp:ListItem Text="Please select" Value="" />
-</asp:DropDownList>
-
-   
-
-
-</td>
-
-
-
-</tr>
-
-
-</table>
-
-
+            <td style="Font-Size:12px;">
+                <asp:Button ID="Button2" runat="server" Text="削除" />
+                </td>
+            <td >
+                <asp:DropDownList ID="DropDownList2" runat="server" Width="1000px"  CssClass="DropDown" Font-Size="11px" AutoPostBack="True" DataSourceID="SqlDataSource8" DataTextField="ADDRESS" DataValueField="ADDRESS" AppendDataBoundItems="true" >
+                <asp:ListItem Text="Please select" Value="" />
+                </asp:DropDownList>
+            </td>
+        </tr>
+    </table>
 
 </div>
 
@@ -470,16 +325,12 @@ border: none;
 <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT left([CUST_CD],4) AS C FROM [T_BOOKING] ORDER BY C" ></asp:SqlDataSource>
 <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [FORWARDER02] FROM [T_EXL_CSANKEN] ORDER BY [FORWARDER02]"></asp:SqlDataSource>
  
-    <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:KBHWPA85ConnectionString %>" SelectCommand="SELECT DISTINCT [CUSTCODE] AS C FROM [T_SN_HD_TB] WHERE [NOKIYMD] > GETDATE()-360 ORDER BY C "></asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:KBHWPA85ConnectionString %>" SelectCommand="SELECT DISTINCT [OLD_INVNO] AS C FROM [T_INV_HD_TB]  WHERE [BLDATE] BETWEEN GETDATE()-5 AND GETDATE()+60 ORDER BY C "></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:KBHWPA85ConnectionString %>" SelectCommand="SELECT DISTINCT [CUSTCODE] AS C FROM [T_SN_HD_TB] WHERE [NOKIYMD] > GETDATE()-360 ORDER BY C "></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:KBHWPA85ConnectionString %>" SelectCommand="SELECT DISTINCT [OLD_INVNO] AS C FROM [T_INV_HD_TB]  WHERE [BLDATE] BETWEEN GETDATE()-5 AND GETDATE()+60 ORDER BY C "></asp:SqlDataSource>
 
 <asp:SqlDataSource ID="SqlDataSource8" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [ADDRESS] FROM [T_EXL_LCLADDRESS] ORDER BY ADDRESS" ></asp:SqlDataSource>
 
-
-
 </form>
 </body>
-
-
 
 </html>
