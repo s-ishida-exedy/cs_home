@@ -200,7 +200,6 @@
   CASE PLACE
   	WHEN '0H' THEN '本社'
   	WHEN '1U' THEN '上野'
-  	WHEN '2A' THEN 'AIR'
   END AS 場所
   , CUST_NM AS 客先名
   , VAN_DATE AS VAN日
@@ -216,15 +215,16 @@
   END AS UPD_FLG
 FROM
   T_EXL_VAN_SCH_DETAIL
+WHERE PLACE <> '2A'
 ORDER BY VAN_DATE, PLACE"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT
   CASE PLACE
   	WHEN '0H' THEN '01:本社'
   	WHEN '1U' THEN '02:上野'
-  	WHEN '2A' THEN '03:AIR'
   END AS 場所
 FROM
   T_EXL_VAN_SCH_DETAIL
+WHERE PLACE <> '2A'
 ORDER BY 場所"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT VAN_DATE FROM T_EXL_VAN_SCH_DETAIL
 ORDER BY VAN_DATE"></asp:SqlDataSource>

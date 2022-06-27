@@ -98,8 +98,6 @@ Partial Class cs_home
                 strPlace = "0H"
             Case "02:上野"
                 strPlace = "1U"
-            Case "03:AIR"
-                strPlace = "2A"
         End Select
 
         If DropDownList2.SelectedValue <> "-VAN日-" Then
