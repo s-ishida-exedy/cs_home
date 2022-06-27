@@ -56,9 +56,10 @@
   text-align: center;
   padding: 0.1px 0;
 }
-
+/*rgba(0, 0, 255, 0.50)*/
+/*rgba(128, 128, 128, 0.60)*/
 .T01 th{
-  background-color: rgba(128, 128, 128, 0.60);
+  background-color: rgba(0, 0, 255, 0.50);
   color: black;
   border:solid 1px #808080;
 }
@@ -90,6 +91,34 @@
   background-color: rgba(111, 191, 209, 0.14);
   border:solid 1px #808080;
 }
+
+
+
+.T03{
+  border-collapse:separate;
+  border-spacing: 2px;
+  width: 90%;
+}
+
+.T03 th,.T03 td{
+  border-radius: 3px;
+  text-align: center;
+  padding: 0.1px 0;
+}
+
+/*rgba(111, 191, 209, 0.1)*/
+.T03 th{
+  background-color: #ffffff;
+  color: black;
+  border:solid 1px #808080;
+}
+
+.T03 td{
+  background-color: #ffffff;
+  border:solid 1px #808080;
+}
+
+
 
 a {
 
@@ -364,7 +393,7 @@ color:#33CC00;
 
             <tr >
                 <td style="width:20px;">
-                    <table  border='0' class ="T01">
+                    <table  border='0' class ="T03">
                             <tr >
                                 <th style="width:20px;"><asp:Label ID="Label181" runat="server" Text="棚番"></asp:Label></th>
                                 <td style="width:20px;"><asp:Label ID="Label182" runat="server" Text="収容</br>可数"></asp:Label></td>
@@ -380,7 +409,7 @@ color:#33CC00;
                     </table>
                 </td>
                 <td style="width:20px;">
-                    <table  border='0' class ="T01">
+                    <table  border='0' class ="T03">
                             <tr >
                                 <th style="width:20px;"><asp:Label ID="Label171" runat="server" Text="棚番"></asp:Label></th>
                                 <td style="width:20px;"><asp:Label ID="Label172" runat="server" Text="収容</br>可数"></asp:Label></td>
@@ -396,7 +425,7 @@ color:#33CC00;
                     </table>
                 </td>
                 <td style="width:20px;">
-                    <table  border='0' class ="T01">
+                    <table  border='0' class ="T03">
                             <tr >
                                 <th style="width:20px;"><asp:Label ID="Label175" runat="server" Text="棚番"></asp:Label></th>
                                 <td style="width:20px;"><asp:Label ID="Label176" runat="server" Text="収容</br>可数"></asp:Label></td>
@@ -412,7 +441,7 @@ color:#33CC00;
                     </table>
                 </td>
                 <td style="width:20px;">
-                    <table  border='0' class ="T01">
+                    <table  border='0' class ="T03">
                             <tr >
                                 <th style="width:20px;"><asp:Label ID="Label179" runat="server" Text="棚番"></asp:Label></th>
                                 <td style="width:20px;"><asp:Label ID="Label180" runat="server" Text="収容</br>可数"></asp:Label></td>
@@ -428,7 +457,7 @@ color:#33CC00;
                     </table>
                 </td>
                 <td style="width:20px;">
-                    <table  border='0' class ="T01">
+                    <table  border='0' class ="T03">
                             <tr >
                                 <th style="width:20px;"><asp:Label ID="Label186" runat="server" Text="棚番"></asp:Label></th>
                                 <td style="width:20px;"><asp:Label ID="Label187" runat="server" Text="収容</br>可数"></asp:Label></td>
@@ -1155,11 +1184,11 @@ color:#33CC00;
             document.getElementById("K09").style.backgroundColor = 'yellow';
         };
 
-        document.getElementById("B09").style.backgroundColor = 'rgba(0, 0, 255, 0.50)';
-        document.getElementById("J17").style.backgroundColor = 'rgba(0, 0, 255, 0.50)';
-        document.getElementById("C13").style.backgroundColor = 'rgba(0, 0, 255, 0.50)';
-        document.getElementById("G13").style.backgroundColor = 'rgba(0, 0, 255, 0.50)';
-        document.getElementById("K01").style.backgroundColor = 'rgba(0, 0, 255, 0.50)';
+        document.getElementById("B09").style.backgroundColor = 'rgba(128, 128, 128)';
+        document.getElementById("J17").style.backgroundColor = 'rgba(128, 128, 128)';
+        document.getElementById("C13").style.backgroundColor = 'rgba(128, 128, 128)';
+        document.getElementById("G13").style.backgroundColor = 'rgba(128, 128, 128)';
+        document.getElementById("K01").style.backgroundColor = 'rgba(128, 128, 128)';
 
     });
 
