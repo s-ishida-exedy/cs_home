@@ -162,6 +162,20 @@ Partial Class cs_home
             ' SQLの実行
             Command.ExecuteNonQuery()
 
+
+        ElseIf strExecMode = "03" Then
+
+            strSQL = ""
+            strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET"
+            strSQL = strSQL & " FLG01 = '1' "
+
+            strSQL = strSQL & "WHERE BOOKING_NO = '" & lstrbkg & "' "
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+
         End If
 
 
@@ -233,5 +247,32 @@ Partial Class cs_home
         Response.Redirect("lcl_tenkai_m.aspx")
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        '完了ボタン押下
+
+        '削除
+        Call DB_access("03")        '削除モード
+
+        Session.Remove("lstrbokou")
+        Session.Remove("lstrcust")
+        Session.Remove("lstrinv")
+        Session.Remove("lstrbkg")
+        Session.Remove("strMode")
+        Session.Remove("lstrcut")
+        Session.Remove("lstretd")
+        Session.Remove("lstreta")
+        Session.Remove("lstrm3")
+        Session.Remove("lstrwhg")
+        Session.Remove("lstrpkg")
+        Session.Remove("lstrp1")
+        Session.Remove("lstrp2")
+        Session.Remove("lstrm1")
+        Session.Remove("lstrm2")
+        Session.Remove("lstrpp")
+        Session.Remove("lstrf3")
+
+        '元の画面に戻る
+        Response.Redirect("lcl_tenkai_m.aspx")
+    End Sub
 End Class
 
