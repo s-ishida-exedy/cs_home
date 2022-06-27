@@ -194,7 +194,6 @@ Public Class DBAccess
         StrSQL = StrSQL & "  CASE PLACE  "
         StrSQL = StrSQL & "    WHEN '0H' THEN '本社'  "
         StrSQL = StrSQL & "    WHEN '1U' THEN '上野'  "
-        StrSQL = StrSQL & "    WHEN '2A' THEN 'AIR'  "
         StrSQL = StrSQL & "    END AS 場所 "
         StrSQL = StrSQL & "  , CUST_NM AS 客先名 "
         StrSQL = StrSQL & "  , VAN_DATE AS VAN日 "
@@ -214,12 +213,17 @@ Public Class DBAccess
             StrSQL = StrSQL & "WHERE "
             StrSQL = StrSQL & " PLACE = '" & strPlace & "' "
             StrSQL = StrSQL & " AND VAN_DATE = '" & strDate & "' "
+            StrSQL = StrSQL & " AND PLACE <> '2A' "
         ElseIf strDate <> "" And strPlace = "" Then
             StrSQL = StrSQL & "WHERE "
             StrSQL = StrSQL & " VAN_DATE = '" & strDate & "' "
+            StrSQL = StrSQL & " AND PLACE <> '2A' "
         ElseIf strDate = "" And strPlace <> "" Then
             StrSQL = StrSQL & "WHERE "
             StrSQL = StrSQL & " PLACE = '" & strPlace & "' "
+            StrSQL = StrSQL & " AND PLACE <> '2A' "
+        Else
+            StrSQL = StrSQL & "WHERE PLACE <> '2A' "
         End If
         StrSQL = StrSQL & "ORDER BY "
         StrSQL = StrSQL & "  PLACE "
@@ -1075,7 +1079,7 @@ Public Class DBAccess
         StrSQL = StrSQL & "  AND SNH.NOKIYMD <> '9999/12/31 0:00:00' "
         StrSQL = StrSQL & "  AND SNB.LEFTQTY > 0 "
         StrSQL = StrSQL & "  And SNH.FINISHDATE < '" & strDate & "' "
-        StrSQL = StrSQL & "  AND (SNH.CUSTCODE NOT IN ('C255','E140','E155') AND SNH.CUSTCODE NOT LIKE 'A%' AND SNH.CUSTCODE NOT LIKE 'B%') "
+        StrSQL = StrSQL & " AND (SNH.CUSTCODE NOT IN ('C255','E140','E155') AND SNH.CUSTCODE NOT LIKE 'A%' AND SNH.CUSTCODE NOT LIKE 'B%') "
         StrSQL = StrSQL & "  )AA "
         StrSQL = StrSQL & "WHERE NOT EXISTS  "
         StrSQL = StrSQL & "(SELECT 1 FROM T_BOOKING  "
