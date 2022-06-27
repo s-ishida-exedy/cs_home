@@ -250,6 +250,19 @@
                     <asp:Button class="btn-radius-gradient-wrap"  ID="Button2" runat="server" Text="削除" Width="100" Height="40px" AutoPostBack="True" Font-Size="13px" ></asp:Button>
                 </td>
             </tr>
+            <tr style="height:10px;">
+                <td style="width:200px;Font-Size:15px;text-align:left;" >
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客先・BKG#
+                </td>
+                <td style="width:250px;Font-Size:15px;" >
+                    <asp:Label ID="Label3" runat="server" Width="100px" Height="10px" Font-Size="12px" Text=""></asp:Label>
+                    <asp:Label ID="Label4" runat="server" Width="100px" Height="10px" Font-Size="12px" Text=""></asp:Label>
+                </td>
+                <td style="width:250px;Font-Size:15px;" >
+                    <asp:Label ID="Label5" runat="server" Width="100px" Height="10px" Font-Size="12px" Text=""></asp:Label>
+                    <asp:Label ID="Label6" runat="server" Width="100px" Height="10px" Font-Size="12px" Text=""></asp:Label>
+                </td>
+            </tr>
             <tr>
                 <td style="width:200px;Font-Size:15px;text-align:left;" >
                     2.客先コードで委託登録と削除   :
@@ -286,14 +299,14 @@
             </tr>
         </table>
 
-        <table>
+<%--        <table>
             <tr>
                 <td>
                     <asp:Label ID="Label2" runat="server" Text="＜その他マスタのメンテナンス＞"></asp:Label>
                 </td>
             </tr>
-        </table>
-        <table class ="design02" >
+        </table>--%>
+<%--        <table class ="design02" >
             <tr>
                 <td style="width:200px;Font-Size:15px;text-align:left;" >
                     4.カレンダマスタ更新&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
@@ -305,7 +318,7 @@
                     ※半年に1回程度カレンダマスタを更新する。
                 </td>
             </tr>
-    </table>
+    </table>--%>
 
 </div>
 

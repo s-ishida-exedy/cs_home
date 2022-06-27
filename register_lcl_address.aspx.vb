@@ -530,11 +530,6 @@ Partial Class yuusen
 
     End Sub
 
-    Protected Sub DropDownList1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList1.SelectedIndexChanged
-
-        Label3.Text = DropDownList1.Text
-
-    End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
@@ -581,11 +576,6 @@ Partial Class yuusen
         cnn.Close()
         cnn.Dispose()
 
-
-        DropDownList1.Items.Clear()
-        'DropDownList1.DataSource = SqlDataSource8
-        DropDownList1.DataBind()
-        DropDownList1.Items.Insert(0, "--Select--")
 
         DropDownList2.Items.Clear()
         'DropDownList1.DataSource = SqlDataSource8
@@ -650,11 +640,6 @@ Partial Class yuusen
         cnn.Close()
         cnn.Dispose()
 
-
-        DropDownList1.Items.Clear()
-        'DropDownList1.DataSource = SqlDataSource8
-        DropDownList1.DataBind()
-        DropDownList1.Items.Insert(0, "--Select--")
 
         DropDownList2.Items.Clear()
         'DropDownList1.DataSource = SqlDataSource8

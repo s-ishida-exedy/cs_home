@@ -163,9 +163,9 @@ Partial Class yuusen
 
         cnt = cnt + 1
 
-        'Label146.Text = strtext00(cnt) 'C0001
-        'Label147.Text = strtext01(cnt)
-        'Label238.Text = strtext02(cnt)
+        Label146.Text = strtext00(cnt) 'C0001
+        Label147.Text = strtext01(cnt)
+        Label238.Text = strtext02(cnt)
 
         cnt = cnt + 1
 
@@ -181,9 +181,9 @@ Partial Class yuusen
 
         cnt = cnt + 1
 
-        Label155.Text = strtext00(cnt)
-        Label156.Text = strtext01(cnt)
-        Label241.Text = strtext02(cnt)
+        'Label155.Text = strtext00(cnt)
+        'Label156.Text = strtext01(cnt)
+        'Label241.Text = strtext02(cnt)
 
         cnt = cnt + 1
 

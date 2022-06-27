@@ -128,7 +128,7 @@ Partial Class yuusen
             'データベース接続を開く
             cnn.Open()
 
-            strSQL = "SELECT T_BOOKING.Forwarder, T_BOOKING.BOOKING_NO FROM T_BOOKING WHERE T_BOOKING.BOOKING_NO = '" & Trim(e.Row.Cells(12).Text) & "' "
+            strSQL = "SELECT T_BOOKING.Forwarder, T_BOOKING.BOOKING_NO FROM T_BOOKING WHERE T_BOOKING.BOOKING_NO = '" & Trim(e.Row.Cells(12).Text) & "' AND STATUS <>'キャンセル' "
 
 
             'ＳＱＬコマンド作成
@@ -138,7 +138,7 @@ Partial Class yuusen
             strkaika = ""
             '結果を取り出す
             While (dataread.Read())
-                strkaika += dataread("Forwarder")
+                strkaika = dataread("Forwarder")
                 e.Row.Cells(1).Text = strkaika
             End While
 

@@ -49,7 +49,7 @@
     #tbl-bdr table,#tbl-bdr td,#tbl-bdr th {
     border-collapse: collapse;
     border:1px solid #333;
-    height:50px;
+    height:10px;
     }
     #tbl-bdr th {
     border-collapse: collapse;
@@ -74,7 +74,7 @@
     .style4 {
         width: 540px;
         text-align:center;
-        font-size:x-large;
+        font-size:19px;
     }
 
 
@@ -133,19 +133,19 @@
             </tr>
             <tr>
                 <td class="auto-style4">
-                    <asp:Button ID="Button1" runat="server" Text="確認完了" Width ="150px" />
+                    <asp:Button ID="Button1" runat="server" Text="確認完了" Width ="150px" Font-Size="14px" />
                 </td>
                 <td class="auto-style7">
-                    <asp:Label ID="Label49" runat="server" Text="確認者：" Font-Size="Large"></asp:Label>
+                    <asp:Label ID="Label49" runat="server" Text="確認者：" Font-Size="14px"></asp:Label>
                     &nbsp;<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                 </td>
                 <td class="auto-style2">
-                    <asp:Label ID="Label46" runat="server" Text="Label" Font-Size="Large" ForeColor="Red" ></asp:Label>
-                    &nbsp;<asp:Label ID="Label47" runat="server" Text="Label" Font-Size="Large"></asp:Label>
+                    <asp:Label ID="Label46" runat="server" Text="Label" Font-Size="14px" ForeColor="Red" ></asp:Label>
+                    &nbsp;<asp:Label ID="Label47" runat="server" Text="Label" Font-Size="14px"></asp:Label>
                 </td>
             </tr>
         </table>
-<div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:solid 1px;">
+<div id="main2" style="width:100%;height:450px;overflow:scroll;-webkit-overflow-scrolling:touch;border:solid 1px;">
         <div  id="tbl-bdr">
         <table class="table-style1">
             <tr>
@@ -160,74 +160,74 @@
                 </th>
             </tr>
             <tr>
-                <td class="style1"><asp:Label ID="Label4" runat="server" Text="計上日"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label7" runat="server" Text="" Font-Size ="X-Large" ></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label8" runat="server" Text="" Font-Size ="X-Large" ></asp:Label></td>
+                <td class="style1"><asp:Label ID="Label4" runat="server" Text="計上日" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label7" runat="server" Text="" Font-Size ="16px" ></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label8" runat="server" Text="" Font-Size ="16px" ></asp:Label></td>
             </tr>
             <tr>
-                <td class="style1"><asp:Label ID="Label2" runat="server" Text="積出港"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label9" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label10" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
+                <td class="style1"><asp:Label ID="Label2" runat="server" Text="積出港" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label9" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label10" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
             </tr>
             <tr>
-                <td class="style1"><asp:Label ID="Label5" runat="server" Text="揚地"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label6" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label11" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
+                <td class="style1"><asp:Label ID="Label5" runat="server" Text="揚地" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label6" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label11" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
             </tr>
             <tr>
-                <td class="style1"><asp:Label ID="Label12" runat="server" Text="配送先"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label13" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label14" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
+                <td class="style1"><asp:Label ID="Label12" runat="server" Text="配送先" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label13" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label14" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
             </tr>
             <tr>
-                <td class="style1"><asp:Label ID="Label15" runat="server" Text="荷受地"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label16" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label17" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
+                <td class="style1"><asp:Label ID="Label15" runat="server" Text="荷受地" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label16" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label17" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
             </tr>
             <tr>
-                <td class="style1"><asp:Label ID="Label18" runat="server" Text="配送先責任送り先"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label19" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label20" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
+                <td class="style1"><asp:Label ID="Label18" runat="server" Text="配送先責任送り先" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label19" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label20" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
             </tr>
             <tr>
-                <td class="style1"><asp:Label ID="Label21" runat="server" Text="カット日"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label22" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label23" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
+                <td class="style1"><asp:Label ID="Label21" runat="server" Text="カット日" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label22" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label23" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
             </tr>
             <tr>
-                <td class="style1"><asp:Label ID="Label24" runat="server" Text="到着日"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label25" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label26" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
+                <td class="style1"><asp:Label ID="Label24" runat="server" Text="到着日" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label25" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label26" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
             </tr>
             <tr>
-                <td class="style1"><asp:Label ID="Label27" runat="server" Text="入出港日"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label28" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label29" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
+                <td class="style1"><asp:Label ID="Label27" runat="server" Text="入出港日" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label28" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label29" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
             </tr>
             <tr>
-                <td class="style1"><asp:Label ID="Label30" runat="server" Text="出荷方法"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label31" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label32" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
+                <td class="style1"><asp:Label ID="Label30" runat="server" Text="出荷方法" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label31" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label32" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
             </tr>
             <tr>
-                <td class="style1"><asp:Label ID="Label33" runat="server" Text="VOYAGENo"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label34" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label35" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
+                <td class="style1"><asp:Label ID="Label33" runat="server" Text="VOYAGENo" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label34" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label35" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
             </tr>
             <tr>
-                <td class="style1"><asp:Label ID="Label36" runat="server" Text="船社"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label37" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label38" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
+                <td class="style1"><asp:Label ID="Label36" runat="server" Text="船社" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label37" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label38" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
             </tr>
             <tr>
-                <td class="style1"><asp:Label ID="Label39" runat="server" Text="ﾌﾞｯｷﾝｸﾞNo"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label40" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label41" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
+                <td class="style1"><asp:Label ID="Label39" runat="server" Text="ﾌﾞｯｷﾝｸﾞNo" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label40" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label41" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
             </tr>
             <tr>
-                <td class="style1"><asp:Label ID="Label42" runat="server" Text="船名"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label43" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
-                <td class="style12"><asp:Label ID="Label44" runat="server" Text="" Font-Size ="X-Large"></asp:Label></td>
+                <td class="style1"><asp:Label ID="Label42" runat="server" Text="船名" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label43" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
+                <td class="style12"><asp:Label ID="Label44" runat="server" Text="" Font-Size ="16px"></asp:Label></td>
             </tr>
 
         </table>
