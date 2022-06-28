@@ -103,21 +103,68 @@ Partial Class cs_home
 
     Private Sub GridView1_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView1.RowCommand
         'GridViewのボタン押下処理
+        Dim strBKG As String = ""
+
         If e.CommandName = "edt" Then
             Dim index As Integer = Convert.ToInt32(e.CommandArgument)
             Dim data1 = Me.GridView1.Rows(index).Cells(4).Text
             Dim data2 = Me.GridView1.Rows(index).Cells(3).Text
             Dim data3 = Me.GridView1.Rows(index).Cells(1).Text
 
+            'イントラよりブッキングNOを取得
+            Call GET_BKGNO(Left(data2, 4), strBKG)
+
             'インボイス番号をキーにデータを更新
-            Call Update_FLG(data3, data1, data2)
+            Call Update_FLG(data3, data1, data2, strBKG)
 
             'Grid再表示
             GridView1.DataBind()
         End If
     End Sub
 
-    Private Sub Update_FLG(strPlace As String, strFVAN As String, strIVNO As String)
+    Private Sub GET_BKGNO(strIVNO As String, ByRef strBKG As String)
+        'インボイスNOに該当するブッキングNOを取得する。
+        Dim strSQL As String
+        Dim dtNow As DateTime = DateTime.Now
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strFlg As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        'データベース接続を開く
+        cnn.Open()
+
+        'フラグを確認
+        strSQL = ""
+        strSQL = strSQL & "SELECT BOOKINGNO FROM V_T_INV_HD_TB "
+        strSQL = strSQL & "WHERE OLD_INVNO = '" & strIVNO & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            strBKG = dataread("BOOKINGNO")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Sub
+
+    Private Sub Update_FLG(strPlace As String, strFVAN As String, strIVNO As String, strBKG As String)
         'レコードのフラグを取得する。
         Dim strSQL As String
         Dim dtNow As DateTime = DateTime.Now
@@ -163,6 +210,7 @@ Partial Class cs_home
             strSQL = strSQL & "'" & strPlace & "' "
             strSQL = strSQL & ",'" & strFVAN & "' "
             strSQL = strSQL & ",'" & strIVNO & "' "
+            strSQL = strSQL & ",'" & strBKG & "' "
             strSQL = strSQL & ",'1' "
             strSQL = strSQL & ",'" & dtNow & "' "
             strSQL = strSQL & ",'" & Session("UsrId") & "') "
