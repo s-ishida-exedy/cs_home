@@ -472,8 +472,18 @@ color:#33CC00;
 
             <tr >
                 <td style="width:20px;">
-                    <table  border='0'>
+                    <table  border='0' class ="T03">
                             <tr >
+                                <th id="X01" style="width:20px;"><asp:Label ID="Label49" runat="server" Text="残スペース50%より上"></asp:Label></th>
+                             </tr>
+                            <tr >
+                                <th id="X02" style="width:20px;"><asp:Label ID="Label50" runat="server" Text="残スペース50%以下"></asp:Label></th>
+                             </tr>
+                            <tr >
+                                <th id="X03" style="width:20px;"><asp:Label ID="Label51" runat="server" Text="スペースなし"></asp:Label></th>
+                             </tr>
+                            <tr >
+                                <th id="X04" style="width:20px;"><asp:Label ID="Label52" runat="server" Text="備品用棚"></asp:Label></th>
                              </tr>
                     </table>
                 </td>
@@ -906,84 +916,98 @@ color:#33CC00;
             document.getElementById("A01").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("A03").innerText / document.getElementById("A02").innerText > 0.5) {
             document.getElementById('A01').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("A01").style.color = 'black';
         };
 
         if (document.getElementById("A07").innerText / document.getElementById("A06").innerText == 1) {
             document.getElementById("A05").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("A07").innerText / document.getElementById("A06").innerText > 0.5) {
             document.getElementById('A05').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("A05").style.color = 'black';
         };
 
         if (document.getElementById("A11").innerText/document.getElementById("A10").innerText == 1) {
             document.getElementById("A09").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("A11").innerText / document.getElementById("A10").innerText > 0.5) {
             document.getElementById('A09').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("A09").style.color = 'black';
         };
 
         if (document.getElementById("D15").innerText/document.getElementById("D14").innerText == 1) {
             document.getElementById("D13").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("D15").innerText / document.getElementById("D14").innerText > 0.5) {
             document.getElementById('D13').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("D13").style.color = 'black';
         };
 
         if (document.getElementById("D19").innerText/document.getElementById("D18").innerText == 1) {
             document.getElementById("D17").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("D19").innerText / document.getElementById("D18").innerText > 0.5) {
             document.getElementById('D17').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("D17").style.color = 'black';
         };
 
         if (document.getElementById("E03").innerText/document.getElementById("E02").innerText == 1) {
             document.getElementById("E01").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("E03").innerText / document.getElementById("E02").innerText > 0.5) {
             document.getElementById('E01').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("E01").style.color = 'black';
         };
 
         if (document.getElementById("E07").innerText/document.getElementById("E06").innerText == 1) {
             document.getElementById("E05").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("E07").innerText / document.getElementById("E06").innerText > 0.5) {
             document.getElementById('E05').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("E05").style.color = 'black';
         };
 
         if (document.getElementById("A15").innerText/document.getElementById("A14").innerText == 1) {
             document.getElementById("A13").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("A15").innerText / document.getElementById("A14").innerText >0.5) {
             document.getElementById('A13').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("A13").style.color = 'black';
         };
 
         if (document.getElementById("A19").innerText/document.getElementById("A18").innerText == 1) {
             document.getElementById("A17").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("A19").innerText / document.getElementById("A18").innerText >0.5) {
             document.getElementById('A17').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("A17").style.color = 'black';
         };
 
         if (document.getElementById("B03").innerText/document.getElementById("B02").innerText == 1) {
             document.getElementById("B01").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("B03").innerText / document.getElementById("B02").innerText >0.5) {
             document.getElementById('B01').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("B01").style.color = 'black';
         };
 
         if (document.getElementById("E11").innerText/document.getElementById("E10").innerText == 1) {
             document.getElementById("E09").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("E11").innerText / document.getElementById("E10").innerText >0.5) {
             document.getElementById('E09').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("E09").style.color = 'black';
         };
 
         if (document.getElementById("E19").innerText/document.getElementById("E18").innerText == 1) {
             document.getElementById("E17").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("E19").innerText / document.getElementById("E18").innerText >0.5) {
             document.getElementById('E17').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("E17").style.color = 'black';
         };
 
         if (document.getElementById("I11").innerText/document.getElementById("I10").innerText == 1) {
             document.getElementById("I09").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("I11").innerText / document.getElementById("I10").innerText >0.5) {
             document.getElementById('I09').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("I09").style.color = 'black';
         };
 
         if (document.getElementById("I19").innerText/document.getElementById("I18").innerText == 1) {
             document.getElementById("I17").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("I19").innerText / document.getElementById("I18").innerText >0.5) {
             document.getElementById('I17').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("I17").style.color = 'black';
         };
 
         //if (document.getElementById("B11").innerText/document.getElementById("B10").innerText == 1) {
@@ -996,42 +1020,49 @@ color:#33CC00;
             document.getElementById("B13").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("B15").innerText / document.getElementById("B14").innerText >0.5) {
             document.getElementById('B13').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("B13").style.color = 'black';
         };
 
         if (document.getElementById("B19").innerText/document.getElementById("B18").innerText == 1) {
             document.getElementById("B17").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("B19").innerText / document.getElementById("B18").innerText >0.5) {
             document.getElementById('B17').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("B17").style.color = 'black';
         };
 
         if (document.getElementById("F07").innerText/document.getElementById("F06").innerText == 1) {
             document.getElementById("F05").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("F07").innerText / document.getElementById("F06").innerText >0.5) {
             document.getElementById('F05').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("F05").style.color = 'black';
         };
 
         if (document.getElementById("F15").innerText/document.getElementById("F14").innerText == 1) {
             document.getElementById("F13").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("F15").innerText / document.getElementById("F14").innerText >0.5) {
             document.getElementById('F13').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("F13").style.color = 'black';
         };
 
         if (document.getElementById("J07").innerText/document.getElementById("J06").innerText == 1) {
             document.getElementById("J05").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("J07").innerText / document.getElementById("J06").innerText >0.5) {
             document.getElementById('J05').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("J05").style.color = 'black';
         };
 
         if (document.getElementById("J11").innerText/document.getElementById("J10").innerText == 1) {
             document.getElementById("J09").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("J11").innerText / document.getElementById("J10").innerText >0.5) {
             document.getElementById('J09').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("J09").style.color = 'black';
         };
 
         if (document.getElementById("J15").innerText/document.getElementById("J14").innerText == 1) {
             document.getElementById("J13").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("J15").innerText / document.getElementById("J14").innerText >0.5) {
             document.getElementById('J13').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("J13").style.color = 'black';
         };
 
         //if (document.getElementById("J19").innerText/document.getElementById("J18").innerText == 1) {
@@ -1044,36 +1075,42 @@ color:#33CC00;
             document.getElementById("C01").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("C03").innerText / document.getElementById("C02").innerText >0.5){
             document.getElementById('C01').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("C01").style.color = 'black';
         };
 
         if (document.getElementById("C07").innerText/document.getElementById("C06").innerText == 1) {
             document.getElementById("C05").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("C07").innerText / document.getElementById("C06").innerText >0.5) {
             document.getElementById('C05').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("C05").style.color = 'black';
         };
 
         if (document.getElementById("C11").innerText/document.getElementById("C10").innerText == 1) {
             document.getElementById("C09").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("C11").innerText / document.getElementById("C10").innerText >0.5) {
             document.getElementById('C09').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("C09").style.color = 'black';
         };
 
         if (document.getElementById("C15").innerText/document.getElementById("C14").innerText == 1) {
             document.getElementById("C13").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("C15").innerText / document.getElementById("C14").innerText >0.5) {
             document.getElementById('C13').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("C13").style.color = 'black';
         };
 
         if (document.getElementById("G03").innerText/document.getElementById("G02").innerText == 1) {
             document.getElementById("G01").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("G03").innerText / document.getElementById("G02").innerText >0.5) {
             document.getElementById('G01').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("G01").style.color = 'black';
         };
 
         if (document.getElementById("G07").innerText/document.getElementById("G06").innerText == 1) {
             document.getElementById("G05").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("G07").innerText / document.getElementById("G06").innerText >0.5) {
             document.getElementById('G05').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("G05").style.color = 'black';
         };
 
 
@@ -1081,6 +1118,7 @@ color:#33CC00;
             document.getElementById("G09").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("G11").innerText / document.getElementById("G10").innerText >0.5) {
             document.getElementById('G09').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("G09").style.color = 'black';
         };
 
         //if (document.getElementById("G15").innerText/document.getElementById("G14").innerText == 1) {
@@ -1093,6 +1131,7 @@ color:#33CC00;
             document.getElementById("F09").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("F11").innerText / document.getElementById("F10").innerText > 0.5) {
             document.getElementById('F09').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("F09").style.color = 'black';
         };
 
         //if (document.getElementById("H15").innerText/document.getElementById("H14").innerText == 1) {
@@ -1173,15 +1212,17 @@ color:#33CC00;
         //};
 
         if (document.getElementById("K07").innerText/document.getElementById("K06").innerText == 1) {
-            document.getElementById("K05").style.backgroundColor = 'red';
+            document.getElementById("K05").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("K07").innerText / document.getElementById("K06").innerText >0.5) {
-            document.getElementById("K05").style.backgroundColor = 'yellow';
+            document.getElementById("K05").style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("K05").style.color = 'black';
         };
 
         if (document.getElementById("K11").innerText/document.getElementById("K10").innerText == 1) {
-            document.getElementById("K09").style.backgroundColor = 'red';
+            document.getElementById("K09").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
         } else if (document.getElementById("K11").innerText/document.getElementById("K10").innerText >0.5) {
-            document.getElementById("K09").style.backgroundColor = 'yellow';
+            document.getElementById("K09").style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("K09").style.color = 'black';
         };
 
         document.getElementById("B09").style.backgroundColor = 'rgba(128, 128, 128)';
@@ -1189,6 +1230,17 @@ color:#33CC00;
         document.getElementById("C13").style.backgroundColor = 'rgba(128, 128, 128)';
         document.getElementById("G13").style.backgroundColor = 'rgba(128, 128, 128)';
         document.getElementById("K01").style.backgroundColor = 'rgba(128, 128, 128)';
+
+        document.getElementById("X01").style.backgroundColor = 'rgba(0, 0, 255, 0.50)';
+        document.getElementById("X02").style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+        document.getElementById("X03").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
+        document.getElementById("X04").style.backgroundColor = 'rgba(128, 128, 128)';
+
+        document.getElementById("X01").style.color = 'white';
+        document.getElementById("X02").style.color = 'black';
+        document.getElementById("X03").style.color = 'white';
+        document.getElementById("X04").style.color = 'white';
+        
 
     });
 

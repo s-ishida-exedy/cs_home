@@ -15,6 +15,10 @@ Partial Class cs_home
         'パラメータ取得
         Dim strId As String = Request.QueryString("strId")
         Dim strMode As String = Request.QueryString("strMode")
+        Dim strname As String = ""
+        Dim uid As String = Session("UsrId")
+
+        Call get_pname(uid, strname)
 
         If IsPostBack Then
         Else
@@ -31,6 +35,7 @@ Partial Class cs_home
             ElseIf strMode = "03" Then
                 TextBox1.Text = Format(Now, "yyyy/MM/dd")
                 TextBox2.Text = Format(Now, "HH:mm")
+                DropDownList1.SelectedValue = strname
                 TextBox1.Enabled = False
                 TextBox2.Enabled = False
                 Button1.Enabled = True
@@ -398,6 +403,53 @@ Partial Class cs_home
 
             cnn.Close()
         End If
+
+    End Sub
+
+
+    Private Sub get_pname(strid As String, ByRef pname As String)
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String = ""
+        Dim strinv As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        Dim dt1 As DateTime = DateTime.Now
+
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = "SELECT M_EXL_CS_MEMBER.NAME_AB "
+        strSQL = strSQL & "FROM M_EXL_CS_MEMBER "
+        strSQL = strSQL & "WHERE M_EXL_CS_MEMBER.CODE = '" & strid & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        pname = ""
+
+        '結果を取り出す 
+        While (dataread.Read())
+            pname = Trim(Convert.ToString(dataread("NAME_AB")))        '客先目
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
 
     End Sub
 
