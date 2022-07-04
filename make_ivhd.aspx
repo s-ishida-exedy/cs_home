@@ -254,6 +254,18 @@
 
 </script>
 
+    <script type="text/javascript">
+      function LinkClick() {
+          var url = 'm_kaika_jpn_eg.aspx?q='
+          var result = confirm('別ウインドウでを開きます');
+
+          if (result) {
+              window.open(url, null);
+          }
+          else {
+          }
+      }
+    </script>
 
 </head>
 
@@ -283,15 +295,28 @@
             </tr>
         </table>    
 
+        <table style="Height:10px;">
+            <tr>
+
+            </tr>
+        </table>
+
+
         <table style="height:10px;">
             <tr>
-                <td style="width:1500px;" >
+                <td style="width:300px;" >
                     <asp:Button ID="Button1" CssClass ="btn00" runat="server" Text="エクセル出力" />
                     <asp:Button ID="Button2" CssClass ="btn00" runat="server" Text="LCL表示" />
                     <asp:Button ID="Button3" CssClass ="btn00" runat="server" Text="FCL表示" />
-
                 </td>
-                                    <a href="make_si.aspx?id={0}">SI</a>
+                <td style="width:100px;Font-Size:25px;" >
+                    <div class="button04">
+                        <a href="javascript:void(0);" onclick="LinkClick()">海貨御者ﾏｽﾀ登録</a>
+                    </div>    
+                </td>
+                <td style="width:700px;Font-Size:25px;" >
+                </td>
+<%--                                    <a href="make_si.aspx?id={0}">SI</a>--%>
             </tr>
         </table>
 
@@ -311,7 +336,7 @@
                     </thead>
 
                     <tbody>
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="7330px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="8190" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
                         <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
                         <HeaderStyle CssClass="Freezing"></HeaderStyle>
 
@@ -330,7 +355,7 @@
 
                         <asp:BoundField DataField="" HeaderText="Finaldestination
                             (届け先名)" SortExpression=""  >
-                        <HeaderStyle Width="250px" />
+                        <HeaderStyle Width="350px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="Finaldestination ADDRESS(届け先住所)" SortExpression="" >
@@ -400,8 +425,8 @@
                         <HeaderStyle Width="60px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="" HeaderText="乙仲名" SortExpression="" >
-                        <HeaderStyle Width="60px" />
+                        <asp:BoundField DataField="Forwarder" HeaderText="乙仲名" SortExpression="Forwarder" >
+                        <HeaderStyle Width="200px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="乙仲担当者" SortExpression="" >
@@ -417,7 +442,7 @@
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="consinerr name of SI" SortExpression="" >
-                        <HeaderStyle Width="200px" />
+                        <HeaderStyle Width="300px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="consiner address of SI" SortExpression="" >
@@ -429,7 +454,7 @@
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="Nortify address" SortExpression="" >
-                        <HeaderStyle Width="1200px" />
+                        <HeaderStyle Width="1900px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="通関方法" SortExpression="" >
@@ -452,8 +477,8 @@
                         <HeaderStyle Width="130px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="Forwarder" HeaderText="海貨業者" SortExpression="Forwarder" >
-                        <HeaderStyle Width="200px" />
+                        <asp:BoundField DataField="" HeaderText="海貨業者" SortExpression="" >
+                        <HeaderStyle Width="60px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="TWENTY_FEET" HeaderText="20Ft" SortExpression="TWENTY_FEET" >

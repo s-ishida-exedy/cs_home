@@ -565,9 +565,9 @@ color:#33CC00;
                             </tr>
                             <tr >
                                 <th id="B17" style="width:20px;"><asp:Label ID="Label31" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">D0010</a></asp:Label></th>
-                                <td id="B18" style="width:20px;"><asp:Label ID="Label32" runat="server" Text="A"></asp:Label></td>
-                                <td id="B19" style="width:20px;"><asp:Label ID="Label33" runat="server" Text="A"></asp:Label></td>
-                                <td id="B20" style="width:20px;"><asp:Label ID="Label200" runat="server" Text="A"></asp:Label></td>
+                                <td id="B18" style="width:20px;"><asp:Label ID="Label32" runat="server" Text="00"></asp:Label></td>
+                                <td id="B19" style="width:20px;"><asp:Label ID="Label33" runat="server" Text="0"></asp:Label></td>
+                                <td id="B20" style="width:20px;"><asp:Label ID="Label200" runat="server" Text="0"></asp:Label></td>
                             </tr>
 
                     </table>
@@ -600,9 +600,9 @@ color:#33CC00;
                             </tr>
                             <tr >
                                 <th id="C13"style="width:20px;"><asp:Label ID="Label46" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">D0014</a></asp:Label></th>
-                                <td id="C14"style="width:20px;"><asp:Label ID="Label47" runat="server" Text="A"></asp:Label></td>
-                                <td id="C15"style="width:20px;"><asp:Label ID="Label48" runat="server" Text="A"></asp:Label></td>
-                                <td id="C16"style="width:20px;"><asp:Label ID="Label205" runat="server" Text="A"></asp:Label></td>
+                                <td id="C14"style="width:20px;"><asp:Label ID="Label47" runat="server" Text="00"></asp:Label></td>
+                                <td id="C15"style="width:20px;"><asp:Label ID="Label48" runat="server" Text="0"></asp:Label></td>
+                                <td id="C16"style="width:20px;"><asp:Label ID="Label205" runat="server" Text="0"></asp:Label></td>
                             </tr>
                     </table>
                 </td>
@@ -694,9 +694,9 @@ color:#33CC00;
                             </tr>
                             <tr >
                                 <th id="F13" style="width:20px;"><asp:Label ID="Label91" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">D0007</a></asp:Label></th>
-                                <td id="F14" style="width:20px;"><asp:Label ID="Label92" runat="server" Text="A"></asp:Label></td>
-                                <td id="F15" style="width:20px;"><asp:Label ID="Label93" runat="server" Text="A"></asp:Label></td>
-                                <td id="F16" style="width:20px;"><asp:Label ID="Label220" runat="server" Text="A"></asp:Label></td>
+                                <td id="F14" style="width:20px;"><asp:Label ID="Label92" runat="server" Text="00"></asp:Label></td>
+                                <td id="F15" style="width:20px;"><asp:Label ID="Label93" runat="server" Text="0"></asp:Label></td>
+                                <td id="F16" style="width:20px;"><asp:Label ID="Label220" runat="server" Text=""></asp:Label></td>
                             </tr>
                     </table>
                 </td>
@@ -835,9 +835,9 @@ color:#33CC00;
                     <table  border='0' class ="T01">
                             <tr >
                                 <th id="K01" style="width:20px;"><asp:Label ID="Label157" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">A0001</a></asp:Label></th>
-                                <td id="K02" style="width:20px;"><asp:Label ID="Label158" runat="server" Text="00"></asp:Label></td>
-                                <td id="K03" style="width:20px;"><asp:Label ID="Label159" runat="server" Text="0"></asp:Label></td>
-                                <td id="K04" style="width:20px;"><asp:Label ID="Label242" runat="server" Text="0"></asp:Label></td>
+                                <td id="K02" style="width:20px;"><asp:Label ID="Label158" runat="server" Text="AA"></asp:Label></td>
+                                <td id="K03" style="width:20px;"><asp:Label ID="Label159" runat="server" Text="A"></asp:Label></td>
+                                <td id="K04" style="width:20px;"><asp:Label ID="Label242" runat="server" Text="A"></asp:Label></td>
                             </tr>
                             <tr >
                                 <th id="K05" style="width:20px;"><asp:Label ID="Label160" runat="server" Text=""><a href="javascript:void(0);" onclick="LinkClick()">A0002</a></asp:Label></th>
@@ -1023,12 +1023,12 @@ color:#33CC00;
             document.getElementById("B13").style.color = 'black';
         };
 
-        if (document.getElementById("B19").innerText/document.getElementById("B18").innerText == 1) {
-            document.getElementById("B17").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
-        } else if (document.getElementById("B19").innerText / document.getElementById("B18").innerText >0.5) {
-            document.getElementById('B17').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
-            document.getElementById("B17").style.color = 'black';
-        };
+        //if (document.getElementById("B19").innerText/document.getElementById("B18").innerText == 1) {
+        //    document.getElementById("B17").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
+        //} else if (document.getElementById("B19").innerText / document.getElementById("B18").innerText >0.5) {
+        //    document.getElementById('B17').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+        //    document.getElementById("B17").style.color = 'black';
+        //};
 
         if (document.getElementById("F07").innerText/document.getElementById("F06").innerText == 1) {
             document.getElementById("F05").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
@@ -1037,12 +1037,12 @@ color:#33CC00;
             document.getElementById("F05").style.color = 'black';
         };
 
-        if (document.getElementById("F15").innerText/document.getElementById("F14").innerText == 1) {
-            document.getElementById("F13").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
-        } else if (document.getElementById("F15").innerText / document.getElementById("F14").innerText >0.5) {
-            document.getElementById('F13').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
-            document.getElementById("F13").style.color = 'black';
-        };
+        //if (document.getElementById("F15").innerText/document.getElementById("F14").innerText == 1) {
+        //    document.getElementById("F13").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
+        //} else if (document.getElementById("F15").innerText / document.getElementById("F14").innerText >0.5) {
+        //    document.getElementById('F13').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+        //    document.getElementById("F13").style.color = 'black';
+        //};
 
         if (document.getElementById("J07").innerText/document.getElementById("J06").innerText == 1) {
             document.getElementById("J05").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
@@ -1092,12 +1092,12 @@ color:#33CC00;
             document.getElementById("C09").style.color = 'black';
         };
 
-        if (document.getElementById("C15").innerText/document.getElementById("C14").innerText == 1) {
-            document.getElementById("C13").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
-        } else if (document.getElementById("C15").innerText / document.getElementById("C14").innerText >0.5) {
-            document.getElementById('C13').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
-            document.getElementById("C13").style.color = 'black';
-        };
+        //if (document.getElementById("C15").innerText/document.getElementById("C14").innerText == 1) {
+        //    document.getElementById("C13").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
+        //} else if (document.getElementById("C15").innerText / document.getElementById("C14").innerText >0.5) {
+        //    document.getElementById('C13').style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+        //    document.getElementById("C13").style.color = 'black';
+        //};
 
         if (document.getElementById("G03").innerText/document.getElementById("G02").innerText == 1) {
             document.getElementById("G01").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
@@ -1205,11 +1205,12 @@ color:#33CC00;
         //};
 
 
-        //if (document.getElementById("K02").innerText == document.getElementById("K03").innerText) {
-        //    document.getElementById("K01").style.backgroundColor = 'red';
-        //} else {
-        //    //document.getElementById('A1').style.backgroundColor = 'blue';
-        //};
+        if (document.getElementById("K02").innerText == document.getElementById("K03").innerText) {
+            document.getElementById("K01").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
+        } else {
+            document.getElementById("K01").style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
+            document.getElementById("K01").style.color = 'black';
+        };
 
         if (document.getElementById("K07").innerText/document.getElementById("K06").innerText == 1) {
             document.getElementById("K05").style.backgroundColor = 'rgba(255, 0, 0, 0.60)';
@@ -1229,7 +1230,10 @@ color:#33CC00;
         document.getElementById("J17").style.backgroundColor = 'rgba(128, 128, 128)';
         document.getElementById("C13").style.backgroundColor = 'rgba(128, 128, 128)';
         document.getElementById("G13").style.backgroundColor = 'rgba(128, 128, 128)';
-        document.getElementById("K01").style.backgroundColor = 'rgba(128, 128, 128)';
+        document.getElementById("B17").style.backgroundColor = 'rgba(128, 128, 128)';
+        document.getElementById("F13").style.backgroundColor = 'rgba(128, 128, 128)';
+
+        
 
         document.getElementById("X01").style.backgroundColor = 'rgba(0, 0, 255, 0.50)';
         document.getElementById("X02").style.backgroundColor = 'rgba(255, 216, 0, 0.60)';
@@ -1240,7 +1244,7 @@ color:#33CC00;
         document.getElementById("X02").style.color = 'black';
         document.getElementById("X03").style.color = 'white';
         document.getElementById("X04").style.color = 'white';
-        
+
 
     });
 

@@ -558,6 +558,8 @@ Partial Class cs_home
 
         End Using
 
+        Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('出力が完了しました。\n出力先：\\\svnas201\\EXD06101\\DISC_COMMON\\WEB出力');</script>", False)
+
 
     End Sub
 End Class
