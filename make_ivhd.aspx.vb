@@ -191,24 +191,12 @@ Partial Class yuusen
 
             e.Row.Cells(19).Text = Replace(e.Row.Cells(19).Text, "AT_", "")
 
-            If e.Row.Cells(19).Text = "伊藤忠ロジスティクス株式会社" Then
-                e.Row.Cells(19).Text = "ITOCHU"
-            ElseIf e.Row.Cells(19).Text = "郵船" Then
-                e.Row.Cells(19).Text = "YUSEN"
-            ElseIf e.Row.Cells(19).Text = "近鉄" Then
-                e.Row.Cells(19).Text = "KWE"
-            ElseIf e.Row.Cells(19).Text = "日本梱包" Then
-                e.Row.Cells(19).Text = "NIPPON KOMPO"
-            ElseIf e.Row.Cells(19).Text = "日本トランスシティ" Then
-                e.Row.Cells(19).Text = "Japan Transcity"
-            ElseIf e.Row.Cells(19).Text = "近鉄" Then
-                e.Row.Cells(19).Text = "KWE"
-            ElseIf e.Row.Cells(19).Text = "近鉄" Then
-                e.Row.Cells(19).Text = "KWE"
-            ElseIf e.Row.Cells(19).Text = "近鉄" Then
-                e.Row.Cells(19).Text = "KWE"
-            ElseIf e.Row.Cells(19).Text = "近鉄" Then
-                e.Row.Cells(19).Text = "KWE"
+            e.Row.Cells(19).Text = get_kaika(Trim(e.Row.Cells(19).Text))
+
+            If e.Row.Cells(19).Text = "" Then
+
+                e.Row.Cells(0).Text = e.Row.Cells(0).Text & "海貨御者英名変換マスタ登録必要"
+
             End If
 
 
@@ -695,6 +683,8 @@ Partial Class yuusen
 
         Dim val01 As String = ""
 
+        GridView1.DataBind()
+
         If GridView1.Rows.Count >= 1 Then
 
             Using wb As XLWorkbook = New XLWorkbook()
@@ -912,4 +902,47 @@ Partial Class yuusen
         GridView1.DataBind()
 
     End Sub
+
+
+    Private Function get_kaika(strkaika As String) As String
+
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        get_kaika = ""
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT DISTINCT NAME_EG "
+        strSQL = strSQL & "FROM M_EXL_KAIKA_CHANGE "
+        strSQL = strSQL & "WHERE NAME_JPN = '" & strkaika & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            get_kaika = dataread("NAME_EG")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
+
 End Class

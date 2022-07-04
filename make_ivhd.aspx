@@ -254,6 +254,18 @@
 
 </script>
 
+    <script type="text/javascript">
+      function LinkClick() {
+          var url = 'm_kaika_jpn_eg.aspx?q='
+          var result = confirm('別ウインドウでを開きます');
+
+          if (result) {
+              window.open(url, null);
+          }
+          else {
+          }
+      }
+    </script>
 
 </head>
 
@@ -283,13 +295,26 @@
             </tr>
         </table>    
 
+        <table style="Height:10px;">
+            <tr>
+
+            </tr>
+        </table>
+
+
         <table style="height:10px;">
             <tr>
-                <td style="width:1500px;" >
+                <td style="width:300px;" >
                     <asp:Button ID="Button1" CssClass ="btn00" runat="server" Text="エクセル出力" />
                     <asp:Button ID="Button2" CssClass ="btn00" runat="server" Text="LCL表示" />
                     <asp:Button ID="Button3" CssClass ="btn00" runat="server" Text="FCL表示" />
-
+                </td>
+                <td style="width:100px;Font-Size:25px;" >
+                    <div class="button04">
+                        <a href="javascript:void(0);" onclick="LinkClick()">海貨御者ﾏｽﾀ登録</a>
+                    </div>    
+                </td>
+                <td style="width:700px;Font-Size:25px;" >
                 </td>
                                     <a href="make_si.aspx?id={0}">SI</a>
             </tr>
