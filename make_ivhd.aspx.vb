@@ -188,6 +188,30 @@ Partial Class yuusen
                 e.Row.Cells(17).Text = e.Row.Cells(17).Text & "_改行"
             End If
 
+
+            e.Row.Cells(19).Text = Replace(e.Row.Cells(19).Text, "AT_", "")
+
+            If e.Row.Cells(19).Text = "伊藤忠ロジスティクス株式会社" Then
+                e.Row.Cells(19).Text = "ITOCHU"
+            ElseIf e.Row.Cells(19).Text = "郵船" Then
+                e.Row.Cells(19).Text = "YUSEN"
+            ElseIf e.Row.Cells(19).Text = "近鉄" Then
+                e.Row.Cells(19).Text = "KWE"
+            ElseIf e.Row.Cells(19).Text = "日本梱包" Then
+                e.Row.Cells(19).Text = "NIPPON KOMPO"
+            ElseIf e.Row.Cells(19).Text = "日本トランスシティ" Then
+                e.Row.Cells(19).Text = "Japan Transcity"
+            ElseIf e.Row.Cells(19).Text = "近鉄" Then
+                e.Row.Cells(19).Text = "KWE"
+            ElseIf e.Row.Cells(19).Text = "近鉄" Then
+                e.Row.Cells(19).Text = "KWE"
+            ElseIf e.Row.Cells(19).Text = "近鉄" Then
+                e.Row.Cells(19).Text = "KWE"
+            ElseIf e.Row.Cells(19).Text = "近鉄" Then
+                e.Row.Cells(19).Text = "KWE"
+            End If
+
+
             'BOOKING_NO	    21
             intval = 0
                 intCnt = InStr(intCnt + 1, e.Row.Cells(21).Text, "→")
@@ -403,10 +427,10 @@ Partial Class yuusen
                     e.Row.Cells(2).Text += dataread(56)
                     'Finaldestination ADDRESS(届け先住所)	3
                     e.Row.Cells(3).Text += dataread(57)
-                    '乙仲名	 19
-                    e.Row.Cells(19).Text += dataread(60)
-                    '乙仲担当者	 20
-                    If dataread(61) = "" Then
+                '乙仲名	 19
+                e.Row.Cells(32).Text += dataread(60)
+                '乙仲担当者	 20
+                If dataread(61) = "" Then
                         e.Row.Cells(20).Text += "-"
                     Else
                         e.Row.Cells(20).Text += dataread(61)

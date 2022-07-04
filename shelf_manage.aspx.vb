@@ -61,9 +61,9 @@ Partial Class yuusen
 
         cnt = 0
 
-        'Label158.Text = strtext00(cnt) 'A0001
-        'Label159.Text = strtext01(cnt)
-        'Label242.Text = strtext02(cnt)
+        Label158.Text = strtext00(cnt) 'A0001
+        Label159.Text = strtext01(cnt)
+        Label242.Text = strtext02(cnt)
 
         cnt = cnt + 1
 
@@ -199,9 +199,9 @@ Partial Class yuusen
 
         cnt = cnt + 1
 
-        Label92.Text = strtext00(cnt)
-        Label93.Text = strtext01(cnt)
-        Label220.Text = strtext02(cnt)
+        'Label92.Text = strtext00(cnt)
+        'Label93.Text = strtext01(cnt)
+        'Label220.Text = strtext02(cnt)
 
         cnt = cnt + 1
 
@@ -217,9 +217,9 @@ Partial Class yuusen
 
         cnt = cnt + 1
 
-        Label32.Text = strtext00(cnt)
-        Label33.Text = strtext01(cnt)
-        Label200.Text = strtext02(cnt)
+        'Label32.Text = strtext00(cnt)
+        'Label33.Text = strtext01(cnt)
+        'Label200.Text = strtext02(cnt)
 
         cnt = cnt + 1
 
@@ -241,9 +241,9 @@ Partial Class yuusen
 
         cnt = cnt + 1
 
-        Label47.Text = strtext00(cnt)
-        Label48.Text = strtext01(cnt)
-        Label205.Text = strtext02(cnt)
+        'Label47.Text = strtext00(cnt)
+        'Label48.Text = strtext01(cnt)
+        'Label205.Text = strtext02(cnt)
 
         cnt = cnt + 1
 
