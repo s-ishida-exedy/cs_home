@@ -270,60 +270,60 @@ Partial Class yuusen
 
                 '20Ft	
                 intval = 0
-                intCnt = InStr(intCnt + 1, e.Row.Cells(33).Text, "→")
-                Do While intCnt > 0
+            intCnt = InStr(intCnt + 1, e.Row.Cells(32).Text, "→")
+            Do While intCnt > 0
                     intval = intCnt
-                    intCnt = InStr(intCnt + 1, e.Row.Cells(33).Text, "→")
-                Loop
-                e.Row.Cells(33).Text = Mid(e.Row.Cells(33).Text, intval + 1, Len(e.Row.Cells(33).Text) - intval)
-                intCnt = 0
-                e.Row.Cells(33).Text = Trim(Left(Trim(e.Row.Cells(33).Text), 1))
-                If IsNumeric(e.Row.Cells(33).Text) = True Then
-                Else
-                    e.Row.Cells(33).Text = 0
-                End If
+                intCnt = InStr(intCnt + 1, e.Row.Cells(32).Text, "→")
+            Loop
+            e.Row.Cells(32).Text = Mid(e.Row.Cells(32).Text, intval + 1, Len(e.Row.Cells(32).Text) - intval)
+            intCnt = 0
+            e.Row.Cells(32).Text = Trim(Left(Trim(e.Row.Cells(32).Text), 1))
+            If IsNumeric(e.Row.Cells(32).Text) = True Then
+            Else
+                e.Row.Cells(32).Text = 0
+            End If
 
                 '40Ft	
                 intval = 0
-                intCnt = InStr(intCnt + 1, e.Row.Cells(34).Text, "→")
-                Do While intCnt > 0
+            intCnt = InStr(intCnt + 1, e.Row.Cells(33).Text, "→")
+            Do While intCnt > 0
                     intval = intCnt
-                    intCnt = InStr(intCnt + 1, e.Row.Cells(34).Text, "→")
-                Loop
-                e.Row.Cells(34).Text = Mid(e.Row.Cells(34).Text, intval + 1, Len(e.Row.Cells(34).Text) - intval)
-                intCnt = 0
+                intCnt = InStr(intCnt + 1, e.Row.Cells(33).Text, "→")
+            Loop
+            e.Row.Cells(33).Text = Mid(e.Row.Cells(33).Text, intval + 1, Len(e.Row.Cells(33).Text) - intval)
+            intCnt = 0
+            e.Row.Cells(33).Text = Trim(Left(Trim(e.Row.Cells(33).Text), 1))
+            If IsNumeric(e.Row.Cells(33).Text) = True Then
+            Else
+                e.Row.Cells(33).Text = 0
+            End If
+
+                'LCL/40Ft
+                intval = 0
+            intCnt = InStr(intCnt + 1, e.Row.Cells(34).Text, "→")
+            Do While intCnt > 0
+                    intval = intCnt
+                intCnt = InStr(intCnt + 1, e.Row.Cells(34).Text, "→")
+            Loop
+            e.Row.Cells(34).Text = Mid(e.Row.Cells(34).Text, intval + 1, Len(e.Row.Cells(34).Text) - intval)
+            intCnt = 0
+
+            'M3以外は数量を算出
+            If e.Row.Cells(34).Text Like "*M3*" Then
+            Else
                 e.Row.Cells(34).Text = Trim(Left(Trim(e.Row.Cells(34).Text), 1))
                 If IsNumeric(e.Row.Cells(34).Text) = True Then
                 Else
                     e.Row.Cells(34).Text = 0
                 End If
-
-                'LCL/40Ft
-                intval = 0
-                intCnt = InStr(intCnt + 1, e.Row.Cells(35).Text, "→")
-                Do While intCnt > 0
-                    intval = intCnt
-                    intCnt = InStr(intCnt + 1, e.Row.Cells(35).Text, "→")
-                Loop
-                e.Row.Cells(35).Text = Mid(e.Row.Cells(35).Text, intval + 1, Len(e.Row.Cells(35).Text) - intval)
-                intCnt = 0
-
-                'M3以外は数量を算出
-                If e.Row.Cells(35).Text Like "*M3*" Then
-                Else
-                    e.Row.Cells(35).Text = Trim(Left(Trim(e.Row.Cells(35).Text), 1))
-                    If IsNumeric(e.Row.Cells(35).Text) = True Then
-                    Else
-                        e.Row.Cells(35).Text = 0
-                    End If
                 End If
 
-                'M3以外は40FTに追加する
-                If e.Row.Cells(35).Text Like "*M3*" Then
-                Else
-                    e.Row.Cells(34).Text = Integer.Parse(e.Row.Cells(35).Text) + Integer.Parse(e.Row.Cells(34).Text)
-                    e.Row.Cells(35).Text = 0
-                End If
+            'M3以外は40FTに追加する
+            If e.Row.Cells(34).Text Like "*M3*" Then
+            Else
+                e.Row.Cells(33).Text = Integer.Parse(e.Row.Cells(34).Text) + Integer.Parse(e.Row.Cells(33).Text)
+                e.Row.Cells(34).Text = 0
+            End If
 
                 '出荷元ストアコード	　13
                 code = e.Row.Cells(0).Text
@@ -348,19 +348,19 @@ Partial Class yuusen
                 End Select
 
 
-                '「M3」がN列に含まれている場合、出荷方法 CFS
-                If e.Row.Cells(35).Text Like "*M3*" Then       'NULLチェック
-                    e.Row.Cells(14).Text = "03"
-                    '上記以外で、M列に1以上の数字が入っている場合、出荷方法 40ft
-                ElseIf e.Row.Cells(34).Text > 0 Then
-                    e.Row.Cells(14).Text = "02"
+            '「M3」がN列に含まれている場合、出荷方法 CFS
+            If e.Row.Cells(34).Text Like "*M3*" Then       'NULLチェック
+                e.Row.Cells(14).Text = "03"
+                '上記以外で、M列に1以上の数字が入っている場合、出荷方法 40ft
+            ElseIf e.Row.Cells(33).Text > 0 Then
+                e.Row.Cells(14).Text = "02"
 
-                    '上記以外で、L列に1以上の数字が入っている場合、出荷方法 20ft
-                ElseIf e.Row.Cells(33).Text > 0 Then
-                    e.Row.Cells(14).Text = "01"
+                '上記以外で、L列に1以上の数字が入っている場合、出荷方法 20ft
+            ElseIf e.Row.Cells(32).Text > 0 Then
+                e.Row.Cells(14).Text = "01"
 
-                Else
-                    e.Row.Cells(14).Text = "-"
+            Else
+                e.Row.Cells(14).Text = "-"
                 End If
 
 
@@ -415,8 +415,9 @@ Partial Class yuusen
                     e.Row.Cells(2).Text += dataread(56)
                     'Finaldestination ADDRESS(届け先住所)	3
                     e.Row.Cells(3).Text += dataread(57)
-                '乙仲名	 19
-                e.Row.Cells(32).Text += dataread(60)
+                ''乙仲名	 19
+                'e.Row.Cells(32).Text += dataread(60)
+
                 '乙仲担当者	 20
                 If dataread(61) = "" Then
                         e.Row.Cells(20).Text += "-"
@@ -712,51 +713,51 @@ Partial Class yuusen
 
                     Else
 
-                        For i As Integer = 0 To row.Cells.Count - 5
-                        val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
-                        Select Case i
+                        For i As Integer = 0 To row.Cells.Count - 4
+                            val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
+                            Select Case i
 
-                            Case 1, 9 To 12
-                                If IsDate(val01) = True Then
-                                    ws.Cell(t, i + 1).SetValue(DateValue(val01))
-                                Else
-
-                                    If row.Cells(0).Text = "C258" Or row.Cells(0).Text = "C255" Then
-                                        ws.Cell(t, i + 1).SetValue(DateValue(row.Cells(11).Text))
+                                Case 1, 9 To 12
+                                    If IsDate(val01) = True Then
+                                        ws.Cell(t, i + 1).SetValue(DateValue(val01))
                                     Else
 
-                                        ws.Cell(t, i + 1).SetValue("日付エラー")
-                                        ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Red
+                                        If row.Cells(0).Text = "C258" Or row.Cells(0).Text = "C255" Then
+                                            ws.Cell(t, i + 1).SetValue(DateValue(row.Cells(11).Text))
+                                        Else
+
+                                            ws.Cell(t, i + 1).SetValue("日付エラー")
+                                            ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Red
+                                        End If
                                     End If
-                                End If
 
-                            Case 2 To 8, 16, 18 To 26
-                                If Len(row.Cells(i).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(row.Cells(i).Text) Then
-                                    ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Green
-                                    ws.Cell(t, i + 1).Style.Fill.BackgroundColor = XLColor.Green
-                                    ws.Cell(t, i + 1).SetValue("全角エラー")
-                                    ws.Cell(t, 1).SetValue("全角エラー")
-                                Else
+                                Case 2 To 8, 16, 18 To 26
+                                    If Len(row.Cells(i).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(row.Cells(i).Text) Then
+                                        ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Green
+                                        ws.Cell(t, i + 1).Style.Fill.BackgroundColor = XLColor.Green
+                                        ws.Cell(t, i + 1).SetValue("全角エラー")
+                                        ws.Cell(t, 1).SetValue("全角エラー")
+                                    Else
+                                        ws.Cell(t, i + 1).SetValue(val01)
+                                    End If
+
+                                Case 0, 2, 4 To 8, 16 To 23, 25
+
+                                    If InStr(row.Cells(i).Text, vbCr) + InStr(row.Cells(i).Text, vbLf) + InStr(row.Cells(i).Text, vbCrLf) > 0 Then
+                                        ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Blue
+                                        ws.Cell(t, i + 1).Style.Fill.BackgroundColor = XLColor.Blue
+                                        ws.Cell(t, i + 1).SetValue(val01)
+                                        ws.Cell(t, i + 1).SetValue("改行エラー")
+                                        ws.Cell(t, 1).SetValue("改行エラー")
+                                    Else
+                                        ws.Cell(t, i + 1).SetValue(val01)
+                                    End If
+
+                                Case Else
                                     ws.Cell(t, i + 1).SetValue(val01)
-                                End If
+                            End Select
 
-                            Case 0, 2, 4 To 8, 16 To 23, 25
-
-                                If InStr(row.Cells(i).Text, vbCr) + InStr(row.Cells(i).Text, vbLf) + InStr(row.Cells(i).Text, vbCrLf) > 0 Then
-                                    ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Blue
-                                    ws.Cell(t, i + 1).Style.Fill.BackgroundColor = XLColor.Blue
-                                    ws.Cell(t, i + 1).SetValue(val01)
-                                    ws.Cell(t, i + 1).SetValue("改行エラー")
-                                    ws.Cell(t, 1).SetValue("改行エラー")
-                                Else
-                                    ws.Cell(t, i + 1).SetValue(val01)
-                                End If
-
-                            Case Else
-                                ws.Cell(t, i + 1).SetValue(val01)
-                        End Select
-
-                    Next
+                        Next
                         t = t + 1
                     End If
                 Next
