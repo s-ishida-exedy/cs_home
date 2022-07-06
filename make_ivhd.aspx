@@ -336,7 +336,7 @@
                     </thead>
 
                     <tbody>
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="8250" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="8258" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
                         <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
                         <HeaderStyle CssClass="Freezing"></HeaderStyle>
 
@@ -362,7 +362,7 @@
 
 
                         <asp:BoundField DataField="LOADING_PORT" HeaderText="PORTOF LOADING(積み出し港)" SortExpression="LOADING_PORT" >
-                        <HeaderStyle Width="120px" />
+                        <HeaderStyle Width="133px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="PORT OF DEISCHARGE(揚地)" SortExpression="DISCHARGING_PORT" >

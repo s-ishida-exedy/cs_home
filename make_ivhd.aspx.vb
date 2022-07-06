@@ -684,7 +684,7 @@ Partial Class yuusen
 
         Dim val01 As String = ""
 
-        GridView1.DataBind()
+        'GridView1.DataBind()
 
         If GridView1.Rows.Count >= 1 Then
 
