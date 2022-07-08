@@ -494,6 +494,31 @@ Public Class DBAccess
         Return Ds
     End Function
 
+    Public Function GET_AIR_DATA2(strValue As String) As DataSet
+        'AIR管理表絞り込み インボイスNO指定
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = ""
+        StrSQL = StrSQL & "SELECT  "
+        StrSQL = StrSQL & " REQUESTED_DATE  , CREATED_DATE, ETD, CUST_CD "
+        StrSQL = StrSQL & ", IVNO  , REQUESTER  , DEPARTMENT  , AUTHOR "
+        StrSQL = StrSQL & ", CASE DOC_FIN WHEN '作成済み' THEN '済' END AS DOC_FIN "
+        StrSQL = StrSQL & ", SHIPPING_COMPANY "
+        StrSQL = StrSQL & ", CASE PICKUP WHEN '集荷済み' THEN '済' END AS PICKUP "
+        StrSQL = StrSQL & ", PLACE  , REMARKS  "
+        StrSQL = StrSQL & "FROM T_EXL_AIR_MANAGE "
+        StrSQL = StrSQL & "WHERE IVNO = '" & strValue & "'"
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
+
     Public Function GET_RESULT_AIR_EXC(strMode As String) As DataSet
         'AIR専用オーダー取得
         Conn = Me.Dbconnect
