@@ -110,10 +110,49 @@
         .wrapper {
           overflow: scroll;
           height: 500px;
+          width :820px;
         }
         /*追加*/
-
-
+        .flex{
+            display: flex;
+        }
+        .flex div{
+           
+        }
+        .right{
+            width: 360px;
+            padding: 10px
+        }
+        .tab1 {
+            border-collapse:collapse;
+            border-spacing:0px;
+            border:1px solid #000000;
+            width:450px;
+        }
+        .tab1 th{
+            border:1px solid #000000;
+        }
+        .td1{
+            border:1px solid #000000;
+            width:130px;
+            text-align:center;
+            font-weight:700;
+        }
+        .td2{
+            border:1px solid #000000;
+            width:250px;
+            text-align:center;
+            font-weight:700;
+        }
+        .td3{
+            border:1px solid #000000;
+            width:250px;
+            text-align:center;
+            font-weight:700;
+        }
+        .lblA{
+            font-weight:700;
+        }
 </style>
 <script>
     $(document).ready(function () {
@@ -158,16 +197,16 @@
                 <h2>ﾌﾞｯｷﾝｸﾞｼｰﾄ vs I/Vﾍｯﾀﾞ 比較結果</h2>  
             </td>
             <td class="second-cell">
-                <asp:CheckBox ID="CheckBox1" runat="server" Text ="確認済は表示しない" AutoPostBack="True" />
+                <asp:Button ID="Button1" runat="server" Text="再読み込み" Width ="200px" Font-Size="Small"/>
             </td>
-            <td class="third-cell">
-                <asp:Label ID="Label2" runat="server" Text="Labe2" ></asp:Label>
+            <td class="third-cell">               
             </td>
         </tr>
     </table>
 
-    <asp:Panel ID="Panel1" runat="server"  Font-Size="14px">
+<%--    <asp:Panel ID="Panel1" runat="server"  Font-Size="14px">--%>
 
+<div class="flex">
 <div class="wrapper">
 <table class="sticky">
 <thead class="fixed">
@@ -176,116 +215,215 @@
 
 <tbody>
 
-
 <%--<div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">--%>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="1290px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical">
-            <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
-            <AlternatingRowStyle BackColor="#DCDCDC" />
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="800px" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3">
+            <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
             <Columns>
-                <asp:BoundField DataField="FIN_FLG" HeaderText="確認&lt;BR&gt;状況" HtmlEncode="False" SortExpression="FIN_FLG">
-                <HeaderStyle HorizontalAlign="Center" Width="40px" />
-                <ItemStyle Font-Bold="True" HorizontalAlign="Center" />
+                <asp:BoundField DataField="CUST_CD" SortExpression="CUST_CD" HeaderText="客先" >
+                <ItemStyle HorizontalAlign="Center" Width="50px" />
                 </asp:BoundField>
-                <asp:BoundField DataField="客先コード" SortExpression="客先コード" HeaderText="客先&lt;BR&gt;コード" HtmlEncode="False" >
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" />
+                <asp:BoundField DataField="INVOICE_NO" SortExpression="INVOICE_NO" HeaderText="IVNO" >
+                <ItemStyle HorizontalAlign="Center" Width="50px" />
                 </asp:BoundField>
-                <asp:HyperLinkField DataNavigateUrlFields="IVNo" DataTextField="IVNo" HeaderText="IVNo" DataNavigateUrlFormatString="iv_booking_detail.aspx?id={0}">
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" />
-                </asp:HyperLinkField>
-                <asp:BoundField DataField="計上日" HeaderText="計上日" ReadOnly="True" SortExpression="計上日" >
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
+                <asp:ButtonField DataTextField="INVOICE_NO" HeaderText="IVNO" Text="ボタン" CommandName="edt">
+                <ItemStyle HorizontalAlign="Center" Width="50px" />
+                </asp:ButtonField>
+                <asp:BoundField DataField="BLDATE" HeaderText="計上日" SortExpression="BLDATE">
+                <ItemStyle Font-Bold="True" HorizontalAlign="Center" Width="50px" />
                 </asp:BoundField>
-                <asp:BoundField DataField="積出港" HeaderText="積出港" ReadOnly="True" SortExpression="積出港" >
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
+                <asp:BoundField DataField="INVFROM" HeaderText="積出港" SortExpression="INVFROM">
+                <ItemStyle Font-Bold="True" HorizontalAlign="Center" Width="50px" />
                 </asp:BoundField>
-                <asp:BoundField DataField="揚地" HeaderText="揚地" SortExpression="揚地" ReadOnly="True" >
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
+                <asp:BoundField DataField="INVON" HeaderText="荷受地" SortExpression="INVON">
+                <ItemStyle Font-Bold="True" HorizontalAlign="Center" Width="50px" />
                 </asp:BoundField>
-                <asp:BoundField DataField="配送先" HeaderText="配送先" SortExpression="配送先" ReadOnly="True" >
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
+                <asp:BoundField DataField="CUTDATE" HeaderText="CUT日" SortExpression="CUTDATE">
+                <ItemStyle Font-Bold="True" HorizontalAlign="Center" Width="50px" />
                 </asp:BoundField>
-                <asp:BoundField DataField="荷受地" HeaderText="荷受地" SortExpression="荷受地" ReadOnly="True" >
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
+                <asp:BoundField DataField="IOPORTDATE" HeaderText="ETD" SortExpression="IOPORTDATE">
+                <ItemStyle Font-Bold="True" HorizontalAlign="Center" Width="50px" />
                 </asp:BoundField>
-                <asp:BoundField DataField="配送先責任送り先" HeaderText="配送先&lt;BR&gt;責任&lt;BR&gt;送り先" SortExpression="配送先責任送り先" HtmlEncode="False" ReadOnly="True" >
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
+                <asp:BoundField DataField="REACHDATE" HeaderText="ETA" SortExpression="REACHDATE">
+                <ItemStyle Font-Bold="True" HorizontalAlign="Center" Width="50px" />
                 </asp:BoundField>
-                <asp:BoundField DataField="カット日" HeaderText="カット日" SortExpression="カット日" ReadOnly="True" >
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
+                <asp:BoundField DataField="VOYAGENO" HeaderText="VOY#" SortExpression="VOYAGENO">
+                <ItemStyle Font-Bold="True" HorizontalAlign="Center" Width="50px" />
                 </asp:BoundField>
-                <asp:BoundField DataField="到着日" HeaderText="到着日" SortExpression="到着日" ReadOnly="True" >
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
+                <asp:BoundField DataField="SHIPPER" HeaderText="船社" SortExpression="SHIPPER">
+                <ItemStyle Font-Bold="True" HorizontalAlign="Center" Width="50px" />
                 </asp:BoundField>
-                <asp:BoundField DataField="入出港日" HeaderText="入出港日" SortExpression="入出港日" >
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
+                <asp:BoundField DataField="BOOKINGNO" HeaderText="BKG#" SortExpression="BOOKINGNO">
+                <ItemStyle Font-Bold="True" HorizontalAlign="Center" Width="50px" />
                 </asp:BoundField>
-                <asp:BoundField DataField="VOYAGENo" HeaderText="VOYAGE&lt;BR&gt;No" SortExpression="VOYAGENo" ReadOnly="True" HtmlEncode="False" >
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
-                </asp:BoundField>
-                <asp:BoundField DataField="船社" HeaderText="船社" SortExpression="船社" ReadOnly="True" >
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
-                </asp:BoundField>
-                <asp:BoundField DataField="ﾌﾞｯｷﾝｸﾞNo" HeaderText="ﾌﾞｯｷﾝｸﾞNo" ReadOnly="True" SortExpression="ﾌﾞｯｷﾝｸﾞNo">
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
-                </asp:BoundField>
-                <asp:BoundField DataField="船名" HeaderText="船名" ReadOnly="True" SortExpression="船名">
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
-                <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
+                <asp:BoundField DataField="SHIPPEDPER" HeaderText="船名" SortExpression="SHIPPEDPER">
+                <ItemStyle Font-Bold="True" HorizontalAlign="Center" Width="50px" />
                 </asp:BoundField>
             </Columns>
-            <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-            <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-            <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
-            <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+            <FooterStyle BackColor="White" ForeColor="#000066" />
+            <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+            <RowStyle ForeColor="#000066" />
+            <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
             <SortedAscendingCellStyle BackColor="#F1F1F1" />
-            <SortedAscendingHeaderStyle BackColor="#0000A9" />
+            <SortedAscendingHeaderStyle BackColor="#007DBB" />
             <SortedDescendingCellStyle BackColor="#CAC9C9" />
-            <SortedDescendingHeaderStyle BackColor="#000065" />
+            <SortedDescendingHeaderStyle BackColor="#00547E" />
         </asp:GridView>
 
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT 
-  CUST_CD AS 客先コード
-, INVOICE_NO AS IVNo
-, CASE ETD WHEN '1' THEN 'ＮＧ' ELSE '-' END AS 計上日
-, CASE LOADING_PORT WHEN '1' THEN 'ＮＧ' ELSE '-' END AS 積出港
-, CASE DISCHARGING_PORT WHEN '1' THEN 'ＮＧ' ELSE '-' END AS 揚地
-, CASE PLACE_OF_DELIVERY WHEN '1' THEN 'ＮＧ' ELSE '-' END AS 配送先
-, CASE PLACE_OF_RECEIPT WHEN '1' THEN 'ＮＧ' ELSE '-' END AS 荷受地
-, CASE PLACE_CARRIER WHEN '1' THEN 'ＮＧ' ELSE '-' END AS 配送先責任送り先
-, CASE CUT_DATE WHEN '1' THEN 'ＮＧ' ELSE '-' END AS カット日
-, CASE ETA WHEN '1' THEN 'ＮＧ' ELSE '-' END AS 到着日
-, CASE IOPORTDATE WHEN '1' THEN 'ＮＧ' ELSE '-' END AS 入出港日
-, CASE VOYAGE_NO WHEN '1' THEN 'ＮＧ' ELSE '-' END AS VOYAGENo
-, CASE BOOK_TO WHEN '1' THEN 'ＮＧ' ELSE '-' END AS 船社
-, CASE BOOKING_NO WHEN '1' THEN 'ＮＧ' ELSE '-' END AS ﾌﾞｯｷﾝｸﾞNo
-, CASE VESSEL_NAME WHEN '1' THEN 'ＮＧ' ELSE '-' END AS 船名
-, CASE FIN_FLG WHEN '1' THEN '確認済' ELSE '未' END AS FIN_FLG 
-FROM T_COMPARE_INV_HD
-WHERE SHIP_METHOD = '0'
-ORDER BY INVOICE_NO "></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT
+  CUST_CD
+  , INVOICE_NO
+  , BLDATE
+  , INVFROM
+  , INVON
+  , CUTDATE
+  , IOPORTDATE
+  , REACHDATE
+  , VOYAGENO
+  , SHIPPER
+  , BOOKINGNO
+  , SHIPPEDPER 
+FROM  T_EXL_BKGIV 
+WHERE
+  BLDATE &lt;&gt; '-' 
+  OR INVFROM &lt;&gt; '-' 
+  OR INVON &lt;&gt; '-' 
+  OR CUTDATE &lt;&gt; '-' 
+  OR IOPORTDATE &lt;&gt; '-' 
+  OR REACHDATE &lt;&gt; '-' 
+  OR VOYAGENO &lt;&gt; '-' 
+  OR SHIPPER &lt;&gt; '-' 
+  OR BOOKINGNO &lt;&gt; '-' 
+  OR SHIPPEDPER &lt;&gt; '-' 
+ORDER BY INVOICE_NO
+"></asp:SqlDataSource>
     
 <%--</div>--%>
 <!--/#main2-->
 
 </tbody>
 </table>
+
+<div class="right">
+    <asp:Label ID="Label1" runat="server" Text="客先：" Class="lblA"></asp:Label>&nbsp;
+    <asp:Label ID="Label2" runat="server" Text="" Class="lblA"></asp:Label><br/>
+    <asp:Label ID="Label3" runat="server" Text="IVNO：" Class="lblA"></asp:Label>&nbsp;
+    <asp:Label ID="Label4" runat="server" Text="" Class="lblA"></asp:Label>
+    <table class="tab1">
+        <tr>
+            <th></th>
+            <th>ﾌﾞｯｷﾝｸﾞｼｰﾄ</th>
+            <th>ｲﾝﾎﾞｲｽﾍｯﾀﾞ</th>
+        </tr>
+        <tr>
+            <td class ="td1">
+                計上日
+            </td>
+            <td class ="td2">
+                <asp:Label ID="Label5" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td3">
+                <asp:Label ID="Label6" runat="server" Text=""></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td class ="td1">
+                積出港
+            </td>
+            <td class ="td2">
+                <asp:Label ID="Label7" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td3">
+                <asp:Label ID="Label8" runat="server" Text=""></asp:Label>
+            </td>
+        </tr>        <tr>
+            <td class ="td1">
+                荷受地
+            </td>
+            <td class ="td2">
+                <asp:Label ID="Label9" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td3">
+                <asp:Label ID="Label10" runat="server" Text=""></asp:Label>
+            </td>
+        </tr>        <tr>
+            <td class ="td1">
+                CUT日
+            </td>
+            <td class ="td2">
+                <asp:Label ID="Label11" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td3">
+                <asp:Label ID="Label12" runat="server" Text=""></asp:Label>
+            </td>
+        </tr>        <tr>
+            <td class ="td1">
+                ETD
+            </td>
+            <td class ="td2">
+                <asp:Label ID="Label13" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td3">
+                <asp:Label ID="Label14" runat="server" Text=""></asp:Label>
+            </td>
+        </tr>        <tr>
+            <td class ="td1">
+                ETA
+            </td>
+            <td class ="td2">
+                <asp:Label ID="Label15" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td3">
+                <asp:Label ID="Label16" runat="server" Text=""></asp:Label>
+            </td>
+        </tr>        <tr>
+            <td class ="td1">
+                VOYNO
+            </td>
+            <td class ="td2">
+                <asp:Label ID="Label17" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td3">
+                <asp:Label ID="Label18" runat="server" Text=""></asp:Label>
+            </td>
+        </tr>        <tr>
+            <td class ="td1">
+                船社
+            </td>
+            <td class ="td2">
+                <asp:Label ID="Label19" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td3">
+                <asp:Label ID="Label20" runat="server" Text=""></asp:Label>
+            </td>
+        </tr>        <tr>
+            <td class ="td1">
+                BKGNO
+            </td>
+            <td class ="td2">
+                <asp:Label ID="Label21" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td3">
+                <asp:Label ID="Label22" runat="server" Text=""></asp:Label>
+            </td>
+        </tr>        <tr>
+            <td class ="td1">
+                船名
+            </td>
+            <td class ="td2">
+                <asp:Label ID="Label23" runat="server" Text=""></asp:Label>
+            </td>
+            <td class ="td3">
+                <asp:Label ID="Label24" runat="server" Text=""></asp:Label>
+            </td>
+        </tr>
+    </table>
 </div>
 
-    </asp:Panel>
+</div>
+
+</div>
+<!--/#FLEX-->
+    <%--</asp:Panel>--%>
 
 </div>
 <!--/#contents2-->
