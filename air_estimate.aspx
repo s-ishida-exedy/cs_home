@@ -186,7 +186,7 @@
                 </td>
                 <th>集荷場所</th>
                 <td>
-                    <asp:DropDownList ID="DropDownList2" runat="server" Width="130px" class="DropDownList">
+                    <asp:DropDownList ID="DropDownList2" runat="server" Width="130px" class="DropDownList" AutoPostBack="True">
                         <asp:ListItem Value="0">本社</asp:ListItem>
                         <asp:ListItem Value="1">上野</asp:ListItem>
                     </asp:DropDownList>
