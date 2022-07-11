@@ -1,11 +1,11 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="booking.aspx.vb" Inherits="cs_home" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="m_booking_colorkbn_ref.aspx.vb" Inherits="cs_home" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>ポータルサイト(BOOKING SHEET)</title>
+<title>ポータルサイト(BOOKING SHEET色未定義案件)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -63,7 +63,6 @@
             border-top: 2px solid #000000;
             border-right: 2px solid #000000;
         }
-
         h2 {
             padding-left: 45px;
             position: relative;
@@ -140,20 +139,6 @@
         });
     });
 </script>
-
-    <script type="text/javascript">
-      function LinkClick() {
-          var url = 'm_booking_colorkbn.aspx?q='
-          var result = confirm('別ウインドウでを開きます');
-
-          if (result) {
-              window.open(url, null);
-          }
-          else {
-          }
-      }
-    </script>
-
 </head>
 <body class="c2">
 <form id="form1" runat="server">
@@ -170,23 +155,7 @@
     <table class="header-ta" >
         <tr>
             <td class="first-cell">
-                <h2>Booking Sheet</h2> 
-            </td>
-            <td class="second-cell">
-                <asp:DropDownList ID="DropDownList1" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource3" DataTextField="STATUS" DataValueField="STATUS" AutoPostBack ="True" Width ="100px"></asp:DropDownList> 
-                <asp:DropDownList ID="DropDownList2" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="Forwarder" DataValueField="Forwarder" AutoPostBack ="true" Width ="200px"></asp:DropDownList> 
-                &nbsp;
-                <asp:Label ID="Label1" runat="server" Text="客先CD:"></asp:Label>
-                <asp:TextBox ID="TextBox1" runat="server" Width ="100"></asp:TextBox>
-                <asp:Label ID="Label3" runat="server" Text="IVNO:"></asp:Label>
-                <asp:TextBox ID="TextBox2" runat="server" Width ="100"></asp:TextBox>
-                <br />
-                <asp:Button ID="Button1" runat="server" Text=" 絞込 " Font-Size="Small" Width ="80" />
-                <asp:Button ID="Button2" runat="server" Text=" ﾘｾｯﾄ " Font-Size="Small" Width ="80" />
-            </td>
-            <td class="third-cell">
-                <asp:Label ID="Label2" runat="server" Text="Labe2" ></asp:Label>
-                <a href="javascript:void(0);" onclick="LinkClick()">BS色ﾏｽﾀ</a>  
+                <h2>BOOKING SHEET色未定義案件</h2> 
             </td>
         </tr>
     </table>
@@ -203,68 +172,45 @@
 <%--<div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">--%>
 
 
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" width="2980px" DataKeyNames="SEQ_NO02,CUST_CD" DataSourceID="SqlDataSource1" 
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" width="1300" DataKeyNames="SEQ_NO02,CUST_CD" DataSourceID="SqlDataSource1" 
             BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" AllowColSizing="True">
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
             <Columns>
                 <asp:BoundField DataField="STATUS" SortExpression="STATUS" HeaderText="ｽﾃｰﾀｽ" >
-                <HeaderStyle Width="100px" />
+                <HeaderStyle Width="60px" />
+                <ItemStyle Font-Size="Small" />
+                </asp:BoundField>
+                <asp:BoundField DataField="ROW_KBN" HeaderText="色コード" SortExpression="ROW_KBN" >
+                <HeaderStyle Width="60px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="Forwarder" HeaderText="海貨業者" SortExpression="Forwarder" >
+                <HeaderStyle Width="160px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="CUST_CD" HeaderText="客先" SortExpression="CUST_CD" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="CONSIGNEE" HeaderText="荷受先名" SortExpression="CONSIGNEE" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" >
+                <HeaderStyle Width="80px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="INVOICE_NO" HeaderText="IVNO" SortExpression="INVOICE_NO" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="CUT_DATE" HeaderText="ｶｯﾄ日" SortExpression="CUT_DATE" >
+                <HeaderStyle Width="130px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="ETD" HeaderText="出港日" SortExpression="ETD" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="ETA" HeaderText="到着日" SortExpression="ETA" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="TWENTY_FEET" HeaderText="20FT" SortExpression="TWENTY_FEET" >
-                <HeaderStyle Width="100px" />
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="FOURTY_FEET" HeaderText="40FT" SortExpression="FOURTY_FEET" >
-                <HeaderStyle Width="100px" />
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="LCL_QTY" HeaderText="LCL" SortExpression="LCL_QTY" >
-                <HeaderStyle Width="100px" />
+                <HeaderStyle Width="60px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="BOOKING_NO" HeaderText="ﾌﾞｯｷﾝｸﾞNO" SortExpression="BOOKING_NO" >
+                <HeaderStyle Width="60px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="VESSEL_NAME" HeaderText="船名" SortExpression="VESSEL_NAME" >
-                <HeaderStyle Width="200px" />
+                <HeaderStyle Width="180px" />
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
-                <asp:BoundField DataField="VOYAGE_NO" HeaderText="VoyNo" SortExpression="VOYAGE_NO" >
-                <HeaderStyle Width="100px" />
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="SEQ_NO02" HeaderText="近鉄はHBLNO" SortExpression="SEQ_NO02" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="PONO" HeaderText="PONO" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
+
+
             </Columns>
             <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
@@ -275,7 +221,7 @@
 </tbody>
 </table>
 </div>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [t_booking]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [t_booking] WHERE STATUS = '未定義'"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [Forwarder] FROM [T_BOOKING]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT STATUS FROM T_BOOKING"></asp:SqlDataSource>
 <%--</div>--%>
