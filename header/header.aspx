@@ -61,7 +61,8 @@
                 <ul class="menu__third-level">
                     <!-- 第二階層 -->
                     <li data-id='["home","air_management.aspx"]'><a href="#">AIR管理表</a></li>
-                    <li data-id='["home","air_exclusive.aspx"]'><a href="#">AIR専用客先オーダー確認</a></li>
+                    <li data-id='["home","air_exclusive.aspx"]'><a href="#">AIR専用客先ｵｰﾀﾞｰ(確認・更新)</a></li>
+                    <li data-id='["home","air_exclusive_a.aspx"]'><a href="#">AIR専用客先ｵｰﾀﾞｰ(一括登録)</a></li>
                     <li data-id='["home","air_estimate.aspx"]'><a href="#">AIR見積り依頼</a></li>
                     <li data-id='["home","./air_shipbase.aspx"]'><a href="#">AIR出荷場所相違チェック</a></li>
                 </ul>

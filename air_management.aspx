@@ -119,6 +119,12 @@
         .date2{
             text-align :center;
         }
+        .txtb{
+            padding: 2px;
+            font-size :smaller ;
+            width:100px;
+            text-align :center ;
+        }
 </style>
 <script>
     // カレンダー
@@ -179,14 +185,16 @@
                 <asp:DropDownList ID="DropDownList6" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource7" DataTextField="CUST_CD" DataValueField="CUST_CD" AutoPostBack="True"></asp:DropDownList>
                 <asp:DropDownList ID="DropDownList7" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource8" DataTextField="REQUESTER" DataValueField="REQUESTER" AutoPostBack="True"></asp:DropDownList>
                 <asp:DropDownList ID="DropDownList8" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource9" DataTextField="IVNO" DataValueField="IVNO" AutoPostBack="True"></asp:DropDownList>
+                <asp:TextBox ID="TextBox3" runat="server" Class ="txtb" placeholder="IVNO入力"></asp:TextBox>
                 <asp:Button ID="Button2" runat="server" Text=" ﾘｾｯﾄ " Font-Size="Small" Width ="80" />
-                <asp:CheckBox ID="CheckBox1" runat="server" Text =" 集荷済みも表示する"  AutoPostBack="True"/>
-                <asp:Button ID="Button4" runat="server" Text="新規登録" Font-Size="Small" Width="120px" />
-                <asp:Button ID="Button5" runat="server" Text="前月分ﾀﾞｳﾝﾛｰﾄﾞ" Font-Size="Small" Width="120px" />&nbsp;
+                <asp:Button ID="Button7" runat="server" Text="検索" Font-Size="Small" Width ="80" />
+                <asp:CheckBox ID="CheckBox1" runat="server" Font-Size="Small" Text =" 集荷済みも表示する"  AutoPostBack="True"/><br/>
                 <asp:TextBox ID="TextBox1" runat="server" Class="date2" Width="130px"></asp:TextBox>
                 <asp:Label ID="Label2" runat="server" Text="～"></asp:Label>
                 <asp:TextBox ID="TextBox2" runat="server" Class="date2" Width="130px"></asp:TextBox>
                 <asp:Button ID="Button6" runat="server" Text="期間指定してﾀﾞｳﾝﾛｰﾄﾞ" Font-Size="Small" Width="200px" />&nbsp;
+                <asp:Button ID="Button5" runat="server" Text="前月分ﾀﾞｳﾝﾛｰﾄﾞ" Font-Size="Small" Width="120px" />&nbsp;
+                <asp:Button ID="Button4" runat="server" Text="新規登録" Font-Size="Small" Width="120px" />
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
@@ -201,7 +209,7 @@
 <tbody>
 
 <!-- <div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;"> -->
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="1680px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" AllowSorting="True">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="auto-style6" Width="1680px" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical">
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
             <Columns>

@@ -116,6 +116,26 @@ Partial Class cs_home
         End If
     End Sub
 
+    Private Sub Make_Grid2()
+        'GRIDを作成する。
+        Dim strValue As String
+        Dim Dataobj As New DBAccess
+
+        If TextBox3.Text = "" Then
+            Exit Sub
+        Else
+            strValue = TextBox3.Text
+        End If
+
+        'データの取得
+        Dim ds As DataSet = Dataobj.GET_AIR_DATA2(strValue)
+        If ds.Tables.Count > 0 Then
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = ds
+            GridView1.DataBind()
+        End If
+    End Sub
+
     Private Sub DropDown_Ctrl(objDL As DropDownList, ds As DataSet, strValue As String,
                               strTitle As String, strKey As String)
         '検索時のドロップダウンリストのデータセット
@@ -190,6 +210,7 @@ Partial Class cs_home
 
         TextBox1.Text = ""
         TextBox2.Text = ""
+        TextBox3.Text = ""
 
         Call Make_Grid()
     End Sub
@@ -217,6 +238,9 @@ Partial Class cs_home
             DropDownList7.Visible = False
             DropDownList8.Visible = False
         End If
+
+        '入力されたIVNOを初期化
+        TextBox3.Text = ""
 
         '再表示
         Call Make_Grid()
@@ -406,5 +430,10 @@ Partial Class cs_home
         Response.Flush()
         Response.End()
 
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        '検索ボタン押下
+        Call Make_Grid2()
     End Sub
 End Class

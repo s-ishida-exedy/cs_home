@@ -235,5 +235,15 @@ Partial Class cs_home
 
     End Sub
 
+    Private Sub DropDownList2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList2.SelectedIndexChanged
+        '集荷場所を上野に変更した場合、集荷時間を15時にする
+
+        If DropDownList2.SelectedValue = "1" Then
+            DropDownList4.SelectedValue = "15:00"
+        ElseIf DropDownList2.SelectedValue = "0" Then
+            DropDownList4.SelectedValue = "13:00"
+        End If
+
+    End Sub
 End Class
 
