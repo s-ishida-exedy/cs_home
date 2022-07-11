@@ -17,8 +17,7 @@ Partial Class cs_home
             ' そうでない時処理
         Else
             'パラメータ取得
-            Dim strEtd As String = Session("strEtd")
-            Dim strIvno As String = Session("strIvno")
+            Dim strCode As String = Session("strCode")
             Dim strMode As String = Session("strMode")
 
             If strMode = "01" Then
@@ -35,8 +34,7 @@ Partial Class cs_home
 
                 strSQL = ""
                 strSQL = strSQL & "SELECT * FROM T_EXL_AIR_MANAGE "
-                strSQL = strSQL & "WHERE ETD = '" & strEtd & "' "
-                strSQL = strSQL & "AND   IVNO = '" & strIvno & "' "
+                strSQL = strSQL & "WHERE AIR_CODE = '" & strCode & "' "
 
                 'ＳＱＬコマンド作成 
                 dbcmd = New SqlCommand(strSQL, cnn)
@@ -48,6 +46,8 @@ Partial Class cs_home
                     DropDownList1.SelectedValue = dataread("DOC_FIN").ToString
                     DropDownList2.SelectedValue = dataread("PICKUP").ToString
                     DropDownList3.SelectedValue = dataread("PLACE").ToString
+                    DropDownList4.SelectedValue = dataread("TATENE").ToString
+                    DropDownList5.SelectedValue = dataread("CURRENCY").ToString
 
                     TextBox1.Text = dataread("REQUESTED_DATE").ToString
                     TextBox2.Text = dataread("CREATED_DATE").ToString
@@ -59,6 +59,17 @@ Partial Class cs_home
                     TextBox8.Text = dataread("AUTHOR").ToString
                     TextBox9.Text = dataread("SHIPPING_COMPANY").ToString
                     TextBox10.Text = dataread("REMARKS").ToString
+                    TextBox11.Text = dataread("SNNO").ToString
+                    TextBox12.Text = dataread("CUT_DATE").ToString
+                    TextBox13.Text = dataread("HAN_DATE").ToString
+                    TextBox14.Text = dataread("ETA").ToString
+                    If dataread("RATE").Equals(DBNull.Value) Then
+                        TextBox16.Text = ""
+                    Else
+                        TextBox16.Text = dataread("RATE")
+                    End If
+
+                    TextBox17.Text = dataread("TRADE_TERM").ToString
                 End While
 
                 'クローズ処理 
@@ -91,8 +102,7 @@ Partial Class cs_home
         Dim dtNow As DateTime = DateTime.Now
 
         'パラメータ取得
-        Dim strEtd As String = Session("strEtd")
-        Dim strIvno As String = Session("strIvno")
+        Dim strCode As String = Session("strCode")
         Dim strMode As String = Session("strMode")
 
         '接続文字列の作成
@@ -126,15 +136,21 @@ Partial Class cs_home
             strSQL = strSQL & "  , REMARKS =  '" & LTrim(RTrim(TextBox10.Text)) & "' "
             strSQL = strSQL & "  , UPD_DATE = '" & dtNow & "' "
             strSQL = strSQL & "  , UPD_PERSON = '" & Session("UsrId") & "' "
+            strSQL = strSQL & "  , SNNO = '" & LTrim(RTrim(TextBox11.Text)) & "' "  'SNNO
+            strSQL = strSQL & "  , CUT_DATE = '" & LTrim(RTrim(TextBox12.Text)) & "' "  'CUT日
+            strSQL = strSQL & "  , HAN_DATE = '" & LTrim(RTrim(TextBox13.Text)) & "' "  '搬入日
+            strSQL = strSQL & "  , ETA = '" & LTrim(RTrim(TextBox14.Text)) & "' "  '到着日
+            strSQL = strSQL & "  , TATENE = '" & DropDownList4.SelectedValue & "' "   '建値
+            strSQL = strSQL & "  , TRADE_TERM = '" & LTrim(RTrim(TextBox17.Text)) & "' "  'Trade Term
+            strSQL = strSQL & "  , CURRENCY = '" & DropDownList5.SelectedValue & "' "   '通貨
+            strSQL = strSQL & "  , RATE = '" & LTrim(RTrim(TextBox16.Text)) & "' "  'レート
             strSQL = strSQL & "WHERE "
-            strSQL = strSQL & "       ETD =  '" & strEtd & "' "
-            strSQL = strSQL & "  AND IVNO =  '" & strIvno & "' "
+            strSQL = strSQL & "       AIR_CODE =  '" & strCode & "' "
         ElseIf strMode = "01" And strExecMode = "02" Then
             strSQL = ""
             strSQL = strSQL & "DELETE FROM  T_EXL_AIR_MANAGE "
             strSQL = strSQL & "WHERE "
-            strSQL = strSQL & "       ETD =  '" & strEtd & "' "
-            strSQL = strSQL & "  AND IVNO =  '" & strIvno & "' "
+            strSQL = strSQL & "       AIR_CODE =  '" & strCode & "' "
         Else
             strSQL = ""
             strSQL = strSQL & "INSERT INTO T_EXL_AIR_MANAGE "
@@ -154,6 +170,14 @@ Partial Class cs_home
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox10.Text)) & "' "
             strSQL = strSQL & "  , '" & dtNow & "' "
             strSQL = strSQL & "  , '" & Session("UsrId") & "' "
+            strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox11.Text)) & "' "  'SNNO
+            strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox12.Text)) & "' "  'CUT日
+            strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox13.Text)) & "' "  '搬入日
+            strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox14.Text)) & "' "  '到着日
+            strSQL = strSQL & "  , '" & DropDownList4.SelectedValue & "' "   '建値
+            strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox17.Text)) & "' "  'Trade Term
+            strSQL = strSQL & "  , '" & DropDownList5.SelectedValue & "' "   '通貨
+            strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox16.Text)) & "' "  'レート
             strSQL = strSQL & ") "
         End If
 
@@ -185,6 +209,42 @@ Partial Class cs_home
             Label1.Text = "客先コードは必須入力です。"
             chk_Nyuryoku = False
         End If
+        If DropDownList4.SelectedValue = "" Then
+            Label1.Text = "建値は必須入力です。"
+            chk_Nyuryoku = False
+        End If
+        If TextBox11.Text = "" Then
+            Label1.Text = "SNNOは必須入力です。"
+            chk_Nyuryoku = False
+        End If
+        If TextBox12.Text = "" Then
+            Label1.Text = "CUT日は必須入力です。"
+            chk_Nyuryoku = False
+        End If
+        If TextBox13.Text = "" Then
+            Label1.Text = "搬入日は必須入力です。"
+            chk_Nyuryoku = False
+        End If
+        If TextBox14.Text = "" Then
+            Label1.Text = "到着日は必須入力です。"
+            chk_Nyuryoku = False
+        End If
+        If TextBox17.Text = "" Then
+            Label1.Text = "Trade Termは必須入力です。"
+            chk_Nyuryoku = False
+        End If
+        If TextBox16.Text = "" Then
+            Label1.Text = "レートは必須入力です。"
+            chk_Nyuryoku = False
+        End If
+        If DropDownList5.SelectedValue = "" Then
+            Label1.Text = "通貨は必須選択です。"
+            chk_Nyuryoku = False
+        End If
+        If DropDownList4.SelectedValue = "" Then
+            Label1.Text = "建値は必須選択です。"
+            chk_Nyuryoku = False
+        End If
 
         '全角入力チェック
         If HankakuEisuChk(TextBox4.Text) = False And Trim(TextBox4.Text) <> "" Then
@@ -201,7 +261,7 @@ Partial Class cs_home
             Label1.Text = "客先コードは４桁で入力してください。"
             chk_Nyuryoku = False
         End If
-        If Len(TextBox5.Text) <> 4 Then
+        If TextBox5.Text <> "" And Len(TextBox5.Text) <> 4 Then
             Label1.Text = "IVNOは４桁で入力してください。"
             chk_Nyuryoku = False
         End If
@@ -280,6 +340,52 @@ Partial Class cs_home
         '元の画面に戻る
         Response.Redirect("air_management.aspx")
 
+    End Sub
+
+    Private Sub DropDownList5_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList5.SelectedIndexChanged
+        '通貨変更時、最新のレートを貿易システムから取得し、テキストボックスに表示する。
+        Dim strSQL As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPA85;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim strYear As String = dt1.ToString("yyyy")
+        Dim strMonth As String = dt1.ToString("MM")
+
+        'データベース接続を開く
+        cnn.Open()
+
+        TextBox16.Text = ""
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT RATE FROM M_RATE_TB "
+        strSQL = strSQL & "WHERE CRY_YEAR = '" & strYear & "' "
+        strSQL = strSQL & "AND   CRY_MONTH = '" & strMonth & "' "
+        strSQL = strSQL & "AND   CRYCD = '" & DropDownList5.SelectedValue & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            TextBox16.Text = dataread("RATE").ToString
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
     End Sub
 End Class
 

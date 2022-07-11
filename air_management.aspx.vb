@@ -23,7 +23,10 @@ Partial Class cs_home
                 dltButton3.CommandArgument = e.Row.RowIndex.ToString()
             End If
         End If
-
+        'コード列非表示処理
+        If e.Row.RowType = DataControlRowType.DataRow OrElse e.Row.RowType = DataControlRowType.Header Then
+            e.Row.Cells(16).Visible = False
+        End If
     End Sub
 
     Protected Sub GridView1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.SelectedIndexChanged
@@ -252,6 +255,7 @@ Partial Class cs_home
         Dim index As Integer = Convert.ToInt32(e.CommandArgument)
         Dim data1 = Me.GridView1.Rows(index).Cells(5).Text
         Dim data2 = Me.GridView1.Rows(index).Cells(7).Text
+        Dim data3 = Me.GridView1.Rows(index).Cells(16).Text
 
         '更新
         If e.CommandName = "doc_fin" Then
@@ -260,8 +264,7 @@ Partial Class cs_home
             Call Update_FLG("pic_fin", data1, data2)
         ElseIf e.CommandName = "update" Then
             '入力された客先コードをセッションへ
-            Session("strEtd") = data1
-            Session("strIvno") = data2
+            Session("strCode") = data3
             Session("strMode") = "01"       '更新モード
 
             '画面遷移
