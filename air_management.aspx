@@ -283,6 +283,7 @@
                 </asp:BoundField>
                 <asp:BoundField DataField="REMARKS" HeaderText="備考" SortExpression="REMARKS" >
                 </asp:BoundField>
+                <asp:BoundField DataField="AIR_CODE" />
             </Columns>
             <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
@@ -305,6 +306,7 @@
   , CASE PICKUP WHEN '集荷済み' THEN '済' END AS PICKUP
   , PLACE
   , REMARKS 
+  , AIR_CODE
 FROM
   T_EXL_AIR_MANAGE 
 WHERE

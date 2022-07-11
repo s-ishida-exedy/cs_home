@@ -102,6 +102,23 @@
             color:red;
             font-weight :700;
         }
+        .txtb{
+            padding: 5px;
+            font-size :small ;
+        }
+        .txtb_r{
+            text-align :right ;
+            padding: 5px;
+            font-size :small ;
+        }
+        .date2{
+            padding: 5px;
+            font-size :small ;
+        }
+        .drpb{
+            padding: 5px;
+            font-size :small ;
+        }
 </style>
 <script>
     // カレンダー
@@ -179,53 +196,127 @@
                 </td>
             </tr>
             <tr>
-                <th>客先</th>
-                <td>
-                    <asp:TextBox ID="TextBox4" runat="server" Width="233px"></asp:TextBox>
-                </td>
-                <th>IVNO</th>
-                <td>
-                    <asp:TextBox ID="TextBox5" runat="server" Width="233px"></asp:TextBox>
-                </td>
                 <th>依頼者</th>
                 <td>
-                    <asp:TextBox ID="TextBox6" runat="server" Width="233px"></asp:TextBox>
+                    <asp:TextBox ID="TextBox6" runat="server" Width="233px" CssClass="txtb"></asp:TextBox>
                 </td>
-            </tr>
-            <tr>
                 <th>部署</th>
                 <td>
-                    <asp:TextBox ID="TextBox7" runat="server" Width="233px"></asp:TextBox>
+                    <asp:TextBox ID="TextBox7" runat="server" Width="233px" CssClass="txtb"></asp:TextBox>
                 </td>
                 <th>作成者</th>
                 <td >
-                    <asp:TextBox ID="TextBox8" runat="server" Width="233px"></asp:TextBox>
+                    <asp:TextBox ID="TextBox8" runat="server" Width="233px" CssClass="txtb"></asp:TextBox>
                 </td>
-                <th>書類作成</th>
+            </tr>
+            <tr>
+                <th>客先</th>
                 <td>
-                    <asp:DropDownList ID="DropDownList1" runat="server" Width ="180px">
+                    <asp:TextBox ID="TextBox4" runat="server" Width="233px" CssClass="txtb"></asp:TextBox>
+                </td>
+                <th>IVNO</th>
+                <td>
+                    <asp:TextBox ID="TextBox5" runat="server" Width="233px" CssClass="txtb"></asp:TextBox>
+                </td>
+                <th>SNNO</th>
+                <td>
+                    <asp:TextBox ID="TextBox11" runat="server" Width="233px" CssClass="txtb"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <th>CUT日</th>
+                <td>
+                    <asp:TextBox ID="TextBox12" runat="server" Width="233px" class="date2"></asp:TextBox>
+                </td>
+                <th>搬入日</th>
+                <td>
+                    <asp:TextBox ID="TextBox13" runat="server" Width="233px" class="date2"></asp:TextBox>
+                </td>
+                <th>到着日</th>
+                <td>
+                    <asp:TextBox ID="TextBox14" runat="server" Width="233px" class="date2"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <th>建値</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList4" runat="server" Width ="180px" CssClass="drpb">
                         <asp:ListItem Value=""></asp:ListItem>
-                        <asp:ListItem Value="作成済み">作成済み</asp:ListItem>
+                        <asp:ListItem Value="02">02:C&F</asp:ListItem>
+                        <asp:ListItem Value="03">03:FOB</asp:ListItem>
+                        <asp:ListItem Value="04">04:CIF&I</asp:ListItem>
+                        <asp:ListItem Value="05">05:CIF&C</asp:ListItem>
+                        <asp:ListItem Value="06">06:C&I</asp:ListItem>
+                        <asp:ListItem Value="07">07:EX-GO</asp:ListItem>
+                        <asp:ListItem Value="08">08:CIP</asp:ListItem>
+                        <asp:ListItem Value="09">09:DDU</asp:ListItem>
+                        <asp:ListItem Value="10">10:DDP</asp:ListItem>
+                        <asp:ListItem Value="11">11:FAS</asp:ListItem>
+                        <asp:ListItem Value="12">12:EX-WORKS</asp:ListItem>
+                        <asp:ListItem Value="13">13:CFR</asp:ListItem>
+                        <asp:ListItem Value="14">14:FCA</asp:ListItem>
+                        <asp:ListItem Value="15">15:CPT</asp:ListItem>
+                        <asp:ListItem Value="16">16:CIP</asp:ListItem>
+                        <asp:ListItem Value="17">17:DAF</asp:ListItem>
+                        <asp:ListItem Value="18">18:DES</asp:ListItem>
+                        <asp:ListItem Value="19">19:DEQ</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                <th>Trade Term</th>
+                <td >
+                    <asp:TextBox ID="TextBox17" runat="server" Width="233px" CssClass="txtb"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <th>通貨</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList5" runat="server" Width ="180px" AutoPostBack="True" CssClass="drpb">
+                        <asp:ListItem Value=""></asp:ListItem>
+                        <asp:ListItem Value="01">JPY</asp:ListItem>
+                        <asp:ListItem Value="02">US$</asp:ListItem>
+                        <asp:ListItem Value="03">EUR</asp:ListItem>
+                        <asp:ListItem Value="04">A$</asp:ListItem>
+                        <asp:ListItem Value="05">INR</asp:ListItem>
+                        <asp:ListItem Value="06">THB</asp:ListItem>
+                        <asp:ListItem Value="07">NT$</asp:ListItem>
+                        <asp:ListItem Value="08">MYR</asp:ListItem>
+                        <asp:ListItem Value="09">CNY</asp:ListItem>
+                        <asp:ListItem Value="10">IDR</asp:ListItem>
+                        <asp:ListItem Value="11">NR\</asp:ListItem>
+                        <asp:ListItem Value="12">WON</asp:ListItem>
+                        <asp:ListItem Value="13">MRK</asp:ListItem>
+                        <asp:ListItem Value="14">NZ$</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                <th>レート</th>
+                <td>
+                    <asp:TextBox ID="TextBox16" runat="server" Width="233px" CssClass="txtb_r"></asp:TextBox>
+                </td>
+                <th>場所</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList3" runat="server" Width ="180px" CssClass="drpb">
+                        <asp:ListItem Value="本社">本社</asp:ListItem>
+                        <asp:ListItem Value="上野">上野</asp:ListItem>
                     </asp:DropDownList>
                 </td>
             </tr>
             <tr>
                 <th>海貨業者</th>
                 <td>
-                    <asp:TextBox ID="TextBox9" runat="server" Width="233px"></asp:TextBox>
+                    <asp:TextBox ID="TextBox9" runat="server" Width="233px" CssClass="txtb"></asp:TextBox>
+                </td>
+                <th>書類作成</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList1" runat="server" Width ="180px" CssClass="drpb">
+                        <asp:ListItem Value=""></asp:ListItem>
+                        <asp:ListItem Value="作成済み">作成済み</asp:ListItem>
+                    </asp:DropDownList>
                 </td>
                 <th>集荷</th>
                 <td>
-                    <asp:DropDownList ID="DropDownList2" runat="server" Width ="180px">
+                    <asp:DropDownList ID="DropDownList2" runat="server" Width ="180px" CssClass="drpb">
                         <asp:ListItem Value=""></asp:ListItem>
                         <asp:ListItem Value="集荷済み">集荷済み</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-                <th>場所</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList3" runat="server" Width ="180px">
-                        <asp:ListItem Value="本社">本社</asp:ListItem>
-                        <asp:ListItem Value="上野">上野</asp:ListItem>
                     </asp:DropDownList>
                 </td>
             </tr>
