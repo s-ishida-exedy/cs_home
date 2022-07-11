@@ -63,6 +63,7 @@
             border-top: 2px solid #000000;
             border-right: 2px solid #000000;
         }
+
         h2 {
             padding-left: 45px;
             position: relative;
@@ -139,6 +140,20 @@
         });
     });
 </script>
+
+    <script type="text/javascript">
+      function LinkClick() {
+          var url = 'm_booking_colorkbn.aspx?q='
+          var result = confirm('別ウインドウでを開きます');
+
+          if (result) {
+              window.open(url, null);
+          }
+          else {
+          }
+      }
+    </script>
+
 </head>
 <body class="c2">
 <form id="form1" runat="server">
@@ -171,6 +186,7 @@
             </td>
             <td class="third-cell">
                 <asp:Label ID="Label2" runat="server" Text="Labe2" ></asp:Label>
+                <a href="javascript:void(0);" onclick="LinkClick()">BS色ﾏｽﾀ</a>  
             </td>
         </tr>
     </table>

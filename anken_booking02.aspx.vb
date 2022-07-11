@@ -872,65 +872,50 @@ Partial Class yuusen
         End If
 
 
-        Dim dt0A = DateTime.Parse("08:00:00")
-        Dim dt1A = DateTime.Parse("08:10:00")
+        'Dim dt0A = DateTime.Parse("08:01:00")
+        'Dim dt1A = DateTime.Parse("08:04:00")
 
-        Dim dt0B = DateTime.Parse("11:50:00")
-        Dim dt1B = DateTime.Parse("12:00:00")
-
-
-        Dim dt0C = DateTime.Parse("14:55:00")
-        Dim dt1C = DateTime.Parse("15:05:00")
+        'Dim dt0B = DateTime.Parse("11:51:00")
+        'Dim dt1B = DateTime.Parse("11:54:00")
 
 
-        If dt1 < dt1A And dt1 > dt0A Then
-
-            Panel1.Visible = False
-            Panel2.Visible = False
-            Panel3.Visible = True
-
-            CheckBox1.Visible = False
-            CheckBox2.Visible = False
-
-            Button1.Visible = False
-            Button4.Visible = False
-            Button3.Visible = False
-            Button2.Visible = False
-
-        End If
-
-        If dt1 < dt1B And dt1 > dt0B Then
-
-            Panel1.Visible = False
-            Panel2.Visible = False
-            Panel3.Visible = True
-
-            CheckBox1.Visible = False
-            CheckBox2.Visible = False
-
-            Button1.Visible = False
-            Button4.Visible = False
-            Button3.Visible = False
-            Button2.Visible = False
-
-        End If
+        'Dim dt0C = DateTime.Parse("14:56:00")
+        'Dim dt1C = DateTime.Parse("14:59:00")
 
 
-        If dt1 < dt1C And dt1 > dt0C Then
+        'If (dt1 < dt1A And dt1 > dt0A) Or (dt1 < dt1B And dt1 > dt0B) Or (dt1 < dt1C And dt1 > dt0C) Then
 
-            Panel1.Visible = False
-            Panel2.Visible = False
-            Panel3.Visible = True
+        '    Panel1.Visible = False
+        '    Panel2.Visible = False
+        '    Panel3.Visible = True
 
-            CheckBox1.Visible = False
-            CheckBox2.Visible = False
+        '    CheckBox1.Visible = False
+        '    CheckBox2.Visible = False
 
-            Button1.Visible = False
-            Button4.Visible = False
-            Button3.Visible = False
-            Button2.Visible = False
+        '    Button1.Visible = False
+        '    Button4.Visible = False
+        '    Button3.Visible = False
+        '    Button2.Visible = False
 
-        End If
+        'End If
+
+        'If dt1 < dt1B And dt1 > dt0B Then
+
+        '    Panel1.Visible = False
+        '    Panel2.Visible = False
+        '    Panel3.Visible = True
+
+        '    CheckBox1.Visible = False
+        '    CheckBox2.Visible = False
+
+        '    Button1.Visible = False
+        '    Button4.Visible = False
+        '    Button3.Visible = False
+        '    Button2.Visible = False
+
+        'End If
+
+
 
         cnn.Close()
         cnn.Dispose()
