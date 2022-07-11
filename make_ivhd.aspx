@@ -336,7 +336,7 @@
                     </thead>
 
                     <tbody>
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="8190" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="8558" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
                         <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
                         <HeaderStyle CssClass="Freezing"></HeaderStyle>
 
@@ -348,24 +348,21 @@
                         <HeaderStyle Width="60px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="ETD" HeaderText="Sailing On/About
-                            (計上日)" SortExpression="ETD"  >
-                        <HeaderStyle Width="130px" />
+                        <asp:BoundField DataField="ETD" HeaderText="Sailing On/About(計上日)" SortExpression="ETD"  >
+                        <HeaderStyle Width="180px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="" HeaderText="Finaldestination
-                            (届け先名)" SortExpression=""  >
+                        <asp:BoundField DataField="" HeaderText="Finaldestination(届け先名)" SortExpression=""  >
                         <HeaderStyle Width="350px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="Finaldestination ADDRESS(届け先住所)" SortExpression="" >
-                        <HeaderStyle Width="1200px" />
+                        <HeaderStyle Width="1300px" />
                         </asp:BoundField>
 
 
-                        <asp:BoundField DataField="LOADING_PORT" HeaderText="PORTOF LOADING
-                            (積み出し港)" SortExpression="LOADING_PORT" >
-                        <HeaderStyle Width="120px" />
+                        <asp:BoundField DataField="LOADING_PORT" HeaderText="PORTOF LOADING(積み出し港)" SortExpression="LOADING_PORT" >
+                        <HeaderStyle Width="133px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="PORT OF DEISCHARGE(揚地)" SortExpression="DISCHARGING_PORT" >
@@ -400,8 +397,7 @@
                         </asp:BoundField>
 
 
-                        <asp:BoundField DataField="" HeaderText="出荷元
-                            ストアコード" SortExpression="" >
+                        <asp:BoundField DataField="" HeaderText="出荷元ストアコード" SortExpression="" >
                         <HeaderStyle Width="80px" />
                         </asp:BoundField>
 
@@ -446,7 +442,7 @@
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="consiner address of SI" SortExpression="" >
-                        <HeaderStyle Width="1100px" />
+                        <HeaderStyle Width="1300px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="place of delivery SI" SortExpression="PLACE_OF_DELIVERY" >
@@ -477,9 +473,9 @@
                         <HeaderStyle Width="130px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="" HeaderText="海貨業者" SortExpression="" >
+<%--                        <asp:BoundField DataField="" HeaderText="海貨業者" SortExpression="" >
                         <HeaderStyle Width="60px" />
-                        </asp:BoundField>
+                        </asp:BoundField>--%>
 
                         <asp:BoundField DataField="TWENTY_FEET" HeaderText="20Ft" SortExpression="TWENTY_FEET" >
                         <HeaderStyle Width="60px" />
@@ -545,7 +541,7 @@
         <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
 
    
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM T_BOOKING WHERE STATUS <> 'キャンセル' AND INVOICE_NO ='' AND BOOKING_NO <>'' "></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM T_BOOKING WHERE STATUS not in('キャンセル','ペンディング') AND INVOICE_NO ='' AND BOOKING_NO <>'' AND BOOKING_NO <>'' AND CUT_DATE <>'' AND ETA <>'' AND ETD <>'' AND BOOKING_NO <>'TBA' "></asp:SqlDataSource>
 
         <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM T_BOOKING WHERE STATUS <> 'キャンセル' AND INVOICE_NO ='' AND BOOKING_NO <>'' "></asp:SqlDataSource>--%>
 
