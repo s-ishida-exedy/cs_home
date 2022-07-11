@@ -266,6 +266,18 @@
                 <td >
                     <asp:TextBox ID="TextBox17" runat="server" Width="233px" CssClass="txtb"></asp:TextBox>
                 </td>
+                <th>出荷方法</th>
+                <td >
+                    <asp:DropDownList ID="DropDownList6" runat="server" Width ="180px" CssClass="drpb">
+                        <asp:ListItem Value=""></asp:ListItem>
+                        <asp:ListItem Value="01">01:20 FTコンテナ</asp:ListItem>
+                        <asp:ListItem Value="02">02:40 FTコンテナ</asp:ListItem>
+                        <asp:ListItem Value="03">03:CFS</asp:ListItem>
+                        <asp:ListItem Value="04">04:LOOSE</asp:ListItem>
+                        <asp:ListItem Value="05">05:AIR</asp:ListItem>
+                        <asp:ListItem Value="06">06:COURIER SERVICE</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
             </tr>
             <tr>
                 <th>通貨</th>

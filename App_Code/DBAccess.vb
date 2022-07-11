@@ -433,7 +433,7 @@ Public Class DBAccess
                 StrSQL = StrSQL & ", CASE DOC_FIN WHEN '作成済み' THEN '済' END AS DOC_FIN "
                 StrSQL = StrSQL & ", SHIPPING_COMPANY "
                 StrSQL = StrSQL & ", CASE PICKUP WHEN '集荷済み' THEN '済' END AS PICKUP "
-                StrSQL = StrSQL & ", PLACE  , REMARKS, AIR_CODE  "
+                StrSQL = StrSQL & ", PLACE  , REMARKS, AIR_CODE, SHUK_METH  "
             Case 1
                 StrSQL = StrSQL & "Select DISTINCT ETD "
             Case 2
@@ -506,7 +506,7 @@ Public Class DBAccess
         StrSQL = StrSQL & ", CASE DOC_FIN WHEN '作成済み' THEN '済' END AS DOC_FIN "
         StrSQL = StrSQL & ", SHIPPING_COMPANY "
         StrSQL = StrSQL & ", CASE PICKUP WHEN '集荷済み' THEN '済' END AS PICKUP "
-        StrSQL = StrSQL & ", PLACE  , REMARKS, AIR_CODE  "
+        StrSQL = StrSQL & ", PLACE  , REMARKS, AIR_CODE, SHUK_METH  "
         StrSQL = StrSQL & "FROM T_EXL_AIR_MANAGE "
         StrSQL = StrSQL & "WHERE IVNO = '" & strValue & "'"
 

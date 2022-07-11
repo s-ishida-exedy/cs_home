@@ -48,6 +48,7 @@ Partial Class cs_home
                     DropDownList3.SelectedValue = dataread("PLACE").ToString
                     DropDownList4.SelectedValue = dataread("TATENE").ToString
                     DropDownList5.SelectedValue = dataread("CURRENCY").ToString
+                    DropDownList6.SelectedValue = dataread("SHUK_METH").ToString
 
                     TextBox1.Text = dataread("REQUESTED_DATE").ToString
                     TextBox2.Text = dataread("CREATED_DATE").ToString
@@ -144,6 +145,7 @@ Partial Class cs_home
             strSQL = strSQL & "  , TRADE_TERM = '" & LTrim(RTrim(TextBox17.Text)) & "' "  'Trade Term
             strSQL = strSQL & "  , CURRENCY = '" & DropDownList5.SelectedValue & "' "   '通貨
             strSQL = strSQL & "  , RATE = '" & LTrim(RTrim(TextBox16.Text)) & "' "  'レート
+            strSQL = strSQL & "  , SHUK_METH = '" & DropDownList6.SelectedValue & "' "  '出荷方法
             strSQL = strSQL & "WHERE "
             strSQL = strSQL & "       AIR_CODE =  '" & strCode & "' "
         ElseIf strMode = "01" And strExecMode = "02" Then
@@ -178,6 +180,7 @@ Partial Class cs_home
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox17.Text)) & "' "  'Trade Term
             strSQL = strSQL & "  , '" & DropDownList5.SelectedValue & "' "   '通貨
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox16.Text)) & "' "  'レート
+            strSQL = strSQL & "  , '" & DropDownList6.SelectedValue & "' "  '出荷方法
             strSQL = strSQL & ") "
         End If
 
@@ -243,6 +246,10 @@ Partial Class cs_home
         End If
         If DropDownList4.SelectedValue = "" Then
             Label1.Text = "建値は必須選択です。"
+            chk_Nyuryoku = False
+        End If
+        If DropDownList6.SelectedValue = "" Then
+            Label1.Text = "出荷方法は必須選択です。"
             chk_Nyuryoku = False
         End If
 
