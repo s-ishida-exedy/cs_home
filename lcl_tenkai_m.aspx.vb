@@ -18,6 +18,8 @@ Partial Class cs_home
 
     Private Sub GridView1_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
 
+        Dim flgship As Long = 0
+
         If e.Row.Cells(18).Text = "1" Then
             e.Row.BackColor = Drawing.Color.DarkGray
         End If
@@ -33,6 +35,17 @@ Partial Class cs_home
                 e.Row.Cells(1).BackColor = Drawing.Color.Salmon
             End If
 
+        End If
+
+        flgship = 0
+        flgship = GET_shipsch(Trim(e.Row.Cells(5).Text))
+
+        If flgship = 1 Then
+            e.Row.Cells(3).BackColor = Drawing.Color.Red
+            e.Row.Cells(3).ForeColor = Drawing.Color.White
+            e.Row.Cells(2).BackColor = Drawing.Color.Red
+            e.Row.Cells(2).ForeColor = Drawing.Color.White
+            e.Row.Cells(2).Text = "スケジュール未登録"
         End If
 
 
@@ -772,5 +785,57 @@ Partial Class cs_home
         End If
 
     End Sub
+
+
+    Private Function GET_shipsch(bkgno As String) As String
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+
+
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = "SELECT count(T_SHIPSCH_VIEW_02.BOOKINGNO) as cnt "
+        strSQL = strSQL & "FROM T_SHIPSCH_VIEW_02 "
+        strSQL = strSQL & "WHERE T_SHIPSCH_VIEW_02.BOOKINGNO = '" & bkgno & "' "
+        strSQL = strSQL & "AND (T_SHIPSCH_VIEW_02.VANDATE IS NULL or T_SHIPSCH_VIEW_02.VANDATE < " & dt1.ToShortDateString & " ) "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        GET_shipsch = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            GET_shipsch = dataread("cnt")        'ETD(計上日)
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
+
 
 End Class

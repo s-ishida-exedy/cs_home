@@ -336,7 +336,7 @@
                     </thead>
 
                     <tbody>
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="8258" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="8558" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
                         <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
                         <HeaderStyle CssClass="Freezing"></HeaderStyle>
 
@@ -357,7 +357,7 @@
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="Finaldestination ADDRESS(届け先住所)" SortExpression="" >
-                        <HeaderStyle Width="1200px" />
+                        <HeaderStyle Width="1300px" />
                         </asp:BoundField>
 
 
@@ -442,7 +442,7 @@
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="consiner address of SI" SortExpression="" >
-                        <HeaderStyle Width="1100px" />
+                        <HeaderStyle Width="1300px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="place of delivery SI" SortExpression="PLACE_OF_DELIVERY" >
@@ -541,7 +541,7 @@
         <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
 
    
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM T_BOOKING WHERE STATUS not in('キャンセル','ペンディング') AND INVOICE_NO ='' AND BOOKING_NO <>'' "></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM T_BOOKING WHERE STATUS not in('キャンセル','ペンディング') AND INVOICE_NO ='' AND BOOKING_NO <>'' AND BOOKING_NO <>'' AND CUT_DATE <>'' AND ETA <>'' AND ETD <>'' AND BOOKING_NO <>'TBA' "></asp:SqlDataSource>
 
         <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM T_BOOKING WHERE STATUS <> 'キャンセル' AND INVOICE_NO ='' AND BOOKING_NO <>'' "></asp:SqlDataSource>--%>
 

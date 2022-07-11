@@ -38,8 +38,6 @@ Partial Class yuusen
         Dim dt2 As DateTime = dt1 + ts1
         Dim dt3 As DateTime = dt1 - ts1
 
-
-
         Dim dt00 As String = dt3.ToShortDateString
 
 
@@ -48,7 +46,7 @@ Partial Class yuusen
             '請求書コード
             e.Row.Cells(0).Text = Trim(Left(e.Row.Cells(0).Text, 4))
 
-            'PORTOF LOADING(積み出し港)	4
+            'PORTOF LOADING(積み出し港)	4 
             intval = 0
             intCnt = InStr(intCnt + 1, e.Row.Cells(4).Text, "→")
             Do While intCnt > 0
@@ -90,12 +88,12 @@ Partial Class yuusen
 
             'PALECE OF DELIVERY(配送先)	6
             intval = 0
+            intCnt = InStr(intCnt + 1, e.Row.Cells(6).Text, "→")
+            Do While intCnt > 0
+                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(6).Text, "→")
-                Do While intCnt > 0
-                    intval = intCnt
-                    intCnt = InStr(intCnt + 1, e.Row.Cells(6).Text, "→")
-                Loop
-                e.Row.Cells(6).Text = Trim(Mid(e.Row.Cells(6).Text, intval + 1, Len(e.Row.Cells(6).Text) - intval))
+            Loop
+            e.Row.Cells(6).Text = Trim(Mid(e.Row.Cells(6).Text, intval + 1, Len(e.Row.Cells(6).Text) - intval))
             intCnt = 0
 
             If Len(e.Row.Cells(6).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(6).Text) Then
@@ -110,12 +108,12 @@ Partial Class yuusen
 
             '荷受地	7
             intval = 0
+            intCnt = InStr(intCnt + 1, e.Row.Cells(7).Text, "→")
+            Do While intCnt > 0
+                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(7).Text, "→")
-                Do While intCnt > 0
-                    intval = intCnt
-                    intCnt = InStr(intCnt + 1, e.Row.Cells(7).Text, "→")
-                Loop
-                e.Row.Cells(7).Text = Trim(Mid(e.Row.Cells(7).Text, intval + 1, Len(e.Row.Cells(7).Text) - intval))
+            Loop
+            e.Row.Cells(7).Text = Trim(Mid(e.Row.Cells(7).Text, intval + 1, Len(e.Row.Cells(7).Text) - intval))
             intCnt = 0
 
             If Len(e.Row.Cells(7).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(7).Text) Then
@@ -130,12 +128,12 @@ Partial Class yuusen
 
             'PLACE OF DELIVERY BY CARRIER(配送者責任送り先)	8
             intval = 0
+            intCnt = InStr(intCnt + 1, e.Row.Cells(8).Text, "→")
+            Do While intCnt > 0
+                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(8).Text, "→")
-                Do While intCnt > 0
-                    intval = intCnt
-                    intCnt = InStr(intCnt + 1, e.Row.Cells(8).Text, "→")
-                Loop
-                e.Row.Cells(8).Text = Trim(Mid(e.Row.Cells(8).Text, intval + 1, Len(e.Row.Cells(8).Text) - intval))
+            Loop
+            e.Row.Cells(8).Text = Trim(Mid(e.Row.Cells(8).Text, intval + 1, Len(e.Row.Cells(8).Text) - intval))
                 intCnt = 0
 
             If Len(e.Row.Cells(8).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(8).Text) Then
@@ -150,12 +148,12 @@ Partial Class yuusen
 
             'voyage 16
             intval = 0
+            intCnt = InStr(intCnt + 1, e.Row.Cells(16).Text, "→")
+            Do While intCnt > 0
+                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(16).Text, "→")
-                Do While intCnt > 0
-                    intval = intCnt
-                    intCnt = InStr(intCnt + 1, e.Row.Cells(16).Text, "→")
-                Loop
-                e.Row.Cells(16).Text = Trim(Mid(e.Row.Cells(16).Text, intval + 1, Len(e.Row.Cells(16).Text) - intval))
+            Loop
+            e.Row.Cells(16).Text = Trim(Mid(e.Row.Cells(16).Text, intval + 1, Len(e.Row.Cells(16).Text) - intval))
                 intCnt = 0
 
             If Len(e.Row.Cells(16).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(16).Text) Then
@@ -170,12 +168,12 @@ Partial Class yuusen
 
             '船社	17
             intval = 0
+            intCnt = InStr(intCnt + 1, e.Row.Cells(17).Text, "→")
+            Do While intCnt > 0
+                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(17).Text, "→")
-                Do While intCnt > 0
-                    intval = intCnt
-                    intCnt = InStr(intCnt + 1, e.Row.Cells(17).Text, "→")
-                Loop
-                e.Row.Cells(17).Text = Trim(Mid(e.Row.Cells(17).Text, intval + 1, Len(e.Row.Cells(17).Text) - intval))
+            Loop
+            e.Row.Cells(17).Text = Trim(Mid(e.Row.Cells(17).Text, intval + 1, Len(e.Row.Cells(17).Text) - intval))
             intCnt = 0
 
             'If Len(e.Row.Cells(17).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(17).Text) Then
@@ -202,13 +200,13 @@ Partial Class yuusen
 
             'BOOKING_NO	    21
             intval = 0
+            intCnt = InStr(intCnt + 1, e.Row.Cells(21).Text, "→")
+            Do While intCnt > 0
+                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(21).Text, "→")
-                Do While intCnt > 0
-                    intval = intCnt
-                    intCnt = InStr(intCnt + 1, e.Row.Cells(21).Text, "→")
-                Loop
-                e.Row.Cells(21).Text = Trim(Replace(Mid(e.Row.Cells(21).Text, intval + 1, Len(e.Row.Cells(21).Text) - intval), vbLf, ""))
-                intCnt = 0
+            Loop
+            e.Row.Cells(21).Text = Trim(Replace(Mid(e.Row.Cells(21).Text, intval + 1, Len(e.Row.Cells(21).Text) - intval), vbLf, ""))
+            intCnt = 0
 
             If Len(e.Row.Cells(21).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(21).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
@@ -238,14 +236,14 @@ Partial Class yuusen
 
             End If
 
-                '船名	22
-                intval = 0
+            '船名	22
+            intval = 0
+            intCnt = InStr(intCnt + 1, e.Row.Cells(22).Text, "→")
+            Do While intCnt > 0
+                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(22).Text, "→")
-                Do While intCnt > 0
-                    intval = intCnt
-                    intCnt = InStr(intCnt + 1, e.Row.Cells(22).Text, "→")
-                Loop
-                e.Row.Cells(22).Text = Trim(Mid(e.Row.Cells(22).Text, intval + 1, Len(e.Row.Cells(22).Text) - intval))
+            Loop
+            e.Row.Cells(22).Text = Trim(Mid(e.Row.Cells(22).Text, intval + 1, Len(e.Row.Cells(22).Text) - intval))
             intCnt = 0
 
             If Len(e.Row.Cells(22).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(22).Text) Then
@@ -260,19 +258,19 @@ Partial Class yuusen
 
             'place of delivery SI	25
             intval = 0
+            intCnt = InStr(intCnt + 1, e.Row.Cells(25).Text, "→")
+            Do While intCnt > 0
+                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(25).Text, "→")
-                Do While intCnt > 0
-                    intval = intCnt
-                    intCnt = InStr(intCnt + 1, e.Row.Cells(25).Text, "→")
-                Loop
-                e.Row.Cells(25).Text = Trim(Mid(e.Row.Cells(25).Text, intval + 1, Len(e.Row.Cells(25).Text) - intval))
-                intCnt = 0
+            Loop
+            e.Row.Cells(25).Text = Trim(Mid(e.Row.Cells(25).Text, intval + 1, Len(e.Row.Cells(25).Text) - intval))
+            intCnt = 0
 
-                '20Ft	
-                intval = 0
+            '20Ft	
+            intval = 0
             intCnt = InStr(intCnt + 1, e.Row.Cells(32).Text, "→")
             Do While intCnt > 0
-                    intval = intCnt
+                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(32).Text, "→")
             Loop
             e.Row.Cells(32).Text = Mid(e.Row.Cells(32).Text, intval + 1, Len(e.Row.Cells(32).Text) - intval)
@@ -283,11 +281,11 @@ Partial Class yuusen
                 e.Row.Cells(32).Text = 0
             End If
 
-                '40Ft	
-                intval = 0
+            '40Ft	
+            intval = 0
             intCnt = InStr(intCnt + 1, e.Row.Cells(33).Text, "→")
             Do While intCnt > 0
-                    intval = intCnt
+                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(33).Text, "→")
             Loop
             e.Row.Cells(33).Text = Mid(e.Row.Cells(33).Text, intval + 1, Len(e.Row.Cells(33).Text) - intval)
@@ -298,11 +296,11 @@ Partial Class yuusen
                 e.Row.Cells(33).Text = 0
             End If
 
-                'LCL/40Ft
-                intval = 0
+            'LCL/40Ft
+            intval = 0
             intCnt = InStr(intCnt + 1, e.Row.Cells(34).Text, "→")
             Do While intCnt > 0
-                    intval = intCnt
+                intval = intCnt
                 intCnt = InStr(intCnt + 1, e.Row.Cells(34).Text, "→")
             Loop
             e.Row.Cells(34).Text = Mid(e.Row.Cells(34).Text, intval + 1, Len(e.Row.Cells(34).Text) - intval)
@@ -316,7 +314,7 @@ Partial Class yuusen
                 Else
                     e.Row.Cells(34).Text = 0
                 End If
-                End If
+            End If
 
             'M3以外は40FTに追加する
             If e.Row.Cells(34).Text Like "*M3*" Then
@@ -325,27 +323,27 @@ Partial Class yuusen
                 e.Row.Cells(34).Text = 0
             End If
 
-                '出荷元ストアコード	　13
-                code = e.Row.Cells(0).Text
-                Select Case code
+            '出荷元ストアコード	　13
+            code = e.Row.Cells(0).Text
+            Select Case code
 
-                    Case "E170", "E232", "E250"                     '上野出荷元ストアコード
-                        e.Row.Cells(13).Text = "0LNF"
+                Case "E170", "E232", "E250"                     '上野出荷元ストアコード
+                    e.Row.Cells(13).Text = "0LNF"
 
-                    Case "E134"
-                        e.Row.Cells(13).Text = "0LNR"
+                Case "E134"
+                    e.Row.Cells(13).Text = "0LNR"
 
-                    Case Else
-                        e.Row.Cells(13).Text = "0BNA"                           '出荷元ストアコード
-                End Select
+                Case Else
+                    e.Row.Cells(13).Text = "0BNA"                           '出荷元ストアコード
+            End Select
 
-                '出荷方法		　14
-                Select Case code
-                    Case "E134", "E170", "E232", "E250"                             '上野出荷拠点
-                        e.Row.Cells(14).Text = "U"
-                    Case Else
-                        e.Row.Cells(14).Text = "O"                               '出荷拠点
-                End Select
+            '出荷方法		　14
+            Select Case code
+                Case "E134", "E170", "E232", "E250"                             '上野出荷拠点
+                    e.Row.Cells(14).Text = "U"
+                Case Else
+                    e.Row.Cells(14).Text = "O"                               '出荷拠点
+            End Select
 
 
             '「M3」がN列に含まれている場合、出荷方法 CFS
@@ -361,82 +359,82 @@ Partial Class yuusen
 
             Else
                 e.Row.Cells(14).Text = "-"
-                End If
+            End If
 
 
-                '出荷拠点		　15
-                Select Case code
-                    Case "E134", "E170", "E232", "E250"                             '上野出荷拠点
-                        e.Row.Cells(15).Text = "U"
-                    Case Else
-                        e.Row.Cells(15).Text = "O"                               '出荷拠点
-                End Select
+            '出荷拠点		　15
+            Select Case code
+                Case "E134", "E170", "E232", "E250"                             '上野出荷拠点
+                    e.Row.Cells(15).Text = "U"
+                Case Else
+                    e.Row.Cells(15).Text = "O"                               '出荷拠点
+            End Select
 
-                '船社担当者			　18
-                e.Row.Cells(18).Text = "-"
+            '船社担当者			　18
+            e.Row.Cells(18).Text = "-"
 
-                '通関方法				　27
-                e.Row.Cells(27).Text = "包括"
+            '通関方法				　27
+            e.Row.Cells(27).Text = "包括"
 
-                '船積スケジュール登録					　29 マニュアル
-                e.Row.Cells(29).Text = "有り"
+            '船積スケジュール登録					　29 マニュアル
+            e.Row.Cells(29).Text = "有り"
 
-                'コンテナ情報登録					　30
-                e.Row.Cells(30).Text = "有り"
+            'コンテナ情報登録					　30
+            e.Row.Cells(30).Text = "有り"
 
 
-                '接続文字列の作成
-                Dim ConnectionString As String = String.Empty
+            '接続文字列の作成
+            Dim ConnectionString As String = String.Empty
 
-                'SQL Server認証
-                ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+            'SQL Server認証 
+            ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
 
-                'SqlConnectionクラスの新しいインスタンスを初期化
-                Dim cnn = New SqlConnection(ConnectionString)
-                Dim Command = cnn.CreateCommand
+            'SqlConnectionクラスの新しいインスタンスを初期化
+            Dim cnn = New SqlConnection(ConnectionString)
+            Dim Command = cnn.CreateCommand
 
-                'データベース接続を開く
-                cnn.Open()
+            'データベース接続を開く 
+            cnn.Open()
 
-                strSQL = "SELECT T_EXL_CSMANUAL.* "
-                strSQL = strSQL & "FROM T_EXL_CSMANUAL "
-                strSQL = strSQL & "WHERE T_EXL_CSMANUAL.NEW_CODE = '" & code & "' "
+            strSQL = "SELECT T_EXL_CSMANUAL.* "
+            strSQL = strSQL & "FROM T_EXL_CSMANUAL "
+            strSQL = strSQL & "WHERE T_EXL_CSMANUAL.NEW_CODE = '" & code & "' "
 
-                'ＳＱＬコマンド作成
-                dbcmd = New SqlCommand(strSQL, cnn)
-                'ＳＱＬ文実行
-                dataread = dbcmd.ExecuteReader()
+            'ＳＱＬコマンド作成
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行
+            dataread = dbcmd.ExecuteReader()
 
-                '結果を取り出す
-                While (dataread.Read())
-                    strbkg += dataread(56)
+            '結果を取り出す
+            While (dataread.Read())
+                strbkg += dataread(56)
 
-                    'Finaldestination(届け先名)	2
-                    e.Row.Cells(2).Text += dataread(56)
-                    'Finaldestination ADDRESS(届け先住所)	3
-                    e.Row.Cells(3).Text += dataread(57)
+                'Finaldestination(届け先名)	2
+                e.Row.Cells(2).Text += dataread(56)
+                'Finaldestination ADDRESS(届け先住所)	3 
+                e.Row.Cells(3).Text += dataread(57)
                 ''乙仲名	 19
                 'e.Row.Cells(32).Text += dataread(60)
 
                 '乙仲担当者	 20
                 If dataread(61) = "" Then
-                        e.Row.Cells(20).Text += "-"
-                    Else
-                        e.Row.Cells(20).Text += dataread(61)
+                    e.Row.Cells(20).Text += "-"
+                Else
+                    e.Row.Cells(20).Text += dataread(61)
 
-                    End If
+                End If
 
 
-                    'consinerr name of SI		 23
-                    e.Row.Cells(23).Text += dataread(54)
-                    'consiner address of SI		 24
-                    e.Row.Cells(24).Text += dataread(55)
-                    'Nortify address			 26
-                    e.Row.Cells(26).Text += dataread(11)
-                    'ベアリング帳票出力					　28
-                    e.Row.Cells(28).Text += dataread(58)
-                    'INVOICE内訳自動計算						　31　マニュアル
-                    e.Row.Cells(31).Text += dataread(59)
+                'consinerr name of SI		 23 
+                e.Row.Cells(23).Text += dataread(54)
+                'consiner address of SI		 24 
+                e.Row.Cells(24).Text += dataread(55)
+                'Nortify address			 26 
+                e.Row.Cells(26).Text += dataread(11)
+                'ベアリング帳票出力					　28 
+                e.Row.Cells(28).Text += dataread(58)
+                'INVOICE内訳自動計算						　31　マニュアル
+                e.Row.Cells(31).Text += dataread(59)
 
                 End While
 
@@ -447,107 +445,113 @@ Partial Class yuusen
 
 
 
-                If IsDate(e.Row.Cells(1).Text) = False Then
+            If IsDate(e.Row.Cells(1).Text) = False Then
 
-                    If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
-
-                    Else
-
-                    e.Row.Cells(0).Text = "日付エラー02行目_" & e.Row.Cells(0).Text
-                    e.Row.BackColor = Drawing.Color.Red
-
-                    End If
+                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
 
                 Else
-                    '半年移行前の日付の場合は翌年にする
-                    If DateValue(e.Row.Cells(1).Text) < dt00 Then
-                        e.Row.Cells(1).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(1).Text)), "yyyy") & Format(DateValue(e.Row.Cells(1).Text), "/mm/dd"))
-                    End If
-                End If
 
-                If IsDate(e.Row.Cells(9).Text) = False Then
-                    If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
-
-                    Else
-
-                    e.Row.Cells(0).Text = "日付エラー10行目_" & e.Row.Cells(0).Text
+                    e.Row.Cells(0).Text = "日付エラー02列目_" & e.Row.Cells(0).Text
                     e.Row.BackColor = Drawing.Color.Red
 
-                    End If
-                Else
-                    '半年移行前の日付の場合は翌年にする
-                    If DateValue(e.Row.Cells(9).Text) < dt00 Then
-                        e.Row.Cells(9).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(9).Text)), "yyyy") & Format(DateValue(e.Row.Cells(9).Text), "/mm/dd"))
-                    End If
                 End If
 
-                If IsDate(e.Row.Cells(10).Text) = False Then
-                    If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+            Else
+                '半年移行前の日付の場合は翌年にする
+                If DateValue(e.Row.Cells(1).Text) < dt00 Then
+                    e.Row.Cells(1).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(1).Text)), "yyyy") & Format(DateValue(e.Row.Cells(1).Text), "/mm/dd"))
+                End If
+            End If
 
-                    Else
+            If IsDate(e.Row.Cells(9).Text) = False Then
+                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
 
-                    e.Row.Cells(0).Text = "日付エラー11行目_" & e.Row.Cells(0).Text
+                Else
+
+                    e.Row.Cells(0).Text = "日付エラー10列目_" & e.Row.Cells(0).Text
                     e.Row.BackColor = Drawing.Color.Red
 
-                    End If
-                Else
-                    '半年移行前の日付の場合は翌年にする
-                    If DateValue(e.Row.Cells(10).Text) < dt00 Then
-                        e.Row.Cells(10).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(10).Text)), "yyyy") & Format(DateValue(e.Row.Cells(10).Text), "/mm/dd"))
-                    End If
                 End If
+            Else
+                '半年移行前の日付の場合は翌年にする 
+                If DateValue(e.Row.Cells(9).Text) < dt00 Then
+                    e.Row.Cells(9).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(9).Text)), "yyyy") & Format(DateValue(e.Row.Cells(9).Text), "/mm/dd"))
+                End If
+            End If
 
-                If IsDate(e.Row.Cells(11).Text) = False Then
-                    If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+            If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+                e.Row.Cells(10).Text = e.Row.Cells(11).Text
+            Else
+            End If
 
-                    Else
 
-                    e.Row.Cells(0).Text = "日付エラー12行目_" & e.Row.Cells(0).Text
+            If IsDate(e.Row.Cells(10).Text) = False Then
+                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+
+                Else
+
+                    e.Row.Cells(0).Text = "日付エラー11列目_" & e.Row.Cells(0).Text
                     e.Row.BackColor = Drawing.Color.Red
 
-                    End If
+                End If
+            Else
+                '半年移行前の日付の場合は翌年にする
+                If DateValue(e.Row.Cells(10).Text) < dt00 Then
+                    e.Row.Cells(10).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(10).Text)), "yyyy") & Format(DateValue(e.Row.Cells(10).Text), "/mm/dd"))
+                End If
+            End If
+
+            If IsDate(e.Row.Cells(11).Text) = False Then
+                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+
                 Else
-                    '半年移行前の日付の場合は翌年にする
-                    If DateValue(e.Row.Cells(11).Text) < dt00 Then
-                        e.Row.Cells(11).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(11).Text)), "yyyy") & Format(DateValue(e.Row.Cells(11).Text), "/mm/dd"))
-                    End If
-                End If
 
-                If e.Row.Cells(12).Text <> "&nbsp;" Then
-
-                    '対象の日付以下の日付の最大値を取得
-                    strSQL = "SELECT MAX(WORKDAY) AS WDAY01 FROM [T_EXL_CSWORKDAY] WHERE [T_EXL_CSWORKDAY].WORKDAY < '" & e.Row.Cells(12).Text & "' "
-
-                    'ＳＱＬコマンド作成 
-                    dbcmd = New SqlCommand(strSQL, cnn)
-                    'ＳＱＬ文実行 
-                    dataread = dbcmd.ExecuteReader()
-
-                    '結果を取り出す 
-                    While (dataread.Read())
-                        e.Row.Cells(12).Text = dataread("WDAY01")
-                    End While
-
-                    dataread.Close()
-                    dbcmd.Dispose()
-
-                End If
-
-                cnn.Close()
-                cnn.Dispose()
-
-
-                If IsDate(e.Row.Cells(12).Text) = False Then
-                    e.Row.Cells(0).Text = "日付エラー13行目"
+                    e.Row.Cells(0).Text = "日付エラー12列目_" & e.Row.Cells(0).Text
                     e.Row.BackColor = Drawing.Color.Red
-                Else
-                    '半年移行前の日付の場合は翌年にする
-                    If DateValue(e.Row.Cells(12).Text) < dt00 Then
-                        e.Row.Cells(12).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(12).Text)), "yyyy") & Format(DateValue(e.Row.Cells(12).Text), "/mm/dd"))
-                    End If
+
                 End If
+            Else
+                '半年移行前の日付の場合は翌年にする
+                If DateValue(e.Row.Cells(11).Text) < dt00 Then
+                    e.Row.Cells(11).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(11).Text)), "yyyy") & Format(DateValue(e.Row.Cells(11).Text), "/mm/dd"))
+                End If
+            End If
+
+            If e.Row.Cells(12).Text <> "&nbsp;" Then
+
+                '対象の日付以下の日付の最大値を取得
+                strSQL = "SELECT MAX(WORKDAY) AS WDAY01 FROM [T_EXL_CSWORKDAY] WHERE [T_EXL_CSWORKDAY].WORKDAY < '" & e.Row.Cells(12).Text & "' "
+
+                'ＳＱＬコマンド作成 
+                dbcmd = New SqlCommand(strSQL, cnn)
+                'ＳＱＬ文実行 
+                dataread = dbcmd.ExecuteReader()
+
+                '結果を取り出す 
+                While (dataread.Read())
+                    e.Row.Cells(12).Text = dataread("WDAY01")
+                End While
+
+                dataread.Close()
+                dbcmd.Dispose()
 
             End If
+
+            cnn.Close()
+            cnn.Dispose()
+
+
+            If IsDate(e.Row.Cells(12).Text) = False Then
+                e.Row.Cells(0).Text = "日付エラー13列目"
+                e.Row.BackColor = Drawing.Color.Red
+            Else
+                '半年移行前の日付の場合は翌年にする
+                If DateValue(e.Row.Cells(12).Text) < dt00 Then
+                    e.Row.Cells(12).Text = DateValue(Format(DateValue(DateAdd("yyyy", 1, e.Row.Cells(12).Text)), "yyyy") & Format(DateValue(e.Row.Cells(12).Text), "/mm/dd"))
+                End If
+            End If
+
+            End If 
 
 
 
@@ -884,7 +888,7 @@ Partial Class yuusen
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
-        Dim strcust As String = "'C255','C258','C253'"
+        Dim strcust As String = "'C255','C258'"
         Dim Dataobj As New DBAccess
 
         Dim ds As DataSet = Dataobj.GET_CS_RESULT_MAKE_IV(strcust)
