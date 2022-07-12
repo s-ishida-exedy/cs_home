@@ -99,7 +99,7 @@ Partial Class cs_home
                 strSQL = strSQL & "   CASE WHEN BK.ETD = CONVERT(VARCHAR,IV.IOPORTDATE,111) THEN '-' ELSE 'ＮＧ' END AS IOPORTDATE,  "
                 strSQL = strSQL & "   CASE WHEN BK.ETA = CONVERT(VARCHAR,IV.REACHDATE,111) THEN '-' ELSE 'ＮＧ' END AS REACHDATE,  "
                 strSQL = strSQL & "   CASE WHEN BK.VOYAGE_NO = IV.VOYAGENO THEN '-' ELSE 'ＮＧ' END AS VOYAGENO,  "
-                strSQL = strSQL & "   CASE WHEN BK.BOOK_TO = IV.SHIPPER THEN '-' ELSE 'ＮＧ' END AS SHIPPER,  "
+                strSQL = strSQL & "   CASE WHEN BK.BOOK_TO = IV.SHIPPER or (BK.BOOK_TO ='' AND IV.SHIPPER ='-') THEN '-' ELSE 'ＮＧ' END AS SHIPPER,  "
                 strSQL = strSQL & "   CASE WHEN BK.BOOKING_NO = IV.BOOKINGNO THEN '-' ELSE 'ＮＧ' END AS BOOKINGNO,  "
                 strSQL = strSQL & "   CASE WHEN BK.VESSEL_NAME = IV.SHIPPEDPER THEN '-' ELSE 'ＮＧ' END AS SHIPPEDPER,  "
                 strSQL = strSQL & "   BK.ETD, CONVERT(VARCHAR,IV.BLDATE2,111) AS BLDATE_01,   "
