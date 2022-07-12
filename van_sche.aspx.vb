@@ -263,6 +263,10 @@ Partial Class cs_home
                 dltButton.CommandArgument = e.Row.RowIndex.ToString()
             End If
         End If
+        'コード列非表示処理
+        If e.Row.RowType = DataControlRowType.DataRow OrElse e.Row.RowType = DataControlRowType.Header Then
+            e.Row.Cells(9).Visible = False
+        End If
     End Sub
 
     Private Sub GridView1_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView1.RowCommand
