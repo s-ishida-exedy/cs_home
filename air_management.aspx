@@ -255,7 +255,7 @@
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="REQUESTER" HeaderText="依頼者" SortExpression="REQUESTER" >
-                <HeaderStyle Width="90px" />
+                <HeaderStyle Width="120px" />
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
                 <asp:BoundField DataField="DEPARTMENT" HeaderText="部署" SortExpression="DEPARTMENT" >
