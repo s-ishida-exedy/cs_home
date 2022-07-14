@@ -115,9 +115,11 @@
         .DropDownList{
             width :100px;
             text-align :center;
+            font-size:small ;
         }
         .date2{
             text-align :center;
+            font-size:small ;
         }
         .txtb{
             padding: 2px;
