@@ -769,6 +769,34 @@ Partial Class yuusen
 
         End If
 
+        Dim strupddate02 As Date
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT T_EXL_DATA_UPD.DATA_UPD FROM T_EXL_DATA_UPD "
+        strSQL = strSQL & "WHERE T_EXL_DATA_UPD.DATA_CD ='013' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            strupddate02 = Trim(dataread("DATA_UPD"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        Dim dt00 As String = dt1.ToShortDateString
+        Dim dt03 As String = strupddate02.ToShortDateString
+
+        If dt00 = dt03 Then
+            Label22.Text = "済"
+        Else
+            Label22.Text = "未"
+        End If
+
 
         Button4.Attributes.Add("onclick", "return confirm('メール送信します。よろしいですか？');")
 
@@ -845,8 +873,8 @@ Partial Class yuusen
         dbcmd.Dispose()
 
 
-        Dim dt00 As String = dt1.ToShortDateString
-        Dim dt01 As String = strupddate00.ToShortDateString
+
+            Dim dt01 As String = strupddate00.ToShortDateString
         Dim dt02 As String = strupddate01.ToShortDateString
 
 
@@ -871,49 +899,6 @@ Partial Class yuusen
 
         End If
 
-
-        'Dim dt0A = DateTime.Parse("08:01:00")
-        'Dim dt1A = DateTime.Parse("08:04:00")
-
-        'Dim dt0B = DateTime.Parse("11:51:00")
-        'Dim dt1B = DateTime.Parse("11:54:00")
-
-
-        'Dim dt0C = DateTime.Parse("14:56:00")
-        'Dim dt1C = DateTime.Parse("14:59:00")
-
-
-        'If (dt1 < dt1A And dt1 > dt0A) Or (dt1 < dt1B And dt1 > dt0B) Or (dt1 < dt1C And dt1 > dt0C) Then
-
-        '    Panel1.Visible = False
-        '    Panel2.Visible = False
-        '    Panel3.Visible = True
-
-        '    CheckBox1.Visible = False
-        '    CheckBox2.Visible = False
-
-        '    Button1.Visible = False
-        '    Button4.Visible = False
-        '    Button3.Visible = False
-        '    Button2.Visible = False
-
-        'End If
-
-        'If dt1 < dt1B And dt1 > dt0B Then
-
-        '    Panel1.Visible = False
-        '    Panel2.Visible = False
-        '    Panel3.Visible = True
-
-        '    CheckBox1.Visible = False
-        '    CheckBox2.Visible = False
-
-        '    Button1.Visible = False
-        '    Button4.Visible = False
-        '    Button3.Visible = False
-        '    Button2.Visible = False
-
-        'End If
 
 
 
@@ -1086,6 +1071,8 @@ Partial Class yuusen
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
 
+        Call mail_update()
+
         'データベース接続を開く
         cnn.Open()
 
@@ -1171,6 +1158,8 @@ Partial Class yuusen
         If nitsu <> "" Then
             mailmsg = mailmsg & "," & "日通"
         End If
+
+
 
         If mailmsg = "" Then
             Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('対象なしです。');</script>", False)
@@ -2788,4 +2777,51 @@ Step00:
 
     End Sub
 
+    Private Sub mail_update()
+
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim strVal As String
+
+        Dim intCnt As Integer
+        Dim itkcnt As String
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strVal = Format(Now, "yyyy/MM/dd hh:mm:ss")
+
+        '更新
+        strSQL = ""
+        strSQL = strSQL & "UPDATE T_EXL_DATA_UPD SET "
+        strSQL = strSQL & "DATA_UPD = '" & strVal & "' "
+        strSQL = strSQL & "WHERE DATA_CD = '013' "
+
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+        cnn.Close()
+        cnn.Dispose()
+
+
+    End Sub
 End Class
