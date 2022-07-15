@@ -235,6 +235,7 @@
 
 
 
+
     <script type="text/javascript">
       function LinkClick() {
           var url = 'm_lcl_dec_mail.aspx?q='
@@ -248,6 +249,21 @@
       }
 
     </script>
+
+<script>
+
+    $(document).ready(function () {
+
+        if (document.getElementById("Label22").innerText  == '未') {
+            document.getElementById("Label22").style.color = 'red';
+            document.getElementById("Label22").style.fontWeight = "bold";
+        } else  {
+            document.getElementById("A01").style.color = 'black';
+        };
+
+    });
+
+</script>
 
 
 </head>
@@ -296,27 +312,27 @@
             <td style="width:20px;" class ="design01" >
                 <asp:Label  ID="Label5" runat="server" ForeColor ="white" Text="KD"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
             </td>   
-            <td style="width:40px;" class ="design02" >
+            <td style="width:30px;" class ="design02" >
                 <asp:CheckBox   ID="CheckBox1" runat="server" Height="13px" AutoPostBack="True" Font-Size="15px" />
                 <asp:Label  ID="Label3" runat="server"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
             </td>   
             <td style="width:20px;" class ="design01">
                 <asp:Label  ID="Label6" runat="server"  ForeColor ="white"  Text="ｱﾌﾀ"  Height="13px" AutoPostBack="True" Font-Size="15px" />
             </td>   
-            <td style="width:40px;" class ="design02" > 
+            <td style="width:30px;" class ="design02" > 
                 <asp:CheckBox   ID="CheckBox2" runat="server" Height="13px" AutoPostBack="True" Font-Size="15px" />
                 <asp:Label  ID="Label4" runat="server"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
             </td>
             <td style="width:20px"class ="design01" >
                 <asp:Label  ID="Label8" runat="server"  ForeColor ="white"  Text="判定"  Height="13px" AutoPostBack="True" Font-Size="15px" />                           
             </td>                   
-            <td style="width:40px" class ="design02"　>
+            <td style="width:20px" class ="design02"　>
                 <asp:Label ID="Label7" runat="server" Font-Size="20px"/>
             </td>
-            <td style="width:40px"class ="design01" >
+            <td style="width:30px"class ="design01" >
                 <asp:Label  ID="Label21" runat="server"  ForeColor ="white"  Text="メール"  Height="13px" AutoPostBack="True" Font-Size="15px" />                           
             </td>                   
-            <td style="width:40px" class ="design02"　>
+            <td style="width:20px" class ="design02"　>
                 <asp:Label ID="Label22" runat="server"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
             </td>
             <td style="width:20px;" >

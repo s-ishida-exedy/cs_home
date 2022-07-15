@@ -176,6 +176,10 @@ Partial Class yuusen
             e.Row.Cells(17).Text = Trim(Mid(e.Row.Cells(17).Text, intval + 1, Len(e.Row.Cells(17).Text) - intval))
             intCnt = 0
 
+            If e.Row.Cells(17).Text = "" Or e.Row.Cells(17).Text = "&nbsp;" Then
+                e.Row.Cells(17).Text = "-"
+            End If
+
             'If Len(e.Row.Cells(17).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(17).Text) Then
             '    e.Row.BackColor = Drawing.Color.Green
             '    e.Row.Cells(17).Text = e.Row.Cells(17).Text & "_全角"
@@ -686,6 +690,15 @@ Partial Class yuusen
         Dim ro As Integer
         Dim co As Integer
 
+        Dim strfn As String = ""
+        Dim strfa As String = ""
+        Dim strcn As String = ""
+        Dim strca As String = ""
+        Dim strny As String = ""
+
+        Dim strbr As String = ""
+        Dim striv As String = ""
+
         Dim val01 As String = ""
 
         'GridView1.DataBind()
@@ -766,19 +779,14 @@ Partial Class yuusen
                     End If
                 Next
 
-                ws.Style.Font.FontName = "Meiryo UI"
-                ws.Style.Alignment.WrapText = False
-                ws.Columns.AdjustToContents()
-                ws.SheetView.FreezeRows(1)
-
 
 
                 lastRow = ws.LastRowUsed().RowNumber()
                 lastCol = ws.LastColumnUsed().ColumnNumber()
 
+
+
                 For ro = 2 To lastRow
-
-
                     Select Case Left(ws.Cell(ro, 1).Value, 4)
 
                         Case "E211"
@@ -797,6 +805,42 @@ Partial Class yuusen
                                 End If
                             Next
 
+                            Call get_manual("E213", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ws.Cell(lastRow2 + 1, 3).SetValue(strfn)
+                            ws.Cell(lastRow2 + 1, 4).SetValue(strfa)
+                            ws.Cell(lastRow2 + 1, 24).SetValue(strcn)
+                            ws.Cell(lastRow2 + 1, 25).SetValue(strca)
+                            ws.Cell(lastRow2 + 1, 27).SetValue(strny)
+                            ws.Cell(lastRow2 + 1, 29).SetValue(strbr)
+                            ws.Cell(lastRow2 + 1, 32).SetValue(striv)
+
+                            Call get_manual("E214", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ws.Cell(lastRow2 + 2, 3).SetValue(strfn)
+                            ws.Cell(lastRow2 + 2, 4).SetValue(strfa)
+                            ws.Cell(lastRow2 + 2, 24).SetValue(strcn)
+                            ws.Cell(lastRow2 + 2, 25).SetValue(strca)
+                            ws.Cell(lastRow2 + 2, 27).SetValue(strny)
+                            ws.Cell(lastRow2 + 2, 29).SetValue(strbr)
+                            ws.Cell(lastRow2 + 2, 32).SetValue(striv)
+
+                            Call get_manual("E215", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ws.Cell(lastRow2 + 3, 3).SetValue(strfn)
+                            ws.Cell(lastRow2 + 3, 4).SetValue(strfa)
+                            ws.Cell(lastRow2 + 3, 24).SetValue(strcn)
+                            ws.Cell(lastRow2 + 3, 25).SetValue(strca)
+                            ws.Cell(lastRow2 + 3, 27).SetValue(strny)
+                            ws.Cell(lastRow2 + 3, 29).SetValue(strbr)
+                            ws.Cell(lastRow2 + 3, 32).SetValue(striv)
+
+                            Call get_manual("K52C", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ws.Cell(lastRow2 + 4, 3).SetValue(strfn)
+                            ws.Cell(lastRow2 + 4, 4).SetValue(strfa)
+                            ws.Cell(lastRow2 + 4, 24).SetValue(strcn)
+                            ws.Cell(lastRow2 + 4, 25).SetValue(strca)
+                            ws.Cell(lastRow2 + 4, 27).SetValue(strny)
+                            ws.Cell(lastRow2 + 4, 29).SetValue(strbr)
+                            ws.Cell(lastRow2 + 4, 32).SetValue(striv)
+
                         Case "E153"
                             lastRow2 = ws.LastRowUsed().RowNumber()
                             For co = 1 To lastCol
@@ -810,6 +854,34 @@ Partial Class yuusen
                                     ws.Cell(lastRow2 + 3, co).SetValue(ws.Cell(ro, co).Value)
                                 End If
                             Next
+
+
+                            Call get_manual("E156", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ws.Cell(lastRow2 + 1, 3).SetValue(strfn)
+                            ws.Cell(lastRow2 + 1, 4).SetValue(strfa)
+                            ws.Cell(lastRow2 + 1, 24).SetValue(strcn)
+                            ws.Cell(lastRow2 + 1, 25).SetValue(strca)
+                            ws.Cell(lastRow2 + 1, 27).SetValue(strny)
+                            ws.Cell(lastRow2 + 1, 29).SetValue(strbr)
+                            ws.Cell(lastRow2 + 1, 32).SetValue(striv)
+
+                            Call get_manual("K501", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ws.Cell(lastRow2 + 2, 3).SetValue(strfn)
+                            ws.Cell(lastRow2 + 2, 4).SetValue(strfa)
+                            ws.Cell(lastRow2 + 2, 24).SetValue(strcn)
+                            ws.Cell(lastRow2 + 2, 25).SetValue(strca)
+                            ws.Cell(lastRow2 + 2, 27).SetValue(strny)
+                            ws.Cell(lastRow2 + 2, 29).SetValue(strbr)
+                            ws.Cell(lastRow2 + 2, 32).SetValue(striv)
+
+                            Call get_manual("E15A", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ws.Cell(lastRow2 + 3, 3).SetValue(strfn)
+                            ws.Cell(lastRow2 + 3, 4).SetValue(strfa)
+                            ws.Cell(lastRow2 + 3, 24).SetValue(strcn)
+                            ws.Cell(lastRow2 + 3, 25).SetValue(strca)
+                            ws.Cell(lastRow2 + 3, 27).SetValue(strny)
+                            ws.Cell(lastRow2 + 3, 29).SetValue(strbr)
+                            ws.Cell(lastRow2 + 3, 32).SetValue(striv)
 
                         Case "E242"
                             lastRow2 = ws.LastRowUsed().RowNumber()
@@ -825,6 +897,32 @@ Partial Class yuusen
                                 End If
                             Next
 
+                            Call get_manual("E243", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ws.Cell(lastRow2 + 1, 3).SetValue(strfn)
+                            ws.Cell(lastRow2 + 1, 4).SetValue(strfa)
+                            ws.Cell(lastRow2 + 1, 24).SetValue(strcn)
+                            ws.Cell(lastRow2 + 1, 25).SetValue(strca)
+                            ws.Cell(lastRow2 + 1, 27).SetValue(strny)
+                            ws.Cell(lastRow2 + 1, 29).SetValue(strbr)
+                            ws.Cell(lastRow2 + 1, 32).SetValue(striv)
+
+                            Call get_manual("E244", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ws.Cell(lastRow2 + 2, 3).SetValue(strfn)
+                            ws.Cell(lastRow2 + 2, 4).SetValue(strfa)
+                            ws.Cell(lastRow2 + 2, 24).SetValue(strcn)
+                            ws.Cell(lastRow2 + 2, 25).SetValue(strca)
+                            ws.Cell(lastRow2 + 2, 27).SetValue(strny)
+                            ws.Cell(lastRow2 + 2, 29).SetValue(strbr)
+                            ws.Cell(lastRow2 + 2, 32).SetValue(striv)
+
+                            Call get_manual("E248", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ws.Cell(lastRow2 + 3, 3).SetValue(strfn)
+                            ws.Cell(lastRow2 + 3, 4).SetValue(strfa)
+                            ws.Cell(lastRow2 + 3, 24).SetValue(strcn)
+                            ws.Cell(lastRow2 + 3, 25).SetValue(strca)
+                            ws.Cell(lastRow2 + 3, 27).SetValue(strny)
+                            ws.Cell(lastRow2 + 3, 29).SetValue(strbr)
+                            ws.Cell(lastRow2 + 3, 32).SetValue(striv)
                         Case "E290"
                             lastRow2 = ws.LastRowUsed().RowNumber()
                             For co = 1 To lastCol
@@ -834,6 +932,15 @@ Partial Class yuusen
                                     ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
                                 End If
                             Next
+
+                            Call get_manual("K51R", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ws.Cell(lastRow2 + 1, 3).SetValue(strfn)
+                            ws.Cell(lastRow2 + 1, 4).SetValue(strfa)
+                            ws.Cell(lastRow2 + 1, 24).SetValue(strcn)
+                            ws.Cell(lastRow2 + 1, 25).SetValue(strca)
+                            ws.Cell(lastRow2 + 1, 27).SetValue(strny)
+                            ws.Cell(lastRow2 + 1, 29).SetValue(strbr)
+                            ws.Cell(lastRow2 + 1, 32).SetValue(striv)
 
                         Case "B261"
                             lastRow2 = ws.LastRowUsed().RowNumber()
@@ -845,6 +952,15 @@ Partial Class yuusen
                                 End If
                             Next
 
+                            Call get_manual("K561", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ws.Cell(lastRow2 + 1, 3).SetValue(strfn)
+                            ws.Cell(lastRow2 + 1, 4).SetValue(strfa)
+                            ws.Cell(lastRow2 + 1, 24).SetValue(strcn)
+                            ws.Cell(lastRow2 + 1, 25).SetValue(strca)
+                            ws.Cell(lastRow2 + 1, 27).SetValue(strny)
+                            ws.Cell(lastRow2 + 1, 29).SetValue(strbr)
+                            ws.Cell(lastRow2 + 1, 32).SetValue(striv)
+
                         Case "E410"
                             lastRow2 = ws.LastRowUsed().RowNumber()
                             For co = 1 To lastCol
@@ -855,6 +971,15 @@ Partial Class yuusen
                                 End If
                             Next
 
+                            Call get_manual("K580", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ws.Cell(lastRow2 + 1, 3).SetValue(strfn)
+                            ws.Cell(lastRow2 + 1, 4).SetValue(strfa)
+                            ws.Cell(lastRow2 + 1, 24).SetValue(strcn)
+                            ws.Cell(lastRow2 + 1, 25).SetValue(strca)
+                            ws.Cell(lastRow2 + 1, 27).SetValue(strny)
+                            ws.Cell(lastRow2 + 1, 29).SetValue(strbr)
+                            ws.Cell(lastRow2 + 1, 32).SetValue(striv)
+
                         Case "E231"
                             lastRow2 = ws.LastRowUsed().RowNumber()
                             For co = 1 To lastCol
@@ -864,9 +989,23 @@ Partial Class yuusen
                                     ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
                                 End If
                             Next
+
+                            Call get_manual("E230", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ws.Cell(lastRow2 + 1, 3).SetValue(strfn)
+                            ws.Cell(lastRow2 + 1, 4).SetValue(strfa)
+                            ws.Cell(lastRow2 + 1, 24).SetValue(strcn)
+                            ws.Cell(lastRow2 + 1, 25).SetValue(strca)
+                            ws.Cell(lastRow2 + 1, 27).SetValue(strny)
+                            ws.Cell(lastRow2 + 1, 29).SetValue(strbr)
+                            ws.Cell(lastRow2 + 1, 32).SetValue(striv)
+
                     End Select
                 Next
 
+                ws.Style.Font.FontName = "Meiryo UI"
+                ws.Style.Alignment.WrapText = False
+                ws.Columns.AdjustToContents()
+                ws.SheetView.FreezeRows(1)
 
                 Dim struid As String = Session("UsrId")
                 wb.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\Mak_ivhd_" & Now.ToString(“yyMMdd”) & "_P_" & struid & ".xlsx")
@@ -950,4 +1089,83 @@ Partial Class yuusen
 
     End Function
 
+    Private Sub get_manual(strcust As String, ByRef strfn As String, ByRef strfa As String, ByRef strcn As String, ByRef strca As String, ByRef strny As String, ByRef strbr As String, ByRef striv As String)
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+        Dim strinv As String
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        Dim dt1 As DateTime = DateTime.Now
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT * FROM T_EXL_CSMANUAL "
+        strSQL = strSQL & " WHERE NEW_CODE = '" & strcust & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strfn = ""
+        strfa = ""
+        strcn = ""
+        strca = ""
+        strny = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            strfn = Convert.ToString(dataread("FINAL_DES"))
+            strfa = Convert.ToString(dataread("FINAL_DES_ADDRESS"))
+            strcn = Convert.ToString(dataread("CONSIGNEE_OF_SI"))
+            strca = Convert.ToString(dataread("CONSIGNEE_OF_SI_ADDRESS"))
+            strny = Convert.ToString(dataread("NOTIFY"))
+            strbr = Convert.ToString(dataread("BEARING"))
+            striv = Convert.ToString(dataread("IV_AUTO_CALC"))
+        End While
+
+        'If strfn = "" Then
+        '    strfn = "-"
+        'End If
+        'If strfa = "" Then
+        '    strfa = "-"
+        'End If
+        'If strcn = "" Then
+        '    strcn = "-"
+        'End If
+        'If strca = "" Then
+        '    strca = "-"
+        'End If
+        'If strny = "" Then
+        '    strny = "-"
+        'End If
+        'If strbr = "" Then
+        '    strbr = "-"
+        'End If
+        'If striv = "" Then
+        '    striv = "-"
+        'End If
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Sub
 End Class

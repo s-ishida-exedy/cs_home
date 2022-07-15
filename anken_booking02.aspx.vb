@@ -801,7 +801,6 @@ Partial Class yuusen
         Button4.Attributes.Add("onclick", "return confirm('メール送信します。よろしいですか？');")
 
 
-
         Dim strupddate00 As Date
         Dim strupddate01 As Date
 
@@ -874,7 +873,7 @@ Partial Class yuusen
 
 
 
-            Dim dt01 As String = strupddate00.ToShortDateString
+        Dim dt01 As String = strupddate00.ToShortDateString
         Dim dt02 As String = strupddate01.ToShortDateString
 
 
