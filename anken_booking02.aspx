@@ -291,7 +291,7 @@
         </tr>
     </table>
 
-    <table style="width:800px;height:10px;" >
+    <table style="width:1000px;height:10px;" >
         <tr>
             <td style="width:20px;" class ="design01" >
                 <asp:Label  ID="Label5" runat="server" ForeColor ="white" Text="KD"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
@@ -312,6 +312,12 @@
             </td>                   
             <td style="width:40px" class ="design02"　>
                 <asp:Label ID="Label7" runat="server" Font-Size="20px"/>
+            </td>
+            <td style="width:40px"class ="design01" >
+                <asp:Label  ID="Label21" runat="server"  ForeColor ="white"  Text="メール"  Height="13px" AutoPostBack="True" Font-Size="15px" />                           
+            </td>                   
+            <td style="width:40px" class ="design02"　>
+                <asp:Label ID="Label22" runat="server"  Height="13px" AutoPostBack="True" Font-Size="15px" /> 
             </td>
             <td style="width:20px;" >
             </td>
