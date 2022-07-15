@@ -120,6 +120,9 @@ Partial Class cs_home
             End If
 
         End If
+
+        '入力用IVNOをクリア
+        TextBox3.Text = ""
     End Sub
 
     Private Sub Make_Grid2()
