@@ -26,10 +26,10 @@
         .first-cell {
             text-align:left;
             font-size:25px;
-            width: 400px;
+            width: 300px;
         }
         .second-cell {
-            width: 700px;
+            width: 800px;
         }   
         .third-cell {
             width: 200px;
@@ -172,6 +172,7 @@
             <td class="second-cell">
                     <asp:Button ID="Button1" runat="server" Text="更　新" style="width:164px" Font-Size="Small" />&nbsp;
                     <asp:Button ID="Button2" runat="server" Text="削　除" style="width:164px" Font-Size="Small" />&nbsp;
+                    <%--<asp:CheckBox ID="CheckBox1" runat="server" Text ="EXCEL再出力" Font-Size="Small"  />&nbsp;--%>
                     <asp:Label ID="Label1" runat="server" Text="" Class="err"></asp:Label>
                 </td>
             <td class="third-cell">

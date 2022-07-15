@@ -25,9 +25,10 @@ Partial Class cs_home
         End If
         'コード列非表示処理
         If e.Row.RowType = DataControlRowType.DataRow OrElse e.Row.RowType = DataControlRowType.Header Then
-            e.Row.Cells(3).Visible = False
-            e.Row.Cells(4).Visible = False
-            e.Row.Cells(16).Visible = False
+            e.Row.Cells(3).Visible = False      '依頼日
+            e.Row.Cells(4).Visible = False      '作成日
+            e.Row.Cells(10).Visible = False     '作成者
+            e.Row.Cells(16).Visible = False     '
         End If
     End Sub
 
@@ -119,6 +120,9 @@ Partial Class cs_home
             End If
 
         End If
+
+        '入力用IVNOをクリア
+        TextBox3.Text = ""
     End Sub
 
     Private Sub Make_Grid2()

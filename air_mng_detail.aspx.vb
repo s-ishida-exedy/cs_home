@@ -1,5 +1,9 @@
 ﻿Imports System.Data.SqlClient
 Imports mod_function
+Imports ClosedXML.Excel
+Imports System
+Imports System.Data
+Imports System.Diagnostics
 
 Partial Class cs_home
     Inherits System.Web.UI.Page
@@ -78,6 +82,9 @@ Partial Class cs_home
                 dbcmd.Dispose()
                 cnn.Close()
                 cnn.Dispose()
+            Else
+                '登録モードの場合、作成者の初期値としてログインユーザー名を表示する。
+                TextBox8.Text = Session("UsrName")
             End If
 
             'モードによりボタン名称を変更する
@@ -86,14 +93,14 @@ Partial Class cs_home
                 Button1.Attributes.Add("onclick", "return confirm('更新します。よろしいですか？');")
                 Button2.Attributes.Add("onclick", "return confirm('削除します。よろしいですか？');")
                 Button2.Visible = True
+                'CheckBox1.Visible = True
             Else
                 Button1.Text = "登　　録"
                 Button1.Attributes.Add("onclick", "return confirm('登録します。よろしいですか？');")
                 Button2.Visible = False
+                'CheckBox1.Visible = False
             End If
-
         End If
-
     End Sub
 
     Private Sub DB_access(strExecMode As String)
@@ -334,6 +341,14 @@ Partial Class cs_home
         '更新(登録)
         Call DB_access("01")
 
+        ''登録モードの場合、最新のデータを取得し、ｲﾝﾎﾞｲｽﾍｯﾀﾞ用のエクセルファイルを作成する。
+        'If strMode = "02" Then
+        '    Call Make_ExcelFile(GET_AIR_CODE)
+        'ElseIf strMode <> "02" And CheckBox1.Checked = True Then
+        '    '更新モードで再出力チェックがONの場合、ｲﾝﾎﾞｲｽﾍｯﾀﾞ用のエクセルファイルを作成する。
+        '    Call Make_ExcelFile(GET_AIR_CODE)
+        'End If
+
         '元の画面に戻る
         Response.Redirect("air_management.aspx")
     End Sub
@@ -394,5 +409,147 @@ Partial Class cs_home
         cnn.Close()
         cnn.Dispose()
     End Sub
+
+    Private Function GET_AIR_CODE() As Integer
+        '最新のデータを取得
+        Dim strSQL As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        GET_AIR_CODE = 0
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT MAX(AIR_CODE) AS AIR_CD FROM T_EXL_AIR_MANAGE "
+        strSQL = strSQL & "WHERE CUST_CD = '" & LTrim(RTrim(TextBox4.Text)) & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            GET_AIR_CODE = dataread("AIR_CD")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+    End Function
+
+    Private Sub Make_ExcelFile(intCode As Integer)
+        'ｲﾝﾎﾞｲｽﾍｯﾀﾞ用のエクセルファイル作成
+        Dim dt = GetExcelData(intCode)
+
+        Dim workbook = New XLWorkbook()
+        Dim worksheet = workbook.Worksheets.Add(dt)
+
+        'ファイル名
+        Dim dt1 As DateTime = DateTime.Now
+        Dim strFile As String = "Air_ivhd_" & dt1.ToString("yyyyMM") & "_" & LTrim(RTrim(TextBox4.Text)) & ".xlsx"
+
+        '出力
+        workbook.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\" & strFile)
+
+    End Sub
+
+    Private Shared Function GetExcelData(intCode As Integer) As DataTable
+        'DataTableにEXCEL出力する内容を格納する
+
+        Dim strSQL As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+        Try
+            Dim dt = New DataTable("Products")
+
+            Using conn = New SqlConnection(ConnectionString)
+                Dim cmd = conn.CreateCommand()
+
+                strSQL = strSQL & "SELECT "
+                strSQL = strSQL & "  a.CUST_CD "
+                strSQL = strSQL & "  , a.ETD AS BLDATE "
+                strSQL = strSQL & "  , b.CONSIGNEENAME AS FNL_NM "
+                strSQL = strSQL & "  , b.CONSIGNEEADDRESS AS FNL_AD "
+                strSQL = strSQL & "  , 'OSAKA' AS POL "
+                strSQL = strSQL & "  , b.DESTINATION AS AGECHI "
+                strSQL = strSQL & "  , b.DESTINATION AS HAISOU "
+                strSQL = strSQL & "  , CASE a.PLACE  "
+                strSQL = strSQL & "    WHEN '本社' THEN 'OSAKA'  "
+                strSQL = strSQL & "    WHEN '上野' THEN 'MIE'  "
+                strSQL = strSQL & "    END AS NIUKECHI "
+                strSQL = strSQL & "  , b.DESTINATION "
+                strSQL = strSQL & "  , a.CUT_DATE "
+                strSQL = strSQL & "  , a.ETA "
+                strSQL = strSQL & "  , a.ETD "
+                strSQL = strSQL & "  , a.HAN_DATE "
+                strSQL = strSQL & "  , CASE a.PLACE  "
+                strSQL = strSQL & "    WHEN '本社' THEN '0BNA'  "
+                strSQL = strSQL & "    WHEN '上野' THEN '0LNF'  "
+                strSQL = strSQL & "    END AS STORE "
+                strSQL = strSQL & "  , a.SHUK_METH "
+                strSQL = strSQL & "  , CASE a.PLACE  "
+                strSQL = strSQL & "    WHEN '本社' THEN 'O'  "
+                strSQL = strSQL & "    WHEN '上野' THEN 'U'  "
+                strSQL = strSQL & "    END AS KYOTEN "
+                strSQL = strSQL & "  , '' AS VOY "
+                strSQL = strSQL & "  , a.SHIPPING_COMPANY "
+                strSQL = strSQL & "  , '' AS SHP_CHG "
+                strSQL = strSQL & "  , a.SHIPPING_COMPANY AS OTUNAKA "
+                strSQL = strSQL & "  , '-' AS OTU_CHG "
+                strSQL = strSQL & "  , '' AS BKGNO "
+                strSQL = strSQL & "  , 'by AirCraft' AS VESSEL "
+                strSQL = strSQL & "  , '' AS CNM_SI "
+                strSQL = strSQL & "  , '' AS CNA_SI "
+                strSQL = strSQL & "  , '' AS PLD_SI "
+                strSQL = strSQL & "  , '' AS NTF "
+                strSQL = strSQL & "  , '' AS TUUK "
+                strSQL = strSQL & "  , '' AS BER "
+                strSQL = strSQL & "  , '有り' AS SCHE "
+                strSQL = strSQL & "  , '' AS CONT "
+                strSQL = strSQL & "  , '' AS INVC "
+                strSQL = strSQL & "  , b.CONSIGNEENAME AS CNEE "
+                strSQL = strSQL & "  , b.CONSIGNEEADDRESS AS CNEE_AD "
+                strSQL = strSQL & "  , b.PAYMENT "
+                strSQL = strSQL & "  , b.BODYTITLE "
+                strSQL = strSQL & "  , a.TATENE "
+                strSQL = strSQL & "  , a.TRADE_TERM "
+                strSQL = strSQL & "  , a.TATENE AS TTL_TATENE "
+                strSQL = strSQL & "  , a.CURRENCY "
+                strSQL = strSQL & "  , a.RATE  "
+                strSQL = strSQL & "FROM "
+                strSQL = strSQL & "  T_EXL_AIR_MANAGE a  "
+                strSQL = strSQL & "  INNER JOIN V_T_SN_HD_TB b  "
+                strSQL = strSQL & "    ON a.SNNO = b.SALESNOTENO  "
+                strSQL = strSQL & "WHERE "
+                strSQL = strSQL & "  a.AIR_CODE = " & intCode & ""
+
+                cmd.CommandText = strSQL
+                Dim sda = New SqlDataAdapter(cmd)
+                sda.Fill(dt)
+            End Using
+
+            Return dt
+        Catch ex As Exception
+            Debug.Write(ex.Message)
+        End Try
+
+        Return Nothing
+    End Function
 End Class
 
