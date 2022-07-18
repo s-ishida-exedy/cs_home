@@ -246,6 +246,14 @@ Partial Class yuusen
         Dim sumval16 As Integer
         Dim sumval17 As Integer
 
+        Dim vala As Integer = 0
+        Dim valk As Integer = 0
+        Dim valk01 As Integer = 0
+        Dim valk02 As Integer = 0
+        Dim valu As Integer = 0
+        Dim valu01 As Integer = 0
+        Dim valu02 As Integer = 0
+
 
         Dim dt1 As DateTime = DateTime.Now
 
@@ -353,30 +361,7 @@ Partial Class yuusen
         TextBox14.Text = Int(wval13)
         TextBox15.Text = Int(wval14)
 
-        If Double.Parse(wval12) > Double.Parse(wval13) Then
 
-            sumval17 = Double.Parse(wval12)
-
-        Else
-            sumval17 = Double.Parse(wval13)
-
-        End If
-
-        If Double.Parse(wval14) > Double.Parse(sumval17) Then
-
-            sumval17 = Double.Parse(wval14)
-
-        Else
-
-
-        End If
-
-        Dim a As Integer
-
-        a = sumval17 / 100
-        a = (a * 100) + 400
-
-        TextBox16.Text = a
 
 
 
@@ -431,6 +416,10 @@ Partial Class yuusen
         dbcmd.Dispose()
 
 
+
+        vala = sumval4 + sumval5
+
+
         strSQL = ""
         strSQL = strSQL & "SELECT * FROM T_EXL_HYOU_SINTYOKU WHERE "
         strSQL = strSQL & "KBN = 'KD' "
@@ -474,7 +463,8 @@ Partial Class yuusen
             sumval13 = sumval13 + Double.Parse(dataread("ZAN_T_T_N")).ToString("N")
             sumval14 = sumval14 + Double.Parse(dataread("ZAN_SUM")).ToString("N")
 
-
+            valk01 = Double.Parse(dataread("ODR_T_S")).ToString("N")
+            valk02 = Double.Parse(dataread("ODR_T_T_N")).ToString("N")
 
         End While
 
@@ -482,6 +472,7 @@ Partial Class yuusen
         dataread.Close()
         dbcmd.Dispose()
 
+        valk = valk01 + valk02
 
         strSQL = ""
         strSQL = strSQL & "SELECT * FROM T_EXL_HYOU_SINTYOKU WHERE "
@@ -526,6 +517,8 @@ Partial Class yuusen
             sumval13 = sumval13 + Double.Parse(dataread("ZAN_T_T_N")).ToString("N")
             sumval14 = sumval14 + Double.Parse(dataread("ZAN_SUM")).ToString("N")
 
+            valu01 = Double.Parse(dataread("ODR_T_S")).ToString("N")
+            valu02 = Double.Parse(dataread("ODR_T_T_N")).ToString("N")
 
         End While
 
@@ -533,6 +526,7 @@ Partial Class yuusen
         dataread.Close()
         dbcmd.Dispose()
 
+        valu = valu01 + valu02
 
         Label65.Text = sumval1.ToString("#,0")
         Label66.Text = sumval2.ToString("#,0")
@@ -552,9 +546,30 @@ Partial Class yuusen
 
 
 
+        If Double.Parse(vala) > Double.Parse(valk) Then
+
+            sumval17 = Double.Parse(vala)
+
+        Else
+            sumval17 = Double.Parse(valk)
+
+        End If
+
+        If Double.Parse(valu) > Double.Parse(sumval17) Then
+
+            sumval17 = Double.Parse(valu)
+
+        Else
 
 
+        End If
 
+        Dim a As Integer
+
+        a = sumval17 / 100000
+        a = (a * 100) + 100
+
+        TextBox16.Text = a
 
 
 
