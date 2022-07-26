@@ -9,18 +9,18 @@ Partial Class cs_home
     Inherits System.Web.UI.Page
 
     '依頼時
-    'Const strToAddressI As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
-    'Const strCcAddressI As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
+    Const strToAddressI As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
+    Const strCcAddressI As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
     ''回答時
-    'Const strToAddressK As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
-    'Const strCcAddressK As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
+    Const strToAddressK As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
+    Const strCcAddressK As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
 
 
-    Const strToAddressI As String = "s-ishida@exedy.com"
-    Const strCcAddressI As String = "s-ishida@exedy.com,order-cs@exedy.com"
-    '回答時
-    Const strToAddressK As String = "s-ishida@exedy.com"
-    Const strCcAddressK As String = "s-ishida@exedy.com,order-cs@exedy.com"
+    'Const strToAddressI As String = "s-ishida@exedy.com"
+    'Const strCcAddressI As String = "s-ishida@exedy.com,order-cs@exedy.com"
+    ''回答時
+    'Const strToAddressK As String = "s-ishida@exedy.com"
+    'Const strCcAddressK As String = "s-ishida@exedy.com,order-cs@exedy.com"
 
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
