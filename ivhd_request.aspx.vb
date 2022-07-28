@@ -9,18 +9,18 @@ Partial Class cs_home
     Inherits System.Web.UI.Page
 
     '依頼時
-    Const strToAddressI As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
-    Const strCcAddressI As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
-    ''回答時
-    Const strToAddressK As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
-    Const strCcAddressK As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
+    'Const strToAddressI As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
+    'Const strCcAddressI As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
+    '''回答時
+    'Const strToAddressK As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
+    'Const strCcAddressK As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
 
 
-    'Const strToAddressI As String = "s-ishida@exedy.com"
-    'Const strCcAddressI As String = "s-ishida@exedy.com,order-cs@exedy.com"
-    ''回答時
-    'Const strToAddressK As String = "s-ishida@exedy.com"
-    'Const strCcAddressK As String = "s-ishida@exedy.com,order-cs@exedy.com"
+    Const strToAddressI As String = "s-ishida@exedy.com"
+    Const strCcAddressI As String = "s-ishida@exedy.com,order-cs@exedy.com"
+    '回答時
+    Const strToAddressK As String = "s-ishida@exedy.com"
+    Const strCcAddressK As String = "s-ishida@exedy.com,order-cs@exedy.com"
 
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -970,11 +970,14 @@ Partial Class cs_home
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
 
+        '元のインボイスNOから客先コードを取得
+        Dim strCust As String = CHK_CUSTCD(txtMoto.Text)
+
         If strmode = "IRAI" Then
             '依頼時
             strfrom = GET_USR_DATA()        ' 送信者
             message.From.Add(MailboxAddress.Parse(strfrom))        ' 送り元情報 
-            subject = "【ご依頼・自動配信】インボイス追加登録"     'メールの件名
+            subject = "【ご依頼・自動配信】インボイス追加登録" & strCust & "向け"     'メールの件名
             body = UriBodyC(strmode)               'メールの本文
             'Toのメールアドレスを取得
             If strToAddressI <> "" Then
@@ -996,7 +999,7 @@ Partial Class cs_home
             '回答時
             strfrom = GET_USR_DATA()        ' 送信者
             message.From.Add(MailboxAddress.Parse(strfrom))        ' 送り元情報 
-            subject = "【ご回答・自動配信】インボイス追加登録"     'メールの件名
+            subject = "【ご回答・自動配信】インボイス追加登録" & strCust & "向け"     'メールの件名
             body = UriBodyC(strmode)              'メールの本文
             'Toのメールアドレスを取得
             If strToAddressK <> "" Then
@@ -1018,7 +1021,7 @@ Partial Class cs_home
             '差し戻し時
             strfrom = GET_USR_DATA()        ' 送信者
             message.From.Add(MailboxAddress.Parse(strfrom))        ' 送り元情報 
-            subject = "【差戻し・自動配信】インボイス追加登録"     'メールの件名
+            subject = "【差戻し・自動配信】インボイス追加登録" & strCust & "向け"    'メールの件名
             body = UriBodyC(strmode)              'メールの本文
             'Toのメールアドレスを取得
             If strToAddressK <> "" Then
@@ -1060,6 +1063,7 @@ Partial Class cs_home
         'メール本文の作成（メール用）
 
         Dim Bdy As String = ""
+        Dim strBdy As String = ""
 
         Bdy = Bdy + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
         Bdy = Bdy + "このメールはシステムから送信されています。<br/>"
@@ -1067,39 +1071,48 @@ Partial Class cs_home
         Bdy = Bdy + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
 
         If strmode = "IRAI" Then
+            Call Make_Mail_TABLE(strBdy)
             Bdy = Bdy + "ＣＳチーム　担当者殿<BR>"
             Bdy = Bdy + "お世話になります。<BR>"
             Bdy = Bdy + "レート違いの出荷がある為インボイスの追加登録お願いします。<BR>"
             Bdy = Bdy + "<br/>"
+            Bdy = Bdy + "元のIVNO:" + txtMoto.Text + "<br/>"
+            Bdy = Bdy + "元のﾚｰﾄ:" + Label2.Text + "<br/>"
+            Bdy = Bdy + strBdy
             Bdy = Bdy + "メッセージ：<br/>"
             Bdy = Bdy + txtMsg.Text + "<br/>"
             Bdy = Bdy + "<br/>"
-
             Bdy = Bdy + "以上、よろしくお願いします。"
             Bdy = Bdy + "<br/><br/>"
             Bdy = Bdy + "【ＣＳ担当者はＣＳポータルにログインし、対応してください。】"
         ElseIf strmode = "KAITO" Then
+            Call Make_Mail_TABLE(strBdy)
             Bdy = Bdy + "ＥＸＬ　出荷担当者殿<BR>"
             Bdy = Bdy + "お世話になります。<BR>"
             Bdy = Bdy + "インボイスの追加登録完了しましたので、確認お願いします。<BR>"
             Bdy = Bdy + "<br/>"
+            Bdy = Bdy + "元のIVNO:" + lblMoto.Text + "<br/>"
+            Bdy = Bdy + "元のﾚｰﾄ:" + Label2.Text + "<br/>"
+            Bdy = Bdy + strBdy
             Bdy = Bdy + "メッセージ：<br/>"
             Bdy = Bdy + txtMsg.Text + "<br/>"
             Bdy = Bdy + "<br/>"
-
             Bdy = Bdy + "以上、よろしくお願いします。"
             Bdy = Bdy + "<br/><br/>"
             Bdy = Bdy + "【ＥＸＬ担当者はＣＳポータルにログインし、確認してください。】"
         ElseIf strmode = "BACK" Then
+            Call Make_Mail_TABLE(strBdy)
             Bdy = Bdy + "ＥＸＬ　出荷担当者殿<BR>"
             Bdy = Bdy + "お世話になります。<BR>"
             Bdy = Bdy + "インボイスの追加登録が差し戻しとなりました。<BR>"
             Bdy = Bdy + "確認し、再度依頼してください。<BR>"
             Bdy = Bdy + "<br/>"
+            Bdy = Bdy + "元のIVNO:" + lblMoto.Text + "<br/>"
+            Bdy = Bdy + "元のﾚｰﾄ:" + Label2.Text + "<br/>"
+            Bdy = Bdy + strBdy
             Bdy = Bdy + "メッセージ：<br/>"
             Bdy = Bdy + txtMsg.Text + "<br/>"
             Bdy = Bdy + "<br/>"
-
             Bdy = Bdy + "以上、よろしくお願いします。"
             Bdy = Bdy + "<br/><br/>"
             Bdy = Bdy + "【ＥＸＬ担当者はＣＳポータルにログインし、確認してください。】"
@@ -1202,4 +1215,132 @@ Partial Class cs_home
         cnn.Dispose()
 
     End Function
+
+    Private Function CHK_CUSTCD(strIV As String) As String
+        'インボイスNOから客先コードを取得する。
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String
+        Dim intCnt As Integer = 0
+        CHK_CUSTCD = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT CUSTCODE "
+        strSQL = strSQL & "FROM V_T_INV_HD_TB "
+        strSQL = strSQL & "WHERE OLD_INVNO = '" & Trim(strIV) & "' "
+
+        dbcmd = New SqlCommand(strSQL, cnn)
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            CHK_CUSTCD = dataread("CUSTCODE")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+    End Function
+
+    Private Sub Make_Mail_TABLE(ByRef Bdy As String)
+        'メールに記載する表の作成
+        Bdy = Bdy + "<table width=75% border=""1"" style=""border-collapse: collapse"">"
+        Bdy = Bdy + "    <tr>"
+        Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#87E7AD"" style =""font-weight:bold"">SNNO</td>"
+        Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">レート</td>"
+        Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">IVNO</td>"
+        Bdy = Bdy + "    </tr>"
+        If txtSN01.Text <> "" Or lblSN01.Text <> "" Then
+            Bdy = Bdy + "    <tr>"
+            If txtSN01.Text <> "" Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & Trim(txtSN01.Text) & "</td>"
+            ElseIf lblSN01.Text <> "" Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & lblSN01.Text & "</td>"
+            End If
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & lblRate01.Text & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV01.Text) & "</td>"
+            Bdy = Bdy + "    </tr>"
+        End If
+        If txtSN02.Text <> "" Or lblSN02.Text <> "" Then
+            Bdy = Bdy + "    <tr>"
+            If txtSN02.Text <> "" Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & Trim(txtSN02.Text) & "</td>"
+            ElseIf lblSN02.Text <> "" Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & lblSN02.Text & "</td>"
+            End If
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & lblRate02.Text & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV02.Text) & "</td>"
+            Bdy = Bdy + "    </tr>"
+        End If
+        If txtSN03.Text <> "" Or lblSN03.Text <> "" Then
+            Bdy = Bdy + "    <tr>"
+            If txtSN03.Text <> "" Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & Trim(txtSN03.Text) & "</td>"
+            ElseIf lblSN03.Text <> "" Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & lblSN03.Text & "</td>"
+            End If
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & lblRate03.Text & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV03.Text) & "</td>"
+            Bdy = Bdy + "    </tr>"
+        End If
+        If txtSN04.Text <> "" Or lblSN04.Text <> "" Then
+            Bdy = Bdy + "    <tr>"
+            If txtSN04.Text <> "" Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & Trim(txtSN04.Text) & "</td>"
+            ElseIf lblSN04.Text <> "" Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & lblSN04.Text & "</td>"
+            End If
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & lblRate04.Text & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV04.Text) & "</td>"
+            Bdy = Bdy + "    </tr>"
+        End If
+        If txtSN05.Text <> "" Or lblSN05.Text <> "" Then
+            Bdy = Bdy + "    <tr>"
+            If txtSN05.Text <> "" Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & Trim(txtSN05.Text) & "</td>"
+            ElseIf lblSN05.Text <> "" Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & lblSN05.Text & "</td>"
+            End If
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & lblRate05.Text & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV05.Text) & "</td>"
+            Bdy = Bdy + "    </tr>"
+        End If
+        If txtSN06.Text <> "" Or lblSN06.Text <> "" Then
+            Bdy = Bdy + "    <tr>"
+            If txtSN06.Text <> "" Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & Trim(txtSN06.Text) & "</td>"
+            ElseIf lblSN06.Text <> "" Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & lblSN06.Text & "</td>"
+            End If
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & lblRate06.Text & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV06.Text) & "</td>"
+            Bdy = Bdy + "    </tr>"
+        End If
+        If txtSN07.Text <> "" Or lblSN07.Text <> "" Then
+            Bdy = Bdy + "    <tr>"
+            If txtSN07.Text <> "" Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & Trim(txtSN07.Text) & "</td>"
+            ElseIf lblSN07.Text <> "" Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & lblSN07.Text & "</td>"
+            End If
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & lblRate07.Text & "</td>"
+            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV07.Text) & "</td>"
+            Bdy = Bdy + "    </tr>"
+        End If
+        Bdy = Bdy + "</table><br/>"
+    End Sub
+
+
 End Class

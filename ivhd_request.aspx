@@ -253,11 +253,11 @@
     </table>
 <div class="flex">
 
-<%--<div class="wrapper">
+<div class="wrapper">
 <table class="sticky">
 <thead class="fixed">
 </thead>
-<tbody>--%>
+<tbody>
 <%--<div id="main2" style="width:100%;height:450px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">--%>
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="900px" 
         BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" 
