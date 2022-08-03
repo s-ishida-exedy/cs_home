@@ -91,6 +91,12 @@
             top:15px;
             position: absolute;
         } 
+        .txtb{
+            padding: 5px;
+            font-size :small ;
+            width :80px;
+            text-align :center ;
+        }
        　/*ヘッダー固定用*/
         table{
           width: 100%;
@@ -177,9 +183,9 @@
                 <asp:DropDownList ID="DropDownList2" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="Forwarder" DataValueField="Forwarder" AutoPostBack ="true" Width ="200px"></asp:DropDownList> 
                 &nbsp;
                 <asp:Label ID="Label1" runat="server" Text="客先CD:"></asp:Label>
-                <asp:TextBox ID="TextBox1" runat="server" Width ="100"></asp:TextBox>
+                <asp:TextBox ID="TextBox1" runat="server" Class ="txtb"></asp:TextBox>
                 <asp:Label ID="Label3" runat="server" Text="IVNO:"></asp:Label>
-                <asp:TextBox ID="TextBox2" runat="server" Width ="100"></asp:TextBox>
+                <asp:TextBox ID="TextBox2" runat="server" Class ="txtb"></asp:TextBox>
                 <br />
                 <asp:Button ID="Button1" runat="server" Text=" 絞込 " Font-Size="Small" Width ="80" />
                 <asp:Button ID="Button2" runat="server" Text=" ﾘｾｯﾄ " Font-Size="Small" Width ="80" />

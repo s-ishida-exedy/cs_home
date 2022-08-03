@@ -43,6 +43,7 @@
                     <li data-id='["home","van_sche.aspx"]'><a href="#">本日のバンニング予定</a></li>
                     <li data-id='["home","doc_final.aspx"]'><a href="#">書類最終一覧</a></li>
                     <li data-id='["home","make_ivhd.aspx"]'><a href="#">ｲﾝﾎﾞｲｽﾍｯﾀﾞファイル作成</a></li>
+                    <li data-id='["home","ivhd_request.aspx"]'><a href="#">追加ｲﾝﾎﾞｲｽﾍｯﾀﾞ作成依頼</a></li>
                     <li data-id='["home","register_csstatus.aspx"]'><a href="#">委託登録・マスタ変更</a></li>
                     <li data-id='["home","eir_comfirm_cs.aspx"]'><a href="#">EIR,Booking差異 CS対応</a></li>
                     <li data-id='["home","iv_booking.aspx"]'><a href="#">ﾌﾞｯｷﾝｸﾞｼｰﾄ vs I/Vﾍｯﾀﾞ 比較結果</a></li>

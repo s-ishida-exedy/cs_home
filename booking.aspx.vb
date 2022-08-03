@@ -86,7 +86,7 @@ Partial Class cs_home
         End If
 
         'データの取得
-        Dim ds As DataSet = Dataobj.GET_BOOKING_DATA(strSts, strFwd, Me.TextBox1.Text, Me.TextBox2.Text)
+        Dim ds As DataSet = Dataobj.GET_BOOKING_DATA(strSts, strFwd, Trim(Me.TextBox1.Text), Trim(Me.TextBox2.Text))
         If ds.Tables.Count > 0 Then
             GridView1.DataSourceID = ""
             GridView1.DataSource = ds
