@@ -731,7 +731,7 @@ Partial Class yuusen
                     Else
 
                         For i As Integer = 0 To row.Cells.Count - 4
-                            val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
+                            val01 = Trim(Replace(Replace(row.Cells(i).Text, "&nbsp;", ""), "&amp;", "&"))
                             Select Case i
 
                                 Case 1, 9 To 12
