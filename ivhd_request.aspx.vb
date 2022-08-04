@@ -9,18 +9,18 @@ Partial Class cs_home
     Inherits System.Web.UI.Page
 
     '依頼時
-    'Const strToAddressI As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
-    'Const strCcAddressI As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
-    '''回答時
-    'Const strToAddressK As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
-    'Const strCcAddressK As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
-
-
-    Const strToAddressI As String = "s-ishida@exedy.com"
-    Const strCcAddressI As String = "s-ishida@exedy.com,order-cs@exedy.com"
+    Const strToAddressI As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
+    Const strCcAddressI As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
     '回答時
-    Const strToAddressK As String = "s-ishida@exedy.com"
-    Const strCcAddressK As String = "s-ishida@exedy.com,order-cs@exedy.com"
+    Const strToAddressK As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
+    Const strCcAddressK As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
+
+
+    'Const strToAddressI As String = "s-ishida@exedy.com"
+    'Const strCcAddressI As String = "s-ishida@exedy.com,order-cs@exedy.com"
+    ''回答時
+    'Const strToAddressK As String = "s-ishida@exedy.com"
+    'Const strCcAddressK As String = "s-ishida@exedy.com,order-cs@exedy.com"
 
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -221,6 +221,15 @@ Partial Class cs_home
                     CType(control, Button).Text = "確認"
                 Else
                     CType(control, Button).Text = "編集"
+                End If
+            End If
+        Next
+        For Each control As Control In e.Row.Cells(7).Controls
+            If TypeOf control Is Button Then
+                If CHK_STATUS(e.Row.Cells(2).Text) = "1" Then
+                    CType(control, Button).Text = "確認"
+                Else
+                    CType(control, Button).Text = "対応"
                 End If
             End If
         Next
@@ -645,9 +654,20 @@ Partial Class cs_home
         '更新
         If e.CommandName = "sup" Then
             '対応ボタン
-            'ステータスが0：依頼中のみＯＫ
+            'ステータスが0：依頼中
             If CHK_STATUS(data1) = "0" Then
                 Call SET_DATA(data1, "0")            '明細を右側にセット
+            ElseIf CHK_STATUS(data1) = "1" Then
+                '回答済みの場合、ボタン名は確認。右側を非活性にしてセットする。
+                Call SET_DATA(data1, "0")            '明細を右側にセット
+
+                txtIV01.Enabled = False
+                txtIV02.Enabled = False
+                txtIV03.Enabled = False
+                txtIV04.Enabled = False
+                txtIV05.Enabled = False
+                txtIV06.Enabled = False
+                txtIV07.Enabled = False
             Else
                 Label12.Text = "ｽﾃｰﾀｽが依頼中のみ押下可能です。"
                 Return
