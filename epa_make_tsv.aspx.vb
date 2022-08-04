@@ -285,7 +285,7 @@ Partial Class cs_home
         While (dataread.Read())
             strArry = ""
             Dim strAry() As String = Split(dataread("CASENO"), ",")
-            Dim intAry(199) As Integer
+            Dim intAry(500) As Integer
 
             'まずは数値型に変換
             For Each str0 As Integer In strAry
