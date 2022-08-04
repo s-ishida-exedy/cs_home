@@ -172,7 +172,7 @@
             <td class="second-cell">
                     <asp:Button ID="Button1" runat="server" Text="更　新" style="width:164px" Font-Size="Small" />&nbsp;
                     <asp:Button ID="Button2" runat="server" Text="削　除" style="width:164px" Font-Size="Small" />&nbsp;
-                    <asp:CheckBox ID="CheckBox1" runat="server" Text ="EXCEL再出力" Font-Size="Small"  />&nbsp;
+                    <%--<asp:CheckBox ID="CheckBox1" runat="server" Text ="EXCEL再出力" Font-Size="Small"  />&nbsp;--%>
                     <asp:Label ID="Label1" runat="server" Text="" Class="err"></asp:Label>
                 </td>
             <td class="third-cell">
@@ -221,8 +221,7 @@
                 </td>
                 <th>SNNO</th>
                 <td>
-                    <asp:TextBox ID="TextBox11" runat="server" Width="120px" CssClass="txtb"></asp:TextBox>
-                    <asp:Button ID="Button3" runat="server" Text="SN情報取得" Font-Size="Small" Width ="100px"/>
+                    <asp:TextBox ID="TextBox11" runat="server" Width="233px" CssClass="txtb"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -284,8 +283,7 @@
             <tr>
                 <th>通貨</th>
                 <td>
-                    <asp:Label ID="Label2" runat="server" Text="" CssClass="txtb"></asp:Label>
-<%--                    <asp:DropDownList ID="DropDownList5" runat="server" Width ="180px" AutoPostBack="True" CssClass="drpb">
+                    <asp:DropDownList ID="DropDownList5" runat="server" Width ="180px" AutoPostBack="True" CssClass="drpb">
                         <asp:ListItem Value=""></asp:ListItem>
                         <asp:ListItem Value="01">JPY</asp:ListItem>
                         <asp:ListItem Value="02">US$</asp:ListItem>
@@ -301,12 +299,11 @@
                         <asp:ListItem Value="12">WON</asp:ListItem>
                         <asp:ListItem Value="13">MRK</asp:ListItem>
                         <asp:ListItem Value="14">NZ$</asp:ListItem>
-                    </asp:DropDownList>--%>
+                    </asp:DropDownList>
                 </td>
                 <th>レート</th>
                 <td>
-                    <asp:Label ID="Label3" runat="server" Text="" CssClass="txtb_r"></asp:Label>
-                    <%--<asp:TextBox ID="TextBox16" runat="server" Width="233px" CssClass="txtb_r"></asp:TextBox>--%>
+                    <asp:TextBox ID="TextBox16" runat="server" Width="233px" CssClass="txtb_r"></asp:TextBox>
                 </td>
                 <th>場所</th>
                 <td>
