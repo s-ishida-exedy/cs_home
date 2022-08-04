@@ -51,7 +51,36 @@ Partial Class cs_home
                     DropDownList2.SelectedValue = dataread("PICKUP").ToString
                     DropDownList3.SelectedValue = dataread("PLACE").ToString
                     DropDownList4.SelectedValue = dataread("TATENE").ToString
-                    DropDownList5.SelectedValue = dataread("CURRENCY").ToString
+                    Select Case dataread("CURRENCY").ToString
+                        Case "01"
+                            Label2.Text = "JPY"
+                        Case "02"
+                            Label2.Text = "US$"
+                        Case "03"
+                            Label2.Text = "EUR"
+                        Case "04"
+                            Label2.Text = "A$"
+                        Case "05"
+                            Label2.Text = "INR"
+                        Case "06"
+                            Label2.Text = "THB"
+                        Case "07"
+                            Label2.Text = "NT$"
+                        Case "08"
+                            Label2.Text = "MYR"
+                        Case "09"
+                            Label2.Text = "CNY"
+                        Case "10"
+                            Label2.Text = "IDR"
+                        Case "11"
+                            Label2.Text = "NR\"
+                        Case "12"
+                            Label2.Text = "WON"
+                        Case "13"
+                            Label2.Text = "MRK"
+                        Case "14"
+                            Label2.Text = "NZ$"
+                    End Select
                     DropDownList6.SelectedValue = dataread("SHUK_METH").ToString
 
                     TextBox1.Text = dataread("REQUESTED_DATE").ToString
@@ -69,9 +98,9 @@ Partial Class cs_home
                     TextBox13.Text = dataread("HAN_DATE").ToString
                     TextBox14.Text = dataread("ETA").ToString
                     If dataread("RATE").Equals(DBNull.Value) Then
-                        TextBox16.Text = ""
+                        Label3.Text = ""
                     Else
-                        TextBox16.Text = dataread("RATE")
+                        Label3.Text = dataread("RATE")
                     End If
 
                     TextBox17.Text = dataread("TRADE_TERM").ToString
@@ -93,12 +122,12 @@ Partial Class cs_home
                 Button1.Attributes.Add("onclick", "return confirm('更新します。よろしいですか？');")
                 Button2.Attributes.Add("onclick", "return confirm('削除します。よろしいですか？');")
                 Button2.Visible = True
-                'CheckBox1.Visible = True
+                CheckBox1.Visible = True
             Else
                 Button1.Text = "登　　録"
                 Button1.Attributes.Add("onclick", "return confirm('登録します。よろしいですか？');")
                 Button2.Visible = False
-                'CheckBox1.Visible = False
+                CheckBox1.Visible = False
             End If
         End If
     End Sub
@@ -108,7 +137,7 @@ Partial Class cs_home
         Dim strSQL As String
         Dim strVal As String = ""
         Dim dtNow As DateTime = DateTime.Now
-
+        Dim strTuuka As String = ""
         'パラメータ取得
         Dim strCode As String = Session("strCode")
         Dim strMode As String = Session("strMode")
@@ -150,8 +179,8 @@ Partial Class cs_home
             strSQL = strSQL & "  , ETA = '" & LTrim(RTrim(TextBox14.Text)) & "' "  '到着日
             strSQL = strSQL & "  , TATENE = '" & DropDownList4.SelectedValue & "' "   '建値
             strSQL = strSQL & "  , TRADE_TERM = '" & LTrim(RTrim(TextBox17.Text)) & "' "  'Trade Term
-            strSQL = strSQL & "  , CURRENCY = '" & DropDownList5.SelectedValue & "' "   '通貨
-            strSQL = strSQL & "  , RATE = '" & LTrim(RTrim(TextBox16.Text)) & "' "  'レート
+            strSQL = strSQL & "  , CURRENCY = '" & Label2.Text & "' "   '通貨
+            strSQL = strSQL & "  , RATE = '" & Label3.Text & "' "  'レート
             strSQL = strSQL & "  , SHUK_METH = '" & DropDownList6.SelectedValue & "' "  '出荷方法
             strSQL = strSQL & "WHERE "
             strSQL = strSQL & "       AIR_CODE =  '" & strCode & "' "
@@ -161,6 +190,36 @@ Partial Class cs_home
             strSQL = strSQL & "WHERE "
             strSQL = strSQL & "       AIR_CODE =  '" & strCode & "' "
         Else
+            Select Case Label2.Text
+                Case "JPY"
+                    strTuuka = "01"
+                Case "US$"
+                    strTuuka = "02"
+                Case "EUR"
+                    strTuuka = "03"
+                Case "A$"
+                    strTuuka = "04"
+                Case "INR"
+                    strTuuka = "05"
+                Case "THB"
+                    strTuuka = "06"
+                Case "NT$"
+                    strTuuka = "07"
+                Case "MYR"
+                    strTuuka = "08"
+                Case "CNY"
+                    strTuuka = "09"
+                Case "IDR"
+                    strTuuka = "10"
+                Case "NR\"
+                    strTuuka = "11"
+                Case "WON"
+                    strTuuka = "12"
+                Case "MRK"
+                    strTuuka = "13"
+                Case "NZ$"
+                    strTuuka = "14"
+            End Select
             strSQL = ""
             strSQL = strSQL & "INSERT INTO T_EXL_AIR_MANAGE "
             strSQL = strSQL & "VALUES ( "
@@ -185,8 +244,8 @@ Partial Class cs_home
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox14.Text)) & "' "  '到着日
             strSQL = strSQL & "  , '" & DropDownList4.SelectedValue & "' "   '建値
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox17.Text)) & "' "  'Trade Term
-            strSQL = strSQL & "  , '" & DropDownList5.SelectedValue & "' "   '通貨
-            strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox16.Text)) & "' "  'レート
+            strSQL = strSQL & "  , '" & strTuuka & "' "   '通貨
+            strSQL = strSQL & "  , '" & Label3.Text & "' "  'レート
             strSQL = strSQL & "  , '" & DropDownList6.SelectedValue & "' "  '出荷方法
             strSQL = strSQL & ") "
         End If
@@ -243,14 +302,14 @@ Partial Class cs_home
             Label1.Text = "Trade Termは必須入力です。"
             chk_Nyuryoku = False
         End If
-        If TextBox16.Text = "" Then
-            Label1.Text = "レートは必須入力です。"
-            chk_Nyuryoku = False
-        End If
-        If DropDownList5.SelectedValue = "" Then
-            Label1.Text = "通貨は必須選択です。"
-            chk_Nyuryoku = False
-        End If
+        'If TextBox16.Text = "" Then
+        '    Label1.Text = "レートは必須入力です。"
+        '    chk_Nyuryoku = False
+        'End If
+        'If DropDownList5.SelectedValue = "" Then
+        '    Label1.Text = "通貨は必須選択です。"
+        '    chk_Nyuryoku = False
+        'End If
         If DropDownList4.SelectedValue = "" Then
             Label1.Text = "建値は必須選択です。"
             chk_Nyuryoku = False
@@ -281,7 +340,6 @@ Partial Class cs_home
         End If
 
     End Function
-
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         '更新（登録）ボタンクリックイベント
@@ -341,13 +399,16 @@ Partial Class cs_home
         '更新(登録)
         Call DB_access("01")
 
-        ''登録モードの場合、最新のデータを取得し、ｲﾝﾎﾞｲｽﾍｯﾀﾞ用のエクセルファイルを作成する。
-        'If strMode = "02" Then
-        '    Call Make_ExcelFile(GET_AIR_CODE)
-        'ElseIf strMode <> "02" And CheckBox1.Checked = True Then
-        '    '更新モードで再出力チェックがONの場合、ｲﾝﾎﾞｲｽﾍｯﾀﾞ用のエクセルファイルを作成する。
-        '    Call Make_ExcelFile(GET_AIR_CODE)
-        'End If
+        'AIR専用客先の場合、エクセルファイルは出力しない
+        If Not TextBox4.Text = "E140" Or TextBox4.Text = "E155" Or TextBox4.Text = "C255" Then
+            '登録モードの場合、最新のデータを取得し、ｲﾝﾎﾞｲｽﾍｯﾀﾞ用のエクセルファイルを作成する。
+            If strMode = "02" Then
+                Call Make_ExcelFile(GET_AIR_CODE)
+            ElseIf strMode <> "02" And CheckBox1.Checked = True Then
+                '更新モードで再出力チェックがONの場合、ｲﾝﾎﾞｲｽﾍｯﾀﾞ用のエクセルファイルを作成する。
+                Call Make_ExcelFile(GET_AIR_CODE)
+            End If
+        End If
 
         '元の画面に戻る
         Response.Redirect("air_management.aspx")
@@ -364,8 +425,8 @@ Partial Class cs_home
 
     End Sub
 
-    Private Sub DropDownList5_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList5.SelectedIndexChanged
-        '通貨変更時、最新のレートを貿易システムから取得し、テキストボックスに表示する。
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        'ＳＮから通貨とレートを取得する。
         Dim strSQL As String = ""
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
@@ -385,13 +446,29 @@ Partial Class cs_home
         'データベース接続を開く
         cnn.Open()
 
-        TextBox16.Text = ""
-
         strSQL = ""
-        strSQL = strSQL & "SELECT RATE FROM M_RATE_TB "
-        strSQL = strSQL & "WHERE CRY_YEAR = '" & strYear & "' "
-        strSQL = strSQL & "AND   CRY_MONTH = '" & strMonth & "' "
-        strSQL = strSQL & "AND   CRYCD = '" & DropDownList5.SelectedValue & "' "
+        strSQL = strSQL & "SELECT "
+        strSQL = strSQL & "  CASE a.CRYCD "
+        strSQL = strSQL & "    WHEN 01 THEN 'JPY' "
+        strSQL = strSQL & "    WHEN 02 THEN 'US$' "
+        strSQL = strSQL & "    WHEN 03 THEN 'EUR' "
+        strSQL = strSQL & "    WHEN 04 THEN 'A$' "
+        strSQL = strSQL & "    WHEN 05 THEN 'INR' "
+        strSQL = strSQL & "    WHEN 06 THEN 'THB' "
+        strSQL = strSQL & "    WHEN 07 THEN 'NT$' "
+        strSQL = strSQL & "    WHEN 08 THEN 'MYR' "
+        strSQL = strSQL & "    WHEN 09 THEN 'CNY' "
+        strSQL = strSQL & "    WHEN 10 THEN 'IDR' "
+        strSQL = strSQL & "    WHEN 11 THEN 'NR\' "
+        strSQL = strSQL & "    WHEN 12 THEN 'WON' "
+        strSQL = strSQL & "    WHEN 13 THEN 'MRK' "
+        strSQL = strSQL & "    WHEN 14 THEN 'NZ$' "
+        strSQL = strSQL & "  END AS CRYCD "
+        strSQL = strSQL & "  , a.RATE  "
+        strSQL = strSQL & "FROM "
+        strSQL = strSQL & "  dbo.T_SN_HD_TB a  "
+        strSQL = strSQL & "WHERE "
+        strSQL = strSQL & "  a.SALESNOTENO = '" & Trim(TextBox11.Text) & "' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -400,7 +477,8 @@ Partial Class cs_home
 
         '結果を取り出す 
         While (dataread.Read())
-            TextBox16.Text = dataread("RATE").ToString
+            Label2.Text = dataread("CRYCD").ToString
+            Label3.Text = dataread("RATE").ToString
         End While
 
         'クローズ処理 
@@ -451,17 +529,34 @@ Partial Class cs_home
 
     Private Sub Make_ExcelFile(intCode As Integer)
         'ｲﾝﾎﾞｲｽﾍｯﾀﾞ用のエクセルファイル作成
+        Dim i As Integer = 0
+
+        'エクセル用データ取得
         Dim dt = GetExcelData(intCode)
 
         Dim workbook = New XLWorkbook()
         Dim worksheet = workbook.Worksheets.Add(dt)
 
+        'シートの最下行を取得
+        Dim lastRow = worksheet.LastRowUsed().RowNumber()
+
+        'セルごとに関数で取込フォーマットに合わせる
+        For i = 2 To lastRow
+            '全角を半角に変換。改行を削除
+            Dim strVal As String = worksheet.Cell(i, 4).Value       'D列 Finaldestination ADDRESS
+            worksheet.Cell(i, 4).Value = StrConv(strVal, VbStrConv.Narrow).Replace(Chr(13), "").Replace(Chr(10), "")
+
+            Dim strVal2 As String = worksheet.Cell(i, 34).Value       'AH列 CNEE_AD
+            worksheet.Cell(i, 34).Value = StrConv(strVal2, VbStrConv.Narrow).Replace(Chr(13), "").Replace(Chr(10), "")
+        Next
+
         'ファイル名
         Dim dt1 As DateTime = DateTime.Now
-        Dim strFile As String = "Air_ivhd_" & dt1.ToString("yyyyMM") & "_" & LTrim(RTrim(TextBox4.Text)) & ".xlsx"
+        Dim strFile As String = "Air_ivhd_" & dt1.ToString("yyMMddhhmm") & "_" & LTrim(RTrim(TextBox4.Text)) & ".xlsx"
 
         '出力
-        workbook.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\" & strFile)
+        'workbook.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\" & strFile)
+        workbook.SaveAs("C:\exp\cs_home\files\" & strFile)
 
     End Sub
 
@@ -476,67 +571,67 @@ Partial Class cs_home
         ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
 
         Try
-            Dim dt = New DataTable("Products")
+            Dim dt = New DataTable("INVHDSHEET")
 
             Using conn = New SqlConnection(ConnectionString)
                 Dim cmd = conn.CreateCommand()
 
                 strSQL = strSQL & "SELECT "
-                strSQL = strSQL & "  a.CUST_CD "
-                strSQL = strSQL & "  , a.ETD AS BLDATE "
-                strSQL = strSQL & "  , b.CONSIGNEENAME AS FNL_NM "
-                strSQL = strSQL & "  , b.CONSIGNEEADDRESS AS FNL_AD "
-                strSQL = strSQL & "  , 'OSAKA' AS POL "
-                strSQL = strSQL & "  , b.DESTINATION AS AGECHI "
-                strSQL = strSQL & "  , b.DESTINATION AS HAISOU "
-                strSQL = strSQL & "  , CASE a.PLACE  "
-                strSQL = strSQL & "    WHEN '本社' THEN 'OSAKA'  "
-                strSQL = strSQL & "    WHEN '上野' THEN 'MIE'  "
-                strSQL = strSQL & "    END AS NIUKECHI "
-                strSQL = strSQL & "  , b.DESTINATION "
-                strSQL = strSQL & "  , a.CUT_DATE "
-                strSQL = strSQL & "  , a.ETA "
-                strSQL = strSQL & "  , a.ETD "
-                strSQL = strSQL & "  , a.HAN_DATE "
-                strSQL = strSQL & "  , CASE a.PLACE  "
-                strSQL = strSQL & "    WHEN '本社' THEN '0BNA'  "
-                strSQL = strSQL & "    WHEN '上野' THEN '0LNF'  "
-                strSQL = strSQL & "    END AS STORE "
-                strSQL = strSQL & "  , a.SHUK_METH "
-                strSQL = strSQL & "  , CASE a.PLACE  "
-                strSQL = strSQL & "    WHEN '本社' THEN 'O'  "
-                strSQL = strSQL & "    WHEN '上野' THEN 'U'  "
-                strSQL = strSQL & "    END AS KYOTEN "
-                strSQL = strSQL & "  , '' AS VOY "
-                strSQL = strSQL & "  , a.SHIPPING_COMPANY "
-                strSQL = strSQL & "  , '' AS SHP_CHG "
-                strSQL = strSQL & "  , a.SHIPPING_COMPANY AS OTUNAKA "
-                strSQL = strSQL & "  , '-' AS OTU_CHG "
-                strSQL = strSQL & "  , '' AS BKGNO "
-                strSQL = strSQL & "  , 'by AirCraft' AS VESSEL "
-                strSQL = strSQL & "  , '' AS CNM_SI "
-                strSQL = strSQL & "  , '' AS CNA_SI "
-                strSQL = strSQL & "  , '' AS PLD_SI "
-                strSQL = strSQL & "  , '' AS NTF "
-                strSQL = strSQL & "  , '' AS TUUK "
-                strSQL = strSQL & "  , '' AS BER "
-                strSQL = strSQL & "  , '有り' AS SCHE "
-                strSQL = strSQL & "  , '' AS CONT "
-                strSQL = strSQL & "  , '' AS INVC "
-                strSQL = strSQL & "  , b.CONSIGNEENAME AS CNEE "
-                strSQL = strSQL & "  , b.CONSIGNEEADDRESS AS CNEE_AD "
-                strSQL = strSQL & "  , b.PAYMENT "
-                strSQL = strSQL & "  , b.BODYTITLE "
-                strSQL = strSQL & "  , a.TATENE "
-                strSQL = strSQL & "  , a.TRADE_TERM "
-                strSQL = strSQL & "  , a.TATENE AS TTL_TATENE "
-                strSQL = strSQL & "  , a.CURRENCY "
-                strSQL = strSQL & "  , a.RATE  "
-                strSQL = strSQL & "FROM "
-                strSQL = strSQL & "  T_EXL_AIR_MANAGE a  "
-                strSQL = strSQL & "  INNER JOIN V_T_SN_HD_TB b  "
-                strSQL = strSQL & "    ON a.SNNO = b.SALESNOTENO  "
-                strSQL = strSQL & "WHERE "
+                strSQL = strSQL & "  a.CUST_CD  "
+                strSQL = strSQL & "  , CAST(a.ETD AS datetime) AS BLDATE "
+                strSQL = strSQL & "  , b.CONSIGNEENAME AS FNL_NM  "
+                strSQL = strSQL & "  , b.CONSIGNEEADDRESS AS FNL_AD  "
+                strSQL = strSQL & "  , 'OSAKA' AS POL  "
+                strSQL = strSQL & "  , RTRIM(b.DESTINATION) AS AGECHI  "
+                strSQL = strSQL & "  , RTRIM(b.DESTINATION) AS HAISOU  "
+                strSQL = strSQL & "  , CASE a.PLACE   "
+                strSQL = strSQL & "    WHEN '本社' THEN 'OSAKA'   "
+                strSQL = strSQL & "    WHEN '上野' THEN 'MIE'   "
+                strSQL = strSQL & "    END AS NIUKECHI  "
+                strSQL = strSQL & "  , RTRIM(b.DESTINATION) AS DESTINATION  "
+                strSQL = strSQL & "  , CAST(a.CUT_DATE AS datetime) AS CUT_DATE "
+                strSQL = strSQL & "  , CAST(a.ETA AS datetime) AS ETA "
+                strSQL = strSQL & "  , CAST(a.ETD AS datetime) AS ETD "
+                strSQL = strSQL & "  , CAST(a.HAN_DATE AS datetime) AS HAN_DATE "
+                strSQL = strSQL & "  , CASE a.PLACE   "
+                strSQL = strSQL & "    WHEN '本社' THEN '0BNA'   "
+                strSQL = strSQL & "    WHEN '上野' THEN '0LNF'   "
+                strSQL = strSQL & "    END AS STORE  "
+                strSQL = strSQL & "  , a.SHUK_METH  "
+                strSQL = strSQL & "  , CASE a.PLACE   "
+                strSQL = strSQL & "    WHEN '本社' THEN 'O'   "
+                strSQL = strSQL & "    WHEN '上野' THEN 'U'   "
+                strSQL = strSQL & "    END AS KYOTEN  "
+                strSQL = strSQL & "  , '-' AS VOY  "
+                strSQL = strSQL & "  , a.SHIPPING_COMPANY  "
+                strSQL = strSQL & "  , '-' AS SHP_CHG  "
+                strSQL = strSQL & "  , a.SHIPPING_COMPANY AS OTUNAKA  "
+                strSQL = strSQL & "  , '-' AS OTU_CHG  "
+                strSQL = strSQL & "  , '-' AS BKGNO  "
+                strSQL = strSQL & "  , 'by AirCraft' AS VESSEL  "
+                strSQL = strSQL & "  , '-' AS CNM_SI  "
+                strSQL = strSQL & "  , '-' AS CNA_SI  "
+                strSQL = strSQL & "  , '-' AS PLD_SI  "
+                strSQL = strSQL & "  , '-' AS NTF  "
+                strSQL = strSQL & "  , ' ' AS TUUK  "
+                strSQL = strSQL & "  , '有り' AS BER  "
+                strSQL = strSQL & "  , '有り' AS SCHE  "
+                strSQL = strSQL & "  , '有り' AS CONT  "
+                strSQL = strSQL & "  , '無し' AS INVC  "
+                strSQL = strSQL & "  , b.CONSIGNEENAME AS CNEE  "
+                strSQL = strSQL & "  , b.CONSIGNEEADDRESS AS CNEE_AD  "
+                strSQL = strSQL & "  , RTRIM(b.PAYMENT) AS PAYMENT  "
+                strSQL = strSQL & "  , RTRIM(b.BODYTITLE) AS BODYTITLE "
+                strSQL = strSQL & "  , a.TATENE  "
+                strSQL = strSQL & "  , a.TRADE_TERM  "
+                strSQL = strSQL & "  , a.TATENE AS TTL_TATENE  "
+                strSQL = strSQL & "  , a.CURRENCY  "
+                strSQL = strSQL & "  , a.RATE   "
+                strSQL = strSQL & "FROM  "
+                strSQL = strSQL & "  T_EXL_AIR_MANAGE a   "
+                strSQL = strSQL & "  INNER JOIN V_T_SN_HD_TB b   "
+                strSQL = strSQL & "    ON a.SNNO = b.SALESNOTENO   "
+                strSQL = strSQL & "WHERE  "
                 strSQL = strSQL & "  a.AIR_CODE = " & intCode & ""
 
                 cmd.CommandText = strSQL
