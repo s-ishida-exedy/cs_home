@@ -986,15 +986,15 @@ Partial Class cs_home
         Dim strfrom As String = ""
         Dim subject As String = ""
         Dim body As String = ""
-
+        Dim strCust As String = ””
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
 
         '元のインボイスNOから客先コードを取得
         If Trim(txtMoto.Text) <> "" Then
-            Dim strCust As String = CHK_CUSTCD(txtMoto.Text)
+            strCust = CHK_CUSTCD(txtMoto.Text)
         Else
-            Dim strCust As String = CHK_CUSTCD(lblMoto.Text)
+            strCust = CHK_CUSTCD(lblMoto.Text)
         End If
 
         If strmode = "IRAI" Then
