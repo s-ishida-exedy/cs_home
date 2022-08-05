@@ -991,7 +991,11 @@ Partial Class cs_home
         Dim message = New MimeKit.MimeMessage()
 
         '元のインボイスNOから客先コードを取得
-        Dim strCust As String = CHK_CUSTCD(txtMoto.Text)
+        If Trim(txtMoto.Text) <> "" Then
+            Dim strCust As String = CHK_CUSTCD(txtMoto.Text)
+        Else
+            Dim strCust As String = CHK_CUSTCD(lblMoto.Text)
+        End If
 
         If strmode = "IRAI" Then
             '依頼時
