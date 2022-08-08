@@ -137,13 +137,13 @@
         </tr>
     </table>
 
-<%--<div class="wrapper">
+<div class="wrapper">
 <table class="sticky">
 <thead class="fixed">
 
 </thead>
 
-<tbody>--%>
+<tbody>
 
 
 <%--<div id="main2" style="width:100%;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">--%>
