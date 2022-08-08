@@ -137,13 +137,13 @@
         </tr>
     </table>
 
-<div class="wrapper">
+<%--<div class="wrapper">
 <table class="sticky">
 <thead class="fixed">
 
 </thead>
 
-<tbody>
+<tbody>--%>
 
 
 <%--<div id="main2" style="width:100%;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">--%>
@@ -216,7 +216,7 @@
 FROM
   T_EXL_VAN_SCH_DETAIL
 WHERE PLACE <> '2A'
-ORDER BY VAN_DATE, PLACE"></asp:SqlDataSource>
+ORDER BY VAN_DATE, PLACE, VAN_TIME"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT
   CASE PLACE
   	WHEN '0H' THEN '01:本社'

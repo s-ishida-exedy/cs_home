@@ -207,7 +207,7 @@ Partial Class cs_home
             '            strSQL = strSQL & "ON VSD.IVNO LIKE '%' + LEFT(AAA.INVOICE_NO,4) + '%' "
             strSQL = strSQL & "On AAA.INVOICE_NO Like '%' + RIGHT(VSD.IVNO,4) + '%'  "
             strSQL = strSQL & "WHERE VSD.IVNO Like '%" & strCode & "%' "
-            strSQL = strSQL & "ORDER BY PLACE, VAN_DATE, VAN_TIME "
+            strSQL = strSQL & "ORDER BY  VAN_DATE, PLACE, VAN_TIME "
 
             'ＳＱＬコマンド作成 
             dbcmd = New SqlCommand(strSQL, cnn)

@@ -226,7 +226,7 @@ Public Class DBAccess
             StrSQL = StrSQL & "WHERE PLACE <> '2A' "
         End If
         StrSQL = StrSQL & "ORDER BY "
-        StrSQL = StrSQL & "  PLACE "
+        StrSQL = StrSQL & "  VAN_DATE, PLACE, VAN_TIME "
 
         Cmd.CommandText = StrSQL
 
