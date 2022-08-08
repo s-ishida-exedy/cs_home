@@ -4,6 +4,7 @@ Imports ClosedXML.Excel
 Imports System
 Imports System.Data
 Imports System.Diagnostics
+Imports System.IO
 
 Partial Class cs_home
     Inherits System.Web.UI.Page
@@ -557,6 +558,37 @@ Partial Class cs_home
         '出力
         'workbook.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\" & strFile)
         workbook.SaveAs("C:\exp\cs_home\files\" & strFile)
+
+        Dim strPath As String = "C:\exp\cs_home\files\"
+        Dim strChanged As String    'サーバー上のフルパス
+        Dim strFileNm As String     'ファイル名
+
+        'ファイル名を取得する
+        Dim strTxtFiles() As String = IO.Directory.GetFiles(strPath, strFile)
+
+        strChanged = strTxtFiles(0)
+        strFileNm = Path.GetFileName(strChanged)
+
+        'Contentをクリア
+        Response.ClearContent()
+
+        'Contentを設定
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+        Response.ContentType = "application/vnd.ms-excel"
+
+        '表示ファイル名を指定
+        Dim fn As String = HttpUtility.UrlEncode(strFileNm)
+        Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
+
+        'ダウンロード対象ファイルを指定
+        Response.WriteFile(strChanged)
+
+        'ダウンロード実行
+        Response.Flush()
+        Response.End()
+
+        'ダウンロードしたファイルを削除
+        System.IO.File.Delete(strPath & strFile)
 
     End Sub
 
