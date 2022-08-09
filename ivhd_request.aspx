@@ -247,7 +247,11 @@
                 <asp:Label ID="Label12" runat="server" Text="" Class="err"></asp:Label>
             </td>
             <td class="third-cell">
-                <a href="./start.aspx">ホームへ戻る</a>
+                <% If Session("Role") = "admin" Or Session("Role") = "csusr" Then %>
+                    <a href="./start.aspx">ホームへ戻る</a>
+                <% Else %>
+                    <a href="./exl_top.aspx">ホームへ戻る</a>
+                <% End If %>   
             </td>
         </tr>
     </table>

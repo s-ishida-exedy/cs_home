@@ -194,9 +194,11 @@
                 <asp:TextBox ID="TextBox1" runat="server" Class="date2" Width="130px"></asp:TextBox>
                 <asp:Label ID="Label2" runat="server" Text="～"></asp:Label>
                 <asp:TextBox ID="TextBox2" runat="server" Class="date2" Width="130px"></asp:TextBox>
-                <asp:Button ID="Button6" runat="server" Text="期間指定してﾀﾞｳﾝﾛｰﾄﾞ" Font-Size="Small" Width="200px" />&nbsp;
-                <asp:Button ID="Button5" runat="server" Text="前月分ﾀﾞｳﾝﾛｰﾄﾞ" Font-Size="Small" Width="120px" />&nbsp;
-                <asp:Button ID="Button4" runat="server" Text="新規登録" Font-Size="Small" Width="120px" />
+                <asp:Button ID="Button6" runat="server" Text="期間指定してﾀﾞｳﾝﾛｰﾄﾞ" Font-Size="Small" Width="180px" />&nbsp;
+                <asp:Button ID="Button5" runat="server" Text="前月分ﾀﾞｳﾝﾛｰﾄﾞ" Font-Size="Small" Width="100px" />&nbsp;
+                <asp:Button ID="Button4" runat="server" Text="新規登録" Font-Size="Small" Width="100px" />
+                &nbsp;
+                <asp:Label ID="Label1" runat="server" Text="ﾌｧｲﾙﾊﾟｽ：\\kbhwpm01\exp\cs_home\files" Font-Size ="X-Small" ></asp:Label>
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>

@@ -216,7 +216,7 @@
 FROM
   T_EXL_VAN_SCH_DETAIL
 WHERE PLACE <> '2A'
-ORDER BY VAN_DATE, PLACE"></asp:SqlDataSource>
+ORDER BY VAN_DATE, PLACE, VAN_TIME"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT
   CASE PLACE
   	WHEN '0H' THEN '01:本社'
