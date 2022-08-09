@@ -188,8 +188,8 @@
                 <asp:DropDownList ID="DropDownList7" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource8" DataTextField="REQUESTER" DataValueField="REQUESTER" AutoPostBack="True"></asp:DropDownList>
                 <asp:DropDownList ID="DropDownList8" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource9" DataTextField="IVNO" DataValueField="IVNO" AutoPostBack="True"></asp:DropDownList>
                 <asp:TextBox ID="TextBox3" runat="server" Class ="txtb" placeholder="IVNO入力"></asp:TextBox>
-                <asp:Button ID="Button2" runat="server" Text=" ﾘｾｯﾄ " Font-Size="Small" Width ="80" />
                 <asp:Button ID="Button7" runat="server" Text="検索" Font-Size="Small" Width ="80" />
+                <asp:Button ID="Button2" runat="server" Text=" ﾘｾｯﾄ " Font-Size="Small" Width ="80" />
                 <asp:CheckBox ID="CheckBox1" runat="server" Font-Size="Small" Text =" 集荷済みも表示する"  AutoPostBack="True"/><br/>
                 <asp:TextBox ID="TextBox1" runat="server" Class="date2" Width="130px"></asp:TextBox>
                 <asp:Label ID="Label2" runat="server" Text="～"></asp:Label>
@@ -198,7 +198,7 @@
                 <asp:Button ID="Button5" runat="server" Text="前月分ﾀﾞｳﾝﾛｰﾄﾞ" Font-Size="Small" Width="100px" />&nbsp;
                 <asp:Button ID="Button4" runat="server" Text="新規登録" Font-Size="Small" Width="100px" />
                 &nbsp;
-                <asp:Label ID="Label1" runat="server" Text="ﾌｧｲﾙﾊﾟｽ：\\kbhwpm01\exp\cs_home\files" Font-Size ="X-Small" ></asp:Label>
+                <asp:Label ID="Label1" runat="server" Text="DLﾌｧｲﾙﾊﾟｽ：\\kbhwpm01\exp\cs_home\files" Font-Size ="X-Small" ></asp:Label>
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
