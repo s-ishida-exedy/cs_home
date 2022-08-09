@@ -82,6 +82,7 @@ Partial Class yuusen
             strbkg = ""
             '結果を取り出す
             While (dataread.Read())
+                strbkg = ""
                 strbkg += dataread("FLG02")
             End While
 
