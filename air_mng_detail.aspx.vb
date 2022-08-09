@@ -348,6 +348,8 @@ Partial Class cs_home
         Dim dataread As SqlDataReader
         Dim StrSQL As String = ""
 
+        Label1.Text = ""
+
         '入力チェック
         If chk_Nyuryoku() = False Then
             Return
@@ -559,36 +561,42 @@ Partial Class cs_home
         'workbook.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\" & strFile)
         workbook.SaveAs("C:\exp\cs_home\files\" & strFile)
 
-        Dim strPath As String = "C:\exp\cs_home\files\"
-        Dim strChanged As String    'サーバー上のフルパス
-        Dim strFileNm As String     'ファイル名
+        'ファイル作成後、そのままローカルにダウンロードする
+        'ダウンロード後、Redirect出来ないので、中止
 
-        'ファイル名を取得する
-        Dim strTxtFiles() As String = IO.Directory.GetFiles(strPath, strFile)
+        'Dim strPath As String = "C:\exp\cs_home\files\"
+        'Dim strChanged As String    'サーバー上のフルパス
+        'Dim strFileNm As String     'ファイル名
 
-        strChanged = strTxtFiles(0)
-        strFileNm = Path.GetFileName(strChanged)
+        ''ファイル名を取得する
+        'Dim strTxtFiles() As String = IO.Directory.GetFiles(strPath, strFile)
 
-        'Contentをクリア
-        Response.ClearContent()
+        'strChanged = strTxtFiles(0)
+        'strFileNm = Path.GetFileName(strChanged)
 
-        'Contentを設定
-        Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
-        Response.ContentType = "application/vnd.ms-excel"
+        ''Contentをクリア
+        'Response.ClearContent()
 
-        '表示ファイル名を指定
-        Dim fn As String = HttpUtility.UrlEncode(strFileNm)
-        Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
+        ''Contentを設定
+        'Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+        'Response.ContentType = "application/vnd.ms-excel"
 
-        'ダウンロード対象ファイルを指定
-        Response.WriteFile(strChanged)
+        ''表示ファイル名を指定
+        'Dim fn As String = HttpUtility.UrlEncode(strFileNm)
+        'Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
 
-        'ダウンロード実行
-        Response.Flush()
-        Response.End()
+        ''ダウンロード対象ファイルを指定
+        'Response.WriteFile(strChanged)
 
-        'ダウンロードしたファイルを削除
-        System.IO.File.Delete(strPath & strFile)
+        ''ダウンロード実行
+        'Response.Flush()
+
+        ''ダウンロードしたファイルを削除
+        'System.IO.File.Delete(strPath & strFile)
+
+        ''Response.End()
+
+        'Return
 
     End Sub
 
