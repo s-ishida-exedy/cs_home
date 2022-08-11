@@ -145,6 +145,9 @@
             };
         });
     });
+    function setBg(tr, color) {
+        tr.style.backgroundColor = color;
+    }
 </script>
 
     <script type="text/javascript">
@@ -219,7 +222,7 @@
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="Forwarder" HeaderText="海貨業者" SortExpression="Forwarder" >
-                <ItemStyle Font-Size="Small" />
+                <ItemStyle Font-Size="X-Small"  />
                 </asp:BoundField>
                 <asp:BoundField DataField="CUST_CD" HeaderText="客先" SortExpression="CUST_CD" >
                 <ItemStyle Font-Size="Small" />
