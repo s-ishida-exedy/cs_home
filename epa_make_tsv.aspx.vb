@@ -302,9 +302,7 @@ Partial Class cs_home
             For Each int1 As Integer In intAry
                 If int1 <> 0 Then
                     ReDim Preserve strArry2(intCnt)
-                    'If int1.ToString <> "0" Then
                     strArry2(intCnt) = int1.ToString
-                    'End If
 
                     intCnt += 1
 
