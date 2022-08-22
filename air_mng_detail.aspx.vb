@@ -411,6 +411,12 @@ Partial Class cs_home
                 '更新モードで再出力チェックがONの場合、ｲﾝﾎﾞｲｽﾍｯﾀﾞ用のエクセルファイルを作成する。
                 Call Make_ExcelFile(GET_AIR_CODE)
             End If
+        ElseIf TextBox4.Text = "E140" Or TextBox4.Text = "E155" Or TextBox4.Text = "C255" Then
+            'AIR専用客先の場合、更新モードのみエクセルファイル出力可能
+            If strMode <> "02" And CheckBox1.Checked = True Then
+                '更新モードで再出力チェックがONの場合、ｲﾝﾎﾞｲｽﾍｯﾀﾞ用のエクセルファイルを作成する。
+                Call Make_ExcelFile(GET_AIR_CODE)
+            End If
         End If
 
         '元の画面に戻る
