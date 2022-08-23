@@ -154,6 +154,37 @@ Partial Class cs_home
         'データベース接続を開く
         cnn.Open()
 
+        Select Case Label2.Text
+            Case "JPY"
+                strTuuka = "01"
+            Case "US$"
+                strTuuka = "02"
+            Case "EUR"
+                strTuuka = "03"
+            Case "A$"
+                strTuuka = "04"
+            Case "INR"
+                strTuuka = "05"
+            Case "THB"
+                strTuuka = "06"
+            Case "NT$"
+                strTuuka = "07"
+            Case "MYR"
+                strTuuka = "08"
+            Case "CNY"
+                strTuuka = "09"
+            Case "IDR"
+                strTuuka = "10"
+            Case "NR\"
+                strTuuka = "11"
+            Case "WON"
+                strTuuka = "12"
+            Case "MRK"
+                strTuuka = "13"
+            Case "NZ$"
+                strTuuka = "14"
+        End Select
+
         If strMode = "01" And strExecMode = "01" Then
             'データ更新
             strSQL = ""
@@ -180,7 +211,7 @@ Partial Class cs_home
             strSQL = strSQL & "  , ETA = '" & LTrim(RTrim(TextBox14.Text)) & "' "  '到着日
             strSQL = strSQL & "  , TATENE = '" & DropDownList4.SelectedValue & "' "   '建値
             strSQL = strSQL & "  , TRADE_TERM = '" & LTrim(RTrim(TextBox17.Text)) & "' "  'Trade Term
-            strSQL = strSQL & "  , CURRENCY = '" & Label2.Text & "' "   '通貨
+            strSQL = strSQL & "  , CURRENCY = '" & strTuuka & "' "   '通貨
             strSQL = strSQL & "  , RATE = '" & Label3.Text & "' "  'レート
             strSQL = strSQL & "  , SHUK_METH = '" & DropDownList6.SelectedValue & "' "  '出荷方法
             strSQL = strSQL & "WHERE "
@@ -191,36 +222,6 @@ Partial Class cs_home
             strSQL = strSQL & "WHERE "
             strSQL = strSQL & "       AIR_CODE =  '" & strCode & "' "
         Else
-            Select Case Label2.Text
-                Case "JPY"
-                    strTuuka = "01"
-                Case "US$"
-                    strTuuka = "02"
-                Case "EUR"
-                    strTuuka = "03"
-                Case "A$"
-                    strTuuka = "04"
-                Case "INR"
-                    strTuuka = "05"
-                Case "THB"
-                    strTuuka = "06"
-                Case "NT$"
-                    strTuuka = "07"
-                Case "MYR"
-                    strTuuka = "08"
-                Case "CNY"
-                    strTuuka = "09"
-                Case "IDR"
-                    strTuuka = "10"
-                Case "NR\"
-                    strTuuka = "11"
-                Case "WON"
-                    strTuuka = "12"
-                Case "MRK"
-                    strTuuka = "13"
-                Case "NZ$"
-                    strTuuka = "14"
-            End Select
             strSQL = ""
             strSQL = strSQL & "INSERT INTO T_EXL_AIR_MANAGE "
             strSQL = strSQL & "VALUES ( "
