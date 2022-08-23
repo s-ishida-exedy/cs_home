@@ -304,14 +304,14 @@ Partial Class cs_home
             Label1.Text = "Trade Termは必須入力です。"
             chk_Nyuryoku = False
         End If
-        'If TextBox16.Text = "" Then
-        '    Label1.Text = "レートは必須入力です。"
-        '    chk_Nyuryoku = False
-        'End If
-        'If DropDownList5.SelectedValue = "" Then
-        '    Label1.Text = "通貨は必須選択です。"
-        '    chk_Nyuryoku = False
-        'End If
+        If Label3.Text = "" Then
+            Label1.Text = "レートが空白になっています。ＳＮを確認してください。"
+            chk_Nyuryoku = False
+        End If
+        If Label2.Text = "" Then
+            Label1.Text = "通貨が空白になっています。ＳＮを確認してください。"
+            chk_Nyuryoku = False
+        End If
         If DropDownList4.SelectedValue = "" Then
             Label1.Text = "建値は必須選択です。"
             chk_Nyuryoku = False
