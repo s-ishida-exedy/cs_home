@@ -303,7 +303,7 @@
                             type: 'horizontalBar',
                             data: dataarr8,
                             //barThickness: 10,
-                            backgroundColor: 'rgba(255, 165, 0, 0.5)',
+                            backgroundColor: 'rgba(211, 211, 211, 0.5)',
                             borderColor: 'rgb(54, 162, 235)',
                             cubicInterpolationMode: 'monotone',
                         }],
