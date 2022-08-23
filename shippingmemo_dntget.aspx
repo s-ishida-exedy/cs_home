@@ -201,8 +201,8 @@
         <asp:BoundField DataField="ETD02" HeaderText="最新ETD" SortExpression="ETD" ReadOnly="true" ></asp:BoundField>
         <asp:BoundField DataField="ETD03" HeaderText="遅延前ETD" SortExpression="REV_ETD" ReadOnly="true" ></asp:BoundField>
 
-        <asp:BoundField DataField="ETA" HeaderText="ETA" SortExpression="ETA" ReadOnly="true" ></asp:BoundField>
-        <asp:BoundField DataField="REV_ETA" HeaderText="REV_ETA" SortExpression="REV_ETA" ReadOnly="true" ></asp:BoundField>
+        <asp:BoundField DataField="ETA02" HeaderText="最新ETA" SortExpression="ETA" ReadOnly="true" ></asp:BoundField>
+        <asp:BoundField DataField="ETA03" HeaderText="遅延前ETA" SortExpression="REV_ETA" ReadOnly="true" ></asp:BoundField>
         <asp:BoundField DataField="SHIP_TYPE" HeaderText="種類" SortExpression="SHIP_TYPE" ReadOnly="true" ></asp:BoundField>
         <asp:BoundField DataField="DATE_GETBL" HeaderText="BL回収" SortExpression="DATE_GETBL" ></asp:BoundField>
         <asp:BoundField DataField="DATE_ONBL" HeaderText="BL上の日付" SortExpression="DATE_ONBL" ></asp:BoundField>
@@ -220,8 +220,8 @@
         <asp:BoundField DataField="RECEIVED_PORT" HeaderText="荷受" SortExpression="RECEIVED_PORT" ReadOnly="true" ></asp:BoundField>
         <asp:BoundField DataField="SHIP_PLACE" HeaderText="出荷拠点" SortExpression="SHIP_PLACE" ReadOnly="true" ></asp:BoundField>
         <asp:BoundField DataField="CHECKFLG" HeaderText="確認" SortExpression="CHECKFLG" ReadOnly="true" ></asp:BoundField>
-        <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" ReadOnly="true" ></asp:BoundField>
-        <asp:BoundField DataField="REV_ETD" HeaderText="REV_ETD" SortExpression="REV_ETD" ReadOnly="true" ></asp:BoundField>
+<%--        <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" ReadOnly="true" ></asp:BoundField>
+        <asp:BoundField DataField="REV_ETD" HeaderText="REV_ETD" SortExpression="REV_ETD" ReadOnly="true" ></asp:BoundField>--%>
 
         <asp:BoundField DataField="FLG01" HeaderText="メモ" SortExpression="FLG01" ReadOnly="true" ></asp:BoundField>
 
@@ -243,7 +243,7 @@
     </asp:Panel>   
 </div>
 
-<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT *,iif(len(REV_ETD)=10,REV_ETD,ETD) AS ETD02,iif(len(REV_ETD)=10,ETD,'') AS ETD03 FROM [T_EXL_SHIPPINGMEMOLIST] WHERE DATE_GETBL='' AND CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530') ORDER BY ETD02,INVOICE_NO "></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT *,iif(len(REV_ETD)=10,REV_ETD,ETD) AS ETD02,iif(len(REV_ETD)=10,ETD,'') AS ETD03,iif(len(REV_ETA)=10,REV_ETA,ETA) AS ETA02,iif(len(REV_ETA)=10,ETA,'') AS ETA03 FROM [T_EXL_SHIPPINGMEMOLIST] WHERE DATE_GETBL='' AND CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530') ORDER BY ETD02,INVOICE_NO "></asp:SqlDataSource>
 
 
 <!--/#contents2-->
