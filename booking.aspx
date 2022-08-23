@@ -145,6 +145,9 @@
             };
         });
     });
+    function setBg(tr, color) {
+        tr.style.backgroundColor = color;
+    }
 </script>
 
     <script type="text/javascript">
@@ -219,7 +222,7 @@
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="Forwarder" HeaderText="海貨業者" SortExpression="Forwarder" >
-                <ItemStyle Font-Size="Small" />
+                <ItemStyle Font-Size="X-Small"  />
                 </asp:BoundField>
                 <asp:BoundField DataField="CUST_CD" HeaderText="客先" SortExpression="CUST_CD" >
                 <ItemStyle Font-Size="Small" />
@@ -240,6 +243,9 @@
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="ETA" HeaderText="到着日" SortExpression="ETA" >
+                <ItemStyle Font-Size="Small" />
+                </asp:BoundField>
+                <asp:BoundField DataField="FINAL_VAN" HeaderText="最終VAN">
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="TWENTY_FEET" HeaderText="20FT" SortExpression="TWENTY_FEET" >
@@ -281,7 +287,58 @@
 </tbody>
 </table>
 </div>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [t_booking]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT 
+    a.STATUS
+  , a.Forwarder
+  , a.CUST_CD 
+  , a.CONSIGNEE
+  , a.DESTINATION
+  , a.INVOICE_NO 
+  , a.CUT_DATE
+  , a.ETD
+  , a.ETA
+  , a.TWENTY_FEET
+  , a.FOURTY_FEET
+  , a.LCL_QTY
+  , a.BOOKING_NO
+  , a.VESSEL_NAME
+  , a.VOYAGE_NO
+  , a.SEQ_NO02
+  , a.PONO
+  , MAX(TBL.VAN_DATE) AS FINAL_VAN 
+FROM T_BOOKING a
+INNER JOIN
+  ( SELECT CUST_CD, INVOICE_NO, DAY01 AS VAN_DATE FROM T_BOOKING  
+    UNION ALL  
+    SELECT CUST_CD, INVOICE_NO, DAY02 AS VAN_DATE FROM T_BOOKING  
+    UNION ALL  
+    SELECT CUST_CD, INVOICE_NO, DAY03 AS VAN_DATE FROM T_BOOKING 
+    UNION ALL  
+    SELECT CUST_CD, INVOICE_NO, DAY04 AS VAN_DATE FROM T_BOOKING 
+    UNION ALL  
+    SELECT CUST_CD, INVOICE_NO, DAY05 AS VAN_DATE FROM T_BOOKING 
+    UNION ALL  
+    SELECT CUST_CD, INVOICE_NO, DAY06 AS VAN_DATE FROM T_BOOKING 
+    UNION ALL  
+    SELECT CUST_CD, INVOICE_NO, DAY07 AS VAN_DATE FROM T_BOOKING 
+    UNION ALL  
+    SELECT CUST_CD, INVOICE_NO, DAY08 AS VAN_DATE FROM T_BOOKING 
+    UNION ALL  
+    SELECT CUST_CD, INVOICE_NO, DAY09 AS VAN_DATE FROM T_BOOKING 
+    UNION ALL  
+    SELECT CUST_CD, INVOICE_NO, DAY10 AS VAN_DATE FROM T_BOOKING 
+    UNION ALL  
+    SELECT CUST_CD, INVOICE_NO, DAY11 AS VAN_DATE FROM T_BOOKING) AS TBL  
+	ON a.CUST_CD = TBL.CUST_CD AND a.INVOICE_NO = TBL.INVOICE_NO
+WHERE 
+  a.INVOICE_NO &lt;&gt; ''  
+  AND TBL.VAN_DATE &lt;&gt; '' 
+GROUP BY 
+      a.STATUS  , a.Forwarder , a.CUST_CD , a.CONSIGNEE , a.DESTINATION
+  , a.INVOICE_NO  , a.CUT_DATE , a.ETD , a.ETA , a.TWENTY_FEET
+  , a.FOURTY_FEET , a.LCL_QTY , a.BOOKING_NO , a.VESSEL_NAME
+  , a.VOYAGE_NO , a.SEQ_NO02 , a.PONO
+"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [Forwarder] FROM [T_BOOKING]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT STATUS FROM T_BOOKING"></asp:SqlDataSource>
 <%--</div>--%>

@@ -1,5 +1,6 @@
 ﻿Imports System.Data
 Imports System.Data.SqlClient
+Imports System.Drawing
 
 Partial Class cs_home
     Inherits System.Web.UI.Page
@@ -12,6 +13,27 @@ Partial Class cs_home
         'コード列非表示処理
         If e.Row.RowType = DataControlRowType.DataRow OrElse e.Row.RowType = DataControlRowType.Header Then
             'e.Row.Cells(10).Visible = False
+        End If
+
+        Dim row As GridViewRow = e.Row
+
+        ' データ行である場合に、onmouseover／onmouseout属性を追加（1）
+        If row.RowType = DataControlRowType.DataRow Then
+
+            ' onmouseover属性を設定
+            row.Attributes("onmouseover") = "setBg(this, '#CC99FF')"
+
+            ' データ行が通常行／代替行であるかで処理を分岐（2）
+            If row.RowState = DataControlRowState.Normal Then
+                row.Attributes("onmouseout") =
+                  String.Format("setBg(this, '{0}')",
+                    ColorTranslator.ToHtml(GridView1.RowStyle.BackColor))
+            Else
+                row.Attributes("onmouseout") =
+                  String.Format("setBg(this, '{0}')",
+                    ColorTranslator.ToHtml(
+                      GridView1.AlternatingRowStyle.BackColor))
+            End If
         End If
 
     End Sub

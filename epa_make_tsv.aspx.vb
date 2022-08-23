@@ -1183,6 +1183,8 @@ Partial Class cs_home
                 myReg.Global = True
                 If myReg.test(TempCode) Then
                     MargeNumber = myReg.Replace(TempCode, "-")
+                Else
+                    MargeNumber = TempCode
                 End If
         End Select
 
