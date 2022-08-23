@@ -291,7 +291,7 @@
                             cubicInterpolationMode: 'monotone',
 
                         }, {
-                            label: '入庫済み',
+                            label: '未着手(在庫有)',
                             type: 'horizontalBar',
                             data: dataarr7,
                             //barThickness: 10,
@@ -299,11 +299,11 @@
                             borderColor: 'rgb(54, 162, 235)',
                             cubicInterpolationMode: 'monotone',
                         }, {
-                            label: '入庫待ち',
+                            label: '未着手(在庫無)',
                             type: 'horizontalBar',
                             data: dataarr8,
                             //barThickness: 10,
-                            backgroundColor: 'rgba(255, 165, 0, 0.5)',
+                            backgroundColor: 'rgba(211, 211, 211, 0.5)',
                             borderColor: 'rgb(54, 162, 235)',
                             cubicInterpolationMode: 'monotone',
                         }],

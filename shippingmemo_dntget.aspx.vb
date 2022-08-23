@@ -76,45 +76,45 @@ Partial Class yuusen
                 End If
             End If
 
-            If e.Row.Cells(4).Text <> "&nbsp;" Then
-                If Trim(e.Row.Cells(4).Text) <> "" Then
+            'If e.Row.Cells(4).Text <> "&nbsp;" Then
+            '    If Trim(e.Row.Cells(4).Text) <> "" Then
 
-                    Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(4).Text)
+            '        Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(4).Text)
 
-                    If dt0.ToString("MM") = dt3.ToString("MM") Then
-                        str04 = "○"
-                        Call UPD_MEMO03(Trim(e.Row.Cells(12).Text), str04)
-                    Else
-                        str04 = "×"
-                        Call UPD_MEMO03(Trim(e.Row.Cells(12).Text), str04)
-                    End If
-                End If
-            End If
+            '        If dt0.ToString("MM") = dt3.ToString("MM") Then
+            '            str04 = "○"
+            '            Call UPD_MEMO03(Trim(e.Row.Cells(12).Text), str04)
+            '        Else
+            '            str04 = "×"
+            '            Call UPD_MEMO03(Trim(e.Row.Cells(12).Text), str04)
+            '        End If
+            '    End If
+            'End If
 
             Dim dt00 As DateTime = DateTime.Now
             Dim ts1 As New TimeSpan(7, 0, 0, 0)
             Dim dt01 As DateTime = dt00 + ts1
 
             If e.Row.Cells(8).Text = "&nbsp;" Or Trim(e.Row.Cells(8).Text) = "" Then
-                If e.Row.Cells(6).Text = "&nbsp;" Or Trim(e.Row.Cells(6).Text) = "" Then
+                '    If e.Row.Cells(6).Text = "&nbsp;" Or Trim(e.Row.Cells(6).Text) = "" Then
 
-                    Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
+                Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(5).Text)
 
-                    If dt4 <= dt01 Then
-                        e.Row.BackColor = Drawing.Color.Red
-                        e.Row.Cells(25).Text = "E"
-                    Else
-                    End If
+                If dt4 <= dt01 Then
+                    e.Row.BackColor = Drawing.Color.Red
+                    e.Row.Cells(23).Text = "E"
                 Else
-
-                    Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
-
-                    If dt3 <= dt01 Then
-                        e.Row.BackColor = Drawing.Color.Red
-                        e.Row.Cells(25).Text = "E"
-                    Else
-                    End If
                 End If
+                '    Else
+
+                '        Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
+
+                '        If dt3 <= dt01 Then
+                '            e.Row.BackColor = Drawing.Color.Red
+                '            e.Row.Cells(25).Text = "E"
+                '        Else
+                '        End If
+                '    End If
             End If
 
             '接続文字列の作成
