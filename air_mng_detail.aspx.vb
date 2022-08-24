@@ -475,6 +475,7 @@ Partial Class cs_home
         strSQL = strSQL & "    WHEN 14 THEN 'NZ$' "
         strSQL = strSQL & "  END AS CRYCD "
         strSQL = strSQL & "  , a.RATE  "
+        strSQL = strSQL & "  , a.TRADETERMS "
         strSQL = strSQL & "FROM "
         strSQL = strSQL & "  dbo.T_SN_HD_TB a  "
         strSQL = strSQL & "WHERE "
@@ -489,6 +490,7 @@ Partial Class cs_home
         While (dataread.Read())
             Label2.Text = dataread("CRYCD").ToString
             Label3.Text = dataread("RATE").ToString
+            TextBox17.Text = Trim(dataread("TRADETERMS").ToString)
         End While
 
         'クローズ処理 
