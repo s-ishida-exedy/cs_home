@@ -106,6 +106,12 @@
             padding: 5px;
             font-size :small ;
         }
+        .txtb2{
+            padding: 5px;
+            font-size :small ;
+            color :red ;
+            font-weight :900 ;
+        }
         .txtb_r{
             text-align :right ;
             padding: 5px;
@@ -264,9 +270,9 @@
                         <asp:ListItem Value="19">19:DEQ</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                <th>Trade Term</th>
+                <th style="line-height:14px">Trade Term<p><small>※必要に応じて修正</small></p></th>
                 <td >
-                    <asp:TextBox ID="TextBox17" runat="server" Width="233px" CssClass="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox17" runat="server" Width="233px" CssClass="txtb2"></asp:TextBox>
                 </td>
                 <th>出荷方法</th>
                 <td >
