@@ -499,7 +499,7 @@
 
     <tbody>
                                  
-    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BackColor="#6fbfd1" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" DataSourceID="SqlDataSource2" Width="927px">
+    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BackColor="#6fbfd1" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" DataSourceID="SqlDataSource2" Width="980px">
     <HeaderStyle BackColor="#6fbfd1" Font-Bold="True" ForeColor="BLACK" />
     <HeaderStyle CssClass="Freezing" />
     <Columns>
