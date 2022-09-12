@@ -148,8 +148,8 @@ Partial Class cs_home
         Dim strcc As String = GET_ToAddress(1, 0) + GET_from(struid)  'CC 
 
 
-        strto = GET_from(struid)
-        strcc = GET_from(struid)
+        ''strto = GET_from(struid)
+        ''strcc = GET_from(struid)
 
         'メールの件名
         Dim subject As String = "<通知>LCL案件展開　荷量追加 " & kbn '"【AIR " & strIrai & "依頼" & Session("strCust") & "向け】"
@@ -242,8 +242,8 @@ Partial Class cs_home
 
         Dim strcc As String = GET_ToAddress(1, 0) + GET_from(struid)  'CC 
 
-        strto = GET_from(struid)
-        strcc = GET_from(struid)
+        'strto = GET_from(struid)
+        'strcc = GET_from(struid)
 
         'メールの件名
         Dim subject As String = "<通知>LCL案件展開　ドレージ手配 "
