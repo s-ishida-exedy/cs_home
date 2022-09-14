@@ -179,7 +179,7 @@
                     <asp:Button ID="Button1" runat="server" Text="更　新" style="width:164px" Font-Size="Small" />&nbsp;
                     <asp:Button ID="Button2" runat="server" Text="削　除" style="width:164px" Font-Size="Small" />&nbsp;
                     <asp:CheckBox ID="CheckBox1" runat="server" Text ="EXCEL再出力" Font-Size="Small"  />&nbsp;
-                    <asp:Label ID="Label1" runat="server" Text="" Class="err"></asp:Label>
+                    <asp:Label ID="Label1" runat="server" Text="注）AIR専用客先は登録時ファイル作成されません。" Class="err"></asp:Label>
                 </td>
             <td class="third-cell">
                 <a href ="./air_management.aspx">一覧へ戻る</a>

@@ -16,7 +16,7 @@ Partial Class cs_home
         Dim strValue As String = ""
         Dim strVal As String = ""
 
-        Label1.Text = ""
+        'Label1.Text = ""
 
         If IsPostBack Then
             ' そうでない時処理
