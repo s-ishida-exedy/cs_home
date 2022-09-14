@@ -167,27 +167,27 @@
         </tr>
     </table>
 
-    <table>
+<%--    <table>
         <tr>
             <td style="height:100px">
             </td>
         </tr>
-    </table>
+    </table>--%>
 
-    <table>
+<%--    <table>
         <tr>
             <td style="color:red">
                 <font size="4">QC_海外業務マニュアル_test.xlsがツールと連携しています。こちらは反映しません。更新ルールは確認してください。</font>
             </td>
         </tr>
-    </table>
+    </table>--%>
 
-    <table>
+<%--    <table>
         <tr>
             <td style="height:100px">
             </td>
         </tr>
-    </table>
+    </table>--%>
 
     <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
