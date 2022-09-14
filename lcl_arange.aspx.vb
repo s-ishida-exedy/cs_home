@@ -36,6 +36,9 @@ Partial Class cs_home
         Dim flgship As Long = 0
         Dim lhlflg As String = ""
 
+        Dim strE22001 As String = ""
+        Dim strE22002 As String = ""
+
         '搬入日作成
 
         '接続文字列の作成
@@ -285,10 +288,26 @@ Partial Class cs_home
                 e.Row.Cells(1).Text = "スケジュール未登録"
             End If
 
+
+            strE22001 = Left(e.Row.Cells(4).Text, 4)
+            strE22002 = Trim(e.Row.Cells(11).Text)
+
+            If Left(e.Row.Cells(3).Text, 4) = "E220" Then
+                If (strE22001 <> "" Or strE22001 <> "&nbsp;") And (strE22002 <> "" Or strE22002 <> "&nbsp;") Then
+                    flgship = 0
+                    flgship = GET_e220(Trim(strE22001), Trim(strE22002))
+                    If flgship = 0 Then
+                        e.Row.Cells(1).BackColor = Drawing.Color.Red
+                        e.Row.Cells(1).ForeColor = Drawing.Color.White
+                        e.Row.Cells(1).Text = e.Row.Cells(1).Text & " タイトル、荷姿変更要"
+                    End If
+                End If
+            End If
+
         End If
 
 
-        cnn.Close()
+            cnn.Close()
         cnn.Dispose()
 
         cnn2.Close()
@@ -1289,5 +1308,67 @@ Partial Class cs_home
         cnn.Dispose()
 
     End Function
+
+
+
+    Private Function GET_e220(ivno As String, bkgno As String) As String
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+
+        Dim strp As String = ""
+        Dim strt As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = "SELECT DISTINCT T_INV_HD_TB.PAYMENT, T_INV_HD_TB.INVBODYTITLE "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+        strSQL = strSQL & "WHERE T_INV_HD_TB.BOOKINGNO = '" & bkgno & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.OLD_INVNO = '" & ivno & "' "
+
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            strp = Trim(dataread("PAYMENT"))
+            strt = Trim(dataread("INVBODYTITLE"))
+        End While
+
+
+        If strp = "FREE OF CHARGE" And strt = "PLASTIC PLATE" Then
+            GET_e220 = 1
+        Else
+            GET_e220 = 0
+        End If
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
+
 
 End Class
