@@ -16,7 +16,7 @@ Partial Class cs_home
         Dim strValue As String = ""
         Dim strVal As String = ""
 
-        Label1.Text = ""
+        'Label1.Text = ""
 
         If IsPostBack Then
             ' そうでない時処理
@@ -544,7 +544,7 @@ Partial Class cs_home
         Dim i As Integer = 0
 
         'エクセル用データ取得
-        Dim dt = GetExcelData(intCode)
+        Dim dt = GetExcelData(intCode, LTrim(RTrim(TextBox4.Text)))
 
         Dim workbook = New XLWorkbook()
         Dim worksheet = workbook.Worksheets.Add(dt)
@@ -567,7 +567,6 @@ Partial Class cs_home
         Dim strFile As String = "Air_ivhd_" & dt1.ToString("yyMMddhhmm") & "_" & LTrim(RTrim(TextBox4.Text)) & ".xlsx"
 
         '出力
-        'workbook.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\" & strFile)
         workbook.SaveAs("C:\exp\cs_home\files\" & strFile)
 
         'ファイル作成後、そのままローカルにダウンロードする
@@ -609,7 +608,7 @@ Partial Class cs_home
 
     End Sub
 
-    Private Shared Function GetExcelData(intCode As Integer) As DataTable
+    Private Shared Function GetExcelData(intCode As Integer, strCust As String) As DataTable
         'DataTableにEXCEL出力する内容を格納する
 
         Dim strSQL As String = ""
@@ -628,8 +627,13 @@ Partial Class cs_home
                 strSQL = strSQL & "SELECT "
                 strSQL = strSQL & "  a.CUST_CD  "
                 strSQL = strSQL & "  , CAST(a.ETD AS datetime) AS BLDATE "
-                strSQL = strSQL & "  , b.CONSIGNEENAME AS FNL_NM  "
-                strSQL = strSQL & "  , b.CONSIGNEEADDRESS AS FNL_AD  "
+                If strCust <> "C255" Then
+                    strSQL = strSQL & "  , b.CONSIGNEENAME AS FNL_NM  "
+                    strSQL = strSQL & "  , b.CONSIGNEEADDRESS AS FNL_AD  "
+                Else
+                    strSQL = strSQL & "  , 'Hyster-Yale Group c/o Fapco, Inc.' AS FNL_NM  "
+                    strSQL = strSQL & "  , '926 Terrecoupe Rd.Buchanan, MI 49107 Danville' AS FNL_AD  "
+                End If
                 strSQL = strSQL & "  , 'OSAKA' AS POL  "
                 strSQL = strSQL & "  , RTRIM(b.DESTINATION) AS AGECHI  "
                 strSQL = strSQL & "  , RTRIM(b.DESTINATION) AS HAISOU  "

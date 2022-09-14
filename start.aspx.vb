@@ -375,6 +375,32 @@ Partial Class cs_home
         dataread.Close()
         dbcmd.Dispose()
 
+        'ＡＩＲ書類の当日件数を取得
+        strSQL = ""
+        strSQL = strSQL & "SELECT "
+        strSQL = strSQL & "   COUNT(*) AS Rec01 "
+        strSQL = strSQL & "FROM  "
+        strSQL = strSQL & "  T_EXL_AIR_MANAGE "
+        strSQL = strSQL & "WHERE  "
+        strSQL = strSQL & "  ETD = CONVERT(NVARCHAR,  GETDATE(), 111) "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        intRec01 = 0
+
+        While (dataread.Read())
+            intRec01 = dataread("Rec01")
+        End While
+
+        Literal3.Text = StrConv(intRec01, VbStrConv.Wide) + "件"
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
         'ＡＩＲ書類の作成状況を取得
         strSQL = ""
         strSQL = strSQL & "SELECT "
