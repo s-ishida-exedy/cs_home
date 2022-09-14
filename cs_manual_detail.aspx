@@ -164,13 +164,21 @@
                     <asp:TextBox ID="TextBox4" runat="server" Height="20px" Width="233px" Class ="txtb"></asp:TextBox>
                 </td>
             </tr>
+            <tr>
+                <th >客先名</th>
+                <td colspan="3">
+                    <asp:TextBox ID="TextBox3" runat="server" Height="15px" Width="600px" Class ="txtb"></asp:TextBox>
+                </td>
+            </tr>
         </table>
+
+ 
 
         <table class="ta3" style="display:none" >
             <tr>
                 <th>客先</th>
                 <td>
-                    <asp:TextBox ID="TextBox3" runat="server" Height="20px" Width="233px" Class ="txtb" disabled="disabled"></asp:TextBox>
+<%--                    <asp:TextBox ID="" runat="server" Height="20px" Width="233px" Class ="txtb" disabled="disabled"></asp:TextBox>--%>
                 </td>
                 <th>建値</th>
                 <td>
