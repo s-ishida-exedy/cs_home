@@ -194,7 +194,7 @@
 
         <table class="ta3" >
             <tr>
-                <th>Cust<br/>Name/Adress</th>
+                <th>Cust(ACCT)<br/>Name/Adress</th>
                 <td >
                     <asp:TextBox ID="TextBox8" runat="server" Height="50px" Width="450px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
                 </td>
@@ -265,23 +265,9 @@
 
         <table class="ta3">
             <tr>
-                <th style="background-color:#009966;color:white">IV</th>
+                <th style="background-color:#009966;color:white">木材</th>
                 <td>
-                    <asp:DropDownList ID="DropDownList1" runat="server" Width ="80px">
-                        <asp:ListItem Value="○">○</asp:ListItem>
-                        <asp:ListItem Value="×">×</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-                <th style="background-color:#009966;color:white">PL</th>
-                <td >
-                    <asp:DropDownList ID="DropDownList2" runat="server" Width ="80px">
-                        <asp:ListItem Value="○">○</asp:ListItem>
-                        <asp:ListItem Value="×">×</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-                <th style="background-color:#009966;color:white">BL</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList3" runat="server" Width ="80px">
+                    <asp:DropDownList ID="DropDownList6" runat="server" Width ="80px">
                         <asp:ListItem Value="○">○</asp:ListItem>
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
@@ -293,6 +279,13 @@
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
                 </td>
+               <th style="background-color:#009966;color:white">エジプト査証</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList16" runat="server" Width ="80px">
+                        <asp:ListItem Value="○">○</asp:ListItem>
+                        <asp:ListItem Value="×">×</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
                 <th style="background-color:#009966;color:white">EPA</th>
                 <td >
                     <asp:DropDownList ID="DropDownList5" runat="server" Width ="80px">
@@ -300,25 +293,21 @@
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
                 </td>
+                <th style="background-color:#009966;color:white">FTA</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList14" runat="server" Width ="80px">
+                        <asp:ListItem Value="○">○</asp:ListItem>
+                        <asp:ListItem Value="×">×</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+
+
             </tr>
+
             <tr>
-                <th style="background-color:#009966;color:white">木材</th>
+                <th style="background-color:#009966;color:white">適合証明書</th>
                 <td>
-                    <asp:DropDownList ID="DropDownList6" runat="server" Width ="80px">
-                        <asp:ListItem Value="○">○</asp:ListItem>
-                        <asp:ListItem Value="×">×</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-                <th style="background-color:#009966;color:white">ﾃﾞﾘﾊﾞﾘ</th>
-                <td >
-                    <asp:DropDownList ID="DropDownList7" runat="server" Width ="80px">
-                        <asp:ListItem Value="○">○</asp:ListItem>
-                        <asp:ListItem Value="×">×</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-                <th style="background-color:#009966;color:white">検査</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList8" runat="server" Width ="80px">
+                    <asp:DropDownList ID="DropDownList15" runat="server" Width ="80px">
                         <asp:ListItem Value="○">○</asp:ListItem>
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
@@ -337,10 +326,6 @@
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-            </tr>
-
-
-            <tr>
                 <th style="background-color:#009966;color:white">IV,PL郵送必要有無</th>
                 <td>
                     <asp:DropDownList ID="DropDownList13" runat="server" Width ="80px">
@@ -348,29 +333,6 @@
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                <th style="background-color:#009966;color:white">FTA</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList14" runat="server" Width ="80px">
-                        <asp:ListItem Value="○">○</asp:ListItem>
-                        <asp:ListItem Value="×">×</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-                <th style="background-color:#009966;color:white">適合証明書</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList15" runat="server" Width ="80px">
-                        <asp:ListItem Value="○">○</asp:ListItem>
-                        <asp:ListItem Value="×">×</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-                <th style="background-color:#009966;color:white">エジプト査証</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList16" runat="server" Width ="80px">
-                        <asp:ListItem Value="○">○</asp:ListItem>
-                        <asp:ListItem Value="×">×</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-            </tr>
-           <tr>
                 <th style="background-color:#009966;color:white">コンテナ清掃</th>
                 <td>
                     <asp:DropDownList ID="DropDownList11" runat="server" Width ="80px">
@@ -378,13 +340,8 @@
                         <asp:ListItem Value="×">×</asp:ListItem>
                     </asp:DropDownList>
                 </td>
-                <th style="background-color:#009966;color:white">LC取引</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList12" runat="server" Width ="80px">
-                        <asp:ListItem Value="○">○</asp:ListItem>
-                        <asp:ListItem Value="×">×</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
+            </tr>
+           <tr>
                 <th style="background-color:#6666FF;color:white">BR帳票出力</th>
                 <td>
                     <asp:DropDownList ID="DropDownList17" runat="server" Width ="80px">
@@ -410,8 +367,50 @@
                 <td>
                     <asp:TextBox ID="TextBox47" runat="server" Height="20px" Width="233px" Class ="txtb"></asp:TextBox>
                 </td>
-            </tr>
 
+                <th style="background-color:#009966;color:white">IV</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList1" runat="server" Width ="80px">
+                        <asp:ListItem Value="○">○</asp:ListItem>
+                        <asp:ListItem Value="×">×</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                <th style="background-color:#009966;color:white">PL</th>
+                <td >
+                    <asp:DropDownList ID="DropDownList2" runat="server" Width ="80px">
+                        <asp:ListItem Value="○">○</asp:ListItem>
+                        <asp:ListItem Value="×">×</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                <th style="background-color:#009966;color:white">BL</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList3" runat="server" Width ="80px">
+                        <asp:ListItem Value="○">○</asp:ListItem>
+                        <asp:ListItem Value="×">×</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                            <th style="background-color:#009966;color:white">LC取引</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList12" runat="server" Width ="80px">
+                        <asp:ListItem Value="○">○</asp:ListItem>
+                        <asp:ListItem Value="×">×</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                <th style="background-color:#009966;color:white">検査</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList8" runat="server" Width ="80px">
+                        <asp:ListItem Value="○">○</asp:ListItem>
+                        <asp:ListItem Value="×">×</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+                <th style="background-color:#009966;color:white">ﾃﾞﾘﾊﾞﾘ</th>
+                <td >
+                    <asp:DropDownList ID="DropDownList7" runat="server" Width ="80px">
+                        <asp:ListItem Value="○">○</asp:ListItem>
+                        <asp:ListItem Value="×">×</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+              </tr>
         </table>
 
 
