@@ -154,40 +154,29 @@
                 <asp:Label ID="Label12" runat="server" Text="" Class="err"></asp:Label>
                 <br/>
                 <asp:Label ID="Label4" runat="server" Text="客先CD：" Font-Size="Small"></asp:Label>
-                <asp:TextBox ID="TextBox1" runat="server" Width ="100"></asp:TextBox>&nbsp;
+                <asp:TextBox ID="TextBox1" runat="server" Width ="50"></asp:TextBox>&nbsp;
                 <asp:Button ID="Button1" runat="server" Text="表示" Font-Size="Small" />&nbsp;
-                <asp:Button ID="Button2" runat="server" Text="詳細表示" Width ="100px" Font-Size="Small" />&nbsp;
-                <asp:Button ID="Button3" runat="server" Text="新規登録" Width ="100px" Font-Size="Small" />&nbsp;
+                <asp:Button ID="Button2" runat="server" Text="詳細表示" Width ="60px" Font-Size="Small" />&nbsp;
+                <asp:Button ID="Button3" runat="server" Text="新規登録" Width ="60px" Font-Size="Small" />&nbsp;
                 <asp:Label ID="Label1" runat="server" Text="※新規登録時、ﾍﾞｰｽの客先CD必須" Font-Size="Small"></asp:Label>&nbsp;
-                <asp:Button ID="Button4" runat="server" Text="エクセル出力" Width ="100px" Font-Size="Small" />
+                <asp:Button ID="Button4" runat="server" Text="エクセル" Width ="60px" Font-Size="Small" />
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
             </td>
         </tr>
+        <tr>
+            <td class="first-cell">
+
+            </td>
+            <td class="second-cell">
+              <asp:Button ID="Button5" runat="server" Text="新規登録②" Width ="70px" Font-Size="Small" />
+              <asp:Label ID="Label2" runat="server" Text="客先CD②：" Font-Size="Small"></asp:Label>
+              <asp:DropDownList ID="DropDownList2" runat="server" Width="60px" Font-Size="Small" CssClass="DropDown" DataSourceID="SqlDataSource2" DataTextField="CUSTCODE" DataValueField="CUSTCODE" ></asp:DropDownList>
+            </td>
+        </tr>
     </table>
 
-<%--    <table>
-        <tr>
-            <td style="height:100px">
-            </td>
-        </tr>
-    </table>--%>
-
-<%--    <table>
-        <tr>
-            <td style="color:red">
-                <font size="4">QC_海外業務マニュアル_test.xlsがツールと連携しています。こちらは反映しません。更新ルールは確認してください。</font>
-            </td>
-        </tr>
-    </table>--%>
-
-<%--    <table>
-        <tr>
-            <td style="height:100px">
-            </td>
-        </tr>
-    </table>--%>
 
     <asp:Panel ID="Panel1" runat="server"  Font-Size="12px">
 
@@ -332,6 +321,10 @@ ORDER BY NEW_CODE
     </asp:Panel>
 
 </div>
+
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CUSTCODE] FROM [T_EXL_CSMANUAL_ADDCUST]">
+        </asp:SqlDataSource>
+
 <!--/#contents2-->
 
 <!--ページの上部に戻る「↑」ボタン-->

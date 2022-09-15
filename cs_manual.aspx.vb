@@ -12,6 +12,151 @@ Partial Class cs_home
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 
+        Dim strSQL As String = ""
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim dataread2 As SqlDataReader
+        Dim dbcmd2 As SqlCommand
+
+        Dim intCnt As Integer
+        Dim intCnt2 As Integer
+
+        Dim a As String
+
+        Dim strcode As String = ""
+        Dim strsname As String = ""
+        Dim strname As String = ""
+        Dim strname_addres01 As String = ""
+        Dim strname_addres02 As String = ""
+
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(2000, 0, 0, 0)
+        Dim ts2 As New TimeSpan(2000, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        Dim ConnectionString2 As String = String.Empty
+        Dim ConnectionString3 As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        ConnectionString2 = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString3 = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        'データベース接続を開く
+        cnn.Open()
+
+        Dim cnn2 = New SqlConnection(ConnectionString2)
+        Dim Command2 = cnn2.CreateCommand
+
+        Dim cnn3 = New SqlConnection(ConnectionString3)
+        Dim Command3 = cnn3.CreateCommand
+
+        'データベース接続を開く
+        cnn3.Open()
+
+        'データベース接続を開く
+        cnn2.Open()
+
+
+        strSQL = ""
+        strSQL = strSQL & "DELETE FROM T_EXL_CSMANUAL_ADDCUST "
+
+
+        Command2.CommandText = strSQL
+        ' SQLの実行
+        Command2.ExecuteNonQuery()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT M_CUST_TB.CUSTCODE,M_CUST_TB.CUSTNAME,M_CUST_TB.CUSTOMERNAME,M_CUST_TB.CUSTOMERADDRESS,M_CUST_TB.CONSIGNEENAME,M_CUST_TB.CONSIGNEEADDRESS "
+        strSQL = strSQL & "FROM M_CUST_TB "
+        strSQL = strSQL & "WHERE M_CUST_TB.STAMP > '" & dt3 & "' "
+        strSQL = strSQL & "ORDER BY M_CUST_TB.CUSTCODE ASC "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+
+        '結果を取り出す 
+        While (dataread.Read())
+            A = dataread("CUSTCODE")
+
+            strSQL = ""
+            strSQL = strSQL & "SELECT T_EXL_CSMANUAL.NEW_CODE "
+            strSQL = strSQL & "FROM T_EXL_CSMANUAL "
+            strSQL = strSQL & "WHERE T_EXL_CSMANUAL.NEW_CODE ='" & dataread("CUSTCODE") & "'"
+
+            'ＳＱＬコマンド作成 
+            dbcmd2 = New SqlCommand(strSQL, cnn2)
+            'ＳＱＬ文実行 
+            dataread2 = dbcmd2.ExecuteReader()
+
+            intCnt2 = 0
+            '結果を取り出す 
+            While (dataread2.Read())
+                intCnt2 = 1
+            End While
+
+            If IsNumeric(dataread("CUSTCODE")) = True Then
+                intCnt2 = 1
+            End If
+
+            'クローズ処理 
+            dataread2.Close()
+            dbcmd2.Dispose()
+
+            If intCnt2 = 0 Then
+
+
+
+                strcode = Trim(dataread("CUSTCODE"))
+                strsname = Trim(dataread("CUSTNAME"))
+                strname = Trim(Replace(dataread("CONSIGNEENAME"), "'", "''"))
+                strname_addres01 = Replace(Trim(dataread("CUSTOMERNAME")) & vbCr & Trim(dataread("CUSTOMERADDRESS")), "'", "''")
+                strname_addres02 = Replace(Trim(dataread("CONSIGNEENAME")) & vbCr & Trim(dataread("CONSIGNEEADDRESS")), "'", "''")
+
+                strSQL = ""
+                strSQL = strSQL & "INSERT INTO T_EXL_CSMANUAL_ADDCUST VALUES("
+                strSQL = strSQL & " '" & strcode & "', "
+                strSQL = strSQL & " '" & strsname & "', "
+                strSQL = strSQL & " '" & strname & "', "
+                strSQL = strSQL & " '" & strname_addres01 & "', "
+                strSQL = strSQL & " '" & strname_addres02 & "' "
+                strSQL = strSQL & ")"
+
+                Command3.CommandText = strSQL
+                ' SQLの実行
+                Command3.ExecuteNonQuery()
+
+            End If
+
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        cnn.Close()
+        cnn.Dispose()
+
+        cnn2.Close()
+        cnn2.Dispose()
+
+        cnn3.Close()
+        cnn3.Dispose()
+
     End Sub
 
 
@@ -43,6 +188,21 @@ Partial Class cs_home
         '入力された客先コードをセッションへ
         Session("strCust") = Trim(TextBox1.Text)
         Session("strMode") = "01"       '更新モード
+
+        '画面遷移
+        Response.Redirect("cs_manual_detail.aspx")
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        '新規登録ボタン押下
+        If Trim(DropDownList2.Text) = "" Then
+            Label12.Text = "ベースとなる客先コードを選択してください。"
+            Return
+        End If
+
+        '入力された客先コードをセッションへ
+        Session("strCust") = Trim(DropDownList2.Text)
+        Session("strMode") = "03"       '登録モード（選択式）
 
         '画面遷移
         Response.Redirect("cs_manual_detail.aspx")
