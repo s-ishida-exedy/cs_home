@@ -153,13 +153,13 @@
             <td class="second-cell">
                 <asp:Label ID="Label12" runat="server" Text="" Class="err"></asp:Label>
                 <br/>
-                <asp:Label ID="Label4" runat="server" Text="客先CD：" Font-Size="Small"></asp:Label>
-                <asp:TextBox ID="TextBox1" runat="server" Width ="50"></asp:TextBox>&nbsp;
+                <asp:Label ID="Label4" runat="server" Text="客先CD①：" Font-Size="Small"></asp:Label>
+                <asp:TextBox ID="TextBox1" runat="server" Width ="60"></asp:TextBox>&nbsp;
                 <asp:Button ID="Button1" runat="server" Text="表示" Font-Size="Small" />&nbsp;
                 <asp:Button ID="Button2" runat="server" Text="詳細表示" Width ="60px" Font-Size="Small" />&nbsp;
                 <asp:Button ID="Button3" runat="server" Text="新規登録" Width ="60px" Font-Size="Small" />&nbsp;
                 <asp:Label ID="Label1" runat="server" Text="※新規登録時、ﾍﾞｰｽの客先CD必須" Font-Size="Small"></asp:Label>&nbsp;
-                <asp:Button ID="Button4" runat="server" Text="エクセル" Width ="60px" Font-Size="Small" />
+                <asp:Button ID="Button4" runat="server" Text="エクセル出力" Width ="80px"　Font-Size="Small" />
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
@@ -170,9 +170,9 @@
 
             </td>
             <td class="second-cell">
-              <asp:Button ID="Button5" runat="server" Text="新規登録②" Width ="70px" Font-Size="Small" />
+<%--              <asp:Button ID="Button5" runat="server" Text="新規登録②" Width ="70px" Font-Size="Small" />--%>
               <asp:Label ID="Label2" runat="server" Text="客先CD②：" Font-Size="Small"></asp:Label>
-              <asp:DropDownList ID="DropDownList2" runat="server" Width="60px" Font-Size="Small" CssClass="DropDown" DataSourceID="SqlDataSource2" DataTextField="CUSTCODE" DataValueField="CUSTCODE" ></asp:DropDownList>
+              <asp:DropDownList ID="DropDownList2" runat="server" Width="70px" Font-Size="Small" CssClass="DropDown" DataTextField="CUSTCODE" DataValueField="CUSTCODE" ></asp:DropDownList>
             </td>
         </tr>
     </table>
