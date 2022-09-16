@@ -4,11 +4,16 @@ Imports System.Data.Common
 Imports System.IO
 Imports ClosedXML.Excel
 
+Imports System.Linq
+
+
 Partial Class cs_home
     Inherits System.Web.UI.Page
 
     Public strRow As String
     Public strProcess As String
+    Public strPath As String = "C:\exp\cs_home\files"
+
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 
@@ -83,7 +88,7 @@ Partial Class cs_home
             strSQL = strSQL & "SELECT M_CUST_TB.CUSTCODE,M_CUST_TB.CUSTNAME,M_CUST_TB.CUSTOMERNAME,M_CUST_TB.CUSTOMERADDRESS,M_CUST_TB.CONSIGNEENAME,M_CUST_TB.CONSIGNEEADDRESS "
             strSQL = strSQL & "FROM M_CUST_TB "
             strSQL = strSQL & "WHERE M_CUST_TB.STAMP > '" & dt3 & "' "
-            strSQL = strSQL & "ORDER BY M_CUST_TB.CUSTCODE ASC "
+            strSQL = strSQL & "ORDER BY M_CUST_TB.CUSTCODE "
 
             'ＳＱＬコマンド作成 
             dbcmd = New SqlCommand(strSQL, cnn)
@@ -325,72 +330,133 @@ Partial Class cs_home
 
 
 
-        Dim t As Integer
-        t = 1
-        Dim cnt As Integer = 0
+        'Dim t As Integer
+        't = 1
+        'Dim cnt As Integer = 0
 
-        Dim val01 As String = ""
+        'Dim val01 As String = ""
 
-        Using wb As XLWorkbook = New XLWorkbook()
-            Dim ws As IXLWorksheet = wb.AddWorksheet("CSマニュアル")
-            For Each cell As TableCell In GridView1.HeaderRow.Cells
+        'Using wb As XLWorkbook = New XLWorkbook()
+        '    Dim ws As IXLWorksheet = wb.AddWorksheet("CSマニュアル")
+        '    For Each cell As TableCell In GridView1.HeaderRow.Cells
 
-                If cnt = 0 Then
-                    cnt = 1
-                Else
-                    val01 = Trim(Replace(cell.Text, "&nbsp;", ""))
-                    ws.Cell(1, t).Value = val01
-                    t = t + 1
-                End If
-            Next
+        '        If cnt = 0 Then
+        '            cnt = 1
+        '        Else
+        '            val01 = Trim(Replace(cell.Text, "&nbsp;", ""))
+        '            ws.Cell(1, t).Value = val01
+        '            t = t + 1
+        '        End If
+        '    Next
 
-            cnt = 0
-            t = 2
-            For Each row As GridViewRow In GridView1.Rows
+        '    cnt = 0
+        '    t = 2
+        '    For Each row As GridViewRow In GridView1.Rows
 
-                If cnt = 0 Then
-                    cnt = 1
-                Else
-                    For i As Integer = 1 To row.Cells.Count - 1
-                        val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
-                        Select Case i
-                            Case 15 To 24, 29 To 30, 37 To 41
-                                val01 = Trim(Replace(val01, "&#215;", "×"))
-                                If IsDate(val01) = True Then
-                                    ws.Cell(t, i).SetValue(DateValue(val01))
-                                Else
-                                    ws.Cell(t, i).SetValue(val01)
-                                End If
+        '        If cnt = 0 Then
+        '            cnt = 1
+        '        Else
+        '            For i As Integer = 1 To row.Cells.Count - 1
+        '                val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
+        '                Select Case i
+        '                    Case 15 To 24, 29 To 30, 37 To 41
+        '                        val01 = Trim(Replace(val01, "&#215;", "×"))
+        '                        If IsDate(val01) = True Then
+        '                            ws.Cell(t, i).SetValue(DateValue(val01))
+        '                        Else
+        '                            ws.Cell(t, i).SetValue(val01)
+        '                        End If
 
-                            Case Else
-                                If IsDate(val01) = True Then
-                                    ws.Cell(t, i).SetValue(DateValue(val01))
-                                Else
-                                    ws.Cell(t, i).SetValue(val01)
-                                End If
+        '                    Case Else
+        '                        If IsDate(val01) = True Then
+        '                            ws.Cell(t, i).SetValue(DateValue(val01))
+        '                        Else
+        '                            ws.Cell(t, i).SetValue(val01)
+        '                        End If
 
-                        End Select
-                    Next
-                    t = t + 1
-                End If
-            Next
+        '                End Select
+        '            Next
+        '            t = t + 1
+        '        End If
+        '    Next
 
-            ws.Style.Font.FontName = "Meiryo UI"
-            ws.Style.Alignment.WrapText = False
-            ws.Columns.AdjustToContents()
-            ws.SheetView.FreezeRows(1)
+        '    ws.Style.Font.FontName = "Meiryo UI"
+        '    ws.Style.Alignment.WrapText = False
+        '    ws.Columns.AdjustToContents()
+        '    ws.SheetView.FreezeRows(1)
 
-            Dim struid As String = Session("UsrId")
-            wb.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\CSマニュアル" & Now.ToString(“yyyyMMddhhmmss”) & "_PIC_" & struid & ".xlsx")
+        '    Dim struid As String = Session("UsrId")
+        '    wb.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\CSマニュアル" & Now.ToString(“yyyyMMddhhmmss”) & "_PIC_" & struid & ".xlsx")
 
-        End Using
-
-
-        Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('出力が完了しました。\n出力先：\\\svnas201\\EXD06101\\DISC_COMMON\\WEB出力');</script>", False)
+        'End Using
 
 
+        'Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('出力が完了しました。\n出力先：\\\svnas201\\EXD06101\\DISC_COMMON\\WEB出力');</script>", False)
 
+        '前月分ダウンロードボタン押下
+        Dim strFile As String = Format(Now, "yyyyMMdd") & "_CS_MANUAL.xlsx"
+        Dim strPath As String = "C:\exp\cs_home\files\"
+        Dim strChanged As String    'サーバー上のフルパス
+        Dim strFileNm As String     'ファイル名
 
+        'Dim dtToday As DateTime = DateTime.Today
+
+        'Dim dtFDM As Date = New DateTime(dtToday.Year, dtToday.Month, 1).AddMonths(-1)      '前月初日
+        'Dim dtTDM As Date = New DateTime(dtToday.Year, dtToday.Month, 1).AddDays(-1)        '前月末日
+
+        Dim dt = GetNorthwindProductTable()
+        Dim workbook = New XLWorkbook()
+        Dim worksheet = workbook.Worksheets.Add(dt)
+        workbook.SaveAs(strPath & strFile)
+
+        'ファイル名を取得する
+        Dim strTxtFiles() As String = IO.Directory.GetFiles(strPath, Format(Now, "yyyyMMdd") & "_CS_MANUAL.xlsx")
+
+        strChanged = strTxtFiles(0)
+        strFileNm = Path.GetFileName(strChanged)
+
+        'Contentをクリア
+        Response.ClearContent()
+
+        'Contentを設定
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+        Response.ContentType = "application/vnd.ms-excel"
+
+        '表示ファイル名を指定
+        Dim fn As String = HttpUtility.UrlEncode(strFileNm)
+        Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
+
+        'ダウンロード対象ファイルを指定
+        Response.WriteFile(strChanged)
+
+        'ダウンロード実行
+        Response.Flush()
+        Response.End()
 
     End Sub
+    Private Shared Function GetNorthwindProductTable() As DataTable
+        'EXCELファイル出力
+        Dim strSQL As String = ""
+        Dim strSDate As String = ""
+        Dim strEDate As String = ""
+
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+        Dim dt = New DataTable("T_EXL_CSMANUAL")
+
+        Using conn = New SqlConnection(ConnectionString)
+            Dim cmd = conn.CreateCommand()
+
+            strSQL = strSQL & "SELECT * FROM T_EXL_CSMANUAL "
+
+
+            cmd.CommandText = strSQL
+            Dim sda = New SqlDataAdapter(cmd)
+            sda.Fill(dt)
+        End Using
+
+        Return dt
+    End Function
 End Class

@@ -322,7 +322,7 @@ ORDER BY NEW_CODE
 
 </div>
 
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CUSTCODE] FROM [T_EXL_CSMANUAL_ADDCUST]">
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CUSTCODE] FROM [T_EXL_CSMANUAL_ADDCUST] ORDER BY CUSTCODE ">
         </asp:SqlDataSource>
 
 <!--/#contents2-->

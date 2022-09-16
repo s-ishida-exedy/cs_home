@@ -4,11 +4,15 @@ Imports System.Data.SqlClient
 Imports System.Data.Common
 Imports System.Console
 Imports ClosedXML.Excel
+Imports System.IO
+Imports System.Linq
 Partial Class yuusen
     Inherits System.Web.UI.Page
 
     Public strRow As String
     Public strProcess As String
+    Public strPath As String = "C:\exp\cs_home\files"
+
 
     Private Sub GridView1_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
 
@@ -583,71 +587,77 @@ Partial Class yuusen
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
-        Dim t As Integer
-        t = 1
-        Dim cnt As Integer = 0
 
-        Dim val01 As String = ""
+        Dim strFile As String = Format(Now, "yyyyMMdd") & "_SHIPPINGMEMO.xlsx"
+        Dim strPath As String = "C:\exp\cs_home\files\"
+        Dim strChanged As String    'サーバー上のフルパス
+        Dim strFileNm As String     'ファイル名
 
-        Using wb As XLWorkbook = New XLWorkbook()
-            Dim ws As IXLWorksheet = wb.AddWorksheet("sipping")
-            For Each cell As TableCell In GridView1.HeaderRow.Cells
 
-                If cnt = 0 Then
-                    cnt = 1
-                Else
-                    val01 = Trim(Replace(cell.Text, "&nbsp;", ""))
-                    ws.Cell(1, t).Value = val01
-                    t = t + 1
-                End If
+        Dim dt As New DataTable("GridView_Data")
+        For Each cell As TableCell In GridView1.HeaderRow.Cells
+            dt.Columns.Add(cell.Text)
+        Next
+        For Each row As GridViewRow In GridView1.Rows
+            dt.Rows.Add()
+            For i As Integer = 0 To row.Cells.Count - 1
+                dt.Rows(dt.Rows.Count - 1)(i) = Replace(row.Cells(i).Text, "&nbsp;", "")
             Next
-
-            cnt = 0
-            t = 2
-            For Each row As GridViewRow In GridView1.Rows
-
-                If cnt = 0 Then
-                    cnt = 1
-                Else
-                    For i As Integer = 1 To row.Cells.Count - 1
-                        val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
-                        Select Case i
-
-                            Case 4 To 7, 9 To 11, 15
-
-                                If IsDate(val01) = True Then
-                                    ws.Cell(t, i).SetValue(DateValue(val01))
-                                Else
-                                    ws.Cell(t, i).SetValue(val01)
-                                End If
-
-                            Case 16 To 18
-                                If IsNumeric(val01) = True Then
-                                    ws.Cell(t, i).SetValue(Val(val01))
-                                Else
-                                    ws.Cell(t, i).SetValue(val01)
-                                End If
-                            Case Else
-                                ws.Cell(t, i).SetValue(val01)
-                        End Select
-                    Next
-                    t = t + 1
-                End If
-            Next
-
-            ws.Style.Font.FontName = "Meiryo UI"
-            ws.Columns.AdjustToContents()
-            ws.SheetView.FreezeRows(1)
-
-            Dim struid As String = Session("UsrId")
-            wb.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\SHIPPINGMEMO_" & Now.ToString(“yyyyMMddhhmmss”) & "_PIC_" & struid & ".xlsx")
+        Next
+        Using workbook As New XLWorkbook()
+            workbook.Worksheets.Add(dt)
+            workbook.SaveAs(strPath & strFile)
 
         End Using
 
-        Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('出力が完了しました。\n出力先：\\\svnas201\\EXD06101\\DISC_COMMON\\WEB出力');</script>", False)
+        'ファイル名を取得する
+        strChanged = strPath & Format(Now, "yyyyMMdd") & "_SHIPPINGMEMO.xlsx"
+        strFileNm = Path.GetFileName(strChanged)
 
+        'Contentをクリア
+        Response.ClearContent()
+
+        'Contentを設定
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+        Response.ContentType = "application/vnd.ms-excel"
+
+        '表示ファイル名を指定
+        Dim fn As String = HttpUtility.UrlEncode(strFileNm)
+        Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
+
+        'ダウンロード対象ファイルを指定
+        Response.WriteFile(strChanged)
+
+        'ダウンロード実行
+        Response.Flush()
+        Response.End()
 
     End Sub
+    Private Shared Function GetNorthwindProductTable() As DataTable
+        'EXCELファイル出力
+        Dim strSQL As String = ""
+        Dim strSDate As String = ""
+        Dim strEDate As String = ""
+
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+        Dim dt = New DataTable("T_EXL_CSMANUAL")
+
+        Using conn = New SqlConnection(ConnectionString)
+            Dim cmd = conn.CreateCommand()
+
+            strSQL = strSQL & "SELECT * FROM T_EXL_CSMANUAL "
+
+
+            cmd.CommandText = strSQL
+            Dim sda = New SqlDataAdapter(cmd)
+            sda.Fill(dt)
+        End Using
+
+        Return dt
+    End Function
 
     Public Overrides Sub VerifyRenderingInServerForm(ByVal control As Control)
         ' このOverridesは以下のエラーを回避するために必要です。
