@@ -128,6 +128,52 @@ Partial Class cs_home
                 TextBox54.Text = dataread("FORWARDER_STAFF_NM").ToString
             End While
 
+
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+
+
+            If strMode = "03" Then
+
+
+                strSQL = ""
+                strSQL = strSQL & "SELECT * FROM T_EXL_CSMANUAL_ADDCUST "
+                strSQL = strSQL & "WHERE CUSTCODE = '" & strCust & "'"
+
+                'ＳＱＬコマンド作成 
+                dbcmd = New SqlCommand(strSQL, cnn)
+                'ＳＱＬ文実行 
+                dataread = dbcmd.ExecuteReader()
+
+                '結果を取り出す 
+                While (dataread.Read())
+
+                    TextBox1.Text = dataread("CUSTCODE").ToString
+                    TextBox3.Text = dataread("CUST_NAME").ToString
+                    TextBox4.Text = dataread("CUST_SNAME").ToString
+                    TextBox8.Text = dataread("CUST_NAME_ADDRESS").ToString
+                    TextBox55.Text = dataread("CNEE_NAME_ADDRESS").ToString
+                End While
+
+
+                DropDownList4.SelectedValue = "×"
+                DropDownList5.SelectedValue = "×"
+                DropDownList6.SelectedValue = "×"
+                DropDownList9.SelectedValue = "×"
+                DropDownList10.SelectedValue = "×"
+                DropDownList11.SelectedValue = "×"
+                DropDownList13.SelectedValue = "×"
+                DropDownList14.SelectedValue = "×"
+                DropDownList15.SelectedValue = "×"
+                DropDownList16.SelectedValue = "×"
+                DropDownList17.SelectedValue = "無し"
+                DropDownList18.SelectedValue = "無し"
+
+            End If
+
+
             'クローズ処理 
             dataread.Close()
             dbcmd.Dispose()
@@ -138,7 +184,10 @@ Partial Class cs_home
             If strMode = "01" Then
                 Button7.Text = "更　　新"
                 Button7.Attributes.Add("onclick", "return confirm('更新します。よろしいですか？');")
-            Else
+            ElseIf strMode = "02" Then
+                Button7.Text = "登　　録"
+                Button7.Attributes.Add("onclick", "return confirm('登録します。よろしいですか？');")
+            ElseIf strMode = "03" Then
                 Button7.Text = "登　　録"
                 Button7.Attributes.Add("onclick", "return confirm('登録します。よろしいですか？');")
             End If

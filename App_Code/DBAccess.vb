@@ -277,7 +277,8 @@ Public Class DBAccess
         StrSQL = StrSQL & ", iif(len(REV_ETD)=10,REV_ETD,ETD) AS ETD02 "
         StrSQL = StrSQL & ", iif(len(REV_ETD)=10,ETD,'') AS ETD03 "
 
-
+        StrSQL = StrSQL & ", IIf(Len(REV_ETA) = 10, REV_ETA, ETA) As ETA02 "
+        StrSQL = StrSQL & ", iif(len(REV_ETA)=10,ETA,'') AS ETA03 "
 
         StrSQL = StrSQL & "FROM "
         StrSQL = StrSQL & "  [T_EXL_SHIPPINGMEMOLIST] "
