@@ -343,53 +343,52 @@
                         <Columns>
 
 
-                        <asp:BoundField DataField="CUST_CD02" HeaderText="請求客先
-                            コード" SortExpression="CUST_CD02"  >
+                        <asp:BoundField DataField="CUST_CD02" HeaderText="請求客先<br/>コード" SortExpression="CUST_CD02" HtmlEncode ="false"  >
                         <HeaderStyle Width="60px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="ETD" HeaderText="Sailing On/About(計上日)" SortExpression="ETD"  >
-                        <HeaderStyle Width="180px" />
+                        <asp:BoundField DataField="ETD" HeaderText="Sailing On/About<br/>(計上日)" SortExpression="ETD"  HtmlEncode ="false"  >
+                        <HeaderStyle Width="130px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="" HeaderText="Finaldestination(届け先名)" SortExpression=""  >
+                        <asp:BoundField DataField="" HeaderText="Finaldestination<br/>(届け先名)" SortExpression=""  HtmlEncode ="false"  >
                         <HeaderStyle Width="350px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="" HeaderText="Finaldestination ADDRESS(届け先住所)" SortExpression="" >
+                        <asp:BoundField DataField="" HeaderText="Finaldestination ADDRESS<br/>(届け先住所)" SortExpression=""  HtmlEncode ="false" >
                         <HeaderStyle Width="1300px" />
                         </asp:BoundField>
 
 
-                        <asp:BoundField DataField="LOADING_PORT" HeaderText="PORTOF LOADING(積み出し港)" SortExpression="LOADING_PORT" >
-                        <HeaderStyle Width="133px" />
+                        <asp:BoundField DataField="LOADING_PORT" HeaderText="PORTOF LOADING<br/>(積み出し港)" SortExpression="LOADING_PORT" HtmlEncode ="false" >
+                        <HeaderStyle Width="140px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="PORT OF DEISCHARGE(揚地)" SortExpression="DISCHARGING_PORT" >
-                        <HeaderStyle Width="150px" />
+                        <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="PORT OF DEISCHARGE<br/>(揚地)" SortExpression="DISCHARGING_PORT"  HtmlEncode ="false" >
+                        <HeaderStyle Width="200px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="PALECE OF DELIVERY(配送先)" SortExpression="PLACE_OF_DELIVERY" >
-                        <HeaderStyle Width="150px" />
+                        <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="PALECE OF DELIVERY<br/>(配送先)" SortExpression="PLACE_OF_DELIVERY"  HtmlEncode ="false" >
+                        <HeaderStyle Width="200px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="PLACE_OF_RECEIPT" HeaderText="荷受地" SortExpression="PLACE_OF_RECEIPT" >
-                        <HeaderStyle Width="120px" />
+                        <HeaderStyle Width="100px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="PLACE OF DELIVERY BY CARRIER(配送者責任送り先)" SortExpression="PLACE_OF_DELIVERY" >
+                        <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="PLACE OF DELIVERY<br/>BY CARRIER(配送者責任送り先)" SortExpression="PLACE_OF_DELIVERY"  HtmlEncode ="false" >
                         <HeaderStyle Width="190px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="CUT_DATE" HeaderText="CUT日" SortExpression="CUT_DATE" >
-                        <HeaderStyle Width="120px" />
+                        <HeaderStyle Width="100px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="ETA" HeaderText="到着日" SortExpression="ETA" >
-                        <HeaderStyle Width="120px" />
+                        <HeaderStyle Width="100px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="ETD" HeaderText="入出港日" SortExpression="ETD" >
-                        <HeaderStyle Width="120px" />
+                        <HeaderStyle Width="100px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="CUT_DATE" HeaderText="搬入日" SortExpression="CUT_DATE" >
@@ -397,7 +396,7 @@
                         </asp:BoundField>
 
 
-                        <asp:BoundField DataField="" HeaderText="出荷元ストアコード" SortExpression="" >
+                        <asp:BoundField DataField="" HeaderText="出荷元<br/>ストアコード" SortExpression="" HtmlEncode ="false" >
                         <HeaderStyle Width="80px" />
                         </asp:BoundField>
 
@@ -414,10 +413,10 @@
                         </asp:BoundField>
 
                         <asp:BoundField DataField="BOOK_TO" HeaderText="船社" SortExpression="BOOK_TO" >
-                        <HeaderStyle Width="90px" />
+                        <HeaderStyle Width="120px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="" HeaderText="船社担当者" SortExpression="" >
+                        <asp:BoundField DataField="" HeaderText="船社担当" SortExpression="" >
                         <HeaderStyle Width="60px" />
                         </asp:BoundField>
 
@@ -425,7 +424,7 @@
                         <HeaderStyle Width="200px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="" HeaderText="乙仲担当者" SortExpression="" >
+                        <asp:BoundField DataField="" HeaderText="乙仲担当" SortExpression="" >
                         <HeaderStyle Width="60px" />
                         </asp:BoundField>
 
@@ -433,7 +432,7 @@
                         <HeaderStyle Width="100px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="VESSEL_NAME" HeaderText="船名(ocean vessll)" SortExpression="VESSEL_NAME" >
+                        <asp:BoundField DataField="VESSEL_NAME" HeaderText="船名<br/>(ocean vessll)" SortExpression="VESSEL_NAME"  HtmlEncode ="false" >
                         <HeaderStyle Width="150px" />
                         </asp:BoundField>
 
@@ -446,7 +445,7 @@
                         </asp:BoundField>
 
                         <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="place of delivery SI" SortExpression="PLACE_OF_DELIVERY" >
-                        <HeaderStyle Width="140px" />
+                        <HeaderStyle Width="200px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="Nortify address" SortExpression="" >
@@ -454,23 +453,23 @@
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="通関方法" SortExpression="" >
-                        <HeaderStyle Width="120px" />
+                        <HeaderStyle Width="100px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="" HeaderText="ベアリング帳票出力" SortExpression="" >
-                        <HeaderStyle Width="120px" />
+                        <asp:BoundField DataField="" HeaderText="ベアリング<br/>帳票出力" SortExpression=""  HtmlEncode ="false" >
+                        <HeaderStyle Width="100px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="" HeaderText="船積スケジュール登録" SortExpression="" >
-                        <HeaderStyle Width="130px" />
+                        <asp:BoundField DataField="" HeaderText="船積スケジュール<br/>登録" SortExpression=""  HtmlEncode ="false" >
+                        <HeaderStyle Width="100px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="" HeaderText="コンテナ情報登録" SortExpression="" >
-                        <HeaderStyle Width="120px" />
+                        <asp:BoundField DataField="" HeaderText="コンテナ<br/>情報登録" SortExpression=""  HtmlEncode ="false" >
+                        <HeaderStyle Width="100px" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="" HeaderText="INVOICE内訳自動計算" SortExpression="" >
-                        <HeaderStyle Width="130px" />
+                        <asp:BoundField DataField="" HeaderText="INVOICE<br/>内訳自動計算" SortExpression=""  HtmlEncode ="false" >
+                        <HeaderStyle Width="100px" />
                         </asp:BoundField>
 
 <%--                        <asp:BoundField DataField="" HeaderText="海貨業者" SortExpression="" >

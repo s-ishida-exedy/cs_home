@@ -59,11 +59,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(4).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(4).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(4).Text = e.Row.Cells(4).Text & "_全角"
+                e.Row.Cells(0).Text = "全角エラー"
             End If
 
             If InStr(e.Row.Cells(4).Text, vbCr) + InStr(e.Row.Cells(4).Text, vbLf) + InStr(e.Row.Cells(4).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(4).Text = e.Row.Cells(4).Text & "_改行"
+                e.Row.Cells(1).Text = "改行エラー"
             End If
 
             'PORTOF DEISCHARGE(揚地)	5
@@ -79,11 +81,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(5).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(5).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(5).Text = e.Row.Cells(5).Text & "_全角"
+                e.Row.Cells(0).Text = "全角エラー"
             End If
 
             If InStr(e.Row.Cells(5).Text, vbCr) + InStr(e.Row.Cells(5).Text, vbLf) + InStr(e.Row.Cells(5).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(5).Text = e.Row.Cells(5).Text & "_改行"
+                e.Row.Cells(1).Text = "改行エラー"
             End If
 
             'PALECE OF DELIVERY(配送先)	6
@@ -99,11 +103,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(6).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(6).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(6).Text = e.Row.Cells(6).Text & "_全角"
+                e.Row.Cells(0).Text = "全角エラー"
             End If
 
             If InStr(e.Row.Cells(6).Text, vbCr) + InStr(e.Row.Cells(6).Text, vbLf) + InStr(e.Row.Cells(6).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(6).Text = e.Row.Cells(6).Text & "_改行"
+                e.Row.Cells(1).Text = "改行エラー"
             End If
 
             '荷受地	7
@@ -119,11 +125,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(7).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(7).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(7).Text = e.Row.Cells(7).Text & "_全角"
+                e.Row.Cells(0).Text = "全角エラー"
             End If
 
             If InStr(e.Row.Cells(7).Text, vbCr) + InStr(e.Row.Cells(7).Text, vbLf) + InStr(e.Row.Cells(7).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(7).Text = e.Row.Cells(7).Text & "_改行"
+                e.Row.Cells(1).Text = "改行エラー"
             End If
 
             'PLACE OF DELIVERY BY CARRIER(配送者責任送り先)	8
@@ -139,11 +147,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(8).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(8).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(8).Text = e.Row.Cells(8).Text & "_全角"
+                e.Row.Cells(0).Text = "全角エラー"
             End If
 
             If InStr(e.Row.Cells(8).Text, vbCr) + InStr(e.Row.Cells(8).Text, vbLf) + InStr(e.Row.Cells(8).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(8).Text = e.Row.Cells(8).Text & "_改行"
+                e.Row.Cells(1).Text = "改行エラー"
             End If
 
             'voyage 16
@@ -159,11 +169,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(16).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(16).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(16).Text = e.Row.Cells(16).Text & "_全角"
+                e.Row.Cells(0).Text = "全角エラー"
             End If
 
             If InStr(e.Row.Cells(16).Text, vbCr) + InStr(e.Row.Cells(16).Text, vbLf) + InStr(e.Row.Cells(16).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(16).Text = e.Row.Cells(16).Text & "_改行"
+                e.Row.Cells(1).Text = "改行エラー"
             End If
 
             '船社	17
@@ -188,6 +200,7 @@ Partial Class yuusen
             If InStr(e.Row.Cells(17).Text, vbCr) + InStr(e.Row.Cells(17).Text, vbLf) + InStr(e.Row.Cells(17).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(17).Text = e.Row.Cells(17).Text & "_改行"
+                e.Row.Cells(1).Text = "改行エラー"
             End If
 
 
@@ -215,11 +228,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(21).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(21).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(21).Text = e.Row.Cells(21).Text & "_全角"
+                e.Row.Cells(0).Text = "全角エラー"
             End If
 
             If InStr(e.Row.Cells(21).Text, vbCr) + InStr(e.Row.Cells(21).Text, vbLf) + InStr(e.Row.Cells(21).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(21).Text = e.Row.Cells(21).Text & "_改行"
+                e.Row.Cells(1).Text = "改行エラー"
             End If
 
             If e.Row.Cells(0).Text = "C255" Then
@@ -253,11 +268,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(22).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(22).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(22).Text = e.Row.Cells(22).Text & "_全角"
+                e.Row.Cells(0).Text = "全角エラー"
             End If
 
             If InStr(e.Row.Cells(22).Text, vbCr) + InStr(e.Row.Cells(22).Text, vbLf) + InStr(e.Row.Cells(22).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(22).Text = e.Row.Cells(22).Text & "_改行"
+                e.Row.Cells(1).Text = "改行エラー"
             End If
 
             'place of delivery SI	25
@@ -421,12 +438,11 @@ Partial Class yuusen
                 'e.Row.Cells(32).Text += dataread(60)
 
                 '乙仲担当者	 20
-                If dataread(61) = "" Then
-                    e.Row.Cells(20).Text += "-"
-                Else
-                    e.Row.Cells(20).Text += dataread(61)
-
-                End If
+                'If dataread(61) = "" Or isnull(dataread(61)) = True Then
+                '    e.Row.Cells(20).Text += "-"
+                'Else
+                e.Row.Cells(20).Text += "-"
+                'End If
 
 
                 'consinerr name of SI		 23 
@@ -555,17 +571,17 @@ Partial Class yuusen
                 End If
             End If
 
-            End If 
+            End If
 
 
 
         '不要行非表示
 
+        e.Row.Cells(32).Visible = False
+        e.Row.Cells(33).Visible = False
+        e.Row.Cells(34).Visible = False
 
-        'e.Row.Cells(33).Visible = False
-        'e.Row.Cells(34).Visible = False
-        'e.Row.Cells(35).Visible = False
-        'e.Row.Cells(36).Visible = False
+
 
 
 
@@ -683,12 +699,12 @@ Partial Class yuusen
         t = 1
         Dim cnt As Integer = 0
 
-        Dim lastRow As Integer
-        Dim lastCol As Integer
+        Dim lastRow As Integer = 0
+        Dim lastCol As Integer = 0
 
         Dim lastRow2 As Integer
-        Dim ro As Integer
-        Dim co As Integer
+        Dim ro As Integer = 0
+
 
         Dim strfn As String = ""
         Dim strfa As String = ""
@@ -701,327 +717,492 @@ Partial Class yuusen
 
         Dim val01 As String = ""
 
-        'GridView1.DataBind()
+        Dim elfg01 As Long = 0
+        Dim elfg02 As Long = 0
+        Dim elfg03 As Long = 0
+
+        Dim strFile As String = Format(Now, "yyyyMMdd") & "_SHIP_IVHEDDR.xlsx"
+        Dim strPath As String = "C:\exp\cs_home\files\"
+        Dim strChanged As String    'サーバー上のフルパス
+        Dim strFileNm As String     'ファイル名
 
         If GridView1.Rows.Count >= 1 Then
 
-            Using wb As XLWorkbook = New XLWorkbook()
-                Dim ws As IXLWorksheet = wb.AddWorksheet("INVHDSHEET")
 
 
 
-                For Each cell As TableCell In GridView1.HeaderRow.Cells
+            Dim dt = New DataTable("INVHDSHEET")
+            For Each cell As TableCell In GridView1.HeaderRow.Cells
+                If cell.Text = "20Ft" Or cell.Text = "40Ft" Or cell.Text = "LCL/40Ft" Then
+                ElseIf cell.Text = "Sailing On/About<br/>(計上日)" Or cell.Text = "CUT日" Or cell.Text = "到着日" Or cell.Text = "入出港日" Or cell.Text = "搬入日" Then
+                    dt.Columns.Add(Replace(cell.Text, "<br/>", ""), Type.GetType("System.DateTime"))
+                Else
+                    dt.Columns.Add(Replace(cell.Text, "<br/>", ""))
+                End If
+            Next
 
-                    If cnt > 31 Then
+            Dim DDATE As Date
+            For Each row As GridViewRow In GridView1.Rows
+                dt.Rows.Add()
+                For i As Integer = 0 To row.Cells.Count - 4
+                    val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
+                    Select Case i
+                        Case 1, 9 To 12
+                            If IsDate(val01) = True Then
+                                DDATE = DateValue(val01)
+                                dt.Rows(dt.Rows.Count - 1)(i) = DDATE
+                            Else
 
-
-                    Else
-                        ws.Cell(1, t).Value = cell.Text
-                        t = t + 1
-                        cnt = cnt + 1
-                    End If
-                Next
-
-                cnt = 0
-                t = 2
-                For Each row As GridViewRow In GridView1.Rows
-
-                    If row.Cells(0).Text Like "*日付エラー*" Then
-
-                    Else
-
-                        For i As Integer = 0 To row.Cells.Count - 4
-                            val01 = Trim(Replace(Replace(row.Cells(i).Text, "&nbsp;", ""), "&amp;", "&"))
-                            Select Case i
-
-                                Case 1, 9 To 12
-                                    If IsDate(val01) = True Then
-                                        ws.Cell(t, i + 1).SetValue(DateValue(val01))
-                                    Else
-
-                                        If row.Cells(0).Text = "C258" Or row.Cells(0).Text = "C255" Then
-                                            ws.Cell(t, i + 1).SetValue(DateValue(row.Cells(11).Text))
-                                        Else
-
-                                            ws.Cell(t, i + 1).SetValue("日付エラー")
-                                            ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Red
-                                        End If
-                                    End If
-
-                                Case 2 To 8, 16, 18 To 26
-                                    If Len(row.Cells(i).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(row.Cells(i).Text) Then
-                                        ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Green
-                                        ws.Cell(t, i + 1).Style.Fill.BackgroundColor = XLColor.Green
-                                        ws.Cell(t, i + 1).SetValue("全角エラー")
-                                        ws.Cell(t, 1).SetValue("全角エラー")
-                                    Else
-                                        ws.Cell(t, i + 1).SetValue(val01)
-                                    End If
-
-                                Case 0, 2, 4 To 8, 16 To 23, 25
-
-                                    If InStr(row.Cells(i).Text, vbCr) + InStr(row.Cells(i).Text, vbLf) + InStr(row.Cells(i).Text, vbCrLf) > 0 Then
-                                        ws.Cell(t, 1).Style.Fill.BackgroundColor = XLColor.Blue
-                                        ws.Cell(t, i + 1).Style.Fill.BackgroundColor = XLColor.Blue
-                                        ws.Cell(t, i + 1).SetValue(val01)
-                                        ws.Cell(t, i + 1).SetValue("改行エラー")
-                                        ws.Cell(t, 1).SetValue("改行エラー")
-                                    Else
-                                        ws.Cell(t, i + 1).SetValue(val01)
-                                    End If
-
-                                Case Else
-                                    ws.Cell(t, i + 1).SetValue(val01)
-                            End Select
-
-                        Next
-                        t = t + 1
-                    End If
-                Next
-
-
-
-                lastRow = ws.LastRowUsed().RowNumber()
-                lastCol = ws.LastColumnUsed().ColumnNumber()
-
-
-
-                For ro = 2 To lastRow
-                    Select Case Left(ws.Cell(ro, 1).Value, 4)
-
-                        Case "E211"
-                            lastRow2 = ws.LastRowUsed().RowNumber()
-                            For co = 1 To lastCol
-                                If co = 1 Then
-                                    ws.Cell(lastRow2 + 1, co).SetValue("E213")
-                                    ws.Cell(lastRow2 + 2, co).SetValue("E214")
-                                    ws.Cell(lastRow2 + 3, co).SetValue("E215")
-                                    ws.Cell(lastRow2 + 4, co).SetValue("K52C")
+                                If row.Cells(0).Text = "C258" Or row.Cells(0).Text = "C255" Then
+                                    dt.Rows(dt.Rows.Count - 1)(i) = row.Cells(11).Text
                                 Else
-                                    ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
-                                    ws.Cell(lastRow2 + 2, co).SetValue(ws.Cell(ro, co).Value)
-                                    ws.Cell(lastRow2 + 3, co).SetValue(ws.Cell(ro, co).Value)
-                                    ws.Cell(lastRow2 + 4, co).SetValue(ws.Cell(ro, co).Value)
+                                    dt.Rows(dt.Rows.Count - 1)(0) = ("日付エラー")
+                                    elfg01 = 1
                                 End If
-                            Next
+                            End If
 
-                            Call get_manual("E213", strfn, strfa, strcn, strca, strny, strbr, striv)
-                            ws.Cell(lastRow2 + 1, 3).SetValue(strfn)
-                            ws.Cell(lastRow2 + 1, 4).SetValue(strfa)
-                            ws.Cell(lastRow2 + 1, 24).SetValue(strcn)
-                            ws.Cell(lastRow2 + 1, 25).SetValue(strca)
-                            ws.Cell(lastRow2 + 1, 27).SetValue(strny)
-                            ws.Cell(lastRow2 + 1, 29).SetValue(strbr)
-                            ws.Cell(lastRow2 + 1, 32).SetValue(striv)
+                        Case 0 To 16, 18 To 26
+                            If Len(row.Cells(i).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(row.Cells(i).Text) Then
+                                dt.Rows(dt.Rows.Count - 1)(i) = ("全角エラー")
+                                dt.Rows(dt.Rows.Count - 1)(0) = ("全角エラー")
+                                elfg02 = 1
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(i) = val01
+                            End If
 
-                            Call get_manual("E214", strfn, strfa, strcn, strca, strny, strbr, striv)
-                            ws.Cell(lastRow2 + 2, 3).SetValue(strfn)
-                            ws.Cell(lastRow2 + 2, 4).SetValue(strfa)
-                            ws.Cell(lastRow2 + 2, 24).SetValue(strcn)
-                            ws.Cell(lastRow2 + 2, 25).SetValue(strca)
-                            ws.Cell(lastRow2 + 2, 27).SetValue(strny)
-                            ws.Cell(lastRow2 + 2, 29).SetValue(strbr)
-                            ws.Cell(lastRow2 + 2, 32).SetValue(striv)
+                        Case 0, 4 To 8, 16 To 22, 25
 
-                            Call get_manual("E215", strfn, strfa, strcn, strca, strny, strbr, striv)
-                            ws.Cell(lastRow2 + 3, 3).SetValue(strfn)
-                            ws.Cell(lastRow2 + 3, 4).SetValue(strfa)
-                            ws.Cell(lastRow2 + 3, 24).SetValue(strcn)
-                            ws.Cell(lastRow2 + 3, 25).SetValue(strca)
-                            ws.Cell(lastRow2 + 3, 27).SetValue(strny)
-                            ws.Cell(lastRow2 + 3, 29).SetValue(strbr)
-                            ws.Cell(lastRow2 + 3, 32).SetValue(striv)
+                            If InStr(row.Cells(i).Text, vbCr) + InStr(row.Cells(i).Text, vbLf) + InStr(row.Cells(i).Text, vbCrLf) > 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(i) = ("改行エラー")
+                                dt.Rows(dt.Rows.Count - 1)(0) = ("改行エラー")
+                                elfg03 = 1
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(i) = val01
+                            End If
 
-                            Call get_manual("K52C", strfn, strfa, strcn, strca, strny, strbr, striv)
-                            ws.Cell(lastRow2 + 4, 3).SetValue(strfn)
-                            ws.Cell(lastRow2 + 4, 4).SetValue(strfa)
-                            ws.Cell(lastRow2 + 4, 24).SetValue(strcn)
-                            ws.Cell(lastRow2 + 4, 25).SetValue(strca)
-                            ws.Cell(lastRow2 + 4, 27).SetValue(strny)
-                            ws.Cell(lastRow2 + 4, 29).SetValue(strbr)
-                            ws.Cell(lastRow2 + 4, 32).SetValue(striv)
-
-                        Case "E153"
-                            lastRow2 = ws.LastRowUsed().RowNumber()
-                            For co = 1 To lastCol
-                                If co = 1 Then
-                                    ws.Cell(lastRow2 + 1, co).SetValue("E156")
-                                    ws.Cell(lastRow2 + 2, co).SetValue("K501")
-                                    ws.Cell(lastRow2 + 3, co).SetValue("E15A")
-                                Else
-                                    ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
-                                    ws.Cell(lastRow2 + 2, co).SetValue(ws.Cell(ro, co).Value)
-                                    ws.Cell(lastRow2 + 3, co).SetValue(ws.Cell(ro, co).Value)
-                                End If
-                            Next
-
-
-                            Call get_manual("E156", strfn, strfa, strcn, strca, strny, strbr, striv)
-                            ws.Cell(lastRow2 + 1, 3).SetValue(strfn)
-                            ws.Cell(lastRow2 + 1, 4).SetValue(strfa)
-                            ws.Cell(lastRow2 + 1, 24).SetValue(strcn)
-                            ws.Cell(lastRow2 + 1, 25).SetValue(strca)
-                            ws.Cell(lastRow2 + 1, 27).SetValue(strny)
-                            ws.Cell(lastRow2 + 1, 29).SetValue(strbr)
-                            ws.Cell(lastRow2 + 1, 32).SetValue(striv)
-
-                            Call get_manual("K501", strfn, strfa, strcn, strca, strny, strbr, striv)
-                            ws.Cell(lastRow2 + 2, 3).SetValue(strfn)
-                            ws.Cell(lastRow2 + 2, 4).SetValue(strfa)
-                            ws.Cell(lastRow2 + 2, 24).SetValue(strcn)
-                            ws.Cell(lastRow2 + 2, 25).SetValue(strca)
-                            ws.Cell(lastRow2 + 2, 27).SetValue(strny)
-                            ws.Cell(lastRow2 + 2, 29).SetValue(strbr)
-                            ws.Cell(lastRow2 + 2, 32).SetValue(striv)
-
-                            Call get_manual("E15A", strfn, strfa, strcn, strca, strny, strbr, striv)
-                            ws.Cell(lastRow2 + 3, 3).SetValue(strfn)
-                            ws.Cell(lastRow2 + 3, 4).SetValue(strfa)
-                            ws.Cell(lastRow2 + 3, 24).SetValue(strcn)
-                            ws.Cell(lastRow2 + 3, 25).SetValue(strca)
-                            ws.Cell(lastRow2 + 3, 27).SetValue(strny)
-                            ws.Cell(lastRow2 + 3, 29).SetValue(strbr)
-                            ws.Cell(lastRow2 + 3, 32).SetValue(striv)
-
-                        Case "E242"
-                            lastRow2 = ws.LastRowUsed().RowNumber()
-                            For co = 1 To lastCol
-                                If co = 1 Then
-                                    ws.Cell(lastRow2 + 1, co).SetValue("E243")
-                                    ws.Cell(lastRow2 + 2, co).SetValue("E244")
-                                    ws.Cell(lastRow2 + 3, co).SetValue("E248")
-                                Else
-                                    ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
-                                    ws.Cell(lastRow2 + 2, co).SetValue(ws.Cell(ro, co).Value)
-                                    ws.Cell(lastRow2 + 3, co).SetValue(ws.Cell(ro, co).Value)
-                                End If
-                            Next
-
-                            Call get_manual("E243", strfn, strfa, strcn, strca, strny, strbr, striv)
-                            ws.Cell(lastRow2 + 1, 3).SetValue(strfn)
-                            ws.Cell(lastRow2 + 1, 4).SetValue(strfa)
-                            ws.Cell(lastRow2 + 1, 24).SetValue(strcn)
-                            ws.Cell(lastRow2 + 1, 25).SetValue(strca)
-                            ws.Cell(lastRow2 + 1, 27).SetValue(strny)
-                            ws.Cell(lastRow2 + 1, 29).SetValue(strbr)
-                            ws.Cell(lastRow2 + 1, 32).SetValue(striv)
-
-                            Call get_manual("E244", strfn, strfa, strcn, strca, strny, strbr, striv)
-                            ws.Cell(lastRow2 + 2, 3).SetValue(strfn)
-                            ws.Cell(lastRow2 + 2, 4).SetValue(strfa)
-                            ws.Cell(lastRow2 + 2, 24).SetValue(strcn)
-                            ws.Cell(lastRow2 + 2, 25).SetValue(strca)
-                            ws.Cell(lastRow2 + 2, 27).SetValue(strny)
-                            ws.Cell(lastRow2 + 2, 29).SetValue(strbr)
-                            ws.Cell(lastRow2 + 2, 32).SetValue(striv)
-
-                            Call get_manual("E248", strfn, strfa, strcn, strca, strny, strbr, striv)
-                            ws.Cell(lastRow2 + 3, 3).SetValue(strfn)
-                            ws.Cell(lastRow2 + 3, 4).SetValue(strfa)
-                            ws.Cell(lastRow2 + 3, 24).SetValue(strcn)
-                            ws.Cell(lastRow2 + 3, 25).SetValue(strca)
-                            ws.Cell(lastRow2 + 3, 27).SetValue(strny)
-                            ws.Cell(lastRow2 + 3, 29).SetValue(strbr)
-                            ws.Cell(lastRow2 + 3, 32).SetValue(striv)
-                        Case "E290"
-                            lastRow2 = ws.LastRowUsed().RowNumber()
-                            For co = 1 To lastCol
-                                If co = 1 Then
-                                    ws.Cell(lastRow2 + 1, co).SetValue("K51R")
-                                Else
-                                    ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
-                                End If
-                            Next
-
-                            Call get_manual("K51R", strfn, strfa, strcn, strca, strny, strbr, striv)
-                            ws.Cell(lastRow2 + 1, 3).SetValue(strfn)
-                            ws.Cell(lastRow2 + 1, 4).SetValue(strfa)
-                            ws.Cell(lastRow2 + 1, 24).SetValue(strcn)
-                            ws.Cell(lastRow2 + 1, 25).SetValue(strca)
-                            ws.Cell(lastRow2 + 1, 27).SetValue(strny)
-                            ws.Cell(lastRow2 + 1, 29).SetValue(strbr)
-                            ws.Cell(lastRow2 + 1, 32).SetValue(striv)
-
-                        Case "B261"
-                            lastRow2 = ws.LastRowUsed().RowNumber()
-                            For co = 1 To lastCol
-                                If co = 1 Then
-                                    ws.Cell(lastRow2 + 1, co).SetValue("K561")
-                                Else
-                                    ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
-                                End If
-                            Next
-
-                            Call get_manual("K561", strfn, strfa, strcn, strca, strny, strbr, striv)
-                            ws.Cell(lastRow2 + 1, 3).SetValue(strfn)
-                            ws.Cell(lastRow2 + 1, 4).SetValue(strfa)
-                            ws.Cell(lastRow2 + 1, 24).SetValue(strcn)
-                            ws.Cell(lastRow2 + 1, 25).SetValue(strca)
-                            ws.Cell(lastRow2 + 1, 27).SetValue(strny)
-                            ws.Cell(lastRow2 + 1, 29).SetValue(strbr)
-                            ws.Cell(lastRow2 + 1, 32).SetValue(striv)
-
-                        Case "E410"
-                            lastRow2 = ws.LastRowUsed().RowNumber()
-                            For co = 1 To lastCol
-                                If co = 1 Then
-                                    ws.Cell(lastRow2 + 1, co).SetValue("K580")
-                                Else
-                                    ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
-                                End If
-                            Next
-
-                            Call get_manual("K580", strfn, strfa, strcn, strca, strny, strbr, striv)
-                            ws.Cell(lastRow2 + 1, 3).SetValue(strfn)
-                            ws.Cell(lastRow2 + 1, 4).SetValue(strfa)
-                            ws.Cell(lastRow2 + 1, 24).SetValue(strcn)
-                            ws.Cell(lastRow2 + 1, 25).SetValue(strca)
-                            ws.Cell(lastRow2 + 1, 27).SetValue(strny)
-                            ws.Cell(lastRow2 + 1, 29).SetValue(strbr)
-                            ws.Cell(lastRow2 + 1, 32).SetValue(striv)
-
-                        Case "E231"
-                            lastRow2 = ws.LastRowUsed().RowNumber()
-                            For co = 1 To lastCol
-                                If co = 1 Then
-                                    ws.Cell(lastRow2 + 1, co).SetValue("E230")
-                                Else
-                                    ws.Cell(lastRow2 + 1, co).SetValue(ws.Cell(ro, co).Value)
-                                End If
-                            Next
-
-                            Call get_manual("E230", strfn, strfa, strcn, strca, strny, strbr, striv)
-                            ws.Cell(lastRow2 + 1, 3).SetValue(strfn)
-                            ws.Cell(lastRow2 + 1, 4).SetValue(strfa)
-                            ws.Cell(lastRow2 + 1, 24).SetValue(strcn)
-                            ws.Cell(lastRow2 + 1, 25).SetValue(strca)
-                            ws.Cell(lastRow2 + 1, 27).SetValue(strny)
-                            ws.Cell(lastRow2 + 1, 29).SetValue(strbr)
-                            ws.Cell(lastRow2 + 1, 32).SetValue(striv)
-
+                        Case Else
+                            dt.Rows(dt.Rows.Count - 1)(i) = val01
                     End Select
+
+
+
                 Next
+            Next
 
-                ws.Style.Font.FontName = "Meiryo UI"
-                ws.Style.Alignment.WrapText = False
-                ws.Columns.AdjustToContents()
-                ws.SheetView.FreezeRows(1)
+            For Each row As GridViewRow In GridView1.Rows
+                Select Case Left(row.Cells(0).Text, 4)
+                    Case "E211"
+                        dt.Rows.Add()
+                        lastRow2 = GridView1.Rows.Count
+                        For co As Integer = 0 To row.Cells.Count - 4
+                            If co = 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = "E213"
+                                Call get_manual("E213", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ElseIf co = 2 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfn
+                            ElseIf co = 3 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfa
 
-                Dim struid As String = Session("UsrId")
-                wb.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\Mak_ivhd_" & Now.ToString(“yyMMdd”) & "_P_" & struid & ".xlsx")
+                            ElseIf co = 23 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strcn
+                            ElseIf co = 24 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strca
+                            ElseIf co = 26 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strny
+                            ElseIf co = 28 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strbr
+                            ElseIf co = 31 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = striv
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(co) = row.Cells(co).Text
+                            End If
+                        Next
+                        dt.Rows.Add()
+                        lastRow2 = GridView1.Rows.Count
+                        For co As Integer = 0 To row.Cells.Count - 4
+                            If co = 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = "E214"
+                                Call get_manual("E214", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ElseIf co = 2 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfn
+                            ElseIf co = 3 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfa
 
-            End Using
+                            ElseIf co = 23 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strcn
+                            ElseIf co = 24 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strca
+                            ElseIf co = 26 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strny
+                            ElseIf co = 28 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strbr
+                            ElseIf co = 31 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = striv
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(co) = row.Cells(co).Text
+                            End If
+                        Next
+                        dt.Rows.Add()
+                        lastRow2 = GridView1.Rows.Count
+                        For co As Integer = 0 To row.Cells.Count - 4
+                            If co = 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = "E215"
+                                Call get_manual("E215", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ElseIf co = 2 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfn
+                            ElseIf co = 3 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfa
 
-            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('出力が完了しました。\n出力先：\\\svnas201\\EXD06101\\DISC_COMMON\\WEB出力');</script>", False)
+                            ElseIf co = 23 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strcn
+                            ElseIf co = 24 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strca
+                            ElseIf co = 26 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strny
+                            ElseIf co = 28 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strbr
+                            ElseIf co = 31 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = striv
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(co) = row.Cells(co).Text
+                            End If
+                        Next
+                        dt.Rows.Add()
+                        lastRow2 = GridView1.Rows.Count
+                        For co As Integer = 0 To row.Cells.Count - 4
+                            If co = 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = "K52C"
+                                Call get_manual("K52C", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ElseIf co = 2 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfn
+                            ElseIf co = 3 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfa
+
+                            ElseIf co = 23 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strcn
+                            ElseIf co = 24 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strca
+                            ElseIf co = 26 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strny
+                            ElseIf co = 28 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strbr
+                            ElseIf co = 31 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = striv
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(co) = row.Cells(co).Text
+                            End If
+                        Next
+
+                    Case "E153"
+                        dt.Rows.Add()
+                        lastRow2 = GridView1.Rows.Count
+                        For co As Integer = 0 To row.Cells.Count - 4
+                            If co = 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = "E156"
+                                Call get_manual("E156", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ElseIf co = 2 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfn
+                            ElseIf co = 3 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfa
+
+                            ElseIf co = 23 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strcn
+                            ElseIf co = 24 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strca
+                            ElseIf co = 26 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strny
+                            ElseIf co = 28 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strbr
+                            ElseIf co = 31 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = striv
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(co) = row.Cells(co).Text
+                            End If
+                        Next
+                        dt.Rows.Add()
+                        lastRow2 = GridView1.Rows.Count
+                        For co As Integer = 0 To row.Cells.Count - 4
+                            If co = 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = "K501"
+                                Call get_manual("K501", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ElseIf co = 2 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfn
+                            ElseIf co = 3 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfa
+
+                            ElseIf co = 23 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strcn
+                            ElseIf co = 24 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strca
+                            ElseIf co = 26 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strny
+                            ElseIf co = 28 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strbr
+                            ElseIf co = 31 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = striv
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(co) = row.Cells(co).Text
+                            End If
+                        Next
+                        dt.Rows.Add()
+                        lastRow2 = GridView1.Rows.Count
+                        For co As Integer = 0 To row.Cells.Count - 4
+                            If co = 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = "E15A"
+                                Call get_manual("E15A", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ElseIf co = 2 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfn
+                            ElseIf co = 3 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfa
+
+                            ElseIf co = 23 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strcn
+                            ElseIf co = 24 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strca
+                            ElseIf co = 26 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strny
+                            ElseIf co = 28 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strbr
+                            ElseIf co = 31 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = striv
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(co) = row.Cells(co).Text
+                            End If
+                        Next
+
+                    Case "E242"
+                        dt.Rows.Add()
+                        lastRow2 = GridView1.Rows.Count
+                        For co As Integer = 0 To row.Cells.Count - 4
+                            If co = 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = "E243"
+                                Call get_manual("E243", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ElseIf co = 2 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfn
+                            ElseIf co = 3 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfa
+
+                            ElseIf co = 23 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strcn
+                            ElseIf co = 24 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strca
+                            ElseIf co = 26 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strny
+                            ElseIf co = 28 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strbr
+                            ElseIf co = 31 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = striv
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(co) = row.Cells(co).Text
+                            End If
+                        Next
+                        dt.Rows.Add()
+                        lastRow2 = GridView1.Rows.Count
+                        For co As Integer = 0 To row.Cells.Count - 4
+                            If co = 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = "E244"
+                                Call get_manual("E244", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ElseIf co = 2 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfn
+                            ElseIf co = 3 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfa
+
+                            ElseIf co = 23 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strcn
+                            ElseIf co = 24 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strca
+                            ElseIf co = 26 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strny
+                            ElseIf co = 28 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strbr
+                            ElseIf co = 31 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = striv
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(co) = row.Cells(co).Text
+                            End If
+                        Next
+                        dt.Rows.Add()
+                        lastRow2 = GridView1.Rows.Count
+                        For co As Integer = 0 To row.Cells.Count - 4
+                            If co = 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = "E248"
+                                Call get_manual("E248", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ElseIf co = 2 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfn
+                            ElseIf co = 3 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfa
+
+                            ElseIf co = 23 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strcn
+                            ElseIf co = 24 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strca
+                            ElseIf co = 26 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strny
+                            ElseIf co = 28 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strbr
+                            ElseIf co = 31 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = striv
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(co) = row.Cells(co).Text
+                            End If
+                        Next
 
 
+                    Case "E290"
+                        dt.Rows.Add()
+                        lastRow2 = GridView1.Rows.Count
+                        For co As Integer = 0 To row.Cells.Count - 4
+                            If co = 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = "K51R"
+                                Call get_manual("K51R", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ElseIf co = 2 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfn
+                            ElseIf co = 3 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfa
+
+                            ElseIf co = 23 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strcn
+                            ElseIf co = 24 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strca
+                            ElseIf co = 26 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strny
+                            ElseIf co = 28 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strbr
+                            ElseIf co = 31 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = striv
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(co) = row.Cells(co).Text
+                            End If
+                        Next
+
+                    Case "B261"
+                        dt.Rows.Add()
+                        lastRow2 = GridView1.Rows.Count
+                        For co As Integer = 0 To row.Cells.Count - 4
+                            If co = 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = "K561"
+                                Call get_manual("K561", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ElseIf co = 2 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfn
+                            ElseIf co = 3 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfa
+
+                            ElseIf co = 23 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strcn
+                            ElseIf co = 24 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strca
+                            ElseIf co = 26 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strny
+                            ElseIf co = 28 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strbr
+                            ElseIf co = 31 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = striv
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(co) = row.Cells(co).Text
+                            End If
+                        Next
+
+                    Case "E410"
+                        dt.Rows.Add()
+                        lastRow2 = GridView1.Rows.Count
+                        For co As Integer = 0 To row.Cells.Count - 4
+                            If co = 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = "K580"
+                                Call get_manual("K580", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ElseIf co = 2 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfn
+                            ElseIf co = 3 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfa
+
+                            ElseIf co = 23 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strcn
+                            ElseIf co = 24 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strca
+                            ElseIf co = 26 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strny
+                            ElseIf co = 28 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strbr
+                            ElseIf co = 31 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = striv
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(co) = row.Cells(co).Text
+                            End If
+                        Next
+
+                    Case "E231"
+                        dt.Rows.Add()
+                        lastRow2 = GridView1.Rows.Count
+                        For co As Integer = 0 To row.Cells.Count - 4
+                            If co = 0 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = "E230"
+                                Call get_manual("E230", strfn, strfa, strcn, strca, strny, strbr, striv)
+                            ElseIf co = 2 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfn
+                            ElseIf co = 3 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strfa
+
+                            ElseIf co = 23 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strcn
+                            ElseIf co = 24 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strca
+                            ElseIf co = 26 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strny
+                            ElseIf co = 28 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = strbr
+                            ElseIf co = 31 Then
+                                dt.Rows(dt.Rows.Count - 1)(co) = striv
+                            Else
+                                dt.Rows(dt.Rows.Count - 1)(co) = row.Cells(co).Text
+                            End If
+                        Next
+
+                End Select
+            Next
+
+
+            If elfg01 + elfg03 + elfg02 >= 1 Then
+                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラー項目があります。エクセルファイルはダウンロードできません。');</script>", False)
+            Else
+
+
+
+                Using workbook As New XLWorkbook()
+                    Dim ws As IXLWorksheet = workbook.Worksheets.Add(dt)
+                    ws.Style.Font.FontName = "Meiryo UI"
+                    ws.Style.Alignment.WrapText = False
+                    ws.Columns.AdjustToContents()
+                    ws.SheetView.FreezeRows(1)
+
+                    workbook.SaveAs(strPath & strFile)
+
+                End Using
+
+                'ファイル名を取得する
+                strChanged = strPath & Format(Now, "yyyyMMdd") & "_SHIP_IVHEDDR.xlsx"
+                strFileNm = Path.GetFileName(strChanged)
+
+                'Contentをクリア
+                Response.ClearContent()
+
+                'Contentを設定
+                Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+                Response.ContentType = "application/vnd.ms-excel"
+
+                '表示ファイル名を指定
+                Dim fn As String = HttpUtility.UrlEncode(strFileNm)
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
+
+                'ダウンロード対象ファイルを指定
+                Response.WriteFile(strChanged)
+
+                'ダウンロード実行
+                Response.Flush()
+                Response.End()
+
+            End If
         Else
-
-            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('対象無し');</script>", False)
-
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('対象なし');</script>", False)
         End If
-
-
 
     End Sub
 
