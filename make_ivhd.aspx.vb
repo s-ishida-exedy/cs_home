@@ -31,6 +31,10 @@ Partial Class yuusen
 
         Dim byteLength As Integer
 
+        Dim errflg01 As Long = 0
+        Dim errflg02 As Long = 0
+        Dim errflg03 As Long = 0
+
         Dim dt1 As DateTime = DateTime.Now
 
         Dim ts1 As New TimeSpan(180, 0, 0, 0)
@@ -42,6 +46,10 @@ Partial Class yuusen
 
 
         If e.Row.RowType = DataControlRowType.DataRow Then
+
+            errflg01 = 0
+            errflg02 = 0
+            errflg03 = 0
 
             '請求書コード
             e.Row.Cells(0).Text = Trim(Left(e.Row.Cells(0).Text, 4))
@@ -59,13 +67,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(4).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(4).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(4).Text = e.Row.Cells(4).Text & "_全角"
-                e.Row.Cells(0).Text = "全角エラー"
+                errflg01 = 1
             End If
 
             If InStr(e.Row.Cells(4).Text, vbCr) + InStr(e.Row.Cells(4).Text, vbLf) + InStr(e.Row.Cells(4).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(4).Text = e.Row.Cells(4).Text & "_改行"
-                e.Row.Cells(1).Text = "改行エラー"
+                errflg02 = 1
             End If
 
             'PORTOF DEISCHARGE(揚地)	5
@@ -81,13 +89,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(5).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(5).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(5).Text = e.Row.Cells(5).Text & "_全角"
-                e.Row.Cells(0).Text = "全角エラー"
+                errflg01 = 1
             End If
 
             If InStr(e.Row.Cells(5).Text, vbCr) + InStr(e.Row.Cells(5).Text, vbLf) + InStr(e.Row.Cells(5).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(5).Text = e.Row.Cells(5).Text & "_改行"
-                e.Row.Cells(1).Text = "改行エラー"
+                errflg02 = 1
             End If
 
             'PALECE OF DELIVERY(配送先)	6
@@ -103,13 +111,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(6).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(6).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(6).Text = e.Row.Cells(6).Text & "_全角"
-                e.Row.Cells(0).Text = "全角エラー"
+                errflg01 = 1
             End If
 
             If InStr(e.Row.Cells(6).Text, vbCr) + InStr(e.Row.Cells(6).Text, vbLf) + InStr(e.Row.Cells(6).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(6).Text = e.Row.Cells(6).Text & "_改行"
-                e.Row.Cells(1).Text = "改行エラー"
+                errflg02 = 1
             End If
 
             '荷受地	7
@@ -125,13 +133,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(7).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(7).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(7).Text = e.Row.Cells(7).Text & "_全角"
-                e.Row.Cells(0).Text = "全角エラー"
+                errflg01 = 1
             End If
 
             If InStr(e.Row.Cells(7).Text, vbCr) + InStr(e.Row.Cells(7).Text, vbLf) + InStr(e.Row.Cells(7).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(7).Text = e.Row.Cells(7).Text & "_改行"
-                e.Row.Cells(1).Text = "改行エラー"
+                errflg02 = 1
             End If
 
             'PLACE OF DELIVERY BY CARRIER(配送者責任送り先)	8
@@ -147,13 +155,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(8).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(8).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(8).Text = e.Row.Cells(8).Text & "_全角"
-                e.Row.Cells(0).Text = "全角エラー"
+                errflg01 = 1
             End If
 
             If InStr(e.Row.Cells(8).Text, vbCr) + InStr(e.Row.Cells(8).Text, vbLf) + InStr(e.Row.Cells(8).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(8).Text = e.Row.Cells(8).Text & "_改行"
-                e.Row.Cells(1).Text = "改行エラー"
+                errflg02 = 1
             End If
 
             'voyage 16
@@ -169,13 +177,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(16).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(16).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(16).Text = e.Row.Cells(16).Text & "_全角"
-                e.Row.Cells(0).Text = "全角エラー"
+                errflg01 = 1
             End If
 
             If InStr(e.Row.Cells(16).Text, vbCr) + InStr(e.Row.Cells(16).Text, vbLf) + InStr(e.Row.Cells(16).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(16).Text = e.Row.Cells(16).Text & "_改行"
-                e.Row.Cells(1).Text = "改行エラー"
+                errflg02 = 1
             End If
 
             '船社	17
@@ -200,7 +208,7 @@ Partial Class yuusen
             If InStr(e.Row.Cells(17).Text, vbCr) + InStr(e.Row.Cells(17).Text, vbLf) + InStr(e.Row.Cells(17).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(17).Text = e.Row.Cells(17).Text & "_改行"
-                e.Row.Cells(1).Text = "改行エラー"
+                errflg02 = 1
             End If
 
 
@@ -228,13 +236,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(21).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(21).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(21).Text = e.Row.Cells(21).Text & "_全角"
-                e.Row.Cells(0).Text = "全角エラー"
+                errflg01 = 1
             End If
 
             If InStr(e.Row.Cells(21).Text, vbCr) + InStr(e.Row.Cells(21).Text, vbLf) + InStr(e.Row.Cells(21).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(21).Text = e.Row.Cells(21).Text & "_改行"
-                e.Row.Cells(1).Text = "改行エラー"
+                errflg02 = 1
             End If
 
             If e.Row.Cells(0).Text = "C255" Then
@@ -268,13 +276,13 @@ Partial Class yuusen
             If Len(e.Row.Cells(22).Text) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(e.Row.Cells(22).Text) Then
                 e.Row.BackColor = Drawing.Color.Green
                 e.Row.Cells(22).Text = e.Row.Cells(22).Text & "_全角"
-                e.Row.Cells(0).Text = "全角エラー"
+                errflg01 = 1
             End If
 
             If InStr(e.Row.Cells(22).Text, vbCr) + InStr(e.Row.Cells(22).Text, vbLf) + InStr(e.Row.Cells(22).Text, vbCrLf) > 0 Then
                 e.Row.BackColor = Drawing.Color.Blue
                 e.Row.Cells(22).Text = e.Row.Cells(22).Text & "_改行"
-                e.Row.Cells(1).Text = "改行エラー"
+                errflg02 = 1
             End If
 
             'place of delivery SI	25
@@ -571,7 +579,15 @@ Partial Class yuusen
                 End If
             End If
 
+            If errflg01 = 1 And errflg02 = 1 Then
+                e.Row.BackColor = Drawing.Color.Violet
+            ElseIf errflg01 = 1 And errflg02 = 0 Then
+                e.Row.BackColor = Drawing.Color.Blue
+            ElseIf errflg01 = 0 And errflg02 = 1 Then
+                e.Row.BackColor = Drawing.Color.Green
             End If
+
+        End If
 
 
 
