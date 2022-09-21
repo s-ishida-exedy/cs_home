@@ -130,10 +130,10 @@
         }
 
         .design02 {
-         width: 65%;
+         width: 90%;
          text-align: center;
-         border-collapse: collapse;
-         border-spacing: 0;
+         border-collapse: separate;
+         border-spacing: 3px;
          border: solid 1px #778ca3;
         }
         .design02 tr {
@@ -145,6 +145,28 @@
         }
         .design02 td {
          padding: 10px;
+         background: #faf7f7;
+         border-top: dashed 1px #778ca3;
+        }
+
+         .design03 {
+         width: 55%;
+         text-align: center;
+         border-collapse: separate;
+         border-spacing: 3px;
+         border: solid 1px #778ca3;
+        }
+        .design03 tr {
+         border-top: dashed 1px #778ca3;
+        }
+        .design03 th {
+         padding: 10px;
+         background: #e9faf9;
+        }
+        .design03 td {
+         padding: 10px;
+         background: #faf7f7;
+         border-top: dashed 1px #778ca3;
         }
 
         .auto-style1 {
@@ -224,73 +246,99 @@
         </tr>
         </table>
 
-        <table>
-            <tr>
-                <td>
-                    <asp:Label ID="Label1" runat="server" Text="＜委託マスタのメンテナンス＞"></asp:Label>
-                </td>
-            </tr>
-        </table>
+
 
         <table class ="design02" >
+<%--            class ="design02"--%>
+<tr>
+<th style="width:85px;Font-Size:15px;text-align:center;" >区分</th>
+<th>登録</th>
+<th>客先コード　BOOKINGNO</th>
+<th>削除</th>
+<th>客先コード　BOOKINGNO</th>
+</tr>
             <tr>
-                <td style="width:200px;Font-Size:15px;text-align:left;" >
-                    1.IVNOで委託登録と削除&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                <td style="width:60px;Font-Size:15px;text-align:center;background-color:#dbd8d8" >
+                    IVNO
                 </td>
-                <td style="width:200px;Font-Size:15px;" >
-                    <asp:DropDownList ID="DropDownList6" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource7" DataTextField="C" DataValueField="C" AppendDataBoundItems="true">
+                <td style="width:200px;Font-Size:15px;text-align:center;" >
+                    <asp:DropDownList ID="DropDownList6" runat="server" Width="100px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource7" DataTextField="C" DataValueField="C" AppendDataBoundItems="true">
                     <asp:ListItem Text="Please select" Value="" />
                     </asp:DropDownList>
                     <asp:Button  ID="Button1" runat="server" CssClass ="" Text="登録" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" ></asp:Button>
                 </td>
-                <td style="width:200px;Font-Size:15px;" >
-                    <asp:DropDownList ID="DropDownList1" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="INVNO" DataValueField="INVNO" AppendDataBoundItems="true">
+                <td style="width:200px;Font-Size:15px;text-align:center;" >
+                    <asp:Label ID="Label3" runat="server" Width="100px" Height="10px" Font-Size="12px" Text=""></asp:Label>
+                    <asp:Label ID="Label4" runat="server" Width="100px" Height="10px" Font-Size="12px" Text=""></asp:Label>
+                </td>
+
+                <td style="width:200px;Font-Size:15px;text-align:center;" >
+                    <asp:DropDownList ID="DropDownList1" runat="server" Width="100px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="INVNO" DataValueField="INVNO" AppendDataBoundItems="true">
                     <asp:ListItem Text="Please select" Value="" />
                     </asp:DropDownList>
                     <asp:Button class="btn-radius-gradient-wrap"  ID="Button2" runat="server" Text="削除" Width="100" Height="40px" AutoPostBack="True" Font-Size="13px" ></asp:Button>
                 </td>
-            </tr>
-            <tr style="height:10px;">
-                <td style="width:200px;Font-Size:15px;text-align:left;" >
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客先・BKG#
-                </td>
-                <td style="width:250px;Font-Size:15px;" >
-                    <asp:Label ID="Label3" runat="server" Width="100px" Height="10px" Font-Size="12px" Text=""></asp:Label>
-                    <asp:Label ID="Label4" runat="server" Width="100px" Height="10px" Font-Size="12px" Text=""></asp:Label>
-                </td>
-                <td style="width:250px;Font-Size:15px;" >
+                <td style="width:200px;Font-Size:15px;text-align:center;" >
                     <asp:Label ID="Label5" runat="server" Width="100px" Height="10px" Font-Size="12px" Text=""></asp:Label>
                     <asp:Label ID="Label6" runat="server" Width="100px" Height="10px" Font-Size="12px" Text=""></asp:Label>
                 </td>
             </tr>
+        </table>
+        <table border ="0" >
             <tr>
-                <td style="width:200px;Font-Size:15px;text-align:left;" >
-                    2.客先コードで委託登録と削除   :
+                <td style="width:200px;Font-Size:15px;text-align:center;Height:25px"  >
                 </td>
-                <td style="width:200px;Font-Size:15px;" >
-                    <asp:DropDownList ID="DropDownList4" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource6" DataTextField="C" DataValueField="C" AppendDataBoundItems="true">
+            </tr>
+        </table>
+        <table class ="design03" >
+<%--            class ="design02"--%>
+<tr>
+<th style="width:60px;Font-Size:15px;text-align:center;" >区分</th>
+<th style="width:170px;Font-Size:15px;text-align:center;" >登録</th>
+<th style="width:170px;Font-Size:15px;text-align:center;" >削除</th>
+</tr>
+            <tr>
+                <td style="width:50px;Font-Size:15px;text-align:center;background-color:#dbd8d8" >
+                    客先コード
+                </td>
+                <td style="width:170px;Font-Size:15px;text-align:center;" >
+                    <asp:DropDownList ID="DropDownList4" runat="server" Width="100px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource6" DataTextField="C" DataValueField="C" AppendDataBoundItems="true">
                     <asp:ListItem Text="Please select" Value="" />
                     </asp:DropDownList>
                     <asp:Button class="btn-radius-gradient-wrap"  ID="Button3" runat="server" Text="登録" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" ></asp:Button>
                 </td>
-                <td style="width:200px;Font-Size:15px;" >
-                    <asp:DropDownList ID="DropDownList2" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource2" DataTextField="ITKNAME" DataValueField="ITKNAME" AppendDataBoundItems="true" >
+                <td style="width:170px;Font-Size:15px;text-align:center;" >
+                    <asp:DropDownList ID="DropDownList2" runat="server" Width="100px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource2" DataTextField="ITKNAME" DataValueField="ITKNAME" AppendDataBoundItems="true" >
                     <asp:ListItem Text="Please select" Value="" />
                     </asp:DropDownList>
                     <asp:Button class="btn-radius-gradient-wrap"  ID="Button4" runat="server" Text="削除" Width="100" Height="40px" AutoPostBack="True" Font-Size="13px" ></asp:Button>
                 </td>
             </tr>
+        </table>
+        <table border ="0" >
             <tr>
-                <td style="width:200px;Font-Size:15px;text-align:left;" >
-                    3.海貨業者で委託登録と削除&nbsp;&nbsp;&nbsp;&nbsp;:
+                <td style="width:200px;Font-Size:15px;text-align:center;Height:25px"  >
                 </td>
-                <td style="width:200px;Font-Size:15px;" >
+            </tr>
+        </table>
+        <table class ="design03" >
+<%--            class ="design02"--%>
+<tr>
+<th style="width:60px;Font-Size:15px;text-align:center;" >区分</th>
+<th style="width:170px;Font-Size:15px;text-align:center;" >登録</th>
+<th style="width:170px;Font-Size:15px;text-align:center;" >削除</th>
+</tr>
+            <tr>
+                <td style="width:50px;Font-Size:15px;text-align:center;background-color:#dbd8d8" >
+                    海貨業者
+                </td>
+                <td style="width:170px;Font-Size:15px;text-align:center;" >
                     <asp:DropDownList ID="DropDownList5" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource5" DataTextField="FORWARDER02" DataValueField="FORWARDER02" AppendDataBoundItems="true" >
                     <asp:ListItem Text="Please select" Value="" />
                     </asp:DropDownList>
                     <asp:Button class="btn-radius-gradient-wrap"  ID="Button5" runat="server" Text="登録" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" ></asp:Button>
                 </td>
-                <td style="width:200px;Font-Size:15px;" >
+                <td style="width:170px;Font-Size:15px;text-align:center;" >
                     <asp:DropDownList ID="DropDownList3" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource3" DataTextField="ITKNAME" DataValueField="ITKNAME" AppendDataBoundItems="true" >
                     <asp:ListItem Text="Please select" Value="" />
                     </asp:DropDownList>

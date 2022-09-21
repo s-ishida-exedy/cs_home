@@ -322,8 +322,8 @@
 
         <table style="height:10px;">
             <tr>
-                <td style="width:1500px;" >
-                    <asp:Label ID="Label1" runat="server" Text="エラー ： 赤：日付異常 / 緑：全角 / 青：改行"></asp:Label>
+                <td style="width:1500px;font-size:13px" >
+                    <asp:Label ID="Label1" runat="server" Text="※エラー ： 赤：日付異常 / 青：全角 / 緑：改行 / 紫：全角・改行両方"></asp:Label>
                 </td>
             </tr>
         </table>

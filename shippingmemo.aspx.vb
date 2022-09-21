@@ -592,16 +592,26 @@ Partial Class yuusen
         Dim strPath As String = "C:\exp\cs_home\files\"
         Dim strChanged As String    'サーバー上のフルパス
         Dim strFileNm As String     'ファイル名
+        Dim a
 
-
-        Dim dt As New DataTable("GridView_Data")
+        Dim dt As New DataTable("SHIPPINGMEMO")
         For Each cell As TableCell In GridView1.HeaderRow.Cells
-            dt.Columns.Add(cell.Text)
+            If cell.Text = "最新ETD" Or cell.Text = "遅延前ETD" Or cell.Text = "最新ETA" Or cell.Text = "遅延前ETA" Or cell.Text = "BL回収" Or cell.Text = "BL上の日付" Or cell.Text = "IV_BLDATE" Then
+                dt.Columns.Add(cell.Text, Type.GetType("System.DateTime"))
+            ElseIf cell.Text = "金額（外貨）" Or cell.Text = "レート" Or cell.Text = "金額（JPY）" Then
+                dt.Columns.Add(cell.Text, Type.GetType("System.Decimal"))
+            Else
+                dt.Columns.Add(cell.Text)
+            End If
         Next
         For Each row As GridViewRow In GridView1.Rows
             dt.Rows.Add()
             For i As Integer = 0 To row.Cells.Count - 1
-                dt.Rows(dt.Rows.Count - 1)(i) = Replace(row.Cells(i).Text, "&nbsp;", "")
+                a = Replace(row.Cells(i).Text, "&nbsp;", "")
+                If a = "" Then
+                    a = DBNull.Value
+                End If
+                dt.Rows(dt.Rows.Count - 1)(i) = a
             Next
         Next
         Using workbook As New XLWorkbook()
