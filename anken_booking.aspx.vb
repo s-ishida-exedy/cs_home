@@ -1399,15 +1399,31 @@ Step00:
         Dim strChanged As String    'サーバー上のフルパス
         Dim strFileNm As String     'ファイル名
 
+        Dim a
 
-        Dim dt As New DataTable("GridView_Data")
+        Dim dt As New DataTable("SHIP")
         For Each cell As TableCell In GridView1.HeaderRow.Cells
-            dt.Columns.Add(cell.Text)
+
+            If cell.Text = "FLG01" Or cell.Text = "FLG02" Or cell.Text = "FLG0" Or cell.Text = "FLG04" Then
+                'dt.Columns.Add(cell.Text)
+            ElseIf cell.Text = "CUT" Or cell.Text = "ETD" Or cell.Text = "ETA" Or cell.Text = "書類作成予定日" Or cell.Text = "VAN01" Or cell.Text = "VAN02" Or cell.Text = "VAN03" Or cell.Text = "VAN04" Or cell.Text = "VAN05" Or cell.Text = "VAN06" Or cell.Text = "VAN07" Or cell.Text = "VAN08" Or cell.Text = "VAN09" Or cell.Text = "VAN10" Or cell.Text = "VAN11" Then
+                dt.Columns.Add(cell.Text, Type.GetType("System.DateTime"))
+            ElseIf cell.Text = "20Ft" Or cell.Text = "40Ft" Or cell.Text = "LCL/40Ft" Or cell.Text = "コンテナ" Then
+                dt.Columns.Add(cell.Text)
+            Else
+                dt.Columns.Add(cell.Text)
+            End If
+
         Next
+
         For Each row As GridViewRow In GridView1.Rows
             dt.Rows.Add()
-            For i As Integer = 0 To row.Cells.Count - 1
-                dt.Rows(dt.Rows.Count - 1)(i) = Replace(row.Cells(i).Text, "&nbsp;", "")
+            For i As Integer = 0 To row.Cells.Count - 5
+                a = Replace(row.Cells(i).Text, "&nbsp;", "")
+                If a = "" Then
+                    a = DBNull.Value
+                End If
+                dt.Rows(dt.Rows.Count - 1)(i) = a
             Next
         Next
         Using workbook As New XLWorkbook()
