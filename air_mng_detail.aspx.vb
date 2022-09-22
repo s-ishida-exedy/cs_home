@@ -476,6 +476,7 @@ Partial Class cs_home
         strSQL = strSQL & "  END AS CRYCD "
         strSQL = strSQL & "  , a.RATE  "
         strSQL = strSQL & "  , a.TRADETERMS "
+        strSQL = strSQL & "  , a.CUSTCODE "
         strSQL = strSQL & "FROM "
         strSQL = strSQL & "  dbo.T_SN_HD_TB a  "
         strSQL = strSQL & "WHERE "
@@ -491,6 +492,7 @@ Partial Class cs_home
             Label2.Text = dataread("CRYCD").ToString
             Label3.Text = dataread("RATE").ToString
             TextBox17.Text = Trim(dataread("TRADETERMS").ToString)
+            TextBox4.Text = dataread("CUSTCODE").ToString
         End While
 
         'クローズ処理 

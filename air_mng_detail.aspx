@@ -217,9 +217,9 @@
                 </td>
             </tr>
             <tr>
-                <th>客先</th>
+                <th style="line-height:14px">客先<p><small>※登録前にFLと確認</small></p></th>
                 <td>
-                    <asp:TextBox ID="TextBox4" runat="server" Width="233px" CssClass="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox4" runat="server" Width="233px" CssClass="txtb2"></asp:TextBox>
                 </td>
                 <th>IVNO</th>
                 <td>
