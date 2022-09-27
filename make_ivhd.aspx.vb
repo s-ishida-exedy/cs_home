@@ -775,6 +775,8 @@ Partial Class yuusen
         Dim strChanged As String    'サーバー上のフルパス
         Dim strFileNm As String     'ファイル名
 
+        Dim sss As String
+
         Dim a
 
 
@@ -785,7 +787,7 @@ Partial Class yuusen
             Dim dt = GetNorthwindProductTable01(TextBox1.text)
 
 
-            Dim dt2 As New DataTable("IVHEDDER")
+            Dim dt2 As New DataTable("INVHDSHEET")
             For Each cell As TableCell In GridView1.HeaderRow.Cells
                 If cell.Text = "20Ft" Or cell.Text = "40Ft" Or cell.Text = "LCL/40Ft" Then
                 ElseIf cell.Text = "Sailing On/About<br/>(計上日)" Or cell.Text = "CUT日" Or cell.Text = "到着日" Or cell.Text = "入出港日" Or cell.Text = "搬入日" Then
@@ -801,7 +803,7 @@ Partial Class yuusen
                 dt2.Rows.Add()
                 For i As Integer = 0 To dt.Columns.Count - 4
                     a = row(2)
-
+                    sss = row(0)
                     If i = 0 Then
 
                         errflg01 = 0
@@ -1304,7 +1306,6 @@ Partial Class yuusen
             Next
 
 
-
             For Each row As DataRow In dt2.Rows
                 For i As Integer = 0 To dt2.Columns.Count - 1
                     a = row(25)
@@ -1316,38 +1317,38 @@ Partial Class yuusen
                         Case 1, 9 To 12
                             If IsDate(val01) = True Then
                                 DDATE = DateValue(val01)
-                                dt2.Rows(dt2.Rows.Count - 1)(i) = DDATE
+                                row(i) = DDATE
                             Else
 
                                 If row(0) = "C258" Or row(0) = "C255" Then
-                                    dt2.Rows(dt2.Rows.Count - 1)(i) = row(11)
+                                    row(i) = row(11)
                                 Else
-                                    dt2.Rows(dt2.Rows.Count - 1)(0) = ("日付エラー")
+                                    row(0) = ("日付エラー")
                                     elfg01 = 1
                                 End If
                             End If
 
                         Case 0 To 16, 18 To 26
                             If Len(row(i)) <> System.Text.Encoding.GetEncoding("shift_jis").GetByteCount(row(i)) Then
-                                dt2.Rows(dt2.Rows.Count - 1)(i) = ("全角エラー")
-                                dt2.Rows(dt2.Rows.Count - 1)(0) = ("全角エラー")
+                                row(i) = ("全角エラー")
+                                row(0) = ("全角エラー")
                                 elfg02 = 1
                             Else
-                                dt2.Rows(dt2.Rows.Count - 1)(i) = val01
+                                row(i) = val01
                             End If
 
                         Case 0, 4 To 8, 16 To 22, 25
 
                             If InStr(row(i), vbCr) + InStr(row(i), vbLf) + InStr(row(i), vbCrLf) > 0 Then
-                                dt2.Rows(dt2.Rows.Count - 1)(i) = ("改行エラー")
-                                dt2.Rows(dt2.Rows.Count - 1)(0) = ("改行エラー")
+                                row(i) = ("改行エラー")
+                                row(0) = ("改行エラー")
                                 elfg03 = 1
                             Else
-                                dt2.Rows(dt2.Rows.Count - 1)(i) = val01
+                                row(i) = val01
                             End If
 
                         Case Else
-                            dt2.Rows(dt2.Rows.Count - 1)(i) = val01
+                            row(i) = val01
                     End Select
                 Next
             Next
