@@ -157,7 +157,7 @@ Partial Class cs_home
 
         strSQL = ""
         strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
-        strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '005' "
+        strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '001' "
         strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
         strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
 
