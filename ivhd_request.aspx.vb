@@ -869,7 +869,7 @@ Partial Class cs_home
         strSQL = strSQL & "  , SNNO "
         strSQL = strSQL & "  , SN_RATE "
         strSQL = strSQL & "  , ISNULL(NEW_IV,'')AS NEW_IV "
-        strSQL = strSQL & "  , HANSOKU "
+        strSQL = strSQL & "  , IsNull(HANSOKU,0) AS HANSOKU "
         strSQL = strSQL & "FROM "
         strSQL = strSQL & "  T_EXL_IVHD_REQ A "
         strSQL = strSQL & "WHERE IVNO = '" & strIV & "' "
