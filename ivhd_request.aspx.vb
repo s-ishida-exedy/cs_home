@@ -8,19 +8,19 @@ Imports MimeKit
 Partial Class cs_home
     Inherits System.Web.UI.Page
 
-    '依頼時
-    Const strToAddressI As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
-    Const strCcAddressI As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
-    '回答時
-    Const strToAddressK As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
-    Const strCcAddressK As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
-
-
-    'Const strToAddressI As String = "s-ishida@exedy.com"
-    'Const strCcAddressI As String = "s-ishida@exedy.com,order-cs@exedy.com"
+    ''依頼時
+    'Const strToAddressI As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
+    'Const strCcAddressI As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
     ''回答時
-    'Const strToAddressK As String = "s-ishida@exedy.com"
-    'Const strCcAddressK As String = "s-ishida@exedy.com,order-cs@exedy.com"
+    'Const strToAddressK As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com"
+    'Const strCcAddressK As String = "s-ishida@exedy.com,r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
+
+
+    Const strToAddressI As String = "s-ishida@exedy.com"
+    Const strCcAddressI As String = "s-ishida@exedy.com,order-cs@exedy.com"
+    '回答時
+    Const strToAddressK As String = "s-ishida@exedy.com"
+    Const strCcAddressK As String = "s-ishida@exedy.com,order-cs@exedy.com"
 
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -78,6 +78,13 @@ Partial Class cs_home
             btnHyouji05.Enabled = False
             btnHyouji06.Enabled = False
             btnHyouji07.Enabled = False
+            CheckBox1.Enabled = False
+            CheckBox2.Enabled = False
+            CheckBox3.Enabled = False
+            CheckBox4.Enabled = False
+            CheckBox5.Enabled = False
+            CheckBox6.Enabled = False
+            CheckBox7.Enabled = False
 
         End If
 
@@ -390,6 +397,13 @@ Partial Class cs_home
         Dim strSQL As String = ""
         Dim strVal As String = ""
         Dim strMode As String = ""
+        Dim strValue1 As String = "0"
+        Dim strValue2 As String = "0"
+        Dim strValue3 As String = "0"
+        Dim strValue4 As String = "0"
+        Dim strValue5 As String = "0"
+        Dim strValue6 As String = "0"
+        Dim strValue7 As String = "0"
 
         'イントラ用
         Dim ConnectionString As String = String.Empty
@@ -429,16 +443,39 @@ Partial Class cs_home
                 Command.ExecuteNonQuery()
             End If
 
+            '販促チェックボックス
+            If CheckBox1.Checked = True Then
+                strValue1 = "1"
+            End If
+            If CheckBox2.Checked = True Then
+                strValue2 = "1"
+            End If
+            If CheckBox3.Checked = True Then
+                strValue3 = "1"
+            End If
+            If CheckBox4.Checked = True Then
+                strValue4 = "1"
+            End If
+            If CheckBox5.Checked = True Then
+                strValue5 = "1"
+            End If
+            If CheckBox6.Checked = True Then
+                strValue6 = "1"
+            End If
+            If CheckBox7.Checked = True Then
+                strValue7 = "1"
+            End If
+
             strSQL = ""
             strSQL = strSQL & "INSERT INTO T_EXL_IVHD_REQ "
-            strSQL = strSQL & "(CUST_CD,IVNO,IV_RATE,SNNO,SN_RATE,NEW_IV,REQUESTER,REQ_DATE,STATUS) VALUES "
-            If Trim(txtSN01.Text) <> "" Then strSQL = strSQL & MAKE_INSERT_SQL(Trim(txtSN01.Text), lblRate01.Text) '1行目
-            If Trim(txtSN02.Text) <> "" Then strSQL = strSQL & "," & MAKE_INSERT_SQL(Trim(txtSN02.Text), lblRate02.Text) '2行目
-            If Trim(txtSN03.Text) <> "" Then strSQL = strSQL & "," & MAKE_INSERT_SQL(Trim(txtSN03.Text), lblRate03.Text) '3行目
-            If Trim(txtSN04.Text) <> "" Then strSQL = strSQL & "," & MAKE_INSERT_SQL(Trim(txtSN04.Text), lblRate04.Text) '4行目
-            If Trim(txtSN05.Text) <> "" Then strSQL = strSQL & "," & MAKE_INSERT_SQL(Trim(txtSN05.Text), lblRate05.Text) '5行目
-            If Trim(txtSN06.Text) <> "" Then strSQL = strSQL & "," & MAKE_INSERT_SQL(Trim(txtSN06.Text), lblRate06.Text) '6行目
-            If Trim(txtSN07.Text) <> "" Then strSQL = strSQL & "," & MAKE_INSERT_SQL(Trim(txtSN07.Text), lblRate07.Text) '7行目
+            strSQL = strSQL & "(CUST_CD,IVNO,IV_RATE,SNNO,SN_RATE,NEW_IV,REQUESTER,REQ_DATE,STATUS,HANSOKU) VALUES "
+            If Trim(txtSN01.Text) <> "" Then strSQL = strSQL & MAKE_INSERT_SQL(Trim(txtSN01.Text), lblRate01.Text, strValue1) '1行目
+            If Trim(txtSN02.Text) <> "" Then strSQL = strSQL & "," & MAKE_INSERT_SQL(Trim(txtSN02.Text), lblRate02.Text, strValue2) '2行目
+            If Trim(txtSN03.Text) <> "" Then strSQL = strSQL & "," & MAKE_INSERT_SQL(Trim(txtSN03.Text), lblRate03.Text, strValue3) '3行目
+            If Trim(txtSN04.Text) <> "" Then strSQL = strSQL & "," & MAKE_INSERT_SQL(Trim(txtSN04.Text), lblRate04.Text, strValue4) '4行目
+            If Trim(txtSN05.Text) <> "" Then strSQL = strSQL & "," & MAKE_INSERT_SQL(Trim(txtSN05.Text), lblRate05.Text, strValue5) '5行目
+            If Trim(txtSN06.Text) <> "" Then strSQL = strSQL & "," & MAKE_INSERT_SQL(Trim(txtSN06.Text), lblRate06.Text, strValue6) '6行目
+            If Trim(txtSN07.Text) <> "" Then strSQL = strSQL & "," & MAKE_INSERT_SQL(Trim(txtSN07.Text), lblRate07.Text, strValue7) '7行目
 
             Command.CommandText = strSQL
             Command.ExecuteNonQuery()
@@ -501,7 +538,7 @@ Partial Class cs_home
         End If
 
         'リセット
-        Call EXEC_RESERT()
+        Call EXEC_RESET()
 
         'グリッド再表示
         GridView1.DataBind()
@@ -568,7 +605,7 @@ Partial Class cs_home
         cnn.Dispose()
     End Function
 
-    Private Function MAKE_INSERT_SQL(strSN As String, strRate As String) As String
+    Private Function MAKE_INSERT_SQL(strSN As String, strRate As String, strChk As String) As String
         Dim strSQL As String = ""
         Dim dt1 As DateTime = DateTime.Now
         Dim strDate As String = dt1.ToString("yyyy/MM/dd HH:mm:ss")
@@ -587,7 +624,8 @@ Partial Class cs_home
         strSQL = strSQL & ",'' "
         strSQL = strSQL & ",'" & Session("UsrId") & "' "
         strSQL = strSQL & ",'" & strDate & "' "
-        strSQL = strSQL & ",'0') "
+        strSQL = strSQL & ",'0' "
+        strSQL = strSQL & "," & strChk & ") "
         MAKE_INSERT_SQL = strSQL
     End Function
 
@@ -710,7 +748,7 @@ Partial Class cs_home
                 Label12.Text = "ｽﾃｰﾀｽが回答済みのみ押下可能です。"
                 Return
             End If
-            Call EXEC_RESERT()
+            Call EXEC_RESET()
         ElseIf e.CommandName = "del" Then
             '削除ボタン
             'ステータスを確認し、回答済みの場合エラー
@@ -812,7 +850,7 @@ Partial Class cs_home
         Dim intCnt As Integer = 1
 
         '一旦リセット
-        Call EXEC_RESERT()
+        Call EXEC_RESET()
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -831,6 +869,7 @@ Partial Class cs_home
         strSQL = strSQL & "  , SNNO "
         strSQL = strSQL & "  , SN_RATE "
         strSQL = strSQL & "  , ISNULL(NEW_IV,'')AS NEW_IV "
+        strSQL = strSQL & "  , IsNull(HANSOKU,0) AS HANSOKU "
         strSQL = strSQL & "FROM "
         strSQL = strSQL & "  T_EXL_IVHD_REQ A "
         strSQL = strSQL & "WHERE IVNO = '" & strIV & "' "
@@ -864,6 +903,9 @@ Partial Class cs_home
                     End If
                     lblRate01.Text = dataread("SN_RATE")
                     txtIV01.Text = dataread("NEW_IV")
+                    If dataread("HANSOKU") = "1" Then
+                        CheckBox1.Checked = True
+                    End If
                 Case 2
                     If strMode = "0" Then
                         lblSN02.Text = dataread("SNNO")
@@ -872,6 +914,9 @@ Partial Class cs_home
                     End If
                     lblRate02.Text = dataread("SN_RATE")
                     txtIV02.Text = dataread("NEW_IV")
+                    If dataread("HANSOKU") = "1" Then
+                        CheckBox2.Checked = True
+                    End If
                 Case 3
                     If strMode = "0" Then
                         lblSN03.Text = dataread("SNNO")
@@ -880,6 +925,9 @@ Partial Class cs_home
                     End If
                     lblRate03.Text = dataread("SN_RATE")
                     txtIV03.Text = dataread("NEW_IV")
+                    If dataread("HANSOKU") = "1" Then
+                        CheckBox3.Checked = True
+                    End If
                 Case 4
                     If strMode = "0" Then
                         lblSN04.Text = dataread("SNNO")
@@ -888,6 +936,9 @@ Partial Class cs_home
                     End If
                     lblRate04.Text = dataread("SN_RATE")
                     txtIV04.Text = dataread("NEW_IV")
+                    If dataread("HANSOKU") = "1" Then
+                        CheckBox4.Checked = True
+                    End If
                 Case 5
                     If strMode = "0" Then
                         lblSN05.Text = dataread("SNNO")
@@ -896,6 +947,9 @@ Partial Class cs_home
                     End If
                     lblRate05.Text = dataread("SN_RATE")
                     txtIV05.Text = dataread("NEW_IV")
+                    If dataread("HANSOKU") = "1" Then
+                        CheckBox5.Checked = True
+                    End If
                 Case 6
                     If strMode = "0" Then
                         lblSN06.Text = dataread("SNNO")
@@ -904,6 +958,9 @@ Partial Class cs_home
                     End If
                     lblRate06.Text = dataread("SN_RATE")
                     txtIV06.Text = dataread("NEW_IV")
+                    If dataread("HANSOKU") = "1" Then
+                        CheckBox6.Checked = True
+                    End If
                 Case 7
                     If strMode = "0" Then
                         lblSN07.Text = dataread("SNNO")
@@ -912,6 +969,9 @@ Partial Class cs_home
                     End If
                     lblRate07.Text = dataread("SN_RATE")
                     txtIV07.Text = dataread("NEW_IV")
+                    If dataread("HANSOKU") = "1" Then
+                        CheckBox7.Checked = True
+                    End If
             End Select
 
             intCnt += 1
@@ -926,12 +986,12 @@ Partial Class cs_home
 
     Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
         'リセットボタン押下
-        Call EXEC_RESERT()
+        Call EXEC_RESET()
 
         GridView1.DataBind()
     End Sub
 
-    Private Sub EXEC_RESERT()
+    Private Sub EXEC_RESET()
         txtMoto.Text = ""
         lblMoto.Text = ""
         Label2.Text = ""
@@ -966,6 +1026,14 @@ Partial Class cs_home
         txtIV07.Text = ""
 
         txtMsg.Text = ""
+
+        CheckBox1.Checked = False
+        CheckBox2.Checked = False
+        CheckBox3.Checked = False
+        CheckBox4.Checked = False
+        CheckBox5.Checked = False
+        CheckBox6.Checked = False
+        CheckBox7.Checked = False
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
@@ -975,7 +1043,7 @@ Partial Class cs_home
         'メール送信
         Call Send_Mail("BACK")
 
-        Call EXEC_RESERT()
+        Call EXEC_RESET()
         GridView1.DataBind()
     End Sub
 
@@ -1088,6 +1156,7 @@ Partial Class cs_home
 
         Dim Bdy As String = ""
         Dim strBdy As String = ""
+        Dim strChk As String = ""
 
         Bdy = Bdy + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
         Bdy = Bdy + "このメールはシステムから送信されています。<br/>"
@@ -1095,7 +1164,7 @@ Partial Class cs_home
         Bdy = Bdy + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
 
         If strmode = "IRAI" Then
-            Call Make_Mail_TABLE(strBdy)
+            Call Make_Mail_TABLE(strBdy, strChk)
             Bdy = Bdy + "ＣＳチーム　担当者殿<BR>"
             Bdy = Bdy + "お世話になります。<BR>"
             Bdy = Bdy + "レート違いの出荷がある為インボイスの追加登録お願いします。<BR>"
@@ -1104,13 +1173,17 @@ Partial Class cs_home
             Bdy = Bdy + "元のﾚｰﾄ:" + Label2.Text + "<br/>"
             Bdy = Bdy + strBdy
             Bdy = Bdy + "メッセージ：<br/>"
-            Bdy = Bdy + txtMsg.Text + "<br/>"
+            If strChk = "True" Then
+                Bdy = Bdy + "【販促品あり】" + txtMsg.Text + "<br/>"
+            Else
+                Bdy = Bdy + txtMsg.Text + "<br/>"
+            End If
             Bdy = Bdy + "<br/>"
             Bdy = Bdy + "以上、よろしくお願いします。"
             Bdy = Bdy + "<br/><br/>"
             Bdy = Bdy + "【ＣＳ担当者はＣＳポータルにログインし、対応してください。】"
         ElseIf strmode = "KAITO" Then
-            Call Make_Mail_TABLE(strBdy)
+            Call Make_Mail_TABLE(strBdy, strChk)
             Bdy = Bdy + "ＥＸＬ　出荷担当者殿<BR>"
             Bdy = Bdy + "お世話になります。<BR>"
             Bdy = Bdy + "インボイスの追加登録完了しましたので、確認お願いします。<BR>"
@@ -1125,7 +1198,7 @@ Partial Class cs_home
             Bdy = Bdy + "<br/><br/>"
             Bdy = Bdy + "【ＥＸＬ担当者はＣＳポータルにログインし、確認してください。】"
         ElseIf strmode = "BACK" Then
-            Call Make_Mail_TABLE(strBdy)
+            Call Make_Mail_TABLE(strBdy, strChk)
             Bdy = Bdy + "ＥＸＬ　出荷担当者殿<BR>"
             Bdy = Bdy + "お世話になります。<BR>"
             Bdy = Bdy + "インボイスの追加登録が差し戻しとなりました。<BR>"
@@ -1278,13 +1351,14 @@ Partial Class cs_home
         cnn.Dispose()
     End Function
 
-    Private Sub Make_Mail_TABLE(ByRef Bdy As String)
+    Private Sub Make_Mail_TABLE(ByRef Bdy As String, ByRef chkFlg As String)
         'メールに記載する表の作成
         Bdy = Bdy + "<table width=75% border=""1"" style=""border-collapse: collapse"">"
         Bdy = Bdy + "    <tr>"
         Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#87E7AD"" style =""font-weight:bold"">SNNO</td>"
-        Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">レート</td>"
-        Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">IVNO</td>"
+        Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">レート</td>"
+        Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">販促品</td>"
+        Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#87E7AD"" style =""font-weight:bold"">IVNO</td>"
         Bdy = Bdy + "    </tr>"
         If txtSN01.Text <> "" Or lblSN01.Text <> "" Then
             Bdy = Bdy + "    <tr>"
@@ -1293,8 +1367,14 @@ Partial Class cs_home
             ElseIf lblSN01.Text <> "" Then
                 Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & lblSN01.Text & "</td>"
             End If
-            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & lblRate01.Text & "</td>"
-            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV01.Text) & "</td>"
+            Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#ffffff"">" & lblRate01.Text & "</td>"
+            If CheckBox1.Checked = True Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">販促品あり</td>"
+                chkFlg = "True"
+            Else
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff""></td>"
+            End If
+            Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV01.Text) & "</td>"
             Bdy = Bdy + "    </tr>"
         End If
         If txtSN02.Text <> "" Or lblSN02.Text <> "" Then
@@ -1304,8 +1384,14 @@ Partial Class cs_home
             ElseIf lblSN02.Text <> "" Then
                 Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & lblSN02.Text & "</td>"
             End If
-            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & lblRate02.Text & "</td>"
-            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV02.Text) & "</td>"
+            Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#ffffff"">" & lblRate02.Text & "</td>"
+            If CheckBox2.Checked = True Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">販促品あり</td>"
+                chkFlg = "True"
+            Else
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff""></td>"
+            End If
+            Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV02.Text) & "</td>"
             Bdy = Bdy + "    </tr>"
         End If
         If txtSN03.Text <> "" Or lblSN03.Text <> "" Then
@@ -1315,8 +1401,14 @@ Partial Class cs_home
             ElseIf lblSN03.Text <> "" Then
                 Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & lblSN03.Text & "</td>"
             End If
-            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & lblRate03.Text & "</td>"
-            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV03.Text) & "</td>"
+            Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#ffffff"">" & lblRate03.Text & "</td>"
+            If CheckBox3.Checked = True Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">販促品あり</td>"
+                chkFlg = "True"
+            Else
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff""></td>"
+            End If
+            Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV03.Text) & "</td>"
             Bdy = Bdy + "    </tr>"
         End If
         If txtSN04.Text <> "" Or lblSN04.Text <> "" Then
@@ -1326,8 +1418,14 @@ Partial Class cs_home
             ElseIf lblSN04.Text <> "" Then
                 Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & lblSN04.Text & "</td>"
             End If
-            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & lblRate04.Text & "</td>"
-            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV04.Text) & "</td>"
+            Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#ffffff"">" & lblRate04.Text & "</td>"
+            If CheckBox4.Checked = True Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">販促品あり</td>"
+                chkFlg = "True"
+            Else
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff""></td>"
+            End If
+            Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV04.Text) & "</td>"
             Bdy = Bdy + "    </tr>"
         End If
         If txtSN05.Text <> "" Or lblSN05.Text <> "" Then
@@ -1337,8 +1435,14 @@ Partial Class cs_home
             ElseIf lblSN05.Text <> "" Then
                 Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & lblSN05.Text & "</td>"
             End If
-            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & lblRate05.Text & "</td>"
-            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV05.Text) & "</td>"
+            Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#ffffff"">" & lblRate05.Text & "</td>"
+            If CheckBox5.Checked = True Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">販促品あり</td>"
+                chkFlg = "True"
+            Else
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff""></td>"
+            End If
+            Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV05.Text) & "</td>"
             Bdy = Bdy + "    </tr>"
         End If
         If txtSN06.Text <> "" Or lblSN06.Text <> "" Then
@@ -1348,8 +1452,14 @@ Partial Class cs_home
             ElseIf lblSN06.Text <> "" Then
                 Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & lblSN06.Text & "</td>"
             End If
-            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & lblRate06.Text & "</td>"
-            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV06.Text) & "</td>"
+            Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#ffffff"">" & lblRate06.Text & "</td>"
+            If CheckBox6.Checked = True Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">販促品あり</td>"
+                chkFlg = "True"
+            Else
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff""></td>"
+            End If
+            Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV06.Text) & "</td>"
             Bdy = Bdy + "    </tr>"
         End If
         If txtSN07.Text <> "" Or lblSN07.Text <> "" Then
@@ -1359,8 +1469,14 @@ Partial Class cs_home
             ElseIf lblSN07.Text <> "" Then
                 Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">" & lblSN07.Text & "</td>"
             End If
-            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & lblRate07.Text & "</td>"
-            Bdy = Bdy + "        <td width=""54px"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV07.Text) & "</td>"
+            Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#ffffff"">" & lblRate07.Text & "</td>"
+            If CheckBox7.Checked = True Then
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff"">販促品あり</td>"
+                chkFlg = "True"
+            Else
+                Bdy = Bdy + "        <td width=""25%"" align=""center""  bgcolor=""#ffffff""></td>"
+            End If
+            Bdy = Bdy + "        <td width=""25%"" align=""center"" bgcolor=""#ffffff"">" & Trim(txtIV07.Text) & "</td>"
             Bdy = Bdy + "    </tr>"
         End If
         Bdy = Bdy + "</table><br/>"
