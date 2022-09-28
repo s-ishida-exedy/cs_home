@@ -129,12 +129,12 @@
         }
         .td1{
             border:1px solid #000000;
-            width:120px;
+            width:100px;
             text-align:center;
         }
         .td2{
             border:1px solid #000000;
-            width:100px;
+            width:80px;
             text-align:center;
         }
         .td3{
@@ -143,6 +143,11 @@
             text-align:center;
         }
         .td4{
+            border:1px solid #000000;
+            width:40px;
+            text-align:center;
+        }
+        .td5{
             border:1px solid #000000;
             width:40px;
             text-align:center;
@@ -279,13 +284,13 @@
                 <ItemStyle HorizontalAlign="Center" Width="40px" />
                 </asp:BoundField>
                 <asp:BoundField DataField="IV_RATE" HeaderText="ﾚｰﾄ" SortExpression="IV_RATE" >
-                <ItemStyle HorizontalAlign="Right" Width="80px" />
+                <ItemStyle HorizontalAlign="Center" Width="60px" />
                 </asp:BoundField>
                 <asp:BoundField DataField="REQUESTER" HeaderText="依頼者" SortExpression="REQUESTER" >
                 <ItemStyle HorizontalAlign="Center" Width="80px" />
                 </asp:BoundField>
                 <asp:BoundField DataField="REQ_DATE" HeaderText="依頼日" SortExpression="REQ_DATE" >
-                <ItemStyle HorizontalAlign="Center" Width="160px" />
+                <ItemStyle HorizontalAlign="Center" Width="120px" />
                 </asp:BoundField>
                 <asp:BoundField DataField="STATUS" HeaderText="ｽﾃｰﾀｽ" SortExpression="STATUS" >
                 <ItemStyle HorizontalAlign="Center" Width="40px" />
@@ -392,7 +397,9 @@ GROUP BY
     <table class="tab1">
         <tr>
             <th>SNNO</th>
-            <th colspan ="2">ﾚｰﾄ</th>
+            <th></th>
+            <th>ﾚｰﾄ</th>
+            <th>販促</th>
             <th>IVNO</th>
         </tr>
         <tr>
@@ -405,6 +412,9 @@ GROUP BY
             </td>
             <td class ="td2">
                 <asp:Label ID="lblRate01" runat="server" Text="-----" CssClass ="lblB"></asp:Label>
+            </td>
+            <td class ="td5">
+                <asp:CheckBox ID="CheckBox1" runat="server" />
             </td>
             <td class ="td3">       
                 <asp:TextBox ID="txtIV01" runat="server"  Class ="txtb2" Width="40px"></asp:TextBox>         
@@ -421,6 +431,9 @@ GROUP BY
             <td class ="td2">
                 <asp:Label ID="lblRate02" runat="server" Text="-----" CssClass ="lblB"></asp:Label>
             </td>
+            <td class ="td5">
+                <asp:CheckBox ID="CheckBox2" runat="server" />
+            </td>
             <td class ="td3">       
                 <asp:TextBox ID="txtIV02" runat="server"  Class ="txtb2" Width="40px"></asp:TextBox>         
             </td>
@@ -435,6 +448,9 @@ GROUP BY
             </td>
             <td class ="td2">
                 <asp:Label ID="lblRate03" runat="server" Text="-----" CssClass ="lblB"></asp:Label>
+            </td>
+            <td class ="td5">
+                <asp:CheckBox ID="CheckBox3" runat="server" />
             </td>
             <td class ="td3">       
                 <asp:TextBox ID="txtIV03" runat="server"  Class ="txtb2" Width="40px"></asp:TextBox>         
@@ -451,6 +467,9 @@ GROUP BY
             <td class ="td2">
                 <asp:Label ID="lblRate04" runat="server" Text="-----" CssClass ="lblB"></asp:Label>
             </td>
+            <td class ="td5">
+                <asp:CheckBox ID="CheckBox4" runat="server" />
+            </td>
             <td class ="td3">       
                 <asp:TextBox ID="txtIV04" runat="server"  Class ="txtb2" Width="40px"></asp:TextBox>         
             </td>
@@ -465,6 +484,9 @@ GROUP BY
             </td>
             <td class ="td2">
                 <asp:Label ID="lblRate05" runat="server" Text="-----" CssClass ="lblB"></asp:Label>
+            </td>
+            <td class ="td5">
+                <asp:CheckBox ID="CheckBox5" runat="server" />
             </td>
             <td class ="td3">       
                 <asp:TextBox ID="txtIV05" runat="server"  Class ="txtb2" Width="40px"></asp:TextBox>         
@@ -481,6 +503,9 @@ GROUP BY
             <td class ="td2">
                 <asp:Label ID="lblRate06" runat="server" Text="-----" CssClass ="lblB"></asp:Label>
             </td>
+            <td class ="td5">
+                <asp:CheckBox ID="CheckBox6" runat="server" />
+            </td>
             <td class ="td3">       
                 <asp:TextBox ID="txtIV06" runat="server"  Class ="txtb2" Width="40px"></asp:TextBox>         
             </td>
@@ -496,6 +521,9 @@ GROUP BY
             <td class ="td2">
                 <asp:Label ID="lblRate07" runat="server" Text="-----" CssClass ="lblB"></asp:Label>
             </td>
+            <td class ="td5">
+                <asp:CheckBox ID="CheckBox7" runat="server" />
+            </td>
             <td class ="td3">       
                 <asp:TextBox ID="txtIV07" runat="server"  Class ="txtb2" Width="40px"></asp:TextBox>         
             </td>
@@ -510,7 +538,7 @@ GROUP BY
         </tr>
         <tr>
             <td>
-                <asp:TextBox ID="txtMsg" runat="server" TextMode="MultiLine" Width ="360" Height ="70" CssClass ="txtb"></asp:TextBox>
+                <asp:TextBox ID="txtMsg" runat="server" TextMode="MultiLine" Width ="340" Height ="70" CssClass ="txtb"></asp:TextBox>
             </td>
         </tr>
     </table>
