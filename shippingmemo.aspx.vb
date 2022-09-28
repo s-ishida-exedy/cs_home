@@ -588,40 +588,120 @@ Partial Class yuusen
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
 
+        'Dim strFile As String = Format(Now, "yyyyMMdd") & "_SHIPPINGMEMO.xlsx"
+        'Dim strPath As String = "C:\exp\cs_home\files\"
+        'Dim strChanged As String    'サーバー上のフルパス
+        'Dim strFileNm As String     'ファイル名
+        'Dim a
+
+        'Dim dt As New DataTable("SHIPPINGMEMO")
+        'For Each cell As TableCell In GridView1.HeaderRow.Cells
+        '    If cell.Text = "最新ETD" Or cell.Text = "遅延前ETD" Or cell.Text = "最新ETA" Or cell.Text = "遅延前ETA" Or cell.Text = "BL回収" Or cell.Text = "BL上の日付" Or cell.Text = "IV_BLDATE" Then
+        '        dt.Columns.Add(cell.Text, Type.GetType("System.DateTime"))
+        '    ElseIf cell.Text = "金額（外貨）" Or cell.Text = "レート" Or cell.Text = "金額（JPY）" Then
+        '        dt.Columns.Add(cell.Text, Type.GetType("System.Decimal"))
+        '    Else
+        '        dt.Columns.Add(cell.Text)
+        '    End If
+        'Next
+        'For Each row As GridViewRow In GridView1.Rows
+        '    dt.Rows.Add()
+        '    For i As Integer = 0 To row.Cells.Count - 1
+        '        a = Replace(row.Cells(i).Text, "&nbsp;", "")
+        '        If a = "" Then
+        '            a = DBNull.Value
+        '        End If
+        '        dt.Rows(dt.Rows.Count - 1)(i) = a
+        '    Next
+        'Next
+        'Using workbook As New XLWorkbook()
+        '    workbook.Worksheets.Add(dt)
+        '    workbook.SaveAs(strPath & strFile)
+
+        'End Using
+
+        ''ファイル名を取得する
+        'strChanged = strPath & Format(Now, "yyyyMMdd") & "_SHIPPINGMEMO.xlsx"
+        'strFileNm = Path.GetFileName(strChanged)
+
+        ''Contentをクリア
+        'Response.ClearContent()
+
+        ''Contentを設定
+        'Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+        'Response.ContentType = "application/vnd.ms-excel"
+
+        ''表示ファイル名を指定
+        'Dim fn As String = HttpUtility.UrlEncode(strFileNm)
+        'Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
+
+        ''ダウンロード対象ファイルを指定
+        'Response.WriteFile(strChanged)
+
+        ''ダウンロード実行
+        'Response.Flush()
+        'Response.End()
+
+
+        '前月分ダウンロードボタン押下
         Dim strFile As String = Format(Now, "yyyyMMdd") & "_SHIPPINGMEMO.xlsx"
         Dim strPath As String = "C:\exp\cs_home\files\"
         Dim strChanged As String    'サーバー上のフルパス
         Dim strFileNm As String     'ファイル名
+
+        Dim dtToday As DateTime = DateTime.Today
+
+
+
+        Dim dt = GetNorthwindProductTable()
+
+
         Dim a
 
-        Dim dt As New DataTable("SHIPPINGMEMO")
+        Dim dt2 As New DataTable("SHIPPINGMEMO")
         For Each cell As TableCell In GridView1.HeaderRow.Cells
-            If cell.Text = "最新ETD" Or cell.Text = "遅延前ETD" Or cell.Text = "最新ETA" Or cell.Text = "遅延前ETA" Or cell.Text = "BL回収" Or cell.Text = "BL上の日付" Or cell.Text = "IV_BLDATE" Then
-                dt.Columns.Add(cell.Text, Type.GetType("System.DateTime"))
+            If cell.Text = "&nbsp;" Then
+            ElseIf cell.Text = "最新ETD" Or cell.Text = "遅延前ETD" Or cell.Text = "最新ETA" Or cell.Text = "遅延前ETA" Or cell.Text = "BL回収" Or cell.Text = "BL上の日付" Or cell.Text = "IV_BLDATE" Then
+                dt2.Columns.Add(cell.Text, Type.GetType("System.DateTime"))
             ElseIf cell.Text = "金額（外貨）" Or cell.Text = "レート" Or cell.Text = "金額（JPY）" Then
-                dt.Columns.Add(cell.Text, Type.GetType("System.Decimal"))
+                dt2.Columns.Add(cell.Text, Type.GetType("System.Decimal"))
             Else
-                dt.Columns.Add(cell.Text)
+                dt2.Columns.Add(cell.Text)
             End If
+
+
         Next
-        For Each row As GridViewRow In GridView1.Rows
-            dt.Rows.Add()
-            For i As Integer = 0 To row.Cells.Count - 1
-                a = Replace(row.Cells(i).Text, "&nbsp;", "")
+
+        For Each row As DataRow In dt.Rows
+            dt2.Rows.Add()
+            For i As Integer = 0 To dt.Columns.Count - 1
+                a = row(i)
                 If a = "" Then
                     a = DBNull.Value
                 End If
-                dt.Rows(dt.Rows.Count - 1)(i) = a
+                dt2.Rows(dt2.Rows.Count - 1)(i) = a
             Next
         Next
-        Using workbook As New XLWorkbook()
-            workbook.Worksheets.Add(dt)
-            workbook.SaveAs(strPath & strFile)
 
-        End Using
+
+
+
+
+        Dim workbook = New XLWorkbook()
+        Dim worksheet = workbook.Worksheets.Add(dt2)
+
+        worksheet.Style.Font.FontName = "Meiryo UI"
+        worksheet.Style.Alignment.WrapText = False
+        worksheet.Columns.AdjustToContents()
+        worksheet.SheetView.FreezeRows(1)
+
+        workbook.SaveAs(strPath & strFile)
+
 
         'ファイル名を取得する
-        strChanged = strPath & Format(Now, "yyyyMMdd") & "_SHIPPINGMEMO.xlsx"
+        Dim strTxtFiles() As String = IO.Directory.GetFiles(strPath, Format(Now, "yyyyMMdd") & "_SHIPPINGMEMO.xlsx")
+
+        strChanged = strTxtFiles(0)
         strFileNm = Path.GetFileName(strChanged)
 
         'Contentをクリア
@@ -642,6 +722,7 @@ Partial Class yuusen
         Response.Flush()
         Response.End()
 
+
     End Sub
     Private Shared Function GetNorthwindProductTable() As DataTable
         'EXCELファイル出力
@@ -653,12 +734,12 @@ Partial Class yuusen
         'SQL Server認証
         ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
 
-        Dim dt = New DataTable("T_EXL_CSMANUAL")
+        Dim dt = New DataTable("T_EXL_SHIPPINGMEMOLIST")
 
         Using conn = New SqlConnection(ConnectionString)
             Dim cmd = conn.CreateCommand()
 
-            strSQL = strSQL & "SELECT * FROM T_EXL_CSMANUAL "
+            strSQL = strSQL & "SELECT CUSTCODE,CUSTNAME,INVOICE_NO,iif(len(REV_ETD)=10,REV_ETD,ETD) AS ETD02,iif(len(REV_ETD)=10,ETD,'') AS ETD03,iif(len(REV_ETA)=10,REV_ETA,ETA) AS ETA02,iif(len(REV_ETA)=10,ETA,'') AS ETA03,SHIP_TYPE,DATE_GETBL,DATE_ONBL,REV_SALESDATE,REV_STATUS,BOOKING_NO,VOY_NO,IV_BLDATE,KIN_GAIKA,RATE,KIN_JPY,VESSEL,LOADING_PORT,RECEIVED_PORT,SHIP_PLACE,CHECKFLG FROM [T_EXL_SHIPPINGMEMOLIST] WHERE CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530') AND ETD > DATEADD(day,1,EOMONTH(GETDATE()-90, -1)) ORDER BY ETD02,INVOICE_NO "
 
 
             cmd.CommandText = strSQL

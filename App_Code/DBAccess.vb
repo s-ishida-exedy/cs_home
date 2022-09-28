@@ -95,6 +95,8 @@ Public Class DBAccess
         StrSQL = StrSQL & ", FTA "
         StrSQL = StrSQL & ", CERTIFICATE_OF_CONFORMITY "
         StrSQL = StrSQL & ", DOC_OF_EGYPT "
+        StrSQL = StrSQL & ", BEARING "
+        StrSQL = StrSQL & ", IV_AUTO_CALC "
         StrSQL = StrSQL & "FROM "
         StrSQL = StrSQL & "  T_EXL_CSMANUAL "
         If strCUST <> "" Then

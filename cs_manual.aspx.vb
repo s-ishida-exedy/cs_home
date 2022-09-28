@@ -281,22 +281,9 @@ Partial Class cs_home
         e.Row.Cells(22).Visible = False
         e.Row.Cells(23).Visible = False
         e.Row.Cells(24).Visible = False
-        e.Row.Cells(25).Visible = False
-        e.Row.Cells(26).Visible = False
-        e.Row.Cells(27).Visible = False
-        e.Row.Cells(28).Visible = False
-        e.Row.Cells(29).Visible = False
-        e.Row.Cells(30).Visible = False
-        e.Row.Cells(31).Visible = False
-        e.Row.Cells(32).Visible = False
-        e.Row.Cells(33).Visible = False
-        e.Row.Cells(34).Visible = False
-        e.Row.Cells(35).Visible = False
-        e.Row.Cells(36).Visible = False
-        e.Row.Cells(37).Visible = False
-        e.Row.Cells(38).Visible = False
-        e.Row.Cells(39).Visible = False
-        e.Row.Cells(40).Visible = False
+
+
+
 
         If e.Row.RowType = DataControlRowType.DataRow Then
             Dim dltButton As ImageButton = e.Row.FindControl("ImageButton1")
@@ -325,73 +312,59 @@ Partial Class cs_home
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
+        'Dim strFile As String = Format(Now, "yyyyMMdd") & "_CS_MANUAL.xlsx"
+        'Dim strPath As String = "C:\exp\cs_home\files\"
+        'Dim strChanged As String    'サーバー上のフルパス
+        'Dim strFileNm As String     'ファイル名
 
+        'Dim a
 
+        'Dim dt As New DataTable("CSMANUAL")
+        'For Each cell As TableCell In GridView1.HeaderRow.Cells
+        '    dt.Columns.Add(cell.Text)
+        'Next
 
-
-
-        'Dim t As Integer
-        't = 1
-        'Dim cnt As Integer = 0
-
-        'Dim val01 As String = ""
-
-        'Using wb As XLWorkbook = New XLWorkbook()
-        '    Dim ws As IXLWorksheet = wb.AddWorksheet("CSマニュアル")
-        '    For Each cell As TableCell In GridView1.HeaderRow.Cells
-
-        '        If cnt = 0 Then
-        '            cnt = 1
-        '        Else
-        '            val01 = Trim(Replace(cell.Text, "&nbsp;", ""))
-        '            ws.Cell(1, t).Value = val01
-        '            t = t + 1
+        'For Each row As GridViewRow In GridView1.Rows
+        '    dt.Rows.Add()
+        '    For i As Integer = 0 To row.Cells.Count - 1
+        '        a = Replace(Replace(row.Cells(i).Text, "&nbsp;", ""), "&#215;", "×")
+        '        If a = "" Then
+        '            a = DBNull.Value
         '        End If
+        '        dt.Rows(dt.Rows.Count - 1)(i) = a
         '    Next
-
-        '    cnt = 0
-        '    t = 2
-        '    For Each row As GridViewRow In GridView1.Rows
-
-        '        If cnt = 0 Then
-        '            cnt = 1
-        '        Else
-        '            For i As Integer = 1 To row.Cells.Count - 1
-        '                val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
-        '                Select Case i
-        '                    Case 15 To 24, 29 To 30, 37 To 41
-        '                        val01 = Trim(Replace(val01, "&#215;", "×"))
-        '                        If IsDate(val01) = True Then
-        '                            ws.Cell(t, i).SetValue(DateValue(val01))
-        '                        Else
-        '                            ws.Cell(t, i).SetValue(val01)
-        '                        End If
-
-        '                    Case Else
-        '                        If IsDate(val01) = True Then
-        '                            ws.Cell(t, i).SetValue(DateValue(val01))
-        '                        Else
-        '                            ws.Cell(t, i).SetValue(val01)
-        '                        End If
-
-        '                End Select
-        '            Next
-        '            t = t + 1
-        '        End If
-        '    Next
+        'Next
+        'Using workbook As New XLWorkbook()
+        '    Dim ws As IXLWorksheet = workbook.Worksheets.Add(dt)
 
         '    ws.Style.Font.FontName = "Meiryo UI"
         '    ws.Style.Alignment.WrapText = False
         '    ws.Columns.AdjustToContents()
-        '    ws.SheetView.FreezeRows(1)
-
-        '    Dim struid As String = Session("UsrId")
-        '    wb.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\CSマニュアル" & Now.ToString(“yyyyMMddhhmmss”) & "_PIC_" & struid & ".xlsx")
+        '    workbook.SaveAs(strPath & strFile)
 
         'End Using
 
+        ''ファイル名を取得する
+        'strChanged = strPath & Format(Now, "yyyyMMdd") & "_CS_MANUAL.xlsx"
+        'strFileNm = Path.GetFileName(strChanged)
 
-        'Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('出力が完了しました。\n出力先：\\\svnas201\\EXD06101\\DISC_COMMON\\WEB出力');</script>", False)
+        ''Contentをクリア
+        'Response.ClearContent()
+
+        ''Contentを設定
+        'Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+        'Response.ContentType = "application/vnd.ms-excel"
+
+        ''表示ファイル名を指定
+        'Dim fn As String = HttpUtility.UrlEncode(strFileNm)
+        'Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
+
+        ''ダウンロード対象ファイルを指定
+        'Response.WriteFile(strChanged)
+
+        ''ダウンロード実行
+        'Response.Flush()
+        'Response.End()
 
         '前月分ダウンロードボタン押下
         Dim strFile As String = Format(Now, "yyyyMMdd") & "_CS_MANUAL.xlsx"
@@ -399,15 +372,21 @@ Partial Class cs_home
         Dim strChanged As String    'サーバー上のフルパス
         Dim strFileNm As String     'ファイル名
 
-        'Dim dtToday As DateTime = DateTime.Today
+        Dim dtToday As DateTime = DateTime.Today
 
-        'Dim dtFDM As Date = New DateTime(dtToday.Year, dtToday.Month, 1).AddMonths(-1)      '前月初日
-        'Dim dtTDM As Date = New DateTime(dtToday.Year, dtToday.Month, 1).AddDays(-1)        '前月末日
+
 
         Dim dt = GetNorthwindProductTable()
         Dim workbook = New XLWorkbook()
         Dim worksheet = workbook.Worksheets.Add(dt)
+
+        worksheet.Style.Font.FontName = "Meiryo UI"
+        worksheet.Style.Alignment.WrapText = False
+        worksheet.Columns.AdjustToContents()
+        worksheet.SheetView.FreezeRows(1)
+
         workbook.SaveAs(strPath & strFile)
+
 
         'ファイル名を取得する
         Dim strTxtFiles() As String = IO.Directory.GetFiles(strPath, Format(Now, "yyyyMMdd") & "_CS_MANUAL.xlsx")
@@ -433,6 +412,7 @@ Partial Class cs_home
         Response.Flush()
         Response.End()
 
+
     End Sub
     Private Shared Function GetNorthwindProductTable() As DataTable
         'EXCELファイル出力
@@ -449,8 +429,9 @@ Partial Class cs_home
         Using conn = New SqlConnection(ConnectionString)
             Dim cmd = conn.CreateCommand()
 
-            strSQL = strSQL & "SELECT * FROM T_EXL_CSMANUAL "
-
+            strSQL = strSQL & "SELECT NEW_CODE, OLD_CODE, CUST_NM,CUST_AB,BL_SEND,CUST_ADDRESS,CONSIGNEE,CONSIGNEE_OF_SI,CONSIGNEE_OF_SI_ADDRESS,FINAL_DES,FINAL_DES_ADDRESS,NOTIFY "
+            strSQL = strSQL & ",WOOD_NECE,CO_NECE,DOC_OF_EGYPT,EPA_NECE,FTA,CERTIFICATE_OF_CONFORMITY,ERL_NECE,VESS_NECE,DOC_NECESSITY,CONTAINER_CLEANING,BEARING,IV_AUTO_CALC "
+            strSQL = strSQL & "FROM T_EXL_CSMANUAL "
 
             cmd.CommandText = strSQL
             Dim sda = New SqlDataAdapter(cmd)

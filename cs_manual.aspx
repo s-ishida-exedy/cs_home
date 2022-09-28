@@ -215,42 +215,26 @@
             <HeaderStyle Width="200px" />
             </asp:BoundField>
 
-            <asp:BoundField DataField="INCOTEM" HeaderText="INCOTEM" SortExpression="INCOTEM" />
-            <asp:BoundField DataField="BL_TYPE" HeaderText="BL_TYPE" SortExpression="BL_TYPE" />
             <asp:BoundField DataField="BL_SEND" HeaderText="BL_SEND" SortExpression="BL_SEND" />
             <asp:BoundField DataField="CUST_ADDRESS" HeaderText="CUST_ADDRESS" SortExpression="CUST_ADDRESS" />
             <asp:BoundField DataField="CONSIGNEE" HeaderText="CONSIGNEE" SortExpression="CONSIGNEE" />
-            <asp:BoundField DataField="CNEE_NM_SI" HeaderText="CNEE_NM_SI" SortExpression="CNEE_NM_SI" />
-            <asp:BoundField DataField="FIN_DESTINATION" HeaderText="FIN_DESTINATION" SortExpression="FIN_DESTINATION" />
-            <asp:BoundField DataField="NOTIFY" HeaderText="NOTIFY" SortExpression="NOTIFY" />
-            <asp:BoundField DataField="FORWARDER_INFO" HeaderText="FORWARDER_INFO" SortExpression="FORWARDER_INFO" />
-            <asp:BoundField DataField="CUST_REQ" HeaderText="CUST_REQ" SortExpression="CUST_REQ" />
-            <asp:BoundField DataField="IV_NECE" HeaderText="IV_NECE" SortExpression="IV_NECE" />
-            <asp:BoundField DataField="PL_NECE" HeaderText="PL_NECE" SortExpression="PL_NECE" />
-            <asp:BoundField DataField="BL_NECE" HeaderText="BL_NECE" SortExpression="BL_NECE" />
-            <asp:BoundField DataField="CO_NECE" HeaderText="CO_NECE" SortExpression="CO_NECE" />
-            <asp:BoundField DataField="EPA_NECE" HeaderText="EPA_NECE" SortExpression="EPA_NECE" />
-            <asp:BoundField DataField="WOOD_NECE" HeaderText="WOOD_NECE" SortExpression="WOOD_NECE" />
-            <asp:BoundField DataField="DELI_NECE" HeaderText="DELI_NECE" SortExpression="DELI_NECE" />
-            <asp:BoundField DataField="INSP_NECE" HeaderText="INSP_NECE" SortExpression="INSP_NECE" />
-            <asp:BoundField DataField="ERL_NECE" HeaderText="ERL_NECE" SortExpression="ERL_NECE" />
-            <asp:BoundField DataField="VESS_NECE" HeaderText="VESS_NECE" SortExpression="VESS_NECE" />
-            <asp:BoundField DataField="SHIP_DAY_OF_WEEK" HeaderText="SHIP_DAY_OF_WEEK" SortExpression="SHIP_DAY_OF_WEEK" />
-            <asp:BoundField DataField="DESTINATION" HeaderText="DESTINATION" SortExpression="DESTINATION" />
-            <asp:BoundField DataField="SHIPMENT_KBN" HeaderText="SHIPMENT_KBN" SortExpression="SHIPMENT_KBN" />
-            <asp:BoundField DataField="LT" HeaderText="LT" SortExpression="LT" />
-            <asp:BoundField DataField="CONTAINER_CLEANING" HeaderText="CONTAINER_CLEANING" SortExpression="CONTAINER_CLEANING" />
-            <asp:BoundField DataField="LC" HeaderText="LC" SortExpression="LC" />
             <asp:BoundField DataField="CONSIGNEE_OF_SI" HeaderText="CONSIGNEE_OF_SI" SortExpression="CONSIGNEE_OF_SI" />
             <asp:BoundField DataField="CONSIGNEE_OF_SI_ADDRESS" HeaderText="CONSIGNEE_OF_SI_ADDRESS" SortExpression="CONSIGNEE_OF_SI_ADDRESS" />
             <asp:BoundField DataField="FINAL_DES" HeaderText="FINAL_DES" SortExpression="FINAL_DES" />
             <asp:BoundField DataField="FINAL_DES_ADDRESS" HeaderText="FINAL_DES_ADDRESS" SortExpression="FINAL_DES_ADDRESS" />
-            <asp:BoundField DataField="FORWARDER_NM" HeaderText="FORWARDER_NM" SortExpression="FORWARDER_NM" />
-            <asp:BoundField DataField="FORWARDER_STAFF_NM" HeaderText="FORWARDER_STAFF_NM" SortExpression="FORWARDER_STAFF_NM" />
-            <asp:BoundField DataField="DOC_NECESSITY" HeaderText="DOC_NECESSITY" SortExpression="DOC_NECESSITY" />
+            <asp:BoundField DataField="NOTIFY" HeaderText="NOTIFY" SortExpression="NOTIFY" />
+            <asp:BoundField DataField="WOOD_NECE" HeaderText="WOOD_NECE" SortExpression="WOOD_NECE" />
+            <asp:BoundField DataField="CO_NECE" HeaderText="CO_NECE" SortExpression="CO_NECE" />
+            <asp:BoundField DataField="DOC_OF_EGYPT" HeaderText="DOC_OF_EGYPT" SortExpression="DOC_OF_EGYPT" />
+            <asp:BoundField DataField="EPA_NECE" HeaderText="EPA_NECE" SortExpression="EPA_NECE" />
             <asp:BoundField DataField="FTA" HeaderText="FTA" SortExpression="FTA" />
             <asp:BoundField DataField="CERTIFICATE_OF_CONFORMITY" HeaderText="CERTIFICATE_OF_CONFORMITY" SortExpression="CERTIFICATE_OF_CONFORMITY" />
-            <asp:BoundField DataField="DOC_OF_EGYPT" HeaderText="DOC_OF_EGYPT" SortExpression="DOC_OF_EGYPT" />
+            <asp:BoundField DataField="ERL_NECE" HeaderText="ERL_NECE" SortExpression="ERL_NECE" />
+            <asp:BoundField DataField="VESS_NECE" HeaderText="VESS_NECE" SortExpression="VESS_NECE" />
+            <asp:BoundField DataField="DOC_NECESSITY" HeaderText="DOC_NECESSITY" SortExpression="DOC_NECESSITY" />
+            <asp:BoundField DataField="CONTAINER_CLEANING" HeaderText="CONTAINER_CLEANING" SortExpression="CONTAINER_CLEANING" />
+            <asp:BoundField DataField="BEARING" HeaderText="BEARING" SortExpression="BEARING" />
+            <asp:BoundField DataField="IV_AUTO_CALC" HeaderText="IV_AUTO_CALC" SortExpression="IV_AUTO_CALC" />
 
 
 
@@ -306,7 +290,9 @@
   , DOC_NECESSITY                                 
   , FTA                                           
   , CERTIFICATE_OF_CONFORMITY                     
-  , DOC_OF_EGYPT                                  
+  , DOC_OF_EGYPT 
+  , BEARING
+  , IV_AUTO_CALC               
 FROM
   T_EXL_CSMANUAL 
 ORDER BY NEW_CODE

@@ -1394,47 +1394,247 @@ Step00:
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
 
+        'Dim strFile As String = Format(Now, "yyyyMMdd") & "_出荷管理表.xlsx"
+        'Dim strPath As String = "C:\exp\cs_home\files\"
+        'Dim strChanged As String    'サーバー上のフルパス
+        'Dim strFileNm As String     'ファイル名
+
+        'Dim a
+
+        'Dim dt As New DataTable("SHIP")
+        'For Each cell As TableCell In GridView1.HeaderRow.Cells
+
+        '    If cell.Text = "FLG01" Or cell.Text = "FLG02" Or cell.Text = "FLG0" Or cell.Text = "FLG04" Then
+        '        'dt.Columns.Add(cell.Text)
+        '    ElseIf cell.Text = "CUT" Or cell.Text = "ETD" Or cell.Text = "ETA" Or cell.Text = "書類作成予定日" Or cell.Text = "VAN01" Or cell.Text = "VAN02" Or cell.Text = "VAN03" Or cell.Text = "VAN04" Or cell.Text = "VAN05" Or cell.Text = "VAN06" Or cell.Text = "VAN07" Or cell.Text = "VAN08" Or cell.Text = "VAN09" Or cell.Text = "VAN10" Or cell.Text = "VAN11" Then
+        '        dt.Columns.Add(cell.Text, Type.GetType("System.DateTime"))
+        '    ElseIf cell.Text = "20Ft" Or cell.Text = "40Ft" Or cell.Text = "LCL/40Ft" Or cell.Text = "コンテナ" Then
+        '        dt.Columns.Add(cell.Text)
+        '    Else
+        '        dt.Columns.Add(cell.Text)
+        '    End If
+
+        'Next
+
+        'For Each row As GridViewRow In GridView1.Rows
+        '    dt.Rows.Add()
+        '    For i As Integer = 0 To row.Cells.Count - 5
+        '        a = Replace(row.Cells(i).Text, "&nbsp;", "")
+        '        If a = "" Then
+        '            a = DBNull.Value
+        '        End If
+        '        dt.Rows(dt.Rows.Count - 1)(i) = a
+        '    Next
+        'Next
+        'Using workbook As New XLWorkbook()
+        '    workbook.Worksheets.Add(dt)
+        '    workbook.SaveAs(strPath & strFile)
+
+        'End Using
+
+        ''ファイル名を取得する
+        'strChanged = strPath & Format(Now, "yyyyMMdd") & "_出荷管理表.xlsx"
+        'strFileNm = Path.GetFileName(strChanged)
+
+        ''Contentをクリア
+        'Response.ClearContent()
+
+        ''Contentを設定
+        'Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+        'Response.ContentType = "application/vnd.ms-excel"
+
+        ''表示ファイル名を指定
+        'Dim fn As String = HttpUtility.UrlEncode(strFileNm)
+        'Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
+
+        ''ダウンロード対象ファイルを指定
+        'Response.WriteFile(strChanged)
+
+        ''ダウンロード実行
+        'Response.Flush()
+        'Response.End()
+
+        '前月分ダウンロードボタン押下
         Dim strFile As String = Format(Now, "yyyyMMdd") & "_出荷管理表.xlsx"
         Dim strPath As String = "C:\exp\cs_home\files\"
         Dim strChanged As String    'サーバー上のフルパス
         Dim strFileNm As String     'ファイル名
 
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strinv As String = ""
+        Dim strbkg As String = ""
+
+
+        Dim wday As String = ""
+        Dim wday2 As String = ""
+        Dim wday3 As String = ""
+        Dim dt1 As DateTime = DateTime.Now
+        Dim Kaika00 As String = ""
+
+        Dim ts1 As New TimeSpan(80, 0, 0, 0)
+        Dim ts2 As New TimeSpan(80, 0, 0, 0)
+        Dim dt02 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        Dim dtToday As DateTime = DateTime.Today
+
+
+
+        Dim dt = GetNorthwindProductTable()
+
+
         Dim a
 
-        Dim dt As New DataTable("SHIP")
+        Dim dt2 As New DataTable("SHIPPINGMEMO")
         For Each cell As TableCell In GridView1.HeaderRow.Cells
-
-            If cell.Text = "FLG01" Or cell.Text = "FLG02" Or cell.Text = "FLG0" Or cell.Text = "FLG04" Then
+            If cell.Text = "&nbsp;" Or cell.Text = "FLG03" Then
+            ElseIf cell.Text = "FLG01" Or cell.Text = "FLG02" Or cell.Text = "FLG0" Or cell.Text = "FLG04" Then
                 'dt.Columns.Add(cell.Text)
             ElseIf cell.Text = "CUT" Or cell.Text = "ETD" Or cell.Text = "ETA" Or cell.Text = "書類作成予定日" Or cell.Text = "VAN01" Or cell.Text = "VAN02" Or cell.Text = "VAN03" Or cell.Text = "VAN04" Or cell.Text = "VAN05" Or cell.Text = "VAN06" Or cell.Text = "VAN07" Or cell.Text = "VAN08" Or cell.Text = "VAN09" Or cell.Text = "VAN10" Or cell.Text = "VAN11" Then
-                dt.Columns.Add(cell.Text, Type.GetType("System.DateTime"))
+                dt2.Columns.Add(cell.Text, Type.GetType("System.DateTime"))
             ElseIf cell.Text = "20Ft" Or cell.Text = "40Ft" Or cell.Text = "LCL/40Ft" Or cell.Text = "コンテナ" Then
-                dt.Columns.Add(cell.Text)
+                dt2.Columns.Add(cell.Text)
             Else
-                dt.Columns.Add(cell.Text)
+                dt2.Columns.Add(cell.Text)
             End If
-
         Next
 
-        For Each row As GridViewRow In GridView1.Rows
-            dt.Rows.Add()
-            For i As Integer = 0 To row.Cells.Count - 5
-                a = Replace(row.Cells(i).Text, "&nbsp;", "")
+        For Each row As DataRow In dt.Rows
+            dt2.Rows.Add()
+            For i As Integer = 0 To dt.Columns.Count - 7
+
+                a = row(25)
+                If i = 0 Then
+
+                    '接続文字列の作成
+                    Dim ConnectionString As String = String.Empty
+
+                    'SQL Server認証
+                    ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+                    'SqlConnectionクラスの新しいインスタンスを初期化
+                    Dim cnn = New SqlConnection(ConnectionString)
+                    Dim Command = cnn.CreateCommand
+
+                    'データベース接続を開く
+                    cnn.Open()
+
+
+
+                    strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(row(25), vbLf, "")) & "' "
+                    strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '002' "
+
+                    'ＳＱＬコマンド作成
+                    dbcmd = New SqlCommand(strSQL, cnn)
+                    'ＳＱＬ文実行
+                    dataread = dbcmd.ExecuteReader()
+                    strbkg = ""
+                    '結果を取り出す
+                    While (dataread.Read())
+                        strbkg += dataread("BKGNO")
+                        '書類作成状況
+                        If Trim(row(25)) = Trim(strbkg) Then
+                            If row(0) = "EXDCUT" Then
+                                row(0) = row(0) & " " & "書類済"
+                            Else
+                                row(0) = row(0) & " " & "書類済"
+                            End If
+                        End If
+                    End While
+
+                    'クローズ処理
+                    dataread.Close()
+                    dbcmd.Dispose()
+
+                    'strSQL = "SELECT DECFIN_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].DECFIN_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+                    strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(row(25), vbLf, "")) & "' "
+                    strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '003' "
+
+                    'ＳＱＬコマンド作成
+                    dbcmd = New SqlCommand(strSQL, cnn)
+                    'ＳＱＬ文実行
+                    dataread = dbcmd.ExecuteReader()
+
+                    strbkg = ""
+                    '結果を取り出す
+                    While (dataread.Read())
+                        strbkg += dataread("BKGNO")
+                        '書類作成状況
+                        If Trim(row(25)) = Trim(strbkg) Then
+                            row(0) = "通関済"
+                        End If
+                    End While
+
+                    'クローズ処理
+                    dataread.Close()
+                    dbcmd.Dispose()
+
+
+
+                    'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+                    strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(row(25), vbLf, "")) & "' "
+                    strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '001' "
+
+                    'ＳＱＬコマンド作成
+                    dbcmd = New SqlCommand(strSQL, cnn)
+                    'ＳＱＬ文実行
+                    dataread = dbcmd.ExecuteReader()
+                    strbkg = ""
+                    '結果を取り出す
+                    While (dataread.Read())
+                        strbkg += dataread("BKGNO")
+                        '書類作成状況
+                        If Trim(row(25)) = Trim(strbkg) And strbkg <> "&nbsp;" Then
+                            If row(0) Like "*書類済*" Then
+                                row(0) = "通関委託" & " " & "書類済"
+                            Else
+                                row(0) = "通関委託"
+                            End If
+                        End If
+                    End While
+
+                    'クローズ処理
+                    dataread.Close()
+                    dbcmd.Dispose()
+                    cnn.Close()
+                    cnn.Dispose()
+
+                End If
+
+                a = row(i)
                 If a = "" Then
                     a = DBNull.Value
                 End If
-                dt.Rows(dt.Rows.Count - 1)(i) = a
+                dt2.Rows(dt2.Rows.Count - 1)(i) = a
             Next
         Next
-        Using workbook As New XLWorkbook()
-            workbook.Worksheets.Add(dt)
-            workbook.SaveAs(strPath & strFile)
 
-        End Using
+
+
+
+
+
+
+
+
+        Dim workbook = New XLWorkbook()
+        Dim worksheet = workbook.Worksheets.Add(dt2)
+
+        worksheet.Style.Font.FontName = "Meiryo UI"
+        worksheet.Style.Alignment.WrapText = False
+        worksheet.Columns.AdjustToContents()
+        worksheet.SheetView.FreezeRows(1)
+
+        workbook.SaveAs(strPath & strFile)
+
+
 
         'ファイル名を取得する
         strChanged = strPath & Format(Now, "yyyyMMdd") & "_出荷管理表.xlsx"
         strFileNm = Path.GetFileName(strChanged)
+
 
         'Contentをクリア
         Response.ClearContent()
@@ -1456,6 +1656,31 @@ Step00:
 
 
     End Sub
+    Private Shared Function GetNorthwindProductTable() As DataTable
+        'EXCELファイル出力
+        Dim strSQL As String = ""
+        Dim strSDate As String = ""
+        Dim strEDate As String = ""
+
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+        Dim dt = New DataTable("T_EXL_SHIPPINGMEMOLIST")
+
+        Using conn = New SqlConnection(ConnectionString)
+            Dim cmd = conn.CreateCommand()
+
+            strSQL = strSQL & "SELECT * FROM [T_EXL_CSANKEN]  ORDER BY CUT_DATE "
+
+
+            cmd.CommandText = strSQL
+            Dim sda = New SqlDataAdapter(cmd)
+            sda.Fill(dt)
+        End Using
+
+        Return dt
+    End Function
 
     Private Sub Get_allinv_k(strInv As String, strbkg As String)
 
