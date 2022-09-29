@@ -299,7 +299,7 @@ Partial Class cs_home
                     If flgship = 0 Then
                         e.Row.Cells(1).BackColor = Drawing.Color.Red
                         e.Row.Cells(1).ForeColor = Drawing.Color.White
-                        e.Row.Cells(1).Text = e.Row.Cells(1).Text & " タイトル、荷姿変更要"
+                        e.Row.Cells(1).Text = e.Row.Cells(1).Text & " 建値、タイトル変更要"
                     End If
                 End If
             End If
