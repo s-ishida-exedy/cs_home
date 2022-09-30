@@ -162,6 +162,11 @@
             padding: 5px;
             font-size :small ;
         }
+        .txtb2{
+            padding: 5px;
+            font-size :small ;
+            text-align :center ;
+        }
 </style>
 <script>
     // カレンダー
@@ -218,6 +223,10 @@
                 <asp:CheckBox ID="CheckBox2" runat="server" text="IVNOが割り振られていない案件のみ表示" Font-Size="Small" AutoPostBack="true"  />
                 &nbsp;&nbsp;
                 <asp:Button ID="Button14" runat="server" Text=" ﾘｾｯﾄ " Font-Size="Small" Width ="80" />
+                <br/>
+                <asp:TextBox ID="TextBox13" runat="server" class="txtb2" Width="100px" placeholder="--IVNO--"></asp:TextBox>
+                &nbsp;&nbsp;
+                <asp:Button ID="Button15" runat="server" Text="SN明細情報表示" Font-Size="Small" Width="220px" />
             </td>
             <td class="ex-cell">
                 &nbsp;
@@ -316,7 +325,7 @@ ORDER BY NOUKI"></asp:SqlDataSource>
     <asp:Label ID="Label13" runat="server" Text="EXL宛先："></asp:Label>&nbsp;
     <asp:TextBox ID="TextBox12" runat="server" Class ="txtb" ></asp:TextBox><br/>
     <asp:Label ID="Label1" runat="server" Text="更新対象："></asp:Label>&nbsp;
-    <asp:Button ID="Button1" runat="server" Text="まとめて更新" width="200px" Font-Size="Small" />
+    <asp:Button ID="Button1" runat="server" Text="まとめて更新" width="180px" Font-Size="Small" />
     <table class="tab1">
         <tr>
             <th>受注管理番号</th>

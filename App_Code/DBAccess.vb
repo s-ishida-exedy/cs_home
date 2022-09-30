@@ -1335,4 +1335,42 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
+    Public Function GET_RESULT_SNDETAIL(strValue As String) As DataSet
+        'AIR専用客先　SN明細取得
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  a.SALESNOTENO "
+        StrSQL = StrSQL & "  , b.ORDERKEY "
+        StrSQL = StrSQL & "  , a.PLNO "
+        StrSQL = StrSQL & "  , a.CUSTCODE "
+        StrSQL = StrSQL & "  , b.CUSTMPN "
+        StrSQL = StrSQL & "  , b.EXDNO "
+        StrSQL = StrSQL & "  , a.ORDERNO "
+        StrSQL = StrSQL & "  , b.PRODNAME "
+        StrSQL = StrSQL & "  , a.NOKIYMD "
+        StrSQL = StrSQL & "  , b.QTY "
+        StrSQL = StrSQL & "  , b.LEFTQTY  "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "  dbo.V_T_SN_HD_TB a  "
+        StrSQL = StrSQL & "  INNER JOIN dbo.V_T_SN_BD_TB b  "
+        StrSQL = StrSQL & "    ON a.SALESNOTENO = b.SALESNOTENO  "
+        StrSQL = StrSQL & "  INNER JOIN T_EXL_AIR_EXC_ODR c  "
+        StrSQL = StrSQL & "    ON a.SALESNOTENO = c.SALESNOTENO  "
+        StrSQL = StrSQL & "  INNER JOIN T_EXL_AIR_EXCLUSIVE d  "
+        StrSQL = StrSQL & "    ON c.ODR_CTL_NO = d.ODR_CTL_NO  "
+        StrSQL = StrSQL & "WHERE "
+        StrSQL = StrSQL & "  d.IVNO = '" & strValue & "' "
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class
