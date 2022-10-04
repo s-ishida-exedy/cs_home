@@ -1201,7 +1201,7 @@ Step00:
 
         Dim struid As String = Session("UsrId")
         Dim strfrom As String = GET_from(struid)
-        '        Dim strto As String = "r-fukao@exedy.com,s-ishida@exedy.com"
+        '        Dim strto As String = "r-fukao@exedy.com"
         Dim strto As String = "r-fukao@exedy.com,r-fukao@exedy.com"
 
         Dim strsyomei As String = GET_syomei(struid)
