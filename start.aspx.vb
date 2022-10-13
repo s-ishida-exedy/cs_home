@@ -312,8 +312,8 @@ Partial Class cs_home
         'バンレポの作成状況を取得
         strSQL = ""
         strSQL = strSQL & "SELECT "
-        strSQL = strSQL & "   COUNT(CASE  WHEN PLACE = '0H' AND SUBSTRING(RIGHT(CUST_NM,5),1,1) = 'K' THEN 1 ELSE NULL END) AS Rec01 "
-        strSQL = strSQL & "  ,COUNT(CASE  WHEN PLACE = '0H' AND SUBSTRING(RIGHT(CUST_NM,5),1,1) <> 'K' THEN 1 ELSE NULL END) AS Rec02 "
+        strSQL = strSQL & "   COUNT(CASE  WHEN PLACE = '0H' AND SUBSTRING(RIGHT(RTRIM(CUST_NM),5),1,1) = 'K' THEN 1 ELSE NULL END) AS Rec01 "
+        strSQL = strSQL & "  ,COUNT(CASE  WHEN PLACE = '0H' AND SUBSTRING(RIGHT(RTRIM(CUST_NM),5),1,1) <> 'K' THEN 1 ELSE NULL END) AS Rec02 "
         strSQL = strSQL & "  ,COUNT(CASE  WHEN PLACE = '1U' THEN 1 ELSE NULL END) AS Rec03 "
         strSQL = strSQL & "FROM  "
         strSQL = strSQL & "  T_EXL_VAN_SCH_DETAIL "
