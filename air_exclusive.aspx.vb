@@ -11,6 +11,7 @@ Partial Class cs_home
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         Label12.Text = ""
+        Session.Remove("strIVNO")
 
         If IsPostBack Then
             ' そうでない時処理
@@ -589,6 +590,7 @@ Partial Class cs_home
         TextBox9.Text = ""
         TextBox10.Text = ""
         TextBox11.Text = ""
+        TextBox13.Text = ""
         Label2.Text = ""
         Label3.Text = ""
         Label4.Text = ""
@@ -601,5 +603,64 @@ Partial Class cs_home
         Label11.Text = ""
 
         Call Make_Grid()
+    End Sub
+
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
+        'SN明細情報表示ボタン押下
+        Label12.Text = ""
+        If Trim(TextBox13.Text) = "" Then
+            Label12.Text = "IVNOが入力されていません。"
+            Return
+        End If
+
+        'AIR専用客先以外はエラー
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String
+        Dim intCnt As Integer
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT "
+        strSQL = strSQL & "  COUNT(*) AS RECCNT  "
+        strSQL = strSQL & "FROM "
+        strSQL = strSQL & "  M_EXL_AIR_EXC_CST a "
+        strSQL = strSQL & "  INNER JOIN V_T_INV_HD_TB b "
+        strSQL = strSQL & "  ON a.CUST_CD = b.CUSTCODE "
+        strSQL = strSQL & "WHERE b.OLD_INVNO = '" & Trim(TextBox13.Text) & "'"
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            intCnt = dataread("RECCNT")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+        If intCnt = 0 Then
+            Label12.Text = "このボタンを押すことができるのはAIR専用客先のみです。"
+            Return
+        End If
+
+        'セッションにIVNOを入れて画面遷移
+        Session("strIVNO") = Trim(TextBox13.Text)
+        Response.Redirect("./air_exclusive_sn.aspx")
     End Sub
 End Class

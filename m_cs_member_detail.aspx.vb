@@ -45,9 +45,9 @@ Partial Class cs_home
                 strSQL = strSQL & "    END AS PLACE "
                 strSQL = strSQL & "  , COMPANY "
                 strSQL = strSQL & "  , TEAM "
-                strSQL = strSQL & "  , TEL_NO "
-                strSQL = strSQL & "  , FAX_NO "
-                strSQL = strSQL & "  , E_MAIL  "
+                strSQL = strSQL & "  , IsNULL(TEL_NO ,'') AS TEL_NO "
+                strSQL = strSQL & "  , IsNULL(FAX_NO ,'') AS FAX_NO "
+                strSQL = strSQL & "  , IsNULL(E_MAIL ,'') AS E_MAIL  "
                 strSQL = strSQL & "FROM M_EXL_CS_MEMBER "
                 strSQL = strSQL & "WHERE CODE = '" & strCode & "' "
 

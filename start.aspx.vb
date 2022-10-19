@@ -121,16 +121,16 @@ Partial Class cs_home
         While (dataread.Read())
             Select Case dataread("PLACE")
                 Case "0H"
-                    If strTody = dataread("VAN_DATE") And Left(Right(dataread("CUST_NM"), 5), 1) = "K" Then
+                    If strTody = dataread("VAN_DATE") And Left(Right(Trim(dataread("CUST_NM")), 5), 1) = "K" Then
                         '当日　本社　AF
                         lngHAf += 1
-                    ElseIf strTody = dataread("VAN_DATE") And Left(Right(dataread("CUST_NM"), 5), 1) <> "K" Then
+                    ElseIf strTody = dataread("VAN_DATE") And Left(Right(trim(dataread("CUST_NM")), 5), 1) <> "K" Then
                         '当日　本社　KD
                         lngHKd += 1
-                    ElseIf strTomm = dataread("VAN_DATE") And Left(Right(dataread("CUST_NM"), 5), 1) = "K" Then
+                    ElseIf strTomm = dataread("VAN_DATE") And Left(Right(trim(dataread("CUST_NM")), 5), 1) = "K" Then
                         '翌日　本社　AF
                         lngHAf2 += 1
-                    ElseIf strTomm = dataread("VAN_DATE") And Left(Right(dataread("CUST_NM"), 5), 1) <> "K" Then
+                    ElseIf strTomm = dataread("VAN_DATE") And Left(Right(trim(dataread("CUST_NM")), 5), 1) <> "K" Then
                         '翌日　本社　KD
                         lngHKd2 += 1
                     End If
@@ -312,8 +312,8 @@ Partial Class cs_home
         'バンレポの作成状況を取得
         strSQL = ""
         strSQL = strSQL & "SELECT "
-        strSQL = strSQL & "   COUNT(CASE  WHEN PLACE = '0H' AND SUBSTRING(RIGHT(CUST_NM,5),1,1) = 'K' THEN 1 ELSE NULL END) AS Rec01 "
-        strSQL = strSQL & "  ,COUNT(CASE  WHEN PLACE = '0H' AND SUBSTRING(RIGHT(CUST_NM,5),1,1) <> 'K' THEN 1 ELSE NULL END) AS Rec02 "
+        strSQL = strSQL & "   COUNT(CASE  WHEN PLACE = '0H' AND SUBSTRING(RIGHT(RTRIM(CUST_NM),5),1,1) = 'K' THEN 1 ELSE NULL END) AS Rec01 "
+        strSQL = strSQL & "  ,COUNT(CASE  WHEN PLACE = '0H' AND SUBSTRING(RIGHT(RTRIM(CUST_NM),5),1,1) <> 'K' THEN 1 ELSE NULL END) AS Rec02 "
         strSQL = strSQL & "  ,COUNT(CASE  WHEN PLACE = '1U' THEN 1 ELSE NULL END) AS Rec03 "
         strSQL = strSQL & "FROM  "
         strSQL = strSQL & "  T_EXL_VAN_SCH_DETAIL "

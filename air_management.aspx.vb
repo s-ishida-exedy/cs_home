@@ -370,7 +370,12 @@ Partial Class cs_home
 
         'ダウンロード実行
         Response.Flush()
+
+        'ダウンロード完了後は削除
+        System.IO.File.Delete(strPath & strFileNm)
+
         Response.End()
+
 
     End Sub
 
@@ -409,6 +414,10 @@ Partial Class cs_home
         Dim strPath As String = "C:\exp\cs_home\files\"
         Dim strChanged As String    'サーバー上のフルパス
         Dim strFileNm As String     'ファイル名
+
+        If TextBox1.Text = "" Or TextBox2.Text = "" Then
+            Return
+        End If
 
         Dim dt = GetNorthwindProductTable(TextBox1.Text, TextBox2.Text)
         Dim workbook = New XLWorkbook()
