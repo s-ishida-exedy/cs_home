@@ -1122,6 +1122,18 @@ Step00:
         strSQL = strSQL & "WHERE T_INV_HD_TB.OLD_INVNO like '%" & iptbx & "%' "
         strSQL = strSQL & "AND T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
 
+        'INVOICENOが最大のものを取得
+        strSQL = strSQL & "AND T_INV_HD_TB.INVOICENO = "
+        strSQL = strSQL & "(SELECT MAX(T_INV_HD_TB.INVOICENO) AS IVNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+
+        strSQL = strSQL & "WHERE T_INV_HD_TB.HEADTITLE Like 'INVOICE%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.OLD_INVNO like '%" & iptbx & "%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.ORG_INVOICENO IS NULL "
+        strSQL = strSQL & ") "
+
+
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
         'ＳＱＬ文実行 

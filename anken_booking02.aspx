@@ -377,7 +377,7 @@
                 <asp:Button ID="Button2"  CssClass ="btn00" runat="server" Text="解除" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
             </td>
             <td style="width:500px; font-size:10px;" >
-                <asp:Label ID="Label1" runat="server" Text="１．ＬＳ７、９（限定・試作）が同梱されている案件にチェックを入れる。"></asp:Label><br>
+                <asp:Label ID="Label1" runat="server" Text="１．ＬＳ７、９（限定・試作）・ＤＮＸ混載出荷　が同梱されている案件にチェックを入れる。"></asp:Label><br>
                 <asp:Label ID="Label2" runat="server" Text="２．登録ボタンを押す。"></asp:Label><br>
             </td>
         </tr>

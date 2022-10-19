@@ -66,6 +66,18 @@ Partial Class yuusen
         strSQL = strSQL & "WHERE OLD_INVNO ='" & iptbx & "' "
         strSQL = strSQL & "AND BLDATE  between '" & dt3 & "' AND '" & dt2 & "' "
 
+        'INVOICENOが最大のものを取得
+        strSQL = strSQL & "AND T_INV_HD_TB.INVOICENO = "
+        strSQL = strSQL & "(SELECT MAX(T_INV_HD_TB.INVOICENO) AS IVNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+
+        strSQL = strSQL & "WHERE T_INV_HD_TB.HEADTITLE Like 'INVOICE%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.OLD_INVNO ='" & iptbx & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.BLDATE between '" & dt3 & "' AND '" & dt2 & "' "
+
+        strSQL = strSQL & "AND T_INV_HD_TB.ORG_INVOICENO IS NULL "
+        strSQL = strSQL & ") "
+
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
         'ＳＱＬ文実行 
@@ -100,7 +112,16 @@ Partial Class yuusen
         strSQL = strSQL & "AND T_INV_HD_TB.OLD_INVNO = '" & iptbx & "' "
 
 
+        'INVOICENOが最大のものを取得
+        strSQL = strSQL & "AND T_INV_HD_TB.INVOICENO = "
+        strSQL = strSQL & "(SELECT MAX(T_INV_HD_TB.INVOICENO) AS IVNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
 
+        strSQL = strSQL & "WHERE T_INV_HD_TB.HEADTITLE Like 'INVOICE%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.OLD_INVNO = '" & iptbx & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.BOOKINGNO = '" & strbkg & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.ORG_INVOICENO IS NULL "
+        strSQL = strSQL & ") "
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn2)
         'ＳＱＬ文実行 
@@ -189,6 +210,16 @@ Partial Class yuusen
 
 
 
+        'INVOICENOが最大のものを取得
+        strSQL = strSQL & "AND T_INV_HD_TB.INVOICENO = "
+        strSQL = strSQL & "(SELECT MAX(T_INV_HD_TB.INVOICENO) AS IVNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+
+        strSQL = strSQL & "WHERE T_INV_HD_TB.HEADTITLE Like 'INVOICE%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.OLD_INVNO = '" & iptbx & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.BOOKINGNO = '" & strbkg & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.ORG_INVOICENO IS NULL "
+        strSQL = strSQL & ") "
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn2)
         'ＳＱＬ文実行 
@@ -332,6 +363,19 @@ Partial Class yuusen
         strSQL = "Select distinct T_INV_HD_TB.BOOKINGNO "
         strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB On T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
         strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE > '" & dt3.ToShortDateString & "' "
+
+        'INVOICENOが最大のものを取得
+        strSQL = strSQL & "AND T_INV_HD_TB.INVOICENO = "
+        strSQL = strSQL & "(SELECT MAX(T_INV_HD_TB.INVOICENO) AS IVNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+
+        strSQL = strSQL & "WHERE T_INV_HD_TB.HEADTITLE Like 'INVOICE%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.OLD_INVNO like '%" & strivno & "%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.BLDATE > '" & dt3.ToShortDateString & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.BOOKINGNO IS NOT NULL "
+        strSQL = strSQL & "AND T_INV_HD_TB.ORG_INVOICENO IS NULL "
+        strSQL = strSQL & ") "
+
         strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE "
         strSQL = strSQL & "HAVING T_INV_HD_TB.OLD_INVNO like '%" & strivno & "%' "
 

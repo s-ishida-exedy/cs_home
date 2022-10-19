@@ -209,6 +209,20 @@ Partial Class yuusen
         strSQL = strSQL & " T_INV_HD_TB.BOOKINGNO is not null "
         strSQL = strSQL & " AND T_INV_HD_TB.BLDATE BETWEEN '" & dt5 & "' AND '" & dt4 & "' "
 
+
+        'INVOICENOが最大のものを取得
+        strSQL = strSQL & "AND T_INV_HD_TB.INVOICENO = "
+        strSQL = strSQL & "(SELECT MAX(T_INV_HD_TB.INVOICENO) AS IVNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+
+        strSQL = strSQL & "WHERE T_INV_HD_TB.HEADTITLE Like 'INVOICE%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.OLD_INVNO  = " & Chr(39) & ivno & Chr(39) & " "
+        strSQL = strSQL & "AND T_INV_HD_TB.BLDATE BETWEEN '" & dt5 & "' AND '" & dt4 & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.BOOKINGNO IS NOT NULL "
+        strSQL = strSQL & "AND T_INV_HD_TB.ORG_INVOICENO IS NULL "
+        strSQL = strSQL & ") "
+
+
         strSQL = strSQL & "GROUP BY T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.BLDATE,T_INV_HD_TB.INVOICENO,T_INV_HD_TB.STAMP,T_INV_HD_TB.RATE,T_INV_HD_TB.BOOKINGNO,T_INV_HD_TB.SHIPPEDPER,T_INV_HD_TB.SHIPBASE,T_INV_HD_TB.INVFROM,T_INV_HD_TB.INVON,T_INV_HD_TB.VOYAGENO "
 
 

@@ -283,6 +283,18 @@ Partial Class cs_home
 
         strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
 
+        'INVOICENOが最大のものを取得
+        strSQL = strSQL & "AND T_INV_HD_TB.INVOICENO = "
+        strSQL = strSQL & "(SELECT MAX(T_INV_HD_TB.INVOICENO) AS IVNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+
+        strSQL = strSQL & "WHERE T_INV_HD_TB.HEADTITLE Like 'INVOICE%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.OLD_INVNO like '%" & strinv & "%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.BOOKINGNO IS NOT NULL "
+        strSQL = strSQL & "AND T_INV_HD_TB.ORG_INVOICENO IS NULL "
+        strSQL = strSQL & ") "
+
         strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE "
         strSQL = strSQL & "HAVING T_INV_HD_TB.OLD_INVNO like '%" & strinv & "%' "
 
