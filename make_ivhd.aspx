@@ -338,7 +338,7 @@
                     </thead>
 
                     <tbody>
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="8558" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="9658" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
                         <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
                         <HeaderStyle CssClass="Freezing"></HeaderStyle>
 
@@ -451,7 +451,7 @@
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="Nortify address" SortExpression="" >
-                        <HeaderStyle Width="1900px" />
+                        <HeaderStyle Width="2500px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="通関方法" SortExpression="" >

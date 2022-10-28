@@ -254,12 +254,12 @@ Partial Class yuusen
                 e.Row.Cells(16).Text = "-"
                 e.Row.Cells(22).Text = "-"
 
-            ElseIf e.Row.Cells(0).Text = "C258" Then
+                'ElseIf e.Row.Cells(0).Text = "C258" Then
 
-                e.Row.Cells(21).Text = "C258" & Format(DateValue(e.Row.Cells(11).Text), "yyyyMMdd")          'booking no
+                '    e.Row.Cells(21).Text = "C258" & Format(DateValue(e.Row.Cells(11).Text), "yyyyMMdd")          'booking no
 
-                e.Row.Cells(16).Text = "-"
-                e.Row.Cells(22).Text = "-"
+                '    e.Row.Cells(16).Text = "-"
+                '    e.Row.Cells(22).Text = "-"
 
 
 
@@ -477,7 +477,8 @@ Partial Class yuusen
 
             If IsDate(e.Row.Cells(1).Text) = False Then
 
-                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+                'If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+                If e.Row.Cells(0).Text = "C255" Then
 
                 Else
 
@@ -494,11 +495,12 @@ Partial Class yuusen
             End If
 
             If IsDate(e.Row.Cells(9).Text) = False Then
-                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+                'If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+                If e.Row.Cells(0).Text = "C255" Then
 
-                Else
+                    Else
 
-                    e.Row.Cells(0).Text = "日付エラー10列目_" & e.Row.Cells(0).Text
+                        e.Row.Cells(0).Text = "日付エラー10列目_" & e.Row.Cells(0).Text
                     e.Row.BackColor = Drawing.Color.Red
 
                 End If
@@ -509,14 +511,16 @@ Partial Class yuusen
                 End If
             End If
 
-            If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+            'If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+            If e.Row.Cells(0).Text = "C255" Then
                 e.Row.Cells(10).Text = e.Row.Cells(11).Text
             Else
             End If
 
 
             If IsDate(e.Row.Cells(10).Text) = False Then
-                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+                'If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+                If e.Row.Cells(0).Text = "C255" Then
 
                 Else
 
@@ -532,7 +536,8 @@ Partial Class yuusen
             End If
 
             If IsDate(e.Row.Cells(11).Text) = False Then
-                If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+                'If e.Row.Cells(0).Text = "C255" Or e.Row.Cells(0).Text = "C258" Then
+                If e.Row.Cells(0).Text = "C255" Then
 
                 Else
 
@@ -1001,12 +1006,12 @@ Partial Class yuusen
                             row(16) = "-"
                             row(22) = "-"
 
-                        ElseIf row(0) = "C258" Then
+                            'ElseIf row(0) = "C258" Then
 
-                            row(21) = "C258" & Format(DateValue(row(11)), "yyyyMMdd")          'booking no
+                            '    row(21) = "C258" & Format(DateValue(row(11)), "yyyyMMdd")          'booking no
 
-                            row(16) = "-"
-                            row(22) = "-"
+                            '    row(16) = "-"
+                            '    row(22) = "-"
                         End If
 
                         '船名	22
@@ -1204,7 +1209,8 @@ Partial Class yuusen
 
 
                         If IsDate(row(1)) = False Then
-                            If row(0) = "C255" Or row(0) = "C258" Then
+                            'If row(0) = "C255" Or row(0) = "C258" Then
+                            If row(0) = "C255" Then
                             Else
                                 row(0) = "日付エラー02列目_" & row(0)
                             End If
@@ -1216,7 +1222,7 @@ Partial Class yuusen
                         End If
 
                         If IsDate(row(9)) = False Then
-                            If row(0) = "C255" Or row(0) = "C258" Then
+                            If row(0) = "C255" Then
 
                             Else
                                 row(0) = "日付エラー10列目_" & row(0)
@@ -1229,13 +1235,13 @@ Partial Class yuusen
                             End If
                         End If
 
-                        If row(0) = "C255" Or row(0) = "C258" Then
+                        If row(0) = "C255" Then
                             row(10) = row(11)
                         Else
                         End If
 
                         If IsDate(row(10)) = False Then
-                            If row(0) = "C255" Or row(0) = "C258" Then
+                            If row(0) = "C255" Then
                             Else
                                 row(0) = "日付エラー11列目_" & row(0)
                             End If
@@ -1247,7 +1253,7 @@ Partial Class yuusen
                         End If
 
                         If IsDate(row(11)) = False Then
-                            If row(0) = "C255" Or row(0) = "C258" Then
+                            If row(0) = "C255" Then
 
                             Else
 
@@ -1320,7 +1326,7 @@ Partial Class yuusen
                                 row(i) = DDATE
                             Else
 
-                                If row(0) = "C258" Or row(0) = "C255" Then
+                                If row(0) = "C255" Then
                                     row(i) = row(11)
                                 Else
                                     row(0) = ("日付エラー")
@@ -1811,7 +1817,8 @@ Partial Class yuusen
                 strSQL = strSQL & ",CUT_DATE,ETA,ETD,CUT_DATE,'','','',VOYAGE_NO,BOOK_TO,'',Forwarder,'' "
                 strSQL = strSQL & ",BOOKING_NO,VESSEL_NAME,'','',PLACE_OF_DELIVERY,'','','','','','','TWENTY_FEET',FOURTY_FEET,LCL_QTY "
                 strSQL = strSQL & "FROM T_BOOKING WHERE STATUS Not In('キャンセル') "
-                strSQL = strSQL & "AND LEFT(CUST_CD,4) IN (" & "'C255','C258'" & ") "
+                'strSQL = strSQL & "AND LEFT(CUST_CD,4) IN (" & "'C255','C258'" & ") "
+                strSQL = strSQL & "AND LEFT(CUST_CD,4) IN (" & "'C255'" & ") "
                 strSQL = strSQL & "AND (INVOICE_NO IS NULL OR INVOICE_NO ='') "
 
             End If
@@ -1851,7 +1858,8 @@ Partial Class yuusen
     End Function
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
-        Dim strcust As String = "'C255','C258'"
+        'Dim strcust As String = "'C255','C258'"
+        Dim strcust As String = "'C255'"
         Dim Dataobj As New DBAccess
 
         Dim ds As DataSet = Dataobj.GET_CS_RESULT_MAKE_IV(strcust)
