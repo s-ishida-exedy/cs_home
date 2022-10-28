@@ -11,14 +11,18 @@ Partial Class cs_home
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
         Dim strMode As String = ""
+        Dim strID As String = ""
 
         Label3.Text = ""
+
+
 
         If IsPostBack Then
             ' そうでない時処理
         Else
             'パラメータ取得
             strMode = Session("strMode")
+            strID = Session("strID")
 
             '接続文字列の作成
             Dim ConnectionString As String = String.Empty
@@ -45,8 +49,9 @@ Partial Class cs_home
                 strSQL = strSQL & "  , REV_SALESDATE "
                 strSQL = strSQL & "  , REV_STATUS "
                 strSQL = strSQL & "FROM T_EXL_SHIPPINGMEMOLIST "
-                strSQL = strSQL & "WHERE INVOICE_NO = '" & strinv & "' "
-                strSQL = strSQL & "AND BOOKING_NO = '" & strbkg & "' "
+                strSQL = strSQL & "WHERE FLG01 = '" & strID & "' "
+                'strSQL = strSQL & "WHERE INVOICE_NO = '" & strinv & "' "
+                'strSQL = strSQL & "AND BOOKING_NO = '" & strbkg & "' "
 
 
                 'ＳＱＬコマンド作成 
@@ -59,6 +64,7 @@ Partial Class cs_home
                     Label1.Text = dataread("CUSTCODE")
                     Label2.Text = strinv
                     Label4.Text = strbkg
+                    Label5.Text = strID
                     TextBox2.Text = dataread("REV_ETD")
                     TextBox3.Text = dataread("REV_ETA")
                     TextBox4.Text = dataread("DATE_GETBL")
@@ -115,14 +121,17 @@ Partial Class cs_home
         Dim DATE_ONBL As String = ""
         Dim REV_SALESDATE As String = ""
         Dim REV_STATUS As String = ""
+        Dim strID As String = ""
 
         strinv = Label2.Text
         strbkg = Label4.Text
+        strID = Label5.Text
         REV_ETD = TextBox2.Text
         REV_ETA = TextBox3.Text
         DATE_GETBL = TextBox4.Text
         DATE_ONBL = TextBox5.Text
         REV_SALESDATE = TextBox6.Text
+
 
         REV_STATUS = DropDownList2.SelectedValue
 
@@ -141,10 +150,18 @@ Partial Class cs_home
             strSQL = strSQL & ",DATE_ONBL = '" & DATE_ONBL & "' "
             strSQL = strSQL & ",REV_SALESDATE = '" & REV_SALESDATE & "' "
             strSQL = strSQL & ",REV_STATUS = '" & REV_STATUS & "' "
-            strSQL = strSQL & "WHERE INVOICE_NO = '" & strinv & "' "
-            strSQL = strSQL & "AND BOOKING_NO = '" & strbkg & "' "
+            strSQL = strSQL & "WHERE FLG01 = '" & strID & "' "
+            'strSQL = strSQL & "WHERE INVOICE_NO = '" & strinv & "' "
+            'strSQL = strSQL & "AND BOOKING_NO = '" & strbkg & "' "
 
         ElseIf strExecMode = "02" Then
+
+            strSQL = ""
+            strSQL = strSQL & "DELETE FROM T_EXL_SHIPPINGMEMOLIST "
+            strSQL = strSQL & "WHERE FLG01 = '" & strID & "' "
+            'strSQL = strSQL & "WHERE INVOICE_NO = '" & strinv & "' "
+            'strSQL = strSQL & "AND BOOKING_NO = '" & strbkg & "' "
+
 
         ElseIf strExecMode = "03" Then
 
@@ -190,7 +207,7 @@ Partial Class cs_home
         Call DB_access("01")        '更新モード
 
 
-
+        Session.Remove("strID")
         Session.Remove("strMode")
         Session.Remove("strinv")
         Session.Remove("strbkg")
@@ -199,5 +216,23 @@ Partial Class cs_home
         Response.Redirect("shippingmemo.aspx")
     End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        '更新ボタンクリックイベント
+
+        '更新
+        Call DB_access("02")        '更新モード
+
+
+        Session.Remove("strID")
+        Session.Remove("strMode")
+        Session.Remove("strinv")
+        Session.Remove("strbkg")
+
+        '元の画面に戻る
+        Response.Redirect("shippingmemo.aspx")
+
+
+    End Sub
 End Class
 

@@ -220,6 +220,16 @@
                     </asp:DropDownList>
                 </td>
              </tr>
+            <tr>
+                <th>ID</th>
+                <td>
+                    <asp:Label ID="Label5" runat="server" Text="Label" style="width:195px"></asp:Label>
+                </td>
+                <th></th>
+                <td>
+                <asp:Button ID="Button2" runat="server" Text="削　除" style="width:120px" Font-Size="Small" />
+                </td>
+            </tr>
 
         </table>
 
