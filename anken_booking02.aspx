@@ -489,7 +489,7 @@
 
     <asp:Panel ID="Panel4" runat="server"  Font-Size="12px">
 
-    <asp:Label ID="Label19" runat="server" Text="＜過去履歴＞"></asp:Label>
+    <asp:Label ID="Label19" runat="server" Text="＜過去履歴＞※EDTが7日前までの案件を表示"></asp:Label>
 
     <div class="wrapper">
     <table class="sticky">
@@ -528,7 +528,7 @@
 
     </asp:Panel>
 
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_ANKEN_HISTORY] ORDER BY SHIP_TYPE "></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_ANKEN_HISTORY] WHERE ETD > GETDATE()-7 ORDER BY SHIP_TYPE "></asp:SqlDataSource>
 
     </div>
 
