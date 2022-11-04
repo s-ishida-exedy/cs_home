@@ -15,7 +15,7 @@ Partial Class cs_home
 
         Label3.Text = ""
 
-
+        Button2.Attributes.Add("onclick", "return confirm('削除しますがよろしいですか？');")
 
         If IsPostBack Then
             ' そうでない時処理
