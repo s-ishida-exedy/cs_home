@@ -30,6 +30,7 @@
                     <li data-id='["home","make_graph_minou02.aspx"]'><a href="#">ＫＤ未納金額</a></li>
                 </ul>
             </li>
+            <li data-id='["home","make_graph_stock01.aspx"]'><a href="#">INV在庫推移</a></li>
         </ul>
     </li>
     <li class="menu__multi">

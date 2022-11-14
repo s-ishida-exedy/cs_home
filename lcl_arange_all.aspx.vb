@@ -758,7 +758,7 @@ Partial Class cs_home
             If Left(e.Row.Cells(2).Text, 4) = "C6G0" Then
                 e.Row.Cells(2).BackColor = Drawing.Color.LightGreen
             End If
-            If Left(e.Row.Cells(2).Text, 4) = "C255" Or Left(e.Row.Cells(2).Text, 4) = "C257" Or Left(e.Row.Cells(2).Text, 4) = "C258" Then
+            If Left(e.Row.Cells(2).Text, 4) = "C255" Or Left(e.Row.Cells(2).Text, 4) = "C257" Or Left(e.Row.Cells(2).Text, 4) = "C258" Or Left(e.Row.Cells(2).Text, 4) = "C253" Then
                 e.Row.Cells(2).BackColor = Drawing.Color.Khaki
             End If
         End If
@@ -777,7 +777,7 @@ Partial Class cs_home
             'ボタンが存在する場合のみセット
             If Not (dltButton Is Nothing) Then
 
-                If Left(e.Row.Cells(2).Text, 4) = "C258" Or Left(e.Row.Cells(2).Text, 4) = "C255" Or Left(e.Row.Cells(2).Text, 4) = "C6G0" Then
+                If Left(e.Row.Cells(2).Text, 4) = "C258" Or Left(e.Row.Cells(2).Text, 4) = "C253" Or Left(e.Row.Cells(2).Text, 4) = "C255" Or Left(e.Row.Cells(2).Text, 4) = "C6G0" Then
 
                     dltButton.CommandArgument = e.Row.RowIndex.ToString()
 

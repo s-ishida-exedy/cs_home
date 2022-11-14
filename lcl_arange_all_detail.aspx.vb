@@ -46,26 +46,26 @@ Partial Class cs_home
             If strcust = "C258" Then
                 If strMode = "0" Then
 
-                    Label1.Text = "C258 プロフォーマインボイス登録メール（EXL）"
+                    Label1.Text = "C258 CRF"
 
-                    TextBox2.Text = "EXL 内田L殿"
-                    TextBox2.Text = TextBox2.Text & vbLf
-                    TextBox2.Text = TextBox2.Text & "いつもお世話になります。"
-                    TextBox2.Text = TextBox2.Text & vbLf & vbLf
-                    TextBox2.Text = TextBox2.Text & strcust & "向けに" & stretd & "ETDでオーダーがございます。"
-                    TextBox2.Text = TextBox2.Text & vbLf & vbLf
-                    TextBox2.Text = TextBox2.Text & "IV-" & striv & "にて登録致しました。"
-                    TextBox2.Text = TextBox2.Text & vbLf & vbLf
-                    TextBox2.Text = TextBox2.Text & "お手数ですがプロフォーマーインボイス用の仮登録をお願いします。"
-                    TextBox2.Text = TextBox2.Text & vbLf
-                    TextBox2.Text = TextBox2.Text & "Bookingに影響しますのでなるべく早くご対応いただければと存じます。 "
-                    TextBox2.Text = TextBox2.Text & vbLf & vbLf
-                    TextBox2.Text = TextBox2.Text & "以上、宜しくお願いします。"
                     CheckBox1.Visible = False
+                    Button7.Visible = False
+                    TextBox2.Visible = False
                 Else
                 End If
 
-            ElseIf strcust = "C6G0" Then
+            ElseIf strcust = "C253" Then
+                If strMode = "0" Then
+
+                    Label1.Text = "C253 CRF"
+
+                    CheckBox1.Visible = False
+                    Button7.Visible = False
+                    TextBox2.Visible = False
+                Else
+                    End If
+
+                ElseIf strcust = "C6G0" Then
 
                 If strMode = "0" Then
 
