@@ -200,10 +200,10 @@
 
                     ctx.font = '14px sans-serif';
                     ctx.textAlign = 'center';
-                    ctx.fillRect(left - 15, top + 100, 31, 20);
+                    ctx.fillRect(left - 60, top + 30, 121, 20);
                     ctx.fillStyle = "White";
-                    ctx.fillText('当日', left, top + 110);
-                    ctx.save();
+                    ctx.fillText('当日:' + dt, left, top + 40);
+       
 
                     // 範囲を設定
                     var xscale = target.scales["x-axis-0"];
@@ -218,18 +218,36 @@
                     ctx.fillStyle = "rgba(230,0,51)";
                     ctx.fillRect(left, top, right, 1.5);
 
-                    ctx.save();
 
                     ctx.font = '14px sans-serif';
                     ctx.textAlign = 'center';
-                    ctx.fillRect(left +50, top-10, 80, 20);
+                    ctx.fillRect(left +10, top-165, 140, 20);
                     ctx.fillStyle = "White";
-                    ctx.fillText('収容可能数', left + 90, top );
-                    ctx.lineWidth = 100;
+                    ctx.fillText('収容可能数：' + dataarr5[1] + '千台', left + 80, top - 155);
 
                     ctx.save();
 
+                    // 範囲を設定
+                    var xscale = target.scales["x-axis-0"];
+                    var yscale = target.scales["y-axis-0"];
+                    var top2 = yscale.getPixelForValue(dataarr5[1]) - 1;  // 塗りつぶしを開始するラベル位置
+                    var bottom2 = yscale.getPixelForValue(dataarr5[1]) + 1; // 塗りつぶしを終了するラベル位置
 
+                    var left2 = xscale.getPixelForValue(Labelarr[0]);                      // 塗りつぶしの基点（上端）
+                    var right2 = xscale.getPixelForValue(Labelarr[Labelarr.length - 4]);                      // 塗りつぶしの基点（上端）
+
+                    // 塗りつぶす長方形の設定
+                    ctx.fillStyle = "rgba(230,0,51)";
+                    ctx.fillRect(left2 + 10, top2 - 165, 1.5, 165);
+                    ctx.save();
+
+
+                    ctx.font = '19px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillStyle = "rgba(230,0,51)";
+                    ctx.fillText('↓', left +10.5, top - 10);
+
+                    ctx.save();
 
                 }
 
@@ -380,9 +398,13 @@
 
                     ctx2.font = '14px sans-serif';
                     ctx2.textAlign = 'center';
-                    ctx2.fillRect(left - 15, top + 100, 31 , 20);
+                    ctx2.fillRect(left - 60, top + 30, 121 , 20);
                     ctx2.fillStyle = "White";
-                    ctx2.fillText('当日', left , top +110);
+                    ctx2.fillText('当日' + dt, left, top + 40);
+
+
+
+
 
                 }
 
