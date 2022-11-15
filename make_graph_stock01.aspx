@@ -196,6 +196,14 @@
                     // 塗りつぶす長方形の設定
                     ctx.fillStyle = "rgba(230,0,51)";
                     ctx.fillRect(left, top, right - left, yscale.height);
+                    ctx.save();
+
+                    ctx.font = '14px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillRect(left - 15, top + 100, 31, 20);
+                    ctx.fillStyle = "White";
+                    ctx.fillText('当日', left, top + 110);
+                    ctx.save();
 
                     // 範囲を設定
                     var xscale = target.scales["x-axis-0"];
@@ -209,6 +217,18 @@
                     // 塗りつぶす長方形の設定
                     ctx.fillStyle = "rgba(230,0,51)";
                     ctx.fillRect(left, top, right, 1.5);
+
+                    ctx.save();
+
+                    ctx.font = '14px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillRect(left +50, top-10, 80, 20);
+                    ctx.fillStyle = "White";
+                    ctx.fillText('収容可能数', left + 90, top );
+                    ctx.lineWidth = 100;
+
+                    ctx.save();
+
 
 
                 }
@@ -353,12 +373,21 @@
 
                     var top = yscale.top;                      // 塗りつぶしの基点（上端）
 
-
                     // 塗りつぶす長方形の設定
                     ctx2.fillStyle = "rgba(230,0,51)";
                     ctx2.fillRect(left, top, right - left, yscale.height);
+                    ctx2.save();
+
+                    ctx2.font = '14px sans-serif';
+                    ctx2.textAlign = 'center';
+                    ctx2.fillRect(left - 15, top + 100, 31 , 20);
+                    ctx2.fillStyle = "White";
+                    ctx2.fillText('当日', left , top +110);
 
                 }
+
+
+
 
                 var ctx2 = $("#myChart2").get(0).getContext("2d");
 
@@ -386,7 +415,8 @@
                         labels: Labelarr
                     },
                     plugins: [{
-                        beforeDraw: drawBackground2 // ★
+                        beforeDraw: drawBackground2, // ★
+
                     }],
 
                     options: {
