@@ -134,15 +134,17 @@
                      type: 'bar',
                      data: {
                          datasets: [{
+
                              label: 'AVER',
                              type: "line",
                              fill: false,
                              data: dataarr3,
                              pointRadius: 0,
                              pointHoverRadius: 0,
-                             //backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                             pointHitRadius: 10,
                              borderColor: 'rgb(255,0,0,0.5)',
                              cubicInterpolationMode: 'monotone',
+
                          }
 
                          , {
@@ -171,7 +173,7 @@
 
                          }],
                          labels: Labelarr
-
+                         
                      },
 
                      options: {
@@ -182,6 +184,7 @@
                              fontFamily: "sans-serif",
                              text: '受注台数'                   // タイトルのラベル
                          },
+
                          scales: {                          // 軸設定
                              xAxes: [                           // Ｘ軸設定
                                  {
@@ -214,6 +217,7 @@
 
 
                        },
+
 
                        gridLines: {                   // 補助線
                            color: "rgba(0, 0, 255, 0.2)", // 補助線の色

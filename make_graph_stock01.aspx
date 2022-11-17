@@ -216,7 +216,7 @@
 
                     // 塗りつぶす長方形の設定
                     ctx.fillStyle = "rgba(230,0,51)";
-                    ctx.fillRect(left, top, right, 1.5);
+                    ctx.fillRect(left, top, right+14, 1.5);
 
 
                     ctx.font = '14px sans-serif';
@@ -250,6 +250,7 @@
                     ctx.save();
 
                 }
+
 
                 var ctx = $("#myChart").get(0).getContext("2d");
 
@@ -306,7 +307,7 @@
                         labels: Labelarr
                     },
                     plugins: [{
-                        beforeDraw: drawBackground // ★
+                        afterDraw: drawBackground // ★
                     }],
                     options: {
                         legend: {
@@ -409,8 +410,6 @@
                 }
 
 
-
-
                 var ctx2 = $("#myChart2").get(0).getContext("2d");
 
 
@@ -437,7 +436,7 @@
                         labels: Labelarr
                     },
                     plugins: [{
-                        beforeDraw: drawBackground2, // ★
+                        afterDraw: drawBackground2 // ★
 
                     }],
 
@@ -452,6 +451,7 @@
                                 }
                             }
                         },
+
                         title: {
                             display: true, // タイトルを表示する
                             text: '概算溢れパレット枚数（実績と予測）', // タイトルのテキスト
@@ -518,6 +518,8 @@
 
                 var myPieChart = new Chart(ctx, config);
                 var myPieChart2 = new Chart(ctx2, config2);
+
+
             }
             function OnErrorCall_(response) {
                 window.alert('エラーです');
