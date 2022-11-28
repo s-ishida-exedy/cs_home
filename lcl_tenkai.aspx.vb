@@ -97,7 +97,7 @@ Partial Class cs_home
         e.Row.Cells(13).Width = 70
         e.Row.Cells(14).Width = 10
         e.Row.Cells(15).Width = 110
-        e.Row.Cells(16).Width = 350
+        e.Row.Cells(16).Width = 400
         e.Row.Cells(17).Width = 300
 
         e.Row.Cells(3).Visible = False

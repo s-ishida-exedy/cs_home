@@ -243,7 +243,7 @@
                       scaleLabel: {                  // 軸ラベル
                           display: true,                 // 表示の有無
 
-                          labelString: '充当パレット数',     // ラベル
+                          labelString: '充当率',     // ラベル
                           fontFamily: "sans-serif",
                           fontColor: "blue",             // 文字の色
                           fontFamily: "sans-serif",

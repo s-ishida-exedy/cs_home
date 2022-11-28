@@ -283,6 +283,17 @@
                      ctx.fillStyle = "rgba(230,0,51)";
                      ctx.fillRect(left, top, right - left, yscale.height);
 
+
+                     // 塗りつぶす長方形の設定
+                     ctx.fillStyle = "rgba(230,0,51)";
+                     ctx.fillRect(left, top, 18, 12);
+
+                     ctx.font = '10px sans-serif';
+                     ctx.textAlign = 'left';
+                     ctx.fillRect(left, top, right - left, yscale.height);
+                     ctx.fillStyle = "WHITE";
+                     ctx.fillText('1W', left, top + 6);
+
                      var xscale = target.scales["x-axis-0"];
                      var yscale = target.scales["y-axis-0"];
                      var left = xscale.getPixelForValue(gData[1]-3);  // 塗りつぶしを開始するラベル位置
@@ -292,6 +303,17 @@
                      // 塗りつぶす長方形の設定
                      ctx.fillStyle = "rgba(230,0,51)";
                      ctx.fillRect(left, top, right - left, yscale.height);
+
+                     // 塗りつぶす長方形の設定
+                     ctx.fillStyle = "rgba(230,0,51)";
+                     ctx.fillRect(left, top + 33, 18, 12);
+
+                     ctx.font = '10px sans-serif';
+                     ctx.textAlign = 'left';
+                     ctx.fillRect(left, top, right - left, yscale.height);
+                     ctx.fillStyle = "WHITE";
+                     ctx.fillText('2W', left, top + 39);
+
 
                      var xscale = target.scales["x-axis-0"];
                      var yscale = target.scales["y-axis-0"];
@@ -303,6 +325,16 @@
                      ctx.fillStyle = "rgba(230,0,51)";
                      ctx.fillRect(left, top, right - left, yscale.height);
 
+                     // 塗りつぶす長方形の設定
+                     ctx.fillStyle = "rgba(230,0,51)";
+                     ctx.fillRect(left, top, 18, 12);
+
+                     ctx.font = '10px sans-serif';
+                     ctx.textAlign = 'left';
+                     ctx.fillRect(left, top, right - left, yscale.height);
+                     ctx.fillStyle = "WHITE";
+                     ctx.fillText('3W', left, top + 6);
+
                      var xscale = target.scales["x-axis-0"];
                      var yscale = target.scales["y-axis-0"];
                      var left = xscale.getPixelForValue(gData[3]-3);  // 塗りつぶしを開始するラベル位置
@@ -312,6 +344,16 @@
                      // 塗りつぶす長方形の設定
                      ctx.fillStyle = "rgba(230,0,51)";
                      ctx.fillRect(left, top, right - left, yscale.height);
+
+                     // 塗りつぶす長方形の設定
+                     ctx.fillStyle = "rgba(230,0,51)";
+                     ctx.fillRect(left, top + 33, 18, 12);
+
+                     ctx.font = '10px sans-serif';
+                     ctx.textAlign = 'left';
+                     ctx.fillRect(left, top, right - left, yscale.height);
+                     ctx.fillStyle = "WHITE";
+                     ctx.fillText('4W', left, top + 39);
 
                      var xscale = target.scales["x-axis-0"];
                      var yscale = target.scales["y-axis-0"];
@@ -323,8 +365,52 @@
                      ctx.fillStyle =  "rgba(230,0,51)";
                      ctx.fillRect(left, top, right - left, yscale.height);
 
+                     // 塗りつぶす長方形の設定
+                     ctx.fillStyle = "rgba(230,0,51)";
+                     ctx.fillRect(left, top, 18, 12);
+
+                     ctx.font = '10px sans-serif';
+                     ctx.textAlign = 'left';
+                     ctx.fillRect(left, top, right - left, yscale.height);
+                     ctx.fillStyle = "WHITE";
+                     ctx.fillText('5W', left, top + 6);
+
+
                  }
 
+                    var today = new Date();
+                    var strw = Math.floor((today.getDate() - today.getDay() + 12) / 7)
+
+                     // 背景色                
+                 function drawBackgroundh(target) {
+                     // 範囲を設定
+                     var xscale = target.scales["x-axis-0"];
+                     var yscale = target.scales["y-axis-0"];
+
+                     if (strw == '1') {
+                         var left = xscale.getPixelForValue(0);  // 塗りつぶしを開始するラベル位置
+                         var right = xscale.getPixelForValue(gData[0]); // 塗りつぶしを終了するラベル位置
+                     } else if (strw == '2') {
+                         var left = xscale.getPixelForValue(gData[0]);  // 塗りつぶしを開始するラベル位置
+                         var right = xscale.getPixelForValue(gData[1]); // 塗りつぶしを終了するラベル位置
+                     } else if (strw == '3') {
+                         var left = xscale.getPixelForValue(gData[1]);  // 塗りつぶしを開始するラベル位置
+                         var right = xscale.getPixelForValue(gData[2]); // 塗りつぶしを終了するラベル位置
+                     } else if (strw == '4') {
+                         var left = xscale.getPixelForValue(gData[2]);  // 塗りつぶしを開始するラベル位置
+                         var right = xscale.getPixelForValue(gData[3]); // 塗りつぶしを終了するラベル位置
+                     } else if (strw == '5') {
+                         var left = xscale.getPixelForValue(gData[3]);  // 塗りつぶしを開始するラベル位置
+                         var right = xscale.getPixelForValue(gData[4]); // 塗りつぶしを終了するラベル位置
+                     }
+     
+                     var top = yscale.top;                      // 塗りつぶしの基点（上端）
+
+                     // 塗りつぶす長方形の設定
+                     ctx.fillStyle = "rgba(0,0,0,0.5)";
+                     ctx.fillRect(left, top, right - left, yscale.height);
+
+                 }
 
                  var ctx = $("#myChart").get(0).getContext("2d");
                  var config = {
@@ -380,7 +466,8 @@
                          labels: [lstr]
                      },
                      plugins: [{
-                         beforeDraw: drawBackground // ★
+                         afterDraw: drawBackground, // ★
+                         beforeDraw: drawBackgroundh // ★
                      }],
                      options: {
                          responsive: true,
@@ -414,7 +501,8 @@
                                      ticks: {                      // 目盛り
                                          //fontColor: "red",             // 目盛りの色
                                          fontSize: 14,                  // フォントサイズ
-                                         max: Number(gData[15])                       // 最大値
+                                         max: Number(gData[15]),                       // 最大値
+                                         stepSize: 100,                   // 軸間隔
                                      }
                                  }
                              ],
@@ -462,6 +550,16 @@
                      ctx2.fillStyle = "rgba(230,0,51)";
                      ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
 
+                     // 塗りつぶす長方形の設定
+                     ctx2.fillStyle = "rgba(230,0,51)";
+                     ctx2.fillRect(left2, top2, 18,12);
+
+                     ctx2.font = '10px sans-serif';
+                     ctx2.textAlign = 'left';
+                     ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
+                     ctx2.fillStyle = "WHITE";
+                     ctx2.fillText('1W', left2, top2+10);
+
                      var xscale2 = target2.scales["x-axis-0"];
                      var yscale2 = target2.scales["y-axis-0"];
                      var left2 = xscale2.getPixelForValue(gData[5]-3);  // 塗りつぶしを開始するラベル位置
@@ -471,6 +569,16 @@
                      // 塗りつぶす長方形の設定
                      ctx2.fillStyle = "rgba(230,0,51)";
                      ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
+
+                     // 塗りつぶす長方形の設定
+                     ctx2.fillStyle = "rgba(230,0,51)";
+                     ctx2.fillRect(left2, top2 + 38, 18, 12);
+
+                     ctx2.font = '10px sans-serif';
+                     ctx2.textAlign = 'left';
+                     ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
+                     ctx2.fillStyle = "WHITE";
+                     ctx2.fillText('2W', left2, top2 + 48);
 
                      var xscale2 = target2.scales["x-axis-0"];
                      var yscale2 = target2.scales["y-axis-0"];
@@ -482,6 +590,16 @@
                      ctx2.fillStyle = "rgba(230,0,51)";
                      ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
 
+                     // 塗りつぶす長方形の設定
+                     ctx2.fillStyle = "rgba(230,0,51)";
+                     ctx2.fillRect(left2, top2, 18, 12);
+
+                     ctx2.font = '10px sans-serif';
+                     ctx2.textAlign = 'left';
+                     ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
+                     ctx2.fillStyle = "WHITE";
+                     ctx2.fillText('3W', left2, top2 + 10);
+
                      var xscale2 = target2.scales["x-axis-0"];
                      var yscale2 = target2.scales["y-axis-0"];
                      var left2 = xscale2.getPixelForValue(gData[7]-3);  // 塗りつぶしを開始するラベル位置
@@ -492,6 +610,16 @@
                      ctx2.fillStyle = "rgba(230,0,51)";
                      ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
 
+                     // 塗りつぶす長方形の設定
+                     ctx2.fillStyle = "rgba(230,0,51)";
+                     ctx2.fillRect(left2, top2 + 38, 18, 12);
+
+                     ctx2.font = '10px sans-serif';
+                     ctx2.textAlign = 'left';
+                     ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
+                     ctx2.fillStyle = "WHITE";
+                     ctx2.fillText('4W', left2, top2 + 48);
+
                      var xscale2 = target2.scales["x-axis-0"];
                      var yscale2 = target2.scales["y-axis-0"];
                      var left2 = xscale2.getPixelForValue(gData[13]-3);  // 塗りつぶしを開始するラベル位置
@@ -500,6 +628,52 @@
 
                      // 塗りつぶす長方形の設定
                      ctx2.fillStyle = "rgba(230,0,51)";
+                     ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
+
+                     // 塗りつぶす長方形の設定
+                     ctx2.fillStyle = "rgba(230,0,51)";
+                     ctx2.fillRect(left2, top2, 18, 12);
+
+                     ctx2.font = '10px sans-serif';
+                     ctx2.textAlign = 'left';
+                     ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
+                     ctx2.fillStyle = "WHITE";
+                     ctx2.fillText('5W', left2, top2 + 10);
+
+                 }
+
+
+
+                 var today = new Date();
+                 var strw = Math.floor((today.getDate() - today.getDay() + 12) / 7)
+
+                     // 背景色                
+                 function drawBackground2h(target) {
+                     // 範囲を設定
+                     var xscale2 = target.scales["x-axis-0"];
+                     var yscale2 = target.scales["y-axis-0"];
+
+                     if (strw == '1') {
+                         var left2 = xscale2.getPixelForValue(0);  // 塗りつぶしを開始するラベル位置
+                         var right2 = xscale2.getPixelForValue(gData[4]); // 塗りつぶしを終了するラベル位置
+                     } else if (strw == '2') {
+                         var left2 = xscale2.getPixelForValue(gData[4]);  // 塗りつぶしを開始するラベル位置
+                         var right2 = xscale2.getPixelForValue(gData[5]); // 塗りつぶしを終了するラベル位置
+                     } else if (strw == '3') {
+                         var left2 = xscale2.getPixelForValue(gData[5]);  // 塗りつぶしを開始するラベル位置
+                         var right2 = xscale2.getPixelForValue(gData[6]); // 塗りつぶしを終了するラベル位置
+                     } else if (strw == '4') {
+                         var left2 = xscale2.getPixelForValue(gData[6]);  // 塗りつぶしを開始するラベル位置
+                         var right2 = xscale2.getPixelForValue(gData[7]); // 塗りつぶしを終了するラベル位置
+                     } else if (strw == '5') {
+                         var left2 = xscale2.getPixelForValue(gData[7]);  // 塗りつぶしを開始するラベル位置
+                         var right2 = xscale2.getPixelForValue(gData[13]); // 塗りつぶしを終了するラベル位置
+                     }
+
+                     var top2 = yscale2.top;                      // 塗りつぶしの基点（上端）
+
+                     // 塗りつぶす長方形の設定
+                     ctx2.fillStyle = "rgba(0,0,0,0.5)";
                      ctx2.fillRect(left2, top2, right2 - left2, yscale2.height);
 
                  }
@@ -558,7 +732,8 @@
                          labels: [lstr2]
                      },
                      plugins: [{
-                         beforeDraw: drawBackground2 // ★
+                         afterDraw: drawBackground2, // ★
+                         beforeDraw: drawBackground2h // ★
                      }],
                      options: {
                          responsive: true,
@@ -587,7 +762,8 @@
                                      ticks: {                      // 目盛り
                                          //fontColor: "red",             // 目盛りの色
                                          fontSize: 14,                  // フォントサイズ
-                                         max: Number(gData[15])                       // 最大値
+                                         max: Number(gData[15]),                       // 最大値
+                                         stepSize: 100,                   // 軸間隔
                                      }
                                  }
                              ],
@@ -634,6 +810,16 @@
                      ctx3.fillStyle = "rgba(230,0,51)";
                      ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
 
+                     // 塗りつぶす長方形の設定
+                     ctx3.fillStyle = "rgba(230,0,51)";
+                     ctx3.fillRect(left3, top3, 18, 12);
+
+                     ctx3.font = '10px sans-serif';
+                     ctx3.textAlign = 'left';
+                     ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
+                     ctx3.fillStyle = "WHITE";
+                     ctx3.fillText('1W', left3, top3 + 10);
+
                      var xscale3 = target3.scales["x-axis-0"];
                      var yscale3 = target3.scales["y-axis-0"];
                      var left3 = xscale3.getPixelForValue(gData[9]-3);  // 塗りつぶしを開始するラベル位置
@@ -643,6 +829,18 @@
                      // 塗りつぶす長方形の設定
                      ctx3.fillStyle = "rgba(230,0,51)";
                      ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
+
+
+
+                     // 塗りつぶす長方形の設定
+                     ctx3.fillStyle = "rgba(230,0,51)";
+                     ctx3.fillRect(left3, top3 + 38, 18, 12);
+
+                     ctx3.font = '10px sans-serif';
+                     ctx3.textAlign = 'left';
+                     ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
+                     ctx3.fillStyle = "WHITE";
+                     ctx3.fillText('2W', left3, top3 + 48);
 
                      var xscale3 = target3.scales["x-axis-0"];
                      var yscale3 = target3.scales["y-axis-0"];
@@ -654,6 +852,16 @@
                      ctx3.fillStyle = "rgba(230,0,51)";
                      ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
 
+                     // 塗りつぶす長方形の設定
+                     ctx3.fillStyle = "rgba(230,0,51)";
+                     ctx3.fillRect(left3, top3, 18, 12);
+
+                     ctx3.font = '10px sans-serif';
+                     ctx3.textAlign = 'left';
+                     ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
+                     ctx3.fillStyle = "WHITE";
+                     ctx3.fillText('3W', left3, top3 + 10);
+
                      var xscale3 = target3.scales["x-axis-0"];
                      var yscale3 = target3.scales["y-axis-0"];
                      var left3 = xscale3.getPixelForValue(gData[11]-3);  // 塗りつぶしを開始するラベル位置
@@ -664,6 +872,16 @@
                      ctx3.fillStyle = "rgba(230,0,51)";
                      ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
 
+                     // 塗りつぶす長方形の設定
+                     ctx3.fillStyle = "rgba(230,0,51)";
+                     ctx3.fillRect(left3, top3 + 38, 18, 12);
+
+                     ctx3.font = '10px sans-serif';
+                     ctx3.textAlign = 'left';
+                     ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
+                     ctx3.fillStyle = "WHITE";
+                     ctx3.fillText('4W', left3, top3 + 48);
+
                      var xscale3 = target3.scales["x-axis-0"];
                      var yscale3 = target3.scales["y-axis-0"];
                      var left3 = xscale3.getPixelForValue(gData[14]-3);  // 塗りつぶしを開始するラベル位置
@@ -672,6 +890,50 @@
 
                      // 塗りつぶす長方形の設定
                      ctx3.fillStyle = "rgba(230,0,51)";
+                     ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
+
+                     // 塗りつぶす長方形の設定
+                     ctx3.fillStyle = "rgba(230,0,51)";
+                     ctx3.fillRect(left3, top3, 18, 12);
+
+                     ctx3.font = '10px sans-serif';
+                     ctx3.textAlign = 'left';
+                     ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
+                     ctx3.fillStyle = "WHITE";
+                     ctx3.fillText('5W', left3, top3 + 10);
+                 }
+
+
+                 var today = new Date();
+                 var strw = Math.floor((today.getDate() - today.getDay() + 12) / 7)
+
+                     // 背景色                
+                 function drawBackground3h(target) {
+                     // 範囲を設定
+                     var xscale3 = target.scales["x-axis-0"];
+                     var yscale3 = target.scales["y-axis-0"];
+
+                     if (strw == '1') {
+                         var left3 = xscale3.getPixelForValue(0);  // 塗りつぶしを開始するラベル位置
+                         var right3 = xscale3.getPixelForValue(gData[8]); // 塗りつぶしを終了するラベル位置
+                     } else if (strw == '2') {
+                         var left3 = xscale3.getPixelForValue(gData[8]);  // 塗りつぶしを開始するラベル位置
+                         var right3 = xscale3.getPixelForValue(gData[9]); // 塗りつぶしを終了するラベル位置
+                     } else if (strw == '3') {
+                         var left3 = xscale3.getPixelForValue(gData[9]);  // 塗りつぶしを開始するラベル位置
+                         var right3 = xscale3.getPixelForValue(gData[10]); // 塗りつぶしを終了するラベル位置
+                     } else if (strw == '4') {
+                         var left3 = xscale3.getPixelForValue(gData[10]);  // 塗りつぶしを開始するラベル位置
+                         var right3 = xscale3.getPixelForValue(gData[11]); // 塗りつぶしを終了するラベル位置
+                     } else if (strw == '5') {
+                         var left3 = xscale3.getPixelForValue(gData[11]);  // 塗りつぶしを開始するラベル位置
+                         var right3 = xscale3.getPixelForValue(gData[14]); // 塗りつぶしを終了するラベル位置
+                     }
+
+                     var top3 = yscale3.top;                      // 塗りつぶしの基点（上端）
+
+                     // 塗りつぶす長方形の設定
+                     ctx3.fillStyle = "rgba(0,0,0,0.5)";
                      ctx3.fillRect(left3, top3, right3 - left3, yscale3.height);
 
                  }
@@ -730,7 +992,8 @@
                          labels: [lstr3]
                      },
                      plugins: [{
-                         beforeDraw: drawBackground3 // ★
+                         afterDraw: drawBackground3, // ★
+                         beforeDraw: drawBackground3h // ★
                      }],
                      options: {
                          responsive: true,
@@ -759,7 +1022,8 @@
                                      ticks: {                      // 目盛り
                                          //fontColor: "red",             // 目盛りの色
                                          fontSize: 14,                  // フォントサイズ
-                                         max: Number(gData[15])                       // 最大値
+                                         max: Number(gData[15]),                       // 最大値
+                                         stepSize: 100,                   // 軸間隔
                                      }
                                  }
                              ],
@@ -1161,10 +1425,11 @@
 
     <table >
         <tr>
-            <td style="width:650px;Font-Size:25px;height:20px;" >
+            <td style="width:620px;Font-Size:25px;height:20px;" >
                 <canvas id="myChartZ2" width="160" height="70"></canvas>
+
             </td>
-            <td style="width:650px;Font-Size:25px;height:20px;" >
+            <td style="width:620px;Font-Size:25px;height:20px;" >
                 <canvas id="myChartZ" width="160" height="70"></canvas>
             </td>
         </tr>

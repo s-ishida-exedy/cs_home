@@ -317,6 +317,7 @@
             <td style="width:300px;" >
                 <asp:Button class="button01"  ID="Button1" runat="server" Text="更新" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
                 <asp:Button class="button01"  ID="Button4" runat="server" Text="エクセル出力" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
+                <asp:Button class="button01"  ID="Button3" runat="server" Text="手動登録" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" /> 
                 <p></p>
             </td>
             <td style="width:150px;" >
@@ -385,6 +386,7 @@
         <asp:BoundField DataField="RECEIVED_PORT" HeaderText="荷受" SortExpression="RECEIVED_PORT" ReadOnly="true" ></asp:BoundField>
         <asp:BoundField DataField="SHIP_PLACE" HeaderText="出荷拠点" SortExpression="SHIP_PLACE" ReadOnly="true" ></asp:BoundField>
         <asp:BoundField DataField="CHECKFLG" HeaderText="確認" SortExpression="CHECKFLG" ReadOnly="true" ></asp:BoundField>
+        <asp:BoundField DataField="FLG01" HeaderText="ID" SortExpression="FLG01" ReadOnly="true" ></asp:BoundField>
 <%--        <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" ReadOnly="true" ></asp:BoundField>
         <asp:BoundField DataField="REV_ETD" HeaderText="REV_ETD" SortExpression="REV_ETD" ReadOnly="true" ></asp:BoundField>--%>
 

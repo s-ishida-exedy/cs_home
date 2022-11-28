@@ -377,7 +377,7 @@
                 <asp:Button ID="Button2"  CssClass ="btn00" runat="server" Text="解除" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
             </td>
             <td style="width:500px; font-size:10px;" >
-                <asp:Label ID="Label1" runat="server" Text="１．ＬＳ７、９（限定・試作）が同梱されている案件にチェックを入れる。"></asp:Label><br>
+                <asp:Label ID="Label1" runat="server" Text="１．ＬＳ７、９（限定・試作）・ＤＮＸ混載出荷　が同梱されている案件にチェックを入れる。"></asp:Label><br>
                 <asp:Label ID="Label2" runat="server" Text="２．登録ボタンを押す。"></asp:Label><br>
             </td>
         </tr>
@@ -489,7 +489,7 @@
 
     <asp:Panel ID="Panel4" runat="server"  Font-Size="12px">
 
-    <asp:Label ID="Label19" runat="server" Text="＜過去履歴＞"></asp:Label>
+    <asp:Label ID="Label19" runat="server" Text="＜過去履歴＞※EDTが7日前までの案件を表示"></asp:Label>
 
     <div class="wrapper">
     <table class="sticky">
@@ -528,7 +528,7 @@
 
     </asp:Panel>
 
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_ANKEN_HISTORY] ORDER BY SHIP_TYPE "></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_ANKEN_HISTORY] WHERE ETD > GETDATE()-7 ORDER BY SHIP_TYPE "></asp:SqlDataSource>
 
     </div>
 

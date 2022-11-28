@@ -243,7 +243,7 @@
 
         <tbody>
 
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" hight = "500px" Width = "1300px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" hight = "500px" Width = "1500px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
 
         <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
 
@@ -282,7 +282,7 @@
 
 
         <asp:BoundField DataField="OTHERS01" HeaderText="備考" SortExpression="OTHERS01"  >
-        <HeaderStyle Width="120px" />
+        <HeaderStyle Width="110px" />
         </asp:BoundField>
         <asp:BoundField DataField="CUST" HeaderText="客先" SortExpression="CUST" >
         <HeaderStyle Width="40px" />
@@ -291,32 +291,42 @@
         <HeaderStyle Width="40px" />
         </asp:BoundField>
         <asp:BoundField DataField="BOOKING_NO" HeaderText="BKG" SortExpression="BOOKING_NO" >
-        <HeaderStyle Width="100px" />
+        <HeaderStyle Width="80px" />
         </asp:BoundField>
         <asp:BoundField DataField="OFFICIAL_QUOT" HeaderText="TATENE" SortExpression="OFFICIAL_QUOT"/>
         <asp:BoundField DataField="CUT_DATE" HeaderText="カット日" SortExpression="CUT_DATE" >
-        <HeaderStyle Width="80px" />
+        <HeaderStyle Width="60px" />
         </asp:BoundField>
         <asp:BoundField DataField="ETD" HeaderText="出港日" SortExpression="ETD" >
-        <HeaderStyle Width="80px" />
+        <HeaderStyle Width="60px" />
         </asp:BoundField>
-        <asp:BoundField DataField="ETA" HeaderText="到着日" SortExpression="ETA" />
-        <asp:BoundField DataField="LCL_SIZE" HeaderText="M3" SortExpression="LCL_SIZE" />
-        <asp:BoundField DataField="WEIGHT" HeaderText="重量" SortExpression="WEIGHT" />
-        <asp:BoundField DataField="QTY" HeaderText="荷量" SortExpression="QTY" />
+        <asp:BoundField DataField="ETA" HeaderText="到着日" SortExpression="ETA" >
+        <HeaderStyle Width="60px" />
+        </asp:BoundField>
+        <asp:BoundField DataField="LCL_SIZE" HeaderText="M3" SortExpression="LCL_SIZE" >
+        <HeaderStyle Width="0px" />
+        </asp:BoundField>
+        <asp:BoundField DataField="WEIGHT" HeaderText="重量" SortExpression="WEIGHT" >
+        <HeaderStyle Width="0px" />
+        </asp:BoundField>
+        <asp:BoundField DataField="QTY" HeaderText="荷量" SortExpression="QTY" >
+        <HeaderStyle Width="0px" />
+        </asp:BoundField>
         <asp:BoundField DataField="PICKUP01" HeaderText="引取希望日" SortExpression="PICKUP01" >
-        <HeaderStyle Width="100px" />
+        <HeaderStyle Width="70px" />
         </asp:BoundField>
         <asp:BoundField DataField="PICKUP02" HeaderText="" SortExpression="PICKUP02" >
         <HeaderStyle Width="20px" />
         </asp:BoundField>
         <asp:BoundField DataField="MOVEIN01" HeaderText="搬入希望日" SortExpression="MOVEIN01" >
-        <HeaderStyle Width="100px" />
+        <HeaderStyle Width="70px" />
         </asp:BoundField>
         <asp:BoundField DataField="MOVEIN02" HeaderText="" SortExpression="MOVEIN02" >
         <HeaderStyle Width="20px" />
         </asp:BoundField>
-        <asp:BoundField DataField="PICKINPLACE" HeaderText="搬入先" SortExpression="PICKINPLACE" />
+        <asp:BoundField DataField="PICKINPLACE" HeaderText="搬入先" SortExpression="PICKINPLACE" >
+        <HeaderStyle Width="400px" />
+        </asp:BoundField>
         <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
 
         </Columns>

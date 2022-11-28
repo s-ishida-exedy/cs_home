@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="shippingmemo_detail.aspx.vb" Inherits="cs_home" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="shippingmemo_detail02.aspx.vb" Inherits="cs_home" %>
 
 <!DOCTYPE html>
 
@@ -136,6 +136,39 @@
         });
     });
 </script>
+
+<%--<script>
+<!--
+    var textbox = document.getElementById('TextBox2');
+
+  // 入力フォーカスを得たときの処理
+  textbox.onfocus = function()
+  {
+      if( this.value == this.defaultValue )
+      {
+          this.value = '';
+          this.style.color = '';
+      }
+  }
+
+  // 入力フォーカスを失ったときの処理
+  textbox.onblur = function()
+  {
+      if( this.value == '' )
+      {
+          this.value = this.defaultValue;
+          this.style.color = 'gray';
+      }
+  }
+
+  // 透かし文字をdefaultValueプロパティで保持する
+  textbox.defaultValue = textbox.value;
+  textbox.value = '';
+
+  textbox.onblur();
+//-->
+</script>--%>
+
 </head>
 <body class="c2">
 <form id="form1" runat="server" autocomplete="off">
@@ -154,7 +187,6 @@
 
 
 
-                <asp:Label ID="Label3" runat="server" Text="Label" Class="err"></asp:Label>
             </td>
             <td class="third-cell">
                 <a href="./shippingmemo.aspx">一覧に戻る</a>
@@ -166,71 +198,23 @@
             <tr>
                 <th></th>
                 <td>
-                <asp:Button ID="Button7" runat="server" Text="更　新" style="width:120px" Font-Size="Small" />
-                </td>
-                <th>客先コード</th>
-                <td>
-                    <asp:Label ID="Label1" runat="server" Text="Label" style="width:195px"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <th>IVNO</th>
-                <td>
-                    <asp:Label ID="Label2" runat="server" Text="Label" style="width:195px"></asp:Label>
-                </td>
-                <th>BKGNO</th>
-                <td>
-                    <asp:Label ID="Label4" runat="server" Text="Label" style="width:195px"></asp:Label>
-                </td>
-             </tr>
-                 <tr>
-                <th>修正後ETD</th>
-                <td>
-                    <asp:TextBox ID="TextBox2" runat="server" class="txtb"></asp:TextBox>
-                </td>
-                <th>修正後ETA</th>
-                <td>
-                    <asp:TextBox ID="TextBox3" runat="server" class="txtb"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <th>BL回収日</th>
-                <td>
-                    <asp:TextBox ID="TextBox4" runat="server" class="txtb"></asp:TextBox>
-                </td>
-                <th>BL日付</th>
-                <td>
-                   <asp:TextBox ID="TextBox5" runat="server" class="txtb"></asp:TextBox>
-                </td>
-             </tr>
-             <tr>
-                <th>売上計上日</th>
-                <td>
-                   <asp:TextBox ID="TextBox6" runat="server" class="txtb"></asp:TextBox>
-                </td>
-                <th>ステータス</th>
-                <td>
-                    <asp:DropDownList ID="DropDownList2" runat="server" class="cmb">
-                        <asp:ListItem></asp:ListItem>
-                        <asp:ListItem>不要</asp:ListItem>
-                        <asp:ListItem>出港済み</asp:ListItem>
-                        <asp:ListItem>月またぎ</asp:ListItem>
-                        <asp:ListItem>月またぎP</asp:ListItem>
-                        <asp:ListItem>月またぎ前月</asp:ListItem>
-                    </asp:DropDownList>
-                </td>
-             </tr>
-            <tr>
-                <th>ID</th>
-                <td>
-                    <asp:Label ID="Label5" runat="server" Text="Label" style="width:195px"></asp:Label>
+                <asp:Button ID="Button7" runat="server" Text="追　加" style="width:120px" Font-Size="Small" />
                 </td>
                 <th></th>
                 <td>
-                <asp:Button ID="Button2" runat="server" Text="削　除" style="width:120px" Font-Size="Small" />
+                    <asp:Label ID="Label5" runat="server" Text="最新のIVNOを取得し登録" style="width:195px"></asp:Label>
                 </td>
             </tr>
-
+                 <tr>
+                <th>IVNO</th>
+                <td>
+                    <asp:TextBox ID="TextBox2" runat="server" placeholder="IVNOを４桁で入力してください。" class="txtb" MaxLength="4" ></asp:TextBox>
+                </td>
+                <th>BKGNO</th>
+                <td>
+                    <asp:TextBox ID="TextBox3" runat="server" placeholder="BOOKING NOを入力してください。" class="txtb"></asp:TextBox>
+                </td>
+            </tr>
         </table>
 
 
