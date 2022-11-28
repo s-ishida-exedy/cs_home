@@ -20,7 +20,6 @@
             </li>
             <li data-id='["home","make_graph_sintyoku.aspx"]'><a href="#">出荷進捗</a></li>
             <li data-id='["","http://kbhwpm01/exp/display/loading_efficiency_and_co2_emission.htm"]'><a href="#">本社_CO2排出量・積載率</a></li>
-            <li data-id='["","http://kbhwpm01/exp/display/marintraffic.html"]'><a href="#">マリントラフィック</a></li>
             <li data-id='["aaa",""]'>
                 <a href="#" class="init-right">未納</a>
                 <ul class="menu__third-level">
