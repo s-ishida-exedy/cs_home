@@ -509,6 +509,11 @@ Partial Class cs_home
 
         '結果を取り出す 
         While (dataread.Read())
+            If dataread("ALLOUTSTAMP") Is DBNull.Value Then
+                Label1.Text = "一括出力されていません。処理を中止します。"
+                Return
+            End If
+
             strCneeNM = Trim(dataread("CONSIGNEENAME"))
             strCneeAD = StrConv(Replace(Replace(Trim(dataread("CONSIGNEEADDRESS")), vbCrLf, " "), "　", " "), VbStrConv.Narrow)
             strBLDATE = Trim(dataread("BLDATE2"))
