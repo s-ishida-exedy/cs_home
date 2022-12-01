@@ -192,6 +192,7 @@
                 <br />
                 <asp:Button ID="Button1" runat="server" Text=" 絞込 " Font-Size="Small" Width ="80" />
                 <asp:Button ID="Button2" runat="server" Text=" ﾘｾｯﾄ " Font-Size="Small" Width ="80" />
+                <asp:Button class="button01"  ID="Button4" runat="server" Text="ｴｸｾﾙ出力" Width="80" AutoPostBack="True" Font-Size="Small" /> 
             </td>
             <td class="third-cell">
                 <asp:Label ID="Label2" runat="server" Text="Labe2" ></asp:Label>
