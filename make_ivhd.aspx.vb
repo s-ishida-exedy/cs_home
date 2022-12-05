@@ -1800,7 +1800,7 @@ Partial Class yuusen
                 strSQL = strSQL & "SELECT CUST_CD02,ETD,'','',LOADING_PORT,DISCHARGING_PORT,PLACE_OF_DELIVERY,PLACE_OF_RECEIPT,PLACE_OF_DELIVERY "
 
                 strSQL = strSQL & ",CUT_DATE,ETA,ETD,CUT_DATE,'','','',VOYAGE_NO,BOOK_TO,'',Forwarder,'' "
-                strSQL = strSQL & ",BOOKING_NO,VESSEL_NAME,'','',PLACE_OF_DELIVERY,'','','','','','','TWENTY_FEET',FOURTY_FEET,LCL_QTY "
+                strSQL = strSQL & ",BOOKING_NO,VESSEL_NAME,'','',PLACE_OF_DELIVERY,'','','','','','',TWENTY_FEET,FOURTY_FEET,LCL_QTY "
                 strSQL = strSQL & "FROM T_BOOKING WHERE STATUS Not In('キャンセル','ペンディング') "
                 strSQL = strSQL & "AND INVOICE_NO ='' "
                 strSQL = strSQL & "AND BOOKING_NO <>'' "
@@ -1815,7 +1815,7 @@ Partial Class yuusen
                 strSQL = ""
                 strSQL = strSQL & "SELECT CUST_CD02,ETD,'','',LOADING_PORT,DISCHARGING_PORT,PLACE_OF_DELIVERY,PLACE_OF_RECEIPT,PLACE_OF_DELIVERY "
                 strSQL = strSQL & ",CUT_DATE,ETA,ETD,CUT_DATE,'','','',VOYAGE_NO,BOOK_TO,'',Forwarder,'' "
-                strSQL = strSQL & ",BOOKING_NO,VESSEL_NAME,'','',PLACE_OF_DELIVERY,'','','','','','','TWENTY_FEET',FOURTY_FEET,LCL_QTY "
+                strSQL = strSQL & ",BOOKING_NO,VESSEL_NAME,'','',PLACE_OF_DELIVERY,'','','','','','',TWENTY_FEET,FOURTY_FEET,LCL_QTY "
                 strSQL = strSQL & "FROM T_BOOKING WHERE STATUS Not In('キャンセル') "
                 'strSQL = strSQL & "AND LEFT(CUST_CD,4) IN (" & "'C255','C258'" & ") "
                 strSQL = strSQL & "AND LEFT(CUST_CD,4) IN (" & "'C255'" & ") "
