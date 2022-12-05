@@ -142,16 +142,19 @@
             //window.alert(dt);
             
 
-            $.ajax({
-                type: "POST",
-                //url: "getTrafficSourceData",
-                url: "./make_graph_stock01.aspx/getTrafficSourceData",
-                //data: jsonData,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess_,
-                error: OnErrorCall_
-            });
+                $.ajax({
+                    type: "POST",
+                    //url: "getTrafficSourceData",
+                    url: "./make_graph_stock01.aspx/getTrafficSourceData",
+                    //data: jsonData,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: OnSuccess_,
+                    error: OnErrorCall_
+                });
+
+
+
 
             function OnSuccess_(response) {
                 var aData = response.d;
@@ -248,6 +251,32 @@
                     ctx.fillText('↓', left +10.5, top - 10);
 
                     ctx.save();
+
+
+
+
+
+                    //// 範囲を設定
+                    //var xscale = target.scales["x-axis-0"];
+                    //var yscale = target.scales["y-axis-0"];
+                    //var top = 150;  // 塗りつぶしを開始するラベル位置
+                    //var bottom = 500; // 塗りつぶしを終了するラベル位置
+
+                    //var left = 150;                      // 塗りつぶしの基点（上端）
+                    //var right = 500;                      // 塗りつぶしの基点（上端）
+
+                    //// 塗りつぶす長方形の設定
+                    //ctx.font = '25px sans-serif';
+                    //ctx.textAlign = 'center';
+                    //ctx.fillRect(left-40 , top-20 , 140, 40);
+                    //ctx.fillStyle = "White";
+                    //ctx.fillText('判定：', left , top);
+
+                    //ctx.save();
+
+
+
+
 
                 }
 
