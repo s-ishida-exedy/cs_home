@@ -115,6 +115,7 @@
                     <li data-id='["home","register_lcl_address.aspx"]'><a href="#">LCL搬入先マスタ</a></li>
                     <li data-id='["home","m_epa_cst_add.aspx"]'><a href="#">ＥＰＡ用客先住所マスタ</a></li>
                     <li data-id='["home","m_epa_itm.aspx"]'><a href="#">ＥＰＡ対象品目マスタ</a></li>
+                    <li data-id='["home","m_mail00.aspx"]'><a href="#">ＭＡＩＬ送信先ﾏｽﾀ（ＴＥＳＴ）</a></li>
                 </ul>
             </li>
         </ul>
