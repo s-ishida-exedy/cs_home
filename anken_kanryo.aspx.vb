@@ -3942,9 +3942,12 @@ Partial Class yuusen
 
             del = """" ' 半角スペース
 
-            strCNEESIN01 = Left(strCNEESIN01, InStr(strCNEESIN01, del) - 1)
-            strFINALDN01 = Left(strFINALDN01, InStr(strFINALDN01, del) - 1)
+            If InStr(strCNEESIN01, del) > 0 Then
 
+                strCNEESIN01 = Left(strCNEESIN01, InStr(strCNEESIN01, del) - 1)
+                strFINALDN01 = Left(strFINALDN01, InStr(strFINALDN01, del) - 1)
+
+            End If
 
         End While
 
