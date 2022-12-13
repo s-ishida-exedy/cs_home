@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>ポータルサイト(ﾒｰﾙﾏｽﾀ)</title>
+<title>ポータルサイト(メール送付先ﾏｽﾀ)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -135,6 +135,20 @@
         });
     });
 </script>
+
+<script type="text/javascript">
+      function LinkClick2() {
+          var url = 'm_work00.aspx?q='
+          var result = confirm('別ウインドウでメールアドレス管理ページを開きます');
+
+          if (result) {
+              window.open(url, null);
+          }
+          else {
+          }
+      }
+
+    </script>
 </head>
 <body class="c2">
 <form id="form1" runat="server" autocomplete="off">
@@ -149,16 +163,16 @@
             <td class="first-cell">
                 <h2>メール送付先ﾏｽﾀ</h2> 
             </td>
-            <td class="second-cell">
-<%--                <asp:Label ID="Label3" runat="server" Text="ﾒｰﾙｱﾄﾞﾚｽ:"></asp:Label>
-                <asp:TextBox ID="TextBox1" runat="server" Width ="300"></asp:TextBox>&nbsp;
-                <asp:Label ID="Label2" runat="server" Text="場所:"></asp:Label>--%>
-<%--                <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" Width ="100px" DataSourceID="SqlDataSource3" DataTextField="KBN" DataValueField="KBN"></asp:DropDownList>&nbsp;
- --%>               <br/>
-<%--                <asp:Button ID="Button1" runat="server" Text="検索" Font-Size="Small" Width ="80" />&nbsp;
-                <asp:Button ID="Button2" runat="server" Text="ﾘｾｯﾄ" Font-Size="Small" Width ="80" />&nbsp;--%>
-                <asp:Button ID="Button3" runat="server" Text="新規登録" Font-Size="Small" Width ="80" />
+            <td>
+            <asp:Button ID="Button3" runat="server" Text="新規登録" Font-Size="Small" Width ="80" />
             </td>
+            <td>
+            <asp:Button id="Button1" runat="server" Text="業務追加" OnClientClick='LinkClick2();' Font-Size="Small" Width ="80" />
+            </td>
+            <td class="second-cell">
+            </td>
+
+
 <%--            <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
             </td>--%>

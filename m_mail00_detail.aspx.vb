@@ -668,7 +668,7 @@ Partial Class cs_home
         strSQL = strSQL & "INSERT INTO M_EXL_MAIL01 VALUES("
         strSQL = strSQL & "'" & strMail & "' "
         strSQL = strSQL & ",'" & strtask & "' "
-        strSQL = strSQL & ",'0' "
+        strSQL = strSQL & ",3 "
         strSQL = strSQL & ",'" & strcompany & "' "
         strSQL = strSQL & ",'" & strpsn & "' ) "
 

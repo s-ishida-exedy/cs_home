@@ -135,6 +135,21 @@
         });
     });
 </script>
+
+    <script type="text/javascript">
+      function LinkClick2() {
+          var url = 'm_mail00.aspx?q='
+          var result = confirm('別ウインドウでメールアドレス管理ページを開きます');
+
+          if (result) {
+              window.open(url, null);
+          }
+          else {
+          }
+      }
+
+    </script>
+
 </head>
 <body class="c2">
 <form id="form1" runat="server" autocomplete="off">
@@ -158,6 +173,12 @@
                 <asp:Button ID="Button1" runat="server" Text="検索" Font-Size="Small" Width ="80" />&nbsp;
                 <asp:Button ID="Button2" runat="server" Text="ﾘｾｯﾄ" Font-Size="Small" Width ="80" />&nbsp;
                 <asp:Button ID="Button3" runat="server" Text="新規登録" Font-Size="Small" Width ="80" />
+
+            </td>
+            <td style="width:100px;Font-Size:25px;" >
+                <div class="button04">
+                    <a href="javascript:void(0);" onclick="LinkClick2()">メール登録</a>
+                </div>    
             </td>
 <%--            <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>
