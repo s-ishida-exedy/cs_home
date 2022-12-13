@@ -1373,4 +1373,31 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
+    Public Function GET_CS_RESULT_MAIL(strValue As String) As DataSet
+        'AIR専用客先　SN明細取得
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  M_EXL_MAIL00.TASK_CD "
+        StrSQL = StrSQL & "  , TASK_NM "
+        StrSQL = StrSQL & "  , Ref "
+        StrSQL = StrSQL & "  , FLG "
+        StrSQL = StrSQL & "FROM [M_EXL_MAIL00] LEFT JOIN [M_EXL_MAIL01] ON M_EXL_MAIL00.TASK_CD = M_EXL_MAIL01.TASK_CD "
+        StrSQL = StrSQL & "WHERE "
+        StrSQL = StrSQL & "  M_EXL_MAIL01.MAIL_ADD = '" & strValue & "' "
+
+
+
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class

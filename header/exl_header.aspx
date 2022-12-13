@@ -39,6 +39,7 @@
             <li data-id='["home","lcl_tenkai.aspx"]'><a href="#">LCL展開済案件</a></li>
             <li data-id='["home","anken_booking02.aspx"]'><a href="#">LS7,9「試作限定」有無確認</a></li>
             <li data-id='["home","ivhd_request.aspx"]'><a href="#">追加ｲﾝﾎﾞｲｽﾍｯﾀﾞ作成依頼</a></li>
+            <li data-id='["home","anken_kanryo.aspx"]'><a href="#">完了報告</a></li>
         </ul>
     </li>
     <li class="menu__multi">
