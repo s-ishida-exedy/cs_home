@@ -61,13 +61,14 @@ Partial Class cs_home
             ElseIf e.Row.Cells(4).Text = 2 Then
                 e.Row.Cells(4).Text = "CC"
                 ddl01.SelectedIndex = 2
-            ElseIf e.Row.Cells(4).Text = 4 Then
+            ElseIf e.Row.Cells(4).Text = 3 Then
                 e.Row.Cells(4).Text = "BCC"
                 ddl01.SelectedIndex = 3
-            ElseIf e.Row.Cells(4).Text = 3 Then
+            ElseIf e.Row.Cells(4).Text = 4 Then
                 e.Row.Cells(4).Text = "なし"
                 ddl01.SelectedIndex = 4
-                e.Row.BackColor = Drawing.Color.LightGray
+                'e.Row.BackColor = Drawing.Color.LightGray
+                e.Row.ForeColor = Drawing.Color.DarkGray
             End If
 
             If e.Row.Cells(5).Text = "無効" Then
@@ -250,6 +251,9 @@ Partial Class cs_home
 
             Dim I As Integer
             For I = 0 To GridView1.Rows.Count - 1
+
+                a = CType(GridView1.Rows(I).FindControl("DropDownList1"), DropDownList).SelectedValue
+
                 '更新
                 strSQL = ""
                 strSQL = strSQL & "UPDATE M_EXL_MAIL01 SET"
@@ -374,7 +378,7 @@ Partial Class cs_home
         strSQL = strSQL & "INSERT INTO M_EXL_MAIL01 VALUES("
         strSQL = strSQL & "'" & strMail & "' "
         strSQL = strSQL & ",'" & strtask & "' "
-        strSQL = strSQL & ",3 "
+        strSQL = strSQL & ",4 "
         strSQL = strSQL & ",'" & strcompany & "' "
         strSQL = strSQL & ",'" & strpsn & "' ) "
 
