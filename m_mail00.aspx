@@ -199,15 +199,15 @@
                 <HeaderStyle BackColor="#6B696B" />
             </asp:TemplateField>
             <asp:BoundField DataField="COMPANY" HeaderText="社名" ReadOnly="True" SortExpression="COMPANY" InsertVisible="False" >
-            <HeaderStyle BackColor="#6B696B" Width="60px" />
-            <ItemStyle HorizontalAlign="Center" />
+            <HeaderStyle BackColor="#6B696B" Width="190px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
             </asp:BoundField>
             <asp:BoundField DataField="IN_CHARGE_NAME" HeaderText="担当者" SortExpression="IN_CHARGE_NAME" >
-            <HeaderStyle BackColor="#6B696B" Width="60px" />
+            <HeaderStyle BackColor="#6B696B" Width="100px" />
             </asp:BoundField>
             <asp:BoundField DataField="MAIL_ADD" HeaderText="メールアドレス" SortExpression="MAIL_ADD" >
-            <HeaderStyle BackColor="#6B696B" Width="250px" />
-            <ItemStyle HorizontalAlign="Center" />
+            <HeaderStyle BackColor="#6B696B" Width="500px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
             </asp:BoundField>
 
         </Columns>
@@ -223,7 +223,7 @@
     </asp:GridView>
 
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT MAIL_ADD, COMPANY,IN_CHARGE_NAME FROM [M_EXL_MAIL01] "></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT MAIL_ADD, COMPANY,IN_CHARGE_NAME FROM [M_EXL_MAIL01] ORDER BY COMPANY,IN_CHARGE_NAME"></asp:SqlDataSource>
     
 <%--    無し--%>
 <%--    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT

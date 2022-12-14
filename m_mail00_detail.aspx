@@ -247,6 +247,10 @@
         <HeaderStyle Width="10px" />
         <ItemStyle HorizontalAlign="Center" />
         </asp:BoundField>
+    <asp:BoundField DataField="VALIDFLG" HeaderText="設定" SortExpression="VALIDFLG"  >
+        <HeaderStyle Width="50px" />
+        <ItemStyle HorizontalAlign="Center" />
+        </asp:BoundField>
     </Columns>
 
     </asp:GridView>

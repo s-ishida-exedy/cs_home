@@ -1385,10 +1385,11 @@ Public Class DBAccess
         StrSQL = StrSQL & "  , TASK_NM "
         StrSQL = StrSQL & "  , Ref "
         StrSQL = StrSQL & "  , FLG "
+        StrSQL = StrSQL & "  , VALIDFLG "
         StrSQL = StrSQL & "FROM [M_EXL_MAIL00] LEFT JOIN [M_EXL_MAIL01] ON M_EXL_MAIL00.TASK_CD = M_EXL_MAIL01.TASK_CD "
         StrSQL = StrSQL & "WHERE "
         StrSQL = StrSQL & "  M_EXL_MAIL01.MAIL_ADD = '" & strValue & "' "
-
+        'StrSQL = StrSQL & "AND  M_EXL_MAIL00.VALIDFLG = '1' "
 
 
 

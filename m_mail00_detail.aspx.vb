@@ -166,7 +166,12 @@ Partial Class cs_home
             '    e.Row.Cells(14).BackColor = Drawing.Color.Orange
             'End If
 
-
+            If e.Row.Cells(5).Text = 0 Then
+                e.Row.Cells(5).Text = "無効"
+                e.Row.BackColor = Drawing.Color.LightGray
+            ElseIf e.Row.Cells(5).Text = 1 Then
+                e.Row.Cells(5).Text = "有効"
+            End If
 
 
         End If
@@ -190,6 +195,12 @@ Partial Class cs_home
             ElseIf e.Row.Cells(4).Text = 3 Then
                 e.Row.Cells(4).Text = "なし"
                 e.Row.BackColor = Drawing.Color.LightGray
+            End If
+
+            If e.Row.Cells(5).Text = "無効" Then
+                'ddl01.Visible = False
+                ddl01.Enabled = Not ddl01.Enabled
+
             End If
 
         End If
@@ -241,8 +252,8 @@ Partial Class cs_home
                 TextBox1.Text = strcamp
                 TextBox2.Text = strname
                 TextBox0.ReadOnly = True
-                TextBox1.ReadOnly = True
-                TextBox2.ReadOnly = True
+                'TextBox1.ReadOnly = True
+                'TextBox2.ReadOnly = True
 
                 strSQL = ""
                 strSQL = strSQL & "SELECT  "
@@ -546,6 +557,18 @@ Partial Class cs_home
                 Command.ExecuteNonQuery()
 
             Next
+
+            '更新
+            strSQL = ""
+            strSQL = strSQL & "UPDATE M_EXL_MAIL01 SET"
+            strSQL = strSQL & " COMPANY = '" & TextBox1.Text & "' "
+            strSQL = strSQL & " ,IN_CHARGE_NAME = '" & TextBox2.Text & "' "
+            strSQL = strSQL & "WHERE MAIL_ADD = '" & TextBox0.Text & "' "
+
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
 
 
 
