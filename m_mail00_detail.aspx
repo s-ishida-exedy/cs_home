@@ -121,6 +121,7 @@
           overflow: scroll;
           height: 400px;
         }
+
 </style>
 <script>
     $(document).ready(function () {
@@ -208,16 +209,16 @@
 
     <tbody>
 
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width = "1000px" DataKeyNames="TASK_CD" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
 
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="White" Width = "1000px" DataKeyNames="TASK_CD" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="3px" CellPadding="4" DataSourceID="SqlDataSource1" ForeColor="Black"  ShowHeaderWhenEmpty="True">
+        <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="#000084" />
 
-    <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
     <Columns>
 
 
 
     <asp:TemplateField ShowHeader="False" HeaderText="設定">
-        <HeaderStyle Width="60px" />
+        <HeaderStyle BackColor="#6B696B"  Width="60px" />
             <ItemTemplate>
                 <asp:DropDownList ID="DropDownList1" runat="server">
                 <asp:ListItem Value="3">なし</asp:ListItem>
@@ -233,22 +234,22 @@
 
     <asp:BoundField DataField="TASK_CD" HeaderText="NO" SortExpression="TASK_CD"  >
         <ItemStyle HorizontalAlign="Center" />
-        <HeaderStyle Width="30px" />
+        <HeaderStyle BackColor="#6B696B"  Width="30px" />
         </asp:BoundField>
     <asp:BoundField DataField="TASK_NM" HeaderText="項目名" SortExpression="TASK_NM"  >
-        <HeaderStyle Width="150px" />
+        <HeaderStyle BackColor="#6B696B"  Width="150px" />
         <ItemStyle HorizontalAlign="Center" />
         </asp:BoundField>
     <asp:BoundField DataField="Ref" HeaderText="備考" SortExpression="Ref"  >
-        <HeaderStyle Width="500px" />
+        <HeaderStyle BackColor="#6B696B"  Width="500px" />
         <ItemStyle HorizontalAlign="left" />
         </asp:BoundField>
     <asp:BoundField DataField="FLG" HeaderText="FLG00" SortExpression="FLG"  >
-        <HeaderStyle Width="10px" />
+        <HeaderStyle BackColor="#6B696B"  Width="10px" />
         <ItemStyle HorizontalAlign="Center" />
         </asp:BoundField>
     <asp:BoundField DataField="VALIDFLG" HeaderText="設定" SortExpression="VALIDFLG"  >
-        <HeaderStyle Width="50px" />
+        <HeaderStyle BackColor="#6B696B"  Width="50px" />
         <ItemStyle HorizontalAlign="Center" />
         </asp:BoundField>
     </Columns>

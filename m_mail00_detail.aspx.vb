@@ -168,6 +168,8 @@ Partial Class cs_home
 
             If e.Row.Cells(5).Text = 0 Then
                 e.Row.Cells(5).Text = "無効"
+                e.Row.ForeColor = Drawing.Color.DarkGray
+
                 e.Row.BackColor = Drawing.Color.LightGray
             ElseIf e.Row.Cells(5).Text = 1 Then
                 e.Row.Cells(5).Text = "有効"
