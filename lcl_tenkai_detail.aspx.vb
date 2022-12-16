@@ -17,6 +17,7 @@ Partial Class cs_home
         Dim strpkg As String = ""
         Dim lstrin As String = ""
         Dim lstrdr As String = ""
+        Dim lstflg01 As String = ""
 
         Label3.Text = ""
 
@@ -37,6 +38,7 @@ Partial Class cs_home
             strpkg = Session("lstrpkg")
             lstrin = Session("lstrin")
             lstrdr = Session("lstrdr")
+            lstflg01 = Session("lstflg01")
 
             If strwgt = "&nbsp;" Or strwgt = "" Then
 
@@ -59,6 +61,12 @@ Partial Class cs_home
             TextBox5.Text = strwgt
             TextBox6.Text = strpkg
             Label9.Text = Replace(lstrin, "<br>", " ")
+
+            If lstflg01 = "1" Then
+                DropDownList1.SelectedValue = "非表示"
+            Else
+                DropDownList1.SelectedValue = "表示"
+            End If
 
 
             Dim i As Long
@@ -127,6 +135,7 @@ Partial Class cs_home
         Dim strwgt As String = ""
         Dim strpkg As String = ""
         Dim lstrin As String = ""
+        Dim lstrflg01 As String = ""
 
         strcust = Label1.Text
         strinv = Label2.Text
@@ -137,6 +146,7 @@ Partial Class cs_home
         strwgt = TextBox5.Text
         strpkg = TextBox6.Text
         lstrin = Label9.Text
+        lstrflg01 = DropDownList1.SelectedValue
 
         strSQL = ""
         strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET"
@@ -144,14 +154,15 @@ Partial Class cs_home
         strSQL = strSQL & ",QTY = '" & strpkg & "' "
         strSQL = strSQL & ",FLG04 = '" & TextBox1.Text & "__" & TextBox2.Text & "__" & TextBox3.Text & "' "
 
+        If lstrflg01 = "表示" Then
+            strSQL = strSQL & ",FLG01 = '0' "
+        Else
+            strSQL = strSQL & ",FLG01 = '1' "
+        End If
+
         strSQL = strSQL & "WHERE CUST = '" & strcust & "' "
 
-        'If strinv = "" Or strinv = "&nbsp;" Then
-        '    'strSQL = strSQL & "AND INVOICE_NO IS NULL "
-        '    strSQL = strSQL & "AND INVOICE_NO = '" & strinv & "' "
-        'Else
-        '    strSQL = strSQL & "AND INVOICE_NO = '" & strinv & "' "
-        'End If
+
 
         strSQL = strSQL & "AND BOOKING_NO = '" & strbkg & "' "
         strSQL = strSQL & "AND FLG01 <> '1' "

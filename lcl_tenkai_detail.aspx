@@ -174,8 +174,14 @@
                 <td>
                 <asp:Button ID="Button7" runat="server" Text="更　新" style="width:120px" Font-Size="Small" />
                 </td>
-                <td colspan="3">
+                <td colspan="2">
                     <asp:Label ID="Label8" runat="server" Text="内容変更後に更新ボタンを押してください。" style="width:195px"></asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="DropDownList1" runat="server" class="cmb" style="width:80px">
+                        <asp:ListItem>表示</asp:ListItem>
+                        <asp:ListItem>非表示</asp:ListItem>
+                    </asp:DropDownList>
                 </td>
              </tr>
             <tr>

@@ -404,7 +404,8 @@ Partial Class cs_home
 
     End Function
 
-    Private Sub GridView1_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView2.RowCommand
+    Private Sub GridView2_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView2.RowCommand
+
         If e.CommandName = "edt" Then
             Dim index As Integer = Convert.ToInt32(e.CommandArgument)
             Dim data0 = Me.GridView2.Rows(index).Cells(1).Text
@@ -417,6 +418,7 @@ Partial Class cs_home
             Dim data7 = Me.GridView2.Rows(index).Cells(10).Text
             Dim data8 = Me.GridView2.Rows(index).Cells(16).Text
             Dim data9 = Me.GridView2.Rows(index).Cells(17).Text
+            Dim data10 = Me.GridView2.Rows(index).Cells(18).Text
 
             Session("lstrcust") = data0
             Session("lstrinv") = data1
@@ -428,6 +430,7 @@ Partial Class cs_home
             Session("lstrpkg") = data7
             Session("lstrin") = data8
             Session("lstrdr") = data9
+            Session("lstflg01") = data10
 
             'Dim clientScript As String = "<script language='JavaScript'> window.open('shippingmemo_detail.aspx', '', 'width=1500,height=450','scrollbars=no','status=no','toolbar=no','location=no','menubar=no','resizable=no') <" + "/script>"
             'Dim startupScript As String = "<script language='JavaScript'>  window.open('shippingmemo_detail.aspx') <" + "/script>"
@@ -440,4 +443,72 @@ Partial Class cs_home
 
     End Sub
 
+    Private Sub GridView1_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles GridView1.RowDataBound
+
+        'ボタンに行数をセット
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            Dim dltButton As Button = e.Row.FindControl("Button1")
+
+            'ボタンが存在する場合のみセット
+            If Not (dltButton Is Nothing) Then
+                dltButton.CommandArgument = e.Row.RowIndex.ToString()
+            End If
+
+
+        End If
+
+    End Sub
+
+
+    Private Sub GridView1_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView1.RowCommand
+        'GridViewのボタン押下処理
+
+
+
+        If e.CommandName = "edt4" Then
+
+            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+            Dim data1 = Me.GridView1.Rows(index).Cells(3).Text
+
+            Dim strSQL As String
+            Dim dtNow As DateTime = DateTime.Now
+            Dim strFlg As String = ""
+
+            '接続文字列の作成
+            Dim ConnectionString As String = String.Empty
+            'SQL Server認証
+            ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+            'SqlConnectionクラスの新しいインスタンスを初期化
+            Dim cnn = New SqlConnection(ConnectionString)
+            Dim Command = cnn.CreateCommand
+
+            'データベース接続を開く
+            cnn.Open()
+
+            strSQL = ""
+            strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET "
+            strSQL = strSQL & "FLG01 = '0' "
+            strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+            cnn.Close()
+            cnn.Dispose()
+
+
+
+
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('表示します。');</script>", False)
+
+
+        End If
+
+        'Grid再表示
+        GridView2.DataBind()
+        GridView1.DataBind()
+
+    End Sub
 End Class

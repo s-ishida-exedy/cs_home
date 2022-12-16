@@ -328,6 +328,7 @@
         <asp:BoundField DataField="OTHERS01" HeaderText="備考" SortExpression="OTHERS01" ReadOnly="true" />
         <asp:BoundField DataField="PICKINPLACE" HeaderText="搬入先" SortExpression="PICKINPLACE" ReadOnly="true" />
         <asp:BoundField DataField="FLG04" HeaderText="ドレージ" SortExpression="FLG04" ReadOnly="true" />
+        <asp:BoundField DataField="FLG01" HeaderText="表示" SortExpression="FLG01" ReadOnly="true" />
 
         </Columns>
         <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
@@ -366,12 +367,19 @@
 
         <tbody>
 
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width = "3000px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" hight ="400px" Width = "3500px" DataSourceID="SqlDataSource1" DataKeyNames="BOOKING_NO" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
 
         <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
 
         <Columns>
 
+
+                        <asp:TemplateField ShowHeader="False" HeaderText="戻し処理">
+                            <ItemTemplate>
+                                <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="edt4" Text="更新" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
 
         <asp:BoundField DataField="CUST" HeaderText="客先" SortExpression="CUST"　 />
         <asp:BoundField DataField="INVOICE_NO" HeaderText="IN_NO" SortExpression="INVOICE_NO" ReadOnly="true" />
@@ -410,7 +418,7 @@
         </asp:Panel>  
 
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CONSIGNEE], [DESTINATION], [CUST], [INVOICE_NO], [BOOKING_NO], [OFFICIAL_QUOT], [CUT_DATE], [ETD], [ETA], [LCL_SIZE], [WEIGHT], [QTY], [PICKUP01], [PICKUP02], [MOVEIN01], [MOVEIN02], [OTHERS01], [FLG01], [FLG02], [FLG03], [FLG04], [FLG05],[PICKINPLACE] FROM [T_EXL_LCLTENKAI] WHERE FLG03 = '1' AND FLG01 = '1' ORDER BY CUT_DATE "
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CONSIGNEE], [DESTINATION], [CUST], [INVOICE_NO], [BOOKING_NO], [OFFICIAL_QUOT], [CUT_DATE], [ETD], [ETA], [LCL_SIZE], [WEIGHT], [QTY], [PICKUP01], [PICKUP02], [MOVEIN01], [MOVEIN02], [OTHERS01], [FLG01], [FLG02], [FLG03], [FLG04], [FLG05],[PICKINPLACE] FROM [T_EXL_LCLTENKAI] WHERE FLG03 = '1' AND FLG01 = '1' ORDER BY CUT_DATE DESC "
     ></asp:SqlDataSource>
 
 
