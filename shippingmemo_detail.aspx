@@ -186,27 +186,27 @@
                  <tr>
                 <th>修正後ETD</th>
                 <td>
-                    <asp:TextBox ID="TextBox2" runat="server" class="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox2" runat="server" placeholder="YYYY/MM/DD" class="txtb"></asp:TextBox>
                 </td>
                 <th>修正後ETA</th>
                 <td>
-                    <asp:TextBox ID="TextBox3" runat="server" class="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox3" runat="server" placeholder="YYYY/MM/DD" class="txtb"></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <th>BL回収日</th>
                 <td>
-                    <asp:TextBox ID="TextBox4" runat="server" class="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox4" runat="server" placeholder="YYYY/MM/DD" class="txtb"></asp:TextBox>
                 </td>
                 <th>BL日付</th>
                 <td>
-                   <asp:TextBox ID="TextBox5" runat="server" class="txtb"></asp:TextBox>
+                   <asp:TextBox ID="TextBox5" runat="server" placeholder="YYYY/MM/DD" class="txtb"></asp:TextBox>
                 </td>
              </tr>
              <tr>
                 <th>売上計上日</th>
                 <td>
-                   <asp:TextBox ID="TextBox6" runat="server" class="txtb"></asp:TextBox>
+                   <asp:TextBox ID="TextBox6" runat="server" placeholder="YYYY/MM/DD" class="txtb"></asp:TextBox>
                 </td>
                 <th>ステータス</th>
                 <td>

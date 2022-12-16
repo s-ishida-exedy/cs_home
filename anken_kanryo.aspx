@@ -419,9 +419,15 @@
 
 
 
-                        <asp:TemplateField ShowHeader="False" HeaderText="エラー解除">
+                        <asp:TemplateField ShowHeader="False" HeaderText="ｴﾗｰ解除">
                             <ItemTemplate>
                                 <asp:Button ID="Button3" runat="server" CausesValidation="false" CommandName="edt3" Text="更新" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+                        <asp:TemplateField ShowHeader="False" HeaderText="ﾁｪｯｸ表示">
+                            <ItemTemplate>
+                                <asp:Button ID="Button4" runat="server" CausesValidation="false" CommandName="edt4" Text="更新" />
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>

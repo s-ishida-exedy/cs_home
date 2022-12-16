@@ -185,7 +185,7 @@ Partial Class yuusen
             Dim dltButton As Button = e.Row.FindControl("Button1")
             Dim dltButton2 As Button = e.Row.FindControl("Button2")
             Dim dltButton3 As Button = e.Row.FindControl("Button3")
-
+            Dim dltButton4 As Button = e.Row.FindControl("Button4")
             If e.Row.Cells(5).Text <> "〇" Then
                 dltButton2.Visible = False
                 e.Row.Cells(4).Text = "-"
@@ -204,6 +204,10 @@ Partial Class yuusen
             If Not (dltButton3 Is Nothing) Then
                 dltButton3.CommandArgument = e.Row.RowIndex.ToString()
             End If
+            'ボタンが存在する場合のみセット
+            If Not (dltButton4 Is Nothing) Then
+                dltButton4.CommandArgument = e.Row.RowIndex.ToString()
+            End If
 
             Dim dltcb01 As CheckBox = e.Row.FindControl("cb01")
             Dim dltcb02 As CheckBox = e.Row.FindControl("cb02")
@@ -221,6 +225,19 @@ Partial Class yuusen
                     dltcb02.Visible = False
                 End If
             End If
+
+            'ボタンが存在する場合のみセット
+            If Not (dltcb01 Is Nothing) And Not (dltcb02 Is Nothing) Then
+                dltcb01.AutoPostBack = True
+                dltcb02.AutoPostBack = True
+                If e.Row.Cells(24).Text <> "1" And e.Row.Cells(23).Text <> "1" Then
+                    dltcb01.Visible = True
+                    dltcb02.Visible = True
+                End If
+            End If
+
+
+
 
         End If
 
@@ -550,6 +567,55 @@ Partial Class yuusen
                 'ｴｸｾﾙ出力
                 Call EXELE(data1, data2, data3, data4, data5, data6, data7)
             End If
+
+
+        ElseIf e.CommandName = "edt4" Then
+
+
+            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+            Dim data1 = Me.GridView1.Rows(index).Cells(16).Text
+            Dim data2 = Me.GridView1.Rows(index).Cells(6).Text
+            Dim data3 = Me.GridView1.Rows(index).Cells(7).Text
+            Dim data4 = Me.GridView1.Rows(index).Cells(9).Text
+            Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
+            Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
+            Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
+
+            Dim strSQL As String
+            Dim dtNow As DateTime = DateTime.Now
+            Dim strFlg As String = ""
+
+            '接続文字列の作成
+            Dim ConnectionString As String = String.Empty
+            'SQL Server認証
+            ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+            'SqlConnectionクラスの新しいインスタンスを初期化
+            Dim cnn = New SqlConnection(ConnectionString)
+            Dim Command = cnn.CreateCommand
+
+            'データベース接続を開く
+            cnn.Open()
+
+            strSQL = ""
+            strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+            strSQL = strSQL & "FLG04 = '1', "
+            strSQL = strSQL & "FLG05 = '1' "
+            strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+            cnn.Close()
+            cnn.Dispose()
+
+
+            Me.GridView1.Rows(index).Cells(24).Text = "1"
+            Me.GridView1.Rows(index).Cells(24).Text = "1"
+
+
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('KD,ｱﾌﾀともにチェックボックスを表示します。');</script>", False)
 
 
         End If
@@ -3980,7 +4046,7 @@ Partial Class yuusen
             Exit Function
         End If
 
-        If Target < DateAdd("m", -3, dt1) Then
+        If Target < DateAdd("m", -6, dt1) Then
             Date_Year = DateAdd("yyyy", 1, Target)
         Else
             Date_Year = Format(Target, "yyyy/mm/dd")
@@ -4118,14 +4184,19 @@ Partial Class yuusen
 
         Dim strfrom As String = GET_from(struid)
 
-        Dim strto As String = GET_ToAddress(2, 1)
+        Dim strto As String = GET_ToAddress("10", 1)
+
+        If strto = "" Then
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('宛先が設定されていないためメール送信に失敗しました。');</script>", False)
+            Exit Sub
+        End If
+
         strto = Left(strto, Len(strto) - 1)
 
-        strto = GET_from(struid)
 
-        Dim strcc As String = GET_ToAddress(2, 0) + GET_from(struid)
-        strcc = GET_from(struid)
-        'strcc = GET_from("T43827")
+
+        Dim strcc As String = GET_ToAddress(" Then Then10", 2) + GET_from(struid)
+
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -4223,13 +4294,16 @@ Partial Class yuusen
 
         Dim strfrom As String = GET_from(struid)
 
-        Dim strto As String = GET_ToAddress(2, 1)
+        Dim strto As String = GET_ToAddress("11", 1)
         strto = Left(strto, Len(strto) - 1)
 
-        strto = GET_from(struid)
+        If strto = "" Then
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('宛先が設定されていないためメール送信に失敗しました。');</script>", False)
+            Exit Sub
+        End If
 
-        Dim strcc As String = GET_ToAddress(2, 0) + GET_from(struid)
-        strcc = GET_from(struid)
+        Dim strcc As String = GET_ToAddress("11", 2) + GET_from(struid)
+
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -4326,9 +4400,9 @@ Partial Class yuusen
         'データベース接続を開く
         cnn.Open()
 
-        strSQL = strSQL & "Select MAIL_ADD FROM M_EXL_LCL_DEC_MAIL "
-        strSQL = strSQL & "WHERE kbn = '" & strkbn & "' "
-        strSQL = strSQL & "AND TO_CC = '" & strtocc & "' "
+        strSQL = strSQL & "Select MAIL_ADD FROM M_EXL_MAIL01 "
+        strSQL = strSQL & "WHERE TASK_CD = '" & strkbn & "' "
+        strSQL = strSQL & "AND FLG = '" & strtocc & "' "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -4445,6 +4519,7 @@ Partial Class yuusen
         Dim eflg As Long
         Dim strcst As String = ""
         Dim strrate As String = ""
+        Dim strcry As String = ""
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
@@ -4464,13 +4539,13 @@ Partial Class yuusen
         cnn.Open()
 
 
-        strSQL = "SELECT DISTINCT T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.CUSTCODE, T_INV_HD_TB.RATE "
-        strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
+        strSQL = "SELECT DISTINCT T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.CUSTCODE, T_INV_HD_TB.RATE,M_CRY_TB.EXPJCD "
+        strSQL = strSQL & "FROM (T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO) LEFT JOIN M_CRY_TB ON T_INV_HD_TB.CRYCD = M_CRY_TB.CRYCD "
         strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
 
 
 
-        strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO,T_INV_HD_TB.CRYCD, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE,T_INV_HD_TB.CUSTCODE,T_INV_HD_TB.HEADTITLE, T_INV_HD_TB.RATE "
+        strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO,T_INV_HD_TB.CRYCD, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE,T_INV_HD_TB.CUSTCODE,T_INV_HD_TB.HEADTITLE, T_INV_HD_TB.RATE,M_CRY_TB.EXPJCD "
         strSQL = strSQL & "HAVING T_INV_HD_TB.BOOKINGNO like '%" & bkgno & "%' "
         strSQL = strSQL & "AND Sum(T_INV_BD_TB.QTY) >= 1 "
         strSQL = strSQL & "AND Sum(T_INV_BD_TB.KIN) >= 1 "
@@ -4489,8 +4564,9 @@ Partial Class yuusen
             strinv = Trim(Convert.ToString(dataread("OLD_INVNO")))        '客先目
             strcst = Trim(Convert.ToString(dataread("CUSTCODE")))        '客先目
             strrate = Trim(Convert.ToString(dataread("RATE")))        '客先目
+            strcry = Trim(Convert.ToString(dataread("EXPJCD")))        '客先目
 
-            t = t & "<br>" & "・IV-" & strinv & " (" & strrate & ")" & " CUST:" & strcst & " "
+            t = t & "<br>" & "・IV-" & strinv & " (" & strcry & " : " & strrate & ")" & " CUST:" & strcst & " "
 
         End While
 
@@ -4517,6 +4593,7 @@ Partial Class yuusen
         Dim strcst As String = ""
         Dim strrate As String = ""
         Dim strrate2 As String = ""
+
 
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty

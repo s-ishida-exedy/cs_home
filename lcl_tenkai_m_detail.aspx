@@ -167,17 +167,17 @@
             <tr>
                 <th>備考</th>
                 <td>
-                    <asp:TextBox ID="TextBox1" runat="server" class="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox1" placeholder="特記事項入力" runat="server" class="txtb"></asp:TextBox>
                 </td>
                 <th>客先</th>
                 <td>
-                    <asp:TextBox ID="TextBox2" runat="server" class="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox2" placeholder="Bookingsheetから取得、入力なしの場合は手入力" runat="server" class="txtb"></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <th>IVNO</th>
                 <td>
-                     <asp:TextBox ID="TextBox3" runat="server" class="txtb"></asp:TextBox>
+                     <asp:TextBox ID="TextBox3" placeholder="Bookingsheetから取得、入力なしの場合は手入力" runat="server" class="txtb"></asp:TextBox>
                 </td>
                 <th>BKG#</th>
                 <td>
@@ -201,17 +201,17 @@
                 </td>
                 <th>M3</th>
                 <td>
-                    <asp:TextBox ID="TextBox8" runat="server" class="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox8" placeholder="Bookingsheetから取得、入力なしの場合は手入力" runat="server" class="txtb"></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <th>重量</th>
                 <td>
-                     <asp:TextBox ID="TextBox9" runat="server" class="txtb"></asp:TextBox>
+                     <asp:TextBox ID="TextBox9" placeholder="ｱﾌﾀ・KD入力欄" runat="server" class="txtb"></asp:TextBox>
                 </td>
                 <th>荷量</th>
                 <td>
-                    <asp:TextBox ID="TextBox10" runat="server" class="txtb"></asp:TextBox>
+                    <asp:TextBox ID="TextBox10" placeholder="ｱﾌﾀ・KD入力欄" runat="server" class="txtb"></asp:TextBox>
                 </td>
             </tr>
             <tr>

@@ -213,11 +213,11 @@
              <tr>
                  <th style="background-color:Khaki;">重量(KD,ｱﾌﾀ)</th>
                 <td>
-                   <asp:TextBox ID="TextBox5" runat="server" class="txtb" ></asp:TextBox>
+                   <asp:TextBox ID="TextBox5"  placeholder="重量（KGS）" runat="server" class="txtb" ></asp:TextBox>
                 </td>
                 <th style="background-color:Khaki;">荷量(KD,ｱﾌﾀ)</th>
                 <td>
-                   <asp:TextBox ID="TextBox6" runat="server" class="txtb"></asp:TextBox>
+                   <asp:TextBox ID="TextBox6" runat="server" placeholder="荷姿・数量" class="txtb"></asp:TextBox>
                 </td>
              </tr>
              <tr>
@@ -231,19 +231,19 @@
                 <th  rowspan="3" style="background-color:Khaki;">引取り<br>ドレージ<br>(輸送チーム)</th>
                 <th >日時</th>
                 <td colspan="2" >
-                   <asp:TextBox ID="TextBox1" runat="server" style="width:400px;Font-Size:13px;"></asp:TextBox>
+                   <asp:TextBox ID="TextBox1" runat="server" placeholder="日時" style="width:400px;Font-Size:13px;"></asp:TextBox>
                 </td>
              </tr>
             <tr>
                 <th >備考01</th>
                 <td colspan="2" >
-                   <asp:TextBox ID="TextBox2" runat="server" style="width:400px;Font-Size:13px;"></asp:TextBox>
+                   <asp:TextBox ID="TextBox2" runat="server"　placeholder="運送業者やその他特記事項" style="width:400px;Font-Size:13px;"></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <th >備考02</th>
                 <td colspan="2" >
-                   <asp:TextBox ID="TextBox3" runat="server" style="width:400px;Font-Size:13px;"></asp:TextBox>
+                   <asp:TextBox ID="TextBox3" runat="server" placeholder="運送業者やその他特記事項" style="width:400px;Font-Size:13px;"></asp:TextBox>
                 </td>
             </tr>
 
