@@ -49,9 +49,9 @@ Partial Class yuusen
             'SQL Server認証
             ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
 
-                'SqlConnectionクラスの新しいインスタンスを初期化
-                Dim cnn = New SqlConnection(ConnectionString)
-                Dim Command = cnn.CreateCommand
+            'SqlConnectionクラスの新しいインスタンスを初期化
+            Dim cnn = New SqlConnection(ConnectionString)
+            Dim Command = cnn.CreateCommand
 
             'データベース接続を開く
             cnn.Open()
@@ -182,10 +182,48 @@ Partial Class yuusen
 
         'ボタンに行数をセット
         If e.Row.RowType = DataControlRowType.DataRow Then
+
+            Dim fflg As String = ""
+
+            '接続文字列の作成
+            Dim ConnectionString As String = String.Empty
+
+            'SQL Server認証
+            ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+            'SqlConnectionクラスの新しいインスタンスを初期化
+            Dim cnn = New SqlConnection(ConnectionString)
+            Dim Command = cnn.CreateCommand
+
+            'データベース接続を開く
+            cnn.Open()
+
+            strSQL = "SELECT T_EXL_CSKANRYO.FLG02 "
+            strSQL = strSQL & "FROM T_EXL_CSKANRYO "
+            strSQL = strSQL & "WHERE BOOKING_NO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
+
+            'ＳＱＬコマンド作成
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行
+            dataread = dbcmd.ExecuteReader()
+            strbkg = ""
+            '結果を取り出す
+            While (dataread.Read())
+                fflg = dataread("FLG02")
+            End While
+
+            'クローズ処理
+            dataread.Close()
+            dbcmd.Dispose()
+
+
             Dim dltButton As Button = e.Row.FindControl("Button1")
             Dim dltButton2 As Button = e.Row.FindControl("Button2")
             Dim dltButton3 As Button = e.Row.FindControl("Button3")
             Dim dltButton4 As Button = e.Row.FindControl("Button4")
+            Dim dltButton5 As Button = e.Row.FindControl("Button5")
+            Dim dltlabel1 As Label = e.Row.FindControl("Label1")
+            Dim dltlabel2 As Label = e.Row.FindControl("Label2")
             If e.Row.Cells(5).Text <> "〇" Then
                 dltButton2.Visible = False
                 e.Row.Cells(4).Text = "-"
@@ -207,7 +245,22 @@ Partial Class yuusen
             'ボタンが存在する場合のみセット
             If Not (dltButton4 Is Nothing) Then
                 dltButton4.CommandArgument = e.Row.RowIndex.ToString()
+
+                If fflg = "" Then
+                    dltButton4.Text = "更新"
+                Else
+                    dltButton4.Text = "戻す"
+                End If
             End If
+            If Not (dltButton5 Is Nothing) Then
+                dltButton5.CommandArgument = e.Row.RowIndex.ToString()
+                If e.Row.Cells(28).Text = "1" Then
+                Else
+                    dltButton5.visible = False
+                End If
+
+            End If
+
 
             Dim dltcb01 As CheckBox = e.Row.FindControl("cb01")
             Dim dltcb02 As CheckBox = e.Row.FindControl("cb02")
@@ -244,6 +297,7 @@ Partial Class yuusen
         '23 24 visible false
         e.Row.Cells(23).Visible = False
         e.Row.Cells(24).Visible = False
+        e.Row.Cells(28).Visible = False
 
     End Sub
 
@@ -374,6 +428,7 @@ Partial Class yuusen
                 End If
             End If
 
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('処理が完了しました。');</script>", False)
 
 
         ElseIf e.CommandName = "edt2" Then
@@ -470,6 +525,8 @@ Partial Class yuusen
                 'ｴｸｾﾙ出力
                 Call EXELE(data1, data2, data3, data4, data5, data6, data7)
             End If
+
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('処理が完了しました。');</script>", False)
 
 
 
@@ -581,9 +638,22 @@ Partial Class yuusen
             Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
             Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
 
+            Dim fflg As Long
+            Dim cflg As String = ""
+
+            Dim dataread As SqlDataReader
+            Dim dbcmd As SqlCommand
+
+            fflg = 0
+
+
             Dim strSQL As String
             Dim dtNow As DateTime = DateTime.Now
             Dim strFlg As String = ""
+
+            Dim dltcb01 As CheckBox = Me.GridView1.Rows(index).FindControl("cb01")
+            Dim dltcb02 As CheckBox = Me.GridView1.Rows(index).FindControl("cb02")
+            Dim dltButton4 As Button = Me.GridView1.Rows(index).FindControl("Button4")
 
             '接続文字列の作成
             Dim ConnectionString As String = String.Empty
@@ -596,12 +666,247 @@ Partial Class yuusen
             'データベース接続を開く
             cnn.Open()
 
-            strSQL = ""
-            strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
-            strSQL = strSQL & "FLG04 = '1', "
-            strSQL = strSQL & "FLG05 = '1' "
+
+
+            strSQL = "SELECT T_EXL_CSKANRYO.FLG02 "
+            strSQL = strSQL & "FROM T_EXL_CSKANRYO "
             strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
 
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+
+            '結果を取り出す 
+            While (dataread.Read())
+                'インボイス番号をキーにデータを更新
+                cflg = dataread("FLG02")
+            End While
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+
+            If cflg = "" Then
+
+                If dltcb01.Visible = True And dltcb02.Visible = True Then
+                    fflg = 1
+                ElseIf dltcb01.Visible = False And dltcb02.Visible = True Then
+                    fflg = 2
+                ElseIf dltcb01.Visible = True And dltcb02.Visible = False Then
+                    fflg = 3
+                ElseIf dltcb01.Visible = False And dltcb02.Visible = False Then
+                    fflg = 4
+                End If
+
+                strSQL = ""
+                strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                strSQL = strSQL & "FLG02 = '" & fflg & "' "
+                strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                Command.CommandText = strSQL
+                ' SQLの実行
+                Command.ExecuteNonQuery()
+
+                strSQL = ""
+                strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                strSQL = strSQL & "FLG04 = '1', "
+                strSQL = strSQL & "FLG05 = '1' "
+                strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                Command.CommandText = strSQL
+                ' SQLの実行
+                Command.ExecuteNonQuery()
+
+                cnn.Close()
+                cnn.Dispose()
+
+                Me.GridView1.Rows(index).Cells(23).Text = "1"
+                Me.GridView1.Rows(index).Cells(24).Text = "1"
+
+                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('KD,ｱﾌﾀともにチェックボックスを表示しました。');</script>", False)
+
+
+            Else
+
+                If cflg = "1" Then
+
+                    dltcb01.Visible = True
+                    dltcb02.Visible = True
+
+                    strSQL = ""
+                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                    strSQL = strSQL & "FLG02 = '' "
+                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                    strSQL = ""
+                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                    strSQL = strSQL & "FLG04 = '1', "
+                    strSQL = strSQL & "FLG05 = '1' "
+                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                    cnn.Close()
+                    cnn.Dispose()
+
+                    Me.GridView1.Rows(index).Cells(23).Text = "1"
+                    Me.GridView1.Rows(index).Cells(24).Text = "1"
+
+                ElseIf cflg = "2" Then
+
+                    dltcb01.Visible = False
+                    dltcb02.Visible = True
+
+                    strSQL = ""
+                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                    strSQL = strSQL & "FLG02 = '' "
+                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                    strSQL = ""
+                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                    strSQL = strSQL & "FLG04 = '0', "
+                    strSQL = strSQL & "FLG05 = '1' "
+                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                    cnn.Close()
+                    cnn.Dispose()
+
+                    Me.GridView1.Rows(index).Cells(23).Text = "0"
+                    Me.GridView1.Rows(index).Cells(24).Text = "1"
+
+                ElseIf cflg = "3" Then
+
+                    dltcb01.Visible = True
+                    dltcb02.Visible = False
+
+                    strSQL = ""
+                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                    strSQL = strSQL & "FLG02 = '' "
+                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                    strSQL = ""
+                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                    strSQL = strSQL & "FLG04 = '1', "
+                    strSQL = strSQL & "FLG05 = '0' "
+                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                    cnn.Close()
+                    cnn.Dispose()
+
+                    Me.GridView1.Rows(index).Cells(23).Text = "1"
+                    Me.GridView1.Rows(index).Cells(24).Text = "0"
+                ElseIf cflg = "4" Then
+
+                    dltcb01.Visible = False
+                    dltcb02.Visible = False
+
+                    strSQL = ""
+                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                    strSQL = strSQL & "FLG02 = '' "
+                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                    strSQL = ""
+                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                    strSQL = strSQL & "FLG04 = '0', "
+                    strSQL = strSQL & "FLG05 = '0' "
+                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                    cnn.Close()
+                    cnn.Dispose()
+
+                    'GRIDVIEWの作成時になくなる？
+                    Me.GridView1.Rows(index).Cells(23).Text = "0"
+                    Me.GridView1.Rows(index).Cells(24).Text = "0"
+
+                End If
+
+                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('チェックボックスを初期状態に戻しました。');</script>", False)
+
+
+            End If
+
+
+        ElseIf e.CommandName = "edt5" Then
+
+
+            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+            Dim data1 = Me.GridView1.Rows(index).Cells(16).Text
+            Dim data2 = Me.GridView1.Rows(index).Cells(6).Text
+            Dim data3 = Me.GridView1.Rows(index).Cells(7).Text
+            Dim data4 = Me.GridView1.Rows(index).Cells(9).Text
+            Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
+            Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
+            Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
+
+
+            Dim dataread As SqlDataReader
+            Dim dbcmd As SqlCommand
+            Dim strSQL As String = ""
+            Dim strDate As String = ""
+            Dim strinv As String = ""
+            Dim eflg As Long
+            Dim strcst As String = ""
+            Dim FLGval As Long
+            Dim a As Long
+            Dim cflg As Long
+
+            FLGval = 0
+
+
+            '接続文字列の作成
+            Dim ConnectionString As String = String.Empty
+            'SQL Server認証
+            ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+            'SqlConnectionクラスの新しいインスタンスを初期化
+            Dim cnn = New SqlConnection(ConnectionString)
+
+            Dim dt1 As DateTime = DateTime.Now
+
+            Dim ts1 As New TimeSpan(100, 0, 0, 0)
+            Dim ts2 As New TimeSpan(100, 0, 0, 0)
+            Dim dt2 As DateTime = dt1 + ts1
+            Dim dt3 As DateTime = dt1 - ts1
+
+            'データベース接続を開く
+            cnn.Open()
+            Dim Command = cnn.CreateCommand
+
+            strSQL = ""
+            strSQL = strSQL & "DELETE FROM T_EXL_CSKANRYO "
+            strSQL = strSQL & "WHERE T_EXL_CSKANRYO.INVOICE = '" & data5 & "' "
+            strSQL = strSQL & "AND T_EXL_CSKANRYO.BOOKING_NO = '" & data1 & "' "
 
             Command.CommandText = strSQL
             ' SQLの実行
@@ -610,12 +915,7 @@ Partial Class yuusen
             cnn.Close()
             cnn.Dispose()
 
-
-            Me.GridView1.Rows(index).Cells(24).Text = "1"
-            Me.GridView1.Rows(index).Cells(24).Text = "1"
-
-
-            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('KD,ｱﾌﾀともにチェックボックスを表示します。');</script>", False)
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('案件を削除しました。');</script>", False)
 
 
         End If
@@ -765,6 +1065,11 @@ Partial Class yuusen
         '表示ボタン　FLG03は表示
         Dim I As Integer
         For I = 0 To GridView1.Rows.Count - 1
+
+
+            Dim dltlabel1 As Label = GridView1.Rows(I).FindControl("Label1")
+            Dim dltlabel2 As Label = GridView1.Rows(I).FindControl("Label2")
+
             If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
 
                 Call reg_check(GridView1.Rows(I).Cells(16).Text, 1)
@@ -861,6 +1166,11 @@ Partial Class yuusen
                 If Trim(GridView1.Rows(I).Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
 
                     GridView1.Rows(I).Cells(3).Text = "〇"
+                    'If Not (dltlabel1 Is Nothing) Then
+                    '    dltlabel1.CommandArgument = e.Row.RowIndex.ToString()
+                    'End If
+
+
 
                 End If
             End While
@@ -886,6 +1196,10 @@ Partial Class yuusen
                 If Trim(GridView1.Rows(I).Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
 
                     GridView1.Rows(I).Cells(5).Text = "〇"
+                    ''ボタンが存在する場合のみセット
+                    'If Not (dltlabel2 Is Nothing) Then
+                    '    dltlabel1.CommandArgument = e.Row.RowIndex.ToString()
+                    'End If
 
                 End If
             End While
@@ -926,11 +1240,6 @@ Partial Class yuusen
             'End If
 
         Next
-
-
-
-
-
 
 
 
@@ -4649,6 +4958,13 @@ Partial Class yuusen
         ' Dim sw As New System.IO.StreamWriter("\\svnas201\EXD06101\DISC_COMMON\WEB出力\RPA書類作成専用\" & Left(d, 4) & ".txt", True)
         ' sw.Close()
 
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+
+        Response.Redirect("anken_kanryo_detail.aspx")
 
     End Sub
 End Class

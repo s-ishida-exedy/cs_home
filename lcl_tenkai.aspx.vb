@@ -103,6 +103,7 @@ Partial Class cs_home
         e.Row.Cells(3).Visible = False
         e.Row.Cells(4).Visible = False
         e.Row.Cells(7).Visible = False
+        e.Row.Cells(18).Visible = False
 
         If e.Row.RowType = DataControlRowType.DataRow Then
             Dim dltButton As ImageButton = e.Row.FindControl("ImageButton1")

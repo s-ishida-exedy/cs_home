@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="anken_kanryo.aspx.vb" Inherits="yuusen" %>
+﻿    <%@ Page Language="VB" AutoEventWireup="false" CodeFile="anken_kanryo.aspx.vb" Inherits="yuusen" %>
 
 <%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
@@ -337,13 +337,14 @@
             <tr>
                 <td style="width:1500px;" >
                 <%--<asp:Button  ID="Button2" CssClass="btn00" runat="server" Text="フォルダ作成登録" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />--%> 
-<%--                <asp:Button  ID="Button3" CssClass="btn00" runat="server" Text="フォルダ作成" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
-                <asp:Button ID="Button2" runat="server" Text="エクセル出力" Width="120px" Height="30px" Font-Size="13px" />
-                <p></p>--%>
-                <%--<asp:Label ID="Label1" runat="server" Text="※チェック後にボタンを押す。(チェックボックスが緑のものはフォルダ作成可能)"  Font-Size="10px"></asp:Label>--%>
+                <asp:Button  ID="Button1" CssClass="btn00" runat="server" Text="案件作成" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
+<%--                <asp:DropDownList ID="DropDownList1" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="C" DataValueField="C" AppendDataBoundItems="true">
+                <asp:ListItem Text="Select" Value="" />
+                </asp:DropDownList>--%>
                 </td>
             </tr>
         </table>
+
 
         <asp:Panel ID="Panel1" runat="server"  Font-Size="12px" >
             <div class="wrapper">
@@ -379,10 +380,17 @@
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
 
-                        <asp:BoundField DataField="FLG02" HeaderText="完 了" SortExpression="FLG02" >
+<%--                        <asp:BoundField DataField="FLG02" HeaderText="完 了" SortExpression="FLG02" >
                         <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
+                        </asp:BoundField>--%>
 
+                        <asp:TemplateField ShowHeader="False" HeaderText="完 了">
+                            <ItemTemplate>
+<%--                                <asp:Button ID="Button2" runat="server" CausesValidation="false" CommandName="edt2" Text="更新" />--%>
+                                <asp:Label ID="Label1" runat="server" Text="" CausesValidation="false" CommandName="edt5"></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
 
                         <asp:TemplateField ShowHeader="False" HeaderText="C S">
                             <ItemTemplate>
@@ -391,9 +399,17 @@
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
 
-                        <asp:BoundField DataField="FLG03" HeaderText="確 認" SortExpression="FLG03" >
+<%--                        <asp:BoundField DataField="FLG03" HeaderText="確 認" SortExpression="FLG03" >
                         <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
+                        </asp:BoundField>--%>
+
+                        <asp:TemplateField ShowHeader="False" HeaderText="確 認">
+                            <ItemTemplate>
+<%--                                <asp:Button ID="Button2" runat="server" CausesValidation="false" CommandName="edt2" Text="更新" />--%>
+                                <asp:Label ID="Label2" runat="server" Text="" CausesValidation="false" CommandName="edt6"></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
 
 
                         <asp:BoundField DataField="FINALVANDATE" HeaderText="最終バン" SortExpression="FINALVANDATE" />
@@ -427,11 +443,18 @@
                         </asp:TemplateField>
                         <asp:TemplateField ShowHeader="False" HeaderText="ﾁｪｯｸ表示">
                             <ItemTemplate>
-                                <asp:Button ID="Button4" runat="server" CausesValidation="false" CommandName="edt4" Text="更新" />
+                                <asp:Button ID="Button4" runat="server" CausesValidation="false" CommandName="edt4" Text="" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+                        <asp:TemplateField ShowHeader="False" HeaderText="削除">
+                            <ItemTemplate>
+                                <asp:Button ID="Button5" runat="server" CausesValidation="false" CommandName="edt5" Text="更新" />
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
 
+                        <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
 
                         </Columns>
                         <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
@@ -536,9 +559,9 @@
         <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
 
 
+        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE FORWARDER <>'上野' ORDER BY FINALVANDATE,FLG01,CUT_DATE,CONTAINER "></asp:SqlDataSource>
 
-       <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE FORWARDER <>'上野' ORDER BY FINALVANDATE,FLG01,CUT_DATE,CONTAINER "></asp:SqlDataSource>
-
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [INVOICE] AS C FROM [T_EXL_CSANKEN] WHERE [INVOICE] IS NOT NULL and [INVOICE] <>'' ORDER BY C "></asp:SqlDataSource>
 
 
 

@@ -62,6 +62,12 @@ Partial Class cs_home
             TextBox6.Text = strpkg
             Label9.Text = Replace(lstrin, "<br>", " ")
 
+            Dim struid As String = Session("UsrId")
+            If struid = "T43529" Then
+            Else
+                DropDownList1.Visible = False
+            End If
+
             If lstflg01 = "1" Then
                 DropDownList1.SelectedValue = "非表示"
             Else
