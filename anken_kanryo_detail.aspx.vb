@@ -233,7 +233,13 @@ Partial Class cs_home
 
         '結果を取り出す 
         While (dataread.Read())
-            strtime = Right(Trim(dataread("A")), 8)
+
+            If IsDBNull(dataread("A")) = True Then
+                strtime = "登録なし"
+            Else
+                strtime = Right(Trim(dataread("A")), 8)
+            End If
+
         End While
 
 
