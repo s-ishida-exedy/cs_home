@@ -19,6 +19,54 @@ Partial Class cs_home
         Dim lstrdr As String = ""
         Dim lstflg01 As String = ""
 
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+
+
+        Dim wday As String = ""
+        Dim wday2 As String = ""
+        Dim wday3 As String = ""
+        Dim dt1 As DateTime = DateTime.Now
+        Dim Kaika00 As String = ""
+
+        Dim ts1 As New TimeSpan(80, 0, 0, 0)
+        Dim ts2 As New TimeSpan(80, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+        Dim fflg2 As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString00 As String = String.Empty
+
+        'SQL Server認証
+        ConnectionString00 = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn00 = New SqlConnection(ConnectionString00)
+        Dim Command00 = cnn00.CreateCommand
+
+        'データベース接続を開く
+        cnn00.Open()
+
+        strSQL = "SELECT CODE "
+        strSQL = strSQL & "FROM M_EXL_CS_MEMBER "
+        strSQL = strSQL & "WHERE CODE = '" & Session("UsrId") & "' "
+
+        'ＳＱＬコマンド作成
+        dbcmd = New SqlCommand(strSQL, cnn00)
+        'ＳＱＬ文実行
+        dataread = dbcmd.ExecuteReader()
+        strbkg = ""
+        '結果を取り出す
+        While (dataread.Read())
+            fflg2 = dataread("CODE")
+        End While
+
+        'クローズ処理
+        dataread.Close()
+        dbcmd.Dispose()
+
         Label3.Text = ""
 
         If IsPostBack Then
@@ -62,11 +110,15 @@ Partial Class cs_home
             TextBox6.Text = strpkg
             Label9.Text = Replace(lstrin, "<br>", " ")
 
-            Dim struid As String = Session("UsrId")
-            If struid = "T43529" Then
-            Else
+            If fflg2 = "" Then
                 DropDownList1.Visible = False
             End If
+
+
+            cnn00.Close()
+            cnn00.Dispose()
+
+
 
             If lstflg01 = "1" Then
                 DropDownList1.SelectedValue = "非表示"

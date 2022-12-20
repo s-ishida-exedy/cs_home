@@ -16,8 +16,16 @@ Partial Class yuusen
 
         Call get_ivdata(DropDownList6.Text, strcust, strbkg)
 
+        DropDownList1.SelectedValue = ""
+        DropDownList2.SelectedValue = ""
+        DropDownList3.SelectedValue = ""
+        DropDownList4.SelectedValue = ""
+        DropDownList5.SelectedValue = ""
+
         Label3.Text = strcust
         Label4.Text = strbkg
+        Label5.Text = ""
+        Label6.Text = ""
 
     End Sub
 
@@ -29,11 +37,78 @@ Partial Class yuusen
         Call get_ivdata2(DropDownList1.Text, strcust, strbkg)
 
 
+        DropDownList6.SelectedValue = ""
+        DropDownList2.SelectedValue = ""
+        DropDownList3.SelectedValue = ""
+        DropDownList4.SelectedValue = ""
+        DropDownList5.SelectedValue = ""
+
         Label5.Text = strcust
         Label6.Text = strbkg
+        Label3.Text = ""
+        Label4.Text = ""
 
     End Sub
 
+    Protected Sub DropDownList2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList2.SelectedIndexChanged
+
+        DropDownList6.SelectedValue = ""
+        DropDownList1.SelectedValue = ""
+        DropDownList3.SelectedValue = ""
+        DropDownList4.SelectedValue = ""
+        DropDownList5.SelectedValue = ""
+
+        Label5.Text = ""
+        Label6.Text = ""
+        Label3.Text = ""
+        Label4.Text = ""
+
+    End Sub
+
+    Protected Sub DropDownList3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList3.SelectedIndexChanged
+
+        DropDownList6.SelectedValue = ""
+        DropDownList1.SelectedValue = ""
+        DropDownList2.SelectedValue = ""
+        DropDownList4.SelectedValue = ""
+        DropDownList5.SelectedValue = ""
+
+        Label5.Text = ""
+        Label6.Text = ""
+        Label3.Text = ""
+        Label4.Text = ""
+
+    End Sub
+
+    Protected Sub DropDownList4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList4.SelectedIndexChanged
+
+        DropDownList6.SelectedValue = ""
+        DropDownList1.SelectedValue = ""
+        DropDownList2.SelectedValue = ""
+        DropDownList3.SelectedValue = ""
+        DropDownList5.SelectedValue = ""
+
+        Label5.Text = ""
+        Label6.Text = ""
+        Label3.Text = ""
+        Label4.Text = ""
+
+    End Sub
+
+    Protected Sub DropDownList5_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList5.SelectedIndexChanged
+
+        DropDownList6.SelectedValue = ""
+        DropDownList1.SelectedValue = ""
+        DropDownList2.SelectedValue = ""
+        DropDownList4.SelectedValue = ""
+        DropDownList3.SelectedValue = ""
+
+        Label5.Text = ""
+        Label6.Text = ""
+        Label3.Text = ""
+        Label4.Text = ""
+
+    End Sub
     Private Sub get_ivdata(iptbx As String, ByRef strcust As String, ByRef strbkg As String)
 
         Dim dataread As SqlDataReader

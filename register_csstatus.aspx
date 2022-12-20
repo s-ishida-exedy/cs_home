@@ -268,8 +268,8 @@
                     <asp:Button  ID="Button1" runat="server" CssClass ="" Text="登録" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" ></asp:Button>
                 </td>
                 <td style="width:200px;Font-Size:15px;text-align:center;" >
-                    <asp:Label ID="Label3" runat="server" Width="100px" Height="10px" Font-Size="12px" Text=""></asp:Label>
-                    <asp:Label ID="Label4" runat="server" Width="100px" Height="10px" Font-Size="12px" Text=""></asp:Label>
+                    <asp:Label ID="Label3" runat="server" Width="60px" Height="10px" Font-Size="12px" Text=""></asp:Label>
+                    <asp:Label ID="Label4" runat="server" Width="100px" Height="10px" Font-Size="11.5px" Text=""></asp:Label>
                 </td>
 
                 <td style="width:200px;Font-Size:15px;text-align:center;" >
@@ -279,8 +279,8 @@
                     <asp:Button class="btn-radius-gradient-wrap"  ID="Button2" runat="server" Text="削除" Width="100" Height="40px" AutoPostBack="True" Font-Size="13px" ></asp:Button>
                 </td>
                 <td style="width:200px;Font-Size:15px;text-align:center;" >
-                    <asp:Label ID="Label5" runat="server" Width="100px" Height="10px" Font-Size="12px" Text=""></asp:Label>
-                    <asp:Label ID="Label6" runat="server" Width="100px" Height="10px" Font-Size="12px" Text=""></asp:Label>
+                    <asp:Label ID="Label5" runat="server" Width="60px" Height="10px" Font-Size="12px" Text=""></asp:Label>
+                    <asp:Label ID="Label6" runat="server" Width="100px" Height="10px" Font-Size="11.5px" Text=""></asp:Label>
                 </td>
             </tr>
         </table>

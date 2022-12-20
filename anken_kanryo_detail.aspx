@@ -254,7 +254,7 @@ END AS KBN
 FROM M_EXL_LCL_DEC_MAIL
 ORDER BY KBN DESC"></asp:SqlDataSource>
 
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [INVOICE] AS C FROM [T_EXL_CSANKEN] WHERE [INVOICE] IS NOT NULL and [INVOICE] <>'' AND LCL_QTY <>'LCL' ORDER BY C "></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [T_EXL_CSANKEN].[INVOICE] AS C FROM [T_EXL_CSANKEN] LEFT JOIN [T_EXL_CSKANRYO] ON [T_EXL_CSANKEN].[INVOICE] = [T_EXL_CSKANRYO].[INVOICE] WHERE [T_EXL_CSANKEN].[INVOICE] IS NOT NULL and [T_EXL_CSANKEN].[INVOICE] <>'' AND [T_EXL_CSANKEN].LCL_QTY <>'LCL' AND [T_EXL_CSKANRYO].[INVOICE] IS NULL ORDER BY C "></asp:SqlDataSource>
 
 
 </div>

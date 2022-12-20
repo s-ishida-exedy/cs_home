@@ -165,17 +165,17 @@ Partial Class cs_home
             cnn3.Close()
             cnn3.Dispose()
 
-            If DropDownList2.SelectedValue = "" Then
+            'If DropDownList2.SelectedValue = "" Then
 
-                DropDownList2.Items.Clear()
-                DropDownList2.DataSource = SqlDataSource2
-                DropDownList2.DataTextField = "CUSTCODE"
-                DropDownList2.DataValueField = "CUSTCODE"
-                DropDownList2.DataBind()
+            '    DropDownList2.Items.Clear()
+            '    DropDownList2.DataSource = SqlDataSource2
+            '    DropDownList2.DataTextField = "CUSTCODE"
+            '    DropDownList2.DataValueField = "CUSTCODE"
+            '    DropDownList2.DataBind()
 
-                DropDownList2.Items.Insert(0, "")
+            '    DropDownList2.Items.Insert(0, "")
 
-            End If
+            'End If
         End If
 
 
@@ -237,23 +237,23 @@ Partial Class cs_home
         '    Return
         'End If
 
-        If Trim(TextBox1.Text) = "" And Trim(DropDownList2.SelectedValue) <> "" Then
-            Session("strMode") = "03"       '登録モード
-            Session("strCust") = Trim(DropDownList2.Text)
-        ElseIf Trim(TextBox1.Text) <> "" And Trim(DropDownList2.SelectedValue) = "" Then
-            Session("strMode") = "02"       '登録モード
-            Session("strCust") = Trim(TextBox1.Text)
-        ElseIf Trim(TextBox1.Text) = "" And Trim(DropDownList2.SelectedValue) = "" Then
+        'If Trim(TextBox1.Text) = "" And Trim(DropDownList2.SelectedValue) <> "" Then
+        '    Session("strMode") = "03"       '登録モード
+        '    Session("strCust") = Trim(DropDownList2.Text)
+        'ElseIf Trim(TextBox1.Text) <> "" And Trim(DropDownList2.SelectedValue) = "" Then
+        '    Session("strMode") = "02"       '登録モード
+        '    Session("strCust") = Trim(TextBox1.Text)
+        'ElseIf Trim(TextBox1.Text) = "" And Trim(DropDownList2.SelectedValue) = "" Then
 
-            Label12.Text = "客先CDは①、②のどちらかは入力してください。"
-            Return
-        ElseIf Trim(TextBox1.Text) <> "" And Trim(DropDownList2.SelectedValue) <> "" Then
-            Label12.Text = "客先CDは①、②のどちらかのみの入力してください。"
-            Return
-        End If
+        '    Label12.Text = "客先CDは①、②のどちらかは入力してください。"
+        '    Return
+        'ElseIf Trim(TextBox1.Text) <> "" And Trim(DropDownList2.SelectedValue) <> "" Then
+        '    Label12.Text = "客先CDは①、②のどちらかのみの入力してください。"
+        '    Return
+        'End If
 
 
-
+        Session("strMode") = "02"       '登録モード
         '画面遷移
         Response.Redirect("cs_manual_detail.aspx")
     End Sub
@@ -312,59 +312,6 @@ Partial Class cs_home
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
-        'Dim strFile As String = Format(Now, "yyyyMMdd") & "_CS_MANUAL.xlsx"
-        'Dim strPath As String = "C:\exp\cs_home\files\"
-        'Dim strChanged As String    'サーバー上のフルパス
-        'Dim strFileNm As String     'ファイル名
-
-        'Dim a
-
-        'Dim dt As New DataTable("CSMANUAL")
-        'For Each cell As TableCell In GridView1.HeaderRow.Cells
-        '    dt.Columns.Add(cell.Text)
-        'Next
-
-        'For Each row As GridViewRow In GridView1.Rows
-        '    dt.Rows.Add()
-        '    For i As Integer = 0 To row.Cells.Count - 1
-        '        a = Replace(Replace(row.Cells(i).Text, "&nbsp;", ""), "&#215;", "×")
-        '        If a = "" Then
-        '            a = DBNull.Value
-        '        End If
-        '        dt.Rows(dt.Rows.Count - 1)(i) = a
-        '    Next
-        'Next
-        'Using workbook As New XLWorkbook()
-        '    Dim ws As IXLWorksheet = workbook.Worksheets.Add(dt)
-
-        '    ws.Style.Font.FontName = "Meiryo UI"
-        '    ws.Style.Alignment.WrapText = False
-        '    ws.Columns.AdjustToContents()
-        '    workbook.SaveAs(strPath & strFile)
-
-        'End Using
-
-        ''ファイル名を取得する
-        'strChanged = strPath & Format(Now, "yyyyMMdd") & "_CS_MANUAL.xlsx"
-        'strFileNm = Path.GetFileName(strChanged)
-
-        ''Contentをクリア
-        'Response.ClearContent()
-
-        ''Contentを設定
-        'Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
-        'Response.ContentType = "application/vnd.ms-excel"
-
-        ''表示ファイル名を指定
-        'Dim fn As String = HttpUtility.UrlEncode(strFileNm)
-        'Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
-
-        ''ダウンロード対象ファイルを指定
-        'Response.WriteFile(strChanged)
-
-        ''ダウンロード実行
-        'Response.Flush()
-        'Response.End()
 
         '前月分ダウンロードボタン押下
         Dim strFile As String = Format(Now, "yyyyMMdd") & "_CS_MANUAL.xlsx"
@@ -398,7 +345,7 @@ Partial Class cs_home
         Response.ClearContent()
 
         'Contentを設定
-        Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+        'Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
         Response.ContentType = "application/vnd.ms-excel"
 
         '表示ファイル名を指定

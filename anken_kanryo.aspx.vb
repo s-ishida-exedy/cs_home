@@ -39,6 +39,39 @@ Partial Class yuusen
         Dim ts2 As New TimeSpan(80, 0, 0, 0)
         Dim dt2 As DateTime = dt1 + ts1
         Dim dt3 As DateTime = dt1 - ts1
+        Dim fflg2 As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString00 As String = String.Empty
+
+        'SQL Server認証
+        ConnectionString00 = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn00 = New SqlConnection(ConnectionString00)
+        Dim Command00 = cnn00.CreateCommand
+
+        'データベース接続を開く
+        cnn00.Open()
+
+        strSQL = "SELECT CODE "
+        strSQL = strSQL & "FROM M_EXL_CS_MEMBER "
+        strSQL = strSQL & "WHERE CODE = '" & Session("UsrId") & "' "
+
+        'ＳＱＬコマンド作成
+        dbcmd = New SqlCommand(strSQL, cnn00)
+        'ＳＱＬ文実行
+        dataread = dbcmd.ExecuteReader()
+        strbkg = ""
+        '結果を取り出す
+        While (dataread.Read())
+            fflg2 = dataread("CODE")
+        End While
+
+        'クローズ処理
+        dataread.Close()
+        dbcmd.Dispose()
+
 
         If e.Row.RowType = DataControlRowType.DataRow Then
 
@@ -291,6 +324,24 @@ Partial Class yuusen
 
 
 
+        End If
+
+
+        If fflg2 = "" Then
+
+            e.Row.Cells(4).Visible = False
+            e.Row.Cells(5).Visible = False
+            e.Row.Cells(10).Visible = False
+            e.Row.Cells(15).Visible = False
+            e.Row.Cells(18).Visible = False
+            e.Row.Cells(19).Visible = False
+
+            e.Row.Cells(20).Visible = False
+            e.Row.Cells(21).Visible = False
+            e.Row.Cells(22).Visible = False
+
+            e.Row.Cells(25).Visible = False
+            GridView1.Width = 1200
 
         End If
 
@@ -298,6 +349,11 @@ Partial Class yuusen
         e.Row.Cells(23).Visible = False
         e.Row.Cells(24).Visible = False
         e.Row.Cells(28).Visible = False
+
+        cnn00.Close()
+        cnn00.Dispose()
+
+
 
     End Sub
 

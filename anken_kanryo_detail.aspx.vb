@@ -235,13 +235,16 @@ Partial Class cs_home
         While (dataread.Read())
 
             If IsDBNull(dataread("A")) = True Then
-                strtime = "登録なし"
+                strtime = "00:00:00"
             Else
                 strtime = Right(Trim(dataread("A")), 8)
             End If
 
         End While
 
+        If strvan = "" Then
+            strvan = "1111/11/11"
+        End If
 
         'クローズ処理 
         dataread.Close()

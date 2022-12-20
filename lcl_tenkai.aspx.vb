@@ -105,6 +105,7 @@ Partial Class cs_home
         e.Row.Cells(7).Visible = False
         e.Row.Cells(18).Visible = False
 
+
         If e.Row.RowType = DataControlRowType.DataRow Then
             Dim dltButton As ImageButton = e.Row.FindControl("ImageButton1")
             'ボタンが存在する場合のみセット
@@ -446,6 +447,60 @@ Partial Class cs_home
 
     Private Sub GridView1_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles GridView1.RowDataBound
 
+
+
+        '最終更新年月日取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strinv As String = ""
+        Dim strbkg As String = ""
+
+
+        Dim wday As String = ""
+        Dim wday2 As String = ""
+        Dim wday3 As String = ""
+        Dim dt1 As DateTime = DateTime.Now
+        Dim Kaika00 As String = ""
+
+        Dim ts1 As New TimeSpan(80, 0, 0, 0)
+        Dim ts2 As New TimeSpan(80, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+        Dim fflg2 As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString00 As String = String.Empty
+
+        'SQL Server認証
+        ConnectionString00 = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn00 = New SqlConnection(ConnectionString00)
+        Dim Command00 = cnn00.CreateCommand
+
+        'データベース接続を開く
+        cnn00.Open()
+
+        strSQL = "SELECT CODE "
+        strSQL = strSQL & "FROM M_EXL_CS_MEMBER "
+        strSQL = strSQL & "WHERE CODE = '" & Session("UsrId") & "' "
+
+        'ＳＱＬコマンド作成
+        dbcmd = New SqlCommand(strSQL, cnn00)
+        'ＳＱＬ文実行
+        dataread = dbcmd.ExecuteReader()
+        strbkg = ""
+        '結果を取り出す
+        While (dataread.Read())
+            fflg2 = dataread("CODE")
+        End While
+
+        'クローズ処理
+        dataread.Close()
+        dbcmd.Dispose()
+
+
         'ボタンに行数をセット
         If e.Row.RowType = DataControlRowType.DataRow Then
             Dim dltButton As Button = e.Row.FindControl("Button1")
@@ -453,6 +508,11 @@ Partial Class cs_home
             'ボタンが存在する場合のみセット
             If Not (dltButton Is Nothing) Then
                 dltButton.CommandArgument = e.Row.RowIndex.ToString()
+            End If
+
+
+            If fflg2 = "" Then
+                e.Row.Cells(0).Visible = False
             End If
 
 

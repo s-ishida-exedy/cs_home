@@ -24,8 +24,11 @@
             width: 400px;
         }
         .second-cell {
-            width: 700px;
+            width: 200px;
         }   
+        .second-cell2 {
+            width: 700px;
+        }  
         .third-cell {
             width: 200px;
             text-align:right;
@@ -140,12 +143,19 @@
             <td class="first-cell">
                 <h2>ＣＳマニュアル詳細</h2> 
                 </td>
-            <td class="second-cell">
+                <td class="second-cell">
                     <asp:Button ID="Button7" runat="server" Text="更　新" style="width:164px" Font-Size="Small" />
                 </td>
-            <td class="third-cell">
-                <a href ="./cs_manual.aspx">一覧へ戻る</a>
-            </td>
+                <td class="second-cell2">
+                    <asp:Label  ID="Label4" runat="server" Text="データ引用"   /> 
+                    <asp:CheckBox   ID="CheckBox100" runat="server" />
+                    <asp:DropDownList ID="DropDownList200" runat="server" Width ="90px" AutoPostBack="true" >
+                    </asp:DropDownList>
+                    <asp:Button ID="Button100" runat="server" Text="クリア" style="width:70px" Font-Size="Small" />
+                </td>
+                <td class="third-cell">
+                    <a href ="./cs_manual.aspx">一覧へ戻る</a>
+                </td>
         </tr>
     </table>
 <div id="main2" style="width:100%;height:600px;overflow:scroll;-webkit-overflow-scrolling:touch;border:solid 0px;">
@@ -153,7 +163,9 @@
             <tr>
                 <th>新コード</th>
                 <td>
-                    <asp:TextBox ID="TextBox1" runat="server" Height="20px" Width="233px" Class ="txtb"></asp:TextBox>
+<%--                    <asp:TextBox ID="TextBox1" runat="server" Height="20px" Width="233px" Class ="txtb"></asp:TextBox>--%>                
+                    <asp:DropDownList ID="DropDownList100"  AutoPostBack="true" runat="server" Width ="90px" Height="35px" Font-Size="12.5">
+                    </asp:DropDownList>
                 </td>
                 <th>国名</th>
                 <td>
@@ -595,6 +607,12 @@
 
 </div>
 <!--/#main2-->
+
+<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [NEW_CODE] FROM [T_EXL_CSMANUAL] ORDER BY NEW_CODE ">
+</asp:SqlDataSource>
+
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [CUSTCODE] FROM [T_EXL_CSMANUAL_ADDCUST] ORDER BY CUSTCODE ">
+        </asp:SqlDataSource>
 
 </div>
 <!--/#contents2-->

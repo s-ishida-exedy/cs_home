@@ -32,9 +32,6 @@ Partial Class cs_home
 
     End Sub
 
-
-
-
     Private Sub GridView1_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView1.RowCommand
         If e.CommandName = "edt" Then
             Dim index As Integer = Convert.ToInt32(e.CommandArgument)

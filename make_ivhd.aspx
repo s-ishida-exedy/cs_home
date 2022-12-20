@@ -305,9 +305,9 @@
         <table style="height:10px;">
             <tr>
                 <td style="width:350px;" >
-                    <asp:Button ID="Button1" CssClass ="btn00" runat="server" Text="エクセル出力" />
-                    <asp:Button ID="Button2" CssClass ="btn00" runat="server" Text="LCL表示" />
-                    <asp:Button ID="Button3" CssClass ="btn00" runat="server" Text="FCL表示" />
+                    <asp:Button ID="Button1" CssClass ="btn00" runat="server" Text="エクセル出力" Font-Size="11" />
+                    <asp:Button ID="Button2" CssClass ="btn00" runat="server" Text="LCL表示" Font-Size="12" />
+                    <asp:Button ID="Button3" CssClass ="btn00" runat="server" Text="FCL表示" Font-Size="12" />
                     <asp:label ID="label2" text="表示：" runat="server"></asp:label>
                     <asp:TextBox ID="TextBox1" text="FCL" runat="server" Width="40px" Enabled=False ></asp:TextBox>
                 </td>

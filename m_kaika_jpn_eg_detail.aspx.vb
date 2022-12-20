@@ -41,7 +41,7 @@ Partial Class cs_home
                 strSQL = strSQL & "  , NAME_EG "
                 strSQL = strSQL & "FROM M_EXL_KAIKA_CHANGE "
                 strSQL = strSQL & "WHERE NAME_JPN = '" & strCode & "' "
-                strSQL = strSQL & "AND NAME_EG = '" & strCode02 & "' "
+
 
                 'ＳＱＬコマンド作成 
                 dbcmd = New SqlCommand(strSQL, cnn)
@@ -53,6 +53,8 @@ Partial Class cs_home
                     TextBox1.Text = dataread("NAME_JPN")
                     TextBox2.Text = dataread("NAME_EG")
                 End While
+
+                TextBox1.ReadOnly = True
 
                 'クローズ処理 
                 dataread.Close()
@@ -107,14 +109,13 @@ Partial Class cs_home
             strSQL = strSQL & "UPDATE M_EXL_KAIKA_CHANGE SET"
             strSQL = strSQL & " NAME_EG = '" & streng & "' "
             strSQL = strSQL & "WHERE NAME_JPN = '" & Session("strCode") & "' "
-            strSQL = strSQL & "AND NAME_EG = '" & Session("strCode02") & "' "
+
 
         ElseIf strExecMode = "02" Then
             'データ削除
             strSQL = ""
             strSQL = strSQL & "DELETE FROM M_EXL_KAIKA_CHANGE "
             strSQL = strSQL & "WHERE NAME_JPN = '" & Session("strCode") & "' "
-            strSQL = strSQL & "AND NAME_EG = '" & Session("strCode02") & "' "
 
         ElseIf strExecMode = "03" Then
             '登録
@@ -153,6 +154,8 @@ Partial Class cs_home
     Protected Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         '削除ボタン押下
 
+
+
         '削除
         Call DB_access("02")        '削除モード
 
@@ -171,6 +174,10 @@ Partial Class cs_home
         Dim dbcmd As SqlCommand
 
         '入力チェック
+        If chk_Nyuryoku() = False Then
+            TextBox1.Text = ""
+            Return
+        End If
 
         '登録
         Call DB_access("03")        '登録モード
@@ -180,6 +187,61 @@ Partial Class cs_home
 
         '元の画面に戻る
         Response.Redirect("m_kaika_jpn_eg.aspx")
+
+    End Sub
+    Private Function chk_Nyuryoku() As Boolean
+        chk_Nyuryoku = True
+
+        Dim name As String = TextBox1.Text
+        Dim cnt As Long
+
+
+        Call name_check(cnt)
+        If cnt > 0 Then
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('" & name & "は登録済みです。');</script>", False)
+            chk_Nyuryoku = False
+        End If
+
+
+
+    End Function
+
+    Private Sub name_check(ByRef cnt As Long)
+        '画面入力情報をテーブルへ登録
+
+        Dim strSQL As String = ""
+        Dim strVal As String = ""
+        Dim strkbn As String = ""
+        Dim strref As String = ""
+        Dim strbkg As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim strname As String = TextBox1.Text
+
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        cnn.Open()
+
+        strSQL = "SELECT Count(NAME_JPN) as cnt FROM [M_EXL_KAIKA_CHANGE] "
+        strSQL = strSQL & "WHERE M_EXL_KAIKA_CHANGE.NAME_JPN = '" & strname & "' "
+
+        'ＳＱＬコマンド作成
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行
+        dataread = dbcmd.ExecuteReader()
+        '結果を取り出す
+        While (dataread.Read())
+            cnt = dataread("cnt")
+        End While
+
+        cnn.Close()
 
     End Sub
 End Class

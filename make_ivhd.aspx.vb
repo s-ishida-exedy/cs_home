@@ -216,11 +216,26 @@ Partial Class yuusen
 
             e.Row.Cells(19).Text = Replace(e.Row.Cells(19).Text, "AT_", "")
 
+            Dim strkaika As String = e.Row.Cells(19).Text
+
             e.Row.Cells(19).Text = get_kaika(Trim(e.Row.Cells(19).Text))
 
             If e.Row.Cells(19).Text = "" Then
 
-                e.Row.Cells(0).Text = e.Row.Cells(0).Text & "海貨御者英名変換マスタ登録必要"
+                e.Row.Cells(0).Text = "E_" & e.Row.Cells(0).Text
+                e.Row.Cells(2).Text = "海貨御者英名変換マスタ登録必要"
+                e.Row.Cells(3).Text = strkaika & " が登録されていません。"
+
+                e.Row.Cells(0).BackColor = Drawing.Color.Red
+                e.Row.Cells(2).BackColor = Drawing.Color.Red
+                e.Row.Cells(3).BackColor = Drawing.Color.Red
+
+                e.Row.Cells(0).ForeColor = Drawing.Color.White
+                e.Row.Cells(2).ForeColor = Drawing.Color.White
+                e.Row.Cells(3).ForeColor = Drawing.Color.White
+                e.Row.Cells(0).Font.Bold = True
+                e.Row.Cells(2).Font.Bold = True
+                e.Row.Cells(3).Font.Bold = True
 
             End If
 
@@ -1757,7 +1772,7 @@ Partial Class yuusen
                 Response.ClearContent()
 
                 'Contentを設定
-                Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+                'Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
                 Response.ContentType = "application/vnd.ms-excel"
 
                 '表示ファイル名を指定
