@@ -228,8 +228,9 @@ Partial Class cs_home
         Command.CommandText = strSQL
         ' SQLの実行
         Command.ExecuteNonQuery()
-
         cnn.Close()
+        cnn.Dispose()
+
 
     End Sub
 

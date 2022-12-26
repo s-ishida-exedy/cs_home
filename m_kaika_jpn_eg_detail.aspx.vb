@@ -130,7 +130,9 @@ Partial Class cs_home
         ' SQLの実行
         Command.ExecuteNonQuery()
 
+
         cnn.Close()
+        cnn.Dispose()
 
     End Sub
 
@@ -241,7 +243,9 @@ Partial Class cs_home
             cnt = dataread("cnt")
         End While
 
+
         cnn.Close()
+        cnn.Dispose()
 
     End Sub
 End Class

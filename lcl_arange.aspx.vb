@@ -307,7 +307,7 @@ Partial Class cs_home
         End If
 
 
-            cnn.Close()
+        cnn.Close()
         cnn.Dispose()
 
         cnn2.Close()
@@ -612,6 +612,8 @@ Partial Class cs_home
         '案件展開後、展開済みの場合（FLG03 ＝１）の場合はCSSTATUSに追加する。（IVNO、BOOKINGNO）
         GridView1.DataBind()
 
+        cnn.Close()
+        cnn.Dispose()
 
     End Sub
 

@@ -180,6 +180,8 @@ Partial Class cs_home
 
 
         cnn.Close()
+        cnn.Dispose()
+
 
     End Sub
 

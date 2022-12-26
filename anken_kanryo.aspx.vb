@@ -1068,6 +1068,9 @@ Partial Class yuusen
         ' SQLの実行
         Command.ExecuteNonQuery()
 
+        cnn.Close()
+        cnn.Dispose()
+
     End Sub
 
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
@@ -1339,6 +1342,9 @@ Partial Class yuusen
             Call INS_kanryo2(strinv, bkgno)
         End If
 
+        cnn.Close()
+        cnn.Dispose()
+
     End Sub
 
     Private Sub reg_check2(bkgno As String, A As String)
@@ -1371,6 +1377,8 @@ Partial Class yuusen
             Call DEL_kanryo2(strinv, bkgno)
         End If
 
+        cnn.Close()
+        cnn.Dispose()
 
     End Sub
 
@@ -1408,6 +1416,8 @@ Partial Class yuusen
             Call reg_kanryo3(strinv, bkgno, dflg)
         End If
 
+        cnn.Close()
+        cnn.Dispose()
 
     End Sub
     Private Sub INS_kanryo(strinv As String, bkgno As String)

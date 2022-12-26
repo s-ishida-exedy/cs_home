@@ -187,6 +187,9 @@ Partial Class yuusen
         ' SQLの実行
         Command.ExecuteNonQuery()
 
+        cnn.Close()
+        cnn.Dispose()
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -458,6 +461,9 @@ Partial Class yuusen
             End If
         Next
         GridView1.DataBind()
+
+        cnn.Close()
+        cnn.Dispose()
 
     End Sub
 

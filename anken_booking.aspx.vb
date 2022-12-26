@@ -155,6 +155,7 @@ Partial Class yuusen
             'クローズ処理
             dataread.Close()
             dbcmd.Dispose()
+
             cnn.Close()
             cnn.Dispose()
 
@@ -432,6 +433,11 @@ Partial Class yuusen
         ' SQLの実行
         Command.ExecuteNonQuery()
 
+
+        cnn.Close()
+        cnn.Dispose()
+
+
     End Sub
 
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
@@ -522,41 +528,6 @@ Partial Class yuusen
 
 
 
-        'For I = 0 To GridView1.Rows.Count - 1
-
-        '    deccnt = 0
-        '    deccnt = DEC_GET(Trim(GridView1.Rows(I).Cells(26).Text))
-
-        '    If Left(GridView1.Rows(I).Cells(2).Text, 2) = "上野" Then
-        '        If GridView1.Rows(I).Cells(7).Text <= WDAY00 Then
-        '            If deccnt > 0 Then
-        '                lng14 = lng14 + 1
-        '            Else
-        '            End If
-        '        ElseIf GridView1.Rows(I).Cells(7).Text <= WDAY00 And GridView1.Rows(I).Cells(7).Text > WDAY00 Then   ' 1稼働日後がEXDCUT 
-        '            If deccnt > 0 Then
-        '                lng15 = lng15 + 1
-        '            Else
-        '            End If
-        '        End If
-        '    Else
-        '        If GridView1.Rows(I).Cells(7).Text <= dt1.ToShortDateString Then
-        '            If deccnt > 0 Then
-        '                lng14 = lng14 + 1
-        '            Else
-        '            End If
-        '        ElseIf GridView1.Rows(I).Cells(7).Text <= WDAY00 And GridView1.Rows(I).Cells(7).Text > dt1.ToShortDateString Then ' 1稼働日後がEXDCUT
-        '            If deccnt > 0 Then
-        '                lng15 = lng15 + 1
-        '            Else
-        '            End If
-        '        End If
-        '    End If
-
-        'Next
-
-
-
 
         Dim strupddate00 As Date
         Dim strupddate01 As Date
@@ -619,40 +590,6 @@ Partial Class yuusen
 
 
         End If
-
-        'Dim dt0A = DateTime.Parse("08:00:00")
-        'Dim dt1A = DateTime.Parse("08:10:00")
-
-        'Dim dt0B = DateTime.Parse("11:50:00")
-        'Dim dt1B = DateTime.Parse("12:00:00")
-
-        'Dim dt0C = DateTime.Parse("14:55:00")
-        'Dim dt1C = DateTime.Parse("15:05:00")
-
-
-        'If dt1 < dt1A And dt1 > dt0A Then
-
-        '    Panel1.Visible = False
-        '    Panel3.Visible = False
-        '    Panel2.Visible = True
-
-        'End If
-
-        'If dt1 < dt1B And dt1 > dt0B Then
-
-        '    Panel1.Visible = False
-        '    Panel3.Visible = False
-        '    Panel2.Visible = True
-
-        'End If
-
-
-        'If dt1 < dt1C And dt1 > dt0C Then
-
-        '    Panel1.Visible = False
-        '    Panel3.Visible = False
-        '    Panel2.Visible = True
-        'End If
 
 
         cnn.Close()
@@ -1690,6 +1627,8 @@ Step00:
             Dim sda = New SqlDataAdapter(cmd)
             sda.Fill(dt)
         End Using
+
+
 
         Return dt
     End Function

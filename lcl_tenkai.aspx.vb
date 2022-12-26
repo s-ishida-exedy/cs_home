@@ -79,26 +79,26 @@ Partial Class cs_home
 
         End If
 
-        e.Row.Cells(0).Width = 10
-        'e.Row.Cells(1).Width = 40
-        'e.Row.Cells(2).Width = 100
-        e.Row.Cells(1).Width = 30
-        e.Row.Cells(2).Width = 40
-        e.Row.Cells(3).Width = 100
-        e.Row.Cells(4).Width = 100
-        e.Row.Cells(5).Width = 70
-        e.Row.Cells(6).Width = 70
-        e.Row.Cells(7).Width = 70
-        e.Row.Cells(8).Width = 30
-        e.Row.Cells(9).Width = 50
-        e.Row.Cells(10).Width = 50
-        e.Row.Cells(11).Width = 70
-        e.Row.Cells(12).Width = 10
-        e.Row.Cells(13).Width = 70
-        e.Row.Cells(14).Width = 10
-        e.Row.Cells(15).Width = 110
-        e.Row.Cells(16).Width = 400
-        e.Row.Cells(17).Width = 300
+        'e.Row.Cells(0).Width = 10
+        ''e.Row.Cells(1).Width = 40
+        ''e.Row.Cells(2).Width = 100
+        'e.Row.Cells(1).Width = 30
+        'e.Row.Cells(2).Width = 40
+        'e.Row.Cells(3).Width = 100
+        'e.Row.Cells(4).Width = 100
+        'e.Row.Cells(5).Width = 70
+        'e.Row.Cells(6).Width = 70
+        'e.Row.Cells(7).Width = 70
+        'e.Row.Cells(8).Width = 30
+        'e.Row.Cells(9).Width = 50
+        'e.Row.Cells(10).Width = 50
+        'e.Row.Cells(11).Width = 70
+        'e.Row.Cells(12).Width = 10
+        'e.Row.Cells(13).Width = 70
+        'e.Row.Cells(14).Width = 10
+        'e.Row.Cells(15).Width = 110
+        'e.Row.Cells(16).Width = 400
+        'e.Row.Cells(17).Width = 300
 
         e.Row.Cells(3).Visible = False
         e.Row.Cells(4).Visible = False
@@ -517,6 +517,10 @@ Partial Class cs_home
 
 
         End If
+        cnn00.Close()
+        cnn00.Dispose()
+
+
 
     End Sub
 

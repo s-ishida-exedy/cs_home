@@ -306,29 +306,85 @@
         <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="false" CommandName="edt" ImageUrl="~/icon/write.png" Text="編集" width = "20" height = "20" />
         </ItemTemplate>
         <HeaderStyle BackColor="#6B696B" />
+        <HeaderStyle Width="10px" />
         </asp:TemplateField>
 
 
 <%--        <asp:BoundField DataField="FLG05" HeaderText="追加/更新日" SortExpression="FLG05" ReadOnly="true" />
         <asp:BoundField DataField="FLG04" HeaderText="追加/更新メモ" SortExpression="FLG04"　ReadOnly="true" />--%>
-        <asp:BoundField DataField="CUST" HeaderText="客先" SortExpression="CUST"　 />
-        <asp:BoundField DataField="INVOICE_NO" HeaderText="IN_NO" SortExpression="INVOICE_NO" ReadOnly="true" />
-        <asp:BoundField DataField="BOOKING_NO" HeaderText="BKG_NO" SortExpression="BOOKING_NO" ReadOnly="true" />
-        <asp:BoundField DataField="OFFICIAL_QUOT" HeaderText="TATENE" SortExpression="OFFICIAL_QUOT"  ReadOnly="true" />
-        <asp:BoundField DataField="CUT_DATE" HeaderText="カット日" SortExpression="CUT_DATE" ReadOnly="true" />
-        <asp:BoundField DataField="ETD" HeaderText="出港日" SortExpression="ETD" ReadOnly="true" />
-        <asp:BoundField DataField="ETA" HeaderText="到着日" SortExpression="ETA" ReadOnly="true" />
-        <asp:BoundField DataField="LCL_SIZE" HeaderText="M3" SortExpression="LCL_SIZE" ReadOnly="true" />
-        <asp:BoundField DataField="WEIGHT" HeaderText="重量" SortExpression="WEIGHT" />
-        <asp:BoundField DataField="QTY" HeaderText="荷量" SortExpression="QTY" />
-        <asp:BoundField DataField="PICKUP01" HeaderText="引取希望日" SortExpression="PICKUP01"  ReadOnly="true"/>
-        <asp:BoundField DataField="PICKUP02" HeaderText="" SortExpression="PICKUP02" ReadOnly="true" />
-        <asp:BoundField DataField="MOVEIN01" HeaderText="搬入希望日" SortExpression="MOVEIN01"  ReadOnly="true"/>
-        <asp:BoundField DataField="MOVEIN02" HeaderText="" SortExpression="MOVEIN02"  ReadOnly="true"/>
-        <asp:BoundField DataField="OTHERS01" HeaderText="備考" SortExpression="OTHERS01" ReadOnly="true" />
-        <asp:BoundField DataField="PICKINPLACE" HeaderText="搬入先" SortExpression="PICKINPLACE" ReadOnly="true" />
-        <asp:BoundField DataField="FLG04" HeaderText="ドレージ" SortExpression="FLG04" ReadOnly="true" />
-        <asp:BoundField DataField="FLG01" HeaderText="表示" SortExpression="FLG01" ReadOnly="true" />
+        <asp:BoundField DataField="CUST" HeaderText="客先" SortExpression="CUST"　>
+            <HeaderStyle Width="50px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="INVOICE_NO" HeaderText="IN_NO" SortExpression="INVOICE_NO" ReadOnly="true" >
+            <HeaderStyle Width="50px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="BOOKING_NO" HeaderText="BKG_NO" SortExpression="BOOKING_NO" ReadOnly="true" >
+            <HeaderStyle Width="80px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="OFFICIAL_QUOT" HeaderText="TATENE" SortExpression="OFFICIAL_QUOT"  ReadOnly="true" >
+            <HeaderStyle Width="80px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="CUT_DATE" HeaderText="カット日" SortExpression="CUT_DATE" ReadOnly="true" >
+            <HeaderStyle Width="70px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="ETD" HeaderText="出港日" SortExpression="ETD" ReadOnly="true" >
+            <HeaderStyle Width="70px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="ETA" HeaderText="到着日" SortExpression="ETA" ReadOnly="true" >
+            <HeaderStyle Width="70px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="LCL_SIZE" HeaderText="M3" SortExpression="LCL_SIZE" ReadOnly="true" >
+            <HeaderStyle Width="50px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="WEIGHT" HeaderText="重量" SortExpression="WEIGHT" >
+            <HeaderStyle Width="130px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="QTY" HeaderText="荷量" SortExpression="QTY" >
+            <HeaderStyle Width="130px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="PICKUP01" HeaderText="引取希望日" SortExpression="PICKUP01"  ReadOnly="true" >
+            <HeaderStyle Width="70px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="PICKUP02" HeaderText="" SortExpression="PICKUP02" ReadOnly="true" >
+            <HeaderStyle Width="10px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="MOVEIN01" HeaderText="搬入希望日" SortExpression="MOVEIN01"  ReadOnly="true" >
+            <HeaderStyle Width="70px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="MOVEIN02" HeaderText="" SortExpression="MOVEIN02"  ReadOnly="true">
+            <HeaderStyle Width="10px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="OTHERS01" HeaderText="備考" SortExpression="OTHERS01" ReadOnly="true" >
+            <HeaderStyle Width="160px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="PICKINPLACE" HeaderText="搬入先" SortExpression="PICKINPLACE" ReadOnly="true" >
+            <HeaderStyle Width="400px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="FLG04" HeaderText="ドレージ" SortExpression="FLG04" ReadOnly="true" >
+            <HeaderStyle Width="400px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="FLG01" HeaderText="表示" SortExpression="FLG01" ReadOnly="true" >
+            <HeaderStyle Width="300px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+
 
         </Columns>
         <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />

@@ -145,8 +145,7 @@ Partial Class cs_home
                 'クローズ処理 
                 dataread.Close()
                 dbcmd.Dispose()
-                cnn.Close()
-                cnn.Dispose()
+
 
                 '登録ボタンを非表示
                 Button1.Visible = False
@@ -156,6 +155,9 @@ Partial Class cs_home
                 Button7.Visible = False
                 Button8.Visible = False
             End If
+
+            cnn.Close()
+            cnn.Dispose()
 
             Dim Dataobj As New DBAccess
 
@@ -169,7 +171,9 @@ Partial Class cs_home
             'Grid再表示
             GridView1.DataBind()
 
+
         End If
+
 
         Button1.Attributes.Add("onclick", "return confirm('登録します。よろしいですか？');")
         Button7.Attributes.Add("onclick", "return confirm('更新します。よろしいですか？');")
@@ -213,8 +217,8 @@ Partial Class cs_home
         While (dataread.Read())
             ddlval01 = dataread("FLG")
         End While
-
         cnn.Close()
+        cnn.Dispose()
 
     End Sub
 
@@ -309,6 +313,7 @@ Partial Class cs_home
         End If
 
         cnn.Close()
+        cnn.Dispose()
 
     End Sub
 
@@ -349,6 +354,7 @@ Partial Class cs_home
         End While
 
         cnn.Close()
+        cnn.Dispose()
 
     End Sub
     Private Sub DB_INSERT(ByRef strtask As String, ByRef strMail As String, ByRef strcompany As String, ByRef strpsn As String)
@@ -387,6 +393,7 @@ Partial Class cs_home
         Command.ExecuteNonQuery()
 
         cnn.Close()
+        cnn.Dispose()
 
     End Sub
     Private Function chk_Nyuryoku() As Boolean

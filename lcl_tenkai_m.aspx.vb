@@ -147,6 +147,10 @@ Partial Class cs_home
 
         GridView1.DataBind()
 
+        cnn.Close()
+        cnn.Dispose()
+
+
     End Sub
 
     Protected Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -189,6 +193,10 @@ Partial Class cs_home
         Next
 
         GridView1.DataBind()
+
+        cnn.Close()
+        cnn.Dispose()
+
 
     End Sub
 

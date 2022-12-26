@@ -155,6 +155,9 @@ Partial Class yuusen
         DropDownList2.Items.Clear()
         DropDownList2.Items.Insert(0, "--Select--")
 
+        cnn.Close()
+        cnn.Dispose()
+
     End Sub
 
     Private Sub GET_IVDATA(bkgno As String, ivno As String, strETD As Date)

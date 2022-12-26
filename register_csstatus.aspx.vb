@@ -322,13 +322,18 @@ Partial Class yuusen
 
         Call GET_BKGNO(strdrp, strbkgno, "1")
 
-        DropDownList1.Items.Clear()
-        DropDownList1.DataBind()
-        DropDownList1.Items.Insert(0, "Please Select")
+
+        Label5.Text = ""
+        Label6.Text = ""
+        Label3.Text = ""
+        Label4.Text = ""
 
         DropDownList6.Items.Clear()
         DropDownList6.DataBind()
         DropDownList6.Items.Insert(0, "Please Select")
+
+        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('登録しました。');</script>", False)
+
 
     End Sub
     Protected Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -342,9 +347,15 @@ Partial Class yuusen
         DropDownList1.DataBind()
         DropDownList1.Items.Insert(0, "Please Select")
 
-        DropDownList6.Items.Clear()
-        DropDownList6.DataBind()
-        DropDownList6.Items.Insert(0, "Please Select")
+
+        Label5.Text = ""
+        Label6.Text = ""
+        Label3.Text = ""
+        Label4.Text = ""
+
+
+        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('削除しました。');</script>", False)
+
 
 
     End Sub
@@ -354,13 +365,15 @@ Partial Class yuusen
 
         Call INS_ITKCUST(strtxt)
 
-        DropDownList2.Items.Clear()
-        DropDownList2.DataBind()
-        DropDownList2.Items.Insert(0, "Please Select")
+
 
         DropDownList4.Items.Clear()
         DropDownList4.DataBind()
         DropDownList4.Items.Insert(0, "Please Select")
+
+
+        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('登録しました。');</script>", False)
+
 
     End Sub
 
@@ -370,13 +383,14 @@ Partial Class yuusen
 
         Call DEL_ITKCUST(strdrp)
 
+
         DropDownList2.Items.Clear()
         DropDownList2.DataBind()
         DropDownList2.Items.Insert(0, "Please Select")
 
-        DropDownList4.Items.Clear()
-        DropDownList4.DataBind()
-        DropDownList4.Items.Insert(0, "Please Select")
+
+        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('削除しました。');</script>", False)
+
 
     End Sub
     Protected Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
@@ -385,13 +399,15 @@ Partial Class yuusen
 
         Call INS_ITKKAIKA(strtxt)
 
-        DropDownList3.Items.Clear()
-        DropDownList3.DataBind()
-        DropDownList3.Items.Insert(0, "Please Select")
+
 
         DropDownList5.Items.Clear()
         DropDownList5.DataBind()
         DropDownList5.Items.Insert(0, "Please Select")
+
+
+        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('登録しました。');</script>", False)
+
 
     End Sub
     Protected Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
@@ -404,9 +420,10 @@ Partial Class yuusen
         DropDownList3.DataBind()
         DropDownList3.Items.Insert(0, "Please Select")
 
-        DropDownList5.Items.Clear()
-        DropDownList5.DataBind()
-        DropDownList5.Items.Insert(0, "Please Select")
+
+
+        Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('削除しました。');</script>", False)
+
 
     End Sub
 

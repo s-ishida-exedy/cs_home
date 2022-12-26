@@ -152,6 +152,7 @@
                     <asp:DropDownList ID="DropDownList200" runat="server" Width ="90px" AutoPostBack="true" >
                     </asp:DropDownList>
                     <asp:Button ID="Button100" runat="server" Text="クリア" style="width:70px" Font-Size="Small" />
+                    <asp:Label ID="Label3" runat="server" Text="Label" Class="err"></asp:Label>
                 </td>
                 <td class="third-cell">
                     <a href ="./cs_manual.aspx">一覧へ戻る</a>

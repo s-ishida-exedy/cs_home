@@ -14,6 +14,10 @@ Partial Class cs_home
         Dim strValue As String = ""
         Dim strVal As String = ""
 
+        Label3.Text = ""
+        Label3.ForeColor = Drawing.Color.Red
+        Label3.Font.Bold = True
+
         If IsPostBack Then
             ' そうでない時処理
         Else
@@ -70,7 +74,7 @@ Partial Class cs_home
 
                     DropDownList100.Items.Insert(0, "")
                     DropDownList100.SelectedValue = strCust
-                    DropDownList100.Enabled = False
+                    'DropDownList100.Enabled = False
 
                     DropDownList200.Visible = False
                     CheckBox100.Visible = False
@@ -310,105 +314,121 @@ Partial Class cs_home
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
 
-        'データベース接続を開く
-        cnn.Open()
 
-        strSQL = ""
-        strSQL = strSQL & "SELECT * FROM T_EXL_CSMANUAL "
-        strSQL = strSQL & "WHERE NEW_CODE = '" & strCust & "'"
 
-        'ＳＱＬコマンド作成 
-        dbcmd = New SqlCommand(strSQL, cnn)
-        'ＳＱＬ文実行 
-        dataread = dbcmd.ExecuteReader()
+        If CheckBox100.Checked = True Then
 
-        '結果を取り出す 
-        While (dataread.Read())
-            DropDownList100.SelectedValue = ""
-            DropDownList1.SelectedValue = dataread("IV_NECE").ToString
-            DropDownList2.SelectedValue = dataread("PL_NECE").ToString
-            DropDownList3.SelectedValue = dataread("BL_NECE").ToString
-            DropDownList4.SelectedValue = dataread("CO_NECE").ToString
-            DropDownList5.SelectedValue = dataread("EPA_NECE").ToString
-            DropDownList6.SelectedValue = dataread("WOOD_NECE").ToString
-            DropDownList7.SelectedValue = dataread("DELI_NECE").ToString
-            DropDownList8.SelectedValue = dataread("INSP_NECE").ToString
-            DropDownList9.SelectedValue = dataread("ERL_NECE").ToString
-            DropDownList10.SelectedValue = dataread("VESS_NECE").ToString
-            DropDownList11.SelectedValue = dataread("CONTAINER_CLEANING").ToString
-            DropDownList12.SelectedValue = dataread("LC").ToString
-            DropDownList13.SelectedValue = dataread("DOC_NECESSITY").ToString
-            DropDownList14.SelectedValue = dataread("FTA").ToString
-            DropDownList15.SelectedValue = dataread("CERTIFICATE_OF_CONFORMITY").ToString
-            DropDownList16.SelectedValue = dataread("DOC_OF_EGYPT").ToString
 
-            TextBox2.Text = dataread("OLD_CODE").ToString
-            TextBox3.Text = dataread("CUST_NM").ToString
-            TextBox4.Text = dataread("CUST_AB").ToString
-            TextBox5.Text = dataread("INCOTEM").ToString
-            TextBox6.Text = dataread("BL_TYPE").ToString
-            TextBox7.Text = dataread("BL_SEND").ToString
-            TextBox8.Text = dataread("CUST_ADDRESS").ToString
-            TextBox55.Text = dataread("CONSIGNEE").ToString
-            TextBox9.Text = dataread("CNEE_NM_SI").ToString
-            TextBox10.Text = dataread("FIN_DESTINATION").ToString
-            TextBox11.Text = dataread("NOTIFY").ToString
-            TextBox12.Text = dataread("FORWARDER_INFO").ToString
-            TextBox13.Text = dataread("CUST_REQ").ToString
-            TextBox14.Text = dataread("SALES_STAFF").ToString
-            TextBox15.Text = dataread("SALES_STAFF1").ToString
-            TextBox16.Text = dataread("SALES_STAFF2").ToString
-            TextBox17.Text = dataread("SALES_STAFF3").ToString
-            TextBox18.Text = dataread("SALES_STAFF4").ToString
-            TextBox19.Text = dataread("CUST_STAFF").ToString
-            TextBox20.Text = dataread("CUST_STAFF1").ToString
-            TextBox21.Text = dataread("CUST_STAFF2").ToString
-            TextBox22.Text = dataread("CUST_STAFF3").ToString
-            TextBox23.Text = dataread("CUST_STAFF4").ToString
-            TextBox24.Text = dataread("SHIP_DAY_OF_WEEK").ToString
-            TextBox25.Text = dataread("DESTINATION").ToString
-            TextBox26.Text = dataread("SHIPMENT_KBN").ToString
-            TextBox27.Text = dataread("LT").ToString
-            TextBox28.Text = dataread("PORT").ToString
-            TextBox29.Text = dataread("SHIP_AGREE").ToString
-            TextBox30.Text = dataread("SHIPPING_COMPANY").ToString
-            TextBox31.Text = dataread("LOCAL_AGENCY").ToString
-            TextBox32.Text = dataread("CONTAINER_SIZE").ToString
-            TextBox33.Text = dataread("REMARKS_ONBL").ToString
-            TextBox34.Text = dataread("IV_ON_BL").ToString
-            TextBox56.Text = dataread("HS_ON_BL").ToString
-            TextBox35.Text = dataread("CNEE_STAFF").ToString
-            TextBox36.Text = dataread("CNEE_STAFF_CONTACT1").ToString
-            TextBox37.Text = dataread("CNEE_STAFF_CONTACT2").ToString
-            TextBox38.Text = dataread("CNEE_STAFF2").ToString
-            TextBox39.Text = dataread("CNEE_STAFF2_CONTACT").ToString
-            TextBox40.Text = dataread("TAXID").ToString
-            TextBox41.Text = dataread("CONSIGNEE_OF_SI").ToString
-            TextBox42.Text = dataread("CONSIGNEE_OF_SI_ADDRESS").ToString
-            TextBox43.Text = dataread("FINAL_DES").ToString
-            TextBox44.Text = dataread("FINAL_DES_ADDRESS").ToString
 
-            DropDownList17.SelectedValue = dataread("BEARING").ToString
-            DropDownList18.SelectedValue = dataread("IV_AUTO_CALC").ToString
+            'データベース接続を開く
+            cnn.Open()
 
-            TextBox47.Text = dataread("FORWARDER").ToString
-            TextBox48.Text = dataread("FORWARDER_STAFF").ToString
-            TextBox49.Text = dataread("TO1").ToString
-            TextBox50.Text = dataread("CC1").ToString
-            TextBox51.Text = dataread("CC2").ToString
-            TextBox52.Text = dataread("CC3").ToString
-            TextBox53.Text = dataread("FORWARDER_NM").ToString
-            TextBox54.Text = dataread("FORWARDER_STAFF_NM").ToString
-        End While
+            strSQL = ""
+            strSQL = strSQL & "SELECT * FROM T_EXL_CSMANUAL "
+            strSQL = strSQL & "WHERE NEW_CODE = '" & strCust & "'"
 
-        'クローズ処理 
-        dataread.Close()
-        dbcmd.Dispose()
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
 
-        TextBox3.ForeColor = Drawing.Color.Black
-        TextBox4.ForeColor = Drawing.Color.Black
-        TextBox8.ForeColor = Drawing.Color.Black
-        TextBox55.ForeColor = Drawing.Color.Black
+            '結果を取り出す 
+            While (dataread.Read())
+                DropDownList100.SelectedValue = ""
+                DropDownList1.SelectedValue = dataread("IV_NECE").ToString
+                DropDownList2.SelectedValue = dataread("PL_NECE").ToString
+                DropDownList3.SelectedValue = dataread("BL_NECE").ToString
+                DropDownList4.SelectedValue = dataread("CO_NECE").ToString
+                DropDownList5.SelectedValue = dataread("EPA_NECE").ToString
+                DropDownList6.SelectedValue = dataread("WOOD_NECE").ToString
+                DropDownList7.SelectedValue = dataread("DELI_NECE").ToString
+                DropDownList8.SelectedValue = dataread("INSP_NECE").ToString
+                DropDownList9.SelectedValue = dataread("ERL_NECE").ToString
+                DropDownList10.SelectedValue = dataread("VESS_NECE").ToString
+                DropDownList11.SelectedValue = dataread("CONTAINER_CLEANING").ToString
+                DropDownList12.SelectedValue = dataread("LC").ToString
+                DropDownList13.SelectedValue = dataread("DOC_NECESSITY").ToString
+                DropDownList14.SelectedValue = dataread("FTA").ToString
+                DropDownList15.SelectedValue = dataread("CERTIFICATE_OF_CONFORMITY").ToString
+                DropDownList16.SelectedValue = dataread("DOC_OF_EGYPT").ToString
+
+                TextBox2.Text = dataread("OLD_CODE").ToString
+                TextBox3.Text = dataread("CUST_NM").ToString
+                TextBox4.Text = dataread("CUST_AB").ToString
+                TextBox5.Text = dataread("INCOTEM").ToString
+                TextBox6.Text = dataread("BL_TYPE").ToString
+                TextBox7.Text = dataread("BL_SEND").ToString
+                TextBox8.Text = dataread("CUST_ADDRESS").ToString
+                TextBox55.Text = dataread("CONSIGNEE").ToString
+                TextBox9.Text = dataread("CNEE_NM_SI").ToString
+                TextBox10.Text = dataread("FIN_DESTINATION").ToString
+                TextBox11.Text = dataread("NOTIFY").ToString
+                TextBox12.Text = dataread("FORWARDER_INFO").ToString
+                TextBox13.Text = dataread("CUST_REQ").ToString
+                TextBox14.Text = dataread("SALES_STAFF").ToString
+                TextBox15.Text = dataread("SALES_STAFF1").ToString
+                TextBox16.Text = dataread("SALES_STAFF2").ToString
+                TextBox17.Text = dataread("SALES_STAFF3").ToString
+                TextBox18.Text = dataread("SALES_STAFF4").ToString
+                TextBox19.Text = dataread("CUST_STAFF").ToString
+                TextBox20.Text = dataread("CUST_STAFF1").ToString
+                TextBox21.Text = dataread("CUST_STAFF2").ToString
+                TextBox22.Text = dataread("CUST_STAFF3").ToString
+                TextBox23.Text = dataread("CUST_STAFF4").ToString
+                TextBox24.Text = dataread("SHIP_DAY_OF_WEEK").ToString
+                TextBox25.Text = dataread("DESTINATION").ToString
+                TextBox26.Text = dataread("SHIPMENT_KBN").ToString
+                TextBox27.Text = dataread("LT").ToString
+                TextBox28.Text = dataread("PORT").ToString
+                TextBox29.Text = dataread("SHIP_AGREE").ToString
+                TextBox30.Text = dataread("SHIPPING_COMPANY").ToString
+                TextBox31.Text = dataread("LOCAL_AGENCY").ToString
+                TextBox32.Text = dataread("CONTAINER_SIZE").ToString
+                TextBox33.Text = dataread("REMARKS_ONBL").ToString
+                TextBox34.Text = dataread("IV_ON_BL").ToString
+                TextBox56.Text = dataread("HS_ON_BL").ToString
+                TextBox35.Text = dataread("CNEE_STAFF").ToString
+                TextBox36.Text = dataread("CNEE_STAFF_CONTACT1").ToString
+                TextBox37.Text = dataread("CNEE_STAFF_CONTACT2").ToString
+                TextBox38.Text = dataread("CNEE_STAFF2").ToString
+                TextBox39.Text = dataread("CNEE_STAFF2_CONTACT").ToString
+                TextBox40.Text = dataread("TAXID").ToString
+                TextBox41.Text = dataread("CONSIGNEE_OF_SI").ToString
+                TextBox42.Text = dataread("CONSIGNEE_OF_SI_ADDRESS").ToString
+                TextBox43.Text = dataread("FINAL_DES").ToString
+                TextBox44.Text = dataread("FINAL_DES_ADDRESS").ToString
+
+                DropDownList17.SelectedValue = dataread("BEARING").ToString
+                DropDownList18.SelectedValue = dataread("IV_AUTO_CALC").ToString
+
+                TextBox47.Text = dataread("FORWARDER").ToString
+                TextBox48.Text = dataread("FORWARDER_STAFF").ToString
+                TextBox49.Text = dataread("TO1").ToString
+                TextBox50.Text = dataread("CC1").ToString
+                TextBox51.Text = dataread("CC2").ToString
+                TextBox52.Text = dataread("CC3").ToString
+                TextBox53.Text = dataread("FORWARDER_NM").ToString
+                TextBox54.Text = dataread("FORWARDER_STAFF_NM").ToString
+            End While
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+            cnn.Close()
+            cnn.Dispose()
+
+            TextBox3.ForeColor = Drawing.Color.Black
+            TextBox4.ForeColor = Drawing.Color.Black
+            TextBox8.ForeColor = Drawing.Color.Black
+            TextBox55.ForeColor = Drawing.Color.Black
+
+
+        Else
+
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('チェックを入れてから選択してください。');</script>", False)
+
+
+        End If
 
 
     End Sub
@@ -435,42 +455,151 @@ Partial Class cs_home
         'データベース接続を開く
         cnn.Open()
 
-        strSQL = ""
-        strSQL = strSQL & "SELECT * FROM T_EXL_CSMANUAL_ADDCUST "
-        strSQL = strSQL & "WHERE CUSTCODE = '" & strCust & "'"
+        Dim strMode As String = Session("strMode")
 
-        'ＳＱＬコマンド作成 
-        dbcmd = New SqlCommand(strSQL, cnn)
-        'ＳＱＬ文実行 
-        dataread = dbcmd.ExecuteReader()
-
-        '結果を取り出す 
-        While (dataread.Read())
-
-            DropDownList100.Text = dataread("CUSTCODE").ToString
-            TextBox3.Text = dataread("CUST_NAME").ToString
-            TextBox4.Text = dataread("CUST_SNAME").ToString
-            TextBox8.Text = dataread("CUST_NAME_ADDRESS").ToString
-            TextBox55.Text = dataread("CNEE_NAME_ADDRESS").ToString
-
-            TextBox3.ReadOnly = True
-            TextBox4.ReadOnly = True
-            TextBox8.ReadOnly = True
-            TextBox55.ReadOnly = True
-            TextBox3.ForeColor = Drawing.Color.Red
-            TextBox4.ForeColor = Drawing.Color.Red
-            TextBox8.ForeColor = Drawing.Color.Red
-            TextBox55.ForeColor = Drawing.Color.Red
+        If strMode = "01" Then
 
 
-        End While
+            strSQL = ""
+            strSQL = strSQL & "SELECT * FROM T_EXL_CSMANUAL "
+            strSQL = strSQL & "WHERE NEW_CODE = '" & strCust & "'"
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+            '結果を取り出す 
+            While (dataread.Read())
+                'DropDownList100.SelectedValue = ""
+                DropDownList1.SelectedValue = dataread("IV_NECE").ToString
+                DropDownList2.SelectedValue = dataread("PL_NECE").ToString
+                DropDownList3.SelectedValue = dataread("BL_NECE").ToString
+                DropDownList4.SelectedValue = dataread("CO_NECE").ToString
+                DropDownList5.SelectedValue = dataread("EPA_NECE").ToString
+                DropDownList6.SelectedValue = dataread("WOOD_NECE").ToString
+                DropDownList7.SelectedValue = dataread("DELI_NECE").ToString
+                DropDownList8.SelectedValue = dataread("INSP_NECE").ToString
+                DropDownList9.SelectedValue = dataread("ERL_NECE").ToString
+                DropDownList10.SelectedValue = dataread("VESS_NECE").ToString
+                DropDownList11.SelectedValue = dataread("CONTAINER_CLEANING").ToString
+                DropDownList12.SelectedValue = dataread("LC").ToString
+                DropDownList13.SelectedValue = dataread("DOC_NECESSITY").ToString
+                DropDownList14.SelectedValue = dataread("FTA").ToString
+                DropDownList15.SelectedValue = dataread("CERTIFICATE_OF_CONFORMITY").ToString
+                DropDownList16.SelectedValue = dataread("DOC_OF_EGYPT").ToString
+
+                TextBox2.Text = dataread("OLD_CODE").ToString
+                TextBox3.Text = dataread("CUST_NM").ToString
+                TextBox4.Text = dataread("CUST_AB").ToString
+                TextBox5.Text = dataread("INCOTEM").ToString
+                TextBox6.Text = dataread("BL_TYPE").ToString
+                TextBox7.Text = dataread("BL_SEND").ToString
+                TextBox8.Text = dataread("CUST_ADDRESS").ToString
+                TextBox55.Text = dataread("CONSIGNEE").ToString
+                TextBox9.Text = dataread("CNEE_NM_SI").ToString
+                TextBox10.Text = dataread("FIN_DESTINATION").ToString
+                TextBox11.Text = dataread("NOTIFY").ToString
+                TextBox12.Text = dataread("FORWARDER_INFO").ToString
+                TextBox13.Text = dataread("CUST_REQ").ToString
+                TextBox14.Text = dataread("SALES_STAFF").ToString
+                TextBox15.Text = dataread("SALES_STAFF1").ToString
+                TextBox16.Text = dataread("SALES_STAFF2").ToString
+                TextBox17.Text = dataread("SALES_STAFF3").ToString
+                TextBox18.Text = dataread("SALES_STAFF4").ToString
+                TextBox19.Text = dataread("CUST_STAFF").ToString
+                TextBox20.Text = dataread("CUST_STAFF1").ToString
+                TextBox21.Text = dataread("CUST_STAFF2").ToString
+                TextBox22.Text = dataread("CUST_STAFF3").ToString
+                TextBox23.Text = dataread("CUST_STAFF4").ToString
+                TextBox24.Text = dataread("SHIP_DAY_OF_WEEK").ToString
+                TextBox25.Text = dataread("DESTINATION").ToString
+                TextBox26.Text = dataread("SHIPMENT_KBN").ToString
+                TextBox27.Text = dataread("LT").ToString
+                TextBox28.Text = dataread("PORT").ToString
+                TextBox29.Text = dataread("SHIP_AGREE").ToString
+                TextBox30.Text = dataread("SHIPPING_COMPANY").ToString
+                TextBox31.Text = dataread("LOCAL_AGENCY").ToString
+                TextBox32.Text = dataread("CONTAINER_SIZE").ToString
+                TextBox33.Text = dataread("REMARKS_ONBL").ToString
+                TextBox34.Text = dataread("IV_ON_BL").ToString
+                TextBox56.Text = dataread("HS_ON_BL").ToString
+                TextBox35.Text = dataread("CNEE_STAFF").ToString
+                TextBox36.Text = dataread("CNEE_STAFF_CONTACT1").ToString
+                TextBox37.Text = dataread("CNEE_STAFF_CONTACT2").ToString
+                TextBox38.Text = dataread("CNEE_STAFF2").ToString
+                TextBox39.Text = dataread("CNEE_STAFF2_CONTACT").ToString
+                TextBox40.Text = dataread("TAXID").ToString
+                TextBox41.Text = dataread("CONSIGNEE_OF_SI").ToString
+                TextBox42.Text = dataread("CONSIGNEE_OF_SI_ADDRESS").ToString
+                TextBox43.Text = dataread("FINAL_DES").ToString
+                TextBox44.Text = dataread("FINAL_DES_ADDRESS").ToString
+
+                DropDownList17.SelectedValue = dataread("BEARING").ToString
+                DropDownList18.SelectedValue = dataread("IV_AUTO_CALC").ToString
+
+                TextBox47.Text = dataread("FORWARDER").ToString
+                TextBox48.Text = dataread("FORWARDER_STAFF").ToString
+                TextBox49.Text = dataread("TO1").ToString
+                TextBox50.Text = dataread("CC1").ToString
+                TextBox51.Text = dataread("CC2").ToString
+                TextBox52.Text = dataread("CC3").ToString
+                TextBox53.Text = dataread("FORWARDER_NM").ToString
+                TextBox54.Text = dataread("FORWARDER_STAFF_NM").ToString
+            End While
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+
+            TextBox3.ForeColor = Drawing.Color.Black
+            TextBox4.ForeColor = Drawing.Color.Black
+            TextBox8.ForeColor = Drawing.Color.Black
+            TextBox55.ForeColor = Drawing.Color.Black
+
+        Else
+
+
+            strSQL = ""
+            strSQL = strSQL & "SELECT * FROM T_EXL_CSMANUAL_ADDCUST "
+            strSQL = strSQL & "WHERE CUSTCODE = '" & strCust & "'"
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+            '結果を取り出す 
+            While (dataread.Read())
+
+                DropDownList100.Text = dataread("CUSTCODE").ToString
+                TextBox3.Text = dataread("CUST_NAME").ToString
+                TextBox4.Text = dataread("CUST_SNAME").ToString
+                TextBox8.Text = dataread("CUST_NAME_ADDRESS").ToString
+                TextBox55.Text = dataread("CNEE_NAME_ADDRESS").ToString
+
+                TextBox3.ReadOnly = True
+                TextBox4.ReadOnly = True
+                TextBox8.ReadOnly = True
+                TextBox55.ReadOnly = True
+                TextBox3.ForeColor = Drawing.Color.Red
+                TextBox4.ForeColor = Drawing.Color.Red
+                TextBox8.ForeColor = Drawing.Color.Red
+                TextBox55.ForeColor = Drawing.Color.Red
+
+
+            End While
 
 
 
-        'クローズ処理 
-        dataread.Close()
-        dbcmd.Dispose()
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
 
+        End If
+
+        cnn.Close()
+        cnn.Dispose()
 
 
     End Sub
@@ -656,6 +785,7 @@ Partial Class cs_home
         Command.ExecuteNonQuery()
 
         cnn.Close()
+        cnn.Dispose()
 
     End Sub
 
@@ -664,20 +794,13 @@ Partial Class cs_home
 
         '必須チェック
         If Trim(DropDownList100.Text) = "" Then
-            MsgBox("新コードは必須入力です。")
+            Label3.Text = "新コードは必須入力です。"
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('新コードは必須入力です。');</script>", False)
+
             chk_Nyuryoku = False
         End If
 
-        '全角入力チェック
-        If HankakuEisuChk(DropDownList100.Text) = False And Trim(DropDownList100.Text) <> "" Then
-            MsgBox("新コードに全角文字が使用されています。")
-            chk_Nyuryoku = False
-        End If
 
-        If Len(DropDownList100.Text) <> 4 Then
-            MsgBox("新コードは４桁で入力してください。")
-            chk_Nyuryoku = False
-        End If
 
     End Function
 

@@ -217,6 +217,8 @@
                     var left = xscale.getPixelForValue(Labelarr[0]);                      // 塗りつぶしの基点（上端）
                     var right = xscale.getPixelForValue(Labelarr[Labelarr.length - 4]);                      // 塗りつぶしの基点（上端）
 
+                    var topX = yscale.top;                      // 塗りつぶしの基点（上端）
+
                     // 塗りつぶす長方形の設定
                     ctx.fillStyle = "rgba(230,0,51)";
                     ctx.fillRect(left, top, right+14, 1.5);
@@ -226,7 +228,9 @@
                     ctx.textAlign = 'center';
                     ctx.fillRect(left +10, top-165, 140, 20);
                     ctx.fillStyle = "White";
-                    ctx.fillText('収容可能数：' + dataarr5[1] + '千台', left + 80, top - 155);
+                    ctx.fillText('収容可能数：' + dataarr5[1] + '千台', left + 80, topX + 48);
+
+
 
                     ctx.save();
 
@@ -392,7 +396,7 @@
                                       },
                                       ticks: {                       // 目盛り
                                           min: 100,                        // 最小値
-                                          //max: 20,                       // 最大値
+                                          max: 500,                       // 最大値
                                           //stepSize: 50000,                   // 軸間隔
                                           //callback: function(label, index, labels) { /* ここです */
                                           //    return label.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ;

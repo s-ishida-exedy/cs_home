@@ -169,7 +169,7 @@
                 <asp:Button ID="Button1" runat="server" Text="登　録" style="width:120px" Font-Size="Small" />&nbsp;
                 <asp:Button ID="Button7" runat="server" Text="更　新" style="width:120px" Font-Size="Small" />&nbsp;
                 <asp:Button ID="Button8" runat="server" Text="削　除" style="width:120px" Font-Size="Small" />&nbsp;
-                <asp:Label ID="Label3" runat="server" Text="Label" Class="err"></asp:Label>
+                <asp:Label ID="Label3" runat="server" Text="" Class="err" ></asp:Label>
             </td>
             <td class="third-cell">
                 <a href="./m_mail00.aspx">一覧に戻る</a>
