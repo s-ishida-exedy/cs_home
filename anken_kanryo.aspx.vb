@@ -1097,10 +1097,10 @@ Partial Class yuusen
         Dim wday3 As String = ""
         Dim dt1 As DateTime = DateTime.Now
 
-        Dim ts1 As New TimeSpan(80, 0, 0, 0)
-        Dim ts2 As New TimeSpan(80, 0, 0, 0)
-        Dim dt2 As DateTime = dt1 + ts1
-        Dim dt3 As DateTime = dt1 - ts1
+        Dim ts1 As New TimeSpan(1, 0, 0, 0)
+        Dim ts2 As New TimeSpan(2, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 - ts1
+        Dim dt3 As DateTime = dt1 - ts2
 
 
         Dim a As String
@@ -1299,6 +1299,48 @@ Partial Class yuusen
             'End If
 
         Next
+
+
+        Dim strDate As String = ""
+
+        strSQL = "SELECT DATA_UPD FROM T_EXL_DATA_UPD WHERE DATA_CD = '015'"
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strDate = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            strDate += dataread("DATA_UPD")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+        If strDate < dt3 Then
+
+            '最終更新年月日を表示
+            Me.Label10.Text = strDate & " 最終更新分(2日前以前)"
+            Me.Label10.ForeColor = Drawing.Color.Red
+
+
+        ElseIf strDate < dt2 Then
+
+            '最終更新年月日を表示
+            Me.Label10.Text = strDate & " 最終更新分(1日前以前)"
+            Me.Label10.ForeColor = Drawing.Color.Red
+
+        Else
+
+            '最終更新年月日を表示
+            Me.Label10.Text = strDate & " 最終更新分"
+            Me.Label10.ForeColor = Drawing.Color.Black
+
+        End If
 
 
 

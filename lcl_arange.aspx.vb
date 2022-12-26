@@ -888,6 +888,12 @@ Partial Class cs_home
 
         Dim dt1 As DateTime = DateTime.Now
 
+        Dim dt11 As DateTime = DateTime.Now
+
+        Dim ts11 As New TimeSpan(1, 0, 0, 0)
+        Dim ts22 As New TimeSpan(2, 0, 0, 0)
+        Dim dt22 As DateTime = dt11 - ts11
+        Dim dt33 As DateTime = dt11 - ts22
 
         '稼働日で7日先を取得
         'データベース接続を開く
@@ -1070,6 +1076,48 @@ Partial Class cs_home
         '    Panel2.Visible = True
 
         'End If
+
+
+        Dim strDate As String = ""
+
+        strSQL = "SELECT DATA_UPD FROM T_EXL_DATA_UPD WHERE DATA_CD = '015'"
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strDate = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            strDate += dataread("DATA_UPD")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+        If strDate < dt33 Then
+
+            '最終更新年月日を表示
+            Me.Label10.Text = strDate & " 最終更新分(2日前以前)"
+            Me.Label10.ForeColor = Drawing.Color.Red
+
+
+        ElseIf strDate < dt22 Then
+
+            '最終更新年月日を表示
+            Me.Label10.Text = strDate & " 最終更新分(1日前以前)"
+            Me.Label10.ForeColor = Drawing.Color.Red
+
+        Else
+
+            '最終更新年月日を表示
+            Me.Label10.Text = strDate & " 最終更新分"
+            Me.Label10.ForeColor = Drawing.Color.Black
+
+        End If
 
         cnn.Close()
         cnn.Dispose()

@@ -216,7 +216,10 @@
                         <p>・AC要:BOOKING未確定</p>
                     </div>
                 </td>
-                <td style="width:500px;" >
+                <td style="width:200px;" >
+                </td>
+                <td style="width:300px;" >
+                    <asp:Label ID="Label10" runat="server" Text="AAA" ></asp:Label>
                 </td>
             </tr>
         </table>
