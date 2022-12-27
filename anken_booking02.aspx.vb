@@ -1201,10 +1201,11 @@ Partial Class yuusen
         'Dim strto As String = GET_from(struid)
         'Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
 
-        Dim strto As String = GET_ToAddress(2, 1)
+        'Dim strto As String = GET_ToAddress(2, 1)
+        Dim strto As String = GET_ToAddress2("01", 1)
         strto = Left(strto, Len(strto) - 1)
 
-        Dim strcc As String = GET_ToAddress(2, 0) + GET_from(struid)
+        Dim strcc As String = GET_ToAddress2("01", 1) + GET_from(struid)
 
         'strto = GET_from(struid)
         'strcc = GET_from(struid)
@@ -1313,10 +1314,11 @@ Partial Class yuusen
         Dim strfrom As String = GET_from(struid)
         'Dim strto As String = GET_from(struid)
         'Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
-        Dim strto As String = GET_ToAddress(3, 1)
+        'Dim strto As String = GET_ToAddress(3, 1)
+        Dim strto As String = GET_ToAddress2("02", 1)
         strto = Left(strto, Len(strto) - 1)
 
-        Dim strcc As String = GET_ToAddress(3, 0) + GET_from(struid)
+        Dim strcc As String = GET_ToAddress2("02", 1) + GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -1417,10 +1419,11 @@ Partial Class yuusen
         ' Dim strto As String = GET_from(struid)
         ' Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
 
-        Dim strto As String = GET_ToAddress(4, 1)
+        'Dim strto As String = GET_ToAddress(4, 1)
+        Dim strto As String = GET_ToAddress2("03", 1)
         strto = Left(strto, Len(strto) - 1)
 
-        Dim strcc As String = GET_ToAddress(4, 0) + GET_from(struid)
+        Dim strcc As String = GET_ToAddress2("03", 1) + GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -1518,10 +1521,11 @@ Partial Class yuusen
         'Dim strto As String = GET_from(struid)
         'Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
 
-        Dim strto As String = GET_ToAddress(5, 1)
+        'Dim strto As String = GET_ToAddress(5, 1)
+        Dim strto As String = GET_ToAddress2("04", 1)
         strto = Left(strto, Len(strto) - 1)
 
-        Dim strcc As String = GET_ToAddress(5, 0) + GET_from(struid)
+        Dim strcc As String = GET_ToAddress2("04", 1) + GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -2064,15 +2068,12 @@ Step00:
 
         ' メールの内容
 
-        Dim strto As String = GET_ToAddress(0, 1) '宛先
+        'Dim strto As String = GET_ToAddress(0, 1) '宛先
+        Dim strto As String = GET_ToAddress2("05", 1) '宛先
         strto = Left(strto, Len(strto) - 1)
 
-        Dim strcc As String = GET_ToAddress(0, 0) + GET_from(struid)  'CC 
-
-
-
-
-
+        'Dim strcc As String = GET_ToAddress(0, 0) + GET_from(struid)  'CC 
+        Dim strcc As String = GET_ToAddress2("05", 1) + GET_from(struid)  'CC 
 
 
         Dim f As String = ""
@@ -2241,6 +2242,49 @@ Step00:
     End Function
 
 
+    Private Function GET_ToAddress2(strkbn As String, strtocc As String) As String
+        'BCCメールアドレス情報を取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+
+        GET_ToAddress2 = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        strSQL = strSQL & "SELECT MAIL_ADD FROM M_EXL_MAIL01 "
+
+        strSQL = strSQL & "WHERE TASK_CD = '" & strkbn & "' "
+        strSQL = strSQL & "AND FLG = '" & strtocc & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strDate = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            GET_ToAddress2 += dataread("MAIL_ADD") + ","
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
     Private Function GET_from(struid As String) As String
         'BCCメールアドレス情報を取得
         Dim dataread As SqlDataReader
