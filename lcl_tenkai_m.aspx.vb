@@ -649,6 +649,7 @@ Partial Class cs_home
                 message.Dispose()
             End Using
 
+            Call button00()
             Page.ClientScript.RegisterStartupScript(Me.GetType, "確認", "<script language='JavaScript'>confirm('メールを送信しました。');</script>", False)
 
             TextBox1.Text = ""
@@ -902,5 +903,92 @@ Partial Class cs_home
 
     End Function
 
+
+    Private Sub button00()
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim intCnt As Long
+
+        'データベース接続を開く
+        cnn.Open()
+
+        '表示ボタン　FLG03は表示
+        Dim I As Integer
+        For I = 0 To GridView1.Rows.Count - 1
+            If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
+
+                'FIN_FLGを更新
+                strSQL = ""
+                strSQL = strSQL & "UPDATE T_EXL_LCLTENKAI SET FLG03 ='1' "
+                strSQL = strSQL & "WHERE CUST = '" & GridView1.Rows(I).Cells(3).Text & "'"
+                strSQL = strSQL & "AND ETD = '" & GridView1.Rows(I).Cells(8).Text & "'"
+                strSQL = strSQL & "AND LCL_SIZE = '" & GridView1.Rows(I).Cells(10).Text & "'"
+                strSQL = strSQL & "AND FLG01 <> '1' "
+
+                Command.CommandText = strSQL
+                ' SQLの実行
+                Command.ExecuteNonQuery()
+
+                Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(5).Text), 1)
+                Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(4).Text, 4), 1)
+                Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(4).Text, 4), Trim(GridView1.Rows(I).Cells(5).Text), 1)
+
+                strSQL = ""
+                strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_LCLCUSTPREADS WHERE "
+                strSQL = strSQL & "T_EXL_LCLCUSTPREADS.CUSTCODE = '" & GridView1.Rows(I).Cells(3).Text & "' "
+
+
+                'ＳＱＬコマンド作成 
+                dbcmd = New SqlCommand(strSQL, cnn)
+                'ＳＱＬ文実行 
+                dataread = dbcmd.ExecuteReader()
+
+                While (dataread.Read())
+                    intCnt = dataread("RecCnt")
+                End While
+
+                'クローズ処理 
+                dataread.Close()
+                dbcmd.Dispose()
+
+                If intCnt > 0 Then
+                    strSQL = ""
+                    strSQL = strSQL & "UPDATE T_EXL_LCLCUSTPREADS SET ADDRESS ='" & Replace(GridView1.Rows(I).Cells(17).Text, "<br>", "__") & "' "
+                    strSQL = strSQL & "WHERE CUSTCODE = '" & GridView1.Rows(I).Cells(3).Text & "'"
+                Else
+                    strSQL = ""
+                    strSQL = strSQL & "INSERT INTO T_EXL_LCLCUSTPREADS VALUES("
+                    strSQL = strSQL & "'" & GridView1.Rows(I).Cells(3).Text & "' "
+                    strSQL = strSQL & ",'" & Replace(GridView1.Rows(I).Cells(17).Text, "<br>", "__") & "' "
+                    strSQL = strSQL & ")"
+                End If
+                Command.CommandText = strSQL
+                ' SQLの実行
+                Command.ExecuteNonQuery()
+            Else
+
+            End If
+        Next
+
+        GridView1.DataBind()
+
+        cnn.Close()
+        cnn.Dispose()
+
+
+    End Sub
 
 End Class

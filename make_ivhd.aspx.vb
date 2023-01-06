@@ -799,6 +799,19 @@ Partial Class yuusen
 
         Dim a
 
+        Dim strFile0 As String = ""
+        'ファイル検索
+        strFile0 = Dir(strPath & "*SHIP_IVHEDDR.xlsx")
+        Do While strFile0 <> ""
+
+            If strFile0 = Format(Now, "yyyyMMdd") & "_SHIP_IVHEDDR.xlsx" Then
+            Else
+                System.IO.File.Delete(strPath & strFile0)
+            End If
+
+            strFile0 = Dir()
+        Loop
+
 
         If GridView1.Rows.Count >= 1 Then
 

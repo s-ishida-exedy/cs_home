@@ -1205,7 +1205,7 @@ Partial Class yuusen
         Dim strto As String = GET_ToAddress2("01", 1)
         strto = Left(strto, Len(strto) - 1)
 
-        Dim strcc As String = GET_ToAddress2("01", 1) + GET_from(struid)
+        Dim strcc As String = GET_ToAddress2("01", 2) + GET_from(struid)
 
         'strto = GET_from(struid)
         'strcc = GET_from(struid)
@@ -1318,7 +1318,7 @@ Partial Class yuusen
         Dim strto As String = GET_ToAddress2("02", 1)
         strto = Left(strto, Len(strto) - 1)
 
-        Dim strcc As String = GET_ToAddress2("02", 1) + GET_from(struid)
+        Dim strcc As String = GET_ToAddress2("02", 2) + GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -1423,7 +1423,7 @@ Partial Class yuusen
         Dim strto As String = GET_ToAddress2("03", 1)
         strto = Left(strto, Len(strto) - 1)
 
-        Dim strcc As String = GET_ToAddress2("03", 1) + GET_from(struid)
+        Dim strcc As String = GET_ToAddress2("03", 2) + GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -1525,7 +1525,7 @@ Partial Class yuusen
         Dim strto As String = GET_ToAddress2("04", 1)
         strto = Left(strto, Len(strto) - 1)
 
-        Dim strcc As String = GET_ToAddress2("04", 1) + GET_from(struid)
+        Dim strcc As String = GET_ToAddress2("04", 2) + GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
@@ -2073,7 +2073,7 @@ Step00:
         strto = Left(strto, Len(strto) - 1)
 
         'Dim strcc As String = GET_ToAddress(0, 0) + GET_from(struid)  'CC 
-        Dim strcc As String = GET_ToAddress2("05", 1) + GET_from(struid)  'CC 
+        Dim strcc As String = GET_ToAddress2("05", 2) + GET_from(struid)  'CC 
 
 
         Dim f As String = ""

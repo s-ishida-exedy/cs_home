@@ -321,7 +321,18 @@ Partial Class cs_home
 
         Dim dtToday As DateTime = DateTime.Today
 
+        Dim strFile0 As String = ""
+        'ファイル検索
+        strFile0 = Dir(strPath & "*CS_MANUAL.xlsx")
+        Do While strFile0 <> ""
 
+            If strFile0 = Format(Now, "yyyyMMdd") & "_CS_MANUAL.xlsx" Then
+            Else
+                System.IO.File.Delete(strPath & strFile0)
+            End If
+
+            strFile0 = Dir()
+        Loop
 
         Dim dt = GetNorthwindProductTable()
         Dim workbook = New XLWorkbook()

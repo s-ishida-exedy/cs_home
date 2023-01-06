@@ -502,66 +502,90 @@ Partial Class cs_home
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
 
+        '前月分ダウンロードボタン押下
+        Dim strFile As String = Format(Now, "yyyyMMdd") & "_特定輸出管理表.xlsx"
+        Dim strPath As String = "C:\exp\cs_home\files\"
+        Dim strChanged As String    'サーバー上のフルパス
+        Dim strFileNm As String     'ファイル名
 
-        Dim t As Integer
-        t = 1
-        Dim cnt As Integer = 0
+        Dim dtToday As DateTime = DateTime.Today
 
-        Dim val01 As String = ""
+        Dim strFile0 As String = ""
+        'ファイル検索
+        strFile0 = Dir(strPath & "*特定輸出管理表.xlsx")
+        Do While strFile0 <> ""
 
-        Using wb As XLWorkbook = New XLWorkbook()
-            Dim ws As IXLWorksheet = wb.AddWorksheet("管理表")
-            For Each cell As TableCell In GridView2.HeaderRow.Cells
+            If strFile0 = Format(Now, "yyyyMMdd") & "_特定輸出管理表.xlsx" Then
+            Else
+                System.IO.File.Delete(strPath & strFile0)
+            End If
 
-                If cnt < 2 Then
-                    cnt = cnt + 1
-                Else
-                    val01 = Trim(Replace(cell.Text, "&nbsp;", ""))
-                    ws.Cell(1, t).Value = val01
-                    t = t + 1
-                End If
-            Next
+            strFile0 = Dir()
+        Loop
 
-            cnt = 0
-            t = 2
-            For Each row As GridViewRow In GridView2.Rows
+        Dim dt = GetNorthwindProductTable()
+        Dim workbook = New XLWorkbook()
+        Dim worksheet = workbook.Worksheets.Add(dt)
+
+        worksheet.Style.Font.FontName = "Meiryo UI"
+        worksheet.Style.Alignment.WrapText = False
+        worksheet.Columns.AdjustToContents()
+        worksheet.SheetView.FreezeRows(1)
+
+        workbook.SaveAs(strPath & strFile)
 
 
-                For i As Integer = 2 To row.Cells.Count - 1
+        'ファイル名を取得する
+        Dim strTxtFiles() As String = IO.Directory.GetFiles(strPath, Format(Now, "yyyyMMdd") & "_特定輸出管理表.xlsx")
 
-                    val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
-                    Select Case i
+        strChanged = strTxtFiles(0)
+        strFileNm = Path.GetFileName(strChanged)
 
-                        Case 1 To 2
+        'Contentをクリア
+        Response.ClearContent()
 
-                            If IsDate(val01) = True Then
-                                ws.Cell(t, i - 1).SetValue(DateValue(val01))
-                            Else
-                                ws.Cell(t, i - 1).SetValue(val01)
-                            End If
+        'Contentを設定
+        'Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+        Response.ContentType = "application/vnd.ms-excel"
 
-                        Case Else
-                            ws.Cell(t, i - 1).SetValue(val01)
-                    End Select
+        '表示ファイル名を指定
+        Dim fn As String = HttpUtility.UrlEncode(strFileNm)
+        Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
 
-                Next
-                t = t + 1
+        'ダウンロード対象ファイルを指定
+        Response.WriteFile(strChanged)
 
-            Next
-
-            ws.Style.Font.FontName = "Meiryo UI"
-            ws.Columns.AdjustToContents()
-            ws.SheetView.FreezeRows(1)
-
-            Dim struid As String = Session("UsrId")
-            wb.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\特定輸出管理表_" & Now.ToString(“yyyyMMddhhmmss”) & "_PIC_" & struid & ".xlsx")
-
-        End Using
-
-        Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('出力が完了しました。\n出力先：\\\svnas201\\EXD06101\\DISC_COMMON\\WEB出力');</script>", False)
+        'ダウンロード実行
+        Response.Flush()
+        Response.End()
 
 
     End Sub
+    Private Shared Function GetNorthwindProductTable() As DataTable
+        'EXCELファイル出力
+        Dim strSQL As String = ""
+        Dim strSDate As String = ""
+        Dim strEDate As String = ""
+
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+        Dim dt = New DataTable("T_EXL_DECKANRIHYO")
+
+        Using conn = New SqlConnection(ConnectionString)
+            Dim cmd = conn.CreateCommand()
+
+            strSQL = strSQL & "SELECT * "
+            strSQL = strSQL & "FROM T_EXL_DECKANRIHYO "
+
+            cmd.CommandText = strSQL
+            Dim sda = New SqlDataAdapter(cmd)
+            sda.Fill(dt)
+        End Using
+
+        Return dt
+    End Function
 End Class
 
 

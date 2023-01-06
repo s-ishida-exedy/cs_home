@@ -223,7 +223,7 @@
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="Forwarder" HeaderText="海貨業者" SortExpression="Forwarder" >
-                <ItemStyle Font-Size="X-Small"  />
+                <ItemStyle Font-Size="Small"  />
                 </asp:BoundField>
                 <asp:BoundField DataField="CUST_CD" HeaderText="客先" SortExpression="CUST_CD" >
                 <ItemStyle Font-Size="Small" />
@@ -278,6 +278,10 @@
                 <asp:BoundField DataField="PONO" HeaderText="PONO" >
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
+                <asp:BoundField DataField="ROW_KBN" HeaderText="ROW_KBN" >
+                <ItemStyle Font-Size="Small" />
+                </asp:BoundField>
+
             </Columns>
             <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
@@ -307,6 +311,7 @@
   , a.SEQ_NO02
   , a.PONO
   , MAX(TBL.VAN_DATE) AS FINAL_VAN 
+  , a.ROW_KBN
 FROM T_BOOKING a
 INNER JOIN
   ( SELECT CUST_CD, INVOICE_NO, DAY01 AS VAN_DATE FROM T_BOOKING  
@@ -338,7 +343,7 @@ GROUP BY
       a.STATUS  , a.Forwarder , a.CUST_CD , a.CONSIGNEE , a.DESTINATION
   , a.INVOICE_NO  , a.CUT_DATE , a.ETD , a.ETA , a.TWENTY_FEET
   , a.FOURTY_FEET , a.LCL_QTY , a.BOOKING_NO , a.VESSEL_NAME
-  , a.VOYAGE_NO , a.SEQ_NO02 , a.PONO
+  , a.VOYAGE_NO , a.SEQ_NO02 , a.PONO,ROW_KBN
 "></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [Forwarder] FROM [T_BOOKING]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT STATUS FROM T_BOOKING"></asp:SqlDataSource>

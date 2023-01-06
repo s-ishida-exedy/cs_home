@@ -671,6 +671,21 @@ Partial Class yuusen
         Dim dt = GetNorthwindProductTable()
 
 
+
+        Dim strFile0 As String = ""
+        'ファイル検索
+        strFile0 = Dir(strPath & "*SHIPPINGMEMO.xlsx")
+        Do While strFile0 <> ""
+
+            If strFile0 = Format(Now, "yyyyMMdd") & "_SHIPPINGMEMO.xlsx" Then
+            Else
+                System.IO.File.Delete(strPath & strFile0)
+            End If
+
+            strFile0 = Dir()
+        Loop
+
+
         Dim a
 
         Dim dt2 As New DataTable("SHIPPINGMEMO")

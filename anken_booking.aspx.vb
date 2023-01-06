@@ -1482,7 +1482,23 @@ Step00:
 
 
 
+        Dim strFile0 As String = ""
+        'ファイル検索
+        strFile0 = Dir(strPath & "*出荷管理表.xlsx")
+        Do While strFile0 <> ""
+
+            If strFile0 = Format(Now, "yyyyMMdd") & "_出荷管理表.xlsx" Then
+            Else
+                System.IO.File.Delete(strPath & strFile0)
+            End If
+
+            strFile0 = Dir()
+        Loop
+
+
         Dim dt = GetNorthwindProductTable()
+
+
 
 
         Dim a

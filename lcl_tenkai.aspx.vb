@@ -144,10 +144,10 @@ Partial Class cs_home
         Dim strfrom As String = GET_from(struid)
 
 
-        Dim strto As String = GET_ToAddress(1, 1) '宛先
+        Dim strto As String = GET_ToAddress2("06", 1) '宛先
         strto = Left(strto, Len(strto) - 1)
 
-        Dim strcc As String = GET_ToAddress(1, 0) + GET_from(struid)  'CC 
+        Dim strcc As String = GET_ToAddress2("06", 2) + GET_from(struid)  'CC 
 
 
         ''strto = GET_from(struid)
@@ -239,10 +239,10 @@ Partial Class cs_home
         Dim strfrom As String = GET_from(struid)
 
 
-        Dim strto As String = GET_ToAddress(1, 1) '宛先
+        Dim strto As String = GET_ToAddress2("06", 1) '宛先
         strto = Left(strto, Len(strto) - 1)
 
-        Dim strcc As String = GET_ToAddress(1, 0) + GET_from(struid)  'CC 
+        Dim strcc As String = GET_ToAddress2("06", 2) + GET_from(struid)  'CC 
 
         'strto = GET_from(struid)
         'strcc = GET_from(struid)
@@ -365,6 +365,49 @@ Partial Class cs_home
 
     End Function
 
+    Private Function GET_ToAddress2(strkbn As String, strtocc As String) As String
+        'BCCメールアドレス情報を取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+
+        GET_ToAddress2 = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        strSQL = strSQL & "SELECT MAIL_ADD FROM M_EXL_MAIL01 "
+
+        strSQL = strSQL & "WHERE TASK_CD = '" & strkbn & "' "
+        strSQL = strSQL & "AND FLG = '" & strtocc & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strDate = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            GET_ToAddress2 += dataread("MAIL_ADD") + ","
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
     Private Function GET_from(struid As String) As String
         'BCCメールアドレス情報を取得
         Dim dataread As SqlDataReader

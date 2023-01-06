@@ -15,24 +15,56 @@ Partial Class cs_home
     Public strProcess As String
     Public strPath As String = "C:\exp\cs_home\files"
 
+    Private Sub GridView1_RowCreated2(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
+
+
+        'ヘッダー以外に処理
+        If e.Row.RowType = DataControlRowType.DataRow Then
+
+            'e.Row.Cells(10).Visible = False
+            If e.Row.Cells(18).Text = "" Then
+            Else
+                Dim s As Integer = e.Row.Cells(18).Text
+                e.Row.Cells(0).BackColor = ColorTranslator.FromWin32(s)
+
+                If e.Row.Cells(0).Text = "キャンセル" Then
+                    'e.Row.BorderStyle = BorderStyle.Dashed
+                    e.Row.Font.Strikeout = True
+                End If
+
+            End If
+
+        End If
+        e.Row.Cells(18).Visible = False
+
+    End Sub
+
 
     Private Sub GridView1_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowCreated
 
         'コード列非表示処理
         If e.Row.RowType = DataControlRowType.DataRow OrElse e.Row.RowType = DataControlRowType.Header Then
             'e.Row.Cells(10).Visible = False
+
         End If
+
+
+
 
         Dim row As GridViewRow = e.Row
 
         ' データ行である場合に、onmouseover／onmouseout属性を追加（1）
         If row.RowType = DataControlRowType.DataRow Then
 
+
+
+
+
             ' onmouseover属性を設定
             row.Attributes("onmouseover") = "setBg(this, '#CC99FF')"
 
-            ' データ行が通常行／代替行であるかで処理を分岐（2）
-            If row.RowState = DataControlRowState.Normal Then
+                ' データ行が通常行／代替行であるかで処理を分岐（2）
+                If row.RowState = DataControlRowState.Normal Then
                 row.Attributes("onmouseout") =
                   String.Format("setBg(this, '{0}')",
                     ColorTranslator.ToHtml(GridView1.RowStyle.BackColor))
@@ -42,6 +74,8 @@ Partial Class cs_home
                     ColorTranslator.ToHtml(
                       GridView1.AlternatingRowStyle.BackColor))
             End If
+
+
         End If
 
     End Sub
@@ -162,6 +196,19 @@ Partial Class cs_home
 
         Dim dtToday As DateTime = DateTime.Today
 
+        Dim strFile0 As String = ""
+        'ファイル検索
+        strFile0 = Dir(strPath & "*BOOKING.xlsx")
+        Do While strFile0 <> ""
+
+            If strFile0 = Format(Now, "yyyyMMdd") & "_BOOKING.xlsx" Then
+            Else
+                System.IO.File.Delete(strPath & strFile0)
+            End If
+
+            strFile0 = Dir()
+        Loop
+
         Dim dt = GetNorthwindProductTable()
 
         Dim a
@@ -197,6 +244,16 @@ Partial Class cs_home
         worksheet.Style.Alignment.WrapText = False
         worksheet.Columns.AdjustToContents()
         worksheet.SheetView.FreezeRows(1)
+
+        'Dim i As Long
+        'i = 1
+        'Do Until worksheet.Cell(i, 1).Value = ""
+        '    worksheet.Cell(i, 1)
+
+
+        '    i = i + 1
+        'Loop
+
 
         workbook.SaveAs(strPath & strFile)
 

@@ -4,24 +4,13 @@ Imports System.Data.SqlClient
 Imports System.Data.Common
 Imports System.Console
 Imports ClosedXML.Excel
-Imports MailKit.Net.Smtp
-Imports MailKit.Security
-Imports MimeKit
-Imports MimeKit.Text
 Imports System.IO
+
 Partial Class yuusen
     Inherits System.Web.UI.Page
 
     Public strRow As String
     Public strProcess As String
-
-    Private Sub GridView1_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
-
-
-
-    End Sub
-
-
 
     Protected Sub DropDownList1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList1.SelectedIndexChanged
 
@@ -184,53 +173,98 @@ Partial Class yuusen
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
-        Dim t As Integer
-        t = 1
-        Dim cnt As Integer = 0
 
-        Dim val01 As String = ""
-
-        Using wb As XLWorkbook = New XLWorkbook()
-            Dim ws As IXLWorksheet = wb.AddWorksheet("保管書類")
-            For Each cell As TableCell In GridView1.HeaderRow.Cells
-
-                val01 = Trim(Replace(cell.Text, "&nbsp;", ""))
-                ws.Cell(1, t).Value = val01
-                t = t + 1
-            Next
+        '前月分ダウンロードボタン押下
+        Dim strFile As String = Format(Now, "yyyyMMdd") & "_書庫管理.xlsx"
+        Dim strPath As String = "C:\exp\cs_home\files\"
+        Dim strChanged As String    'サーバー上のフルパス
+        Dim strFileNm As String     'ファイル名
 
 
-            t = 2
-            For Each row As GridViewRow In GridView1.Rows
-                For i As Integer = 0 To row.Cells.Count - 1
-                    val01 = Trim(Replace(row.Cells(i).Text, "&nbsp;", ""))
-
-                    If IsDate(val01) = True Then
-                        ws.Cell(t, i + 1).SetValue(DateValue(val01))
-                    Else
-                        ws.Cell(t, i + 1).SetValue(val01)
-                    End If
+        Dim dtToday As DateTime = DateTime.Today
 
 
+        Dim dt = GetNorthwindProductTable()
+        Dim workbook = New XLWorkbook()
+        Dim worksheet = workbook.Worksheets.Add(dt)
 
-                Next
-                t = t + 1
+        worksheet.Style.Font.FontName = "Meiryo UI"
+        worksheet.Style.Alignment.WrapText = False
+        worksheet.Columns.AdjustToContents()
+        worksheet.SheetView.FreezeRows(1)
 
-            Next
-
-            ws.Style.Font.FontName = "Meiryo UI"
-            ws.Style.Alignment.WrapText = False
-            ws.Columns.AdjustToContents()
-            ws.SheetView.FreezeRows(1)
+        workbook.SaveAs(strPath & strFile)
 
 
-            Dim struid As String = Session("UsrId")
-            wb.SaveAs("\\svnas201\EXD06101\DISC_COMMON\WEB出力\書庫保管処理" & Now.ToString(“yyyyMMddhhmmss”) & "_PIC_" & struid & ".xlsx")
+        'ファイル名を取得する
+        Dim strTxtFiles() As String = IO.Directory.GetFiles(strPath, Format(Now, "yyyyMMdd") & "_書庫管理.xlsx")
 
-        End Using
+        Dim strFile0 As String = ""
+        'ファイル検索
+        strFile0 = Dir(strPath & "*書庫管理.xlsx")
+        Do While strFile0 <> ""
 
-        Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('出力が完了しました。\n出力先：\\\svnas201\\EXD06101\\DISC_COMMON\\WEB出力');</script>", False)
+            If strFile0 = Format(Now, "yyyyMMdd") & "_書庫管理.xlsx" Then
+            Else
+                System.IO.File.Delete(strPath & strFile0)
+            End If
+
+            strFile0 = Dir()
+        Loop
+
+
+
+        strChanged = strTxtFiles(0)
+        strFileNm = Path.GetFileName(strChanged)
+
+        'Contentをクリア
+        Response.ClearContent()
+
+        'Contentを設定
+        'Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+        Response.ContentType = "application/vnd.ms-excel"
+
+        '表示ファイル名を指定
+        Dim fn As String = HttpUtility.UrlEncode(strFileNm)
+        Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
+
+        'ダウンロード対象ファイルを指定
+        Response.WriteFile(strChanged)
+
+        'ダウンロード実行
+        Response.Flush()
+        Response.End()
+
+
+
 
 
     End Sub
+    Private Shared Function GetNorthwindProductTable() As DataTable
+        'EXCELファイル出力
+        Dim strSQL As String = ""
+        Dim strSDate As String = ""
+        Dim strEDate As String = ""
+
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+        Dim dt = New DataTable("T_EXL_DOC_BOX")
+
+        Using conn = New SqlConnection(ConnectionString)
+            Dim cmd = conn.CreateCommand()
+
+            strSQL = strSQL & "SELECT * "
+            strSQL = strSQL & "FROM T_EXL_DOC_BOX "
+
+            cmd.CommandText = strSQL
+            Dim sda = New SqlDataAdapter(cmd)
+            sda.Fill(dt)
+        End Using
+
+        Return dt
+    End Function
+
+
 End Class

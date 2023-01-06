@@ -426,7 +426,7 @@
                         <HeaderStyle Width="70px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" >
-                        <HeaderStyle Width="150px" />
+                        <HeaderStyle Width="200px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="INVOICE" HeaderText="INVOICE" SortExpression="INVOICE" >
                         <HeaderStyle Width="150px" />
@@ -447,7 +447,7 @@
                         <HeaderStyle Width="120px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="VESSEL_NAME" HeaderText="船名" SortExpression="VESSEL_NAME" >
-                        <HeaderStyle Width="120px" />
+                        <HeaderStyle Width="170px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="VOYAGE_NO" HeaderText="VOYAGE_NO" SortExpression="VOYAGE_NO" >
                         <HeaderStyle Width="70px" />

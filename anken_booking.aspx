@@ -310,7 +310,7 @@
                 <p></p>
                 <%--<asp:Label ID="Label1" runat="server" Text="※チェック後にボタンを押す。(チェックボックスが緑のものはフォルダ作成可能)"  Font-Size="10px"></asp:Label>--%>
                 </td>
-                <td style="width:300px;" >
+                <td style="width:400px;" >
                     <asp:Label ID="Label10" runat="server" Text="AAA" ></asp:Label>
                 </td>
             </tr>
