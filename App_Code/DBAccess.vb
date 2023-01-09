@@ -408,6 +408,7 @@ Public Class DBAccess
         StrSQL = StrSQL & "  , a.SEQ_NO02 "
         StrSQL = StrSQL & "  , a.PONO "
         StrSQL = StrSQL & "  , MAX(TBL.VAN_DATE) AS FINAL_VAN  "
+        StrSQL = StrSQL & "  , a.ROW_KBN "
         StrSQL = StrSQL & "FROM T_BOOKING a "
         StrSQL = StrSQL & "INNER JOIN "
         StrSQL = StrSQL & "  ( SELECT CUST_CD, INVOICE_NO, DAY01 AS VAN_DATE FROM T_BOOKING  "
@@ -440,7 +441,7 @@ Public Class DBAccess
         StrSQL = StrSQL & "      a.STATUS  , a.Forwarder , a.CUST_CD , a.CONSIGNEE , a.DESTINATION "
         StrSQL = StrSQL & "  , a.INVOICE_NO  , a.CUT_DATE , a.ETD , a.ETA , a.TWENTY_FEET "
         StrSQL = StrSQL & "  , a.FOURTY_FEET , a.LCL_QTY , a.BOOKING_NO , a.VESSEL_NAME "
-        StrSQL = StrSQL & "  , a.VOYAGE_NO , a.SEQ_NO02 , a.PONO "
+        StrSQL = StrSQL & "  , a.VOYAGE_NO , a.SEQ_NO02 , a.PONO,a.ROW_KBN "
 
         cmd.CommandText = StrSQL
         cmd.Parameters.Clear()
