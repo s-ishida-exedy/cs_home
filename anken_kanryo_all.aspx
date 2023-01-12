@@ -1,4 +1,4 @@
-﻿    <%@ Page Language="VB" AutoEventWireup="false" CodeFile="anken_kanryo.aspx.vb" Inherits="yuusen" %>
+﻿    <%@ Page Language="VB" AutoEventWireup="false" CodeFile="anken_kanryo_all.aspx.vb" Inherits="yuusen" %>
 
 <%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
@@ -326,9 +326,9 @@
                 <td style="width:150px;" >
                 </td>
                 <td style="width:150px;" >
-                    <div class="button04">
-                    <a href="anken_kanryo_all.aspx?id={0}">完了VER2</a>
-                    </div>
+<%--                    <div class="button04">
+                    <a href="anken_booking02.aspx?id={0}">案件抽出</a>
+                    </div>--%>
                 </td>
             </tr>
         </table>    
@@ -381,7 +381,7 @@
                         <asp:TemplateField ShowHeader="False" HeaderText="登録">
                             <HeaderStyle Width="40px" />
                             <ItemTemplate>
-                                <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="edt" Text="更新" />
+                                <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="edt" Text="" />
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
@@ -413,10 +413,10 @@
                         </asp:TemplateField>
 
 
-                        <asp:BoundField DataField="FINALVANDATE" HeaderText="最終バン" SortExpression="FINALVANDATE" >
+                        <asp:BoundField DataField="DAY11" HeaderText="バン日" SortExpression="DAY11" >
                         <HeaderStyle Width="70px" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="FLG01" HeaderText="最終時間" SortExpression="FLG01" >
+                        <asp:BoundField DataField="FLG01" HeaderText="バン時間" SortExpression="FLG01" >
                         <HeaderStyle Width="70px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="FORWARDER02" HeaderText="海貨業者" SortExpression="FORWARDER02" >
@@ -497,7 +497,8 @@
                         </asp:TemplateField>
 
                         <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
-
+                        <asp:BoundField DataField="DAY10" HeaderText="最終" SortExpression="DAY10" />
+                        <asp:BoundField DataField="DAY09" HeaderText="ROWNO" SortExpression="DAY09" />
 
                         </Columns>
                         <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
@@ -602,7 +603,7 @@
         <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
 
 
-        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE FORWARDER <>'上野' ORDER BY FINALVANDATE,FLG01,CUT_DATE,CONTAINER "></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE DAY08 ='' or DAY08 IS NULL ORDER BY FLG01,CUT_DATE "></asp:SqlDataSource>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [INVOICE] AS C FROM [T_EXL_CSANKEN] WHERE [INVOICE] IS NOT NULL and [INVOICE] <>'' ORDER BY C "></asp:SqlDataSource>
 

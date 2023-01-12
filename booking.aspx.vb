@@ -48,23 +48,16 @@ Partial Class cs_home
 
         End If
 
-
-
-
         Dim row As GridViewRow = e.Row
 
         ' データ行である場合に、onmouseover／onmouseout属性を追加（1）
         If row.RowType = DataControlRowType.DataRow Then
 
-
-
-
-
             ' onmouseover属性を設定
             row.Attributes("onmouseover") = "setBg(this, '#CC99FF')"
 
-                ' データ行が通常行／代替行であるかで処理を分岐（2）
-                If row.RowState = DataControlRowState.Normal Then
+            ' データ行が通常行／代替行であるかで処理を分岐（2）
+            If row.RowState = DataControlRowState.Normal Then
                 row.Attributes("onmouseout") =
                   String.Format("setBg(this, '{0}')",
                     ColorTranslator.ToHtml(GridView1.RowStyle.BackColor))
@@ -186,8 +179,6 @@ Partial Class cs_home
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
 
-
-
         '前月分ダウンロードボタン押下
         Dim strFile As String = Format(Now, "yyyyMMdd") & "_BOOKING.xlsx"
         Dim strPath As String = "C:\exp\cs_home\files\"
@@ -210,6 +201,7 @@ Partial Class cs_home
         Loop
 
         Dim dt = GetNorthwindProductTable()
+        'Dim dtZ = GetNorthwindProductTableZ()
 
         Dim a
 
@@ -331,4 +323,29 @@ Partial Class cs_home
 
         Return dt
     End Function
+
+    '    Private Shared Function GetNorthwindProductTableZ() As DataTable
+    '    'EXCELファイル出力
+    '    Dim strSQL As String = ""
+    '    Dim strSDate As String = ""
+    '    Dim strEDate As String = ""
+
+    '    Dim ConnectionString As String = String.Empty
+    '    'SQL Server認証
+    '    ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+    '        Dim dt = New DataTable("T_BOOKING_COLOR")
+
+    '        Using conn = New SqlConnection(ConnectionString)
+    '        Dim cmd = conn.CreateCommand()
+
+    '        strSQL = strSQL & "Select T_BOOKING.STATUS, T_BOOKING.Forwarder, T_BOOKING.SEQ_NO01, T_BOOKING.SEQ_NO02, T_BOOKING.CUST_CD, T_BOOKING.CONSIGNEE, T_BOOKING.DESTINATION, T_BOOKING.INVOICE_NO, T_BOOKING.OFFICIAL_QUOT, T_BOOKING.CUT_DATE, T_BOOKING.ETD, T_BOOKING.ETA, T_BOOKING.TWENTY_FEET, T_BOOKING.FOURTY_FEET, T_BOOKING.LCL_QTY, T_BOOKING.DAY01, T_BOOKING.PACKAGE01, T_BOOKING.DAY02, T_BOOKING.PACKAGE02, T_BOOKING.DAY03, T_BOOKING.PACKAGE03, T_BOOKING.DAY04, T_BOOKING.PACKAGE04, T_BOOKING.DAY05, T_BOOKING.PACKAGE05, T_BOOKING.DAY06, T_BOOKING.PACKAGE06, T_BOOKING.DAY07, T_BOOKING.PACKAGE07, T_BOOKING.DAY08, T_BOOKING.PACKAGE08, T_BOOKING.DAY09, T_BOOKING.PACKAGE09, T_BOOKING.DAY10, T_BOOKING.PACKAGE10, T_BOOKING.DAY11, T_BOOKING.PACKAGE11, T_BOOKING.BOOKING_NO, T_BOOKING.BOOK_TO, T_BOOKING.VESSEL_NAME, T_BOOKING.VOYAGE_NO, T_BOOKING.PLACE_OF_RECEIPT, T_BOOKING.LOADING_PORT, T_BOOKING.DISCHARGING_PORT, T_BOOKING.PLACE_OF_DELIVERY, T_BOOKING.ETA_AFTER_TS, T_BOOKING.REMARKS, T_BOOKING.PODATE, T_BOOKING.PONO,T_BOOKING.ROW_KBN From T_BOOKING "
+
+    '        cmd.CommandText = strSQL
+    '        Dim sda = New SqlDataAdapter(cmd)
+    '        sda.Fill(dt)
+    '    End Using
+
+    '    Return dt
+    'End Function
 End Class

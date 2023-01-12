@@ -117,6 +117,17 @@
             text-align :center;
             font-size :small;
         }
+
+
+        .GridStyle{overflow:scroll}
+.Freezing
+{
+position:relative;
+top:expression(this.offsetparent.scrollTop);
+z-index:10;
+}
+
+
 </style>
 <script>
     $(document).ready(function () {
@@ -161,7 +172,9 @@
           else {
           }
       }
+
     </script>
+
 
 </head>
 <body class="c2">
@@ -202,6 +215,8 @@
     </table>
 
 
+
+
 <div class="wrapper">
 <table class="sticky">
 <thead class="fixed">
@@ -213,13 +228,13 @@
 <%--<div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">--%>
 
 
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" width="2980px" DataKeyNames="SEQ_NO02,CUST_CD" DataSourceID="SqlDataSource1" 
-            BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" AllowColSizing="True">
+        <asp:GridView style="overflow:auto" ID="GridView1" runat="server" AutoGenerateColumns="False" width="2980px" DataKeyNames="SEQ_NO02,CUST_CD" DataSourceID="SqlDataSource1" 
+            BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" AllowColSizing="True" >
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
             <Columns>
                 <asp:BoundField DataField="STATUS" SortExpression="STATUS" HeaderText="ｽﾃｰﾀｽ" >
-                <HeaderStyle Width="100px" />
+                <HeaderStyle Width="100px"/>
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="Forwarder" HeaderText="海貨業者" SortExpression="Forwarder" >
@@ -292,6 +307,7 @@
 </tbody>
 </table>
 </div>
+
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT 
     a.STATUS
   , a.Forwarder

@@ -207,7 +207,9 @@ Partial Class yuusen
                 e.Row.Cells(14).BackColor = Drawing.Color.Orange
             End If
 
-
+            If Trim(e.Row.Cells(29).Text) = "1" Then
+                e.Row.BackColor = Drawing.Color.Orange
+            End If
 
 
         End If
@@ -263,9 +265,16 @@ Partial Class yuusen
 
             End If
 
+            If Trim(e.Row.Cells(29).Text) = "1" Then
+                dltButton.Text = "最終"
+            Else
+                dltButton.Text = "途中"
+            End If
+
             'ボタンが存在する場合のみセット
             If Not (dltButton Is Nothing) Then
                 dltButton.CommandArgument = e.Row.RowIndex.ToString()
+                dltButton.Attributes.Add("onclick", "return confirm('出荷分全てにチェックは入っていますか？\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
             End If
             'ボタンが存在する場合のみセット
             If Not (dltButton2 Is Nothing) Then
@@ -350,6 +359,9 @@ Partial Class yuusen
         e.Row.Cells(24).Visible = False
         e.Row.Cells(28).Visible = False
 
+        e.Row.Cells(29).Visible = False
+        e.Row.Cells(30).Visible = False
+
         cnn00.Close()
         cnn00.Dispose()
 
@@ -370,6 +382,7 @@ Partial Class yuusen
             Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
             Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
             Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
+            Dim data8 = Me.GridView1.Rows(index).Cells(30).Text
 
             Dim dataread As SqlDataReader
             Dim dbcmd As SqlCommand
@@ -437,7 +450,7 @@ Partial Class yuusen
             While (dataread.Read())
                 'インボイス番号をキーにデータを更新
                 If cflg = 0 Then
-                    Call reg_check3(Trim(data1), 3, dflg)
+                    Call reg_check3(Trim(data1), 3, dflg, data8)
                     Call check001(Trim(data1))
                     cflg = 1
                 Else
@@ -1424,7 +1437,7 @@ Partial Class yuusen
 
     End Sub
 
-    Private Sub reg_check3(bkgno As String, A As String, ByRef dflg As Long)
+    Private Sub reg_check3(bkgno As String, A As String, ByRef dflg As Long, nom As String)
 
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
@@ -1456,6 +1469,7 @@ Partial Class yuusen
             Call reg_kanryo2(strinv, bkgno)
         ElseIf A = "3" Then 'KD
             Call reg_kanryo3(strinv, bkgno, dflg)
+            Call reg_kanryo4(strinv, bkgno, dflg, nom)
         End If
 
         cnn.Close()
@@ -1988,6 +2002,92 @@ Partial Class yuusen
 
     End Sub
 
+    Private Sub reg_kanryo4(strinv As String, bkgno As String, ByRef dflg As Long, nom As String)
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim dataread2 As SqlDataReader
+        Dim dbcmd2 As SqlCommand
+
+        Dim intCnt As Long
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        'データベース接続を開く
+        cnn.Open()
+
+        If bkgno = "" Or IsNothing(bkgno) = True Then
+
+        Else
+
+            strSQL = ""
+            strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
+            strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '010' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & nom & "' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+            While (dataread.Read())
+                intCnt = dataread("RecCnt")
+            End While
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+
+            If intCnt > 0 Then
+                strSQL = ""
+                strSQL = strSQL & "DELETE FROM T_EXL_WORKSTATUS00 "
+                strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.ID IN ('010') "
+                strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & nom & "' "
+                strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+
+                'strSQL = ""
+                'strSQL = strSQL & "UPDATE T_EXL_WORKSTATUS00 SET "
+                'strSQL = strSQL & "T_EXL_WORKSTATUS00.INVNO = '" & strinv & "', "
+                'strSQL = strSQL & "T_EXL_WORKSTATUS00.REGDATE = '" & Format(Now(), "yyyy/MM/dd") & "', "
+                'strSQL = strSQL & "T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+                ''strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.INVNO ='" & strinv & "' "
+                'strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
+                'strSQL = strSQL & "AND T_EXL_WORKSTATUS00.ID = '008' "
+
+                dflg = 1
+
+            Else
+
+                strSQL = ""
+                strSQL = strSQL & "INSERT INTO T_EXL_WORKSTATUS00 VALUES("
+                strSQL = strSQL & " '010' "
+                strSQL = strSQL & ",'" & nom & "' "
+                strSQL = strSQL & ",'" & bkgno & "' "
+                strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
+                strSQL = strSQL & ",'" & Session("UsrId") & "_07" & "' "
+                strSQL = strSQL & ")"
+            End If
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+        End If
+
+        cnn.Close()
+        cnn.Dispose()
+
+    End Sub
 
 
 

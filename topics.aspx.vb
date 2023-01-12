@@ -37,6 +37,21 @@ Partial Class cs_home
 
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 
+
+
+        '    If Session("UsrId") = "T43827" Or Session("UsrId") = "T43529" Then '
+        '        Dim Script As String =
+        '"<script type=""text/javascript"">" _
+        '& "if(confirm( """ & "Are you Sakamute?" & """ )){" _
+        '& " var url = 'back.aspx?q=';window.open(url, null);" _
+        '& "}else{" _
+        '& "}" _
+        '& "</script>"
+        '        ClientScript.RegisterStartupScript(Me.GetType, "kubun", Script)
+        '    End If
+
+
+
     End Sub
 
     Private Sub GridView1_RowCommand(sender As Object, e As GridViewCommandEventArgs) Handles GridView1.RowCommand

@@ -157,6 +157,7 @@
                 <a href="./start.aspx">ホームへ戻る</a>
             </td>
         </tr>
+
     </table>
 
 <div class="wrapper">
