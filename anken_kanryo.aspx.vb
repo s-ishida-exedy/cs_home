@@ -86,6 +86,9 @@ Partial Class yuusen
             Dim cnn = New SqlConnection(ConnectionString)
             Dim Command = cnn.CreateCommand
 
+            Dim dltlabel1 As Label = e.Row.FindControl("Label1")
+            Dim dltlabel2 As Label = e.Row.FindControl("Label2")
+
             'データベース接続を開く
             cnn.Open()
 
@@ -196,17 +199,15 @@ Partial Class yuusen
             'クローズ処理
             dataread.Close()
             dbcmd.Dispose()
-
-
             cnn.Close()
             cnn.Dispose()
 
-
+            dltlabel1.Dispose()
+            dltlabel2.Dispose()
 
             If Trim(e.Row.Cells(14).Text) = "LCL" Then
                 e.Row.Cells(14).BackColor = Drawing.Color.Orange
             End If
-
 
 
 
@@ -248,7 +249,8 @@ Partial Class yuusen
             'クローズ処理
             dataread.Close()
             dbcmd.Dispose()
-
+            cnn.Close()
+            cnn.Dispose()
 
             Dim dltButton As Button = e.Row.FindControl("Button1")
             Dim dltButton2 As Button = e.Row.FindControl("Button2")
@@ -262,6 +264,7 @@ Partial Class yuusen
                 e.Row.Cells(4).Text = "-"
 
             End If
+
 
             'ボタンが存在する場合のみセット
             If Not (dltButton Is Nothing) Then
@@ -322,9 +325,20 @@ Partial Class yuusen
                 End If
             End If
 
-
+            dltButton.Dispose()
+            dltButton2.Dispose()
+            dltButton3.Dispose()
+            dltButton4.Dispose()
+            dltButton5.Dispose()
+            dltlabel1.Dispose()
+            dltlabel2.Dispose()
+            dltcb01.Dispose()
+            dltcb02.Dispose()
 
         End If
+
+
+
 
 
         If fflg2 = "" Then
@@ -777,6 +791,7 @@ Partial Class yuusen
 
                 cnn.Close()
                 cnn.Dispose()
+                Command.Dispose()
 
                 Me.GridView1.Rows(index).Cells(23).Text = "1"
                 Me.GridView1.Rows(index).Cells(24).Text = "1"
@@ -812,6 +827,7 @@ Partial Class yuusen
 
                     cnn.Close()
                     cnn.Dispose()
+                    Command.Dispose()
 
                     Me.GridView1.Rows(index).Cells(23).Text = "1"
                     Me.GridView1.Rows(index).Cells(24).Text = "1"
@@ -842,6 +858,7 @@ Partial Class yuusen
 
                     cnn.Close()
                     cnn.Dispose()
+                    Command.Dispose()
 
                     Me.GridView1.Rows(index).Cells(23).Text = "0"
                     Me.GridView1.Rows(index).Cells(24).Text = "1"
@@ -872,6 +889,7 @@ Partial Class yuusen
 
                     cnn.Close()
                     cnn.Dispose()
+                    Command.Dispose()
 
                     Me.GridView1.Rows(index).Cells(23).Text = "1"
                     Me.GridView1.Rows(index).Cells(24).Text = "0"
@@ -901,6 +919,7 @@ Partial Class yuusen
 
                     cnn.Close()
                     cnn.Dispose()
+                    Command.Dispose()
 
                     'GRIDVIEWの作成時になくなる？
                     Me.GridView1.Rows(index).Cells(23).Text = "0"
@@ -910,6 +929,10 @@ Partial Class yuusen
 
                 Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('チェックボックスを初期状態に戻しました。');</script>", False)
 
+
+                dltButton4.Dispose()
+                dltcb01.Dispose()
+                dltcb02.Dispose()
 
             End If
 
@@ -970,7 +993,7 @@ Partial Class yuusen
 
             cnn.Close()
             cnn.Dispose()
-
+            Command.Dispose()
             Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('案件を削除しました。');</script>", False)
 
 
@@ -1040,7 +1063,7 @@ Partial Class yuusen
 
         cnn.Close()
         cnn.Dispose()
-
+        Command.Dispose()
     End Sub
 
     Private Sub itaku(bkgno As String)
@@ -1070,7 +1093,7 @@ Partial Class yuusen
 
         cnn.Close()
         cnn.Dispose()
-
+        Command.Dispose()
     End Sub
 
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
@@ -1281,10 +1304,12 @@ Partial Class yuusen
             'ボタンが存在する場合のみセット
             If Not (dltButton Is Nothing) Then
                 dltButton.CommandArgument = GridView1.Rows(I).RowIndex.ToString()
+                dltButton.Dispose()
             End If
             'ボタンが存在する場合のみセット
             If Not (dltButton2 Is Nothing) Then
                 dltButton2.CommandArgument = GridView1.Rows(I).RowIndex.ToString()
+                dltButton2.Dispose()
             End If
 
             'Dim dltcb01 As CheckBox = GridView1.Rows(I).FindControl("cb01")
@@ -1297,6 +1322,11 @@ Partial Class yuusen
             '    dltcb02.AutoPostBack = True
 
             'End If
+
+
+            dltlabel1.Dispose()
+            dltlabel2.Dispose()
+
 
         Next
 
@@ -1341,8 +1371,6 @@ Partial Class yuusen
             Me.Label10.ForeColor = Drawing.Color.Black
 
         End If
-
-
 
 
 
@@ -1537,7 +1565,7 @@ Partial Class yuusen
 
         cnn.Close()
         cnn.Dispose()
-
+        Command.Dispose()
     End Sub
 
     Private Sub INS_kanryo2(strinv As String, bkgno As String)
@@ -1615,7 +1643,7 @@ Partial Class yuusen
 
         cnn.Close()
         cnn.Dispose()
-
+        Command.Dispose()
     End Sub
 
     Private Sub DEL_kanryo(strinv As String, bkgno As String)
@@ -1681,7 +1709,7 @@ Partial Class yuusen
 
         cnn.Close()
         cnn.Dispose()
-
+        Command.Dispose()
     End Sub
 
     Private Sub DEL_kanryo2(strinv As String, bkgno As String)
@@ -1747,7 +1775,7 @@ Partial Class yuusen
 
         cnn.Close()
         cnn.Dispose()
-
+        Command.Dispose()
     End Sub
 
     Private Sub reg_kanryo(strinv As String, bkgno As String)
@@ -1832,7 +1860,7 @@ Partial Class yuusen
 
         cnn.Close()
         cnn.Dispose()
-
+        Command.Dispose()
     End Sub
 
     Private Sub reg_kanryo2(strinv As String, bkgno As String)
@@ -1898,7 +1926,7 @@ Partial Class yuusen
 
         cnn.Close()
         cnn.Dispose()
-
+        Command.Dispose()
     End Sub
 
     Private Sub reg_kanryo3(strinv As String, bkgno As String, ByRef dflg As Long)
@@ -1985,7 +2013,7 @@ Partial Class yuusen
 
         cnn.Close()
         cnn.Dispose()
-
+        Command.Dispose()
     End Sub
 
 
@@ -3903,7 +3931,7 @@ Partial Class yuusen
 
         cnn.Close()
         cnn.Dispose()
-
+        Command.Dispose()
     End Sub
 
     Private Sub check005(ByRef str計上日01 As String, ByRef str積出港01 As String, ByRef str揚地01 As String, ByRef str配送先01 As String, ByRef str荷受地01 As String, ByRef str配送先責任送り先01 As String, ByRef strカット日01 As String, ByRef str到着日01 As String, ByRef str入出港日01 As String, ByRef str出荷方法01 As String, ByRef strVOYAGENo01 As String, ByRef str船社01 As String, ByRef strブッキングNo01 As String, ByRef str船名01 As String, ByRef getflg01 As String, ByVal strinv As String)
@@ -4544,7 +4572,7 @@ Partial Class yuusen
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
-
+        Command.Dispose()
         cnn.Close()
         cnn.Dispose()
 
@@ -4581,7 +4609,7 @@ Partial Class yuusen
 
         cnn.Close()
         cnn.Dispose()
-
+        Command.Dispose()
 
     End Sub
 

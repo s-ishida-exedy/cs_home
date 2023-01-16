@@ -189,7 +189,7 @@
 
             </td>
             <td class="third-cell">
-                <a href="./anken_kanryo.aspx">一覧に戻る</a>
+                <a href="./anken_kanryo_all.aspx">一覧に戻る</a>
             </td>
         </tr>
     </table>
@@ -237,7 +237,20 @@
                     <asp:TextBox ID="TextBox6" runat="server" placeholder="未入力" class="txtb"></asp:TextBox>
                 </td>
             </tr>
+            <tr>
+                <th>最終バン</th>
+                <td>
+                    <asp:DropDownList ID="DropDownList3" runat="server" Width="40px" Height="30px"  CssClass="DropDown" Font-Size="13px">
+                    <asp:ListItem Text="0" Value="0" />
+                    <asp:ListItem Text="1" Value="1" />
+                    </asp:DropDownList>     
+                    ←最終バンの場合は 1 を選択           
+                </td>
+                <td colspan ="2">
 
+                </td>
+
+            </tr>
         </table>
 
 
@@ -254,7 +267,7 @@ END AS KBN
 FROM M_EXL_LCL_DEC_MAIL
 ORDER BY KBN DESC"></asp:SqlDataSource>
 
-<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [T_EXL_CSANKEN].[INVOICE] AS C FROM [T_EXL_CSANKEN] LEFT JOIN [T_EXL_CSKANRYO] ON [T_EXL_CSANKEN].[INVOICE] = [T_EXL_CSKANRYO].[INVOICE] WHERE [T_EXL_CSANKEN].[INVOICE] IS NOT NULL and [T_EXL_CSANKEN].[INVOICE] <>'' AND [T_EXL_CSANKEN].LCL_QTY <>'LCL' AND [T_EXL_CSKANRYO].[INVOICE] IS NULL ORDER BY C "></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [T_EXL_CSANKEN].[INVOICE] AS C FROM [T_EXL_CSANKEN] LEFT JOIN [T_EXL_CSKANRYO] ON [T_EXL_CSANKEN].[INVOICE] = [T_EXL_CSKANRYO].[INVOICE] WHERE [T_EXL_CSANKEN].[INVOICE] IS NOT NULL and [T_EXL_CSANKEN].[INVOICE] <>'' AND [T_EXL_CSANKEN].LCL_QTY <>'LCL' AND [T_EXL_CSKANRYO].[INVOICE] IS NULL AND [T_EXL_CSANKEN].[FIN_FLG] <>'1' AND [T_EXL_CSANKEN].[FORWARDER] <>'上野  ' ORDER BY C "></asp:SqlDataSource>
 
 
 </div>

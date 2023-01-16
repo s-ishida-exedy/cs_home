@@ -221,10 +221,10 @@
         <HeaderStyle BackColor="#6B696B"  Width="60px" />
             <ItemTemplate>
                 <asp:DropDownList ID="DropDownList1" runat="server">
-                <asp:ListItem Value="4">なし</asp:ListItem>
+<%--                <asp:ListItem Value="4">なし</asp:ListItem>
                 <asp:ListItem Value="1">宛先</asp:ListItem>
                 <asp:ListItem Value="2">CC</asp:ListItem>
-                <asp:ListItem Value="3">BCC</asp:ListItem>
+                <asp:ListItem Value="3">BCC</asp:ListItem>--%>
                 </asp:DropDownList>
 
             </ItemTemplate>

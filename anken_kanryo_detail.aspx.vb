@@ -117,6 +117,7 @@ Partial Class cs_home
         Dim str04 As String = ""
         Dim str05 As String = ""
         Dim str06 As String = ""
+        Dim str07 As String = ""
 
         str00 = Trim(DropDownList1.SelectedValue)
         str01 = Trim(TextBox1.Text)
@@ -125,7 +126,11 @@ Partial Class cs_home
         str04 = Trim(TextBox4.Text)
         str05 = Trim(TextBox5.Text)
         str06 = Trim(TextBox6.Text)
+        str07 = Trim(DropDownList3.SelectedValue)
 
+        If str07 = "0" Then
+            str07 = "0"
+        End If
 
         Dim strvan As String = ""
         Dim strtime As String = ""
@@ -145,8 +150,7 @@ Partial Class cs_home
         Dim strlp As String = ""
         Dim strdp As String = ""
         Dim strpd As String = ""
-        Dim val01 As Long
-        val01 = 0
+        Dim val01 As String = ""
         Dim flgka00 As String = "0"
         Dim flgka01 As String = "0"
         Dim flgka02 As String = ""
@@ -199,10 +203,8 @@ Partial Class cs_home
 
         strSQL = ""
         strSQL = strSQL & "SELECT  "
-        strSQL = strSQL & " count(*) AS C "
+        strSQL = strSQL & " count(*)+1  AS C "
         strSQL = strSQL & "FROM T_EXL_CSKANRYO "
-        strSQL = strSQL & "WHERE T_EXL_CSKANRYO.INVOICE = '" & str00 & "' "
-        strSQL = strSQL & "AND T_EXL_CSKANRYO.BOOKING_NO = '" & str05 & "' "
 
 
 
@@ -216,42 +218,18 @@ Partial Class cs_home
             val01 = Trim(dataread("C"))
         End While
 
+        If val01 < 10 Then
+            val01 = "0" & val01
+        End If
 
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
 
 
-        strSQL = ""
-        strSQL = strSQL & "SELECT Max(T_SHIPSCH_VIEW_02.VANTIME_ST) AS A, T_SHIPSCH_VIEW_02.BOOKINGNO "
-        strSQL = strSQL & "FROM T_SHIPSCH_VIEW_02 "
-        strSQL = strSQL & "WHERE T_SHIPSCH_VIEW_02.BOOKINGNO = '" & strbkg & "' "
-        strSQL = strSQL & "AND T_SHIPSCH_VIEW_02.STATUS = '" & "01" & "' "
-        strSQL = strSQL & "GROUP BY T_SHIPSCH_VIEW_02.BOOKINGNO "
+        strtime = "手動登録"
+        strvan = "手動登録"
 
-
-        'ＳＱＬコマンド作成 
-        dbcmd = New SqlCommand(strSQL, cnn02)
-        'ＳＱＬ文実行 
-        dataread = dbcmd.ExecuteReader()
-
-        '結果を取り出す 
-        While (dataread.Read())
-
-            If IsDBNull(dataread("A")) = True Then
-                strtime = "未登録"
-                strd = "未登録"
-            Else
-                strtime = Right(Trim(dataread("A")), 8)
-                strvan = Left(Trim(dataread("A")), 10)
-            End If
-
-        End While
-
-        If strvan = "" Then
-            strvan = "1111/11/11"
-            strvan = "未登録"
-        End If
 
         'クローズ処理 
         dataread.Close()
@@ -265,7 +243,7 @@ Partial Class cs_home
         strcus = get_cust(strcus)
 
         strSQL = ""
-        strSQL = strSQL & "SELECT IIf(left(T_SN_HD_TB.CUSTCODE,1) = 'K','A','K') AS 式1 "
+        strSQL = strSQL & "SELECT IIf(T_SN_HD_TB.CUSTCODE = 'E230','A',IIf(left(T_SN_HD_TB.CUSTCODE,1) = 'K','A','K')) AS 式1 "
         strSQL = strSQL & "FROM (T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO) LEFT JOIN T_SN_HD_TB ON T_INV_BD_TB.SNNO = T_SN_HD_TB.SALESNOTENO "
         strSQL = strSQL & "WHERE T_INV_HD_TB.CUSTCODE IN ('" & strcus & "') "
         strSQL = strSQL & "AND T_SN_HD_TB.CUSTCODE Is Not Null "
@@ -305,84 +283,55 @@ Partial Class cs_home
             flgka01 = "1"
         End If
 
-        If val01 > 0 Then
-            '更新
 
 
-            strSQL = ""
-            strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET"
-            strSQL = strSQL & " STATUS = '" & strsta & "' "
-            strSQL = strSQL & ",FORWARDER02 = '" & strfwd & "' "
-            strSQL = strSQL & ",CUST = '" & strcus2 & "' "
-            strSQL = strSQL & ",DESTINATION = '" & strdes & "' "
-            strSQL = strSQL & ",INVOICE = '" & strinv & "' "
-            strSQL = strSQL & ",CUT_DATE = '" & strcut & "' "
-            strSQL = strSQL & ",ETD = '" & stretd & "' "
-            strSQL = strSQL & ",CONTAINER = '" & strcon & "' "
-            strSQL = strSQL & ",FINALVANDATE = '" & strvan & "' "
-            strSQL = strSQL & ",BOOKING_NO = '" & strbkg & "' "
-            strSQL = strSQL & ",VESSEL_NAME = '" & strvessle & "' "
-            strSQL = strSQL & ",VOYAGE_NO = '" & strvy & "' "
-            strSQL = strSQL & ",PLACE_OF_RECEIPT = '" & strrp & "' "
-            strSQL = strSQL & ",LOADING_PORT = '" & strlp & "' "
-            strSQL = strSQL & ",DISCHARGING_PORT = '" & strdp & "' "
-            strSQL = strSQL & ",PLACE_OF_DELIVERY = '" & strpd & "' "
-            strSQL = strSQL & ",FLG01 = '" & strtime & "' "
-            strSQL = strSQL & ",FLG03 = '1' "
-            strSQL = strSQL & "WHERE T_EXL_CSKANRYO.INVOICE = '" & str00 & "' "
-            strSQL = strSQL & "AND T_EXL_CSKANRYO.BOOKING_NO = '" & str05 & "' "
+        strSQL = ""
+        strSQL = strSQL & "INSERT INTO T_EXL_CSKANRYO VALUES("
+        strSQL = strSQL & " '" & strsta & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & strfwd & "' "
 
-        Else
+        strSQL = strSQL & ",'" & strcus2 & "' "
+        strSQL = strSQL & ",'" & strdes & "' "
+        strSQL = strSQL & ",'" & strinv & "' "
+        strSQL = strSQL & ",'" & strcut & "' "
+        strSQL = strSQL & ",'" & stretd & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & strcon & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & val01 & "' "
+        strSQL = strSQL & ",'" & str07 & "' "
+        strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
+        strSQL = strSQL & ",'" & strvan & "' "
+        strSQL = strSQL & ",'" & strbkg & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & strvessle & "' "
+        strSQL = strSQL & ",'" & strvy & "' "
+        strSQL = strSQL & ",'" & strrp & "' "
+        strSQL = strSQL & ",'" & strlp & "' "
 
+        strSQL = strSQL & ",'" & strdp & "' "
+        strSQL = strSQL & ",'" & strpd & "' "
+        strSQL = strSQL & ",'" & strtime & "' "
+        strSQL = strSQL & ",'' "
+        strSQL = strSQL & ",'1' "
+        strSQL = strSQL & ",'" & flgka00 & "' "
+        strSQL = strSQL & ",'" & flgka01 & "' "
+        strSQL = strSQL & ",'' "
 
-            strSQL = ""
-            strSQL = strSQL & "INSERT INTO T_EXL_CSKANRYO VALUES("
-            strSQL = strSQL & " '" & strsta & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & strfwd & "' "
-            strSQL = strSQL & ",'" & strcus2 & "' "
-            strSQL = strSQL & ",'" & strdes & "' "
-            strSQL = strSQL & ",'" & strinv & "' "
-            strSQL = strSQL & ",'" & strcut & "' "
-            strSQL = strSQL & ",'" & stretd & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & strcon & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & strvan & "' "
-            strSQL = strSQL & ",'" & strbkg & "' "
-            strSQL = strSQL & ",'" & "" & "' "
-            strSQL = strSQL & ",'" & strvessle & "' "
-            strSQL = strSQL & ",'" & strvy & "' "
-            strSQL = strSQL & ",'" & strrp & "' "
-            strSQL = strSQL & ",'" & strlp & "' "
-
-            strSQL = strSQL & ",'" & strdp & "' "
-            strSQL = strSQL & ",'" & strpd & "' "
-            strSQL = strSQL & ",'" & strtime & "' "
-            strSQL = strSQL & ",'' "
-            strSQL = strSQL & ",'1' "
-            strSQL = strSQL & ",'" & flgka00 & "' "
-            strSQL = strSQL & ",'" & flgka01 & "' "
-            strSQL = strSQL & ",'' "
-
-            strSQL = strSQL & ")"
+        strSQL = strSQL & ")"
 
 
-
-        End If
 
         Command.CommandText = strSQL
         ' SQLの実行
@@ -493,7 +442,7 @@ Partial Class cs_home
 
 
         '元の画面に戻る
-        Response.Redirect("anken_kanryo.aspx")
+        Response.Redirect("anken_kanryo_all.aspx")
     End Sub
 
 End Class

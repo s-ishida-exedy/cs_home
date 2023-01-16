@@ -47,7 +47,7 @@
                     <li data-id='["home","register_csstatus.aspx"]'><a href="#">委託登録・マスタ変更</a></li>
                     <li data-id='["home","eir_comfirm_cs.aspx"]'><a href="#">EIR,Booking差異 CS対応</a></li>
                     <li data-id='["home","iv_booking.aspx"]'><a href="#">ﾌﾞｯｷﾝｸﾞｼｰﾄ vs I/Vﾍｯﾀﾞ 比較結果</a></li>
-                    <li data-id='["home","anken_kanryo.aspx"]'><a href="#">完了報告</a></li>
+                    <li data-id='["home","anken_kanryo_all.aspx"]'><a href="#">完了報告</a></li>
                 </ul>
             </li>
             <li data-id='["aaa",""]'>

@@ -499,6 +499,7 @@
                         <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
                         <asp:BoundField DataField="DAY10" HeaderText="最終" SortExpression="DAY10" />
                         <asp:BoundField DataField="DAY09" HeaderText="ROWNO" SortExpression="DAY09" />
+                        <asp:BoundField DataField="FINALVANDATE" HeaderText="FINALVANDATE" SortExpression="FINALVANDATE" />
 
                         </Columns>
                         <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />

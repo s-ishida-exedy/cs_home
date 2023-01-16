@@ -55,18 +55,43 @@ Partial Class cs_home
                 'AddHandler ddl01.SelectedIndexChanged, AddressOf ddl01_change
             End If
 
+
+
+            If e.Row.Cells(2).Text = "本社AIR" Or e.Row.Cells(2).Text = "上野AIR" Then
+
+                Dim li As ListItem = New ListItem("宛先", 1)
+                ddl01.Items.Add(li)
+                Dim li2 As ListItem = New ListItem("CC", 2)
+                ddl01.Items.Add(li2)
+                Dim li3 As ListItem = New ListItem("BCC", 3)
+                ddl01.Items.Add(li3)
+                Dim li4 As ListItem = New ListItem("なし", 4)
+                ddl01.Items.Add(li4)
+
+            Else
+
+
+                Dim li As ListItem = New ListItem("宛先", 1)
+                ddl01.Items.Add(li)
+                Dim li2 As ListItem = New ListItem("CC", 2)
+                ddl01.Items.Add(li2)
+                Dim li4 As ListItem = New ListItem("なし", 4)
+                ddl01.Items.Add(li4)
+
+            End If
+
             If e.Row.Cells(4).Text = 1 Then
                 e.Row.Cells(4).Text = "宛先"
-                ddl01.SelectedIndex = 1
+                ddl01.SelectedValue = 1
             ElseIf e.Row.Cells(4).Text = 2 Then
                 e.Row.Cells(4).Text = "CC"
-                ddl01.SelectedIndex = 2
+                ddl01.SelectedValue = 2
             ElseIf e.Row.Cells(4).Text = 3 Then
                 e.Row.Cells(4).Text = "BCC"
-                ddl01.SelectedIndex = 3
+                ddl01.SelectedValue = 3
             ElseIf e.Row.Cells(4).Text = 4 Then
                 e.Row.Cells(4).Text = "なし"
-                ddl01.SelectedIndex = 4
+                ddl01.SelectedValue = 4
                 'e.Row.BackColor = Drawing.Color.LightGray
                 e.Row.ForeColor = Drawing.Color.DarkGray
             End If
@@ -76,6 +101,9 @@ Partial Class cs_home
                 ddl01.Enabled = Not ddl01.Enabled
 
             End If
+
+
+
 
         End If
 

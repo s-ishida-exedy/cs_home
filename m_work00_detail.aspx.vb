@@ -31,6 +31,7 @@ Partial Class cs_home
         Dim dt2 As DateTime = dt1 + ts1
         Dim dt3 As DateTime = dt1 - ts1
 
+        Dim strname As String = Session("strname")
 
         Dim a As String = ""
         'ボタンに行数をセット
@@ -45,21 +46,46 @@ Partial Class cs_home
                 'AddHandler ddl01.SelectedIndexChanged, AddressOf ddl01_change
             End If
 
+            If strname = "本社AIR" Or strname = "上野AIR" Then
+
+                Dim li As ListItem = New ListItem("宛先", 1)
+                ddl01.Items.Add(li)
+                Dim li2 As ListItem = New ListItem("CC", 2)
+                ddl01.Items.Add(li2)
+                Dim li3 As ListItem = New ListItem("BCC", 3)
+                ddl01.Items.Add(li3)
+                Dim li4 As ListItem = New ListItem("なし", 4)
+                ddl01.Items.Add(li4)
+
+            Else
+
+
+                Dim li As ListItem = New ListItem("宛先", 1)
+                ddl01.Items.Add(li)
+                Dim li2 As ListItem = New ListItem("CC", 2)
+                ddl01.Items.Add(li2)
+                Dim li4 As ListItem = New ListItem("なし", 4)
+                ddl01.Items.Add(li4)
+
+            End If
+
+
             If e.Row.Cells(4).Text = 1 Then
                 e.Row.Cells(4).Text = "宛先"
-                ddl01.SelectedIndex = 1
+                ddl01.SelectedValue = 1
             ElseIf e.Row.Cells(4).Text = 2 Then
                 e.Row.Cells(4).Text = "CC"
-                ddl01.SelectedIndex = 2
+                ddl01.SelectedValue = 2
             ElseIf e.Row.Cells(4).Text = 3 Then
                 e.Row.Cells(4).Text = "BCC"
-                ddl01.SelectedIndex = 3
+                ddl01.SelectedValue = 3
             ElseIf e.Row.Cells(4).Text = 4 Then
                 e.Row.Cells(4).Text = "なし"
-                ddl01.SelectedIndex = 4
+                ddl01.SelectedValue = 4
                 'e.Row.BackColor = Drawing.Color.LightGray
                 e.Row.ForeColor = Drawing.Color.DarkGray
             End If
+
 
             'If e.Row.Cells(5).Text = "無効" Then
             '    'ddl01.Visible = False
