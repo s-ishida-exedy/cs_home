@@ -247,14 +247,20 @@ Partial Class yuusen
             dltlabel1.Dispose()
             dltlabel2.Dispose()
 
+            Dim fll As String = "0"
+            Call get_meisai(Trim(Replace(e.Row.Cells(16).Text, vbLf, "")), fll)
 
+            If fll = "0" Then
+                btn01.Enabled = False
+                dltlabel1.Text = "明細未"
 
+            End If
 
         End If
 
 
-        'ボタンに行数をセット
-        If e.Row.RowType = DataControlRowType.DataRow Then
+            'ボタンに行数をセット
+            If e.Row.RowType = DataControlRowType.DataRow Then
 
             Dim fflg As String = ""
             Dim kflg01 As String = ""
@@ -2404,6 +2410,69 @@ Partial Class yuusen
 
     End Sub
 
+    Private Sub get_meisai(bkgno As String, FLGval As String)
+        'データの取得
+
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String = ""
+        Dim strinv As String = ""
+        Dim eflg As Long
+        Dim strcst As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        strSQL = "SELECT DISTINCT T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.CUSTCODE "
+        strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
+        strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+
+        strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO,T_INV_HD_TB.CRYCD, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE,T_INV_HD_TB.CUSTCODE,T_INV_HD_TB.HEADTITLE "
+        strSQL = strSQL & "HAVING T_INV_HD_TB.BOOKINGNO like '%" & bkgno & "%' "
+        strSQL = strSQL & "AND Sum(T_INV_BD_TB.QTY) >= 1 "
+        strSQL = strSQL & "AND Sum(T_INV_BD_TB.KIN) >= 1 "
+        strSQL = strSQL & "AND T_INV_HD_TB.HEADTITLE like 'INVOICE%' "
+        strSQL = strSQL & "Order by T_INV_HD_TB.OLD_INVNO "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        FLGval = 0
+        '結果を取り出す 
+        While (dataread.Read())
+
+            FLGval = 1
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+
+
+    End Sub
 
 
     Private Sub check002(strinv As String, bkgno As String, eflg As Long, strcst As String)
