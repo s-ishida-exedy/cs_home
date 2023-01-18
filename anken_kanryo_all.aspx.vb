@@ -332,6 +332,7 @@ Partial Class yuusen
             Dim dltButton3 As Button = e.Row.FindControl("Button3")
             Dim dltButton4 As Button = e.Row.FindControl("Button4")
             Dim dltButton5 As Button = e.Row.FindControl("Button5")
+            Dim dltButton6 As Button = e.Row.FindControl("Button6")
             Dim dltlabel1 As Label = e.Row.FindControl("Label1")
             Dim dltlabel2 As Label = e.Row.FindControl("Label2")
 
@@ -360,12 +361,16 @@ Partial Class yuusen
                 If Not (dltButton2 Is Nothing) Then
                     dltButton2.CommandArgument = e.Row.RowIndex.ToString()
                 End If
-                'ボタンが存在する場合のみセット
-                If Not (dltButton3 Is Nothing) Then
-                    dltButton3.CommandArgument = e.Row.RowIndex.ToString()
-                End If
-                'ボタンが存在する場合のみセット
-                If Not (dltButton4 Is Nothing) Then
+            'ボタンが存在する場合のみセット
+            If Not (dltButton3 Is Nothing) Then
+                dltButton3.CommandArgument = e.Row.RowIndex.ToString()
+            End If
+            'ボタンが存在する場合のみセット
+            If Not (dltButton6 Is Nothing) Then
+                dltButton6.CommandArgument = e.Row.RowIndex.ToString()
+            End If
+            'ボタンが存在する場合のみセット
+            If Not (dltButton4 Is Nothing) Then
                     dltButton4.CommandArgument = e.Row.RowIndex.ToString()
 
                     If fflg = "" Then
@@ -631,7 +636,7 @@ Partial Class yuusen
 
                 If a > 0 Then
                     If data9 = 1 Then
-                        Call Mail02(data1, data2, data3, data4, data5, data6, data7)
+                        Call Mail02(data1, data2, data3, data4, data5, data6, data7, data10)
                     Else
                     End If
 
@@ -662,7 +667,7 @@ Partial Class yuusen
             End If
 
 
-                ElseIf e.CommandName = "edt2" Then
+        ElseIf e.CommandName = "edt2" Then
 
 
 
@@ -674,7 +679,7 @@ Partial Class yuusen
             Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
             Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
             Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
-
+            Dim data10 = Me.GridView1.Rows(index).Cells(31).Text
 
             Dim dataread As SqlDataReader
             Dim dbcmd As SqlCommand
@@ -750,7 +755,7 @@ Partial Class yuusen
 
 
             If a > 0 Then
-                Call Mail02(data1, data2, data3, data4, data5, data6, data7)
+                Call Mail02(data1, data2, data3, data4, data5, data6, data7, data10)
                 Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーが解消されていません。');</script>", False)
             Else
                 Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーがなくなりました。');</script>", False)
@@ -773,6 +778,7 @@ Partial Class yuusen
             Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
             Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
             Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
+            Dim data10 = Me.GridView1.Rows(index).Cells(31).Text
 
 
             Dim dataread As SqlDataReader
@@ -849,7 +855,7 @@ Partial Class yuusen
 
 
             If a > 0 Then
-                Call Mail02(data1, data2, data3, data4, data5, data6, data7)
+                Call Mail02(data1, data2, data3, data4, data5, data6, data7, data10)
                 Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーが解消されていません。');</script>", False)
             Else
                 Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーを強制的に解除します。。');</script>", False)
@@ -1151,6 +1157,76 @@ Partial Class yuusen
             cnn.Dispose()
 
             Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('案件を削除しました。');</script>", False)
+            Command.Dispose()
+
+        ElseIf e.CommandName = "edt6" Then
+
+
+            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+            Dim data1 = Me.GridView1.Rows(index).Cells(16).Text
+            Dim data2 = Me.GridView1.Rows(index).Cells(6).Text
+            Dim data3 = Me.GridView1.Rows(index).Cells(7).Text
+            Dim data4 = Me.GridView1.Rows(index).Cells(9).Text
+            Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
+            Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
+            Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
+            Dim data8 = Me.GridView1.Rows(index).Cells(30).Text
+            Dim data9 = Me.GridView1.Rows(index).Cells(29).Text
+            Dim data10 = Me.GridView1.Rows(index).Cells(31).Text
+
+
+
+            Dim dataread As SqlDataReader
+            Dim dbcmd As SqlCommand
+            Dim strSQL As String = ""
+            Dim strDate As String = ""
+            Dim strinv As String = ""
+            Dim eflg As Long
+            Dim strcst As String = ""
+            Dim FLGval As Long
+            Dim a As Long
+            Dim cflg As Long
+
+            FLGval = 0
+
+
+            '接続文字列の作成
+            Dim ConnectionString As String = String.Empty
+            'SQL Server認証
+            ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+            'SqlConnectionクラスの新しいインスタンスを初期化
+            Dim cnn = New SqlConnection(ConnectionString)
+
+            Dim dt1 As DateTime = DateTime.Now
+
+            Dim ts1 As New TimeSpan(100, 0, 0, 0)
+            Dim ts2 As New TimeSpan(100, 0, 0, 0)
+            Dim dt2 As DateTime = dt1 + ts1
+            Dim dt3 As DateTime = dt1 - ts1
+
+            'データベース接続を開く
+            cnn.Open()
+            Dim Command = cnn.CreateCommand
+
+            If data9 = "1" Then
+                data9 = "0"
+            Else
+                data9 = "1"
+            End If
+
+            strSQL = ""
+            strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+            strSQL = strSQL & "DAY10 = '" & data9 & "' "
+            strSQL = strSQL & "WHERE DAY09 = '" & data8 & "' "
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+            cnn.Close()
+            cnn.Dispose()
+
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('最終⇔途中を変更します。');</script>", False)
             Command.Dispose()
 
         End If
@@ -1495,6 +1571,47 @@ Partial Class yuusen
             'クローズ処理
             dataread.Close()
             dbcmd.Dispose()
+
+            'LABEL
+            Dim la01 As String = "完了報告残 ： "
+
+            strSQL = "SELECT Count(T_EXL_CSKANRYO.DAY08) AS C "
+            strSQL = strSQL & "FROM T_EXL_CSKANRYO "
+            strSQL = strSQL & "WHERE T_EXL_CSKANRYO.DAY08 IS NULL OR T_EXL_CSKANRYO.DAY08 ='' "
+
+            'ＳＱＬコマンド作成
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行
+            dataread = dbcmd.ExecuteReader()
+
+            '結果を取り出す
+            While (dataread.Read())
+                la01 = la01 & dataread("C")
+            End While
+
+            'クローズ処理
+            dataread.Close()
+            dbcmd.Dispose()
+
+            strSQL = "SELECT Count(T_EXL_CSKANRYO.DAY09) AS C "
+            strSQL = strSQL & "FROM T_EXL_CSKANRYO "
+            strSQL = strSQL & "WHERE T_EXL_CSKANRYO.DAY09 IS NOT NULL "
+
+            'ＳＱＬコマンド作成
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行
+            dataread = dbcmd.ExecuteReader()
+
+            '結果を取り出す
+            While (dataread.Read())
+                la01 = la01 & " / " & dataread("C")
+            End While
+
+            'クローズ処理
+            dataread.Close()
+            dbcmd.Dispose()
+
+            Label6.Text = la01 & " コンテナ"
 
             Dim dltButton As Button = GridView1.Rows(I).FindControl("Button1")
             Dim dltButton2 As Button = GridView1.Rows(I).FindControl("Button2")
@@ -2410,7 +2527,7 @@ Partial Class yuusen
 
     End Sub
 
-    Private Sub get_meisai(bkgno As String, FLGval As String)
+    Private Sub get_meisai(bkgno As String, ByRef FLGval As String)
         'データの取得
 
 
@@ -2744,7 +2861,7 @@ Partial Class yuusen
 
             If str計上日01 = str計上日02 Then
             Else
-                errlrmsg02 = "×" & vbLf & "B:" & str計上日01 & vbLf & "I:" & str計上日02
+                errlrmsg02 = "相違：" & vbLf & "B:" & str計上日01 & " vs " & vbLf & "I:" & str計上日02
 
                 'エラー内容登録
                 strSQL = ""
@@ -2790,7 +2907,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(str計上日01) <> Len(StrConv(str計上日01, VbStrConv.Wide)) Then
+            If isOneByteChar(str計上日01) Then
+            Else
+                'If Len(str計上日01) <> Len(StrConv(str計上日01, VbStrConv.Wide)) Then
                 errlrmsg04 = "ブッキングシート_計上日_全角 "
 
                 'エラー内容登録
@@ -2835,7 +2954,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(str計上日02) <> Len(StrConv(str計上日02, VbStrConv.Narrow)) Then
+            If isOneByteChar(str計上日02) Then
+            Else
+                'If Len(str計上日02) <> Len(StrConv(str計上日02, VbStrConv.Narrow)) Then
                 errlrmsg04 = "イントラ_計上日_全角 "
 
                 'エラー内容登録
@@ -2860,7 +2981,7 @@ Partial Class yuusen
 
             If str積出港01 = str積出港02 Then
             Else
-                errlrmsg02 = "×" & vbLf & "B:" & str積出港01 & vbLf & "I:" & str積出港02
+                errlrmsg02 = "相違：" & vbLf & "B:" & str積出港01 & " vs " & vbLf & "I:" & str積出港02
 
                 'エラー内容登録
                 strSQL = ""
@@ -2906,7 +3027,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(str積出港01) <> Len(StrConv(str積出港01, VbStrConv.Narrow)) Then
+            If isOneByteChar(str積出港01) Then
+            Else
+                'If Len(str積出港01) <> Len(StrConv(str積出港01, VbStrConv.Narrow)) Then
                 errlrmsg04 = "ブッキングシート_積出港_全角 "
 
                 'エラー内容登録
@@ -2951,7 +3074,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(str積出港02) <> Len(StrConv(str積出港02, VbStrConv.Narrow)) Then
+            If isOneByteChar(str積出港02) Then
+            Else
+                'If Len(str積出港02) <> Len(StrConv(str積出港02, VbStrConv.Narrow)) Then
                 errlrmsg04 = "イントラ_積出港_全角 "
 
                 'エラー内容登録
@@ -2977,7 +3102,7 @@ Partial Class yuusen
 
             If str揚地01 Like str揚地02 & "*" Then
             Else
-                errlrmsg02 = "×" & vbLf & "B:" & str揚地01 & vbLf & "I:" & str揚地02
+                errlrmsg02 = "相違：" & vbLf & "B:" & str揚地01 & " vs " & vbLf & "I:" & str揚地02
 
                 'エラー内容登録
                 strSQL = ""
@@ -3024,7 +3149,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(str揚地01) <> Len(StrConv(str揚地01, VbStrConv.Narrow)) Then
+            If isOneByteChar(str揚地01) Then
+            Else
+                'If Len(str揚地01) <> Len(StrConv(str揚地01, VbStrConv.Narrow)) Then
                 errlrmsg04 = "ブッキングシート_揚地_全角 "
 
                 'エラー内容登録
@@ -3069,7 +3196,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(str揚地02) <> Len(StrConv(str揚地02, VbStrConv.Narrow)) Then
+            If isOneByteChar(str揚地02) Then
+            Else
+                'If Len(str揚地02) <> Len(StrConv(str揚地02, VbStrConv.Narrow)) Then
                 errlrmsg04 = "イントラ_揚地_全角 "
 
                 'エラー内容登録
@@ -3094,7 +3223,7 @@ Partial Class yuusen
 
             If str配送先01 Like str配送先02 & "*" Then
             Else
-                errlrmsg02 = "×" & vbLf & "B:" & str配送先01 & vbLf & "I:" & str配送先02
+                errlrmsg02 = "相違：" & vbLf & "B:" & str配送先01 & " vs " & vbLf & "I:" & str配送先02
 
                 'エラー内容登録
                 strSQL = ""
@@ -3140,7 +3269,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(str配送先01) <> Len(StrConv(str配送先01, VbStrConv.Narrow)) Then
+            If isOneByteChar(str配送先01) Then
+            Else
+                'If Len(str配送先01) <> Len(StrConv(str配送先01, VbStrConv.Narrow)) Then
                 errlrmsg04 = "ブッキングシート_配送先_全角 "
 
                 'エラー内容登録
@@ -3185,7 +3316,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(str配送先02) <> Len(StrConv(str配送先02, VbStrConv.Narrow)) Then
+            If isOneByteChar(str配送先02) Then
+            Else
+                'If Len(str配送先02) <> Len(StrConv(str配送先02, VbStrConv.Narrow)) Then
                 errlrmsg04 = "イントラ_配送先_全角 "
 
                 'エラー内容登録
@@ -3210,7 +3343,7 @@ Partial Class yuusen
 
             If str荷受地01 = str荷受地02 Then
             Else
-                errlrmsg02 = "×" & vbLf & "B:" & str荷受地01 & vbLf & "I:" & str荷受地02
+                errlrmsg02 = "相違：" & vbLf & "B:" & str荷受地01 & " vs " & vbLf & "I:" & str荷受地02
 
                 'エラー内容登録
                 strSQL = ""
@@ -3256,7 +3389,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(str荷受地01) <> Len(StrConv(str荷受地01, VbStrConv.Narrow)) Then
+            If isOneByteChar(str荷受地01) Then
+            Else
+                'If Len(str荷受地01) <> Len(StrConv(str荷受地01, VbStrConv.Narrow)) Then
                 errlrmsg04 = "ブッキングシート_荷受地_全角 "
 
                 'エラー内容登録
@@ -3301,7 +3436,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(str荷受地02) <> Len(StrConv(str荷受地02, VbStrConv.Narrow)) Then
+            If isOneByteChar(str荷受地02) Then
+            Else
+                'If Len(str荷受地02) <> Len(StrConv(str荷受地02, VbStrConv.Narrow)) Then
                 errlrmsg04 = "イントラ_荷受地_全角 "
 
                 'エラー内容登録
@@ -3326,7 +3463,7 @@ Partial Class yuusen
 
             If strカット日01 = strカット日02 Then
             Else
-                errlrmsg02 = "×" & vbLf & "B:" & strカット日01 & vbLf & "I:" & strカット日02
+                errlrmsg02 = "相違：" & vbLf & "B:" & strカット日01 & " vs " & vbLf & "I:" & strカット日02
 
                 'エラー内容登録
                 strSQL = ""
@@ -3372,7 +3509,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(strカット日01) <> Len(StrConv(strカット日01, VbStrConv.Narrow)) Then
+            If isOneByteChar(strカット日01) Then
+            Else
+                'If Len(strカット日01) <> Len(StrConv(strカット日01, VbStrConv.Narrow)) Then
                 errlrmsg04 = "ブッキングシート_カット日_全角 "
 
                 'エラー内容登録
@@ -3417,7 +3556,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(strカット日02) <> Len(StrConv(strカット日02, VbStrConv.Narrow)) Then
+            If isOneByteChar(strカット日02) Then
+            Else
+                'If Len(strカット日02) <> Len(StrConv(strカット日02, VbStrConv.Narrow)) Then
                 errlrmsg04 = "イントラ_カット日_全角 "
 
                 'エラー内容登録
@@ -3443,7 +3584,7 @@ Partial Class yuusen
 
             If str到着日01 = str到着日02 Then
             Else
-                errlrmsg02 = "×" & vbLf & "B:" & str到着日01 & vbLf & "I:" & str到着日02
+                errlrmsg02 = "相違：" & vbLf & "B:" & str到着日01 & " vs " & vbLf & "I:" & str到着日02
 
                 'エラー内容登録
                 strSQL = ""
@@ -3489,7 +3630,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(str到着日01) <> Len(StrConv(str到着日01, VbStrConv.Narrow)) Then
+            If isOneByteChar(str到着日01) Then
+            Else
+                'If Len(str到着日01) <> Len(StrConv(str到着日01, VbStrConv.Narrow)) Then
                 errlrmsg04 = "ブッキングシート_到着日_全角 "
 
                 'エラー内容登録
@@ -3534,7 +3677,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(str到着日02) <> Len(StrConv(str到着日02, VbStrConv.Narrow)) Then
+            If isOneByteChar(str到着日02) Then
+            Else
+                'If Len(str到着日02) <> Len(StrConv(str到着日02, VbStrConv.Narrow)) Then
                 errlrmsg04 = "イントラ_到着日_全角 "
 
                 'エラー内容登録
@@ -3559,7 +3704,7 @@ Partial Class yuusen
 
             If str入出港日01 = str入出港日02 Then
             Else
-                errlrmsg02 = "×" & vbLf & "B:" & str入出港日01 & vbLf & "I:" & str入出港日02
+                errlrmsg02 = "相違：" & vbLf & "B:" & str入出港日01 & " vs " & vbLf & "I:" & str入出港日02
 
                 'エラー内容登録
                 strSQL = ""
@@ -3605,7 +3750,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(str入出港日01) <> Len(StrConv(str入出港日01, VbStrConv.Narrow)) Then
+            If isOneByteChar(str入出港日01) Then
+            Else
+                'If Len(str入出港日01) <> Len(StrConv(str入出港日01, VbStrConv.Narrow)) Then
                 errlrmsg04 = "ブッキングシート_入出港日_全角 "
 
                 'エラー内容登録
@@ -3650,7 +3797,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(str入出港日02) <> Len(StrConv(str入出港日02, VbStrConv.Narrow)) Then
+            If isOneByteChar(str入出港日02) Then
+            Else
+                'If Len(str入出港日02) <> Len(StrConv(str入出港日02, VbStrConv.Narrow)) Then
                 errlrmsg04 = "イントラ_入出港日_全角 "
 
                 'エラー内容登録
@@ -3674,7 +3823,7 @@ Partial Class yuusen
 
             If strVOYAGENo01 = strVOYAGENo02 Then
             Else
-                errlrmsg02 = "×" & vbLf & "B:" & strVOYAGENo01 & vbLf & "I:" & strVOYAGENo02
+                errlrmsg02 = "相違：" & vbLf & "B:" & strVOYAGENo01 & " vs " & vbLf & "I:" & strVOYAGENo02
 
                 'エラー内容登録
                 strSQL = ""
@@ -3719,7 +3868,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(strVOYAGENo01) <> Len(StrConv(strVOYAGENo01, VbStrConv.Narrow)) Then
+            If isOneByteChar(strVOYAGENo01) Then
+            Else
+                'If Len(strVOYAGENo01) <> Len(StrConv(strVOYAGENo01, VbStrConv.Narrow)) Then
                 errlrmsg04 = "ブッキングシート_VOYAGENo_全角 "
 
                 'エラー内容登録
@@ -3764,7 +3915,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(strVOYAGENo02) <> Len(StrConv(strVOYAGENo02, VbStrConv.Narrow)) Then
+            If isOneByteChar(strVOYAGENo02) Then
+            Else
+                'If Len(strVOYAGENo02) <> Len(StrConv(strVOYAGENo02, VbStrConv.Narrow)) Then
                 errlrmsg04 = "イントラ_VOYAGENo_全角 "
 
                 'エラー内容登録
@@ -3788,7 +3941,7 @@ Partial Class yuusen
 
             If str船社01 = str船社02 Then
             Else
-                errlrmsg02 = "×" & vbLf & "B:" & str船社01 & vbLf & "I:" & str船社02
+                errlrmsg02 = "相違：" & vbLf & "B:" & str船社01 & " vs " & vbLf & "I:" & str船社02
 
                 'エラー内容登録
                 strSQL = ""
@@ -3796,7 +3949,7 @@ Partial Class yuusen
                 strSQL = strSQL & " '" & strinv & "', "
                 strSQL = strSQL & " '" & bkgno & "', "
                 strSQL = strSQL & " '" & errlrmsg02 & "', "
-                strSQL = strSQL & " '  船名(Ocean Vessel) ', "
+                strSQL = strSQL & " '  船社 ', "
                 strSQL = strSQL & " '', "
                 strSQL = strSQL & " '', "
                 strSQL = strSQL & " '', "
@@ -3821,7 +3974,7 @@ Partial Class yuusen
                 strSQL = strSQL & " '" & strinv & "', "
                 strSQL = strSQL & " '" & bkgno & "', "
                 strSQL = strSQL & " '" & errlrmsg03 & "', "
-                strSQL = strSQL & " '  船名(Ocean Vessel) ', "
+                strSQL = strSQL & " '船社', "
                 strSQL = strSQL & " '', "
                 strSQL = strSQL & " '', "
                 strSQL = strSQL & " '', "
@@ -3845,7 +3998,7 @@ Partial Class yuusen
                 strSQL = strSQL & " '" & strinv & "', "
                 strSQL = strSQL & " '" & bkgno & "', "
                 strSQL = strSQL & " '" & errlrmsg03 & "', "
-                strSQL = strSQL & " '  船名(Ocean Vessel) ', "
+                strSQL = strSQL & " '船社', "
                 strSQL = strSQL & " '', "
                 strSQL = strSQL & " '', "
                 strSQL = strSQL & " '', "
@@ -3860,7 +4013,7 @@ Partial Class yuusen
 
             If strブッキングNo01 = strブッキングNo02 Then
             Else
-                errlrmsg02 = "×" & vbLf & "B:" & strブッキングNo01 & vbLf & "I:" & strブッキングNo02
+                errlrmsg02 = "相違：" & vbLf & "B:" & strブッキングNo01 & " vs " & vbLf & "I:" & strブッキングNo02
 
                 'エラー内容登録
                 strSQL = ""
@@ -3906,7 +4059,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(strブッキングNo01) <> Len(StrConv(strブッキングNo01, VbStrConv.Narrow)) Then
+            If isOneByteChar(strブッキングNo01) Then
+            Else
+                'If Len(strブッキングNo01) <> Len(StrConv(strブッキングNo01, VbStrConv.Narrow)) Then
                 errlrmsg04 = "ブッキングシート_ブッキングNo_全角 "
 
                 'エラー内容登録
@@ -3951,7 +4106,9 @@ Partial Class yuusen
 
             End If
 
-            If Len(strブッキングNo02) <> Len(StrConv(strブッキングNo02, VbStrConv.Narrow)) Then
+            If isOneByteChar(strブッキングNo02) Then
+            Else
+                'If Len(strブッキングNo02) <> Len(StrConv(strブッキングNo02, VbStrConv.Narrow)) Then
                 errlrmsg04 = "イントラ_ブッキングNo_全角 "
 
                 'エラー内容登録
@@ -3976,7 +4133,7 @@ Partial Class yuusen
 
             If str船名01 = str船名02 Then
             Else
-                errlrmsg02 = "×" & vbLf & "B:" & str船名01 & vbLf & "I:" & str船名02
+                errlrmsg02 = "相違：" & vbLf & "B:" & str船名01 & " vs " & vbLf & "I:" & str船名02
 
                 'エラー内容登録
                 strSQL = ""
@@ -3984,7 +4141,7 @@ Partial Class yuusen
                 strSQL = strSQL & " '" & strinv & "', "
                 strSQL = strSQL & " '" & bkgno & "', "
                 strSQL = strSQL & " '" & errlrmsg02 & "', "
-                strSQL = strSQL & " '船社', "
+                strSQL = strSQL & " '船名', "
                 strSQL = strSQL & " '', "
                 strSQL = strSQL & " '', "
                 strSQL = strSQL & " '', "
@@ -4008,7 +4165,7 @@ Partial Class yuusen
                 strSQL = strSQL & " '" & strinv & "', "
                 strSQL = strSQL & " '" & bkgno & "', "
                 strSQL = strSQL & " '" & errlrmsg03 & "', "
-                strSQL = strSQL & " '船社', "
+                strSQL = strSQL & " '船名', "
                 strSQL = strSQL & " '', "
                 strSQL = strSQL & " '', "
                 strSQL = strSQL & " '', "
@@ -4021,255 +4178,261 @@ Partial Class yuusen
 
             End If
 
-            If Len(str船名01) <> Len(StrConv(str船名01, VbStrConv.Narrow)) Then
+
+            If isOneByteChar(str船名01) Then
+            Else
+                'If Len(str船名01) <> Len(StrConv(str船名01, VbStrConv.Narrow)) Then
+
                 errlrmsg04 = "ブッキングシート_船名_全角 "
 
-                'エラー内容登録
-                strSQL = ""
-                strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
-                strSQL = strSQL & " '" & strinv & "', "
-                strSQL = strSQL & " '" & bkgno & "', "
-                strSQL = strSQL & " '" & errlrmsg04 & "', "
-                strSQL = strSQL & " '船社', "
+                    'エラー内容登録
+                    strSQL = ""
+                    strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
+                    strSQL = strSQL & " '" & strinv & "', "
+                    strSQL = strSQL & " '" & bkgno & "', "
+                    strSQL = strSQL & " '" & errlrmsg04 & "', "
+                strSQL = strSQL & " '船名', "
                 strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '' "
+                    strSQL = strSQL & ") "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                End If
+
+                '全角半角、改行
+                If InStr(str船名02, vbCr) + InStr(str船名02, vbLf) + InStr(str船名02, vbCrLf) > 0 Then
+                    errlrmsg03 = "イントラ_船名_改行 "
+
+                    'エラー内容登録
+                    strSQL = ""
+                    strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
+                    strSQL = strSQL & " '" & strinv & "', "
+                    strSQL = strSQL & " '" & bkgno & "', "
+                    strSQL = strSQL & " '" & errlrmsg03 & "', "
+                strSQL = strSQL & " '船名', "
                 strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '' "
-                strSQL = strSQL & ") "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '' "
+                    strSQL = strSQL & ") "
 
-                Command.CommandText = strSQL
-                ' SQLの実行
-                Command.ExecuteNonQuery()
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
 
-            End If
+                End If
 
-            '全角半角、改行
-            If InStr(str船名02, vbCr) + InStr(str船名02, vbLf) + InStr(str船名02, vbCrLf) > 0 Then
-                errlrmsg03 = "イントラ_船名_改行 "
-
-                'エラー内容登録
-                strSQL = ""
-                strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
-                strSQL = strSQL & " '" & strinv & "', "
-                strSQL = strSQL & " '" & bkgno & "', "
-                strSQL = strSQL & " '" & errlrmsg03 & "', "
-                strSQL = strSQL & " '船社', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '' "
-                strSQL = strSQL & ") "
-
-                Command.CommandText = strSQL
-                ' SQLの実行
-                Command.ExecuteNonQuery()
-
-            End If
-
-            If Len(str船名02) <> Len(StrConv(str船名02, VbStrConv.Narrow)) Then
+            If isOneByteChar(str船名02) Then
+            Else
+                'If Len(str船名02) <> Len(StrConv(str船名02, VbStrConv.Narrow)) Then
                 errlrmsg04 = "イントラ_船名_全角 "
 
-                'エラー内容登録
-                strSQL = ""
-                strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
-                strSQL = strSQL & " '" & strinv & "', "
-                strSQL = strSQL & " '" & bkgno & "', "
-                strSQL = strSQL & " '" & errlrmsg04 & "', "
-                strSQL = strSQL & " '船社', "
+                    'エラー内容登録
+                    strSQL = ""
+                    strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
+                    strSQL = strSQL & " '" & strinv & "', "
+                    strSQL = strSQL & " '" & bkgno & "', "
+                    strSQL = strSQL & " '" & errlrmsg04 & "', "
+                strSQL = strSQL & " '船名', "
                 strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '' "
-                strSQL = strSQL & ") "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '' "
+                    strSQL = strSQL & ") "
 
-                Command.CommandText = strSQL
-                ' SQLの実行
-                Command.ExecuteNonQuery()
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
 
-            End If
-
-
-            If Replace(Replace(strFINALDN01, vbCrLf, ""), vbLf, "") = Replace(Replace(strFINALDN02, vbCrLf, ""), vbLf, "") Then
-            Else
-                errlrmsg02 = "×" & vbLf & "M:" & strFINALDN01 & vbLf & "I:" & strFINALDN02
-
-                'エラー内容登録
-                strSQL = ""
-                strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
-                strSQL = strSQL & " '" & strinv & "', "
-                strSQL = strSQL & " '" & bkgno & "', "
-                strSQL = strSQL & " '" & errlrmsg02 & "', "
-                strSQL = strSQL & " 'Final Destination(届先名)', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '' "
-                strSQL = strSQL & ") "
-
-                Command.CommandText = strSQL
-                ' SQLの実行
-                Command.ExecuteNonQuery()
-
-                flg = 1
-            End If
+                End If
 
 
-            If Replace(Replace(strFINALDA01, vbCrLf, ""), vbLf, "") = Replace(Replace(strFINALDA02, vbCrLf, ""), vbLf, "") Then
-            Else
-                errlrmsg02 = "×" & vbLf & "M:" & strFINALDA01 & vbLf & "I:" & strFINALDA02
+                If Replace(Replace(strFINALDN01, vbCrLf, ""), vbLf, "") = Replace(Replace(strFINALDN02, vbCrLf, ""), vbLf, "") Then
+                Else
+                    errlrmsg02 = "相違：" & vbLf & "M:" & strFINALDN01 & " vs " & vbLf & "I:" & strFINALDN02
 
-                'エラー内容登録
-                strSQL = ""
-                strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
-                strSQL = strSQL & " '" & strinv & "', "
-                strSQL = strSQL & " '" & bkgno & "', "
-                strSQL = strSQL & " '" & errlrmsg02 & "', "
-                strSQL = strSQL & " 'Final Destination Address(届先住所)', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '' "
-                strSQL = strSQL & ") "
+                    'エラー内容登録
+                    strSQL = ""
+                    strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
+                    strSQL = strSQL & " '" & strinv & "', "
+                    strSQL = strSQL & " '" & bkgno & "', "
+                    strSQL = strSQL & " '" & errlrmsg02 & "', "
+                    strSQL = strSQL & " 'Final Destination(届先名)', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '' "
+                    strSQL = strSQL & ") "
 
-                Command.CommandText = strSQL
-                ' SQLの実行
-                Command.ExecuteNonQuery()
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
 
-                flg = 1
-            End If
-
-
-            If Replace(Replace(strCNEESIN01, vbCrLf, ""), vbLf, "") = Replace(Replace(strCNEESIN02, vbCrLf, ""), vbLf, "") Then
-            Else
-                errlrmsg02 = "×" & vbLf & "M:" & strCNEESIN01 & vbLf & "I:" & strCNEESIN02
-
-                'エラー内容登録
-                strSQL = ""
-                strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
-                strSQL = strSQL & " '" & strinv & "', "
-                strSQL = strSQL & " '" & bkgno & "', "
-                strSQL = strSQL & " '" & errlrmsg02 & "', "
-                strSQL = strSQL & " 'Consignee(荷受先名)', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '' "
-                strSQL = strSQL & ") "
-
-                Command.CommandText = strSQL
-                ' SQLの実行
-                Command.ExecuteNonQuery()
-
-                flg = 1
-            End If
+                    flg = 1
+                End If
 
 
-            If Replace(Replace(strCNEESIA01, vbCrLf, ""), vbLf, "") = Replace(Replace(strCNEESIA02, vbCrLf, ""), vbLf, "") Then
-            Else
-                errlrmsg02 = "×" & vbLf & "M:" & strCNEESIA01 & vbLf & "I:" & strCNEESIA02
+                If Replace(Replace(strFINALDA01, vbCrLf, ""), vbLf, "") = Replace(Replace(strFINALDA02, vbCrLf, ""), vbLf, "") Then
+                Else
+                    errlrmsg02 = "相違：" & vbLf & "M:" & strFINALDA01 & " vs " & vbLf & "I:" & strFINALDA02
 
-                'エラー内容登録
-                strSQL = ""
-                strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
-                strSQL = strSQL & " '" & strinv & "', "
-                strSQL = strSQL & " '" & bkgno & "', "
-                strSQL = strSQL & " '" & errlrmsg02 & "', "
-                strSQL = strSQL & " 'ConsigneeAddress(荷受先住所)', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '' "
-                strSQL = strSQL & ") "
+                    'エラー内容登録
+                    strSQL = ""
+                    strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
+                    strSQL = strSQL & " '" & strinv & "', "
+                    strSQL = strSQL & " '" & bkgno & "', "
+                    strSQL = strSQL & " '" & errlrmsg02 & "', "
+                    strSQL = strSQL & " 'Final Destination Address(届先住所)', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '' "
+                    strSQL = strSQL & ") "
 
-                Command.CommandText = strSQL
-                ' SQLの実行
-                Command.ExecuteNonQuery()
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
 
-                flg = 1
-            End If
-
-            If Replace(Replace(strNOTYSI01, vbCrLf, ""), vbLf, "") = Replace(Replace(strNOTYSI02, vbCrLf, ""), vbLf, "") Then
-            Else
-                errlrmsg02 = "×" & vbLf & "M:" & strNOTYSI01 & vbLf & "I:" & strNOTYSI02
-
-                'エラー内容登録
-                strSQL = ""
-                strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
-                strSQL = strSQL & " '" & strinv & "', "
-                strSQL = strSQL & " '" & bkgno & "', "
-                strSQL = strSQL & " '" & errlrmsg02 & "', "
-                strSQL = strSQL & " 'Notify Address', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '' "
-                strSQL = strSQL & ") "
-
-                Command.CommandText = strSQL
-                ' SQLの実行
-                Command.ExecuteNonQuery()
-
-                flg = 1
-            End If
+                    flg = 1
+                End If
 
 
-            If DateValue(strカット日01) < DateValue(str入出港日01) Or DateValue(strカット日01) < DateValue(str計上日01) Then
-            Else
+                If Replace(Replace(strCNEESIN01, vbCrLf, ""), vbLf, "") = Replace(Replace(strCNEESIN02, vbCrLf, ""), vbLf, "") Then
+                Else
+                    errlrmsg02 = "相違：" & vbLf & "M:" & strCNEESIN01 & " vs " & vbLf & "I:" & strCNEESIN02
 
-                errlrmsg06 = "出港日か売上計上日がCUT日以前にあります。（ブッキングシート）"
+                    'エラー内容登録
+                    strSQL = ""
+                    strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
+                    strSQL = strSQL & " '" & strinv & "', "
+                    strSQL = strSQL & " '" & bkgno & "', "
+                    strSQL = strSQL & " '" & errlrmsg02 & "', "
+                    strSQL = strSQL & " 'Consignee(荷受先名)', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '' "
+                    strSQL = strSQL & ") "
 
-                'エラー内容登録
-                strSQL = ""
-                strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
-                strSQL = strSQL & " '" & strinv & "', "
-                strSQL = strSQL & " '" & bkgno & "', "
-                strSQL = strSQL & " '" & errlrmsg06 & "', "
-                strSQL = strSQL & " 'CUT日', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '' "
-                strSQL = strSQL & ") "
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
 
-                Command.CommandText = strSQL
-                ' SQLの実行
-                Command.ExecuteNonQuery()
-
-            End If
-
-
-            If DateValue(strカット日02) < DateValue(str入出港日02) Or DateValue(strカット日02) < DateValue(str計上日02) Then
-            Else
-
-                errlrmsg06 = "出港日か売上計上日がCUT日以前にあります。（イントラ）"
-
-                'エラー内容登録
-                strSQL = ""
-                strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
-                strSQL = strSQL & " '" & strinv & "', "
-                strSQL = strSQL & " '" & bkgno & "', "
-                strSQL = strSQL & " '" & errlrmsg06 & "', "
-                strSQL = strSQL & " '入出港日', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '', "
-                strSQL = strSQL & " '' "
-                strSQL = strSQL & ") "
-
-                Command.CommandText = strSQL
-                ' SQLの実行
-                Command.ExecuteNonQuery()
-
-            End If
+                    flg = 1
+                End If
 
 
+                If Replace(Replace(strCNEESIA01, vbCrLf, ""), vbLf, "") = Replace(Replace(strCNEESIA02, vbCrLf, ""), vbLf, "") Then
+                Else
+                    errlrmsg02 = "相違：" & vbLf & "M:" & strCNEESIA01 & " vs " & vbLf & "I:" & strCNEESIA02
 
-        ElseIf getflg01 = 1 And getflg02 = 0 Then
-            errlrmsg01 = "1:イントラなし" '"イントラなし"
-        ElseIf getflg01 = 0 And getflg02 = 1 Then
-            errlrmsg01 = "1:Bookingシートなし" '"Bookingシートなし"
-        ElseIf getflg01 = 0 And getflg02 = 0 Then
-            errlrmsg01 = "1:両方なし" '"両方なし"
+                    'エラー内容登録
+                    strSQL = ""
+                    strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
+                    strSQL = strSQL & " '" & strinv & "', "
+                    strSQL = strSQL & " '" & bkgno & "', "
+                    strSQL = strSQL & " '" & errlrmsg02 & "', "
+                    strSQL = strSQL & " 'ConsigneeAddress(荷受先住所)', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '' "
+                    strSQL = strSQL & ") "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                    flg = 1
+                End If
+
+                If Replace(Replace(strNOTYSI01, vbCrLf, ""), vbLf, "") = Replace(Replace(strNOTYSI02, vbCrLf, ""), vbLf, "") Then
+                Else
+                    errlrmsg02 = "相違：" & vbLf & "M:" & strNOTYSI01 & " vs " & vbLf & "I:" & strNOTYSI02
+
+                    'エラー内容登録
+                    strSQL = ""
+                    strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
+                    strSQL = strSQL & " '" & strinv & "', "
+                    strSQL = strSQL & " '" & bkgno & "', "
+                    strSQL = strSQL & " '" & errlrmsg02 & "', "
+                    strSQL = strSQL & " 'Notify Address', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '' "
+                    strSQL = strSQL & ") "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                    flg = 1
+                End If
+
+
+                If DateValue(strカット日01) < DateValue(str入出港日01) Or DateValue(strカット日01) < DateValue(str計上日01) Then
+                Else
+
+                    errlrmsg06 = "出港日か売上計上日がCUT日以前にあります。（ブッキングシート）"
+
+                    'エラー内容登録
+                    strSQL = ""
+                    strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
+                    strSQL = strSQL & " '" & strinv & "', "
+                    strSQL = strSQL & " '" & bkgno & "', "
+                    strSQL = strSQL & " '" & errlrmsg06 & "', "
+                    strSQL = strSQL & " 'CUT日', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '' "
+                    strSQL = strSQL & ") "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                End If
+
+
+                If DateValue(strカット日02) < DateValue(str入出港日02) Or DateValue(strカット日02) < DateValue(str計上日02) Then
+                Else
+
+                    errlrmsg06 = "出港日か売上計上日がCUT日以前にあります。（イントラ）"
+
+                    'エラー内容登録
+                    strSQL = ""
+                    strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
+                    strSQL = strSQL & " '" & strinv & "', "
+                    strSQL = strSQL & " '" & bkgno & "', "
+                    strSQL = strSQL & " '" & errlrmsg06 & "', "
+                    strSQL = strSQL & " '入出港日', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '', "
+                    strSQL = strSQL & " '' "
+                    strSQL = strSQL & ") "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                End If
+
+
+
+            ElseIf getflg01 = 1 And getflg02 = 0 Then
+                errlrmsg01 = "イントラにデータなし" '"イントラなし"
+            ElseIf getflg01 = 0 And getflg02 = 1 Then
+                errlrmsg01 = "BookingSheetにデータなし" '"Bookingシートなし"
+            ElseIf getflg01 = 0 And getflg02 = 0 Then
+                errlrmsg01 = "両方にデータなし" '"両方なし"
         End If
 
         If errlrmsg01 <> "0" Then
@@ -4314,6 +4477,16 @@ Partial Class yuusen
         cnn.Dispose()
         Command.Dispose()
     End Sub
+
+    Private Function isOneByteChar(ByVal str As String) As Boolean
+        Dim byte_data As Byte() = System.Text.Encoding.GetEncoding(932).GetBytes(str)
+
+        If byte_data.Length = str.Length Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 
     Private Sub check005(ByRef str計上日01 As String, ByRef str積出港01 As String, ByRef str揚地01 As String, ByRef str配送先01 As String, ByRef str荷受地01 As String, ByRef str配送先責任送り先01 As String, ByRef strカット日01 As String, ByRef str到着日01 As String, ByRef str入出港日01 As String, ByRef str出荷方法01 As String, ByRef strVOYAGENo01 As String, ByRef str船社01 As String, ByRef strブッキングNo01 As String, ByRef str船名01 As String, ByRef getflg01 As String, ByVal strinv As String)
 
@@ -5035,6 +5208,17 @@ Partial Class yuusen
         'メールの本文
         Dim body As String = ""
 
+
+        If strcon = e Then
+        Else
+            body = "＜実績バン本数とブッキング本数に相違があります＞"
+            body = "<font style=" & Chr(34) & "background-color: Red" & Chr(34) & ">" & body & "</font>"
+            body = "<font style=" & Chr(34) & "color: white" & Chr(34) & ">" & body & "</font>"
+            body = "<font size=" & Chr(34) & "3" & Chr(34) & ">" & body & "</font><br/>"
+
+        End If
+
+
         body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
         body = body + "このメールはシステムから送信されています。<br/>"
         body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
@@ -5262,7 +5446,7 @@ Partial Class yuusen
 
     End Sub
 
-    Sub Mail02(ByRef bkgno As String, ByRef a As String, ByRef b As String, ByRef c2 As String, ByRef d As String, ByRef e As String, ByRef f As String)
+    Sub Mail02(ByRef bkgno As String, ByRef a As String, ByRef b As String, ByRef c2 As String, ByRef d As String, ByRef e As String, ByRef f As String, ByRef g As String)
 
         'メールの送信に必要な情報
         Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
@@ -5288,7 +5472,8 @@ Partial Class yuusen
 
 
         'メールの件名
-        Dim subject As String = " 【通知】エラー" & "　最終バン：" & a & " " & b & "　客先：" & c2 & "　IV-" & d & "　コンテナ：" & e & " 本" & "　ETD：" & f
+        Dim subject As String = " 【通知】＜エラー＞" & " 客先：" & c2 & " / IV-" & d & " / BKG#" & bkgno
+
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
 
@@ -5300,11 +5485,27 @@ Partial Class yuusen
         body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
         body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
 
-        body = body & "<html><body>CS各位<br>お疲れ様です。<br><br>エラーが発生しているため、ご確認宜しくお願いいたします。<br><br><br>＜説明＞<br>B　：　Booking sheet　　　　 I　：　Intra-mart<br><br><br><エラー内容></body></html>" ' UriBodyC()
+        body = body & "<html><body>CS各位<br>お疲れ様です。<br><br>エラーが発生しているため、ご確認宜しくお願いいたします。<br></body></html>" ' UriBodyC()
+
+
+        Dim t2 As String = ""
+        t2 = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;'><tr style='background-color: #D3D3D3;'><td>客先</td><td>IVNO</td><td>ETD</td><td>最終バン</td><td>BKG#</td></tr>"
+        t2 = t2 & "<tr><td>" & c2 & "</td><td>" & d & "</td><td>" & f & "</td><td>" & g & " " & b & "</td><td>" & bkgno & "</td></tr>"
+        t2 = t2 & "</Table></body></html><br/>"
+
+        body = body & t2
+
+        body = body & "<html><body><エラー内容>B：Booking sheet　I：Intra-mart<br></body></html>" ' UriBodyC()
+
 
         Dim t As String = ""
 
+
+        t = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;'><tr style='background-color: #6fbfd1;'><td>IVNO</td><td>ｴﾗｰ項目</td><td>ｴﾗｰ内容</td></tr>"
+
         Call GETERROR(bkgno, t)
+
+        t = t & "</Table></body></html>"
 
         t = "<font color=" & Chr(34) & "RED" & Chr(34) & ">" & t & "</font>"
         t = "<font size=" & Chr(34) & "3" & Chr(34) & ">" & t & "</font>"
@@ -5689,7 +5890,8 @@ Partial Class yuusen
             strcst = Trim(Convert.ToString(dataread("BKGNO")))        '客先目
             strrate = Trim(Convert.ToString(dataread("ERDETAIL")))        'REF01
             strrate2 = Trim(Convert.ToString(dataread("REF01")))        '
-            t = t & "<br>" & "・IV-" & strinv & " エラー項目:" & strrate2 & " エラー内容:" & strrate
+            t = t & "<tr><td>" & strinv & "</td><td>" & strrate2 & "</td><td>" & strrate & "</td></tr>"
+
         End While
 
         'クローズ処理 

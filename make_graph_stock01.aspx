@@ -228,7 +228,7 @@
                     ctx.textAlign = 'center';
                     ctx.fillRect(left +10, top-165, 140, 20);
                     ctx.fillStyle = "White";
-                    ctx.fillText('収容可能数：' + dataarr5[1] + '千台', left + 80, topX + 48);
+                    ctx.fillText('収容可能数：' + dataarr5[70] + '千台', left + 80, topX + 48);
 
 
 

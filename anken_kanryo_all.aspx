@@ -223,6 +223,7 @@
         }
 
 
+
     </style>
  <%--<script>
     $(document).ready(function () {
@@ -299,36 +300,18 @@
 
 
     <div id="contents2" class="inner2">
-        <table style="height:10px;">
+        <table style="height:10px;" >
             <tr>
                 <td style="width:250px;Font-Size:25px;" >
                     <h2>完了報告</h2>
                 </td>
-                <td style="width:100px;" >
+                <td style="width:250px;" >
+
+                <div style="background-color:none;text-align: center;border:groove">
+                    <asp:Label ID="Label6" runat="server" Text="Label" ></asp:Label>
+                </div>
                 </td>
-<%--                <td style="width:550px;">
-                    <h1>フィルタ</h1>
-                    <p></p>
-                    <asp:DropDownList ID="DropDownList1" runat="server" Width="100px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" >
-                    <asp:ListItem>--Select--</asp:ListItem>
-                    <asp:ListItem>進捗状況</asp:ListItem>
-                    <asp:ListItem>シート</asp:ListItem>
-                    <asp:ListItem>海貨業者</asp:ListItem>
-                    <asp:ListItem>客先コード</asp:ListItem>
-                    <asp:ListItem>IVNO</asp:ListItem>
-                    <asp:ListItem>CUT日</asp:ListItem>
-                    <asp:ListItem>書類作成予定日</asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:DropDownList ID="DropDownList2" runat="server" Width="140px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" ></asp:DropDownList>
-                    <asp:Button CssClass ="button01" ID="Button1" runat="server" Text="全件表示" Width="100px" Height="40px" AutoPostBack="True" Font-Size="13px" />
-                    <asp:CheckBox   ID="CheckBox1" runat="server" Height="13px" Text="自社通関"  Font-Size="13px" />
-                </td>--%>
-                <td style="width:150px;" >
-                </td>
-                <td style="width:150px;" >
-<%--                    <div class="button04">
-                    <a href="anken_booking02.aspx?id={0}">案件抽出</a>
-                    </div>--%>
+                <td style="width:750px;" >
                 </td>
             </tr>
         </table>    
@@ -388,7 +371,7 @@
 
 
                         <asp:TemplateField ShowHeader="False" HeaderText="完 了">
-                            <HeaderStyle Width="40px" />
+                            <HeaderStyle Width="50px" />
                             <ItemTemplate>
                                 <asp:Label ID="Label1" runat="server" Text="" CausesValidation="false" CommandName="edt5"></asp:Label>
                             </ItemTemplate>
@@ -482,7 +465,7 @@
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
                         <asp:TemplateField ShowHeader="False" HeaderText="ﾁｪｯｸ表示">
-                        <HeaderStyle Width="50px" />
+                        <HeaderStyle Width="60px" />
                             <ItemTemplate>
                                 <asp:Button ID="Button4" runat="server" CausesValidation="false" CommandName="edt4" Text="" />
                             </ItemTemplate>
@@ -500,6 +483,14 @@
                         <asp:BoundField DataField="DAY10" HeaderText="最終" SortExpression="DAY10" />
                         <asp:BoundField DataField="DAY09" HeaderText="ROWNO" SortExpression="DAY09" />
                         <asp:BoundField DataField="FINALVANDATE" HeaderText="FINALVANDATE" SortExpression="FINALVANDATE" />
+
+                        <asp:TemplateField ShowHeader="False" HeaderText="最終・途中">
+                        <HeaderStyle Width="70px" />
+                            <ItemTemplate>
+                                <asp:Button ID="Button6" runat="server" CausesValidation="false" CommandName="edt6" Text="変更" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
 
                         </Columns>
                         <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
