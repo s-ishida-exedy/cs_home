@@ -374,7 +374,7 @@
         <asp:BoundField DataField="DATE_ONBL" HeaderText="BL上の日付" SortExpression="DATE_ONBL" ></asp:BoundField>
 
         <asp:BoundField DataField="REV_SALESDATE" HeaderText="修正後計上日" SortExpression="REV_SALESDATE" ></asp:BoundField>
-        <asp:BoundField DataField="REV_STATUS" HeaderText="修正状況" SortExpression="REV_STATUS" ></asp:BoundField>
+        <asp:BoundField DataField="REV_STATUS" HeaderText="修正状況" SortExpression="REV_STATUS" ></asp:BoundField> <%--12--%>
         <asp:BoundField DataField="BOOKING_NO" HeaderText="BOOKING_NO" SortExpression="BOOKING_NO" ReadOnly="true" ></asp:BoundField>
         <asp:BoundField DataField="VOY_NO" HeaderText="VOY_NO" SortExpression="VOY_NO" ReadOnly="true" ></asp:BoundField>
         <asp:BoundField DataField="IV_BLDATE" HeaderText="IV_BLDATE" SortExpression="IV_BLDATE" ReadOnly="true" ></asp:BoundField>
@@ -386,7 +386,10 @@
         <asp:BoundField DataField="RECEIVED_PORT" HeaderText="荷受" SortExpression="RECEIVED_PORT" ReadOnly="true" ></asp:BoundField>
         <asp:BoundField DataField="SHIP_PLACE" HeaderText="出荷拠点" SortExpression="SHIP_PLACE" ReadOnly="true" ></asp:BoundField>
         <asp:BoundField DataField="CHECKFLG" HeaderText="確認" SortExpression="CHECKFLG" ReadOnly="true" ></asp:BoundField>
-        <asp:BoundField DataField="FLG01" HeaderText="ID" SortExpression="FLG01" ReadOnly="true" ></asp:BoundField>
+        <asp:BoundField DataField="FLG01" HeaderText="ID" SortExpression="FLG01" ReadOnly="true" ></asp:BoundField> <%--24--%>
+        <asp:BoundField DataField="FLG02" HeaderText="変更後VOY" SortExpression="FLG02" ReadOnly="true" ></asp:BoundField>
+        <asp:BoundField DataField="FLG03" HeaderText="変更後VESSEL" SortExpression="FLG03" ReadOnly="true" ></asp:BoundField>
+        <asp:BoundField DataField="FLG04" HeaderText="変更後LOAD" SortExpression="FLG04" ReadOnly="true" ></asp:BoundField>
 <%--        <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" ReadOnly="true" ></asp:BoundField>
         <asp:BoundField DataField="REV_ETD" HeaderText="REV_ETD" SortExpression="REV_ETD" ReadOnly="true" ></asp:BoundField>--%>
 

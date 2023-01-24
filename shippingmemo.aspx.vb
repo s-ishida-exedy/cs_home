@@ -22,6 +22,9 @@ Partial Class yuusen
         Dim str04 As String = ""
         Dim str05 As String = ""
 
+
+
+
         If e.Row.RowType = DataControlRowType.DataRow Then
             If e.Row.Cells(12).Text = "月またぎ" Then
                 e.Row.BackColor = Drawing.Color.DarkSalmon
@@ -33,9 +36,68 @@ Partial Class yuusen
                 e.Row.BackColor = Drawing.Color.LightGreen
             End If
 
-            If IsPostBack = True Then
+            'If IsPostBack = True Then
 
-                If e.Row.Cells(9).Text = "" Or e.Row.Cells(9).Text = "&nbsp;" Then
+            If e.Row.Cells(25).Text = e.Row.Cells(14).Text Then
+            Else
+                If e.Row.Cells(25).Text <> "&nbsp;" Then
+                    If e.Row.Cells(25).Text <> "&nbsp;" Then
+                        e.Row.Cells(1).BackColor = Drawing.Color.LightSalmon
+                        e.Row.Cells(1).ForeColor = Drawing.Color.White
+                        e.Row.Cells(1).Font.Bold = True
+
+                        e.Row.Cells(25).BackColor = Drawing.Color.LightSalmon
+                        e.Row.Cells(25).ForeColor = Drawing.Color.White
+                        e.Row.Cells(25).Font.Bold = True
+
+                        e.Row.Cells(14).BackColor = Drawing.Color.LightSalmon
+                        e.Row.Cells(14).ForeColor = Drawing.Color.White
+                        e.Row.Cells(14).Font.Bold = True
+
+                    End If
+                End If
+            End If
+            'e.Row.Cells(25).Visible = False
+            If e.Row.Cells(26).Text = e.Row.Cells(19).Text Then
+            Else
+                If e.Row.Cells(26).Text <> "" Then
+                    If e.Row.Cells(26).Text <> "&nbsp;" Then
+                        e.Row.Cells(1).BackColor = Drawing.Color.LightSalmon
+                        e.Row.Cells(1).ForeColor = Drawing.Color.White
+                        e.Row.Cells(1).Font.Bold = True
+
+                        e.Row.Cells(26).BackColor = Drawing.Color.LightSalmon
+                        e.Row.Cells(26).ForeColor = Drawing.Color.White
+                        e.Row.Cells(26).Font.Bold = True
+
+                        e.Row.Cells(19).BackColor = Drawing.Color.LightSalmon
+                        e.Row.Cells(19).ForeColor = Drawing.Color.White
+                        e.Row.Cells(19).Font.Bold = True
+                    End If
+                End If
+                End If
+            'e.Row.Cells(26).Visible = False
+            If e.Row.Cells(27).Text = e.Row.Cells(20).Text Then
+            Else
+                If e.Row.Cells(27).Text <> "" Then
+                    If e.Row.Cells(27).Text <> "&nbsp;" Then
+                        e.Row.Cells(1).BackColor = Drawing.Color.LightSalmon
+                        e.Row.Cells(1).ForeColor = Drawing.Color.White
+                        e.Row.Cells(1).Font.Bold = True
+
+                        e.Row.Cells(27).BackColor = Drawing.Color.LightSalmon
+                        e.Row.Cells(27).ForeColor = Drawing.Color.White
+                        e.Row.Cells(27).Font.Bold = True
+
+                        e.Row.Cells(20).BackColor = Drawing.Color.LightSalmon
+                        e.Row.Cells(20).ForeColor = Drawing.Color.White
+                        e.Row.Cells(20).Font.Bold = True
+                    End If
+                End If
+                End If
+            'e.Row.Cells(27).Visible = False
+
+            If e.Row.Cells(9).Text = "" Or e.Row.Cells(9).Text = "&nbsp;" Then
                     Call GET_IVDATA(Trim(e.Row.Cells(13).Text), Trim(e.Row.Cells(3).Text), e.Row.Cells(4).Text)
                 End If
 
@@ -83,7 +145,7 @@ Partial Class yuusen
                     End If
                 End If
 
-            End If
+            'End If
 
             Dim dt00 As DateTime = DateTime.Now
             Dim ts1 As New TimeSpan(7, 0, 0, 0)
@@ -93,7 +155,7 @@ Partial Class yuusen
                 If e.Row.Cells(7).Text = "&nbsp;" Or Trim(e.Row.Cells(7).Text) = "" Then
                     Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
                     If dt4 <= dt01 Then
-                        e.Row.BackColor = Drawing.Color.Red
+                        e.Row.BackColor= Drawing.Color.Red
                     Else
                     End If
                 Else
@@ -139,8 +201,13 @@ Partial Class yuusen
         '非表示ボタン　FLG03は非表示
         Dim I As Integer
         For I = 0 To GridView1.Rows.Count - 1
+
+            'If GridView1.Rows(I).Cells(9).Text = "" Or GridView1.Rows(I).Cells(9).Text = "&nbsp;" Then 'DATE_GETBL BL回収がまだの案件
             Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(13).Text), Trim(GridView1.Rows(I).Cells(3).Text), GridView1.Rows(I).Cells(4).Text)
+            'End If
         Next
+
+
 
         'Grid再表示
         GridView1.DataBind()
@@ -288,16 +355,16 @@ Partial Class yuusen
 
         strSQL = ""
         strSQL = strSQL & "UPDATE T_EXL_SHIPPINGMEMOLIST SET "
-        strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.BOOKING_NO ='" & str01 & "', "
-        strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.VOY_NO ='" & str02 & "', "
+        'strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.BOOKING_NO ='" & str01 & "', "
+        'strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.VOY_NO ='" & str02 & "', "
         strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.IV_BLDATE ='" & str03 & "', "
         strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.KIN_GAIKA ='" & str04 & "', "
         strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.RATE ='" & str05 & "', "
-        strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.KIN_JPY ='" & str06 & "', "
-        strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.VESSEL ='" & str07 & "', "
-        strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.LOADING_PORT ='" & str08 & "', "
-        strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.RECEIVED_PORT ='" & str09 & "', "
-        strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.SHIP_PLACE ='" & str10 & "' "
+        strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.KIN_JPY ='" & str06 & "' "
+        'strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.VESSEL ='" & str07 & "', "
+        'strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.LOADING_PORT ='" & str08 & "', "
+        'strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.RECEIVED_PORT ='" & str09 & "', "
+        'strSQL = strSQL & "T_EXL_SHIPPINGMEMOLIST.SHIP_PLACE ='" & str10 & "' "
         'strSQL = strSQL & "WHERE T_EXL_SHIPPINGMEMOLIST.BOOKING_NO ='" & str01 & "' "
         'strSQL = strSQL & "AND T_EXL_SHIPPINGMEMOLIST.INVOICE_NO ='" & ivno & "' "
 
@@ -769,7 +836,7 @@ Partial Class yuusen
         Using conn = New SqlConnection(ConnectionString)
             Dim cmd = conn.CreateCommand()
 
-            strSQL = strSQL & "SELECT CUSTCODE,CUSTNAME,INVOICE_NO,iif(len(REV_ETD)=10,REV_ETD,ETD) AS ETD02,iif(len(REV_ETD)=10,ETD,'') AS ETD03,iif(len(REV_ETA)=10,REV_ETA,ETA) AS ETA02,iif(len(REV_ETA)=10,ETA,'') AS ETA03,SHIP_TYPE,DATE_GETBL,DATE_ONBL,REV_SALESDATE,REV_STATUS,BOOKING_NO,VOY_NO,IV_BLDATE,KIN_GAIKA,RATE,KIN_JPY,VESSEL,LOADING_PORT,RECEIVED_PORT,SHIP_PLACE,CHECKFLG FROM [T_EXL_SHIPPINGMEMOLIST] WHERE CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530') AND ETD > DATEADD(day,1,EOMONTH(GETDATE()-90, -1)) ORDER BY ETD02,INVOICE_NO "
+            strSQL = strSQL & "SELECT CUSTCODE,CUSTNAME,INVOICE_NO,iif(len(REV_ETD)=10,REV_ETD,ETD) AS ETD02,iif(len(REV_ETD)=10,ETD,'') AS ETD03,iif(len(REV_ETA)=10,REV_ETA,ETA) AS ETA02,iif(len(REV_ETA)=10,ETA,'') AS ETA03,SHIP_TYPE,DATE_GETBL,DATE_ONBL,REV_SALESDATE,REV_STATUS,BOOKING_NO,VOY_NO,IV_BLDATE,KIN_GAIKA,RATE,KIN_JPY,VESSEL,LOADING_PORT,RECEIVED_PORT,SHIP_PLACE,CHECKFLG,FLG02,FLG03,FLG04 FROM [T_EXL_SHIPPINGMEMOLIST] WHERE CUSTCODE not in ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530') AND ETD > DATEADD(day,1,EOMONTH(GETDATE()-90, -1)) ORDER BY ETD02,INVOICE_NO "
 
 
             cmd.CommandText = strSQL

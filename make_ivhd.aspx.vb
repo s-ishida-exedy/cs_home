@@ -10,6 +10,11 @@ Imports MimeKit
 Imports MimeKit.Text
 Imports System.IO
 Imports System.Linq
+
+Imports System.Drawing
+
+
+
 Partial Class yuusen
     Inherits System.Web.UI.Page
 
@@ -609,6 +614,14 @@ Partial Class yuusen
                 e.Row.BackColor = Drawing.Color.Green
             End If
 
+            Dim s As Integer = Left(e.Row.Cells(35).Text, Len(e.Row.Cells(35).Text) - 1)
+            e.Row.BackColor = ColorTranslator.FromWin32(s)
+
+            If Right(e.Row.Cells(18).Text, 1) = "●" Then
+                'e.Row.BorderStyle = BorderStyle.Dashed
+                e.Row.Font.Strikeout = True
+            End If
+
         End If
 
 
@@ -618,7 +631,7 @@ Partial Class yuusen
         e.Row.Cells(32).Visible = False
         e.Row.Cells(33).Visible = False
         e.Row.Cells(34).Visible = False
-
+        e.Row.Cells(35).Visible = False
 
 
 
@@ -822,7 +835,7 @@ Partial Class yuusen
 
             Dim dt2 As New DataTable("INVHDSHEET")
             For Each cell As TableCell In GridView1.HeaderRow.Cells
-                If cell.Text = "20Ft" Or cell.Text = "40Ft" Or cell.Text = "LCL/40Ft" Then
+                If cell.Text = "20Ft" Or cell.Text = "40Ft" Or cell.Text = "LCL/40Ft" Or cell.Text = "ROW_KBN" Then
                 ElseIf cell.Text = "Sailing On/About<br/>(計上日)" Or cell.Text = "CUT日" Or cell.Text = "到着日" Or cell.Text = "入出港日" Or cell.Text = "搬入日" Then
                     dt2.Columns.Add(Replace(cell.Text, "<br/>", ""), Type.GetType("System.DateTime"))
                 Else

@@ -490,6 +490,9 @@
                         <HeaderStyle Width="60px" />
                         </asp:BoundField>
 
+                        <asp:BoundField DataField="ROW_KBN" HeaderText="ROW_KBN" SortExpression="ROW_KBN" >
+                        <HeaderStyle Width="60px" />
+                        </asp:BoundField>
 
                         </Columns>
                         <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />

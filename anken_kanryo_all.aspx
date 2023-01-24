@@ -308,7 +308,7 @@
                 <td style="width:250px;" >
 
                 <div style="background-color:none;text-align: center;border:groove">
-                    <asp:Label ID="Label6" runat="server" Text="Label" ></asp:Label>
+                    <asp:Label ID="Label6" runat="server" Text="本日全案件完了" ></asp:Label>
                 </div>
                 </td>
                 <td style="width:750px;" >
@@ -339,7 +339,7 @@
                     </thead>
 
                     <tbody>
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource7" Width="2300px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource7" Width="2350px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
                         <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
                         <HeaderStyle CssClass="Freezing"></HeaderStyle>
 
@@ -412,7 +412,7 @@
                         <HeaderStyle Width="230px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="INVOICE" HeaderText="INVOICE" SortExpression="INVOICE" >
-                        <HeaderStyle Width="180px" />
+                        <HeaderStyle Width="200px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="CUT_DATE" HeaderText="CUT" SortExpression="CUT_DATE" >
                         <HeaderStyle Width="70px" />
@@ -439,13 +439,13 @@
                         <HeaderStyle Width="70px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="LOADING_PORT" HeaderText="積出港" SortExpression="LOADING_PORT" >
-                        <HeaderStyle Width="70px" />
+                        <HeaderStyle Width="100px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="揚港" SortExpression="DISCHARGING_PORT" >
                         <HeaderStyle Width="170px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="配送先" SortExpression="PLACE_OF_DELIVERY" >
-                        <HeaderStyle Width="170px" />
+                        <HeaderStyle Width="230px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="FLG04" HeaderText="FLG04" SortExpression="FLG04" >
@@ -485,7 +485,7 @@
                         <asp:BoundField DataField="FINALVANDATE" HeaderText="FINALVANDATE" SortExpression="FINALVANDATE" />
 
                         <asp:TemplateField ShowHeader="False" HeaderText="最終・途中">
-                        <HeaderStyle Width="70px" />
+                        <HeaderStyle Width="80px" />
                             <ItemTemplate>
                                 <asp:Button ID="Button6" runat="server" CausesValidation="false" CommandName="edt6" Text="変更" />
                             </ItemTemplate>
@@ -595,7 +595,7 @@
         <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
 
 
-        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE DAY08 ='' or DAY08 IS NULL ORDER BY FLG01,CUT_DATE "></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE DAY08 ='' or DAY08 IS NULL ORDER BY FLG01,CUT_DATE,DAY10 "></asp:SqlDataSource>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [INVOICE] AS C FROM [T_EXL_CSANKEN] WHERE [INVOICE] IS NOT NULL and [INVOICE] <>'' ORDER BY C "></asp:SqlDataSource>
 

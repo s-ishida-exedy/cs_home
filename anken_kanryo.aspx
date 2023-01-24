@@ -602,7 +602,7 @@
         <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
 
 
-        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE FORWARDER <>'上野' ORDER BY FINALVANDATE,FLG01,CUT_DATE,CONTAINER "></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE FORWARDER <>'上野' ORDER BY ORDER BY FINALVANDATE,FLG01,CUT_DATE,CONTAINER"></asp:SqlDataSource>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [INVOICE] AS C FROM [T_EXL_CSANKEN] WHERE [INVOICE] IS NOT NULL and [INVOICE] <>'' ORDER BY C "></asp:SqlDataSource>
 
