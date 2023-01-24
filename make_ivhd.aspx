@@ -443,7 +443,7 @@
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="consiner address of SI" SortExpression="" >
-                        <HeaderStyle Width="1300px" />
+                        <HeaderStyle Width="1450px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="place of delivery SI" SortExpression="PLACE_OF_DELIVERY" >

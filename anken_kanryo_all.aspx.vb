@@ -5309,6 +5309,9 @@ Partial Class yuusen
         Dim strcon As String
         Dim stritk As String
 
+        Dim plt As Long
+        Dim qty As Long
+
         ' メールの内容
         Dim struid As String = Session("UsrId")
 
@@ -5389,9 +5392,11 @@ Partial Class yuusen
         body = body & "＜ コンテナ" & strcon & "/" & e & "本目(ブッキングシートがただしければ) ＞<br/>"
 
 
-        t = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;'><tr style='background-color: #6fbfd1;'><td>IVNO</td><td>通貨</td><td>レート</td><td>客先</td><td>LS7.9</td><td>LS7.9品名</td><td>木材</td><td>パレット数</td><td>数量</td></tr>"
+        t = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;text-align: center;'><tr style='background-color: #6fbfd1;'><td>IVNO</td><td>通貨</td><td>レート</td><td>客先</td><td>LS7.9</td><td>LS7.9品名</td><td>木材</td><td>パレット数</td><td>数量</td></tr>"
 
-        Call IVINFO(bkgno, t)
+        Call IVINFO(bkgno, t, plt, qty)
+
+        t = t & "<tr style ='background-color: #6fbfd1;'><td colspan='7' style='text-align: center;'>合計</td><td>" & plt & "</td><td>" & Format(qty, "#,0") & "</td></tr>"
 
         t = t & "</Table></body></html>"
 
@@ -5464,6 +5469,9 @@ Partial Class yuusen
         Dim strcon As String
         Dim stritk As String
 
+        Dim plt As Long
+        Dim qty As Long
+
         ' メールの内容
         Dim struid As String = Session("UsrId")
 
@@ -5526,7 +5534,7 @@ Partial Class yuusen
         body = body & "<html><body>各位<br>お疲れ様です。<br><br>主題の件<br>以下にて完了報告実施しましたので、ご確認宜しくお願いいたします。<br></body></html>" ' UriBodyC()
 
         Dim t2 As String = ""
-        t2 = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;'><tr style='background-color: #D3D3D3;'><td>客先</td><td>IVNO</td><td>ETD</td><td>最終バン</td><td>BKG#</td></tr>"
+        t2 = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;text-align: center;'><tr style='background-color: #D3D3D3;'><td>客先</td><td>IVNO</td><td>ETD</td><td>最終バン</td><td>BKG#</td></tr>"
         t2 = t2 & "<tr><td>" & c2 & "</td><td>" & d & "</td><td>" & f & "</td><td>" & g & " " & b & "</td><td>" & bkgno & "</td></tr>"
         t2 = t2 & "</Table></body></html><br/>"
 
@@ -5540,7 +5548,9 @@ Partial Class yuusen
 
         t = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;'><tr style='background-color: #6fbfd1;'><td>IVNO</td><td>通貨</td><td>レート</td><td>客先</td><td>LS7.9</td><td>LS7.9品名</td><td>木材</td><td>パレット数</td><td>数量</td></tr>"
 
-        Call IVINFO(bkgno, t)
+        Call IVINFO(bkgno, t, plt, qty)
+
+        t = t & "<tr style ='background-color: #6fbfd1;'><td colspan='7' style='text-align: center;'>合計</td><td>" & plt & "</td><td>" & Format(qty, "#,0") & "</td></tr>"
 
         t = t & "</Table></body></html>"
 
@@ -5848,7 +5858,7 @@ Partial Class yuusen
 
     End Function
 
-    Private Sub IVINFO(bkgno As String, ByRef t As String)
+    Private Sub IVINFO(bkgno As String, ByRef t As String, ByRef plt As Long, ByRef qty As Long)
         'データの取得
 
 
@@ -5906,8 +5916,8 @@ Partial Class yuusen
         While (dataread.Read())
             strinv = Trim(Convert.ToString(dataread("OLD_INVNO")))        '客先目
             Call IVINFO2(bkgno, strinv, y)
-            Call IVINFO3(bkgno, strinv, y)
-            Call IVINFO4(bkgno, strinv, y)
+            Call IVINFO3(bkgno, strinv, y, plt)
+            Call IVINFO4(bkgno, strinv, y, qty)
             strcst = Trim(Convert.ToString(dataread("CUSTCODE")))        '客先目
             strrate = Trim(dataread("RATE"))        '客先目
             strcry = Trim(Convert.ToString(dataread("EXPJCD")))        '客先目
@@ -6002,7 +6012,7 @@ Partial Class yuusen
 
     End Sub
 
-    Private Sub IVINFO3(bkgno As String, IVNO As String, ByRef t As String)
+    Private Sub IVINFO3(bkgno As String, IVNO As String, ByRef t As String, ByRef plt As Long)
         'データの取得
 
 
@@ -6056,6 +6066,9 @@ Partial Class yuusen
         '結果を取り出す 
         While (dataread.Read())
             strinv = Trim(Convert.ToString(dataread("caseno_ttl")))        '客先目
+
+            plt = plt + dataread("caseno_ttl")
+
             t = t & "<td>" & strinv & "</td>"
         End While
 
@@ -6074,7 +6087,7 @@ Partial Class yuusen
 
     End Sub
 
-    Private Sub IVINFO4(bkgno As String, IVNO As String, ByRef t As String)
+    Private Sub IVINFO4(bkgno As String, IVNO As String, ByRef t As String, ByRef qty As Long)
         'データの取得
 
 
@@ -6130,7 +6143,9 @@ Partial Class yuusen
         '結果を取り出す 
         While (dataread.Read())
             strinv = Trim(Convert.ToString(dataread("QTY")))        '客先目
-            t = t & "<td>" & strinv & "</td>"
+            qty = qty + Int(dataread("QTY"))
+
+            t = t & "<td>" & Format(Int(strinv), "#,0") & "</td>"
         End While
 
         If t = "" Then
