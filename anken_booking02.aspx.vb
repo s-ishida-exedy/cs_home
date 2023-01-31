@@ -1095,6 +1095,7 @@ Partial Class yuusen
 
         strSQL = ""
         strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY_NO FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY <= '" & dt1.ToShortDateString & "' "
+        strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -1113,6 +1114,7 @@ Partial Class yuusen
 
         strSQL = ""
         strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 1 & "' "
+        strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -1131,6 +1133,7 @@ Partial Class yuusen
 
         strSQL = ""
         strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 2 & "' "
+        strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)

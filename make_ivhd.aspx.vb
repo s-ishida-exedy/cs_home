@@ -409,7 +409,7 @@ Partial Class yuusen
                 e.Row.Cells(14).Text = "01"
 
             Else
-                e.Row.Cells(14).Text = "-"
+                e.Row.Cells(14).Text = "02" '判定不能分は40Ftに振り分け
             End If
 
 

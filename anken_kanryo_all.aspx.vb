@@ -5392,14 +5392,14 @@ Partial Class yuusen
         body = body & "＜ コンテナ" & strcon & "/" & e & "本目(ブッキングシートがただしければ) ＞<br/>"
 
 
-        t = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;text-align: center;'><tr style='background-color: #6fbfd1;'><td>IVNO</td><td>通貨</td><td>レート</td><td>客先</td><td>LS7.9</td><td>LS7.9品名</td><td>木材</td><td>パレット数</td><td>数量</td></tr>"
+        t = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;text-align: center;'><tr style='background-color: #6fbfd1;'><td>IVNO</td><td>通貨</td><td>レート</td><td>客先</td><td>LS7.9</td><td>LS7.9品名</td><td>木材</td><td>パッケージ数</td><td>数量</td></tr>"
 
         Call IVINFO(bkgno, t, plt, qty)
 
         t = t & "<tr style ='background-color: #6fbfd1;'><td colspan='7' style='text-align: center;'>合計</td><td>" & plt & "</td><td>" & Format(qty, "#,0") & "</td></tr>"
 
         t = t & "</Table></body></html>"
-
+        t = t & "<html><body><Table style='Font-Size:12px;font-family:Meiryo UI;'>※パッケージ数はパレット、カートン等の総合計個数です。</Table></body></html>"
 
         body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
 
@@ -5546,13 +5546,16 @@ Partial Class yuusen
         body = body & "＜ コンテナ" & strcon & "/" & e & "本目(ブッキングシートがただしければ) ＞<br/>"
 
 
-        t = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;'><tr style='background-color: #6fbfd1;'><td>IVNO</td><td>通貨</td><td>レート</td><td>客先</td><td>LS7.9</td><td>LS7.9品名</td><td>木材</td><td>パレット数</td><td>数量</td></tr>"
+        t = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;'><tr style='background-color: #6fbfd1;'><td>IVNO</td><td>通貨</td><td>レート</td><td>客先</td><td>LS7.9</td><td>LS7.9品名</td><td>木材</td><td>パッケージ数</td><td>数量</td></tr>"
 
         Call IVINFO(bkgno, t, plt, qty)
 
         t = t & "<tr style ='background-color: #6fbfd1;'><td colspan='7' style='text-align: center;'>合計</td><td>" & plt & "</td><td>" & Format(qty, "#,0") & "</td></tr>"
 
         t = t & "</Table></body></html>"
+
+        t = t & "<html><body><Table style='Font-Size:12px;font-family:Meiryo UI;'>※パッケージ数はパレット、カートン等の総合計個数です。</Table></body></html>"
+
 
         't = "<font style=" & Chr(34) & "background-color: yellow" & Chr(34) & ">" & t & "</font>"
         't = "<font size=" & Chr(34) & "3" & Chr(34) & ">" & t & "</font>"
