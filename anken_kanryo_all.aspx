@@ -409,7 +409,7 @@
                         <HeaderStyle Width="70px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" >
-                        <HeaderStyle Width="260px" />
+                        <HeaderStyle Width="300px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="INVOICE" HeaderText="INVOICE" SortExpression="INVOICE" >
                         <HeaderStyle Width="200px" />
