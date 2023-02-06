@@ -326,7 +326,7 @@
                 </asp:DropDownList>--%>
                 </td>
                 <td style="width:300px;" >
-                    <asp:Label ID="Label10" runat="server" Text="AAA" ></asp:Label>
+                    <asp:Label ID="Label10" runat="server" Text="AAA" Font-Size="12px" ></asp:Label>
                 </td>
             </tr>
         </table>

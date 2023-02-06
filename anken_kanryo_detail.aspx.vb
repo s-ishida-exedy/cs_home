@@ -219,8 +219,20 @@ Partial Class cs_home
         End While
 
         If val01 < 10 Then
+            val01 = "00000" & val01
+        ElseIf val01 < 100 Then
+            val01 = "0000" & val01
+        ElseIf val01 < 1000 Then
+            val01 = "000" & val01
+        ElseIf val01 < 10000 Then
+            val01 = "00" & val01
+        ElseIf val01 < 100000 Then
             val01 = "0" & val01
+        Else
+            val01 = val01
         End If
+
+
 
         'クローズ処理 
         dataread.Close()
@@ -243,7 +255,7 @@ Partial Class cs_home
         strcus = get_cust(strcus)
 
         strSQL = ""
-        strSQL = strSQL & "SELECT IIf(T_SN_HD_TB.CUSTCODE = 'E230','A',IIf(left(T_SN_HD_TB.CUSTCODE,1) = 'K','A','K')) AS 式1 "
+        strSQL = strSQL & "SELECT IIf(T_SN_HD_TB.CUSTCODE = 'E230','A',iif(T_SN_HD_TB.CUSTCODE = 'E247','A',iif(T_SN_HD_TB.CUSTCODE = 'E244','A',iif(T_SN_HD_TB.CUSTCODE = 'E243','A',IIf(left(T_SN_HD_TB.CUSTCODE,1) = 'K','A','K'))))) AS 式1 "
         strSQL = strSQL & "FROM (T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO) LEFT JOIN T_SN_HD_TB ON T_INV_BD_TB.SNNO = T_SN_HD_TB.SALESNOTENO "
         strSQL = strSQL & "WHERE T_INV_HD_TB.CUSTCODE IN ('" & strcus & "') "
         strSQL = strSQL & "AND T_SN_HD_TB.CUSTCODE Is Not Null "

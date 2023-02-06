@@ -1109,7 +1109,9 @@ Partial Class yuusen
             Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
             Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
             Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
-
+            Dim data8 = Me.GridView1.Rows(index).Cells(30).Text
+            Dim data9 = Me.GridView1.Rows(index).Cells(29).Text
+            Dim data10 = Me.GridView1.Rows(index).Cells(31).Text
 
             Dim dataread As SqlDataReader
             Dim dbcmd As SqlCommand
@@ -1147,6 +1149,7 @@ Partial Class yuusen
             strSQL = strSQL & "DELETE FROM T_EXL_CSKANRYO "
             strSQL = strSQL & "WHERE T_EXL_CSKANRYO.INVOICE = '" & data5 & "' "
             strSQL = strSQL & "AND T_EXL_CSKANRYO.BOOKING_NO = '" & data1 & "' "
+            strSQL = strSQL & "AND T_EXL_CSKANRYO.DAY09 = '" & data8 & "' "
 
             Command.CommandText = strSQL
             ' SQLの実行
@@ -1415,15 +1418,15 @@ Partial Class yuusen
             Dim dltlabel2 As Label = GridView1.Rows(I).FindControl("Label2")
 
             If CType(GridView1.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
-                Call reg_check(GridView1.Rows(I).Cells(16).Text, 1)
+                Call reg_check(GridView1.Rows(I).Cells(16).Text, 1, GridView1.Rows(I).Cells(30).Text)
             Else
-                Call reg_check2(GridView1.Rows(I).Cells(16).Text, 1)
+                Call reg_check2(GridView1.Rows(I).Cells(16).Text, 1, GridView1.Rows(I).Cells(30).Text)
             End If
 
             If CType(GridView1.Rows(I).Cells(1).Controls(1), CheckBox).Checked Then
-                Call reg_check(GridView1.Rows(I).Cells(16).Text, 2)
+                Call reg_check(GridView1.Rows(I).Cells(16).Text, 2, GridView1.Rows(I).Cells(30).Text)
             Else
-                Call reg_check2(GridView1.Rows(I).Cells(16).Text, 2)
+                Call reg_check2(GridView1.Rows(I).Cells(16).Text, 2, GridView1.Rows(I).Cells(30).Text)
             End If
 
 
@@ -1729,7 +1732,7 @@ Partial Class yuusen
 
     End Sub
 
-    Private Sub reg_check(bkgno As String, A As String)
+    Private Sub reg_check(bkgno As String, A As String, b As String)
 
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
@@ -1753,7 +1756,7 @@ Partial Class yuusen
         Dim dt3 As DateTime = dt1 - ts1
 
 
-        strinv = "-"        'ETD(計上日)
+        strinv = b        'ETD(計上日)
         If A = "1" Then 'KD
             Call INS_kanryo(strinv, bkgno)
         ElseIf A = "2" Then 'ｱﾌﾀ
@@ -1765,7 +1768,7 @@ Partial Class yuusen
 
     End Sub
 
-    Private Sub reg_check2(bkgno As String, A As String)
+    Private Sub reg_check2(bkgno As String, A As String, b As String)
 
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
@@ -1788,7 +1791,7 @@ Partial Class yuusen
         Dim dt2 As DateTime = dt1 + ts1
         Dim dt3 As DateTime = dt1 - ts1
 
-        strinv = "-"      'ETD(計上日)
+        strinv = b      'ETD(計上日)
         If A = "1" Then 'KD
             Call DEL_kanryo(strinv, bkgno)
         ElseIf A = "2" Then 'ｱﾌﾀ
@@ -5347,12 +5350,13 @@ Partial Class yuusen
         Dim bodyitk As String = ""
 
 
-        If strcon = e Then
-        Else
+        If strcon > e Then
             body = "＜実績バン本数とブッキング本数に相違があります＞"
             body = "<font style=" & Chr(34) & "background-color: Red" & Chr(34) & ">" & body & "</font>"
             body = "<font style=" & Chr(34) & "color: white" & Chr(34) & ">" & body & "</font>"
             body = "<b><font size=" & Chr(34) & "3" & Chr(34) & ">" & body & "</font></b><br/>"
+        Else
+
 
         End If
 
@@ -5502,12 +5506,13 @@ Partial Class yuusen
         Dim bodyitk As String = ""
 
 
-        If strcon = e Then
-        Else
+        If strcon > e Then
             body = "＜実績バン本数とブッキング本数に相違があります＞"
             body = "<font style=" & Chr(34) & "background-color: Red" & Chr(34) & ">" & body & "</font>"
             body = "<font style=" & Chr(34) & "color: white" & Chr(34) & ">" & body & "</font>"
             body = "<b><font size=" & Chr(34) & "3" & Chr(34) & ">" & body & "</font></b><br/>"
+        Else
+
 
         End If
 
