@@ -1,4 +1,4 @@
-﻿    <%@ Page Language="VB" AutoEventWireup="false" CodeFile="anken_kanryo_all.aspx.vb" Inherits="yuusen" %>
+﻿    <%@ Page Language="VB" MaintainScrollPositionOnPostback="true" AutoEventWireup="false" CodeFile="anken_kanryo_all.aspx.vb" Inherits="yuusen" %>
 
 <%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
@@ -398,30 +398,37 @@
 
                         <asp:BoundField DataField="DAY11" HeaderText="バン日" SortExpression="DAY11" >
                         <HeaderStyle Width="70px" />
+                        <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField DataField="FLG01" HeaderText="バン時間" SortExpression="FLG01" >
                         <HeaderStyle Width="70px" />
+                        <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField DataField="FORWARDER02" HeaderText="海貨業者" SortExpression="FORWARDER02" >
-                        <HeaderStyle Width="140px" />
+                        <HeaderStyle Width="110px" />
+                        <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField DataField="CUST" HeaderText="客先コード" SortExpression="CUST" >
                         <HeaderStyle Width="70px" />
+                        <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" >
-                        <HeaderStyle Width="300px" />
+                        <HeaderStyle Width="200px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="INVOICE" HeaderText="INVOICE" SortExpression="INVOICE" >
                         <HeaderStyle Width="200px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="CUT_DATE" HeaderText="CUT" SortExpression="CUT_DATE" >
                         <HeaderStyle Width="70px" />
+                        <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" >
                         <HeaderStyle Width="70px" />
+                        <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField DataField="CONTAINER" HeaderText="コンテナ" SortExpression="CONTAINER" >
                         <HeaderStyle Width="70px" />
+                        <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField DataField="STATUS" HeaderText="進捗状況" SortExpression="STATUS" >
                         <HeaderStyle Width="100px" />
@@ -436,16 +443,16 @@
                         <HeaderStyle Width="70px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="PLACE_OF_RECEIPT" HeaderText="荷受港" SortExpression="PLACE_OF_RECEIPT" >
-                        <HeaderStyle Width="70px" />
+                        <HeaderStyle Width="100px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="LOADING_PORT" HeaderText="積出港" SortExpression="LOADING_PORT" >
                         <HeaderStyle Width="100px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="揚港" SortExpression="DISCHARGING_PORT" >
-                        <HeaderStyle Width="170px" />
+                        <HeaderStyle Width="200px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="配送先" SortExpression="PLACE_OF_DELIVERY" >
-                        <HeaderStyle Width="230px" />
+                        <HeaderStyle Width="200px" />
                         </asp:BoundField>
 
                         <asp:BoundField DataField="FLG04" HeaderText="FLG04" SortExpression="FLG04" >
@@ -531,12 +538,201 @@
             </tr>
         </table>
 
+        </div>
+
+
+            <table>
+                <tr>
+                    <td style="width:150px;Font-Size:15px;" >
+                        <asp:Label ID="Label7" runat="server" Text="<過去履歴>"></asp:Label>
+                    </td>
+                    <td style="width:800px;Font-Size:15px;" >
+                    </td>
+                </tr>
+            </table>
+            <div class="wrapper" >
+                <table class="sticky" >
+                    <thead class="fixed">
+                    </thead>
+
+                    <tbody>
+                        <asp:GridView Font-Size="12px" ID="GridView2" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource2" Width="2350px" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
+                        <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
+                        <HeaderStyle CssClass="Freezing"></HeaderStyle>
+
+                        <Columns>
+
+                        <asp:TemplateField ShowHeader="False" HeaderText="KD">
+                            <HeaderStyle Width="30px" />
+                            <ItemTemplate>
+                            <asp:CheckBox ID="cb01" Checked="false"  runat="server" CausesValidation="false" CommandName="cb01" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField ShowHeader="False" HeaderText="ｱﾌﾀ">
+                            <HeaderStyle Width="30px" />
+                            <ItemTemplate>
+                            <asp:CheckBox ID="cb02" Checked="false"  runat="server" CausesValidation="false" CommandName="cb02" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField ShowHeader="False" HeaderText="登録">
+                            <HeaderStyle Width="40px" />
+                            <ItemTemplate>
+                                <asp:Button ID="Button1" runat="server" CausesValidation="false" CommandName="edt" Text="" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+
+
+                        <asp:TemplateField ShowHeader="False" HeaderText="完 了">
+                            <HeaderStyle Width="50px" />
+                            <ItemTemplate>
+                                <asp:Label ID="Label1" runat="server" Text="" CausesValidation="false" CommandName="edt5"></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+
+                        <asp:TemplateField ShowHeader="False" HeaderText="C S">
+                            <HeaderStyle Width="40px" />
+                            <ItemTemplate>
+                                <asp:Button ID="Button2" runat="server" CausesValidation="false" CommandName="edt2" Text="更新" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+
+
+                        <asp:TemplateField ShowHeader="False" HeaderText="確 認" >
+                            <HeaderStyle Width="40px" />
+                            <ItemTemplate>
+                                <asp:Label ID="Label2" runat="server" Text="" CausesValidation="false" CommandName="edt6"></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+
+
+                        <asp:BoundField DataField="DAY11" HeaderText="バン日" SortExpression="DAY11" >
+                        <HeaderStyle Width="70px" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="FLG01" HeaderText="バン時間" SortExpression="FLG01" >
+                        <HeaderStyle Width="70px" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="FORWARDER02" HeaderText="海貨業者" SortExpression="FORWARDER02" >
+                        <HeaderStyle Width="110px" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="CUST" HeaderText="客先コード" SortExpression="CUST" >
+                        <HeaderStyle Width="70px" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" >
+                        <HeaderStyle Width="200px" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="INVOICE" HeaderText="INVOICE" SortExpression="INVOICE" >
+                        <HeaderStyle Width="200px" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="CUT_DATE" HeaderText="CUT" SortExpression="CUT_DATE" >
+                        <HeaderStyle Width="70px" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="ETD" HeaderText="ETD" SortExpression="ETD" >
+                        <HeaderStyle Width="70px" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="CONTAINER" HeaderText="コンテナ" SortExpression="CONTAINER" >
+                        <HeaderStyle Width="70px" />
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="STATUS" HeaderText="進捗状況" SortExpression="STATUS" >
+                        <HeaderStyle Width="100px" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="BOOKING_NO" HeaderText="BOOKING_NO" SortExpression="BOOKING_NO" >
+                        <HeaderStyle Width="120px" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="VESSEL_NAME" HeaderText="船名" SortExpression="VESSEL_NAME" >
+                        <HeaderStyle Width="170px" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="VOYAGE_NO" HeaderText="VOYAGE_NO" SortExpression="VOYAGE_NO" >
+                        <HeaderStyle Width="70px" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="PLACE_OF_RECEIPT" HeaderText="荷受港" SortExpression="PLACE_OF_RECEIPT" >
+                        <HeaderStyle Width="100px" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="LOADING_PORT" HeaderText="積出港" SortExpression="LOADING_PORT" >
+                        <HeaderStyle Width="100px" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="DISCHARGING_PORT" HeaderText="揚港" SortExpression="DISCHARGING_PORT" >
+                        <HeaderStyle Width="200px" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="PLACE_OF_DELIVERY" HeaderText="配送先" SortExpression="PLACE_OF_DELIVERY" >
+                        <HeaderStyle Width="200px" />
+                        </asp:BoundField>
+
+                        <asp:BoundField DataField="FLG04" HeaderText="FLG04" SortExpression="FLG04" >
+                        <HeaderStyle Width="100px" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="FLG05" HeaderText="FLG05" SortExpression="FLG05" >
+                        <HeaderStyle Width="100px" />
+                        </asp:BoundField>
 
 
 
+                        <asp:TemplateField ShowHeader="False" HeaderText="ｴﾗｰ解除">
+                        <HeaderStyle Width="50px" />
+                            <ItemTemplate>
+                                <asp:Button ID="Button3" runat="server" CausesValidation="false" CommandName="edt3" Text="更新" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+                        <asp:TemplateField ShowHeader="False" HeaderText="ﾁｪｯｸ表示">
+                        <HeaderStyle Width="60px" />
+                            <ItemTemplate>
+                                <asp:Button ID="Button4" runat="server" CausesValidation="false" CommandName="edt4" Text="" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+                        <asp:TemplateField ShowHeader="False" HeaderText="削除">
+                        <HeaderStyle Width="40px" />
+                            <ItemTemplate>
+                                <asp:Button ID="Button5" runat="server" CausesValidation="false" CommandName="edt5" Text="削除" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+
+                        <asp:BoundField DataField="FLG03" HeaderText="FLG03" SortExpression="FLG03" />
+                        <asp:BoundField DataField="DAY10" HeaderText="最終" SortExpression="DAY10" />
+                        <asp:BoundField DataField="DAY09" HeaderText="ROWNO" SortExpression="DAY09" />
+                        <asp:BoundField DataField="FINALVANDATE" HeaderText="FINALVANDATE" SortExpression="FINALVANDATE" />
+
+                        <asp:TemplateField ShowHeader="False" HeaderText="最終・途中">
+                        <HeaderStyle Width="80px" />
+                            <ItemTemplate>
+                                <asp:Button ID="Button6" runat="server" CausesValidation="false" CommandName="edt6" Text="変更" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+
+                        </Columns>
+                        <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+                        <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#FFFFFF" ForeColor="Black" />
+                        <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+                        <SortedAscendingHeaderStyle BackColor="#0000A9" />
+                        </asp:GridView>
+
+                    </tbody>
+                </table>
             </div>
+
+
         </asp:Panel>
-                            
+                   
+       
+                 
 
     <asp:Panel ID="Panel3" runat="server"  Font-Size="20px" Visible ="false">
 
@@ -574,6 +770,7 @@
 
     </asp:Panel>
 
+
         <table style="height:10px;">
         </table>
     </div>
@@ -595,9 +792,11 @@
         <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
 
 
-        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE DAY08 ='' or DAY08 IS NULL ORDER BY FLG01,CUT_DATE,DAY10 "></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE (DAY08 ='' or DAY08 IS NULL) or (DAY07 ='' or DAY07 IS NULL) ORDER BY DAY11,FLG01,CUT_DATE,DAY10 "></asp:SqlDataSource>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [INVOICE] AS C FROM [T_EXL_CSANKEN] WHERE [INVOICE] IS NOT NULL and [INVOICE] <>'' ORDER BY C "></asp:SqlDataSource>
+
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE DAY08 <>'' AND DAY07 <>'' ORDER BY DAY11,FLG01,CUT_DATE,DAY10 "></asp:SqlDataSource>
 
 
 

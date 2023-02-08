@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="shippingmemo.aspx.vb" Inherits="yuusen" %>
+﻿<%@ Page Language="VB" MaintainScrollPositionOnPostback="true" AutoEventWireup="false" CodeFile="shippingmemo.aspx.vb" Inherits="yuusen" %>
 
 <!DOCTYPE html>
 
