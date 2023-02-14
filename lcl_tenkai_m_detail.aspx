@@ -243,7 +243,7 @@
             <tr>
                 <th>搬入先</th>
                 <td>
-                    <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="SqlDataSource1" DataTextField="ADDRESS" DataValueField="ADDRESS" class="cmb"></asp:DropDownList>    
+                    <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="SqlDataSource1" DataTextField="D" DataValueField="D" class="cmb"></asp:DropDownList>    
                 </td>
                 <th>展開 1:展開済み</th>
                 <td>
@@ -253,7 +253,7 @@
  
         </table>
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT ADDRESS FROM T_EXL_LCLADDRESS"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT (WHCD +':'+ ADRS01+'__'+ ADRS02+'__'+ ADRS03) AS D FROM M_EXL_LCL_WH"></asp:SqlDataSource>
 
 </div>
 <!--/#main2-->

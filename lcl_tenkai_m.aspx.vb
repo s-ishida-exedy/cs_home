@@ -128,13 +128,13 @@ Partial Class cs_home
 
                 If intCnt > 0 Then
                     strSQL = ""
-                    strSQL = strSQL & "UPDATE T_EXL_LCLCUSTPREADS SET ADDRESS ='" & Replace(GridView1.Rows(I).Cells(17).Text, "<br>", "__") & "' "
+                    strSQL = strSQL & "UPDATE T_EXL_LCLCUSTPREADS SET ADDRESS ='" & Left(Replace(GridView1.Rows(I).Cells(17).Text, "<br>", "__"), 3) & "' "
                     strSQL = strSQL & "WHERE CUSTCODE = '" & GridView1.Rows(I).Cells(3).Text & "'"
                 Else
                     strSQL = ""
                     strSQL = strSQL & "INSERT INTO T_EXL_LCLCUSTPREADS VALUES("
                     strSQL = strSQL & "'" & GridView1.Rows(I).Cells(3).Text & "' "
-                    strSQL = strSQL & ",'" & Replace(GridView1.Rows(I).Cells(17).Text, "<br>", "__") & "' "
+                    strSQL = strSQL & ",'" & Left(Replace(GridView1.Rows(I).Cells(17).Text, "<br>", "__"), 3) & "' "
                     strSQL = strSQL & ")"
                 End If
                 Command.CommandText = strSQL
@@ -975,13 +975,13 @@ Partial Class cs_home
 
                 If intCnt > 0 Then
                     strSQL = ""
-                    strSQL = strSQL & "UPDATE T_EXL_LCLCUSTPREADS SET ADDRESS ='" & Replace(GridView1.Rows(I).Cells(17).Text, "<br>", "__") & "' "
+                    strSQL = strSQL & "UPDATE T_EXL_LCLCUSTPREADS SET ADDRESS ='" & Left(Replace(GridView1.Rows(I).Cells(17).Text, "<br>", "__"), 3) & "' "
                     strSQL = strSQL & "WHERE CUSTCODE = '" & GridView1.Rows(I).Cells(3).Text & "'"
                 Else
                     strSQL = ""
                     strSQL = strSQL & "INSERT INTO T_EXL_LCLCUSTPREADS VALUES("
                     strSQL = strSQL & "'" & GridView1.Rows(I).Cells(3).Text & "' "
-                    strSQL = strSQL & ",'" & Replace(GridView1.Rows(I).Cells(17).Text, "<br>", "__") & "' "
+                    strSQL = strSQL & ",'" & Left(Replace(GridView1.Rows(I).Cells(17).Text, "<br>", "__"), 3) & "' "
                     strSQL = strSQL & ")"
                 End If
                 Command.CommandText = strSQL

@@ -462,6 +462,26 @@ Partial Class cs_home
 
                 End If
 
+
+                strSQL = ""
+                strSQL = strSQL & "SELECT * FROM M_EXL_LCL_WH WHERE "
+                strSQL = strSQL & "M_EXL_LCL_WH.WHCD = '" & straddress & "' "
+
+                'ＳＱＬコマンド作成 
+                dbcmd = New SqlCommand(strSQL, cnn)
+                'ＳＱＬ文実行 
+                dataread = dbcmd.ExecuteReader()
+
+                While (dataread.Read())
+                    straddress = straddress & ":" & dataread("ADRS01") & "__" & dataread("ADRS02") & "__" & dataread("ADRS03")
+                End While
+
+                'クローズ処理 
+                dataread.Close()
+                dbcmd.Dispose()
+
+
+
                 If intCnt > 0 Then
 
                     strSQL = ""
@@ -518,7 +538,7 @@ Partial Class cs_home
                     strSQL = strSQL & "FLG03 = '" & FLG03 & "', "
                     strSQL = strSQL & "FLG04 = '" & FLG04 & "', "
                     strSQL = strSQL & "FLG05 = '" & FLG05 & "', "
-                    strSQL = strSQL & "PICKINPLACE = '" & straddress & "' "
+                    strSQL = strSQL & "PICKINPLACE = '" & straddress & "' " ''koko
                     strSQL = strSQL & "WHERE BOOKING_NO ='" & bkgno01 & "' "
                     strSQL = strSQL & "AND FLG01 <> '1' "
 

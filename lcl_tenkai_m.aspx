@@ -123,7 +123,7 @@
 
     <script type="text/javascript">
       function LinkClick() {
-          var url = 'register_lcl_address.aspx?q='
+          var url = 'm_lcl_address.aspx?q='
           var result = confirm('別ウインドウでLCL住所変更ページを開きます');
 
           if (result) {
