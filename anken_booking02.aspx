@@ -238,7 +238,7 @@
 
     <script type="text/javascript">
       function LinkClick() {
-          var url = 'm_lcl_dec_mail.aspx?q='
+          var url = 'm_mail00.aspx?q='
           var result = confirm('別ウインドウでメールアドレス管理ページを開きます');
 
           if (result) {

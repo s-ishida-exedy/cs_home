@@ -140,6 +140,12 @@ Partial Class cs_home
                 Command.CommandText = strSQL
                 ' SQLの実行
                 Command.ExecuteNonQuery()
+
+
+                'kanryounituika
+                Call INS_KANRYO(GridView1.Rows(I).Cells(13).Text, GridView1.Rows(I).Cells(5).Text, GridView1.Rows(I).Cells(10).Text)
+
+
             Else
 
             End If
@@ -188,6 +194,9 @@ Partial Class cs_home
                 Call GET_IVDATA(Trim(GridView1.Rows(I).Cells(5).Text), 2)
                 Call GET_IVDATA2(Left(GridView1.Rows(I).Cells(4).Text, 4), 2)
                 Call GET_IVDATA3(Left(GridView1.Rows(I).Cells(4).Text, 4), Trim(GridView1.Rows(I).Cells(5).Text), 2)
+
+                Call DEL_KANRYO(GridView1.Rows(I).Cells(13).Text, GridView1.Rows(I).Cells(5).Text)
+
             Else
             End If
         Next
@@ -991,4 +1000,479 @@ Partial Class cs_home
 
     End Sub
 
+
+    Private Sub INS_KANRYO(strinv As String, bkgno As String, niryou As String)
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim dataread2 As SqlDataReader
+        Dim dbcmd2 As SqlCommand
+
+        '接続文字列の作成
+        Dim ConnectionString02 As String = String.Empty
+        'SQL Server認証
+        ConnectionString02 = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn02 = New SqlConnection(ConnectionString02)
+        Dim Command02 = cnn02.CreateCommand
+
+        Dim STRSTATUS As String = ""
+        Dim STRFORWARDER As String = ""
+        Dim STRFORWARDER02 As String = ""
+        Dim strcust As String = ""
+        Dim STRDESTINATION As String = ""
+        Dim STRINVOICE As String = ""
+        Dim STRCUT_DATE As String = ""
+        Dim stretd As String = ""
+        Dim STRETA As String = ""
+        Dim STRTWENTY_FEET As String = ""
+        Dim STRFOURTY_FEET As String = ""
+        Dim STRLCL_QTY As String = ""
+        Dim STRCONTAINER As String = ""
+        Dim STRDAY01 As String = ""
+        Dim STRDAY02 As String = ""
+        Dim STRDAY03 As String = ""
+        Dim STRDAY04 As String = ""
+        Dim STRDAY05 As String = ""
+        Dim STRDAY06 As String = ""
+        Dim STRDAY07 As String = ""
+        Dim strday08 As String = ""
+        Dim STRDAY09 As String = ""
+        Dim STRDAY10 As String = ""
+        Dim STRDAY11 As String = ""
+        Dim STRFINALVANDATE As String = ""
+        Dim STRBOOKING_NO As String = ""
+        Dim STRBOOK_TO As String = ""
+        Dim STRVESSEL_NAME As String = ""
+        Dim STRVOYAGE_NO As String = ""
+        Dim STRPLACE_OF_RECEIPT As String = ""
+        Dim STRLOADING_PORT As String = ""
+        Dim STRDISCHARGING_PORT As String = ""
+        Dim STRPLACE_OF_DELIVERY As String = ""
+        Dim STRFLG01 As String = ""
+        Dim strflg02 As String = ""
+        Dim STRFLG03 As String = ""
+        Dim STRFLG04 As String = ""
+        Dim STRFLG05 As String = ""
+        Dim FINFLG00 As String = ""
+
+        Dim strvessle As String = ""
+        Dim strvy As String = ""
+        Dim strrp As String = ""
+        Dim strlp As String = ""
+        Dim strdp As String = ""
+        Dim strpd As String = ""
+        Dim val01 As String = ""
+        Dim flgka00 As String = "0"
+        Dim flgka01 As String = "0"
+        Dim flgka02 As String = ""
+
+        Dim deccnt As Long
+
+        Dim intCnt As Long
+        Dim intCnt2 As Long
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        'データベース接続を開く
+        cnn.Open()
+        cnn02.Open()
+        If bkgno = "" Or IsNothing(bkgno) = True Then
+
+        Else
+
+            strSQL = ""
+            strSQL = strSQL & "SELECT count(*) as RecCnt FROM T_EXL_CSANKEN WHERE T_EXL_CSANKEN.BOOKING_NO = '" & bkgno & "' "
+
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+            While (dataread.Read())
+                intCnt = dataread("RecCnt")
+            End While
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+
+            strSQL = ""
+            strSQL = strSQL & "SELECT count(*) as RecCnt FROM T_EXL_CSKANRYO WHERE T_EXL_CSKANRYO.BOOKING_NO = '" & bkgno & "' "
+
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+            While (dataread.Read())
+                intCnt2 = dataread("RecCnt")
+            End While
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+            If intCnt2 > 0 Then
+            Else
+                If intCnt > 0 Then
+
+                    strSQL = ""
+                    strSQL = strSQL & "SELECT * FROM T_EXL_CSANKEN WHERE T_EXL_CSANKEN.BOOKING_NO = '" & bkgno & "' "
+
+                    'ＳＱＬコマンド作成 
+                    dbcmd = New SqlCommand(strSQL, cnn)
+                    'ＳＱＬ文実行 
+                    dataread = dbcmd.ExecuteReader()
+
+                    While (dataread.Read())
+
+                        STRSTATUS = dataread("Status")
+                        STRFORWARDER = dataread("FORWARDER")
+                        STRFORWARDER02 = dataread("FORWARDER02")
+                        strcust = dataread("cust")
+                        STRDESTINATION = dataread("DESTINATION")
+                        STRINVOICE = dataread("INVOICE")
+                        STRCUT_DATE = dataread("CUT_DATE")
+                        stretd = dataread("ETD")
+                        STRETA = dataread("ETA")
+                        STRTWENTY_FEET = "0"
+                        STRFOURTY_FEET = "0"
+                        STRLCL_QTY = dataread("LCL_QTY")
+                        STRCONTAINER = "1"
+                        STRDAY01 = ""
+                        STRDAY02 = ""
+                        STRDAY03 = ""
+                        STRDAY04 = ""
+                        STRDAY05 = ""
+                        STRDAY06 = ""
+                        STRDAY07 = ""
+                        strday08 = ""
+                        STRDAY09 = ""
+                        STRDAY10 = ""
+                        STRDAY11 = ""
+                        STRFINALVANDATE = ""
+                        STRBOOKING_NO = dataread("BOOKING_NO")
+                        STRBOOK_TO = dataread("BOOK_TO")
+                        STRVESSEL_NAME = dataread("VESSEL_NAME")
+                        STRVOYAGE_NO = dataread("VOYAGE_NO")
+                        STRPLACE_OF_RECEIPT = dataread("PLACE_OF_RECEIPT")
+                        STRLOADING_PORT = dataread("LOADING_PORT")
+                        STRDISCHARGING_PORT = dataread("DISCHARGING_PORT")
+                        STRPLACE_OF_DELIVERY = dataread("PLACE_OF_DELIVERY")
+                        STRFLG01 = ""
+                        strflg02 = ""
+                        STRFLG03 = ""
+                        STRFLG04 = "KD"
+                        STRFLG05 = "AM"
+                        FINFLG00 = ""
+                    End While
+
+                    'クローズ処理 
+                    dataread.Close()
+                    dbcmd.Dispose()
+
+
+
+                    '済分カウント
+                    deccnt = 0
+                    '           Call DEC_GET02(STRBOOKING_NO, deccnt)
+
+                    If deccnt > 0 Then
+
+                    Else
+
+                        strSQL = ""
+                        strSQL = strSQL & "SELECT  "
+                        strSQL = strSQL & " count(*)+1  AS C "
+                        strSQL = strSQL & "FROM T_EXL_CSKANRYO "
+
+
+
+                        'ＳＱＬコマンド作成 
+                        dbcmd = New SqlCommand(strSQL, cnn)
+                        'ＳＱＬ文実行 
+                        dataread = dbcmd.ExecuteReader()
+
+                        '結果を取り出す 
+                        While (dataread.Read())
+                            val01 = Trim(dataread("C"))
+                        End While
+
+                        If val01 < 10 Then
+                            val01 = "00000" & val01
+                        ElseIf val01 < 100 Then
+                            val01 = "0000" & val01
+                        ElseIf val01 < 1000 Then
+                            val01 = "000" & val01
+                        ElseIf val01 < 10000 Then
+                            val01 = "00" & val01
+                        ElseIf val01 < 100000 Then
+                            val01 = "0" & val01
+                        Else
+                            val01 = val01
+                        End If
+
+
+
+                        'クローズ処理 
+                        dataread.Close()
+                        dbcmd.Dispose()
+
+
+
+                        flgka02 = ""
+                        flgka00 = "0"
+                        flgka01 = "0"
+
+                        Dim strcus2 As String = strcust
+                        strcust = get_cust(strcust)
+
+                        strSQL = ""
+                        strSQL = strSQL & "SELECT IIf(T_SN_HD_TB.CUSTCODE = 'E230','A',iif(T_SN_HD_TB.CUSTCODE = 'E247','A',iif(T_SN_HD_TB.CUSTCODE = 'E244','A',iif(T_SN_HD_TB.CUSTCODE = 'E243','A',IIf(left(T_SN_HD_TB.CUSTCODE,1) = 'K','A','K'))))) AS 式1 "
+                        strSQL = strSQL & "FROM (T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO) LEFT JOIN T_SN_HD_TB ON T_INV_BD_TB.SNNO = T_SN_HD_TB.SALESNOTENO "
+                        strSQL = strSQL & "WHERE T_INV_HD_TB.CUSTCODE IN ('" & strcust & "') "
+                        strSQL = strSQL & "AND T_SN_HD_TB.CUSTCODE Is Not Null "
+
+
+
+                        'ＳＱＬコマンド作成 
+                        dbcmd = New SqlCommand(strSQL, cnn02)
+                        'ＳＱＬ文実行 
+                        dataread = dbcmd.ExecuteReader()
+
+                        '結果を取り出す 
+                        While (dataread.Read())
+
+
+                            If IsDBNull(dataread("式1")) = True Then
+                                flgka02 = "XXX"
+                            Else
+                                flgka02 = Trim(dataread("式1"))
+                            End If
+
+                            If flgka02 = "A" Then
+                                flgka00 = "1"
+                            ElseIf flgka02 = "K" Then
+                                flgka01 = "1"
+                            End If
+
+                        End While
+
+
+                        'クローズ処理 
+                        dataread.Close()
+                        dbcmd.Dispose()
+
+                        If flgka00 = "0" And flgka01 = "0" Then
+                            flgka00 = "1"
+                            flgka01 = "1"
+                        End If
+
+
+                        strSQL = ""
+                        strSQL = strSQL & "INSERT INTO T_EXL_CSKANRYO VALUES("
+                        strSQL = strSQL & " '" & STRSTATUS & "' "
+                        strSQL = strSQL & ",'" & STRFORWARDER & "' "
+                        strSQL = strSQL & ",'" & STRFORWARDER02 & "' "
+                        strSQL = strSQL & ",'" & strcust & "' "
+                        strSQL = strSQL & ",'" & STRDESTINATION & "' "
+                        strSQL = strSQL & ",'" & STRINVOICE & "' "
+                        strSQL = strSQL & ",'" & STRCUT_DATE & "' "
+                        strSQL = strSQL & ",'" & stretd & "' "
+                        strSQL = strSQL & ",'" & STRETA & "' "
+                        strSQL = strSQL & ",'" & STRTWENTY_FEET & "' "
+                        strSQL = strSQL & ",'" & STRFOURTY_FEET & "' "
+                        strSQL = strSQL & ",'" & niryou & "' "
+                        strSQL = strSQL & ",'" & niryou & "' "
+                        strSQL = strSQL & ",'" & STRDAY01 & "' "
+                        strSQL = strSQL & ",'" & STRDAY02 & "' "
+                        strSQL = strSQL & ",'" & STRDAY03 & "' "
+                        strSQL = strSQL & ",'" & STRDAY04 & "' "
+                        strSQL = strSQL & ",'" & STRDAY05 & "' "
+                        strSQL = strSQL & ",'" & STRDAY06 & "' "
+                        strSQL = strSQL & ",'" & "' "
+                        strSQL = strSQL & ",'" & "' "
+                        strSQL = strSQL & ",'" & val01 & "' "
+                        strSQL = strSQL & ",'" & "1" & "' "
+                        strSQL = strSQL & ",'" & strinv & "' " 'hikitori
+                        strSQL = strSQL & ",'" & strinv & "' " 'hikitori
+                        strSQL = strSQL & ",'" & STRBOOKING_NO & "' "
+                        strSQL = strSQL & ",'" & STRBOOK_TO & "' "
+                        strSQL = strSQL & ",'" & STRVESSEL_NAME & "' "
+                        strSQL = strSQL & ",'" & STRVOYAGE_NO & "' "
+                        strSQL = strSQL & ",'" & STRPLACE_OF_RECEIPT & "' "
+                        strSQL = strSQL & ",'" & STRLOADING_PORT & "' "
+
+                        strSQL = strSQL & ",'" & STRDISCHARGING_PORT & "' "
+                        strSQL = strSQL & ",'" & STRPLACE_OF_DELIVERY & "' "
+                        strSQL = strSQL & ",'LCL' "
+                        strSQL = strSQL & ",'' "
+                        strSQL = strSQL & ",'2' "
+                        strSQL = strSQL & ",'" & flgka00 & "' "
+                        strSQL = strSQL & ",'" & flgka01 & "' "
+                        strSQL = strSQL & ",'' "
+
+                        strSQL = strSQL & ")"
+
+
+                        Command.CommandText = strSQL
+                        ' SQLの実行
+                        Command.ExecuteNonQuery()
+
+                    End If
+                End If
+            End If
+        End If
+
+        cnn.Close()
+        cnn.Dispose()
+
+
+        cnn02.Close()
+        cnn02.Dispose()
+
+    End Sub
+    Private Function get_cust(custcode As String) As String
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+        Dim strcust As String = ""
+
+        get_cust = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT M_EXL_CUST.CUST_GRP_CD "
+        strSQL = strSQL & "FROM M_EXL_CUST "
+        strSQL = strSQL & "WHERE M_EXL_CUST.CUST_ANAME = '" & custcode & "' "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strcust = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            strcust = Convert.ToString(dataread("CUST_GRP_CD"))        'ETD(計上日)
+            If strcust = "" Then
+            Else
+                custcode = strcust
+            End If
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT M_EXL_CUST.CUST_ANAME "
+        strSQL = strSQL & "FROM M_EXL_CUST "
+        strSQL = strSQL & "WHERE M_EXL_CUST.CUST_GRP_CD = '" & custcode & "' "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strcust = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            If strcust = "" Then
+                strcust = Convert.ToString(dataread("CUST_ANAME"))
+            Else
+                strcust = strcust & "','" & Convert.ToString(dataread("CUST_ANAME"))
+            End If
+
+        End While
+
+        If strcust = "" Then
+        Else
+            get_cust = strcust
+        End If
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
+
+
+    Private Sub DEL_KANRYO(strinv As String, bkgno As String)
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim dataread2 As SqlDataReader
+        Dim dbcmd2 As SqlCommand
+
+        Dim intCnt As Long
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        'データベース接続を開く
+        cnn.Open()
+
+        If bkgno = "" Or IsNothing(bkgno) = True Then
+
+        Else
+
+
+            strSQL = ""
+            strSQL = strSQL & "DELETE FROM T_EXL_CSKANRYO "
+            strSQL = strSQL & "WHERE T_EXL_CSKANRYO.BOOKING_NO = '" & bkgno & "' "
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+        End If
+
+        cnn.Close()
+        cnn.Dispose()
+
+    End Sub
 End Class

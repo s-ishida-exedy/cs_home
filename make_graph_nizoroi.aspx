@@ -229,7 +229,7 @@
                                     },
                                     ticks: {                      // 目盛り
                                         //fontColor: "red",             // 目盛りの色
-                                        //max: 20,                       // 最大値
+                                        max: 100,                       // 最大値
                                         stepSize: 10,                   // 軸間隔
 
                                         fontSize: 14                  // フォントサイズ
@@ -255,7 +255,7 @@
                       },
                       ticks: {                       // 目盛り
                           min: 0,                        // 最小値
-                          //max: 20,                       // 最大値
+                          //max: 100,                       // 最大値
                           //stepSize: 5,                   // 軸間隔
                           fontColor: "blue",             // 目盛りの色
                           fontSize: 12                   // フォントサイズ

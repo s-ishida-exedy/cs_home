@@ -240,7 +240,7 @@
             <tr>
                 <th>最終バン</th>
                 <td>
-                    <asp:DropDownList ID="DropDownList3" runat="server" Width="40px" Height="30px"  CssClass="DropDown" Font-Size="13px">
+                    <asp:DropDownList ID="DropDownList3" runat="server" Width="40px" Height="30px"  CssClass="DropDown" Font-Size="13px" AutoPostBack="True">
                     <asp:ListItem Text="0" Value="0" />
                     <asp:ListItem Text="1" Value="1" />
                     </asp:DropDownList>     
@@ -267,7 +267,7 @@ END AS KBN
 FROM M_EXL_LCL_DEC_MAIL
 ORDER BY KBN DESC"></asp:SqlDataSource>
 
-<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [T_EXL_CSANKEN].[INVOICE] AS C FROM [T_EXL_CSANKEN] LEFT JOIN [T_EXL_CSKANRYO] ON [T_EXL_CSANKEN].[INVOICE] = [T_EXL_CSKANRYO].[INVOICE] WHERE [T_EXL_CSANKEN].LCL_QTY <>'LCL' AND [T_EXL_CSANKEN].[FIN_FLG] <>'1' AND [T_EXL_CSANKEN].[FORWARDER] <>'上野  ' ORDER BY C "></asp:SqlDataSource> <%--[T_EXL_CSANKEN].[INVOICE] IS NOT NULL and [T_EXL_CSANKEN].[INVOICE] <>'' AND --%>
+<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [T_EXL_CSANKEN].[INVOICE] AS C FROM [T_EXL_CSANKEN] LEFT JOIN [T_EXL_CSKANRYO] ON [T_EXL_CSANKEN].[INVOICE] = [T_EXL_CSKANRYO].[INVOICE] WHERE [T_EXL_CSANKEN].LCL_QTY <>'LCL' AND [T_EXL_CSANKEN].[INVOICE] <>'' AND [T_EXL_CSANKEN].[FIN_FLG] <>'1' AND [T_EXL_CSANKEN].[FORWARDER] <>'上野  ' GROUP BY T_EXL_CSANKEN.INVOICE, T_EXL_CSANKEN.CUT_DATE ORDER BY T_EXL_CSANKEN.CUT_DATE "></asp:SqlDataSource> <%--[T_EXL_CSANKEN].[INVOICE] IS NOT NULL and [T_EXL_CSANKEN].[INVOICE] <>'' AND --%>
 <%--    AND [T_EXL_CSKANRYO].[INVOICE] IS NULL --%>
 
 </div>

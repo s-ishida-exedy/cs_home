@@ -338,7 +338,7 @@
                     </thead>
 
                     <tbody>
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="9058" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="9158" Height="100px" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px">
                         <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
                         <HeaderStyle CssClass="Freezing"></HeaderStyle>
 
@@ -358,7 +358,7 @@
                         </asp:BoundField>
 
                         <asp:BoundField DataField="" HeaderText="Finaldestination ADDRESS<br/>(届け先住所)" SortExpression=""  HtmlEncode ="false" >
-                        <HeaderStyle Width="1300px" />
+                        <HeaderStyle Width="1400px" />
                         </asp:BoundField>
 
 

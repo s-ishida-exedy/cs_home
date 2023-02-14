@@ -318,12 +318,16 @@
 
         <table style="height:10px;">
             <tr>
-                <td style="width:1000px;" >
+                <td style="width:100px;" >
                 <%--<asp:Button  ID="Button2" CssClass="btn00" runat="server" Text="フォルダ作成登録" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />--%> 
                 <asp:Button  ID="Button1" CssClass="btn00" runat="server" Text="案件作成" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
 <%--                <asp:DropDownList ID="DropDownList1" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="C" DataValueField="C" AppendDataBoundItems="true">
                 <asp:ListItem Text="Select" Value="" />
                 </asp:DropDownList>--%>
+
+                </td>
+                <td style="width:900px;" >
+                <asp:Button  ID="Button7" CssClass="btn00" runat="server" Text="エクセル" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
                 </td>
                 <td style="width:300px;" >
                     <asp:Label ID="Label10" runat="server" Text="AAA" Font-Size="12px" ></asp:Label>
@@ -413,7 +417,7 @@
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" >
-                        <HeaderStyle Width="200px" />
+                        <HeaderStyle Width="210px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="INVOICE" HeaderText="INVOICE" SortExpression="INVOICE" >
                         <HeaderStyle Width="200px" />
