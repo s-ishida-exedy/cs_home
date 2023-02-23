@@ -671,10 +671,12 @@ Partial Class cs_home
         dbcmd.Dispose()
 
 
+        If e.Row.Cells(10).Text = "AC要" Or e.Row.Cells(10).Text = " Booking依頼済み" Then
+            e.Row.Cells(10).Text = e.Row.Cells(10).Text & Left(e.Row.Cells(2).Text, 4) & Replace(e.Row.Cells(7).Text, "/", "")
+        End If
 
 
-
-        strSQL = "SELECT INVOICE_NO FROM [T_EXL_LCLTENKAI] WHERE [T_EXL_LCLTENKAI].INVOICE_NO = '" & e.Row.Cells(3).Text & "' "
+        strSQL = "SELECT BOOKING_NO FROM [T_EXL_LCLTENKAI] WHERE [T_EXL_LCLTENKAI].BOOKING_NO = '" & e.Row.Cells(10).Text & "' "
         strSQL = strSQL & "AND [T_EXL_LCLTENKAI].FLG03 = '1' "
         strSQL = strSQL & "AND FLG01 <> '1' "
 
@@ -686,9 +688,9 @@ Partial Class cs_home
         strinv = ""
         '結果を取り出す 
         While (dataread.Read())
-            strinv += dataread("INVOICE_NO")
+            strinv += dataread("BOOKING_NO")
             '書類作成状況
-            If e.Row.Cells(3).Text = strinv Then
+            If e.Row.Cells(10).Text = strinv Then
                 e.Row.BackColor = Drawing.Color.LightBlue
             End If
         End While
@@ -788,7 +790,9 @@ Partial Class cs_home
 
                 End If
             End If
-            End If
+        End If
+
+        e.Row.Cells(0).Visible = False
 
     End Sub
 

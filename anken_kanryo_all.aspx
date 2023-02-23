@@ -288,7 +288,7 @@
 
 <body class="c2">
 
-<form id="form1" runat="server">
+<form id="form1" runat="server" enctype="multipart/form-data" >
 <!--PC用（901px以上端末）メニュー-->
 <!-- インクルードファイルの指定 -->
 <!-- メニューの編集はheader.aspxで行う -->
@@ -335,7 +335,6 @@
             </tr>
         </table>
 
-
         <asp:Panel ID="Panel1" runat="server"  Font-Size="12px" >
             <div class="wrapper">
                 <table class="sticky" >
@@ -373,7 +372,6 @@
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
 
-
                         <asp:TemplateField ShowHeader="False" HeaderText="完 了">
                             <HeaderStyle Width="50px" />
                             <ItemTemplate>
@@ -390,7 +388,6 @@
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
 
-
                         <asp:TemplateField ShowHeader="False" HeaderText="確 認" >
                             <HeaderStyle Width="40px" />
                             <ItemTemplate>
@@ -398,7 +395,6 @@
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
-
 
                         <asp:BoundField DataField="DAY11" HeaderText="バン日" SortExpression="DAY11" >
                         <HeaderStyle Width="70px" />
@@ -435,7 +431,7 @@
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField DataField="STATUS" HeaderText="進捗状況" SortExpression="STATUS" >
-                        <HeaderStyle Width="100px" />
+                        <HeaderStyle Width="130px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="BOOKING_NO" HeaderText="BOOKING_NO" SortExpression="BOOKING_NO" >
                         <HeaderStyle Width="120px" />
@@ -465,8 +461,6 @@
                         <asp:BoundField DataField="FLG05" HeaderText="FLG05" SortExpression="FLG05" >
                         <HeaderStyle Width="100px" />
                         </asp:BoundField>
-
-
 
                         <asp:TemplateField ShowHeader="False" HeaderText="ｴﾗｰ解除">
                         <HeaderStyle Width="50px" />
@@ -513,8 +507,6 @@
 
                     </tbody>
                 </table>
-
-
                 
         <table style="height:20px;">
         </table>
@@ -524,7 +516,8 @@
                 <td style="width:150px;Font-Size:15px;" >
                     <asp:Label ID="Label5" runat="server" Text="<備考記載欄>"></asp:Label>
                 </td>
-                <td style="width:800px;Font-Size:15px;" >
+                <td style="width:1000px;Font-Size:12px;">
+<%--                    <input type="file" name="userfile" id="userfile00" accept=".xls,.xlsx,.xlsm" runat="server" />--%>
                 </td>
             </tr>
         </table>
@@ -535,7 +528,7 @@
         <table>
             <tr>
                 <td style="width:100px;Font-Size:15px; height:60px;" >
-                    <asp:TextBox ID="TextBox1" runat="server" Width="500px" Height="80px" TextMode="MultiLine" CssClass="" Font-Size="12px" AutoPostBack="True"  AppendDataBoundItems="true" ></asp:TextBox>
+                    <asp:TextBox Font-Names="Meiryo UI" ID="TextBox1" runat="server" Width="800px" Height="90px" TextMode="MultiLine" CssClass="" Font-Size="15px"  AppendDataBoundItems="true" ></asp:TextBox>
                 </td>
                     <td style="width:600px;Font-Size:25px;" >
                 </td>
@@ -543,7 +536,6 @@
         </table>
 
         </div>
-
 
             <table>
                 <tr>
@@ -589,7 +581,6 @@
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
-
 
                         <asp:TemplateField ShowHeader="False" HeaderText="完 了">
                             <HeaderStyle Width="50px" />
@@ -796,11 +787,11 @@
         <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
 
 
-        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE (DAY08 ='' or DAY08 IS NULL) or (DAY07 ='' or DAY07 IS NULL) ORDER BY DAY11,FLG01,CUT_DATE,DAY10 "></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE ((DAY08 ='' or DAY08 IS NULL) or (DAY07 ='' or DAY07 IS NULL)) AND DAY06 <>'1' ORDER BY DAY11,FLG01,CUT_DATE,DAY10 "></asp:SqlDataSource>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [INVOICE] AS C FROM [T_EXL_CSANKEN] WHERE [INVOICE] IS NOT NULL and [INVOICE] <>'' ORDER BY C "></asp:SqlDataSource>
 
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE DAY08 <>'' AND DAY07 <>'' ORDER BY DAY11,FLG01,CUT_DATE,DAY10 "></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_CSKANRYO] WHERE DAY08 <>'' AND DAY07 <>'' ORDER BY DAY11 DeSC,FLG01,CUT_DATE,DAY10 "></asp:SqlDataSource>
 
 
 

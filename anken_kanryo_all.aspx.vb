@@ -10,6 +10,7 @@ Imports MailKit.Security
 Imports MimeKit
 Imports MimeKit.Text
 Imports System.Linq
+Imports mod_function
 
 
 
@@ -673,124 +674,124 @@ Partial Class yuusen
             'データベース接続を開く
             cnn.Open()
 
-            'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '006' "
+            ''strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '006' "
 
-            'ＳＱＬコマンド作成
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行
-            dataread = dbcmd.ExecuteReader()
-            strbkg = ""
-            '結果を取り出す
-            While (dataread.Read())
-                strbkg += dataread("BKGNO")
-                '書類作成状況
-                If Trim(e.Row.Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
-                    'e.Row.BackColor = Drawing.Color.DarkGray
+            ''ＳＱＬコマンド作成
+            'dbcmd = New SqlCommand(strSQL, cnn)
+            ''ＳＱＬ文実行
+            'dataread = dbcmd.ExecuteReader()
+            'strbkg = ""
+            ''結果を取り出す
+            'While (dataread.Read())
+            '    strbkg += dataread("BKGNO")
+            '    '書類作成状況
+            '    If Trim(e.Row.Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
+            '        'e.Row.BackColor = Drawing.Color.DarkGray
 
-                    Dim dltcb01 As CheckBox = e.Row.FindControl("cb01")
+            '        Dim dltcb01 As CheckBox = e.Row.FindControl("cb01")
 
-                    dltcb01.Checked = True
-                    'dltcb02.Checked = True
+            '        dltcb01.Checked = True
+            '        'dltcb02.Checked = True
 
-                End If
-            End While
+            '    End If
+            'End While
 
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
-
-
-            'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '007' "
-
-            'ＳＱＬコマンド作成
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行
-            dataread = dbcmd.ExecuteReader()
-            strbkg = ""
-            '結果を取り出す
-            While (dataread.Read())
-                strbkg += dataread("BKGNO")
-                '書類作成状況
-                If Trim(e.Row.Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
-                    'e.Row.BackColor = Drawing.Color.DarkGray
+            ''クローズ処理
+            'dataread.Close()
+            'dbcmd.Dispose()
 
 
-                    Dim dltcb02 As CheckBox = e.Row.FindControl("cb02")
+            ''strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '007' "
 
-                    'dltcb01.Checked = True
-                    dltcb02.Checked = True
-
-                End If
-            End While
-
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
-
-
-            'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '008' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].INVNO = '" & Trim(Replace(e.Row.Cells(30).Text, vbLf, "")) & "' "
-
-            'ＳＱＬコマンド作成
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行
-            dataread = dbcmd.ExecuteReader()
-            strbkg = ""
-            '結果を取り出す
-            While (dataread.Read())
-                strbkg += dataread("BKGNO")
-                '書類作成状況
-                If Trim(e.Row.Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
-
-                    dltlabel1.Text = "〇"
-
-                End If
-            End While
-
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
+            ''ＳＱＬコマンド作成
+            'dbcmd = New SqlCommand(strSQL, cnn)
+            ''ＳＱＬ文実行
+            'dataread = dbcmd.ExecuteReader()
+            'strbkg = ""
+            ''結果を取り出す
+            'While (dataread.Read())
+            '    strbkg += dataread("BKGNO")
+            '    '書類作成状況
+            '    If Trim(e.Row.Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
+            '        'e.Row.BackColor = Drawing.Color.DarkGray
 
 
-            'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '009' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].INVNO = '" & Trim(Replace(e.Row.Cells(30).Text, vbLf, "")) & "' "
+            '        Dim dltcb02 As CheckBox = e.Row.FindControl("cb02")
+
+            '        'dltcb01.Checked = True
+            '        dltcb02.Checked = True
+
+            '    End If
+            'End While
+
+            ''クローズ処理
+            'dataread.Close()
+            'dbcmd.Dispose()
 
 
-            'ＳＱＬコマンド作成
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行
-            dataread = dbcmd.ExecuteReader()
-            strbkg = ""
-            '結果を取り出す
-            While (dataread.Read())
-                strbkg += dataread("BKGNO")
-                '書類作成状況
-                If Trim(e.Row.Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
+            ''strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '008' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].INVNO = '" & Trim(Replace(e.Row.Cells(30).Text, vbLf, "")) & "' "
 
-                    dltlabel2.Text = "〇"
+            ''ＳＱＬコマンド作成
+            'dbcmd = New SqlCommand(strSQL, cnn)
+            ''ＳＱＬ文実行
+            'dataread = dbcmd.ExecuteReader()
+            'strbkg = ""
+            ''結果を取り出す
+            'While (dataread.Read())
+            '    strbkg += dataread("BKGNO")
+            '    '書類作成状況
+            '    If Trim(e.Row.Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
 
-                End If
-            End While
+            '        dltlabel1.Text = "〇"
 
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
+            '    End If
+            'End While
 
-            If Trim(e.Row.Cells(14).Text) = "LCL" Then
-                e.Row.Cells(14).BackColor = Drawing.Color.Orange
-            End If
+            ''クローズ処理
+            'dataread.Close()
+            'dbcmd.Dispose()
 
-            If Trim(e.Row.Cells(29).Text) = "1" Then
-                e.Row.BackColor = Drawing.Color.Orange
-            End If
+
+            ''strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '009' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].INVNO = '" & Trim(Replace(e.Row.Cells(30).Text, vbLf, "")) & "' "
+
+
+            ''ＳＱＬコマンド作成
+            'dbcmd = New SqlCommand(strSQL, cnn)
+            ''ＳＱＬ文実行
+            'dataread = dbcmd.ExecuteReader()
+            'strbkg = ""
+            ''結果を取り出す
+            'While (dataread.Read())
+            '    strbkg += dataread("BKGNO")
+            '    '書類作成状況
+            '    If Trim(e.Row.Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
+
+            '        dltlabel2.Text = "〇"
+
+            '    End If
+            'End While
+
+            ''クローズ処理
+            'dataread.Close()
+            'dbcmd.Dispose()
+
+            'If Trim(e.Row.Cells(14).Text) = "LCL" Then
+            '    e.Row.Cells(14).BackColor = Drawing.Color.Orange
+            'End If
+
+            'If Trim(e.Row.Cells(29).Text) = "1" Then
+            '    e.Row.BackColor = Drawing.Color.Orange
+            'End If
 
 
             'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
@@ -837,14 +838,14 @@ Partial Class yuusen
             dltlabel1.Dispose()
             dltlabel2.Dispose()
 
-            Dim fll As String = "0"
-            Call get_meisai(Trim(Replace(e.Row.Cells(16).Text, vbLf, "")), fll)
+            'Dim fll As String = "0"
+            'Call get_meisai(Trim(Replace(e.Row.Cells(16).Text, vbLf, "")), fll)
 
-            If fll = "0" Then
-                btn01.Enabled = False
-                dltlabel1.Text = "明細未"
+            'If fll = "0" Then
+            '    btn01.Enabled = False
+            '    dltlabel1.Text = "明細未"
 
-            End If
+            'End If
 
         End If
 
@@ -868,51 +869,51 @@ Partial Class yuusen
             'データベース接続を開く
             cnn.Open()
 
-            strSQL = "SELECT T_EXL_CSKANRYO.FLG02 "
-            strSQL = strSQL & "FROM T_EXL_CSKANRYO "
-            strSQL = strSQL & "WHERE BOOKING_NO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
+            'strSQL = "SELECT T_EXL_CSKANRYO.FLG02 "
+            'strSQL = strSQL & "FROM T_EXL_CSKANRYO "
+            'strSQL = strSQL & "WHERE BOOKING_NO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
 
-            'ＳＱＬコマンド作成
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行
-            dataread = dbcmd.ExecuteReader()
-            strbkg = ""
-            '結果を取り出す
-            While (dataread.Read())
-                fflg = dataread("FLG02")
-            End While
+            ''ＳＱＬコマンド作成
+            'dbcmd = New SqlCommand(strSQL, cnn)
+            ''ＳＱＬ文実行
+            'dataread = dbcmd.ExecuteReader()
+            'strbkg = ""
+            ''結果を取り出す
+            'While (dataread.Read())
+            '    fflg = dataread("FLG02")
+            'End While
 
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
-
-
-            'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '010' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].INVNO = '" & Trim(Replace(e.Row.Cells(30).Text, vbLf, "")) & "' "
+            ''クローズ処理
+            'dataread.Close()
+            'dbcmd.Dispose()
 
 
-            'ＳＱＬコマンド作成
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行
-            dataread = dbcmd.ExecuteReader()
-            strbkg = ""
-            '結果を取り出す
-            While (dataread.Read())
-                strbkg += dataread("BKGNO")
-                '書類作成状況
-                If Trim(e.Row.Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
-
-                    kflg01 = 1
+            ''strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '010' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].INVNO = '" & Trim(Replace(e.Row.Cells(30).Text, vbLf, "")) & "' "
 
 
-                End If
-            End While
+            ''ＳＱＬコマンド作成
+            'dbcmd = New SqlCommand(strSQL, cnn)
+            ''ＳＱＬ文実行
+            'dataread = dbcmd.ExecuteReader()
+            'strbkg = ""
+            ''結果を取り出す
+            'While (dataread.Read())
+            '    strbkg += dataread("BKGNO")
+            '    '書類作成状況
+            '    If Trim(e.Row.Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
 
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
+            '        kflg01 = 1
+
+
+            '    End If
+            'End While
+
+            ''クローズ処理
+            'dataread.Close()
+            'dbcmd.Dispose()
 
             cnn.Close()
             cnn.Dispose()
@@ -926,127 +927,127 @@ Partial Class yuusen
             Dim dltlabel1 As Label = e.Row.FindControl("Label1")
             Dim dltlabel2 As Label = e.Row.FindControl("Label2")
 
-            If dltlabel2.Text <> "〇" Then
-                dltButton2.Visible = False
-                ''e.Row.Cells(4).Text = "-"
-            Else
-                dltButton2.Visible = True
-                ''e.Row.Cells(4).Text = ""
-            End If
+            'If dltlabel2.Text <> "〇" Then
+            '    dltButton2.Visible = False
+            '    ''e.Row.Cells(4).Text = "-"
+            'Else
+            '    dltButton2.Visible = True
+            '    ''e.Row.Cells(4).Text = ""
+            'End If
 
-            If kflg01 = "1" Then
-                dltButton.Text = "戻す"
-            Else
-                If Trim(e.Row.Cells(29).Text) = "1" Then
-                    dltButton.Text = "最終"
-                Else
-                    dltButton.Text = "途中"
-                End If
-            End If
+            'If kflg01 = "1" Then
+            '    dltButton.Text = "戻す"
+            'Else
+            '    If Trim(e.Row.Cells(29).Text) = "1" Then
+            '        dltButton.Text = "最終"
+            '    Else
+            '        dltButton.Text = "途中"
+            '    End If
+            'End If
 
-            'ボタンが存在する場合のみセット
-            If Not (dltButton Is Nothing) Then
-                dltButton.CommandArgument = e.Row.RowIndex.ToString()
-            End If
+            ''ボタンが存在する場合のみセット
+            'If Not (dltButton Is Nothing) Then
+            '    dltButton.CommandArgument = e.Row.RowIndex.ToString()
+            'End If
 
-            'ボタンが存在する場合のみセット
-            If Not (dltButton2 Is Nothing) Then
-                dltButton2.CommandArgument = e.Row.RowIndex.ToString()
-            End If
-            'ボタンが存在する場合のみセット
-            If Not (dltButton3 Is Nothing) Then
-                dltButton3.CommandArgument = e.Row.RowIndex.ToString()
-            End If
-            'ボタンが存在する場合のみセット
-            If Not (dltButton6 Is Nothing) Then
-                dltButton6.CommandArgument = e.Row.RowIndex.ToString()
-            End If
-            'ボタンが存在する場合のみセット
-            If Not (dltButton4 Is Nothing) Then
-                dltButton4.CommandArgument = e.Row.RowIndex.ToString()
+            ''ボタンが存在する場合のみセット
+            'If Not (dltButton2 Is Nothing) Then
+            '    dltButton2.CommandArgument = e.Row.RowIndex.ToString()
+            'End If
+            ''ボタンが存在する場合のみセット
+            'If Not (dltButton3 Is Nothing) Then
+            '    dltButton3.CommandArgument = e.Row.RowIndex.ToString()
+            'End If
+            ''ボタンが存在する場合のみセット
+            'If Not (dltButton6 Is Nothing) Then
+            '    dltButton6.CommandArgument = e.Row.RowIndex.ToString()
+            'End If
+            ''ボタンが存在する場合のみセット
+            'If Not (dltButton4 Is Nothing) Then
+            '    dltButton4.CommandArgument = e.Row.RowIndex.ToString()
 
-                If fflg = "" Then
-                    dltButton4.Text = "更新"
-                Else
-                    dltButton4.Text = "戻す"
-                End If
-            End If
-            If Not (dltButton5 Is Nothing) Then
-                dltButton5.CommandArgument = e.Row.RowIndex.ToString()
-                If e.Row.Cells(28).Text = "1" Then
-                Else
-                    dltButton5.Visible = False
-                End If
+            '    If fflg = "" Then
+            '        dltButton4.Text = "更新"
+            '    Else
+            '        dltButton4.Text = "戻す"
+            '    End If
+            'End If
+            'If Not (dltButton5 Is Nothing) Then
+            '    dltButton5.CommandArgument = e.Row.RowIndex.ToString()
+            '    If e.Row.Cells(28).Text = "1" Then
+            '    Else
+            '        dltButton5.Visible = False
+            '    End If
 
-            End If
+            'End If
 
 
             Dim dltcb01 As CheckBox = e.Row.FindControl("cb01")
             Dim dltcb02 As CheckBox = e.Row.FindControl("cb02")
 
-            'ボタンが存在する場合のみセット
-            If Not (dltcb01 Is Nothing) Then
-                dltcb01.AutoPostBack = True
-                If e.Row.Cells(24).Text <> "1" Then
-                    dltcb01.Visible = False
-                End If
-            End If
-            If Not (dltcb02 Is Nothing) Then
-                dltcb02.AutoPostBack = True
-                If e.Row.Cells(23).Text <> "1" Then
-                    dltcb02.Visible = False
-                End If
-            End If
+            ''ボタンが存在する場合のみセット
+            'If Not (dltcb01 Is Nothing) Then
+            '    dltcb01.AutoPostBack = True
+            '    If e.Row.Cells(24).Text <> "1" Then
+            '        dltcb01.Visible = False
+            '    End If
+            'End If
+            'If Not (dltcb02 Is Nothing) Then
+            '    dltcb02.AutoPostBack = True
+            '    If e.Row.Cells(23).Text <> "1" Then
+            '        dltcb02.Visible = False
+            '    End If
+            'End If
 
-            'ボタンが存在する場合のみセット
-            If Not (dltcb01 Is Nothing) And Not (dltcb02 Is Nothing) Then
-                dltcb01.AutoPostBack = True
-                dltcb02.AutoPostBack = True
-                If e.Row.Cells(24).Text <> "1" And e.Row.Cells(23).Text <> "1" Then
-                    dltcb01.Visible = True
-                    dltcb02.Visible = True
-                End If
-            End If
+            ''ボタンが存在する場合のみセット
+            'If Not (dltcb01 Is Nothing) And Not (dltcb02 Is Nothing) Then
+            '    dltcb01.AutoPostBack = True
+            '    dltcb02.AutoPostBack = True
+            '    If e.Row.Cells(24).Text <> "1" And e.Row.Cells(23).Text <> "1" Then
+            '        dltcb01.Visible = True
+            '        dltcb02.Visible = True
+            '    End If
+            'End If
 
             Dim ckfl00 As String = ""
             Dim ckfl01 As String = ""
 
-            'ボタンが存在する場合のみセット
-            If dltcb01.Visible = True Then
-                If dltcb01.Checked = True Then
-                    ckfl00 = ""
-                Else
-                    ckfl00 = "KD"
-                End If
-            End If
-            'ボタンが存在する場合のみセット
-            If dltcb02.Visible = True Then
-                If dltcb02.Checked = True Then
-                    ckfl00 = ""
-                Else
-                    ckfl01 = "AM"
-                End If
-            End If
+            ''ボタンが存在する場合のみセット
+            'If dltcb01.Visible = True Then
+            '    If dltcb01.Checked = True Then
+            '        ckfl00 = ""
+            '    Else
+            '        ckfl00 = "KD"
+            '    End If
+            'End If
+            ''ボタンが存在する場合のみセット
+            'If dltcb02.Visible = True Then
+            '    If dltcb02.Checked = True Then
+            '        ckfl00 = ""
+            '    Else
+            '        ckfl01 = "AM"
+            '    End If
+            'End If
 
-            If dltlabel1.Text = "〇" Then
-                dltButton.Attributes.Add("onclick", "return confirm('完了報告を解除しますか？');")
-            Else
-                If ckfl00 = "KD" And ckfl01 = "AM" Then
-                    dltButton.Attributes.Add("onclick", "return confirm('KD、ｱﾌﾀどちらもチェックがありませんが処理を進めますか？\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
-                ElseIf ckfl00 = "KD" And ckfl01 = "" Then
-                    dltButton.Attributes.Add("onclick", "return confirm('KDにチェックがありませんが処理を進めますか？\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
-                ElseIf ckfl00 = "" And ckfl01 = "AM" Then
-                    dltButton.Attributes.Add("onclick", "return confirm('ｱﾌﾀにチェックがありませんが処理を進めますか？\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
-                Else
-                    dltButton.Attributes.Add("onclick", "return confirm('チェックボックス確認\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
-                End If
-            End If
+            'If dltlabel1.Text = "〇" Then
+            '    dltButton.Attributes.Add("onclick", "return confirm('完了報告を解除しますか？');")
+            'Else
+            '    If ckfl00 = "KD" And ckfl01 = "AM" Then
+            '        dltButton.Attributes.Add("onclick", "return confirm('KD、ｱﾌﾀどちらもチェックがありませんが処理を進めますか？\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
+            '    ElseIf ckfl00 = "KD" And ckfl01 = "" Then
+            '        dltButton.Attributes.Add("onclick", "return confirm('KDにチェックがありませんが処理を進めますか？\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
+            '    ElseIf ckfl00 = "" And ckfl01 = "AM" Then
+            '        dltButton.Attributes.Add("onclick", "return confirm('ｱﾌﾀにチェックがありませんが処理を進めますか？\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
+            '    Else
+            '        dltButton.Attributes.Add("onclick", "return confirm('チェックボックス確認\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
+            '    End If
+            'End If
 
-            If e.Row.Cells(29).Text = "1" Then
-                dltlabel1.Text = "最終"
-            Else
-                dltlabel1.Text = "途中"
-            End If
+            'If e.Row.Cells(29).Text = "1" Then
+            '    dltlabel1.Text = "最終"
+            'Else
+            '    dltlabel1.Text = "途中"
+            'End If
 
 
             dltButton.Dispose()
@@ -1068,7 +1069,7 @@ Partial Class yuusen
             e.Row.Cells(0).Visible = False
             e.Row.Cells(1).Visible = False
             e.Row.Cells(2).Visible = False
-            'e.Row.Cells(3).Visible = False
+            e.Row.Cells(3).Visible = False
 
             e.Row.Cells(4).Visible = False
             e.Row.Cells(5).Visible = False
@@ -1095,7 +1096,7 @@ Partial Class yuusen
             e.Row.Cells(0).Visible = False
             e.Row.Cells(1).Visible = False
             e.Row.Cells(2).Visible = False
-            'e.Row.Cells(3).Visible = False
+            e.Row.Cells(3).Visible = False
 
             e.Row.Cells(4).Visible = False
             e.Row.Cells(5).Visible = False
@@ -1151,6 +1152,16 @@ Partial Class yuusen
             Dim data9 = Me.GridView1.Rows(index).Cells(29).Text
             Dim data10 = Me.GridView1.Rows(index).Cells(31).Text
 
+
+
+            ''添付ファイルをサーバーにアップロード
+            ''Dim posted As HttpPostedFile = Request.Files("userfile")
+            'Dim posted As HttpPostedFile = userfile00.PostedFile
+
+            'If Not posted.FileName = "" Then
+            '    posted.SaveAs("C:\exp\cs_home\upload\" & System.IO.Path.GetFileName(posted.FileName))
+            '    Session("strFile") = System.IO.Path.GetFileName(posted.FileName)
+            'End If
 
 
             Dim dataread As SqlDataReader
@@ -1257,7 +1268,7 @@ Partial Class yuusen
 
                         If data9 = 1 Then
                             Call erreg(a, data1, data8)
-                            'Call Mail01(data1, data2, data3, data4, data5, data6, data7, data10) 'kkkkkk
+                            Call Mail01(data1, data2, data3, data4, data5, data6, data7, data10) 'kkkkkk
                         Else
                             Call Mail03(data1, data2, data3, data4, data5, data6, data7, data10)
                         End If
@@ -1995,7 +2006,7 @@ Partial Class yuusen
 
                         If data9 = 1 Then
                             Call erreg(a, data1, data8)
-                            'Call Mail01(data1, data2, data3, data4, data5, data6, data7, data10)'Kkkkkkk
+                            Call Mail01(data1, data2, data3, data4, data5, data6, data7, data10) 'Kkkkkkk
                         Else
                             Call Mail03(data1, data2, data3, data4, data5, data6, data7, data10)
                         End If
@@ -3074,113 +3085,113 @@ Partial Class yuusen
             Dim dltlabel1 As Label = GridView2.Rows(I).FindControl("Label1")
             Dim dltlabel2 As Label = GridView2.Rows(I).FindControl("Label2")
 
-            If CType(GridView2.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
-                Call reg_check(GridView2.Rows(I).Cells(16).Text, 1, GridView2.Rows(I).Cells(30).Text)
-            Else
-                Call reg_check2(GridView2.Rows(I).Cells(16).Text, 1, GridView2.Rows(I).Cells(30).Text)
-            End If
+            'If CType(GridView2.Rows(I).Cells(0).Controls(1), CheckBox).Checked Then
+            '    Call reg_check(GridView2.Rows(I).Cells(16).Text, 1, GridView2.Rows(I).Cells(30).Text)
+            'Else
+            '    Call reg_check2(GridView2.Rows(I).Cells(16).Text, 1, GridView2.Rows(I).Cells(30).Text)
+            'End If
 
-            If CType(GridView2.Rows(I).Cells(1).Controls(1), CheckBox).Checked Then
-                Call reg_check(GridView2.Rows(I).Cells(16).Text, 2, GridView2.Rows(I).Cells(30).Text)
-            Else
-                Call reg_check2(GridView2.Rows(I).Cells(16).Text, 2, GridView2.Rows(I).Cells(30).Text)
-            End If
-
-
-            'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(GridView2.Rows(I).Cells(16).Text, vbLf, "")) & "' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '006' "
-
-            'ＳＱＬコマンド作成
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行
-            dataread = dbcmd.ExecuteReader()
-            strbkg = ""
-            '結果を取り出す
-            While (dataread.Read())
-                strbkg += dataread("BKGNO")
-                '書類作成状況
-                If Trim(GridView2.Rows(I).Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
-                    dltcb01.Checked = True
-                End If
-            End While
-
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
+            'If CType(GridView2.Rows(I).Cells(1).Controls(1), CheckBox).Checked Then
+            '    Call reg_check(GridView2.Rows(I).Cells(16).Text, 2, GridView2.Rows(I).Cells(30).Text)
+            'Else
+            '    Call reg_check2(GridView2.Rows(I).Cells(16).Text, 2, GridView2.Rows(I).Cells(30).Text)
+            'End If
 
 
-            'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(GridView2.Rows(I).Cells(16).Text, vbLf, "")) & "' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '007' "
+            ''strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(GridView2.Rows(I).Cells(16).Text, vbLf, "")) & "' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '006' "
 
-            'ＳＱＬコマンド作成
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行
-            dataread = dbcmd.ExecuteReader()
-            strbkg = ""
-            '結果を取り出す
-            While (dataread.Read())
-                strbkg += dataread("BKGNO")
-                '書類作成状況
-                If Trim(GridView2.Rows(I).Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
-                    dltcb02.Checked = True
-                End If
-            End While
+            ''ＳＱＬコマンド作成
+            'dbcmd = New SqlCommand(strSQL, cnn)
+            ''ＳＱＬ文実行
+            'dataread = dbcmd.ExecuteReader()
+            'strbkg = ""
+            ''結果を取り出す
+            'While (dataread.Read())
+            '    strbkg += dataread("BKGNO")
+            '    '書類作成状況
+            '    If Trim(GridView2.Rows(I).Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
+            '        dltcb01.Checked = True
+            '    End If
+            'End While
 
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
-
-
-            'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(GridView2.Rows(I).Cells(16).Text, vbLf, "")) & "' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '008' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].INVNO = '" & Trim(Replace(GridView2.Rows(I).Cells(30).Text, vbLf, "")) & "' "
+            ''クローズ処理
+            'dataread.Close()
+            'dbcmd.Dispose()
 
 
-            'ＳＱＬコマンド作成
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行
-            dataread = dbcmd.ExecuteReader()
-            strbkg = ""
-            '結果を取り出す
-            While (dataread.Read())
-                strbkg += dataread("BKGNO")
-                '書類作成状況
-                If Trim(GridView2.Rows(I).Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
-                    dltlabel1.Text = "〇"
-                End If
-            End While
+            ''strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(GridView2.Rows(I).Cells(16).Text, vbLf, "")) & "' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '007' "
 
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
+            ''ＳＱＬコマンド作成
+            'dbcmd = New SqlCommand(strSQL, cnn)
+            ''ＳＱＬ文実行
+            'dataread = dbcmd.ExecuteReader()
+            'strbkg = ""
+            ''結果を取り出す
+            'While (dataread.Read())
+            '    strbkg += dataread("BKGNO")
+            '    '書類作成状況
+            '    If Trim(GridView2.Rows(I).Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
+            '        dltcb02.Checked = True
+            '    End If
+            'End While
 
-
-            'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(GridView2.Rows(I).Cells(16).Text, vbLf, "")) & "' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '009' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].INVNO = '" & Trim(Replace(GridView2.Rows(I).Cells(30).Text, vbLf, "")) & "' "
+            ''クローズ処理
+            'dataread.Close()
+            'dbcmd.Dispose()
 
 
-            'ＳＱＬコマンド作成
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行
-            dataread = dbcmd.ExecuteReader()
-            strbkg = ""
-            '結果を取り出す
-            While (dataread.Read())
-                strbkg += dataread("BKGNO")
-                '書類作成状況
-                If Trim(GridView2.Rows(I).Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
-                    dltlabel2.Text = "〇"
-                End If
-            End While
+            ''strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(GridView2.Rows(I).Cells(16).Text, vbLf, "")) & "' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '008' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].INVNO = '" & Trim(Replace(GridView2.Rows(I).Cells(30).Text, vbLf, "")) & "' "
 
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
+
+            ''ＳＱＬコマンド作成
+            'dbcmd = New SqlCommand(strSQL, cnn)
+            ''ＳＱＬ文実行
+            'dataread = dbcmd.ExecuteReader()
+            'strbkg = ""
+            ''結果を取り出す
+            'While (dataread.Read())
+            '    strbkg += dataread("BKGNO")
+            '    '書類作成状況
+            '    If Trim(GridView2.Rows(I).Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
+            '        dltlabel1.Text = "〇"
+            '    End If
+            'End While
+
+            ''クローズ処理
+            'dataread.Close()
+            'dbcmd.Dispose()
+
+
+            ''strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(GridView2.Rows(I).Cells(16).Text, vbLf, "")) & "' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '009' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].INVNO = '" & Trim(Replace(GridView2.Rows(I).Cells(30).Text, vbLf, "")) & "' "
+
+
+            ''ＳＱＬコマンド作成
+            'dbcmd = New SqlCommand(strSQL, cnn)
+            ''ＳＱＬ文実行
+            'dataread = dbcmd.ExecuteReader()
+            'strbkg = ""
+            ''結果を取り出す
+            'While (dataread.Read())
+            '    strbkg += dataread("BKGNO")
+            '    '書類作成状況
+            '    If Trim(GridView2.Rows(I).Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
+            '        dltlabel2.Text = "〇"
+            '    End If
+            'End While
+
+            ''クローズ処理
+            'dataread.Close()
+            'dbcmd.Dispose()
 
             'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
             strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(GridView2.Rows(I).Cells(16).Text, vbLf, "")) & "' "
@@ -3216,82 +3227,39 @@ Partial Class yuusen
             dataread.Close()
             dbcmd.Dispose()
 
-            'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
-            strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(GridView2.Rows(I).Cells(16).Text, vbLf, "")) & "' "
-            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '002' "
-
-            'ＳＱＬコマンド作成
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行
-            dataread = dbcmd.ExecuteReader()
-            strbkg = ""
-            '結果を取り出す
-            While (dataread.Read())
-                strbkg += dataread("BKGNO")
-                '書類作成状況
-                If Trim(GridView2.Rows(I).Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
-                    Call syorui(Trim(GridView2.Rows(I).Cells(16).Text))
-                End If
-            End While
-
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
-
-            ''LABEL
-            'Dim la01 As String = "完了報告残 ： "
-
-            'strSQL = "SELECT Count(T_EXL_CSKANRYO.DAY08) AS C "
-            'strSQL = strSQL & "FROM T_EXL_CSKANRYO "
-            'strSQL = strSQL & "WHERE T_EXL_CSKANRYO.DAY08 IS NULL OR T_EXL_CSKANRYO.DAY08 ='' "
-            'strSQL = strSQL & "AND T_EXL_CSKANRYO.DAY11 = '" & Format(dt1, "yyyy/MM/dd") & "'"
+            ''strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
+            'strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(GridView2.Rows(I).Cells(16).Text, vbLf, "")) & "' "
+            'strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '002' "
 
             ''ＳＱＬコマンド作成
             'dbcmd = New SqlCommand(strSQL, cnn)
             ''ＳＱＬ文実行
             'dataread = dbcmd.ExecuteReader()
-
+            'strbkg = ""
             ''結果を取り出す
             'While (dataread.Read())
-            '    la01 = la01 & dataread("C")
-            'End While
-
-            'クローズ処理
-            dataread.Close()
-            dbcmd.Dispose()
-
-            'strSQL = "SELECT Count(T_EXL_CSKANRYO.DAY09) AS C "
-            'strSQL = strSQL & "FROM T_EXL_CSKANRYO "
-            'strSQL = strSQL & "WHERE T_EXL_CSKANRYO.DAY09 IS NOT NULL "
-            'strSQL = strSQL & "AND T_EXL_CSKANRYO.DAY11 = '" & Format(dt1, "yyyy/MM/dd") & "'"
-
-
-
-            ''ＳＱＬコマンド作成
-            'dbcmd = New SqlCommand(strSQL, cnn)
-            ''ＳＱＬ文実行
-            'dataread = dbcmd.ExecuteReader()
-
-            ''結果を取り出す
-            'While (dataread.Read())
-            '    la01 = la01 & " / " & dataread("C")
+            '    strbkg += dataread("BKGNO")
+            '    '書類作成状況
+            '    If Trim(GridView2.Rows(I).Cells(16).Text) = Trim(strbkg) And strbkg <> "&nbsp;" Then
+            '        Call syorui(Trim(GridView2.Rows(I).Cells(16).Text))
+            '    End If
             'End While
 
             ''クローズ処理
             'dataread.Close()
             'dbcmd.Dispose()
 
-            'Label6.Text = la01 & " コンテナ"
+
+
 
             Dim dltButton As Button = GridView2.Rows(I).FindControl("Button1")
             Dim dltButton2 As Button = GridView2.Rows(I).FindControl("Button2")
 
-            If dltlabel2.Text <> "〇" Then
-                dltButton2.Visible = False
-                ''GridView1.Rows(I).Cells(4).Text = "-"
-            Else
-                dltButton2.Visible = True
-            End If
+            'If dltlabel2.Text <> "〇" Then
+            '    dltButton2.Visible = False
+            'Else
+            '    dltButton2.Visible = True
+            'End If
 
 
             Dim ckfl00 As String = ""
@@ -3299,62 +3267,58 @@ Partial Class yuusen
             Dim ckfl02 As String = ""
             Dim ckfl03 As String = ""
 
-            'ボタンが存在する場合のみセット
-            If dltcb01.Visible = True Then
-                If dltcb01.Checked = True Then
-                    ckfl00 = ""
-                Else
-                    ckfl00 = "KD"
-                End If
-            End If
-            'ボタンが存在する場合のみセット
-            If dltcb02.Visible = True Then
-                If dltcb02.Checked = True Then
-                    ckfl00 = ""
-                Else
-                    ckfl01 = "AM"
-                End If
-            End If
+            ''ボタンが存在する場合のみセット
+            'If dltcb01.Visible = True Then
+            '    If dltcb01.Checked = True Then
+            '        ckfl00 = ""
+            '    Else
+            '        ckfl00 = "KD"
+            '    End If
+            'End If
+            ''ボタンが存在する場合のみセット
+            'If dltcb02.Visible = True Then
+            '    If dltcb02.Checked = True Then
+            '        ckfl00 = ""
+            '    Else
+            '        ckfl01 = "AM"
+            '    End If
+            'End If
 
-            If dltlabel1.Text = "〇" Then
-                dltButton.Attributes.Add("onclick", "return confirm('完了報告を解除しますか？');")
-            Else
-                If ckfl00 = "KD" And ckfl01 = "AM" Then
-                    dltButton.Attributes.Add("onclick", "return confirm('KD、ｱﾌﾀどちらもチェックがありませんが処理を進めますか？\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
-                ElseIf ckfl00 = "KD" And ckfl01 = "" Then
-                    dltButton.Attributes.Add("onclick", "return confirm('KDにチェックがありませんが処理を進めますか？\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
-                ElseIf ckfl00 = "" And ckfl01 = "AM" Then
-                    dltButton.Attributes.Add("onclick", "return confirm('ｱﾌﾀにチェックがありませんが処理を進めますか？\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
-                Else
-                    dltButton.Attributes.Add("onclick", "return confirm('チェックボックス確認\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
-                End If
-            End If
+            'If dltlabel1.Text = "〇" Then
+            '    dltButton.Attributes.Add("onclick", "return confirm('完了報告を解除しますか？');")
+            'Else
+            '    If ckfl00 = "KD" And ckfl01 = "AM" Then
+            '        dltButton.Attributes.Add("onclick", "return confirm('KD、ｱﾌﾀどちらもチェックがありませんが処理を進めますか？\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
+            '    ElseIf ckfl00 = "KD" And ckfl01 = "" Then
+            '        dltButton.Attributes.Add("onclick", "return confirm('KDにチェックがありませんが処理を進めますか？\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
+            '    ElseIf ckfl00 = "" And ckfl01 = "AM" Then
+            '        dltButton.Attributes.Add("onclick", "return confirm('ｱﾌﾀにチェックがありませんが処理を進めますか？\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
+            '    Else
+            '        dltButton.Attributes.Add("onclick", "return confirm('チェックボックス確認\r\n※ｱﾌﾀ、KD混載時は注意してください。');")
+            '    End If
+            'End If
 
-            If GridView2.Rows(I).Cells(29).Text = "1" Then
-                dltlabel1.Text = "最終"
-            Else
-                dltlabel1.Text = "途中"
-            End If
+            'If GridView2.Rows(I).Cells(29).Text = "1" Then
+            '    dltlabel1.Text = "最終"
+            'Else
+            '    dltlabel1.Text = "途中"
+            'End If
 
-            'ボタンが存在する場合のみセット
-            If Not (dltButton Is Nothing) Then
-                dltButton.CommandArgument = GridView2.Rows(I).RowIndex.ToString()
-                dltButton.Dispose()
-            End If
-            'ボタンが存在する場合のみセット
-            If Not (dltButton2 Is Nothing) Then
-                dltButton2.CommandArgument = GridView2.Rows(I).RowIndex.ToString()
-                dltButton2.Dispose()
-            End If
-
-
+            ''ボタンが存在する場合のみセット
+            'If Not (dltButton Is Nothing) Then
+            '    dltButton.CommandArgument = GridView2.Rows(I).RowIndex.ToString()
+            '    dltButton.Dispose()
+            'End If
+            ''ボタンが存在する場合のみセット
+            'If Not (dltButton2 Is Nothing) Then
+            '    dltButton2.CommandArgument = GridView2.Rows(I).RowIndex.ToString()
+            '    dltButton2.Dispose()
+            'End If
 
             dltlabel1.Dispose()
             dltlabel2.Dispose()
 
         Next
-
-
 
         Dim strDate As String = ""
 
@@ -3397,15 +3361,8 @@ Partial Class yuusen
 
         End If
 
-
-
-
-
-
         cnn.Close()
         cnn.Dispose()
-
-
     End Sub
 
     Private Sub reg_check(bkgno As String, A As String, b As String)
@@ -3582,7 +3539,6 @@ Partial Class yuusen
                 strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
                 strSQL = strSQL & "AND T_EXL_WORKSTATUS00.ID = '006' "
             Else
-
                 strSQL = ""
                 strSQL = strSQL & "INSERT INTO T_EXL_WORKSTATUS00 VALUES("
                 strSQL = strSQL & " '006' "
@@ -6998,6 +6954,8 @@ Partial Class yuusen
 
         Dim strto As String = GET_ToAddress("10", 1)
 
+        'Dim strFilePath As String = "C:\exp\cs_home\upload\" & Session("strFile")
+
         If strto = "" Then
             Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('宛先が設定されていないためメール送信に失敗しました。');</script>", False)
             Exit Sub
@@ -7089,13 +7047,16 @@ Partial Class yuusen
         body = body & t
 
 
-        body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+        body = "<font size= '3' face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
         Dim body2 As String = "<br><br>備考－－－－－－－－－－－－－－</p>" & TextBox1.Text.Replace(vbCrLf, "<br/>") & "</p>" ' UriBodyC()
 
         body2 = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body2 & "</font>"
+        body2 = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body2 & "</font>"
 
         body = body & body2
+
+        TextBox1.Text = ""
 
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
@@ -7133,6 +7094,21 @@ Partial Class yuusen
         multipart.Add(textPart)
 
         message.Body = multipart
+
+
+        ''添付ファイル
+        'If Session("strFile") <> "" Then
+        '    Dim path = strFilePath     '添付したいファイル
+        '    Dim mimeType = MimeKit.MimeTypes.GetMimeType(path)
+        '    Dim attachment = New MimeKit.MimePart(mimeType) _
+        '    With {
+        '        .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
+        '        .ContentDisposition = New MimeKit.ContentDisposition(),
+        '        .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
+        '        .FileName = System.IO.Path.GetFileName(path)
+        '    }
+        '    multipart.Add(attachment)
+        'End If
 
         Using client As New MailKit.Net.Smtp.SmtpClient()
             client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
@@ -8235,6 +8211,7 @@ Partial Class yuusen
 
         Return dt
     End Function
+
 End Class
 
 
