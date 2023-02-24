@@ -424,6 +424,12 @@ Partial Class yuusen
             'ボタンが存在する場合のみセット
             If Not (dltButton3 Is Nothing) Then
                 dltButton3.CommandArgument = e.Row.RowIndex.ToString()
+
+                If dltlabel2.Text = "〇" Then
+                Else
+                    dltButton3.Visible = False
+                End If
+
             End If
             'ボタンが存在する場合のみセット
             If Not (dltButton6 Is Nothing) Then
@@ -433,23 +439,23 @@ Partial Class yuusen
             If Not (dltButton4 Is Nothing) Then
                     dltButton4.CommandArgument = e.Row.RowIndex.ToString()
 
-                    If fflg = "" Then
-                        dltButton4.Text = "更新"
-                    Else
-                        dltButton4.Text = "戻す"
-                    End If
+                If fflg = "" Then
+                    dltButton4.Text = "更新"
+                Else
+                    dltButton4.Text = "戻す"
                 End If
-                If Not (dltButton5 Is Nothing) Then
-                    dltButton5.CommandArgument = e.Row.RowIndex.ToString()
-                    If e.Row.Cells(28).Text = "1" Then
-                    Else
-                        dltButton5.Visible = False
-                    End If
-
+            End If
+            If Not (dltButton5 Is Nothing) Then
+                dltButton5.CommandArgument = e.Row.RowIndex.ToString()
+                If e.Row.Cells(28).Text = "1" Then
+                Else
+                    dltButton5.Visible = False
                 End If
 
+            End If
 
-                Dim dltcb01 As CheckBox = e.Row.FindControl("cb01")
+
+            Dim dltcb01 As CheckBox = e.Row.FindControl("cb01")
                 Dim dltcb02 As CheckBox = e.Row.FindControl("cb02")
 
                 'ボタンが存在する場合のみセット
@@ -1834,6 +1840,7 @@ Partial Class yuusen
             Dim FLGval As Long
             Dim a As Long
             Dim cflg As Long
+            Dim cntnum As Long
 
             FLGval = 0
 
@@ -1844,6 +1851,7 @@ Partial Class yuusen
             ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
             'SqlConnectionクラスの新しいインスタンスを初期化
             Dim cnn = New SqlConnection(ConnectionString)
+
 
             Dim dt1 As DateTime = DateTime.Now
 
@@ -1860,6 +1868,32 @@ Partial Class yuusen
                 data9 = "0"
             Else
                 data9 = "1"
+
+                strSQL = "SELECT count(T_EXL_CSKANRYO.BOOKING_NO) as cnt01 "
+                strSQL = strSQL & "FROM T_EXL_CSKANRYO "
+                strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+                strSQL = strSQL & "AND DAY10 = '1' "
+
+                'ＳＱＬコマンド作成 
+                dbcmd = New SqlCommand(strSQL, cnn)
+                'ＳＱＬ文実行 
+                dataread = dbcmd.ExecuteReader()
+
+
+                '結果を取り出す 
+                While (dataread.Read())
+                    'インボイス番号をキーにデータを更新
+                    cntnum = dataread("cnt01")
+                End While
+
+                'クローズ処理 
+                dataread.Close()
+                dbcmd.Dispose()
+
+                If cntnum > 0 Then
+                    data9 = "0"
+                End If
+
             End If
 
             strSQL = ""
@@ -1874,13 +1908,18 @@ Partial Class yuusen
             cnn.Close()
             cnn.Dispose()
 
-            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('最終⇔途中を変更します。');</script>", False)
+            If cntnum > 0 Then
+                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('既に最終データが存在するため処理を中止します。');</script>", False)
+            Else
+                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('最終⇔途中を変更します。');</script>", False)
+            End If
+
             Command.Dispose()
 
-        End If
+            End If
 
-        'Grid再表示
-        GridView1.DataBind()
+            'Grid再表示
+            GridView1.DataBind()
 
     End Sub
 

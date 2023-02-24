@@ -240,7 +240,7 @@
             <tr>
                 <th>最終バン</th>
                 <td>
-                    <asp:DropDownList ID="DropDownList3" runat="server" Width="40px" Height="30px"  CssClass="DropDown" Font-Size="13px" AutoPostBack="True">
+                    <asp:DropDownList ID="DropDownList3" runat="server" Width="40px" Height="30px"  CssClass="DropDown" Font-Size="13px" >
                     <asp:ListItem Text="0" Value="0" />
                     <asp:ListItem Text="1" Value="1" />
                     </asp:DropDownList>     
