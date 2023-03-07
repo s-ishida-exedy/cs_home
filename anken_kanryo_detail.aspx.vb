@@ -72,6 +72,7 @@ Partial Class cs_home
             dataread.Close()
             dbcmd.Dispose()
 
+            TextBox13.Text = Now().ToString("yyyy-MM-dd")
 
             strSQL = ""
             strSQL = strSQL & "SELECT count(T_EXL_CSKANRYO.BOOKING_NO) as cnt "
@@ -151,12 +152,13 @@ Partial Class cs_home
                 End If
             End If
 
-                If DropDownList3.SelectedValue = "1" And kcnt00 > 0 Then
+            If DropDownList3.SelectedValue = "1" And kcnt00 > 0 Then
                 '追加無し　レコード数がコンテナ本数以上の場合
                 ecnt02 = 1
                 DropDownList3.SelectedValue = "0"
             Else
             End If
+
 
 
             If ecnt01 = 1 And ecnt02 = 0 Then '
@@ -262,6 +264,8 @@ Partial Class cs_home
         Dim kcnt00 As Long
         Dim kcnt01 As Long
         Dim kcnt02 As Long
+
+        Dim strvdt As String
 
 
         strSQL = ""
@@ -432,6 +436,37 @@ Partial Class cs_home
         dataread.Close()
         dbcmd.Dispose()
 
+
+
+        'strSQL = ""
+        'strSQL = strSQL & "SELECT MIN(T_EXL_VAN_SCH_DETAIL.VAN_DATE) AS D "
+        'strSQL = strSQL & "FROM T_EXL_VAN_SCH_DETAIL "
+        'strSQL = strSQL & "WHERE T_EXL_VAN_SCH_DETAIL.IVNO LIKE '%" & Left(str00, 4) & "%' "
+
+
+        ''ＳＱＬコマンド作成 
+        'dbcmd = New SqlCommand(strSQL, cnn)
+        ''ＳＱＬ文実行 
+        'dataread = dbcmd.ExecuteReader()
+
+        'strvdt = ""
+        ''結果を取り出す 
+        'While (dataread.Read())
+        '    strvdt = dataread("D")
+        'End While
+
+        'If strvdt = "" Then
+        '    strvdt = Format(Now(), "yyyy/MM/dd")
+        'Else
+        'End If
+
+        ''クローズ処理 
+        'dataread.Close()
+        'dbcmd.Dispose()
+
+
+        strvdt = Replace(TextBox13.Text, "-", "/")
+
         flgka02 = ""
         flgka00 = "0"
         flgka01 = "0"
@@ -508,7 +543,7 @@ Partial Class cs_home
         strSQL = strSQL & ",'" & "" & "' "
         strSQL = strSQL & ",'" & val01 & "' "
         strSQL = strSQL & ",'" & str07 & "' "
-        strSQL = strSQL & ",'" & Format(Now(), "yyyy/MM/dd") & "' "
+        strSQL = strSQL & ",'" & strvdt & "' "
         strSQL = strSQL & ",'" & strvan & "' "
         strSQL = strSQL & ",'" & strbkg & "' "
         strSQL = strSQL & ",'" & "" & "' "

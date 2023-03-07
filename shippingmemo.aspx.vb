@@ -36,6 +36,12 @@ Partial Class yuusen
                 e.Row.BackColor = Drawing.Color.LightGreen
             End If
 
+
+            e.Row.Cells(16).Text = Double.Parse(e.Row.Cells(16).Text).ToString("#,0")
+            'e.Row.Cells(17).Text = Double.Parse(e.Row.Cells(17).Text).ToString("#,0")
+            e.Row.Cells(18).Text = Double.Parse(e.Row.Cells(18).Text).ToString("#,0")
+            e.Row.Cells(15).Text = Left(e.Row.Cells(15).Text, 10)
+
             'If IsPostBack = True Then
 
             If e.Row.Cells(25).Text = e.Row.Cells(14).Text Then
@@ -269,8 +275,8 @@ Partial Class yuusen
         cnn.Open()
 
 
-        strSQL = "SELECT T_INV_HD_TB.OLD_INVNO,T_INV_HD_TB.INVFROM,T_INV_HD_TB.INVON, T_INV_HD_TB.BLDATE, Sum(T_INV_BD_TB.KIN) AS KINの合計,T_INV_HD_TB.INVOICENO,T_INV_HD_TB.STAMP,T_INV_HD_TB.RATE,(Sum(T_INV_BD_TB.KIN) * T_INV_HD_TB.RATE) as JPY,T_INV_HD_TB.BOOKINGNO,T_INV_HD_TB.SHIPPEDPER,T_INV_HD_TB.SHIPBASE,T_INV_HD_TB.VOYAGENO "
-        strSQL = strSQL & "FROM T_INV_BD_TB RIGHT JOIN T_INV_HD_TB ON T_INV_BD_TB.INVOICENO = T_INV_HD_TB.INVOICENO "
+        strSQL = "Select T_INV_HD_TB.OLD_INVNO,T_INV_HD_TB.INVFROM,T_INV_HD_TB.INVON, T_INV_HD_TB.BLDATE, Sum(T_INV_BD_TB.KIN) As KINの合計,T_INV_HD_TB.INVOICENO,T_INV_HD_TB.STAMP,T_INV_HD_TB.RATE,(Sum(T_INV_BD_TB.KIN) * T_INV_HD_TB.RATE) As JPY,T_INV_HD_TB.BOOKINGNO,T_INV_HD_TB.SHIPPEDPER,T_INV_HD_TB.SHIPBASE,T_INV_HD_TB.VOYAGENO "
+        strSQL = strSQL & "FROM T_INV_BD_TB RIGHT JOIN T_INV_HD_TB On T_INV_BD_TB.INVOICENO = T_INV_HD_TB.INVOICENO "
         strSQL = strSQL & "WHERE "
         '    strSQL = strSQL & "T_INV_HD_TB.SALESFLG = '1' "
         '    strSQL = strSQL & "AND T_INV_HD_TB.BOOKINGNO is not null "

@@ -246,8 +246,9 @@
                     </asp:DropDownList>     
                     ←最終バンの場合は 1 を選択           
                 </td>
-                <td colspan ="2">
-
+                <th>バン日程</th>
+                <td>
+                    <asp:TextBox ID="TextBox13" runat="server" type="date" class="txtb"></asp:TextBox>
                 </td>
 
             </tr>

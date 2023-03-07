@@ -1285,7 +1285,7 @@ Partial Class cs_home
                         strSQL = strSQL & " '" & STRSTATUS & "' "
                         strSQL = strSQL & ",'" & STRFORWARDER & "' "
                         strSQL = strSQL & ",'" & STRFORWARDER02 & "' "
-                        strSQL = strSQL & ",'" & strcust & "' "
+                        strSQL = strSQL & ",'" & Replace(strcust, "','", "-") & "' "
                         strSQL = strSQL & ",'" & STRDESTINATION & "' "
                         strSQL = strSQL & ",'" & STRINVOICE & "' "
                         strSQL = strSQL & ",'" & STRCUT_DATE & "' "
@@ -1301,8 +1301,8 @@ Partial Class cs_home
                         strSQL = strSQL & ",'" & STRDAY04 & "' "
                         strSQL = strSQL & ",'" & STRDAY05 & "' "
                         strSQL = strSQL & ",'" & STRDAY06 & "' "
-                        strSQL = strSQL & ",'" & "' "
-                        strSQL = strSQL & ",'" & "' "
+                        strSQL = strSQL & ",'' "
+                        strSQL = strSQL & ",'' "
                         strSQL = strSQL & ",'" & val01 & "' "
                         strSQL = strSQL & ",'" & "1" & "' "
                         strSQL = strSQL & ",'" & strinv & "' " 'hikitori
@@ -1324,6 +1324,8 @@ Partial Class cs_home
                         strSQL = strSQL & ",'' "
 
                         strSQL = strSQL & ")"
+
+
 
 
                         Command.CommandText = strSQL

@@ -52,7 +52,7 @@ Partial Class yuusen
         Dim arrColor As String() = New String() {"#231F20", "#FFC200", "#F44937", "#16F27E", "#FC9775"}
 
         Using cn As SqlConnection = New SqlConnection("Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
-            Dim myQuery As String = "select DATE01,firfloor,trdfloor,fourfloor,ew,cap,ovrpallet from T_EXL_GRAPH_STOCK "
+            Dim myQuery As String = "select DATE01,firfloor,trdfloor,fourfloor,ew,cap,ovrpallet from T_EXL_GRAPH_STOCK OrDER BY DATE01 "
             Dim cmd As SqlCommand = New SqlCommand()
             cmd.CommandText = myQuery
             cmd.CommandType = CommandType.Text

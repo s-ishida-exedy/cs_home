@@ -33,6 +33,11 @@ Partial Class yuusen
                 e.Row.BackColor = Drawing.Color.LightGreen
             End If
 
+            e.Row.Cells(15).Text = Double.Parse(e.Row.Cells(15).Text).ToString("#,0")
+            'e.Row.Cells(17).Text = Double.Parse(e.Row.Cells(17).Text).ToString("#,0")
+            e.Row.Cells(17).Text = Double.Parse(e.Row.Cells(17).Text).ToString("#,0")
+            e.Row.Cells(14).Text = Left(e.Row.Cells(14).Text, 10)
+
             If e.Row.Cells(8).Text = "" Or e.Row.Cells(8).Text = "&nbsp;" Then
                 Call GET_IVDATA(Trim(e.Row.Cells(12).Text), Trim(e.Row.Cells(2).Text), e.Row.Cells(3).Text)
             End If
