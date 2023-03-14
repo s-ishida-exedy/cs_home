@@ -93,6 +93,11 @@ Partial Class yuusen
                 e.Row.Cells(11).Font.Size = 7.5
             End If
 
+            'IVNO
+            If Len(e.Row.Cells(9).Text) > 8 Then
+                e.Row.Cells(9).Font.Size = 7.5
+            End If
+
             '船名
             If Len(e.Row.Cells(17).Text) > 19 Then
                 e.Row.Cells(17).Font.Size = 7.5
@@ -4322,7 +4327,7 @@ Partial Class yuusen
             strcst = Trim(Convert.ToString(dataread("CUSTCODE")))        '客先目
             Call check002(strinv, bkgno, eflg, strcst)
             Call check004(strinv, bkgno, eflg, strcst)
-
+            Call check003(strinv, bkgno, eflg, strcst)
         End While
 
         'クローズ処理 
@@ -4492,85 +4497,110 @@ Partial Class yuusen
 
     End Sub
 
-
-    'Private Sub check003(Strcn As String, strcst As String)
-    '    'データの取得
-
-
-    '    Dim dataread As SqlDataReader
-    '    Dim dbcmd As SqlCommand
-    '    Dim strSQL As String = ""
-    '    Dim strDate As String = ""
-    '    Dim h01 As String = ""
-    '    Dim h02 As String = ""
-    '    Dim h03 As String = ""
+    Private Sub check003(strinv As String, bkgno As String, eflg As Long, strcst As String)
+        'データの取得
 
 
-    '    '接続文字列の作成
-    '    Dim ConnectionString As String = String.Empty
-    '    'SQL Server認証
-    '    ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
-    '    'SqlConnectionクラスの新しいインスタンスを初期化
-    '    Dim cnn = New SqlConnection(ConnectionString)
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String = ""
+        Dim h01 As String = ""
+        Dim h02 As String = ""
+        Dim h03 As String = ""
+        Dim Strcn As String = ""
 
-    '    Dim dt1 As DateTime = DateTime.Now
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
 
-    '    Dim ts1 As New TimeSpan(100, 0, 0, 0)
-    '    Dim ts2 As New TimeSpan(100, 0, 0, 0)
-    '    Dim dt2 As DateTime = dt1 + ts1
-    '    Dim dt3 As DateTime = dt1 - ts1
-
-    '    'データベース接続を開く
-    '    cnn.Open()
-
-    '    strSQL = "SELECT T_INV_HD_TB.CRYCD,IIf(T_INV_HD_TB.CRYCD=T_SN_HD_TB.CRYCD,'1','2') AS AAA,IIf(T_INV_HD_TB.TATENECD=T_SN_HD_TB.TATENECD,'1','2') AS BBB ,IIf(T_INV_HD_TB.RATE=T_SN_HD_TB.RATE,'1','2') AS CCC,T_INV_HD_TB.CONSIGNEENAME,T_INV_HD_TB.CONSIGNEEADDRESS "
-    '    strSQL = strSQL & "FROM (T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO) LEFT JOIN T_SN_HD_TB ON T_INV_BD_TB.SNNO = T_SN_HD_TB.SALESNOTENO "
-    '    strSQL = strSQL & "WHERE T_INV_BD_TB.EXDNO <> 'INTEREST' "
-
-
-    '    'INVOICENOが最大のものを取得
-    '    strSQL = strSQL & "AND T_INV_HD_TB.INVOICENO = "
-    '    strSQL = strSQL & "(SELECT MAX(T_INV_HD_TB.INVOICENO) AS IVNO "
-    '    strSQL = strSQL & "FROM T_INV_HD_TB "
-    '    strSQL = strSQL & "WHERE T_INV_HD_TB.HEADTITLE Like 'INVOICE%' "
-    '    strSQL = strSQL & "AND T_INV_HD_TB.OLD_INVNO = '" & strinv & "' "
-    '    strSQL = strSQL & "AND T_INV_HD_TB.BOOKINGNO = '" & bkgno & "' "
-    '    strSQL = strSQL & "AND T_INV_HD_TB.ORG_INVOICENO IS NULL "
-    '    strSQL = strSQL & ") "
-
-    '    strSQL = strSQL & "GROUP BY T_INV_HD_TB.CRYCD,IIf(T_INV_HD_TB.CRYCD=T_SN_HD_TB.CRYCD,'1','2'),IIf(T_INV_HD_TB.TATENECD=T_SN_HD_TB.TATENECD,'1','2'),IIf(T_INV_HD_TB.RATE=T_SN_HD_TB.RATE,'1','2') ,T_INV_HD_TB.CONSIGNEENAME,T_INV_HD_TB.CONSIGNEEADDRESS  "
-    '    strSQL = strSQL & "ORDER BY IIf(T_INV_HD_TB.CRYCD=T_SN_HD_TB.CRYCD,'1','2'),IIf(T_INV_HD_TB.TATENECD=T_SN_HD_TB.TATENECD,'1','2'),IIf(T_INV_HD_TB.RATE=T_SN_HD_TB.RATE,'1','2') DESC  "
+        '接続文字列の作成
+        Dim ConnectionString2 As String = String.Empty
+        'SQL Server認証
+        ConnectionString2 = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn2 = New SqlConnection(ConnectionString2)
+        Dim Command = cnn2.CreateCommand
 
 
+        Dim errlrmsg01 As String
 
-    '    'ＳＱＬコマンド作成 
-    '    dbcmd = New SqlCommand(strSQL, cnn)
-    '    'ＳＱＬ文実行 
-    '    dataread = dbcmd.ExecuteReader()
+        Dim dt1 As DateTime = DateTime.Now
 
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
 
-    '    '結果を取り出す 
-    '    While (dataread.Read())
+        'データベース接続を開く
+        cnn.Open()
+        cnn2.Open()
 
-    '        h01 = Trim(Convert.ToString(dataread("AAA")))        '客先目
-    '        h02 = Trim(Convert.ToString(dataread("BBB")))        '客先目
-    '        h03 = Trim(Convert.ToString(dataread("CCC")))        '客先目
-
-    '        Strcn = Trim(Convert.ToString(dataread("CONSIGNEENAME"))) & Trim(Convert.ToString(dataread("CONSIGNEEADDRESS")))
-    '        'tuika
-
-
-    '    End While
-
-    '    'クローズ処理 
-    '    dataread.Close()
-    '    dbcmd.Dispose()
-    '    cnn.Close()
-    '    cnn.Dispose()
+        strSQL = "SELECT COUNT(T_INV_HD_TB.INVOICENO) AS CNT "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+        strSQL = strSQL & "WHERE T_INV_HD_TB.INVOICENO = "
+        strSQL = strSQL & "(SELECT MAX(T_INV_HD_TB.INVOICENO) AS IVNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+        strSQL = strSQL & "WHERE T_INV_HD_TB.HEADTITLE Like 'INVOICE%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.OLD_INVNO = '" & strinv & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.BOOKINGNO = '" & bkgno & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.ORG_INVOICENO IS NULL "
+        strSQL = strSQL & ") "
+        strSQL = strSQL & "AND T_INV_HD_TB.ALLOUTSTAMP IS NULL "
 
 
 
-    'End Sub
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+
+        '結果を取り出す 
+        While (dataread.Read())
+            h01 = Trim(Convert.ToString(dataread("CNT")))        '客先目
+        End While
+
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        If h01 = 0 Then
+
+            errlrmsg01 = "一括処理解除と作成済み書類削除が必要"
+
+            'エラー内容登録
+            strSQL = ""
+            strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
+            strSQL = strSQL & " '" & strinv & "', "
+            strSQL = strSQL & " '" & bkgno & "', "
+            strSQL = strSQL & " '" & errlrmsg01 & "', "
+            strSQL = strSQL & " '書類作成済み', "
+            strSQL = strSQL & " '', "
+            strSQL = strSQL & " '', "
+            strSQL = strSQL & " '', "
+            strSQL = strSQL & " '' "
+            strSQL = strSQL & ") "
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+        Else
+        End If
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+
+
+    End Sub
 
 
     Private Sub check004(strinv As String, bkgno As String, eflg As Long, strcst As String)
@@ -6343,20 +6373,20 @@ Partial Class yuusen
         While (dataread.Read())
 
 
-            str計上日01 = Convert.ToString(dataread("ETD"))
-            str積出港01 = Convert.ToString(dataread("LOADING_PORT"))
-            str揚地01 = Convert.ToString(dataread("DISCHARGING_PORT"))
-            str配送先01 = Convert.ToString(dataread("PLACE_OF_DELIVERY"))
-            str荷受地01 = Convert.ToString(dataread("PLACE_OF_RECEIPT"))
+            str計上日01 = Trim(Convert.ToString(dataread("ETD")))
+            str積出港01 = Trim(Convert.ToString(dataread("LOADING_PORT")))
+            str揚地01 = Trim(Convert.ToString(dataread("DISCHARGING_PORT")))
+            str配送先01 = Trim(Convert.ToString(dataread("PLACE_OF_DELIVERY")))
+            str荷受地01 = Trim(Convert.ToString(dataread("PLACE_OF_RECEIPT")))
             str配送先責任送り先01 = ""
-            strカット日01 = Convert.ToString(dataread("CUT_DATE"))
-            str到着日01 = Convert.ToString(dataread("ETA"))
-            str入出港日01 = Convert.ToString(dataread("ETD"))
+            strカット日01 = Trim(Convert.ToString(dataread("CUT_DATE")))
+            str到着日01 = Trim(Convert.ToString(dataread("ETA")))
+            str入出港日01 = Trim(Convert.ToString(dataread("ETD")))
             str出荷方法01 = ""
-            strVOYAGENo01 = Convert.ToString(dataread("VOYAGE_NO"))
-            str船社01 = Convert.ToString(dataread("BOOK_TO"))
-            strブッキングNo01 = Convert.ToString(dataread("BOOKING_NO"))
-            str船名01 = Convert.ToString(dataread("VESSEL_NAME"))
+            strVOYAGENo01 = Trim(Convert.ToString(dataread("VOYAGE_NO")))
+            str船社01 = Trim(Convert.ToString(dataread("BOOK_TO")))
+            strブッキングNo01 = Trim(Convert.ToString(dataread("BOOKING_NO")))
+            str船名01 = Trim(Convert.ToString(dataread("VESSEL_NAME")))
 
 
 
@@ -6714,29 +6744,29 @@ Partial Class yuusen
 
 
 
-            str計上日02 = Left(Convert.ToString(dataread("BLDATE")), 10)
+            str計上日02 = Trim(Left(Convert.ToString(dataread("BLDATE")), 10))
 
-            str積出港02 = Convert.ToString(dataread("INVFROM"))
-            str揚地02 = Convert.ToString(dataread("VIA"))
-            str配送先02 = Convert.ToString(dataread("INVTO"))
-            str荷受地02 = Convert.ToString(dataread("INVON"))
+            str積出港02 = Trim(Convert.ToString(dataread("INVFROM")))
+            str揚地02 = Trim(Convert.ToString(dataread("VIA")))
+            str配送先02 = Trim(Convert.ToString(dataread("INVTO")))
+            str荷受地02 = Trim(Convert.ToString(dataread("INVON")))
             str配送先責任送り先02 = ""
-            strカット日02 = Left(Convert.ToString(dataread("CUTDATE")), 10)
-            str到着日02 = Left(Convert.ToString(dataread("REACHDATE")), 10)
-            str入出港日02 = Left(Convert.ToString(dataread("IOPORTDATE")), 10)
+            strカット日02 = Trim(Left(Convert.ToString(dataread("CUTDATE")), 10))
+            str到着日02 = Trim(Left(Convert.ToString(dataread("REACHDATE")), 10))
+            str入出港日02 = Trim(Left(Convert.ToString(dataread("IOPORTDATE")), 10))
             str出荷方法02 = ""
-            strVOYAGENo02 = Convert.ToString(dataread("VOYAGENO"))
-            str船社02 = Convert.ToString(dataread("SHIPPER"))
-            strブッキングNo02 = Convert.ToString(dataread("BOOKINGNO"))
-            str船名02 = Convert.ToString(dataread("SHIPPEDPER"))
-            str客コード02 = Convert.ToString(dataread("CUSTCODE"))
+            strVOYAGENo02 = Trim(Convert.ToString(dataread("VOYAGENO")))
+            str船社02 = Trim(Convert.ToString(dataread("SHIPPER")))
+            strブッキングNo02 = Trim(Convert.ToString(dataread("BOOKINGNO")))
+            str船名02 = Trim(Convert.ToString(dataread("SHIPPEDPER")))
+            str客コード02 = Trim(Convert.ToString(dataread("CUSTCODE")))
 
-            strFINALDN02 = Convert.ToString(dataread("DELIVERTONAME"))
-            strFINALDA02 = Convert.ToString(dataread("DELIVERTOADDRESS"))
-            strCNEESIN02 = Convert.ToString(dataread("CONSIGNEESINAME"))
-            strCNEESIA02 = Convert.ToString(dataread("CONSIGNEESIADDRESS"))
+            strFINALDN02 = Trim(Convert.ToString(dataread("DELIVERTONAME")))
+            strFINALDA02 = Trim(Convert.ToString(dataread("DELIVERTOADDRESS")))
+            strCNEESIN02 = Trim(Convert.ToString(dataread("CONSIGNEESINAME")))
+            strCNEESIA02 = Trim(Convert.ToString(dataread("CONSIGNEESIADDRESS")))
             '    strPODSI02 = Trim(fld("PLACEDELIVERSI"))
-            strNOTYSI02 = Convert.ToString(dataread("NOTIFYADDRESS"))
+            strNOTYSI02 = Trim(Convert.ToString(dataread("NOTIFYADDRESS")))
 
 
             getflg02 = 1
@@ -6804,11 +6834,11 @@ Partial Class yuusen
 
 
 
-            strCNEESIN01 = Convert.ToString(dataread("CONSIGNEE_OF_SI"))
-            strCNEESIA01 = Convert.ToString(dataread("CONSIGNEE_OF_SI_ADDRESS"))
-            strFINALDN01 = Convert.ToString(dataread("FINAL_DES"))
-            strFINALDA01 = Convert.ToString(dataread("FINAL_DES_ADDRESS"))
-            strNOTYSI01 = Convert.ToString(dataread("NOTIFY"))
+            strCNEESIN01 = Trim(Convert.ToString(dataread("CONSIGNEE_OF_SI")))
+            strCNEESIA01 = Trim(Convert.ToString(dataread("CONSIGNEE_OF_SI_ADDRESS")))
+            strFINALDN01 = Trim(Convert.ToString(dataread("FINAL_DES")))
+            strFINALDA01 = Trim(Convert.ToString(dataread("FINAL_DES_ADDRESS")))
+            strNOTYSI01 = Trim(Convert.ToString(dataread("NOTIFY")))
 
             del = """" ' 半角スペース
 
@@ -6983,6 +7013,8 @@ Partial Class yuusen
         Dim strcon As String
         Dim stritk As String
 
+        Dim ls7 As String = ""
+
         Dim plt As Long
         Dim qty As Long
 
@@ -7036,6 +7068,18 @@ Partial Class yuusen
 
         End If
 
+        If e Like "*M3*" Then
+
+            bodyitk = "＜委託案件です＞"
+            bodyitk = "<font style=" & Chr(34) & "background-color: Yellow" & Chr(34) & ">" & bodyitk & "</font>"
+            bodyitk = "<font style=" & Chr(34) & "color: Black" & Chr(34) & ">" & bodyitk & "</font>"
+            bodyitk = "<b><font size=" & Chr(34) & "3" & Chr(34) & ">" & bodyitk & "</font></b><br/>"
+            body = body + bodyitk
+        Else
+
+            stritk = ""
+
+        End If
 
         If stritk = "0" Then
             stritk = ""
@@ -7074,7 +7118,13 @@ Partial Class yuusen
 
         t = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;text-align: center;'><tr style='background-color: #6fbfd1;'><td>IVNO</td><td>通貨</td><td>レート</td><td>客先</td><td>LS7.9</td><td>LS7.9品名</td><td>木材</td><td>パッケージ数</td><td>数量</td></tr>"
 
-        Call IVINFO(bkgno, t, plt, qty)
+        Call IVINFO(bkgno, t, plt, qty, ls7)
+
+        If ls7 = "1" Then
+            If stritk = "" Then
+                subject = "★委託漏れしていませんか？★" & subject
+            End If
+        End If
 
         t = t & "<tr style ='background-color: #6fbfd1;'><td colspan='7' style='text-align: center;'>合計</td><td>" & plt & "</td><td>" & Format(qty, "#,0") & "</td></tr>"
 
@@ -7167,6 +7217,8 @@ Partial Class yuusen
         Dim strcon As String
         Dim stritk As String
 
+        Dim ls7 As String = ""
+
         Dim plt As Long
         Dim qty As Long
 
@@ -7211,6 +7263,7 @@ Partial Class yuusen
         End If
 
 
+
         If stritk = "0" Then
             stritk = ""
         Else
@@ -7247,7 +7300,14 @@ Partial Class yuusen
 
         t = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;'><tr style='background-color: #6fbfd1;'><td>IVNO</td><td>通貨</td><td>レート</td><td>客先</td><td>LS7.9</td><td>LS7.9品名</td><td>木材</td><td>パッケージ数</td><td>数量</td></tr>"
 
-        Call IVINFO(bkgno, t, plt, qty)
+        Call IVINFO(bkgno, t, plt, qty, ls7)
+
+
+        If ls7 = "1" Then
+            If stritk = "" Then
+                subject = "★委託漏れしていませんか？★" & subject
+            End If
+        End If
 
         t = t & "<tr style ='background-color: #6fbfd1;'><td colspan='7' style='text-align: center;'>合計</td><td>" & plt & "</td><td>" & Format(qty, "#,0") & "</td></tr>"
 
@@ -7564,7 +7624,7 @@ Partial Class yuusen
 
     End Function
 
-    Private Sub IVINFO(bkgno As String, ByRef t As String, ByRef plt As Long, ByRef qty As Long)
+    Private Sub IVINFO(bkgno As String, ByRef t As String, ByRef plt As Long, ByRef qty As Long, ByRef ls7 As String)
         'データの取得
 
 
@@ -7621,7 +7681,7 @@ Partial Class yuusen
         '結果を取り出す 
         While (dataread.Read())
             strinv = Trim(Convert.ToString(dataread("OLD_INVNO")))        '客先目
-            Call IVINFO2(bkgno, strinv, y)
+            Call IVINFO2(bkgno, strinv, y, ls7)
             Call IVINFO3(bkgno, strinv, y, plt)
             Call IVINFO4(bkgno, strinv, y, qty)
             strcst = Trim(Convert.ToString(dataread("CUSTCODE")))        '客先目
@@ -7643,7 +7703,7 @@ Partial Class yuusen
 
     End Sub
 
-    Private Sub IVINFO2(bkgno As String, IVNO As String, ByRef t As String)
+    Private Sub IVINFO2(bkgno As String, IVNO As String, ByRef t As String, ByRef ls7 As String)
         'データの取得
 
 
@@ -7690,6 +7750,16 @@ Partial Class yuusen
         'strSQL = strSQL & "AND Sum(T_INV_BD_TB.KIN) >= 1 "
         strSQL = strSQL & "AND T_INV_HD_TB.HEADTITLE like 'INVOICE%' "
 
+        'INVOICENOが最大のものを取得
+        strSQL = strSQL & "AND T_INV_HD_TB.INVOICENO = "
+        strSQL = strSQL & "(SELECT MAX(T_INV_HD_TB.INVOICENO) AS IVNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+        strSQL = strSQL & "WHERE T_INV_HD_TB.HEADTITLE Like 'INVOICE%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.OLD_INVNO like '%" & IVNO & "%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.BOOKINGNO like '%" & bkgno & "%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.ORG_INVOICENO IS NULL "
+        strSQL = strSQL & ") "
 
 
         'ＳＱＬコマンド作成 
@@ -7703,9 +7773,17 @@ Partial Class yuusen
 
             If tt = 0 Then
                 strinv = Trim(Convert.ToString(dataread("LS")))        '客先目
+                If Trim(Convert.ToString(dataread("LS"))) = "7" Or Trim(Convert.ToString(dataread("LS"))) = "9" Then
+                    ls7 = "1"
+                End If
+
                 strcst = Trim(Convert.ToString(dataread("PRODNAME"))) & " / " & Trim(Convert.ToString(dataread("REMARK")))      '客先目
             Else
                 strinv = strinv & "<br>" & Trim(Convert.ToString(dataread("LS")))        '客先目
+                If Trim(Convert.ToString(dataread("LS"))) = "7" Or Trim(Convert.ToString(dataread("LS"))) = "9" Then
+                    ls7 = "1"
+                End If
+
                 strcst = strcst & "<br>" & Trim(Convert.ToString(dataread("PRODNAME"))) & " / " & Trim(Convert.ToString(dataread("REMARK")))      '客先目
             End If
 
@@ -7775,7 +7853,26 @@ Partial Class yuusen
         strSQL = strSQL & "AND old_invno = '" & IVNO & "' "
         strSQL = strSQL & "AND BOOKINGNO like '%" & bkgno & "%' "
         strSQL = strSQL & "AND BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+
+
+        'INVOICENOが最大のものを取得
+        strSQL = strSQL & "AND INVOICENO = "
+        strSQL = strSQL & "(SELECT MAX(INVOICENO) AS IVNO "
+        strSQL = strSQL & "FROM T_INV_PDF_VIEW "
+        strSQL = strSQL & "WHERE HEADTITLE Like 'INVOICE%' "
+        strSQL = strSQL & "AND old_invno = '" & IVNO & "' "
+        strSQL = strSQL & "AND BOOKINGNO like '%" & bkgno & "%' "
+        strSQL = strSQL & ") "
+
         strSQL = strSQL & "group by CASENO,PACKNAME,PACKPLURAL,PLNO) b "
+
+
+
+
+
+
+
+
 
 
 
@@ -7850,9 +7947,25 @@ Partial Class yuusen
         strSQL = strSQL & "AND old_invno = '" & IVNO & "' "
         strSQL = strSQL & "AND BOOKINGNO like '%" & bkgno & "%' "
         strSQL = strSQL & "AND BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+
+
+        'INVOICENOが最大のものを取得
+        strSQL = strSQL & "AND INVOICENO = "
+        strSQL = strSQL & "(SELECT MAX(INVOICENO) AS IVNO "
+        strSQL = strSQL & "FROM T_INV_PDF_VIEW "
+        strSQL = strSQL & "WHERE HEADTITLE Like 'INVOICE%' "
+        strSQL = strSQL & "AND old_invno = '" & IVNO & "' "
+        strSQL = strSQL & "AND BOOKINGNO like '%" & bkgno & "%' "
+        strSQL = strSQL & ") "
+
+
         strSQL = strSQL & "group by SINGULARNAME, PLURALNAME,CASENO,PACKNAME,PACKPLURAL,PLNO) b  "
         strSQL = strSQL & "group by b.SINGULARNAME,b.PLURALNAME "
         strSQL = strSQL & "order by b.SINGULARNAME Desc "
+
+
+
+
 
 
 
