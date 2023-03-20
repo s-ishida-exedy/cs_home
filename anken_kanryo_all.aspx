@@ -492,10 +492,13 @@
                         <asp:TemplateField ShowHeader="False" HeaderText="最終・途中">
                         <HeaderStyle Width="80px" />
                             <ItemTemplate>
-                                <asp:Button ID="Button6" runat="server" CausesValidation="false" CommandName="edt6" Text="変更" />
+                                <asp:Button ID="Button6"  runat="server" CausesValidation="false" CommandName="edt6" Text="変更" />
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
+
+
+
 
                         </Columns>
                         <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
@@ -517,7 +520,7 @@
                     <asp:Label ID="Label5" runat="server" Text="<備考記載欄>"></asp:Label>
                 </td>
                 <td style="width:1000px;Font-Size:12px;">
-<%--                    <input type="file" name="userfile" id="userfile00" accept=".xls,.xlsx,.xlsm" runat="server" />--%>
+                    <input type="file" name="userfile" id="userfile00" accept=".xls,.xlsx,.xlsm" runat="server" />
                 </td>
             </tr>
         </table>

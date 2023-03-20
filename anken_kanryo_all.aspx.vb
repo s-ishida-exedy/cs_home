@@ -88,6 +88,11 @@ Partial Class yuusen
                 e.Row.Cells(10).Font.Size = 7
             End If
 
+            '仕向地
+            If Len(e.Row.Cells(10).Text) >= 24 Then
+                e.Row.Cells(10).Text = Left(e.Row.Cells(10).Text, 24)
+            End If
+
             'IVNO
             If Len(e.Row.Cells(11).Text) > 19 Then
                 e.Row.Cells(11).Font.Size = 7.5
@@ -1905,21 +1910,22 @@ Partial Class yuusen
             strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
             strSQL = strSQL & "DAY10 = '" & data9 & "' "
             strSQL = strSQL & "WHERE DAY09 = '" & data8 & "' "
+            strSQL = strSQL & "AND BOOKING_NO = '" & data1 & "' "
 
             Command.CommandText = strSQL
             ' SQLの実行
             Command.ExecuteNonQuery()
 
             cnn.Close()
-            cnn.Dispose()
+                cnn.Dispose()
 
-            If cntnum > 0 Then
-                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('既に最終データが存在するため処理を中止します。');</script>", False)
-            Else
-                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('最終⇔途中を変更します。');</script>", False)
-            End If
+                If cntnum > 0 Then
+                    Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('既に最終データが存在するため処理を中止します。');</script>", False)
+                Else
+                    Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('最終⇔途中を変更します。');</script>", False)
+                End If
 
-            Command.Dispose()
+                Command.Dispose()
 
             End If
 
@@ -7075,22 +7081,23 @@ Partial Class yuusen
             bodyitk = "<font style=" & Chr(34) & "color: Black" & Chr(34) & ">" & bodyitk & "</font>"
             bodyitk = "<b><font size=" & Chr(34) & "3" & Chr(34) & ">" & bodyitk & "</font></b><br/>"
             body = body + bodyitk
+
+            stritk = "X"
+
         Else
-
-            stritk = ""
-
         End If
 
         If stritk = "0" Then
             stritk = ""
+        ElseIf stritk = "X" Then
         Else
-
-
             bodyitk = "＜委託案件です＞"
             bodyitk = "<font style=" & Chr(34) & "background-color: Yellow" & Chr(34) & ">" & bodyitk & "</font>"
             bodyitk = "<font style=" & Chr(34) & "color: Black" & Chr(34) & ">" & bodyitk & "</font>"
             bodyitk = "<b><font size=" & Chr(34) & "3" & Chr(34) & ">" & bodyitk & "</font></b><br/>"
             body = body + bodyitk
+
+            stritk = "X"
 
         End If
 
@@ -7113,7 +7120,12 @@ Partial Class yuusen
 
 
 
-        body = body & "＜ コンテナ" & strcon & "/" & e & "本目(ブッキングシートがただしければ) ＞<br/>"
+
+        If e Like "*M3*" Then
+            body = body & "＜ 荷量" & " " & e & " ＞<br/>"
+        Else
+            body = body & "＜ コンテナ" & strcon & "/" & e & "本目(ブッキングシートがただしければ) ＞<br/>"
+        End If
 
 
         t = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;text-align: center;'><tr style='background-color: #6fbfd1;'><td>IVNO</td><td>通貨</td><td>レート</td><td>客先</td><td>LS7.9</td><td>LS7.9品名</td><td>木材</td><td>パッケージ数</td><td>数量</td></tr>"
@@ -7121,7 +7133,7 @@ Partial Class yuusen
         Call IVINFO(bkgno, t, plt, qty, ls7)
 
         If ls7 = "1" Then
-            If stritk = "" Then
+            If stritk <> "X" Then
                 subject = "★委託漏れしていませんか？★" & subject
             End If
         End If
@@ -7257,25 +7269,27 @@ Partial Class yuusen
             body = "<font style=" & Chr(34) & "background-color: Red" & Chr(34) & ">" & body & "</font>"
             body = "<font style=" & Chr(34) & "color: white" & Chr(34) & ">" & body & "</font>"
             body = "<b><font size=" & Chr(34) & "3" & Chr(34) & ">" & body & "</font></b><br/>"
+
+            stritk = "X"
         Else
-
-
         End If
-
 
 
         If stritk = "0" Then
             stritk = ""
+        ElseIf stritk = "X" Then
         Else
-
-
             bodyitk = "＜委託案件です＞"
             bodyitk = "<font style=" & Chr(34) & "background-color: Yellow" & Chr(34) & ">" & bodyitk & "</font>"
             bodyitk = "<font style=" & Chr(34) & "color: Black" & Chr(34) & ">" & bodyitk & "</font>"
             bodyitk = "<b><font size=" & Chr(34) & "3" & Chr(34) & ">" & bodyitk & "</font></b><br/>"
             body = body + bodyitk
 
+            stritk = "X"
+
         End If
+
+
 
 
         body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
@@ -7295,7 +7309,11 @@ Partial Class yuusen
         Dim t As String = ""
 
 
-        body = body & "＜ コンテナ" & strcon & "/" & e & "本目(ブッキングシートがただしければ) ＞<br/>"
+        If e Like "*M3*" Then
+            body = body & "＜ 荷量" & " " & e & " ＞<br/>"
+        Else
+            body = body & "＜ コンテナ" & strcon & "/" & e & "本目(ブッキングシートがただしければ) ＞<br/>"
+        End If
 
 
         t = "<html><body><Table border='1' style='Font-Size:13px;font-family:Meiryo UI;'><tr style='background-color: #6fbfd1;'><td>IVNO</td><td>通貨</td><td>レート</td><td>客先</td><td>LS7.9</td><td>LS7.9品名</td><td>木材</td><td>パッケージ数</td><td>数量</td></tr>"
@@ -7304,7 +7322,7 @@ Partial Class yuusen
 
 
         If ls7 = "1" Then
-            If stritk = "" Then
+            If stritk <> "X" Then
                 subject = "★委託漏れしていませんか？★" & subject
             End If
         End If
