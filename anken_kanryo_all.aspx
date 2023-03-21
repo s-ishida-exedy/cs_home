@@ -520,7 +520,7 @@
                     <asp:Label ID="Label5" runat="server" Text="<備考記載欄>"></asp:Label>
                 </td>
                 <td style="width:1000px;Font-Size:12px;">
-                    <input type="file" name="userfile" id="userfile00" accept=".xls,.xlsx,.xlsm" runat="server" />
+<%--                    <input type="file" name="userfile" id="userfile00" accept=".xls,.xlsx,.xlsm" runat="server" />--%>
                 </td>
             </tr>
         </table>

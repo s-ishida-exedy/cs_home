@@ -1191,6 +1191,8 @@ Partial Class yuusen
             Dim a As Long
             Dim dflg As Long
 
+            Dim ck As String = ""
+
             Dim dt00 As DateTime = DateTime.Now
             'Dim dt01 As DateTime
 
@@ -1253,6 +1255,7 @@ Partial Class yuusen
                 If cflg = 0 Then
                     Call reg_check3(Trim(data1), 3, dflg, data8, data9)
                     Call check001(Trim(data1))
+                    Call docexck(Trim(data1), Trim(dataread("OLD_INVNO")))
                     cflg = 1
                 Else
                 End If
@@ -1284,7 +1287,7 @@ Partial Class yuusen
 
                         If data9 = 1 Then
                             Call erreg(a, data1, data8)
-                            Call Mail01(data1, data2, data3, data4, data5, data6, data7, data10) 'kkkkkk
+                            Call Mail01(data1, data2, data3, data4, data5, data6, data7, data10, a) 'kkkkkk
                         Else
                             Call Mail03(data1, data2, data3, data4, data5, data6, data7, data10)
                         End If
@@ -1303,7 +1306,6 @@ Partial Class yuusen
                     'ｴｸｾﾙ出力
                     If dflg = 1 Then '取消時はチェックは無しで強制的にチェックの登録を解除
                     Else
-
                         'バンニングのみの場合は処理しない＿＿＿X
                         If data9 = 1 Then
                             Call EXELE(data1, data2, data3, data4, data5, data6, data7)
@@ -1351,6 +1353,7 @@ Partial Class yuusen
             Dim FLGval As Long
             Dim a As Long
             Dim cflg As Long
+            Dim ck As String = ""
 
             FLGval = 0
 
@@ -1419,8 +1422,10 @@ Partial Class yuusen
                 Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーが解消されていません。');</script>", False)
             Else
                 Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーがなくなりました。');</script>", False)
-                'ｴｸｾﾙ出力
+
                 Call EXELE(data1, data2, data3, data4, data5, data6, data7)
+
+
             End If
 
             Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('処理が完了しました。');</script>", False)
@@ -1452,6 +1457,7 @@ Partial Class yuusen
             Dim FLGval As Long
             Dim a As Long
             Dim cflg As Long
+            Dim ck As String = ""
 
             FLGval = 0
 
@@ -1520,8 +1526,10 @@ Partial Class yuusen
                 Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーが解消されていません。');</script>", False)
             Else
                 Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーを強制的に解除します。。');</script>", False)
-                'ｴｸｾﾙ出力
+
                 Call EXELE(data1, data2, data3, data4, data5, data6, data7)
+
+
             End If
 
 
@@ -1962,6 +1970,7 @@ Partial Class yuusen
             Dim FLGval As Long
             Dim a As Long
             Dim dflg As Long
+            Dim ck As String = ""
 
             Dim dt00 As DateTime = DateTime.Now
             'Dim dt01 As DateTime
@@ -2056,7 +2065,7 @@ Partial Class yuusen
 
                         If data9 = 1 Then
                             Call erreg(a, data1, data8)
-                            Call Mail01(data1, data2, data3, data4, data5, data6, data7, data10) 'Kkkkkkk
+                            Call Mail01(data1, data2, data3, data4, data5, data6, data7, data10, a) 'Kkkkkkk
                         Else
                             Call Mail03(data1, data2, data3, data4, data5, data6, data7, data10)
                         End If
@@ -2078,7 +2087,10 @@ Partial Class yuusen
 
                         'バンニングのみの場合は処理しない＿＿＿X
                         If data9 = 1 Then
+
                             Call EXELE(data1, data2, data3, data4, data5, data6, data7)
+
+
                         Else
                         End If
 
@@ -2123,6 +2135,7 @@ Partial Class yuusen
             Dim FLGval As Long
             Dim a As Long
             Dim cflg As Long
+            Dim ck As String = ""
 
             FLGval = 0
 
@@ -2191,8 +2204,11 @@ Partial Class yuusen
                 Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーが解消されていません。');</script>", False)
             Else
                 Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーがなくなりました。');</script>", False)
-                'ｴｸｾﾙ出力
+
+
                 Call EXELE(data1, data2, data3, data4, data5, data6, data7)
+
+
             End If
 
             Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('処理が完了しました。');</script>", False)
@@ -2224,6 +2240,8 @@ Partial Class yuusen
             Dim FLGval As Long
             Dim a As Long
             Dim cflg As Long
+
+            Dim ck As String = ""
 
             FLGval = 0
 
@@ -2292,8 +2310,9 @@ Partial Class yuusen
                 Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーが解消されていません。');</script>", False)
             Else
                 Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーを強制的に解除します。。');</script>", False)
-                'ｴｸｾﾙ出力
+
                 Call EXELE(data1, data2, data3, data4, data5, data6, data7)
+
             End If
 
 
@@ -4585,7 +4604,7 @@ Partial Class yuusen
             strSQL = strSQL & " '" & strinv & "', "
             strSQL = strSQL & " '" & bkgno & "', "
             strSQL = strSQL & " '" & errlrmsg01 & "', "
-            strSQL = strSQL & " '書類作成済み', "
+            strSQL = strSQL & " '書類作成済み01', "
             strSQL = strSQL & " '', "
             strSQL = strSQL & " '', "
             strSQL = strSQL & " '', "
@@ -7011,7 +7030,7 @@ Partial Class yuusen
 
     End Sub
 
-    Sub Mail01(ByRef bkgno As String, ByRef a As String, ByRef b As String, ByRef c2 As String, ByRef d As String, ByRef e As String, ByRef f As String, ByRef g As String)
+    Sub Mail01(ByRef bkgno As String, ByRef a As String, ByRef b As String, ByRef c2 As String, ByRef d As String, ByRef e As String, ByRef f As String, ByRef g As String, ByRef er As Long)
 
         'メールの送信に必要な情報
         Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
@@ -7056,6 +7075,11 @@ Partial Class yuusen
         If e Like "*M3*" Then
             subject = " 【ご報告】＜最終＞ＬＣＬ 完了報告 " & "客先：" & c2 & " / IV-" & d & " / BKG#" & bkgno & " / 荷量：" & e
         End If
+
+        If er > 0 Then
+            subject = Replace(subject, "ご報告", "ご報告_ｴﾗｰあり")
+        End If
+
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
 
@@ -7467,6 +7491,100 @@ Partial Class yuusen
 
 
         body = body & "<html><body><Table style='Font-Size:13px;font-family:Meiryo UI;'>・B：Booking sheet<br>・I：Intra-mart<br>・M：CSﾏｽﾀ<br></Table></body></html>" ' UriBodyC()
+
+        body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+
+        ' MailKit におけるメールの情報
+        Dim message = New MimeKit.MimeMessage()
+
+        ' 送り元情報  
+        message.From.Add(MailboxAddress.Parse(strfrom))
+
+        ' 宛先情報  
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
+
+        If strcc <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
+
+        ' 表題  
+        message.Subject = subject
+
+        ' 本文
+        Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
+        textPart.Text = body
+        message.Body = textPart
+
+        Dim multipart = New MimeKit.Multipart("mixed")
+
+        multipart.Add(textPart)
+
+        message.Body = multipart
+
+        Using client As New MailKit.Net.Smtp.SmtpClient()
+            client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
+            client.Send(message)
+            client.Disconnect(True)
+            client.Dispose()
+            message.Dispose()
+        End Using
+
+    End Sub
+
+    Sub Mail04(ByRef bkgno As String, ByRef a As String, ByRef b As String, ByRef c2 As String, ByRef d As String, ByRef e As String, ByRef f As String, ByRef g As String)
+
+        'メールの送信に必要な情報
+        Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
+        Dim smtpPort As Integer = 25
+
+        ' メールの内容
+        Dim struid As String = Session("UsrId")
+
+        '宛先はｴﾗｰと一緒
+
+        Dim strfrom As String = GET_from(struid)
+
+        Dim strto As String = GET_ToAddress("11", 1)
+        strto = Left(strto, Len(strto) - 1)
+
+        If strto = "" Then
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('宛先が設定されていないためメール送信に失敗しました。');</script>", False)
+            Exit Sub
+        End If
+
+        Dim strcc As String = GET_ToAddress("11", 2) + GET_from(struid)
+
+
+        Dim strsyomei As String = GET_syomei(struid)
+
+        Dim cnt As Long
+        Call GETERROR2(bkgno, cnt)
+
+        'メールの件名
+        Dim subject As String = " 【通知】！！書類を作成し直してください！！ " & " 客先：" & c2 & " / IV-" & d & " / BKG#" & bkgno
+
+        'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
+
+
+        'メールの本文
+        Dim body As String = ""
+
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        body = body + "このメールはシステムから送信されています。<br/>"
+        body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+
+        body = body & "<html><body>CS各位<br>お疲れ様です。<br><br>書類の再作成が必要です。<br><br>既存の書類を削除し一括処理解除後に、<br>ＲＰＡを使用し書類を再作成してください。<br></body></html>" ' UriBodyC()
 
         body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
@@ -8286,7 +8404,156 @@ Partial Class yuusen
 
 
     End Sub
+    Private Sub docexck(ByRef bkgno As String, ByRef IVNO As String)
 
+        Dim strFile0 As String = ""
+
+        Dim path01 As String = "\\K3HWPA83\InvPack送信前フォルダ\"
+        Dim path02 As String = "\\K3HWPA83\InvPack送信前フォルダ\送付待ち\"
+        Dim path03 As String = "\\svnas201\EXD06101\DISC_COMMON\_按分INVOICE\"
+        Dim path04 As String = "\\svnas201\EXD06101\DISC_COMMON\輸出書類保管（新）\"
+        Dim path05 As String = "\\svnas201\EXD06101\DISC_COMMON\WEB出力\RPA書類作成専用\"
+        Dim path06 As String = ""
+        Dim Cname As String = ""
+        Dim Ccode As String = ""
+        Dim ck01 As String = ""
+
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim dataread2 As SqlDataReader
+        Dim dbcmd2 As SqlCommand
+
+        Dim intCnt As Long
+        Dim errlrmsg01 As String
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        'Call copy_custfile(bkgno, Cname, Ccode)
+        'path05 = path04 & Dir("\\svnas201\EXD06101\DISC_COMMON\輸出書類保管（新）\*" & strCust & "*", vbDirectory) & "\"
+
+        strFile0 = Dir(path01 & "*_IV" & IVNO & ".pdf")
+
+        If strFile0 <> "" Then
+            ck01 = "1"
+        End If
+
+        strFile0 = Dir(path01 & "*_PL" & IVNO & ".pdf")
+
+        If strFile0 <> "" Then
+            ck01 = "1"
+        End If
+        'strFile0 = Dir(strPath & "*_IV" & a & "*.xls")
+        'strFile0 = Dir(strPath & "*_SI" & a & "*.xls")
+        strFile0 = Dir(path03 & "*IV-" & IVNO & "DATA.xls")
+
+        If strFile0 <> "" Then
+            ck01 = "1"
+        End If
+
+        Call Get_allinv_ck(bkgno, ck01)
+        Call get_ikkatsu(bkgno, ck01)
+
+        If ck01 <> "" Then
+
+            errlrmsg01 = "一括処理解除と作成済み書類削除後に書類を作成"
+
+            'エラー内容登録
+            strSQL = ""
+            strSQL = strSQL & "INSERT INTO T_EXL_KANRYOERROR VALUES("
+            strSQL = strSQL & " '" & IVNO & "', "
+            strSQL = strSQL & " '" & bkgno & "', "
+            strSQL = strSQL & " '" & errlrmsg01 & "', "
+            strSQL = strSQL & " '書類再作成必須02', "
+            strSQL = strSQL & " '', "
+            strSQL = strSQL & " '', "
+            strSQL = strSQL & " '', "
+            strSQL = strSQL & " '' "
+            strSQL = strSQL & ") "
+
+            Command.CommandText = strSQL
+            ' SQLの実行
+            Command.ExecuteNonQuery()
+
+        End If
+
+        cnn.Close()
+        cnn.Dispose()
+
+    End Sub
+
+    Private Sub copy_custfile(iptbx As String, ByRef Cname As String, ByRef Ccode As String)
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String = ""
+        Dim strinv As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        strSQL = "SELECT DISTINCT T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.CUSTCODE "
+        strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
+        strSQL = strSQL & "AND T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+
+
+        strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO,T_INV_HD_TB.CRYCD, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE,T_INV_HD_TB.CUSTCODE,T_INV_HD_TB.HEADTITLE "
+        strSQL = strSQL & "HAVING T_INV_HD_TB.BOOKINGNO like '%" & iptbx & "%' "
+        strSQL = strSQL & "AND Sum(T_INV_BD_TB.QTY) >= 1 "
+        strSQL = strSQL & "AND Sum(T_INV_BD_TB.KIN) >= 1 "
+        strSQL = strSQL & "AND T_INV_HD_TB.HEADTITLE like 'INVOICE%' "
+        strSQL = strSQL & "Order by T_INV_HD_TB.OLD_INVNO "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        Cname = ""
+        Ccode = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            Cname = Trim(Convert.ToString(dataread("CUSTNAME")))        '客先目
+            Ccode = Trim(Convert.ToString(dataread("CUSTCODE")))        '客先コード
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
 
@@ -8382,6 +8649,125 @@ Partial Class yuusen
         Return dt
     End Function
 
+    Private Sub Get_allinv_ck(strbkg As String, ByRef ck01 As String)
+
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim path05 As String = "\\svnas201\EXD06101\DISC_COMMON\WEB出力\RPA書類作成専用\"
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        Dim strFile0 As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = "SELECT T_INV_HD_TB.OLD_INVNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
+        strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+        strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE "
+        strSQL = strSQL & "HAVING T_INV_HD_TB.BOOKINGNO like '%" & strbkg & "%' "
+
+        strSQL = strSQL & "order by T_INV_HD_TB.CUTDATE Desc "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+
+        '結果を取り出す 
+        While (dataread.Read())
+            '全てのインボスNOをループ
+            strFile0 = Dir(path05 & "" & dataread("OLD_INVNO") & ".txt")
+            If strFile0 <> "" Then
+                ck01 = "1"
+            End If
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+
+    End Sub
+
+    Private Sub get_ikkatsu(bkgno As String, ByRef ck01 As String)
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String
+        Dim strinv As String
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        strSQL = "SELECT T_INV_HD_TB.BOOKINGNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+        strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.ALLOUTSTAMP IS NOT NULL "
+        'INVOICENOが最大のものを取得
+        strSQL = strSQL & "AND T_INV_HD_TB.INVOICENO = "
+        strSQL = strSQL & "(SELECT MAX(T_INV_HD_TB.INVOICENO) AS IVNO "
+        strSQL = strSQL & "FROM T_INV_HD_TB "
+
+        strSQL = strSQL & "WHERE T_INV_HD_TB.HEADTITLE Like 'INVOICE%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+        strSQL = strSQL & "AND T_INV_HD_TB.BOOKINGNO like '%" & bkgno & "%' "
+        strSQL = strSQL & "AND T_INV_HD_TB.ORG_INVOICENO IS NULL "
+        strSQL = strSQL & ") "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        strDate = ""
+        '結果を取り出す 
+        While (dataread.Read())
+            ck01 = "1"
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+    End Sub
 End Class
 
 
