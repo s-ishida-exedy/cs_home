@@ -1447,10 +1447,12 @@ Public Class DBAccess
         StrSQL = StrSQL & "FROM "
         StrSQL = StrSQL & "  dbo.T_EXL_ZAIKO_RES a  "
         StrSQL = StrSQL & "WHERE "
-        StrSQL = StrSQL & "    a.JOIN_RES = '' "
-        StrSQL = StrSQL & "AND a.HANTEI <> '対象外' "
-        StrSQL = StrSQL & "AND a.PLACE = '" & strPlace & "' "
-        If strShubetsu <> "" Then
+        StrSQL = StrSQL & "    a.PLACE = '" & strPlace & "' "
+        If strShubetsu = "AFアミ" Or strShubetsu = "OEM(アミ)" Then
+            StrSQL = StrSQL & "AND a.SHUBETSU = '" & strShubetsu & "' "
+        ElseIf strShubetsu <> "" Then
+            StrSQL = StrSQL & "AND a.HANTEI <> '対象外' "
+            StrSQL = StrSQL & "AND a.JOIN_RES = '' "
             StrSQL = StrSQL & "AND a.SHUBETSU = '" & strShubetsu & "' "
         End If
 
