@@ -166,6 +166,7 @@
                 <h2>BL未回収</h2>
             </td>
             <td style="width:500px;" >
+                <asp:Label ID="Label1" runat="server" Text="" ></asp:Label>
             </td>
             <td style="width:80px;" >
                 <div class="button04">

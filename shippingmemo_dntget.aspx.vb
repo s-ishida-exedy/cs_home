@@ -8,6 +8,7 @@ Partial Class yuusen
     Public strRow As String
     Public strProcess As String
 
+
     Private Sub GridView1_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
 
         Dim dataread As SqlDataReader
@@ -21,6 +22,11 @@ Partial Class yuusen
         Dim str03 As String = ""
         Dim str04 As String = ""
         Dim str05 As String = ""
+        Dim cnt000 As Long
+        cnt000 = 0
+
+        Dim dt001 As DateTime = DateTime.Now
+        Dim dt002 As String = dt001.ToString("yyyy/MM")
 
         If e.Row.RowType = DataControlRowType.DataRow Then
             If e.Row.Cells(11).Text = "月またぎ" Then
@@ -150,6 +156,7 @@ Partial Class yuusen
 
 
         End If
+
 
     End Sub
 
@@ -373,4 +380,62 @@ Partial Class yuusen
         cnn.Dispose()
     End Sub
 
+    Private Function get_zan(ByRef intCnt As Long) As String
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        get_zan = ""
+
+        Dim dt1 As DateTime = DateTime.Now
+        Dim days As Integer = DateTime.DaysInMonth(dt1.Year, dt1.Month)
+
+        Dim firstDayOfMonth = New DateTime(dt1.Year, dt1.Month, 1)
+        Dim lastDayOfMonth1 = New DateTime(dt1.Year, dt1.Month, days)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT COUNT(*) AS CNT00 "
+        strSQL = strSQL & "FROM [T_EXL_SHIPPINGMEMOLIST] "
+        strSQL = strSQL & "WHERE DATE_GETBL='' "
+        strSQL = strSQL & "AND CUSTCODE Not In ('B494','B490','B491','B492','B520','A063','A064','A060','A061','A062','B530') "
+        strSQL = strSQL & "AND iif(len(REV_ETD)=10,REV_ETD,ETD) between '" & firstDayOfMonth & "' AND '" & lastDayOfMonth1 & "' "
+        strSQL = strSQL & "AND REV_STATUS = '' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            intCnt = dataread("CNT00")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        cnn.Close()
+        cnn.Dispose()
+
+    End Function
+
+    Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
+
+        Dim cnt000 As Long
+        cnt000 = 0
+        Call get_zan(cnt000)
+        Label1.Text = "当月未回収（出港未確認）案件 ： " & cnt000 & " 件"
+
+    End Sub
 End Class
