@@ -1428,4 +1428,40 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+    Public Function GET_RESULT_ZAIKO(strPlace As String, strShubetsu As String) As DataSet
+        'AIR専用客先　SN明細取得
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "    a.TANABAN "
+        StrSQL = StrSQL & "  , a.SHUBETSU "
+        StrSQL = StrSQL & "  , a.PLACE "
+        StrSQL = StrSQL & "  , a.OKIBA "
+        StrSQL = StrSQL & "  , a.HANTEI "
+        StrSQL = StrSQL & "  , a.BUNKATSU "
+        StrSQL = StrSQL & "  , a.JOIN_RES "
+        StrSQL = StrSQL & "  , a.AMI_QTY "
+        StrSQL = StrSQL & "  , a.QTY "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "  dbo.T_EXL_ZAIKO_RES a  "
+        StrSQL = StrSQL & "WHERE "
+        StrSQL = StrSQL & "    a.PLACE = '" & strPlace & "' "
+        If strShubetsu = "AFアミ" Or strShubetsu = "OEM(アミ)" Then
+            StrSQL = StrSQL & "AND a.SHUBETSU = '" & strShubetsu & "' "
+        ElseIf strShubetsu <> "" Then
+            StrSQL = StrSQL & "AND a.HANTEI <> '対象外' "
+            StrSQL = StrSQL & "AND a.JOIN_RES = '' "
+            StrSQL = StrSQL & "AND a.SHUBETSU = '" & strShubetsu & "' "
+        End If
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class

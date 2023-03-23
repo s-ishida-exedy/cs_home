@@ -31,6 +31,7 @@
             </li>
             <li data-id='["home","make_graph_stock01.aspx"]'><a href="#">INV在庫推移</a></li>
             <li data-id='["home","make_graph_delaykin.aspx"]'><a href="#">出港遅延未納金額</a></li>
+            <li data-id='["home","exl_zaiko.aspx"]'><a href="#">EXL在庫</a></li>
         </ul>
     </li>
     <li class="menu__multi">
