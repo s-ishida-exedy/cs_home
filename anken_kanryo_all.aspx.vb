@@ -7037,6 +7037,7 @@ Partial Class yuusen
         Dim smtpPort As Integer = 25
         Dim strcon As String
         Dim stritk As String
+        Dim strend As String
 
         Dim ls7 As String = ""
 
@@ -7143,6 +7144,12 @@ Partial Class yuusen
         Dim t As String = ""
 
 
+
+        strend = "★最終★<br/>"
+        strend = "<font style=" & Chr(34) & "background-color: LIGHTBLUE" & Chr(34) & ">" & strend & "</font>"
+        strend = "<font style=" & Chr(34) & "color: BLACK" & Chr(34) & ">" & strend & "</font>"
+        strend = "<b><font size=" & Chr(34) & "3" & Chr(34) & ">" & strend & "</font></b><br/>"
+        body = body + strend
 
 
         If e Like "*M3*" Then
@@ -7464,7 +7471,7 @@ Partial Class yuusen
         body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
         body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
 
-        body = body & "<html><body>CS各位<br>お疲れ様です。<br><br>エラーが発生しているため、ご確認ください。<br></body></html>" ' UriBodyC()
+        body = body & "<html><body>CS各位<br>お疲れ様です。<br><br>エラーが発生しているため、ご確認ください。<br>ｴﾗｰだよ。確認してね。('ω')ノ<br></body></html>" ' UriBodyC()
 
 
         Dim t2 As String = ""
