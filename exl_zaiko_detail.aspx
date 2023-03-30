@@ -151,6 +151,7 @@
                 <h2>EXL在庫　空き棚</h2>  
             </td>
             <td class="second-cell">
+                ※1F CC及び3F CCは網の状況を表示
             </td>
             <td class="third-cell">
                 <a href="./exl_zaiko.aspx">一覧へ戻る</a>
