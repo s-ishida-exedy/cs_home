@@ -216,11 +216,17 @@ Partial Class cs_home
             strSQL = strSQL & "  , SHUK_METH = '" & DropDownList6.SelectedValue & "' "  '出荷方法
             strSQL = strSQL & "WHERE "
             strSQL = strSQL & "       AIR_CODE =  '" & strCode & "' "
+
+            Call UPD_KANRYO()
+
         ElseIf strMode = "01" And strExecMode = "02" Then
             strSQL = ""
             strSQL = strSQL & "DELETE FROM  T_EXL_AIR_MANAGE "
             strSQL = strSQL & "WHERE "
             strSQL = strSQL & "       AIR_CODE =  '" & strCode & "' "
+
+            Call DeL_KANRYO()
+
         Else
             strSQL = ""
             strSQL = strSQL & "INSERT INTO T_EXL_AIR_MANAGE "
@@ -250,9 +256,17 @@ Partial Class cs_home
             strSQL = strSQL & "  , '" & Label3.Text & "' "  'レート
             strSQL = strSQL & "  , '" & DropDownList6.SelectedValue & "' "  '出荷方法
             strSQL = strSQL & ") "
+
+            If DropDownList1.SelectedValue = "" Then
+                If DropDownList3.SelectedValue = "本社" Then
+                    Call IST_KANRYO()
+                Else
+                End If
+            Else
+            End If
         End If
 
-        Command.CommandText = strSQL
+            Command.CommandText = strSQL
         ' SQLの実行
         Command.ExecuteNonQuery()
 
@@ -701,5 +715,282 @@ Partial Class cs_home
 
         Return Nothing
     End Function
+
+
+    Private Sub IST_KANRYO()
+        'レコードのフラグを取得する。 深尾追加
+        Dim strSQL As String
+        Dim dtNow As DateTime = DateTime.Now
+        Dim strFlg As String = ""
+
+        Dim stracode As String = ""
+        Dim val01 As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        'データベース接続を開く
+        cnn.Open()
+
+        'フラグをUPDATE
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT  "
+        strSQL = strSQL & " max(DAY09)+1  AS C "
+        strSQL = strSQL & "FROM T_EXL_CSKANRYO "
+
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            val01 = Trim(dataread("C"))
+        End While
+
+        If val01 < 10 Then
+            val01 = "00000" & val01
+        ElseIf val01 < 100 Then
+            val01 = "0000" & val01
+        ElseIf val01 < 1000 Then
+            val01 = "000" & val01
+        ElseIf val01 < 10000 Then
+            val01 = "00" & val01
+        ElseIf val01 < 100000 Then
+            val01 = "0" & val01
+        Else
+            val01 = val01
+        End If
+
+
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT  "
+        strSQL = strSQL & " max(AIR_CODE)+1  AS C "
+        strSQL = strSQL & "FROM T_EXL_AIR_MANAGE "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            stracode = Trim(dataread("C"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+
+        strSQL = ""
+        strSQL = strSQL & "INSERT INTO T_EXL_CSKANRYO VALUES("
+        strSQL = strSQL & " '" & "-" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' " '海貨業者
+
+        strSQL = strSQL & ",'" & LTrim(RTrim(TextBox4.Text)) & "' " '客先コード
+        strSQL = strSQL & ",'" & "" & "' " '仕向地
+        strSQL = strSQL & ",'" & LTrim(RTrim(TextBox5.Text)) & "' " 'IVNO
+        strSQL = strSQL & ",'" & "" & "' " 'CUT
+        strSQL = strSQL & ",'" & LTrim(RTrim(TextBox3.Text)) & "' " 'ETD
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "AIR" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' " '削除？
+        strSQL = strSQL & ",'" & "" & "' " '完了ボタン押した
+        strSQL = strSQL & ",'" & "" & "' " '書類
+        strSQL = strSQL & ",'" & val01 & "' " 'NO
+        strSQL = strSQL & ",'" & "1" & "' "
+        strSQL = strSQL & ",'" & LTrim(RTrim(TextBox3.Text)) & "' " 'ETD
+        strSQL = strSQL & ",'" & LTrim(RTrim(TextBox3.Text)) & "' " 'ETD
+        strSQL = strSQL & ",'" & stracode & "' " 'NO
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "AIR" & "' "
+        strSQL = strSQL & ",'' "
+        strSQL = strSQL & ",'1' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'" & "" & "' "
+        strSQL = strSQL & ",'' "
+
+        strSQL = strSQL & ")"
+
+
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+        cnn.Close()
+        cnn.Dispose()
+        Command.Dispose()
+
+    End Sub
+
+    Private Sub DeL_KANRYO()
+        'レコードのフラグを取得する。　深尾追加
+        Dim strSQL As String
+        Dim dtNow As DateTime = DateTime.Now
+        Dim strFlg As String = ""
+        Dim stracode As String = ""
+
+        Dim val01 As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT AIR_CODE as C "
+        strSQL = strSQL & "FROM T_EXL_AIR_MANAGE "
+        strSQL = strSQL & "WHERE  T_EXL_AIR_MANAGE "
+        strSQL = strSQL & "WHERE INVOICE = '" & LTrim(RTrim(TextBox5.Text)) & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            stracode = Trim(dataread("C"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+
+        strSQL = ""
+        strSQL = strSQL & "DELETE FROM  T_EXL_CSKANRYO "
+        strSQL = strSQL & "WHERE INVOICE = '" & LTrim(RTrim(TextBox5.Text)) & "' "
+        strSQL = strSQL & "AND FLG01 = '" & "AIR" & "' "
+
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+        cnn.Close()
+        cnn.Dispose()
+        Command.Dispose()
+
+    End Sub
+
+    Private Sub UPD_KANRYO()
+        'レコードのフラグを取得する。　深尾追加
+        Dim strSQL As String
+        Dim dtNow As DateTime = DateTime.Now
+        Dim strFlg As String = ""
+
+        Dim val01 As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim stracode As String = ""
+
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT AIR_CODE as C "
+        strSQL = strSQL & "FROM T_EXL_AIR_MANAGE "
+        strSQL = strSQL & "WHERE IVNO = '" & LTrim(RTrim(TextBox5.Text)) & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            stracode = Trim(dataread("C"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        'フラグをUPDATE
+        strSQL = ""
+        strSQL = strSQL & "UPDATE T_EXL_CSKANRYO "
+        strSQL = strSQL & "SET "
+        strSQL = strSQL & " ETD =  '" & LTrim(RTrim(TextBox3.Text)) & "' "
+        strSQL = strSQL & "  , DAY11 =  '" & LTrim(RTrim(TextBox3.Text)) & "' "
+        strSQL = strSQL & "  , FINALVANDATE =  '" & LTrim(RTrim(TextBox3.Text)) & "' "
+        strSQL = strSQL & "  , CUST =  '" & LTrim(RTrim(TextBox4.Text)) & "' "
+        strSQL = strSQL & "  , INVOICE =  '" & LTrim(RTrim(TextBox5.Text)) & "' "
+        strSQL = strSQL & "  , FORWARDER02 =  '" & LTrim(RTrim(TextBox9.Text)) & "' "
+        strSQL = strSQL & "WHERE BOOKING_NO = '" & stracode & "' "
+        strSQL = strSQL & "AND FLG01 = '" & "AIR" & "' "
+
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+        cnn.Close()
+        cnn.Dispose()
+        Command.Dispose()
+
+    End Sub
 End Class
 

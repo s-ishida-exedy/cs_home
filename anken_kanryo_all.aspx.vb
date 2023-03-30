@@ -14,6 +14,7 @@ Imports mod_function
 
 
 
+
 Partial Class yuusen
     Inherits System.Web.UI.Page
 
@@ -81,6 +82,7 @@ Partial Class yuusen
             '仕向地
             If Len(e.Row.Cells(8).Text) > 7 Then
                 e.Row.Cells(8).Font.Size = 7
+                e.Row.Cells(8).Text = Left(e.Row.Cells(8).Text, 8)
             End If
 
             '仕向地
@@ -100,7 +102,7 @@ Partial Class yuusen
 
             'IVNO
             If Len(e.Row.Cells(9).Text) > 8 Then
-                e.Row.Cells(9).Font.Size = 7.5
+                e.Row.Cells(9).Font.Size = 7
             End If
 
             '船名
@@ -111,6 +113,7 @@ Partial Class yuusen
             '荷受地
             If Len(e.Row.Cells(19).Text) > 5 Then
                 e.Row.Cells(19).Font.Size = 7
+                e.Row.Cells(19).Text = Left(e.Row.Cells(19).Text, 10)
             End If
 
             '積出港
@@ -154,6 +157,7 @@ Partial Class yuusen
             'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
             strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
             strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '006' "
+            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].INVNO = '" & Trim(Replace(e.Row.Cells(30).Text, vbLf, "")) & "' "
 
             'ＳＱＬコマンド作成
             dbcmd = New SqlCommand(strSQL, cnn)
@@ -183,6 +187,7 @@ Partial Class yuusen
             'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
             strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(e.Row.Cells(16).Text, vbLf, "")) & "' "
             strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '007' "
+            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].INVNO = '" & Trim(Replace(e.Row.Cells(30).Text, vbLf, "")) & "' "
 
             'ＳＱＬコマンド作成
             dbcmd = New SqlCommand(strSQL, cnn)
@@ -319,12 +324,15 @@ Partial Class yuusen
             Call get_meisai(Trim(Replace(e.Row.Cells(16).Text, vbLf, "")), fll)
 
             If fll = "0" Then
+                'If e.Row.Cells(7).Text = "AIR" Then
+                'Else
                 btn01.Enabled = False
                 dltlabel1.Text = "明細未"
 
+                'End If
             End If
 
-        End If
+            End If
 
 
             'ボタンに行数をセット
@@ -1231,396 +1239,640 @@ Partial Class yuusen
             cnn.Open()
 
 
-            strSQL = "SELECT DISTINCT T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.CUSTCODE "
-            strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
-            strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
-
-            strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO,T_INV_HD_TB.CRYCD, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE,T_INV_HD_TB.CUSTCODE,T_INV_HD_TB.HEADTITLE "
-            strSQL = strSQL & "HAVING T_INV_HD_TB.BOOKINGNO like '%" & data1 & "%' "
-            strSQL = strSQL & "AND Sum(T_INV_BD_TB.QTY) >= 1 "
-            strSQL = strSQL & "AND Sum(T_INV_BD_TB.KIN) >= 1 "
-            strSQL = strSQL & "AND T_INV_HD_TB.HEADTITLE like 'INVOICE%' "
-            strSQL = strSQL & "Order by T_INV_HD_TB.OLD_INVNO "
+            If data3 = "AIR" Then
+            Else
 
 
-            'ＳＱＬコマンド作成 
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行 
-            dataread = dbcmd.ExecuteReader()
+                strSQL = "SELECT DISTINCT T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.CUSTCODE "
+                strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
+                strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+
+                strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO,T_INV_HD_TB.CRYCD, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE,T_INV_HD_TB.CUSTCODE,T_INV_HD_TB.HEADTITLE "
+                strSQL = strSQL & "HAVING T_INV_HD_TB.BOOKINGNO like '%" & data1 & "%' "
+                strSQL = strSQL & "AND Sum(T_INV_BD_TB.QTY) >= 1 "
+                strSQL = strSQL & "AND Sum(T_INV_BD_TB.KIN) >= 1 "
+                strSQL = strSQL & "AND T_INV_HD_TB.HEADTITLE like 'INVOICE%' "
+                strSQL = strSQL & "Order by T_INV_HD_TB.OLD_INVNO "
 
 
-            '結果を取り出す 
-            While (dataread.Read())
-                'インボイス番号をキーにデータを更新
-                If cflg = 0 Then
-                    Call reg_check3(Trim(data1), 3, dflg, data8, data9)
-                    Call check001(Trim(data1))
-                    Call docexck(Trim(data1), Trim(dataread("OLD_INVNO")))
-                    cflg = 1
-                Else
-                End If
+                'ＳＱＬコマンド作成 
+                dbcmd = New SqlCommand(strSQL, cnn)
+                'ＳＱＬ文実行 
+                dataread = dbcmd.ExecuteReader()
 
-                FLGval = 1
 
-            End While
+                '結果を取り出す 
+                While (dataread.Read())
+                    'インボイス番号をキーにデータを更新
+                    If cflg = 0 Then
+                        Call reg_check3(Trim(data1), 3, dflg, data8, data9)
+                        Call check001(Trim(data1))
+                        Call docexck(Trim(data1), Trim(dataread("OLD_INVNO")))
+                        cflg = 1
+                    Else
+                    End If
 
-            'クローズ処理 
-            dataread.Close()
-            dbcmd.Dispose()
+                    FLGval = 1
+
+                End While
+
+                'クローズ処理 
+                dataread.Close()
+                dbcmd.Dispose()
+
+            End If
+
             cnn.Close()
             cnn.Dispose()
 
 
-            If FLGval = 0 Then
-                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('未登録です。');</script>", False)
 
-            Else
-
-                'エラーの抽出　エラーがあればエラー通知メールを送付 エラーの項目に追加・削除
-                If dflg = 1 Then '取消時はチェックは無しで強制的にチェックの登録を解除
-
-
-                Else
-                    If FLGval = 0 Then 'データがなければ
-                    Else
-
-
-                        If data9 = 1 Then
-                            Call erreg(a, data1, data8)
-                            Call Mail01(data1, data2, data3, data4, data5, data6, data7, data10, a) 'kkkkkk
-                        Else
-                            Call Mail03(data1, data2, data3, data4, data5, data6, data7, data10)
-                        End If
-
-
-                    End If
+            If data3 = "AIR" Then
+                    Call reg_check3(Trim(data1), 3, dflg, data8, data9)
+                    FLGval = 1
                 End If
 
-                If a > 0 Then
-                    If data9 = 1 Then
-                        Call Mail02(data1, data2, data3, data4, data5, data6, data7, data10)
-                    Else
-                    End If
+                If FLGval = 0 Then
+                    Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('未登録です。');</script>", False)
 
                 Else
-                    'ｴｸｾﾙ出力
+
+                    'エラーの抽出　エラーがあればエラー通知メールを送付 エラーの項目に追加・削除
                     If dflg = 1 Then '取消時はチェックは無しで強制的にチェックの登録を解除
+
+
+                    Else
+                        If FLGval = 0 Then 'データがなければ
+                        Else
+
+
+                            If data9 = 1 Then
+                                Call erreg(a, data1, data8)
+
+                                If data3 = "AIR" Then
+                                Call Mail06(data1, data2, data3, data4, data5, data6, data7, data10, a) 'kkkkkk
+                            Else
+                                    Call Mail01(data1, data2, data3, data4, data5, data6, data7, data10, a) 'kkkkkk
+                                End If
+                                'LCL
+                                If data3 = "LCL" Then
+                                    Call Mail05(data1, data2, data3, data4, data5, data6, data7, data10, a) 'kkkkkk
+                                End If
+
+                            Else
+                                If data3 = "AIR" Then
+                                Else
+                                    Call Mail03(data1, data2, data3, data4, data5, data6, data7, data10)
+                                End If
+
+                                'LCL
+                                If data3 = "LCL" Then
+                                    Call Mail05(data1, data2, data3, data4, data5, data6, data7, data10, a) 'kkkkkk
+                                End If
+                            End If
+
+
+                        End If
+                    End If
+
+                    If data3 = "AIR" Then
+                    Else
+
+                        If a > 0 Then
+                            If data9 = 1 Then
+                                Call Mail02(data1, data2, data3, data4, data5, data6, data7, data10)
+                            Else
+                            End If
+
+                        Else
+                            'ｴｸｾﾙ出力
+                            If dflg = 1 Then '取消時はチェックは無しで強制的にチェックの登録を解除
+                            Else
+                                'バンニングのみの場合は処理しない＿＿＿X
+                                If data9 = 1 Then
+                                    Call EXELE(data1, data2, data3, data4, data5, data6, data7)
+                                Else
+                                End If
+
+                            End If
+                        End If
+                    End If
+
+                    If dflg = 1 Then '取消時はチェックは無しで強制的にチェックの登録を解除
+                        Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('解除しました。');</script>", False)
                     Else
                         'バンニングのみの場合は処理しない＿＿＿X
                         If data9 = 1 Then
-                            Call EXELE(data1, data2, data3, data4, data5, data6, data7)
+                            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('＜最終バン＞処理が完了しました。');</script>", False)
                         Else
+                            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('＜途中バン＞処理が完了しました。');</script>", False)
                         End If
-
                     End If
                 End If
 
-                If dflg = 1 Then '取消時はチェックは無しで強制的にチェックの登録を解除
-                    Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('解除しました。');</script>", False)
-                Else
-                    'バンニングのみの場合は処理しない＿＿＿X
-                    If data9 = 1 Then
-                        Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('＜最終バン＞処理が完了しました。');</script>", False)
+
+                'kokonituika
+                Call Update_vandate(data9)
+
+
+                TextBox1.Text = ""
+
+
+            ElseIf e.CommandName = "edt2" Then
+
+
+
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Dim data1 = Me.GridView1.Rows(index).Cells(16).Text
+                Dim data2 = Me.GridView1.Rows(index).Cells(6).Text
+                Dim data3 = Me.GridView1.Rows(index).Cells(7).Text
+                Dim data4 = Me.GridView1.Rows(index).Cells(9).Text
+                Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
+                Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
+                Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
+                Dim data8 = Me.GridView1.Rows(index).Cells(30).Text
+                Dim data10 = Me.GridView1.Rows(index).Cells(31).Text
+
+                Dim dataread As SqlDataReader
+                Dim dbcmd As SqlCommand
+                Dim strSQL As String = ""
+                Dim strDate As String = ""
+                Dim strinv As String = ""
+                Dim eflg As Long
+                Dim strcst As String = ""
+                Dim FLGval As Long
+                Dim a As Long
+                Dim cflg As Long
+                Dim ck As String = ""
+
+                FLGval = 0
+
+                'データの削除 
+                Call DEL_KANRYOERROR()
+
+                '接続文字列の作成
+                Dim ConnectionString As String = String.Empty
+                'SQL Server認証
+                ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+                'SqlConnectionクラスの新しいインスタンスを初期化
+                Dim cnn = New SqlConnection(ConnectionString)
+
+                Dim dt1 As DateTime = DateTime.Now
+
+                Dim ts1 As New TimeSpan(100, 0, 0, 0)
+                Dim ts2 As New TimeSpan(100, 0, 0, 0)
+                Dim dt2 As DateTime = dt1 + ts1
+                Dim dt3 As DateTime = dt1 - ts1
+
+                'データベース接続を開く
+                cnn.Open()
+
+
+                strSQL = "SELECT DISTINCT T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.CUSTCODE "
+                strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
+                strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+
+                strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO,T_INV_HD_TB.CRYCD, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE,T_INV_HD_TB.CUSTCODE,T_INV_HD_TB.HEADTITLE "
+                strSQL = strSQL & "HAVING T_INV_HD_TB.BOOKINGNO like '%" & data1 & "%' "
+                strSQL = strSQL & "AND Sum(T_INV_BD_TB.QTY) >= 1 "
+                strSQL = strSQL & "AND Sum(T_INV_BD_TB.KIN) >= 1 "
+                strSQL = strSQL & "AND T_INV_HD_TB.HEADTITLE like 'INVOICE%' "
+                strSQL = strSQL & "Order by T_INV_HD_TB.OLD_INVNO "
+
+
+                'ＳＱＬコマンド作成 
+                dbcmd = New SqlCommand(strSQL, cnn)
+                'ＳＱＬ文実行 
+                dataread = dbcmd.ExecuteReader()
+
+
+                '結果を取り出す 
+                While (dataread.Read())
+                    'インボイス番号をキーにデータを更新
+                    If cflg = 0 Then
+                        Call check001(Trim(data1))
+                        cflg = 1
                     Else
-                        Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('＜途中バン＞処理が完了しました。');</script>", False)
                     End If
-                End If
-            End If
+
+                End While
+
+                'クローズ処理 
+                dataread.Close()
+                dbcmd.Dispose()
+                cnn.Close()
+                cnn.Dispose()
+
+                'エラーの抽出　エラーがあればエラー通知メールを送付 エラーの項目に追加・削除
+                Call erreg(a, data1, data8)
 
 
-        ElseIf e.CommandName = "edt2" Then
-
-
-
-            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
-            Dim data1 = Me.GridView1.Rows(index).Cells(16).Text
-            Dim data2 = Me.GridView1.Rows(index).Cells(6).Text
-            Dim data3 = Me.GridView1.Rows(index).Cells(7).Text
-            Dim data4 = Me.GridView1.Rows(index).Cells(9).Text
-            Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
-            Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
-            Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
-            Dim data8 = Me.GridView1.Rows(index).Cells(30).Text
-            Dim data10 = Me.GridView1.Rows(index).Cells(31).Text
-
-            Dim dataread As SqlDataReader
-            Dim dbcmd As SqlCommand
-            Dim strSQL As String = ""
-            Dim strDate As String = ""
-            Dim strinv As String = ""
-            Dim eflg As Long
-            Dim strcst As String = ""
-            Dim FLGval As Long
-            Dim a As Long
-            Dim cflg As Long
-            Dim ck As String = ""
-
-            FLGval = 0
-
-            'データの削除 
-            Call DEL_KANRYOERROR()
-
-            '接続文字列の作成
-            Dim ConnectionString As String = String.Empty
-            'SQL Server認証
-            ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
-            'SqlConnectionクラスの新しいインスタンスを初期化
-            Dim cnn = New SqlConnection(ConnectionString)
-
-            Dim dt1 As DateTime = DateTime.Now
-
-            Dim ts1 As New TimeSpan(100, 0, 0, 0)
-            Dim ts2 As New TimeSpan(100, 0, 0, 0)
-            Dim dt2 As DateTime = dt1 + ts1
-            Dim dt3 As DateTime = dt1 - ts1
-
-            'データベース接続を開く
-            cnn.Open()
-
-
-            strSQL = "SELECT DISTINCT T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.CUSTCODE "
-            strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
-            strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
-
-            strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO,T_INV_HD_TB.CRYCD, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE,T_INV_HD_TB.CUSTCODE,T_INV_HD_TB.HEADTITLE "
-            strSQL = strSQL & "HAVING T_INV_HD_TB.BOOKINGNO like '%" & data1 & "%' "
-            strSQL = strSQL & "AND Sum(T_INV_BD_TB.QTY) >= 1 "
-            strSQL = strSQL & "AND Sum(T_INV_BD_TB.KIN) >= 1 "
-            strSQL = strSQL & "AND T_INV_HD_TB.HEADTITLE like 'INVOICE%' "
-            strSQL = strSQL & "Order by T_INV_HD_TB.OLD_INVNO "
-
-
-            'ＳＱＬコマンド作成 
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行 
-            dataread = dbcmd.ExecuteReader()
-
-
-            '結果を取り出す 
-            While (dataread.Read())
-                'インボイス番号をキーにデータを更新
-                If cflg = 0 Then
-                    Call check001(Trim(data1))
-                    cflg = 1
+                If a > 0 Then
+                    Call Mail02(data1, data2, data3, data4, data5, data6, data7, data10)
+                    Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーが解消されていません。');</script>", False)
                 Else
+                    Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーがなくなりました。');</script>", False)
+
+                    Call EXELE(data1, data2, data3, data4, data5, data6, data7)
+
+
                 End If
 
-            End While
+                TextBox1.Text = ""
 
-            'クローズ処理 
-            dataread.Close()
-            dbcmd.Dispose()
-            cnn.Close()
-            cnn.Dispose()
-
-            'エラーの抽出　エラーがあればエラー通知メールを送付 エラーの項目に追加・削除
-            Call erreg(a, data1, data8)
-
-
-            If a > 0 Then
-                Call Mail02(data1, data2, data3, data4, data5, data6, data7, data10)
-                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーが解消されていません。');</script>", False)
-            Else
-                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーがなくなりました。');</script>", False)
-
-                Call EXELE(data1, data2, data3, data4, data5, data6, data7)
-
-
-            End If
-
-            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('処理が完了しました。');</script>", False)
+                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('処理が完了しました。');</script>", False)
 
 
 
-        ElseIf e.CommandName = "edt3" Then
+            ElseIf e.CommandName = "edt3" Then
 
 
-            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
-            Dim data1 = Me.GridView1.Rows(index).Cells(16).Text
-            Dim data2 = Me.GridView1.Rows(index).Cells(6).Text
-            Dim data3 = Me.GridView1.Rows(index).Cells(7).Text
-            Dim data4 = Me.GridView1.Rows(index).Cells(9).Text
-            Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
-            Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
-            Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
-            Dim data8 = Me.GridView1.Rows(index).Cells(30).Text
-            Dim data10 = Me.GridView1.Rows(index).Cells(31).Text
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Dim data1 = Me.GridView1.Rows(index).Cells(16).Text
+                Dim data2 = Me.GridView1.Rows(index).Cells(6).Text
+                Dim data3 = Me.GridView1.Rows(index).Cells(7).Text
+                Dim data4 = Me.GridView1.Rows(index).Cells(9).Text
+                Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
+                Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
+                Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
+                Dim data8 = Me.GridView1.Rows(index).Cells(30).Text
+                Dim data10 = Me.GridView1.Rows(index).Cells(31).Text
 
 
-            Dim dataread As SqlDataReader
-            Dim dbcmd As SqlCommand
-            Dim strSQL As String = ""
-            Dim strDate As String = ""
-            Dim strinv As String = ""
-            Dim eflg As Long
-            Dim strcst As String = ""
-            Dim FLGval As Long
-            Dim a As Long
-            Dim cflg As Long
-            Dim ck As String = ""
+                Dim dataread As SqlDataReader
+                Dim dbcmd As SqlCommand
+                Dim strSQL As String = ""
+                Dim strDate As String = ""
+                Dim strinv As String = ""
+                Dim eflg As Long
+                Dim strcst As String = ""
+                Dim FLGval As Long
+                Dim a As Long
+                Dim cflg As Long
+                Dim ck As String = ""
 
-            FLGval = 0
+                FLGval = 0
 
-            'データの削除 
-            Call DEL_KANRYOERROR()
+                'データの削除 
+                Call DEL_KANRYOERROR()
 
-            '接続文字列の作成
-            Dim ConnectionString As String = String.Empty
-            'SQL Server認証
-            ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
-            'SqlConnectionクラスの新しいインスタンスを初期化
-            Dim cnn = New SqlConnection(ConnectionString)
+                '接続文字列の作成
+                Dim ConnectionString As String = String.Empty
+                'SQL Server認証
+                ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+                'SqlConnectionクラスの新しいインスタンスを初期化
+                Dim cnn = New SqlConnection(ConnectionString)
 
-            Dim dt1 As DateTime = DateTime.Now
+                Dim dt1 As DateTime = DateTime.Now
 
-            Dim ts1 As New TimeSpan(100, 0, 0, 0)
-            Dim ts2 As New TimeSpan(100, 0, 0, 0)
-            Dim dt2 As DateTime = dt1 + ts1
-            Dim dt3 As DateTime = dt1 - ts1
+                Dim ts1 As New TimeSpan(100, 0, 0, 0)
+                Dim ts2 As New TimeSpan(100, 0, 0, 0)
+                Dim dt2 As DateTime = dt1 + ts1
+                Dim dt3 As DateTime = dt1 - ts1
 
-            'データベース接続を開く
-            cnn.Open()
-
-
-            strSQL = "SELECT DISTINCT T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.CUSTCODE "
-            strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
-            strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
-
-            strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO,T_INV_HD_TB.CRYCD, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE,T_INV_HD_TB.CUSTCODE,T_INV_HD_TB.HEADTITLE "
-            strSQL = strSQL & "HAVING T_INV_HD_TB.BOOKINGNO like '%" & data1 & "%' "
-            strSQL = strSQL & "AND Sum(T_INV_BD_TB.QTY) >= 1 "
-            strSQL = strSQL & "AND Sum(T_INV_BD_TB.KIN) >= 1 "
-            strSQL = strSQL & "AND T_INV_HD_TB.HEADTITLE like 'INVOICE%' "
-            strSQL = strSQL & "Order by T_INV_HD_TB.OLD_INVNO "
+                'データベース接続を開く
+                cnn.Open()
 
 
-            'ＳＱＬコマンド作成 
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行 
-            dataread = dbcmd.ExecuteReader()
+                strSQL = "SELECT DISTINCT T_INV_HD_TB.OLD_INVNO, T_INV_HD_TB.CUSTCODE "
+                strSQL = strSQL & "FROM T_INV_HD_TB LEFT JOIN T_INV_BD_TB ON T_INV_HD_TB.INVOICENO = T_INV_BD_TB.INVOICENO "
+                strSQL = strSQL & "WHERE T_INV_HD_TB.BLDATE BETWEEN '" & dt3 & "' AND '" & dt2 & "' "
+
+                strSQL = strSQL & "GROUP BY T_INV_HD_TB.BOOKINGNO, T_INV_HD_TB.OLD_INVNO,T_INV_HD_TB.CRYCD, T_INV_HD_TB.SHIPPEDPER, T_INV_HD_TB.VOYAGENO, T_INV_HD_TB.IOPORTDATE, T_INV_HD_TB.CUTDATE,T_INV_HD_TB.CUSTCODE,T_INV_HD_TB.HEADTITLE "
+                strSQL = strSQL & "HAVING T_INV_HD_TB.BOOKINGNO like '%" & data1 & "%' "
+                strSQL = strSQL & "AND Sum(T_INV_BD_TB.QTY) >= 1 "
+                strSQL = strSQL & "AND Sum(T_INV_BD_TB.KIN) >= 1 "
+                strSQL = strSQL & "AND T_INV_HD_TB.HEADTITLE like 'INVOICE%' "
+                strSQL = strSQL & "Order by T_INV_HD_TB.OLD_INVNO "
 
 
-            '結果を取り出す 
-            While (dataread.Read())
-                'インボイス番号をキーにデータを更新
-                If cflg = 0 Then
-                    'Call check001(Trim(data1))
-                    cflg = 1
+                'ＳＱＬコマンド作成 
+                dbcmd = New SqlCommand(strSQL, cnn)
+                'ＳＱＬ文実行 
+                dataread = dbcmd.ExecuteReader()
+
+
+                '結果を取り出す 
+                While (dataread.Read())
+                    'インボイス番号をキーにデータを更新
+                    If cflg = 0 Then
+                        'Call check001(Trim(data1))
+                        cflg = 1
+                    Else
+                    End If
+
+                End While
+
+                'クローズ処理 
+                dataread.Close()
+                dbcmd.Dispose()
+                cnn.Close()
+                cnn.Dispose()
+
+                'エラーの抽出　エラーがあればエラー通知メールを送付 エラーの項目に追加・削除
+                Call erreg(a, data1, data8)
+
+
+                If a > 0 Then
+                    Call Mail02(data1, data2, data3, data4, data5, data6, data7, data10)
+                    Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーが解消されていません。');</script>", False)
                 Else
+                    Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーを強制的に解除します。。');</script>", False)
+
+                    Call EXELE(data1, data2, data3, data4, data5, data6, data7)
+
+
                 End If
 
-            End While
+                TextBox1.Text = ""
 
-            'クローズ処理 
-            dataread.Close()
-            dbcmd.Dispose()
-            cnn.Close()
-            cnn.Dispose()
-
-            'エラーの抽出　エラーがあればエラー通知メールを送付 エラーの項目に追加・削除
-            Call erreg(a, data1, data8)
+            ElseIf e.CommandName = "edt4" Then
 
 
-            If a > 0 Then
-                Call Mail02(data1, data2, data3, data4, data5, data6, data7, data10)
-                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーが解消されていません。');</script>", False)
-            Else
-                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('エラーを強制的に解除します。。');</script>", False)
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Dim data1 = Me.GridView1.Rows(index).Cells(16).Text
+                Dim data2 = Me.GridView1.Rows(index).Cells(6).Text
+                Dim data3 = Me.GridView1.Rows(index).Cells(7).Text
+                Dim data4 = Me.GridView1.Rows(index).Cells(9).Text
+                Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
+                Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
+                Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
 
-                Call EXELE(data1, data2, data3, data4, data5, data6, data7)
+                Dim fflg As Long
+                Dim cflg As String = ""
 
+                Dim dataread As SqlDataReader
+                Dim dbcmd As SqlCommand
 
-            End If
-
-
-        ElseIf e.CommandName = "edt4" Then
-
-
-            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
-            Dim data1 = Me.GridView1.Rows(index).Cells(16).Text
-            Dim data2 = Me.GridView1.Rows(index).Cells(6).Text
-            Dim data3 = Me.GridView1.Rows(index).Cells(7).Text
-            Dim data4 = Me.GridView1.Rows(index).Cells(9).Text
-            Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
-            Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
-            Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
-
-            Dim fflg As Long
-            Dim cflg As String = ""
-
-            Dim dataread As SqlDataReader
-            Dim dbcmd As SqlCommand
-
-            fflg = 0
+                fflg = 0
 
 
-            Dim strSQL As String
-            Dim dtNow As DateTime = DateTime.Now
-            Dim strFlg As String = ""
+                Dim strSQL As String
+                Dim dtNow As DateTime = DateTime.Now
+                Dim strFlg As String = ""
 
-            Dim dltcb01 As CheckBox = Me.GridView1.Rows(index).FindControl("cb01")
-            Dim dltcb02 As CheckBox = Me.GridView1.Rows(index).FindControl("cb02")
-            Dim dltButton4 As Button = Me.GridView1.Rows(index).FindControl("Button4")
+                Dim dltcb01 As CheckBox = Me.GridView1.Rows(index).FindControl("cb01")
+                Dim dltcb02 As CheckBox = Me.GridView1.Rows(index).FindControl("cb02")
+                Dim dltButton4 As Button = Me.GridView1.Rows(index).FindControl("Button4")
 
-            '接続文字列の作成
-            Dim ConnectionString As String = String.Empty
-            'SQL Server認証
-            ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
-            'SqlConnectionクラスの新しいインスタンスを初期化
-            Dim cnn = New SqlConnection(ConnectionString)
-            Dim Command = cnn.CreateCommand
+                '接続文字列の作成
+                Dim ConnectionString As String = String.Empty
+                'SQL Server認証
+                ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+                'SqlConnectionクラスの新しいインスタンスを初期化
+                Dim cnn = New SqlConnection(ConnectionString)
+                Dim Command = cnn.CreateCommand
 
-            'データベース接続を開く
-            cnn.Open()
+                'データベース接続を開く
+                cnn.Open()
 
 
 
-            strSQL = "SELECT T_EXL_CSKANRYO.FLG02 "
-            strSQL = strSQL & "FROM T_EXL_CSKANRYO "
-            strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
-
-            'ＳＱＬコマンド作成 
-            dbcmd = New SqlCommand(strSQL, cnn)
-            'ＳＱＬ文実行 
-            dataread = dbcmd.ExecuteReader()
-
-
-            '結果を取り出す 
-            While (dataread.Read())
-                'インボイス番号をキーにデータを更新
-                cflg = dataread("FLG02")
-            End While
-
-            'クローズ処理 
-            dataread.Close()
-            dbcmd.Dispose()
-
-            If cflg = "" Then
-
-                If dltcb01.Visible = True And dltcb02.Visible = True Then
-                    fflg = 1
-                ElseIf dltcb01.Visible = False And dltcb02.Visible = True Then
-                    fflg = 2
-                ElseIf dltcb01.Visible = True And dltcb02.Visible = False Then
-                    fflg = 3
-                ElseIf dltcb01.Visible = False And dltcb02.Visible = False Then
-                    fflg = 4
-                End If
-
-                strSQL = ""
-                strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
-                strSQL = strSQL & "FLG02 = '" & fflg & "' "
+                strSQL = "SELECT T_EXL_CSKANRYO.FLG02 "
+                strSQL = strSQL & "FROM T_EXL_CSKANRYO "
                 strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
 
-                Command.CommandText = strSQL
-                ' SQLの実行
-                Command.ExecuteNonQuery()
+                'ＳＱＬコマンド作成 
+                dbcmd = New SqlCommand(strSQL, cnn)
+                'ＳＱＬ文実行 
+                dataread = dbcmd.ExecuteReader()
+
+
+                '結果を取り出す 
+                While (dataread.Read())
+                    'インボイス番号をキーにデータを更新
+                    cflg = dataread("FLG02")
+                End While
+
+                'クローズ処理 
+                dataread.Close()
+                dbcmd.Dispose()
+
+                If cflg = "" Then
+
+                    If dltcb01.Visible = True And dltcb02.Visible = True Then
+                        fflg = 1
+                    ElseIf dltcb01.Visible = False And dltcb02.Visible = True Then
+                        fflg = 2
+                    ElseIf dltcb01.Visible = True And dltcb02.Visible = False Then
+                        fflg = 3
+                    ElseIf dltcb01.Visible = False And dltcb02.Visible = False Then
+                        fflg = 4
+                    End If
+
+                    strSQL = ""
+                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                    strSQL = strSQL & "FLG02 = '" & fflg & "' "
+                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                    strSQL = ""
+                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                    strSQL = strSQL & "FLG04 = '1', "
+                    strSQL = strSQL & "FLG05 = '1' "
+                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                    Command.CommandText = strSQL
+                    ' SQLの実行
+                    Command.ExecuteNonQuery()
+
+                    cnn.Close()
+                    cnn.Dispose()
+
+                    Me.GridView1.Rows(index).Cells(23).Text = "1"
+                    Me.GridView1.Rows(index).Cells(24).Text = "1"
+
+                    Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('KD,ｱﾌﾀともにチェックボックスを表示しました。');</script>", False)
+
+
+                Else
+
+                    If cflg = "1" Then
+
+                        dltcb01.Visible = True
+                        dltcb02.Visible = True
+
+                        strSQL = ""
+                        strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                        strSQL = strSQL & "FLG02 = '' "
+                        strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                        Command.CommandText = strSQL
+                        ' SQLの実行
+                        Command.ExecuteNonQuery()
+
+                        strSQL = ""
+                        strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                        strSQL = strSQL & "FLG04 = '1', "
+                        strSQL = strSQL & "FLG05 = '1' "
+                        strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                        Command.CommandText = strSQL
+                        ' SQLの実行
+                        Command.ExecuteNonQuery()
+
+                        cnn.Close()
+                        cnn.Dispose()
+
+                        Me.GridView1.Rows(index).Cells(23).Text = "1"
+                        Me.GridView1.Rows(index).Cells(24).Text = "1"
+
+                    ElseIf cflg = "2" Then
+
+                        dltcb01.Visible = True
+                        dltcb02.Visible = False
+
+                        strSQL = ""
+                        strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                        strSQL = strSQL & "FLG02 = '' "
+                        strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                        Command.CommandText = strSQL
+                        ' SQLの実行
+                        Command.ExecuteNonQuery()
+
+                        strSQL = ""
+                        strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                        strSQL = strSQL & "FLG04 = '1', "
+                        strSQL = strSQL & "FLG05 = '0' "
+                        strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                        Command.CommandText = strSQL
+                        ' SQLの実行
+                        Command.ExecuteNonQuery()
+
+                        cnn.Close()
+                        cnn.Dispose()
+
+                        Me.GridView1.Rows(index).Cells(23).Text = "0"
+                        Me.GridView1.Rows(index).Cells(24).Text = "1"
+
+                    ElseIf cflg = "3" Then
+
+                        dltcb01.Visible = False
+                        dltcb02.Visible = True
+
+                        strSQL = ""
+                        strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                        strSQL = strSQL & "FLG02 = '' "
+                        strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                        Command.CommandText = strSQL
+                        ' SQLの実行
+                        Command.ExecuteNonQuery()
+
+                        strSQL = ""
+                        strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                        strSQL = strSQL & "FLG04 = '0', "
+                        strSQL = strSQL & "FLG05 = '1' "
+                        strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                        Command.CommandText = strSQL
+                        ' SQLの実行
+                        Command.ExecuteNonQuery()
+
+                        cnn.Close()
+                        cnn.Dispose()
+
+                        Me.GridView1.Rows(index).Cells(23).Text = "1"
+                        Me.GridView1.Rows(index).Cells(24).Text = "0"
+                    ElseIf cflg = "4" Then
+
+                        dltcb01.Visible = False
+                        dltcb02.Visible = False
+
+                        strSQL = ""
+                        strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                        strSQL = strSQL & "FLG02 = '' "
+                        strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                        Command.CommandText = strSQL
+                        ' SQLの実行
+                        Command.ExecuteNonQuery()
+
+                        strSQL = ""
+                        strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+                        strSQL = strSQL & "FLG04 = '0', "
+                        strSQL = strSQL & "FLG05 = '0' "
+                        strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+
+                        Command.CommandText = strSQL
+                        ' SQLの実行
+                        Command.ExecuteNonQuery()
+
+                        cnn.Close()
+                        cnn.Dispose()
+
+                        'GRIDVIEWの作成時になくなる？
+                        Me.GridView1.Rows(index).Cells(23).Text = "0"
+                        Me.GridView1.Rows(index).Cells(24).Text = "0"
+
+                    End If
+
+                    Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('チェックボックスを初期状態に戻しました。');</script>", False)
+
+                    dltButton4.Dispose()
+                    dltcb01.Dispose()
+                    dltcb02.Dispose()
+
+                End If
+                Command.Dispose()
+
+            ElseIf e.CommandName = "edt5" Then
+
+
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Dim data1 = Me.GridView1.Rows(index).Cells(16).Text
+                Dim data2 = Me.GridView1.Rows(index).Cells(6).Text
+                Dim data3 = Me.GridView1.Rows(index).Cells(7).Text
+                Dim data4 = Me.GridView1.Rows(index).Cells(9).Text
+                Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
+                Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
+                Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
+                Dim data8 = Me.GridView1.Rows(index).Cells(30).Text
+                Dim data9 = Me.GridView1.Rows(index).Cells(29).Text
+                Dim data10 = Me.GridView1.Rows(index).Cells(31).Text
+
+                Dim dataread As SqlDataReader
+                Dim dbcmd As SqlCommand
+                Dim strSQL As String = ""
+                Dim strDate As String = ""
+                Dim strinv As String = ""
+                Dim eflg As Long
+                Dim strcst As String = ""
+                Dim FLGval As Long
+                Dim a As Long
+                Dim cflg As Long
+
+                FLGval = 0
+
+
+                '接続文字列の作成
+                Dim ConnectionString As String = String.Empty
+                'SQL Server認証
+                ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+                'SqlConnectionクラスの新しいインスタンスを初期化
+                Dim cnn = New SqlConnection(ConnectionString)
+
+                Dim dt1 As DateTime = DateTime.Now
+
+                Dim ts1 As New TimeSpan(100, 0, 0, 0)
+                Dim ts2 As New TimeSpan(100, 0, 0, 0)
+                Dim dt2 As DateTime = dt1 + ts1
+                Dim dt3 As DateTime = dt1 - ts1
+
+                'データベース接続を開く
+                cnn.Open()
+                Dim Command = cnn.CreateCommand
 
                 strSQL = ""
-                strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
-                strSQL = strSQL & "FLG04 = '1', "
-                strSQL = strSQL & "FLG05 = '1' "
-                strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
+                strSQL = strSQL & "DELETE FROM T_EXL_CSKANRYO "
+                strSQL = strSQL & "WHERE T_EXL_CSKANRYO.INVOICE = '" & data5 & "' "
+                strSQL = strSQL & "AND T_EXL_CSKANRYO.BOOKING_NO = '" & data1 & "' "
+                strSQL = strSQL & "AND T_EXL_CSKANRYO.DAY09 = '" & data8 & "' "
 
                 Command.CommandText = strSQL
                 ' SQLの実行
@@ -1629,212 +1881,13 @@ Partial Class yuusen
                 cnn.Close()
                 cnn.Dispose()
 
-                Me.GridView1.Rows(index).Cells(23).Text = "1"
-                Me.GridView1.Rows(index).Cells(24).Text = "1"
+                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('案件を削除しました。');</script>", False)
+                Command.Dispose()
 
-                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('KD,ｱﾌﾀともにチェックボックスを表示しました。');</script>", False)
-
-
-            Else
-
-                If cflg = "1" Then
-
-                    dltcb01.Visible = True
-                    dltcb02.Visible = True
-
-                    strSQL = ""
-                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
-                    strSQL = strSQL & "FLG02 = '' "
-                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
-
-                    Command.CommandText = strSQL
-                    ' SQLの実行
-                    Command.ExecuteNonQuery()
-
-                    strSQL = ""
-                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
-                    strSQL = strSQL & "FLG04 = '1', "
-                    strSQL = strSQL & "FLG05 = '1' "
-                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
-
-                    Command.CommandText = strSQL
-                    ' SQLの実行
-                    Command.ExecuteNonQuery()
-
-                    cnn.Close()
-                    cnn.Dispose()
-
-                    Me.GridView1.Rows(index).Cells(23).Text = "1"
-                    Me.GridView1.Rows(index).Cells(24).Text = "1"
-
-                ElseIf cflg = "2" Then
-
-                    dltcb01.Visible = True
-                    dltcb02.Visible = False
-
-                    strSQL = ""
-                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
-                    strSQL = strSQL & "FLG02 = '' "
-                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
-
-                    Command.CommandText = strSQL
-                    ' SQLの実行
-                    Command.ExecuteNonQuery()
-
-                    strSQL = ""
-                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
-                    strSQL = strSQL & "FLG04 = '1', "
-                    strSQL = strSQL & "FLG05 = '0' "
-                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
-
-                    Command.CommandText = strSQL
-                    ' SQLの実行
-                    Command.ExecuteNonQuery()
-
-                    cnn.Close()
-                    cnn.Dispose()
-
-                    Me.GridView1.Rows(index).Cells(23).Text = "0"
-                    Me.GridView1.Rows(index).Cells(24).Text = "1"
-
-                ElseIf cflg = "3" Then
-
-                    dltcb01.Visible = False
-                    dltcb02.Visible = True
-
-                    strSQL = ""
-                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
-                    strSQL = strSQL & "FLG02 = '' "
-                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
-
-                    Command.CommandText = strSQL
-                    ' SQLの実行
-                    Command.ExecuteNonQuery()
-
-                    strSQL = ""
-                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
-                    strSQL = strSQL & "FLG04 = '0', "
-                    strSQL = strSQL & "FLG05 = '1' "
-                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
-
-                    Command.CommandText = strSQL
-                    ' SQLの実行
-                    Command.ExecuteNonQuery()
-
-                    cnn.Close()
-                    cnn.Dispose()
-
-                    Me.GridView1.Rows(index).Cells(23).Text = "1"
-                    Me.GridView1.Rows(index).Cells(24).Text = "0"
-                ElseIf cflg = "4" Then
-
-                    dltcb01.Visible = False
-                    dltcb02.Visible = False
-
-                    strSQL = ""
-                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
-                    strSQL = strSQL & "FLG02 = '' "
-                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
-
-                    Command.CommandText = strSQL
-                    ' SQLの実行
-                    Command.ExecuteNonQuery()
-
-                    strSQL = ""
-                    strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
-                    strSQL = strSQL & "FLG04 = '0', "
-                    strSQL = strSQL & "FLG05 = '0' "
-                    strSQL = strSQL & "WHERE BOOKING_NO = '" & data1 & "' "
-
-                    Command.CommandText = strSQL
-                    ' SQLの実行
-                    Command.ExecuteNonQuery()
-
-                    cnn.Close()
-                    cnn.Dispose()
-
-                    'GRIDVIEWの作成時になくなる？
-                    Me.GridView1.Rows(index).Cells(23).Text = "0"
-                    Me.GridView1.Rows(index).Cells(24).Text = "0"
-
-                End If
-
-                Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('チェックボックスを初期状態に戻しました。');</script>", False)
-
-                dltButton4.Dispose()
-                dltcb01.Dispose()
-                dltcb02.Dispose()
-
-            End If
-            Command.Dispose()
-
-        ElseIf e.CommandName = "edt5" Then
+            ElseIf e.CommandName = "edt6" Then
 
 
-            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
-            Dim data1 = Me.GridView1.Rows(index).Cells(16).Text
-            Dim data2 = Me.GridView1.Rows(index).Cells(6).Text
-            Dim data3 = Me.GridView1.Rows(index).Cells(7).Text
-            Dim data4 = Me.GridView1.Rows(index).Cells(9).Text
-            Dim data5 = Me.GridView1.Rows(index).Cells(11).Text
-            Dim data6 = Me.GridView1.Rows(index).Cells(14).Text
-            Dim data7 = Me.GridView1.Rows(index).Cells(13).Text
-            Dim data8 = Me.GridView1.Rows(index).Cells(30).Text
-            Dim data9 = Me.GridView1.Rows(index).Cells(29).Text
-            Dim data10 = Me.GridView1.Rows(index).Cells(31).Text
-
-            Dim dataread As SqlDataReader
-            Dim dbcmd As SqlCommand
-            Dim strSQL As String = ""
-            Dim strDate As String = ""
-            Dim strinv As String = ""
-            Dim eflg As Long
-            Dim strcst As String = ""
-            Dim FLGval As Long
-            Dim a As Long
-            Dim cflg As Long
-
-            FLGval = 0
-
-
-            '接続文字列の作成
-            Dim ConnectionString As String = String.Empty
-            'SQL Server認証
-            ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
-            'SqlConnectionクラスの新しいインスタンスを初期化
-            Dim cnn = New SqlConnection(ConnectionString)
-
-            Dim dt1 As DateTime = DateTime.Now
-
-            Dim ts1 As New TimeSpan(100, 0, 0, 0)
-            Dim ts2 As New TimeSpan(100, 0, 0, 0)
-            Dim dt2 As DateTime = dt1 + ts1
-            Dim dt3 As DateTime = dt1 - ts1
-
-            'データベース接続を開く
-            cnn.Open()
-            Dim Command = cnn.CreateCommand
-
-            strSQL = ""
-            strSQL = strSQL & "DELETE FROM T_EXL_CSKANRYO "
-            strSQL = strSQL & "WHERE T_EXL_CSKANRYO.INVOICE = '" & data5 & "' "
-            strSQL = strSQL & "AND T_EXL_CSKANRYO.BOOKING_NO = '" & data1 & "' "
-            strSQL = strSQL & "AND T_EXL_CSKANRYO.DAY09 = '" & data8 & "' "
-
-            Command.CommandText = strSQL
-            ' SQLの実行
-            Command.ExecuteNonQuery()
-
-            cnn.Close()
-            cnn.Dispose()
-
-            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('案件を削除しました。');</script>", False)
-            Command.Dispose()
-
-        ElseIf e.CommandName = "edt6" Then
-
-
-            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+                Dim index As Integer = Convert.ToInt32(e.CommandArgument)
             Dim data1 = Me.GridView1.Rows(index).Cells(16).Text
             Dim data2 = Me.GridView1.Rows(index).Cells(6).Text
             Dim data3 = Me.GridView1.Rows(index).Cells(7).Text
@@ -1937,8 +1990,43 @@ Partial Class yuusen
 
             End If
 
-            'Grid再表示
+
+        Dim Dataobj As New DBAccess
+
+        If Label8.Text = "ＬＣＬ表示" Then
+            Dim ds As DataSet = Dataobj.GET_KANRYO_LCL
+            If ds.Tables.Count > 0 Then
+                GridView1.DataSourceID = ""
+                GridView1.DataSource = ds
+                GridView1.DataBind()
+            End If
+        ElseIf Label8.Text = "ＡＩＲ表示" Then
+            Dim ds As DataSet = Dataobj.GET_KANRYO_AIR
+            If ds.Tables.Count > 0 Then
+                GridView1.DataSourceID = ""
+                GridView1.DataSource = ds
+                GridView1.DataBind()
+            End If
+        ElseIf Label8.Text = "ＦＣＬ表示" Then
+            Dim ds As DataSet = Dataobj.GET_KANRYO_FCL
+            If ds.Tables.Count > 0 Then
+                GridView1.DataSourceID = ""
+                GridView1.DataSource = ds
+                GridView1.DataBind()
+            End If
+        ElseIf Label8.Text = "全件表示" Then
+
+
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = SqlDataSource7
             GridView1.DataBind()
+
+        End If
+
+
+
+        ''Grid再表示
+        'GridView1.DataBind()
 
     End Sub
 
@@ -2065,35 +2153,53 @@ Partial Class yuusen
 
                         If data9 = 1 Then
                             Call erreg(a, data1, data8)
-                            Call Mail01(data1, data2, data3, data4, data5, data6, data7, data10, a) 'Kkkkkkk
+                            If data3 = "AIR" Then
+                            Else
+                                Call Mail01(data1, data2, data3, data4, data5, data6, data7, data10, a) 'Kkkkkkk
+                            End If
+                            'LCL
+                            If data3 = "LCL" Then
+                                Call Mail05(data1, data2, data3, data4, data5, data6, data7, data10, a) 'kkkkkk
+                            End If
                         Else
-                            Call Mail03(data1, data2, data3, data4, data5, data6, data7, data10)
+                            If data3 = "AIR" Then
+                            Else
+                                Call Mail03(data1, data2, data3, data4, data5, data6, data7, data10)
+                            End If
+                            'LCL
+                            If data3 = "LCL" Then
+                                Call Mail05(data1, data2, data3, data4, data5, data6, data7, data10, a) 'kkkkkk
+                            End If
                         End If
 
 
                     End If
                 End If
 
-                If a > 0 Then
-                    If data9 = 1 Then
-                        Call Mail02(data1, data2, data3, data4, data5, data6, data7, data10)
-                    Else
-                    End If
-
+                If data3 = "AIR" Then
                 Else
-                    'ｴｸｾﾙ出力
-                    If dflg = 1 Then '取消時はチェックは無しで強制的にチェックの登録を解除
-                    Else
 
-                        'バンニングのみの場合は処理しない＿＿＿X
+                    If a > 0 Then
                         If data9 = 1 Then
-
-                            Call EXELE(data1, data2, data3, data4, data5, data6, data7)
-
-
+                            Call Mail02(data1, data2, data3, data4, data5, data6, data7, data10)
                         Else
                         End If
 
+                    Else
+                        'ｴｸｾﾙ出力
+                        If dflg = 1 Then '取消時はチェックは無しで強制的にチェックの登録を解除
+                        Else
+
+                            'バンニングのみの場合は処理しない＿＿＿X
+                            If data9 = 1 Then
+
+                                Call EXELE(data1, data2, data3, data4, data5, data6, data7)
+
+
+                            Else
+                            End If
+
+                        End If
                     End If
                 End If
 
@@ -2109,6 +2215,7 @@ Partial Class yuusen
                 End If
             End If
 
+            TextBox1.Text = ""
 
         ElseIf e.CommandName = "edt2" Then
 
@@ -2213,7 +2320,7 @@ Partial Class yuusen
 
             Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('処理が完了しました。');</script>", False)
 
-
+            TextBox1.Text = ""
 
         ElseIf e.CommandName = "edt3" Then
 
@@ -2315,6 +2422,7 @@ Partial Class yuusen
 
             End If
 
+            TextBox1.Text = ""
 
         ElseIf e.CommandName = "edt4" Then
 
@@ -2885,6 +2993,7 @@ Partial Class yuusen
             'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
             strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(GridView1.Rows(I).Cells(16).Text, vbLf, "")) & "' "
             strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '006' "
+            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].INVNO = '" & Trim(Replace(GridView1.Rows(I).Cells(30).Text, vbLf, "")) & "' "
 
             'ＳＱＬコマンド作成
             dbcmd = New SqlCommand(strSQL, cnn)
@@ -2908,6 +3017,7 @@ Partial Class yuusen
             'strSQL = "SELECT ITK_BKGNO FROM [T_EXL_CSWORKSTATUS] WHERE [T_EXL_CSWORKSTATUS].ITK_BKGNO = '" & Trim(e.Row.Cells(26).Text) & "' "
             strSQL = "SELECT BKGNO FROM [T_EXL_WORKSTATUS00] WHERE [T_EXL_WORKSTATUS00].BKGNO = '" & Trim(Replace(GridView1.Rows(I).Cells(16).Text, vbLf, "")) & "' "
             strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].ID = '007' "
+            strSQL = strSQL & "AND [T_EXL_WORKSTATUS00].INVNO = '" & Trim(Replace(GridView1.Rows(I).Cells(30).Text, vbLf, "")) & "' "
 
             'ＳＱＬコマンド作成
             dbcmd = New SqlCommand(strSQL, cnn)
@@ -3432,6 +3542,8 @@ Partial Class yuusen
 
         cnn.Close()
         cnn.Dispose()
+
+
     End Sub
 
     Private Sub reg_check(bkgno As String, A As String, b As String)
@@ -3582,7 +3694,7 @@ Partial Class yuusen
             strSQL = ""
             strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
             strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '006' "
-            '           strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
             strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
 
             'ＳＱＬコマンド作成 
@@ -3737,7 +3849,7 @@ Partial Class yuusen
             strSQL = ""
             strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
             strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '006' "
-            'strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
             strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
 
             'ＳＱＬコマンド作成 
@@ -3758,7 +3870,7 @@ Partial Class yuusen
                 strSQL = ""
                 strSQL = strSQL & "DELETE FROM T_EXL_WORKSTATUS00 "
                 strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.ID = '006' "
-                'strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
+                strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
                 strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
 
                 Command.CommandText = strSQL
@@ -3803,7 +3915,7 @@ Partial Class yuusen
             strSQL = ""
             strSQL = strSQL & "SELECT COUNT(*) AS RecCnt FROM T_EXL_WORKSTATUS00 WHERE "
             strSQL = strSQL & "T_EXL_WORKSTATUS00.ID = '007' "
-            'strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
+            strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
             strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
 
             'ＳＱＬコマンド作成 
@@ -3824,7 +3936,7 @@ Partial Class yuusen
                 strSQL = ""
                 strSQL = strSQL & "DELETE FROM T_EXL_WORKSTATUS00 "
                 strSQL = strSQL & "WHERE T_EXL_WORKSTATUS00.ID = '007' "
-                'strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
+                strSQL = strSQL & "AND T_EXL_WORKSTATUS00.INVNO = '" & strinv & "' "
                 strSQL = strSQL & "AND T_EXL_WORKSTATUS00.BKGNO = '" & bkgno & "' "
 
                 Command.CommandText = strSQL
@@ -7188,7 +7300,7 @@ Partial Class yuusen
 
         body = body & body2
 
-        TextBox1.Text = ""
+
 
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
@@ -7595,6 +7707,11 @@ Partial Class yuusen
 
         body = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
 
+
+
+
+
+
         ' MailKit におけるメールの情報
         Dim message = New MimeKit.MimeMessage()
 
@@ -7635,6 +7752,286 @@ Partial Class yuusen
         Using client As New MailKit.Net.Smtp.SmtpClient()
             client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
             client.Send(message)
+            client.Disconnect(True)
+            client.Dispose()
+            message.Dispose()
+        End Using
+
+    End Sub
+
+    Sub Mail05(ByRef bkgno As String, ByRef a As String, ByRef b As String, ByRef c2 As String, ByRef d As String, ByRef e As String, ByRef f As String, ByRef g As String, ByRef er As Long)
+
+        'メールの送信に必要な情報
+        Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
+        Dim smtpPort As Integer = 25
+        Dim strcon As String
+        Dim stritk As String
+        Dim strend As String
+
+        Dim ls7 As String = ""
+
+        Dim plt As Long
+        Dim qty As Long
+
+        ' メールの内容
+        Dim struid As String = Session("UsrId")
+
+        Dim strfrom As String = GET_from(struid)
+        'Dim strto As String = GET_from(struid)
+        Dim strto As String = GET_ToAddress("12", 1) '戻す
+
+        'Dim strFilePath As String = "C:\exp\cs_home\upload\" & Session("strFile")
+
+        If strto = "" Then
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('宛先が設定されていないためメール送信に失敗しました。');</script>", False)
+            Exit Sub
+        End If
+
+        strto = Left(strto, Len(strto) - 1)
+
+        Dim strcc As String = GET_ToAddress("12", 2) + GET_from(struid) '戻す
+
+        Dim strsyomei As String = GET_syomei(struid)
+
+        'メールの件名
+        Dim subject As String = " 【ご連絡】ＬＣＬ貨物サイズ " & "客先：" & c2 & " / IV-" & d & " / BKG#" & bkgno & " "
+        'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
+
+        'メールの本文
+        Dim body As String = ""
+        Dim bodyitk As String = ""
+
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        body = body + "このメールはシステムから送信されています。<br/>"
+        body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+
+        body = body & "<html><body>各位<br>お疲れ様です。<br><br>主題の件、概算サイズご連絡致します。<br></body></html>" ' UriBodyC()
+
+
+        Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;font-family:Meiryo UI;'><tr style='background-color: #6fbfd1;'><td>客先</td><td>IN_NO</td><td>カット日</td><td>出港日</td><td>M3</td><td>重量</td><td>荷量</td><td>引取希望日</td><td></td><td>搬入希望日</td><td></td><td>搬入先</td><td>ドレージ</td></tr>"
+
+        Call IVINFO5(bkgno, t, plt, qty, ls7)
+
+        t = t & "</Table></body></html>"
+        t = t & "<html><body><Table style='Font-Size:12px;font-family:Meiryo UI;'></Table></body></html>"
+
+        body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
+
+        body = body & t
+
+
+        body = "<font size= '3' face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+
+        Dim body2 As String = "<br>貨物情報－－－－－－－－－－－－－－</p>" & TextBox1.Text.Replace(vbCrLf, "<br/>") & "</p>" ' UriBodyC()
+
+        body2 = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body2 & "</font>"
+        body2 = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body2 & "</font>"
+
+        body = body & body2
+
+
+        ' MailKit におけるメールの情報
+        Dim message = New MimeKit.MimeMessage()
+
+        ' 送り元情報  
+        message.From.Add(MailboxAddress.Parse(strfrom))
+
+        ' 宛先情報  
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
+
+        If strcc <> "" Then　'戻す
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
+
+        ' 表題  
+        message.Subject = subject
+
+        ' 本文
+        Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
+        textPart.Text = body
+        message.Body = textPart
+
+        Dim multipart = New MimeKit.Multipart("mixed")
+
+        multipart.Add(textPart)
+
+        message.Body = multipart
+
+
+        ''添付ファイル
+        'If Session("strFile") <> "" Then
+        '    Dim path = strFilePath     '添付したいファイル
+        '    Dim mimeType = MimeKit.MimeTypes.GetMimeType(path)
+        '    Dim attachment = New MimeKit.MimePart(mimeType) _
+        '    With {
+        '        .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
+        '        .ContentDisposition = New MimeKit.ContentDisposition(),
+        '        .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
+        '        .FileName = System.IO.Path.GetFileName(path)
+        '    }
+        '    multipart.Add(attachment)
+        'End If
+
+        Using client As New MailKit.Net.Smtp.SmtpClient()
+
+
+            client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
+            If TextBox1.Text <> "" Then
+                client.Send(message)
+            End If
+            client.Disconnect(True)
+            client.Dispose()
+            message.Dispose()
+        End Using
+
+    End Sub
+
+    Sub Mail06(ByRef bkgno As String, ByRef a As String, ByRef b As String, ByRef c2 As String, ByRef d As String, ByRef e As String, ByRef f As String, ByRef g As String, ByRef er As Long)
+
+        'メールの送信に必要な情報
+        Dim smtpHostName As String = "svsmtp01.exedy.co.jp"
+        Dim smtpPort As Integer = 25
+        Dim strcon As String
+        Dim stritk As String
+        Dim strend As String
+
+        Dim ls7 As String = ""
+
+        Dim plt As Long
+        Dim qty As Long
+
+        ' メールの内容
+        Dim struid As String = Session("UsrId")
+
+        Dim strfrom As String = GET_from(struid)
+        'Dim strto As String = GET_from(struid)
+        Dim strto As String = GET_ToAddress("10", 1) '戻す
+
+        'Dim strFilePath As String = "C:\exp\cs_home\upload\" & Session("strFile")
+
+        If strto = "" Then
+            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('宛先が設定されていないためメール送信に失敗しました。');</script>", False)
+            Exit Sub
+        End If
+
+        strto = Left(strto, Len(strto) - 1)
+
+        Dim strcc As String = GET_ToAddress("10", 2) + GET_from(struid) '戻す
+
+        Dim strsyomei As String = GET_syomei(struid)
+
+        'メールの件名
+
+        Dim subject = " 【ご報告】＜最終＞ＡＩＲ 完了報告 " & "客先：" & c2 & " / IV-" & d
+        'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
+
+        'メールの本文
+        Dim body As String = ""
+        Dim bodyitk As String = ""
+
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+        body = body + "このメールはシステムから送信されています。<br/>"
+        body = body + "心当たりが無い場合、エクセディ　CSチーム担当者までご連絡ください。<br/>"
+        body = body + "－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－<br/>"
+
+        body = body & "<html><body>各位<br>お疲れ様です。<br><br>主題の件<br>以下にて完了報告実施しましたので、ご確認宜しくお願いいたします。<br></body></html>" ' UriBodyC()
+
+
+        Dim t As String = "<html><body><Table border='1' style='Font-Size:12px;font-family:Meiryo UI;'><tr style='background-color: #6fbfd1;'><td>ETD</td><td>客先</td><td>IVNO</td><td>依頼者</td><td>部署</td><td>海貨業者</td><td>場所</td></tr>"
+
+
+
+
+        Call IVINFO6(d, t, plt, qty, ls7)
+
+        t = t & "</Table></body></html>"
+        t = t & "<html><body><Table style='Font-Size:12px;font-family:Meiryo UI;'></Table></body></html>"
+
+        body = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body & "</font>"
+
+        body = body & t
+
+
+        body = "<font size= '3' face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body & "</font>"
+
+        Dim body2 As String = "<br><br>備考－－－－－－－－－－－－－－</p>" & TextBox1.Text.Replace(vbCrLf, "<br/>") & "</p>" ' UriBodyC()
+
+        body2 = "<font face=" & Chr(34) & "Meiryo UI" & Chr(34) & ">" & body2 & "</font>"
+        body2 = "<font size=" & Chr(34) & "2" & Chr(34) & ">" & body2 & "</font>"
+
+        body = body & body2
+
+
+        ' MailKit におけるメールの情報
+        Dim message = New MimeKit.MimeMessage()
+
+        ' 送り元情報  
+        message.From.Add(MailboxAddress.Parse(strfrom))
+
+        ' 宛先情報  
+        If strto <> "" Then
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strto.Split(",")
+            For Each c In strVal
+                message.To.Add(New MailboxAddress("", c))
+            Next
+        End If
+
+        If strcc <> "" Then　'戻す
+            'カンマ区切りをSPLIT
+            Dim strVal() As String = strcc.Split(",")
+            For Each c In strVal
+                message.Cc.Add(New MailboxAddress("", c))
+            Next
+        End If
+
+        ' 表題  
+        message.Subject = subject
+
+        ' 本文
+        Dim textPart = New MimeKit.TextPart(MimeKit.Text.TextFormat.Html)
+        textPart.Text = body
+        message.Body = textPart
+
+        Dim multipart = New MimeKit.Multipart("mixed")
+
+        multipart.Add(textPart)
+
+        message.Body = multipart
+
+
+        ''添付ファイル
+        'If Session("strFile") <> "" Then
+        '    Dim path = strFilePath     '添付したいファイル
+        '    Dim mimeType = MimeKit.MimeTypes.GetMimeType(path)
+        '    Dim attachment = New MimeKit.MimePart(mimeType) _
+        '    With {
+        '        .Content = New MimeKit.MimeContent(System.IO.File.OpenRead(path)),
+        '        .ContentDisposition = New MimeKit.ContentDisposition(),
+        '        .ContentTransferEncoding = MimeKit.ContentEncoding.Base64,
+        '        .FileName = System.IO.Path.GetFileName(path)
+        '    }
+        '    multipart.Add(attachment)
+        'End If
+
+        Using client As New MailKit.Net.Smtp.SmtpClient()
+
+
+            client.Connect(smtpHostName, smtpPort, MailKit.Security.SecureSocketOptions.Auto)
+
+            client.Send(message)
+
             client.Disconnect(True)
             client.Dispose()
             message.Dispose()
@@ -8137,6 +8534,174 @@ Partial Class yuusen
         cnn.Close()
         cnn.Dispose()
 
+
+
+    End Sub
+
+    Private Sub IVINFO5(bkgno As String, ByRef t As String, ByRef plt As Long, ByRef qty As Long, ByRef ls7 As String)
+        'データの取得
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String = ""
+        Dim strinv As String = ""
+        Dim eflg As Long
+        Dim strcst As String = ""
+        Dim strrate As Double
+        Dim strcry As String = ""
+        Dim y As String = ""
+        Dim strcut As String = ""
+        Dim stretd As String = ""
+        Dim strm3 As String = ""
+        Dim strwgt As String = ""
+        Dim strniryo As String = ""
+        Dim strpick01 As String = ""
+        Dim strpick02 As String = ""
+        Dim strin01 As String = ""
+        Dim strin02 As String = ""
+        Dim strwh As String = ""
+        Dim strdr As String = ""
+        Dim strcust As String = ""
+        Dim striv As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = strSQL & "SELECT [CONSIGNEE], [DESTINATION], [CUST], [INVOICE_NO], [BOOKING_NO], [OFFICIAL_QUOT], [CUT_DATE], [ETD], [ETA], [LCL_SIZE], [WEIGHT], [QTY], [PICKUP01], [PICKUP02], [MOVEIN01], [MOVEIN02], [OTHERS01], [FLG01], [FLG02], [FLG03], [FLG04], [FLG05],[PICKINPLACE]  "
+        strSQL = strSQL & "FROM [T_EXL_LCLTENKAI] "
+        strSQL = strSQL & "WHERE BOOKING_NO = '" & bkgno & "' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+
+            strcust = Trim(Convert.ToString(dataread("CUST")))        '客先目
+            striv = Trim(Convert.ToString(dataread("INVOICE_NO")))        '客先目
+            strcut = Trim(Convert.ToString(dataread("CUT_DATE")))        '客先目
+            stretd = Trim(Convert.ToString(dataread("ETD")))        '客先目
+            strm3 = Trim(dataread("LCL_SIZE"))
+            strwgt = Trim(Convert.ToString(dataread("WEIGHT")))        '客先目
+            strniryo = Trim(Convert.ToString(dataread("QTY")))        '客先目
+            strpick01 = Trim(Convert.ToString(dataread("PICKUP01")))        '客先目
+            strpick02 = Trim(Convert.ToString(dataread("PICKUP02")))        '客先目
+            strin01 = Trim(dataread("MOVEIN01"))        '客先目
+            strin02 = Trim(dataread("MOVEIN02"))        '客先目
+            strwh = Trim(Convert.ToString(dataread("PICKINPLACE")))        '客先目
+            strdr = Trim(Convert.ToString(dataread("FLG04")))        '客先目
+
+
+            t = t & "<tr><td>" & strcust & "</td><td>" & striv & "</td><td>" & strcut & "</td><td>" & stretd & "</td><td>" & strm3 & "</td><td>" & strwgt & "</td><td>" & strniryo & "</td><td>" & strpick01 & "</td><td>" & strpick02 & "</td><td>" & strin01 & "</td><td>" & strin02 & "</td><td>" & Replace(strwh, "__", "<br>") & "</td><td style='background-color: Khaki;'>" & Replace(strdr, "__", "<br>") & "</td>"
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+
+    End Sub
+
+    Private Sub IVINFO6(striv As String, ByRef t As String, ByRef plt As Long, ByRef qty As Long, ByRef ls7 As String)
+        'データの取得
+
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strDate As String = ""
+        Dim strinv As String = ""
+        Dim eflg As Long
+        Dim strcst As String = ""
+        Dim strrate As Double
+        Dim strcry As String = ""
+        Dim y As String = ""
+        Dim stretd As String = ""
+        Dim strcd As String = ""
+        Dim strivn As String = ""
+        Dim strreq As String = ""
+        Dim strdp As String = ""
+        Dim strsc As String = ""
+        Dim strplc As String = ""
+        Dim strdoc As String = ""
+        Dim strpu As String = ""
+        Dim strwh As String = ""
+        Dim strdr As String = ""
+        Dim strcust As String = ""
+
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = strSQL & "SELECT ETD, CUST_CD, IVNO, REQUESTER, DEPARTMENT, SHIPPING_COMPANY, PLACE, DOC_FIN, PICKUP "
+        strSQL = strSQL & "FROM T_EXL_AIR_MANAGE "
+        strSQL = strSQL & "WHERE IVNO = '" & striv & "' "
+        strSQL = strSQL & "AND PLACE = '" & "本社" & "' "
+        strSQL = strSQL & "AND DOC_FIN = '" & "" & "' "
+        strSQL = strSQL & "AND PICKUP = '" & "" & "' "
+
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+
+            stretd = Trim(Convert.ToString(dataread("ETD")))        '客先目
+            strcd = Trim(Convert.ToString(dataread("CUST_CD")))        '客先目
+            strivn = Trim(Convert.ToString(dataread("IVNO")))        '客先目
+            strreq = Trim(Convert.ToString(dataread("REQUESTER")))        '客先目
+            strdp = Trim(Convert.ToString(dataread("DEPARTMENT")))        '客先目
+            strsc = Trim(Convert.ToString(dataread("SHIPPING_COMPANY")))        '客先目
+            strplc = Trim(Convert.ToString(dataread("PLACE")))        '客先目
+            strdoc = Trim(Convert.ToString(dataread("DOC_FIN")))        '客先目
+            strpu = Trim(Convert.ToString(dataread("PICKUP")))        '客先目
+
+            t = t & "<tr><td>" & stretd & "</td><td>" & strcd & "</td><td>" & strivn & "</td><td>" & strreq & "</td><td>" & strdp & "</td><td>" & strsc & "</td><td>" & strplc & "</td>"
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
 
 
     End Sub
@@ -8775,6 +9340,94 @@ Partial Class yuusen
         cnn.Dispose()
 
     End Sub
+
+    Private Sub Update_vandate(strnum As String)
+        'レコードのフラグを取得する。
+        Dim strSQL As String
+        Dim dtNow As DateTime = DateTime.Now
+        Dim strFlg As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        'データベース接続を開く
+        cnn.Open()
+
+        'フラグをUPDATE
+        strSQL = ""
+        strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET "
+        strSQL = strSQL & "DAY11 = '" & dt1.ToString("yyyy/MM/dd") & "' "
+        strSQL = strSQL & "WHERE DAY09 = '" & strnum & "' "
+
+
+
+
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+        cnn.Close()
+        cnn.Dispose()
+        Command.Dispose()
+
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+
+        'Dim strcust As String = "'C255','C258'"
+        Dim strcust As String = "'C255'"
+        Dim Dataobj As New DBAccess
+
+        Dim ds As DataSet = Dataobj.GET_KANRYO_FCL()
+        If ds.Tables.Count > 0 Then
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = ds
+            GridView1.DataBind()
+        End If
+
+        Label8.Text = "ＦＣＬ表示"
+
+    End Sub
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+
+        'Dim strcust As String = "'C255','C258'"
+        Dim strcust As String = "'C255'"
+        Dim Dataobj As New DBAccess
+
+        Dim ds As DataSet = Dataobj.GET_KANRYO_LCL
+        If ds.Tables.Count > 0 Then
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = ds
+            GridView1.DataBind()
+        End If
+
+        Label8.Text = "ＬＣＬ表示"
+
+    End Sub
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+
+        'Dim strcust As String = "'C255','C258'"
+        Dim strcust As String = "'C255'"
+        Dim Dataobj As New DBAccess
+
+        Dim ds As DataSet = Dataobj.GET_KANRYO_AIR
+        If ds.Tables.Count > 0 Then
+            GridView1.DataSourceID = ""
+            GridView1.DataSource = ds
+            GridView1.DataBind()
+        End If
+
+        Label8.Text = "ＡＩＲ表示"
+
+    End Sub
+
 End Class
 
 

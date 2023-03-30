@@ -317,6 +317,18 @@ Partial Class cs_home
         ' SQLの実行
         Command.ExecuteNonQuery()
 
+
+        If strFlg = "doc_fin" Then
+            strSQL = strSQL & "UPDATE T_EXL_CSKANRYO SET DAY08 = '2' "
+            strSQL = strSQL & "WHERE INVOICE = '" & strIvno & "' "
+            strSQL = strSQL & "AND FLG01 = '" & "AIR" & "' "
+        End If
+
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+
         cnn.Close()
         cnn.Dispose()
 

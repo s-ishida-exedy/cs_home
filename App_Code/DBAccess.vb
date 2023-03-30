@@ -1464,4 +1464,70 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+    Public Function GET_KANRYO_FCL() As DataSet
+        'AIR専用客先　SN明細取得
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT * "
+        StrSQL = StrSQL & "FROM T_EXL_CSKANRYO "
+        StrSQL = StrSQL & "WHERE ((DAY08 ='' or DAY08 IS NULL) or (DAY07 ='' or DAY07 IS NULL)) "
+        StrSQL = StrSQL & "AND DAY06 <>'1' "
+        StrSQL = StrSQL & "AND FLG01 not in ('AIR','LCL') "
+        StrSQL = StrSQL & "ORDER BY DAY11,FLG01,CUT_DATE,DAY10 "
+
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
+    Public Function GET_KANRYO_LCL() As DataSet
+        'AIR専用客先　SN明細取得
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT * "
+        StrSQL = StrSQL & "FROM T_EXL_CSKANRYO "
+        StrSQL = StrSQL & "WHERE ((DAY08 ='' or DAY08 IS NULL) or (DAY07 ='' or DAY07 IS NULL)) "
+        StrSQL = StrSQL & "AND DAY06 <>'1' "
+        StrSQL = StrSQL & "AND FLG01 in ('LCL') "
+        StrSQL = StrSQL & "ORDER BY DAY11,FLG01,CUT_DATE,DAY10 "
+
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
+    Public Function GET_KANRYO_AIR() As DataSet
+        'AIR専用客先　SN明細取得
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT * "
+        StrSQL = StrSQL & "FROM T_EXL_CSKANRYO "
+        StrSQL = StrSQL & "WHERE ((DAY08 ='' or DAY08 IS NULL) or (DAY07 ='' or DAY07 IS NULL)) "
+        StrSQL = StrSQL & "AND DAY06 <>'1' "
+        StrSQL = StrSQL & "AND FLG01 in ('AIR') "
+        StrSQL = StrSQL & "ORDER BY BOOKING_NO "
+
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
 End Class

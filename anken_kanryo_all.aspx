@@ -311,7 +311,11 @@
                     <asp:Label ID="Label6" runat="server" Text="本日全案件完了" ></asp:Label>
                 </div>
                 </td>
-                <td style="width:750px;" >
+                <td style="width:50px;" >
+
+                </td>
+                <td style="width:700px;" >
+                    <asp:Label ID="Label8" runat="server" Text="全件表示" ></asp:Label>
                 </td>
             </tr>
         </table>    
@@ -326,8 +330,17 @@
                 </asp:DropDownList>--%>
 
                 </td>
-                <td style="width:900px;" >
+                <td style="width:100px;" >
                 <asp:Button  ID="Button7" CssClass="btn00" runat="server" Text="エクセル" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
+                </td>
+                <td style="width:100px;" >
+                <asp:Button  ID="Button8" CssClass="btn00" runat="server" Text="コンテナ" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
+                </td>
+                <td style="width:100px;" >
+                <asp:Button  ID="Button9" CssClass="btn00" runat="server" Text="ＬＣＬ" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
+                </td>
+                <td style="width:100px;" >
+                <asp:Button  ID="Button10" CssClass="btn00" runat="server" Text="ＡＩＲ" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
                 </td>
                 <td style="width:300px;" >
                     <asp:Label ID="Label10" runat="server" Text="AAA" Font-Size="12px" ></asp:Label>

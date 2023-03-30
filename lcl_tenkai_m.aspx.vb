@@ -1194,7 +1194,7 @@ Partial Class cs_home
 
                         strSQL = ""
                         strSQL = strSQL & "SELECT  "
-                        strSQL = strSQL & " count(*)+1  AS C "
+                        strSQL = strSQL & " max(DAY09)+1  AS C "
                         strSQL = strSQL & "FROM T_EXL_CSKANRYO "
 
 
@@ -1324,8 +1324,6 @@ Partial Class cs_home
                         strSQL = strSQL & ",'' "
 
                         strSQL = strSQL & ")"
-
-
 
 
                         Command.CommandText = strSQL

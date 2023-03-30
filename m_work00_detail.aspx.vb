@@ -350,11 +350,19 @@ Partial Class cs_home
 
         ElseIf strExecMode = "03" Then
 
+
+            If DropDownList1.SelectedValue = "無効" Then
+                vflg = 0
+            ElseIf DropDownList1.SelectedValue = "有効" Then
+                vflg = 1
+            End If
+
             strSQL = ""
             strSQL = strSQL & "INSERT INTO M_EXL_MAIL00 VALUES("
             strSQL = strSQL & "'" & TextBox0.Text & "' "
             strSQL = strSQL & ",'" & TextBox1.Text & "' "
-            strSQL = strSQL & ",'" & TextBox0.Text & "' ) "
+            strSQL = strSQL & ",'" & TextBox2.Text & "' "
+            strSQL = strSQL & ",'" & vflg & "' ) "
 
             Command.CommandText = strSQL
             ' SQLの実行
@@ -450,7 +458,7 @@ Partial Class cs_home
         strSQL = strSQL & "INSERT INTO M_EXL_MAIL01 VALUES("
         strSQL = strSQL & "'" & strmail & "' "
         strSQL = strSQL & ",'" & strtaskCD & "' "
-        strSQL = strSQL & ",3 "
+        strSQL = strSQL & ",4 "
         strSQL = strSQL & ",'" & strcom & "' "
         strSQL = strSQL & ",'" & strico & "' ) "
 
