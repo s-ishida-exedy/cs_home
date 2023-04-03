@@ -19,8 +19,6 @@ Partial Class cs_home
         TextBox5.ReadOnly = True
         TextBox6.ReadOnly = True
 
-
-
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
@@ -39,6 +37,8 @@ Partial Class cs_home
         Dim ecnt01 As Long
         Dim ecnt02 As Long
         Dim ecnt00 As Long
+
+        Dim strvd As String = ""
 
         Dim dt1 As DateTime = DateTime.Now
 
@@ -95,7 +95,6 @@ Partial Class cs_home
             dataread.Close()
             dbcmd.Dispose()
 
-
             strSQL = ""
             strSQL = strSQL & "SELECT count(T_EXL_CSKANRYO.BOOKING_NO) as cnt "
             strSQL = strSQL & "FROM T_EXL_CSKANRYO "
@@ -111,7 +110,6 @@ Partial Class cs_home
             While (dataread.Read())
                 kcnt01 = dataread("cnt")
             End While
-
 
             'クローズ処理 
             dataread.Close()
@@ -132,6 +130,10 @@ Partial Class cs_home
             While (dataread.Read())
                 kcnt02 = dataread("CONTAINER")
             End While
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
 
             ecnt00 = 0
             ecnt01 = 0
@@ -159,10 +161,34 @@ Partial Class cs_home
             Else
             End If
 
+            strSQL = ""
+            strSQL = strSQL & "SELECT T_EXL_CSANKEN.DAY0" & kcnt01 + 1 & " AS VD "
+            strSQL = strSQL & "FROM T_EXL_CSANKEN "
+            strSQL = strSQL & "WHERE T_EXL_CSANKEN.BOOKING_NO = '" & TextBox5.Text & "' "
+            strSQL = strSQL & "AND T_EXL_CSANKEN.CUST = '" & TextBox1.Text & "' "
 
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+            '結果を取り出す 
+            While (dataread.Read())
+                strvd = dataread("VD")
+            End While
+
+            If IsDate(strvd) = False Then
+
+            Else
+                TextBox13.Text = Replace(strvd, "/", "-")
+            End If
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
 
             If ecnt01 = 1 And ecnt02 = 0 Then '
-                Button7.Attributes.Add("onclick", "return confirm('・レコード数がブッキングシートのコンテナ本数以上になります。\r\n処理をしますか？');")
+                Button7.Attributes.Add(" Thenonclick", "Return confirm('・レコード数がブッキングシートのコンテナ本数以上になります。\r\n処理をしますか？');")
             ElseIf ecnt01 = 0 And ecnt02 = 1 Then ''最終バンのレコードが存在するため、\r\n途中バンに変更しております。'
                 Button7.Attributes.Add("onclick", "return confirm('・最終バンのレコードが存在するため途中バンに変更しております。\r\nこのまま処理をしますか？');")
             ElseIf ecnt01 = 1 And ecnt02 = 1 Then
@@ -189,7 +215,6 @@ Partial Class cs_home
         Dim strkbn As String = ""
         Dim strref As String = ""
         Dim strbkg As String = ""
-
 
         Dim dataread As SqlDataReader
         Dim dbcmd As SqlCommand
@@ -235,10 +260,7 @@ Partial Class cs_home
         str07 = Trim(DropDownList3.SelectedValue)
 
         If str05 = "" Or str01 = "" Then
-            '            Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('未選択なので処理を終了します。');</script>", False)
         Else
-
-
 
             If str07 = "0" Then
                 str07 = "0"
@@ -266,6 +288,7 @@ Partial Class cs_home
             Dim flgka00 As String = "0"
             Dim flgka01 As String = "0"
             Dim flgka02 As String = ""
+            Dim strLCL As String = ""
 
             Dim kcnt00 As Long
             Dim kcnt01 As Long
@@ -273,6 +296,7 @@ Partial Class cs_home
 
             Dim strvdt As String
 
+            Dim dt00 As DateTime = DateTime.Now
 
             strSQL = ""
             strSQL = strSQL & "SELECT count(T_EXL_CSKANRYO.BOOKING_NO) as cnt "
@@ -291,11 +315,9 @@ Partial Class cs_home
                 kcnt00 = dataread("cnt")
             End While
 
-
             'クローズ処理 
             dataread.Close()
             dbcmd.Dispose()
-
 
             strSQL = ""
             strSQL = strSQL & "SELECT count(T_EXL_CSKANRYO.BOOKING_NO) as cnt "
@@ -313,12 +335,9 @@ Partial Class cs_home
                 kcnt01 = dataread("cnt")
             End While
 
-
             'クローズ処理 
             dataread.Close()
             dbcmd.Dispose()
-
-
 
             strSQL = ""
             strSQL = strSQL & "SELECT DISTINCT T_EXL_CSKANRYO.CONTAINER "
@@ -336,20 +355,15 @@ Partial Class cs_home
                 kcnt02 = dataread("CONTAINER")
             End While
 
-
             'クローズ処理 
             dataread.Close()
             dbcmd.Dispose()
 
-            'If kcnt01 >= kcnt02 And kcnt01 > 0 Then
-            '    '追加無し　レコード数がコンテナ本数以上の場合
-            'Else
             If str07 = "1" And kcnt00 > 0 Then
                 '追加無し　最終バンの登録が済んでいる場合
                 str07 = "0"
             Else
             End If
-
 
             strSQL = ""
             strSQL = strSQL & "SELECT  "
@@ -358,8 +372,6 @@ Partial Class cs_home
             strSQL = strSQL & "WHERE T_EXL_CSANKEN.INVOICE = '" & str00 & "' "
             strSQL = strSQL & "AND T_EXL_CSANKEN.BOOKING_NO = '" & str05 & "' "
 
-
-
             'ＳＱＬコマンド作成 
             dbcmd = New SqlCommand(strSQL, cnn)
             'ＳＱＬ文実行 
@@ -367,7 +379,6 @@ Partial Class cs_home
 
             '結果を取り出す 
             While (dataread.Read())
-
 
                 strvan = Trim(dataread("FINALVANDATE"))
                 strfwd = Trim(dataread("FORWARDER02"))
@@ -385,23 +396,18 @@ Partial Class cs_home
                 strlp = dataread("LOADING_PORT")
                 strdp = dataread("DISCHARGING_PORT")
                 strpd = dataread("PLACE_OF_DELIVERY")
+                strLCL = dataread("LCL_QTY")
 
             End While
-
 
             'クローズ処理 
             dataread.Close()
             dbcmd.Dispose()
 
-
-
-
             strSQL = ""
             strSQL = strSQL & "SELECT  "
             strSQL = strSQL & " max(DAY09)+1  AS C "
             strSQL = strSQL & "FROM T_EXL_CSKANRYO "
-
-
 
             'ＳＱＬコマンド作成 
             dbcmd = New SqlCommand(strSQL, cnn)
@@ -427,16 +433,12 @@ Partial Class cs_home
                 val01 = val01
             End If
 
-
-
             'クローズ処理 
             dataread.Close()
             dbcmd.Dispose()
 
-
             strtime = "手動登録"
             strvan = "手動登録"
-
 
             'クローズ処理 
             dataread.Close()
@@ -457,8 +459,6 @@ Partial Class cs_home
             strSQL = strSQL & "WHERE T_INV_HD_TB.CUSTCODE IN ('" & strcus & "') "
             strSQL = strSQL & "AND T_SN_HD_TB.CUSTCODE Is Not Null "
 
-
-
             'ＳＱＬコマンド作成 
             dbcmd = New SqlCommand(strSQL, cnn02)
             'ＳＱＬ文実行 
@@ -466,7 +466,6 @@ Partial Class cs_home
 
             '結果を取り出す 
             While (dataread.Read())
-
 
                 If IsDBNull(dataread("式1")) = True Then
                     flgka02 = "XXX"
@@ -482,7 +481,6 @@ Partial Class cs_home
 
             End While
 
-
             'クローズ処理 
             dataread.Close()
             dbcmd.Dispose()
@@ -492,7 +490,12 @@ Partial Class cs_home
                 flgka01 = "1"
             End If
 
-
+            If strLCL = "LCL" Then
+                strcon = "LCL"
+                str07 = "1"
+                strtime = "LCL"
+                strvan = dt00.ToString("yyyy/MM/dd")
+            End If
 
             strSQL = ""
             strSQL = strSQL & "INSERT INTO T_EXL_CSKANRYO VALUES("
@@ -540,14 +543,9 @@ Partial Class cs_home
 
             strSQL = strSQL & ")"
 
-
-
             Command.CommandText = strSQL
             ' SQLの実行
             Command.ExecuteNonQuery()
-
-
-            'End If
 
             cnn.Close()
             cnn.Dispose()
@@ -589,7 +587,6 @@ Partial Class cs_home
         strSQL = strSQL & "FROM M_EXL_CUST "
         strSQL = strSQL & "WHERE M_EXL_CUST.CUST_ANAME = '" & custcode & "' "
 
-
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
         'ＳＱＬ文実行 
@@ -609,12 +606,10 @@ Partial Class cs_home
         dataread.Close()
         dbcmd.Dispose()
 
-
         strSQL = ""
         strSQL = strSQL & "SELECT M_EXL_CUST.CUST_ANAME "
         strSQL = strSQL & "FROM M_EXL_CUST "
         strSQL = strSQL & "WHERE M_EXL_CUST.CUST_GRP_CD = '" & custcode & "' "
-
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
@@ -651,7 +646,6 @@ Partial Class cs_home
 
         '更新
         Call DB_access("03")        '更新モード
-
 
         '元の画面に戻る
         Response.Redirect("anken_kanryo_all.aspx")

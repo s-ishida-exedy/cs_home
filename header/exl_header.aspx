@@ -5,9 +5,9 @@
         <ul class="menu__second-level">
             <!-- 第一階層 -->
             <li data-id='["home","make_graph_odr.aspx"]'><a href="#">受注台数</a></li>
-            <li data-id='["home","make_graph_con.aspx"]'><a href="#">コンテナ本数(AF)</a></li>
+<%--            <li data-id='["home","make_graph_con.aspx"]'><a href="#">コンテナ本数(AF)</a></li>--%>
             <li data-id='["home","booking.aspx"]'><a href="#">ブッキングシート</a></li>
-            <li data-id='["home","make_graph_nizoroi.aspx"]'><a href="#">荷揃え状況(AF)</a></li>
+<%--            <li data-id='["home","make_graph_nizoroi.aspx"]'><a href="#">荷揃え状況(AF)</a></li>--%>
             <li data-id='["home","4f_floor.aspx"]'><a href="#">４Ｆフロア状況</a></li>
             <li data-id='["aaa",""]'>
                 <a href="#" class="init-right">バンニング</a>
@@ -21,14 +21,14 @@
             <li data-id='["home","make_graph_sintyoku.aspx"]'><a href="#">出荷進捗</a></li>
             <li data-id='["","http://kbhwpm01/exp/display/loading_efficiency_and_co2_emission.htm"]'><a href="#">本社_CO2排出量・積載率</a></li>
             <li data-id='["aaa",""]'>
-                <a href="#" class="init-right">未納</a>
-                <ul class="menu__third-level">
+<%--                <a href="#" class="init-right">未納</a>--%>
+<%--                <ul class="menu__third-level">
                     <!-- 第二階層 -->
                     <li data-id='["home","make_graph_minou01.aspx"]'><a href="#">アフタ未納金額</a></li>
                     <li data-id='["home","make_graph_minou02.aspx"]'><a href="#">ＫＤ未納金額</a></li>
-                </ul>
-            <li data-id='["home","make_graph_stock01.aspx"]'><a href="#">INV在庫推移</a></li>
-            <li data-id='["home","make_graph_delaykin.aspx"]'><a href="#">出港遅延未納金額</a></li>
+                </ul>--%>
+<%--            <li data-id='["home","make_graph_stock01.aspx"]'><a href="#">INV在庫推移</a></li>--%>
+<%--            <li data-id='["home","make_graph_delaykin.aspx"]'><a href="#">出港遅延未納金額</a></li>--%>
             <li data-id='["home","exl_zaiko.aspx"]'><a href="#">EXL在庫</a></li>
             </li>
         </ul>
