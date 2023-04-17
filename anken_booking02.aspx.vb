@@ -1887,7 +1887,15 @@ Partial Class yuusen
             myPath = "\\svnas201\exd06100\COMMON\生産管理本部\ＣＳチーム\案件抽出\q_住所" '--- フォルダを作成した場所のパス
 
             iptbx = Left(Replace(GridView1.Rows(I).Cells(5).Text, "IV-", ""), 4)
-            Call copy_custfile(iptbx, Cname, Ccode)
+
+
+            If IsNumeric(Trim(iptbx)) Then
+                Call copy_custfile(iptbx, Cname, Ccode)
+            Else
+                Ccode = Trim(GridView1.Rows(I).Cells(4).Text)
+                Cname = Cname01(Ccode)
+            End If
+
 
             F_dir = Dir(myPath & "\" & Ccode & "*", vbDirectory)
 
@@ -2888,4 +2896,55 @@ Step00:
 
 
     End Sub
+
+    Function Cname01(custcode As String) As String
+
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim ts1 As New TimeSpan(100, 0, 0, 0)
+        Dim ts2 As New TimeSpan(100, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=svdpo051;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        Cname01 = ""
+        strSQL = "SELECT M_CUST_TB.CUSTCODE, M_CUST_TB.CUSTNAME "
+        strSQL = strSQL & "FROM M_CUST_TB "
+        strSQL = strSQL & "WHERE M_CUST_TB.CUSTCODE = '" & custcode & "' "
+
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+
+        '結果を取り出す 
+        While (dataread.Read())
+            Cname01 = Trim(dataread("CUSTNAME"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+
+    End Function
 End Class

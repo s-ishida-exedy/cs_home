@@ -305,44 +305,49 @@
                 <td style="width:250px;Font-Size:25px;" >
                     <h2>完了報告</h2>
                 </td>
-                <td style="width:250px;" >
+                <td style="width:50px;" >
 
-                <div style="background-color:none;text-align: center;border:groove">
-                    <asp:Label ID="Label6" runat="server" Text="本日全案件完了" ></asp:Label>
+
+<%--                    <asp:Label ID="Label6" runat="server" Visible="false" Text="本日全案件完了" ></asp:Label>--%>
                 </div>
                 </td>
                 <td style="width:50px;" >
-
                 </td>
-                <td style="width:700px;" >
-                    <asp:Label ID="Label8" runat="server" Text="全件表示" ></asp:Label>
+                <td style="width:200px;" >
+                <div style="background-color:none;text-align: center;border:groove">
+                    <asp:Label ID="Label9" runat="server" Text="表示切替　："  Font-Size="13px"></asp:Label>
+                    <asp:DropDownList ID="DropDownList1" runat="server" Width="100px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" >
+                    <asp:ListItem>--Select--</asp:ListItem>
+                    <asp:ListItem>全件表示</asp:ListItem>
+                    <asp:ListItem>コンテナ</asp:ListItem>
+                    <asp:ListItem>ＬＣＬ</asp:ListItem>
+                    <asp:ListItem>ＡＩＲ</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+                </td>
+                <td style="width:500px;" >
+<%--                    <asp:Label ID="Label8" runat="server" Text="全件表示" ></asp:Label>--%>
                 </td>
             </tr>
         </table>    
 
         <table style="height:10px;">
             <tr>
-                <td style="width:100px;" >
+                <td style="width:200px;" >
                 <%--<asp:Button  ID="Button2" CssClass="btn00" runat="server" Text="フォルダ作成登録" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />--%> 
                 <asp:Button  ID="Button1" CssClass="btn00" runat="server" Text="案件作成" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
-<%--                <asp:DropDownList ID="DropDownList1" runat="server" Width="150px" Height="40px"  CssClass="DropDown" Font-Size="12px" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="C" DataValueField="C" AppendDataBoundItems="true">
-                <asp:ListItem Text="Select" Value="" />
-                </asp:DropDownList>--%>
+                <asp:Button  ID="Button7" CssClass="btn00" runat="server" Text="エクセル出力" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
+ 
+                </td>
+ 
+
+
+
+                <td style="width:300px;" >
 
                 </td>
-                <td style="width:100px;" >
-                <asp:Button  ID="Button7" CssClass="btn00" runat="server" Text="エクセル" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
-                </td>
-                <td style="width:100px;" >
-                <asp:Button  ID="Button8" CssClass="btn00" runat="server" Text="コンテナ" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
-                </td>
-                <td style="width:100px;" >
-                <asp:Button  ID="Button9" CssClass="btn00" runat="server" Text="ＬＣＬ" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
-                </td>
-                <td style="width:100px;" >
-                <asp:Button  ID="Button10" CssClass="btn00" runat="server" Text="ＡＩＲ" Width="120px" Height="30px" AutoPostBack="True" Font-Size="13px" />
-                </td>
-                <td style="width:300px;" >
+
+                <td style="width:200px;" >
                     <asp:Label ID="Label10" runat="server" Text="AAA" Font-Size="12px" ></asp:Label>
                 </td>
             </tr>

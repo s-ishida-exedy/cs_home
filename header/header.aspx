@@ -6,9 +6,9 @@
             <!-- 第一階層 -->
             <li data-id='["home","situation.aspx"]'><a href="#">EXL概況</a></li>
             <li data-id='["home","make_graph_odr.aspx"]'><a href="#">受注台数</a></li>
-            <li data-id='["home","make_graph_con.aspx"]'><a href="#">コンテナ本数(AF)</a></li>
+<%--            <li data-id='["home","make_graph_con.aspx"]'><a href="#">コンテナ本数(AF)</a></li>--%>
             <li data-id='["home","booking.aspx"]'><a href="#">ブッキングシート</a></li>
-            <li data-id='["home","make_graph_nizoroi.aspx"]'><a href="#">荷揃え状況(AF)</a></li>
+<%--            <li data-id='["home","make_graph_nizoroi.aspx"]'><a href="#">荷揃え状況(AF)</a></li>--%>
             <li data-id='["home","4f_floor.aspx"]'><a href="#">４Ｆフロア状況</a></li>
             <li data-id='["aaa",""]'>
                 <a href="#" class="init-right">バンニング</a>
@@ -22,15 +22,15 @@
             <li data-id='["home","make_graph_sintyoku.aspx"]'><a href="#">出荷進捗</a></li>
             <li data-id='["","http://kbhwpm01/exp/display/loading_efficiency_and_co2_emission.htm"]'><a href="#">本社_CO2排出量・積載率</a></li>
             <li data-id='["aaa",""]'>
-                <a href="#" class="init-right">未納</a>
+<%--                <a href="#" class="init-right">未納</a>
                 <ul class="menu__third-level">
                     <!-- 第二階層 -->
                     <li data-id='["home","make_graph_minou01.aspx"]'><a href="#">アフタ未納金額</a></li>
                     <li data-id='["home","make_graph_minou02.aspx"]'><a href="#">ＫＤ未納金額</a></li>
-                </ul>
+                </ul>--%>
             </li>
-            <li data-id='["home","make_graph_stock01.aspx"]'><a href="#">INV在庫推移</a></li>
-            <li data-id='["home","make_graph_delaykin.aspx"]'><a href="#">出港遅延未納金額</a></li>
+<%--            <li data-id='["home","make_graph_stock01.aspx"]'><a href="#">INV在庫推移</a></li>
+            <li data-id='["home","make_graph_delaykin.aspx"]'><a href="#">出港遅延未納金額</a></li>--%>
             <li data-id='["home","exl_zaiko.aspx"]'><a href="#">EXL在庫</a></li>
         </ul>
     </li>
@@ -44,7 +44,7 @@
                     <!-- 第二階層 -->
                     <li data-id='["home","van_sche.aspx"]'><a href="#">本日のバンニング予定</a></li>
                     <li data-id='["home","doc_final.aspx"]'><a href="#">書類最終一覧</a></li>
-                    <li data-id='["home","make_ivhd.aspx"]'><a href="#">ｲﾝﾎﾞｲｽﾍｯﾀﾞファイル作成</a></li>
+<%--                    <li data-id='["home","make_ivhd.aspx"]'><a href="#">ｲﾝﾎﾞｲｽﾍｯﾀﾞファイル作成</a></li>--%>
                     <li data-id='["home","ivhd_request.aspx"]'><a href="#">追加ｲﾝﾎﾞｲｽﾍｯﾀﾞ作成依頼</a></li>
                     <li data-id='["home","register_csstatus.aspx"]'><a href="#">委託登録・マスタ変更</a></li>
                     <li data-id='["home","eir_comfirm_cs.aspx"]'><a href="#">EIR,Booking差異 CS対応</a></li>
@@ -96,7 +96,7 @@
                     <li data-id='["home","sales_comfirm.aspx"]'><a href="#">海外売上確定チェック</a></li>
                     <li data-id='["home","ord_book_chk.aspx"]'><a href="#">ブッキング確認</a></li>
                     <li data-id='["home","ord_check.aspx"]'><a href="#">LS2受注処理チェック</a></li>
-                    <li data-id='["home","shelf_manage.aspx"]'><a href="#">書庫管理</a></li>
+<%--                    <li data-id='["home","shelf_manage.aspx"]'><a href="#">書庫管理</a></li>--%>
                 </ul>
             </li>
         </ul>
