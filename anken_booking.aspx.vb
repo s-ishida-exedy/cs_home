@@ -176,6 +176,12 @@ Partial Class yuusen
                 e.Row.Cells(0).BackColor = Drawing.Color.YellowGreen
             End If
 
+
+            If e.Row.Cells(25).Text = dt1.ToString("yyyy/MM/dd") Then
+                e.Row.Cells(25).BackColor = Drawing.Color.Red
+                e.Row.Cells(25).ForeColor = Drawing.Color.White
+            End If
+
         End If
 
 

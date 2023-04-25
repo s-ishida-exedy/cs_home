@@ -36,74 +36,78 @@ Partial Class yuusen
                 e.Row.BackColor = Drawing.Color.LightGreen
             End If
 
+            If Replace(e.Row.Cells(16).Text, "&nbsp;", "") <> "" Then
+                e.Row.Cells(16).Text = Double.Parse(e.Row.Cells(16).Text).ToString("#,0")
+            End If
 
-            e.Row.Cells(16).Text = Double.Parse(e.Row.Cells(16).Text).ToString("#,0")
             'e.Row.Cells(17).Text = Double.Parse(e.Row.Cells(17).Text).ToString("#,0")
-            e.Row.Cells(18).Text = Double.Parse(e.Row.Cells(18).Text).ToString("#,0")
+            If Replace(e.Row.Cells(18).Text, "&nbsp;", "") <> "" Then
+                e.Row.Cells(18).Text = Double.Parse(e.Row.Cells(18).Text).ToString("#,0")
+            End If
             e.Row.Cells(15).Text = Left(e.Row.Cells(15).Text, 10)
 
-            'If IsPostBack = True Then
+                'If IsPostBack = True Then
 
-            If e.Row.Cells(25).Text = e.Row.Cells(14).Text Then
-            Else
-                If e.Row.Cells(25).Text <> "&nbsp;" Then
+                If e.Row.Cells(25).Text = e.Row.Cells(14).Text Then
+                Else
                     If e.Row.Cells(25).Text <> "&nbsp;" Then
-                        e.Row.Cells(1).BackColor = Drawing.Color.LightSalmon
-                        e.Row.Cells(1).ForeColor = Drawing.Color.White
-                        e.Row.Cells(1).Font.Bold = True
+                        If e.Row.Cells(25).Text <> "&nbsp;" Then
+                            e.Row.Cells(1).BackColor = Drawing.Color.LightSalmon
+                            e.Row.Cells(1).ForeColor = Drawing.Color.White
+                            e.Row.Cells(1).Font.Bold = True
 
-                        e.Row.Cells(25).BackColor = Drawing.Color.LightSalmon
-                        e.Row.Cells(25).ForeColor = Drawing.Color.White
-                        e.Row.Cells(25).Font.Bold = True
+                            e.Row.Cells(25).BackColor = Drawing.Color.LightSalmon
+                            e.Row.Cells(25).ForeColor = Drawing.Color.White
+                            e.Row.Cells(25).Font.Bold = True
 
-                        e.Row.Cells(14).BackColor = Drawing.Color.LightSalmon
-                        e.Row.Cells(14).ForeColor = Drawing.Color.White
-                        e.Row.Cells(14).Font.Bold = True
+                            e.Row.Cells(14).BackColor = Drawing.Color.LightSalmon
+                            e.Row.Cells(14).ForeColor = Drawing.Color.White
+                            e.Row.Cells(14).Font.Bold = True
 
+                        End If
                     End If
                 End If
-            End If
-            'e.Row.Cells(25).Visible = False
-            If e.Row.Cells(26).Text = e.Row.Cells(19).Text Then
-            Else
-                If e.Row.Cells(26).Text <> "" Then
-                    If e.Row.Cells(26).Text <> "&nbsp;" Then
-                        e.Row.Cells(1).BackColor = Drawing.Color.LightSalmon
-                        e.Row.Cells(1).ForeColor = Drawing.Color.White
-                        e.Row.Cells(1).Font.Bold = True
+                'e.Row.Cells(25).Visible = False
+                If e.Row.Cells(26).Text = e.Row.Cells(19).Text Then
+                Else
+                    If e.Row.Cells(26).Text <> "" Then
+                        If e.Row.Cells(26).Text <> "&nbsp;" Then
+                            e.Row.Cells(1).BackColor = Drawing.Color.LightSalmon
+                            e.Row.Cells(1).ForeColor = Drawing.Color.White
+                            e.Row.Cells(1).Font.Bold = True
 
-                        e.Row.Cells(26).BackColor = Drawing.Color.LightSalmon
-                        e.Row.Cells(26).ForeColor = Drawing.Color.White
-                        e.Row.Cells(26).Font.Bold = True
+                            e.Row.Cells(26).BackColor = Drawing.Color.LightSalmon
+                            e.Row.Cells(26).ForeColor = Drawing.Color.White
+                            e.Row.Cells(26).Font.Bold = True
 
-                        e.Row.Cells(19).BackColor = Drawing.Color.LightSalmon
-                        e.Row.Cells(19).ForeColor = Drawing.Color.White
-                        e.Row.Cells(19).Font.Bold = True
+                            e.Row.Cells(19).BackColor = Drawing.Color.LightSalmon
+                            e.Row.Cells(19).ForeColor = Drawing.Color.White
+                            e.Row.Cells(19).Font.Bold = True
+                        End If
                     End If
                 End If
-                End If
-            'e.Row.Cells(26).Visible = False
-            If e.Row.Cells(27).Text = e.Row.Cells(20).Text Then
-            Else
-                If e.Row.Cells(27).Text <> "" Then
-                    If e.Row.Cells(27).Text <> "&nbsp;" Then
-                        e.Row.Cells(1).BackColor = Drawing.Color.LightSalmon
-                        e.Row.Cells(1).ForeColor = Drawing.Color.White
-                        e.Row.Cells(1).Font.Bold = True
+                'e.Row.Cells(26).Visible = False
+                If e.Row.Cells(27).Text = e.Row.Cells(20).Text Then
+                Else
+                    If e.Row.Cells(27).Text <> "" Then
+                        If e.Row.Cells(27).Text <> "&nbsp;" Then
+                            e.Row.Cells(1).BackColor = Drawing.Color.LightSalmon
+                            e.Row.Cells(1).ForeColor = Drawing.Color.White
+                            e.Row.Cells(1).Font.Bold = True
 
-                        e.Row.Cells(27).BackColor = Drawing.Color.LightSalmon
-                        e.Row.Cells(27).ForeColor = Drawing.Color.White
-                        e.Row.Cells(27).Font.Bold = True
+                            e.Row.Cells(27).BackColor = Drawing.Color.LightSalmon
+                            e.Row.Cells(27).ForeColor = Drawing.Color.White
+                            e.Row.Cells(27).Font.Bold = True
 
-                        e.Row.Cells(20).BackColor = Drawing.Color.LightSalmon
-                        e.Row.Cells(20).ForeColor = Drawing.Color.White
-                        e.Row.Cells(20).Font.Bold = True
+                            e.Row.Cells(20).BackColor = Drawing.Color.LightSalmon
+                            e.Row.Cells(20).ForeColor = Drawing.Color.White
+                            e.Row.Cells(20).Font.Bold = True
+                        End If
                     End If
                 End If
-                End If
-            'e.Row.Cells(27).Visible = False
+                'e.Row.Cells(27).Visible = False
 
-            If e.Row.Cells(9).Text = "" Or e.Row.Cells(9).Text = "&nbsp;" Then
+                If e.Row.Cells(9).Text = "" Or e.Row.Cells(9).Text = "&nbsp;" Then
                     Call GET_IVDATA(Trim(e.Row.Cells(13).Text), Trim(e.Row.Cells(3).Text), e.Row.Cells(4).Text)
                 End If
 
@@ -151,33 +155,33 @@ Partial Class yuusen
                     End If
                 End If
 
-            'End If
+                'End If
 
-            Dim dt00 As DateTime = DateTime.Now
-            Dim ts1 As New TimeSpan(7, 0, 0, 0)
-            Dim dt01 As DateTime = dt00 + ts1
+                Dim dt00 As DateTime = DateTime.Now
+                Dim ts1 As New TimeSpan(7, 0, 0, 0)
+                Dim dt01 As DateTime = dt00 + ts1
 
-            If e.Row.Cells(9).Text = "&nbsp;" Or Trim(e.Row.Cells(9).Text) = "" Then
-                If e.Row.Cells(7).Text = "&nbsp;" Or Trim(e.Row.Cells(7).Text) = "" Then
-                    Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
-                    If dt4 <= dt01 Then
-                        e.Row.BackColor= Drawing.Color.Red
+                If e.Row.Cells(9).Text = "&nbsp;" Or Trim(e.Row.Cells(9).Text) = "" Then
+                    If e.Row.Cells(7).Text = "&nbsp;" Or Trim(e.Row.Cells(7).Text) = "" Then
+                        Dim dt4 As DateTime = DateTime.Parse(e.Row.Cells(6).Text)
+                        If dt4 <= dt01 Then
+                            e.Row.BackColor = Drawing.Color.Red
+                        Else
+                        End If
                     Else
-                    End If
-                Else
 
-                    Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(7).Text)
+                        Dim dt3 As DateTime = DateTime.Parse(e.Row.Cells(7).Text)
 
-                    If dt3 <= dt01 Then
-                        e.Row.BackColor = Drawing.Color.Red
-                    Else
+                        If dt3 <= dt01 Then
+                            e.Row.BackColor = Drawing.Color.Red
+                        Else
+                        End If
                     End If
                 End If
             End If
-        End If
 
 
-        If e.Row.RowType = DataControlRowType.DataRow Then
+            If e.Row.RowType = DataControlRowType.DataRow Then
             Dim dltButton As ImageButton = e.Row.FindControl("ImageButton1")
             'ボタンが存在する場合のみセット
             If Not (dltButton Is Nothing) Then

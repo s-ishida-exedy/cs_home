@@ -2866,6 +2866,10 @@ Partial Class yuusen
 
         End If
 
+        Call UP_AIRIV01()
+
+
+
         cnn.Close()
         cnn.Dispose()
 
@@ -8485,6 +8489,141 @@ Partial Class yuusen
         End If
 
     End Sub
+
+    Private Sub UP_AIRIV01()
+        'レコードのフラグを取得する。
+        Dim strSQL As String
+        Dim dtNow As DateTime = DateTime.Now
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strFlg As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        'データベース接続を開く
+        cnn.Open()
+
+        'フラグを確認し、１（作成済み）なら０（未作成）にUPDATEする。
+        strSQL = ""
+        strSQL = strSQL & "SELECT * "
+        strSQL = strSQL & "FROM T_EXL_CSKANRYO "
+        strSQL = strSQL & "WHERE ((DAY08 ='' or DAY08 IS NULL) or (DAY07 ='' or DAY07 IS NULL)) "
+        strSQL = strSQL & "AND DAY06 <>'1' "
+        strSQL = strSQL & "AND INVOICE = '' "
+        strSQL = strSQL & "AND FLG01 ='AIR' "
+        strSQL = strSQL & "ORDER BY DAY11,FLG01,CUT_DATE,DAY10 "
+        ' 
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            Call UP_AIRIV02(dataread("BOOKING_NO"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        cnn.Close()
+        cnn.Dispose()
+
+    End Sub
+
+    Private Sub UP_AIRIV02(ByRef BKGNO As String)
+
+        'レコードのフラグを取得する。
+        Dim strSQL As String
+        Dim dtNow As DateTime = DateTime.Now
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strFlg As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        'データベース接続を開く
+        cnn.Open()
+
+        'フラグを確認し、１（作成済み）なら０（未作成）にUPDATEする。
+        strSQL = ""
+        strSQL = strSQL & "SELECT * "
+        strSQL = strSQL & "FROM T_EXL_AIR_MANAGE "
+        strSQL = strSQL & "WHERE AIR_CODE =' " & BKGNO & "' "
+
+        ' 
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            Call UP_AIRIV03(dataread("IVNO"), BKGNO)
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        cnn.Close()
+        cnn.Dispose()
+
+    End Sub
+    Private Sub UP_AIRIV03(ByRef IVNO As String, ByRef BKGNO As String)
+        'レコードのフラグを取得する。
+        Dim strSQL As String
+        Dim dtNow As DateTime = DateTime.Now
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strFlg As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+
+        'データベース接続を開く
+        cnn.Open()
+
+
+        'フラグをUPDATE
+        strSQL = ""
+        strSQL = strSQL & "UPDATE T_EXL_CSANKEN  "
+        strSQL = strSQL & "SET INVOICE = '" & IVNO & "'  "
+        strSQL = strSQL & "WHERE BOOKING_NO = '" & BKGNO & "' "
+
+
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+        cnn.Close()
+        cnn.Dispose()
+        Command.Dispose()
+
+    End Sub
+
 End Class
 
 

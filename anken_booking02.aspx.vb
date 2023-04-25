@@ -2559,7 +2559,7 @@ Step00:
             '既存データありの場合、UPDATE
             strSQL = ""
             strSQL = strSQL & "UPDATE T_EXL_ANKEN_HISTORY Set "
-            strSQL = strSQL & "T_EXL_ANKEN_HISTORY.STATUS = '" & Replace(strstu, "&nbsp;", "") & " ', "
+            strSQL = strSQL & "T_EXL_ANKEN_HISTORY.STATUS = '" & Replace(strstu, "&nbsp;", Format(Now, "yyyy/MM/dd")) & " ', "
             strSQL = strSQL & "T_EXL_ANKEN_HISTORY.BKGSHEET = '" & strsheet & " ', "
             strSQL = strSQL & "T_EXL_ANKEN_HISTORY.FORWARDER = '" & strkaika & " ', "
             strSQL = strSQL & "T_EXL_ANKEN_HISTORY.CUST = '" & strcust & " ', "
@@ -2579,7 +2579,7 @@ Step00:
             '既存データが無いのでINSERTする
             strSQL = ""
             strSQL = strSQL & "INSERT INTO T_EXL_ANKEN_HISTORY VALUES("
-            strSQL = strSQL & " '" & IIf(Replace(strstu, "&nbsp;", "") = "", "", Replace(strstu, "&nbsp;", "")) & "', "
+            strSQL = strSQL & " '" & IIf(Replace(strstu, "&nbsp;", "") = "", "", Replace(strstu, "&nbsp;", Format(Now, "yyyy/MM/dd"))) & "', "
             strSQL = strSQL & " '" & IIf(strsheet = "", "", strsheet) & "', "
             strSQL = strSQL & " '" & IIf(strkaika = "", "", strkaika) & "', "
             strSQL = strSQL & " '" & IIf(strcust = "", "", strcust) & "', "
