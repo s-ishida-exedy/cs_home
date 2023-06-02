@@ -184,7 +184,7 @@
 
 <div class="box1">
     <h2 class="mb10">ＥＸＬ概況</h2>
-    <asp:Image class="imgOKNG" runat="server" src="images/NGtouka.png" style="margin-top:8px;margin-left:70px;" />
+    <asp:Image id="OKNGimg" class="imgOKNG" runat="server" ImageUrl="#" style="margin-top:8px;margin-left:70px;" />
 </div>
 <!--/#sub-->
 
