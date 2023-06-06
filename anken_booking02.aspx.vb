@@ -1239,8 +1239,11 @@ Partial Class yuusen
         'メールの件名
         'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
 
+        Dim s01 As String = ""
+        s01 = mailsub(WDAY00)
+
         'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY00 & "分"
+        Dim subject As String = "【ご連絡】EXD通関委託　" & s01 & "分"
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
 
@@ -1349,8 +1352,12 @@ Partial Class yuusen
 
         Dim f As String = ""
 
+
+        Dim s01 As String = ""
+        s01 = mailsub(WDAY01)
+
         'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
+        Dim subject As String = "【ご連絡】EXD通関委託　" & s01 & "分"
 
         'メールの本文
         Dim body As String = ""
@@ -1451,8 +1458,11 @@ Partial Class yuusen
 
         Dim f As String = ""
 
+        Dim s01 As String = ""
+        s01 = mailsub(WDAY01)
+
         'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
+        Dim subject As String = "【ご連絡】EXD通関委託　" & s01 & "分"
 
 
         'メールの本文
@@ -1553,8 +1563,11 @@ Partial Class yuusen
 
         Dim f As String = ""
 
+        Dim s01 As String = ""
+        s01 = mailsub(WDAY01)
+
         'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
+        Dim subject As String = "【ご連絡】EXD通関委託　" & s01 & "分"
 
 
         'メールの本文
@@ -3233,6 +3246,92 @@ Step00:
 
 
     'End Sub
+
+    Function mailsub(wd01 As String) As String
+
+        '最終更新年月日取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim dt1 As DateTime = DateTime.Now
+
+        Dim WDAY00 As String = ""
+        Dim WDAY01 As String = ""
+        Dim WDAY02 As String = ""
+        Dim WDAY03 As String = ""
+        Dim WDAY04 As String = ""
+        Dim WDAY05 As String = ""
+
+        Dim WDAYNO00 As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim cnn02 = New SqlConnection(ConnectionString)
+        Dim Command = cnn02.CreateCommand
+        'データベース接続を開く
+        cnn.Open()
+        cnn02.Open()
+
+        Dim a As String = ""
+        a = DropDownList6.SelectedValue
+
+
+        strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY_NO FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY <= '" & wd01 & "' "
+        strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+        'ＳＱＬコマンド作成
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行
+        dataread = dbcmd.ExecuteReader()
+        '結果を取り出す
+        While (dataread.Read())
+            WDAYNO00 = dataread("WORKDAY_NO")
+        End While
+
+        'クローズ処理
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        strSQL = ""
+        strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + Val(a) - 1 & "' "
+        strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+        'ＳＱＬコマンド作成
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行
+        dataread = dbcmd.ExecuteReader()
+        '結果を取り出す
+        While (dataread.Read())
+            WDAY00 = dataread("WORKDAY")
+        End While
+
+        If wd01 = WDAY00 Then
+
+            mailsub = wd01
+
+        Else
+            mailsub = wd01 & "-" & WDAY00
+
+        End If
+
+
+        'クローズ処理
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        cnn.Close()
+        cnn.Dispose()
+
+
+    End Function
 
     Private Sub DropDownList6_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList6.SelectedIndexChanged
 
