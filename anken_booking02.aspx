@@ -368,7 +368,7 @@
         </tr>
     </table>
 
-    <table style="width:700px;height:10px;">
+    <table style="width:900px;height:10px;">
         <tr>
             <td style="width:100px;" >
                 <asp:Button ID="Button3" CssClass ="btn00" runat="server" Text="登録" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
@@ -376,9 +376,36 @@
             <td style="width:100px;" >
                 <asp:Button ID="Button2"  CssClass ="btn00" runat="server" Text="解除" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
             </td>
-            <td style="width:500px; font-size:10px;" >
+            <td style="width:400px; font-size:10px;" >
                 <asp:Label ID="Label1" runat="server" Text="１．ＬＳ７、９（限定・試作）・ＤＮＸ混載出荷　が同梱されている案件にチェックを入れる。"></asp:Label><br>
                 <asp:Label ID="Label2" runat="server" Text="２．登録ボタンを押す。"></asp:Label><br>
+            </td>
+            
+<%--            追加20230608--%>
+<%--            <td style="width:80px;" >
+                <asp:Button ID="Button6"  CssClass ="btn00" runat="server" Text="期間変更" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
+            </td>--%>
+            <td style="width:30px;text-align:center;" >
+<%--                <asp:TextBox ID="TextBox6" runat="server" Height="20px" Width="20px" Class ="txtb" ></asp:TextBox>--%>
+                <asp:DropDownList ID="DropDownList6" runat="server" Width ="50px" AutoPostBack="true">
+                    <asp:ListItem Value="1">1</asp:ListItem>
+                    <asp:ListItem Value="2">2</asp:ListItem>
+                    <asp:ListItem Value="3">3</asp:ListItem>
+                    <asp:ListItem Value="4">4</asp:ListItem>
+                    <asp:ListItem Value="5">5</asp:ListItem>
+                    <asp:ListItem Value="6">6</asp:ListItem>
+                    <asp:ListItem Value="7">7</asp:ListItem>
+                    <asp:ListItem Value="8">8</asp:ListItem>
+                    <asp:ListItem Value="9">9</asp:ListItem>
+                    <asp:ListItem Value="10">10</asp:ListItem>
+                    <asp:ListItem Value="11">11</asp:ListItem>
+                    <asp:ListItem Value="12">12</asp:ListItem>
+                    <asp:ListItem Value="13">13</asp:ListItem>
+                    <asp:ListItem Value="14">14</asp:ListItem>
+                </asp:DropDownList>
+            </td>
+            <td style="width:70px; font-size:12px;" >
+                <asp:Label ID="Label23" runat="server" Text="稼働日先まで"></asp:Label>
             </td>
         </tr>
     </table>

@@ -698,8 +698,6 @@ Partial Class yuusen
         End If
 
 
-
-
         'データベース接続を開く
         cnn.Open()
 
@@ -888,6 +886,27 @@ Partial Class yuusen
         'クローズ処理 
         dataread.Close()
         dbcmd.Dispose()
+
+
+        If IsPostBack = True Then
+        Else
+            strSQL = ""
+            strSQL = strSQL & "SELECT M_EXL_KAIKA_CHANGE.NAME_EG FROM M_EXL_KAIKA_CHANGE WHERE M_EXL_KAIKA_CHANGE.NAME_JPN = 'DAYS'  "
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+            While (dataread.Read())
+                DropDownList6.SelectedValue = dataread("NAME_EG")
+            End While
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+        End If
+
 
 
 
@@ -2947,4 +2966,547 @@ Step00:
 
 
     End Function
+
+    'Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+
+
+
+    '    '最終更新年月日取得
+    '    Dim dataread As SqlDataReader
+    '    Dim dbcmd As SqlCommand
+    '    Dim strSQL As String = ""
+    '    Dim strinv As String = ""
+    '    Dim strbkg As String = ""
+
+
+    '    Dim wday As String = ""
+    '    Dim wday2 As String = ""
+    '    Dim wday3 As String = ""
+    '    Dim dt1 As DateTime = DateTime.Now
+    '    Dim Kaika00 As String = ""
+
+
+
+    '    Dim ts1 As New TimeSpan(80, 0, 0, 0)
+    '    Dim ts2 As New TimeSpan(80, 0, 0, 0)
+    '    Dim dt2 As DateTime = dt1 + ts1
+    '    Dim dt3 As DateTime = dt1 - ts1
+
+
+    '    Dim WDAY00 As String = ""
+    '    Dim WDAY01 As String = ""
+    '    Dim WDAY02 As String = ""
+    '    Dim WDAY03 As String = ""
+    '    Dim WDAY04 As String = ""
+    '    Dim WDAY05 As String = ""
+
+    '    Dim WDAYNO00 As String = ""
+
+    '    Dim STRFORWARDER As String = ""
+    '    Dim STRFORWARDER02 As String = ""
+    '    Dim strcust As String = ""
+    '    Dim STRCUT_DATE As String = ""
+    '    Dim STRBOOKING_NO As String = ""
+    '    Dim STRINVOICE As String = ""
+
+    '    Dim STRFLG01 As String = ""
+
+    '    '接続文字列の作成
+    '    Dim ConnectionString As String = String.Empty
+
+    '    'SQL Server認証
+    '    ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+    '    'SqlConnectionクラスの新しいインスタンスを初期化
+    '    Dim cnn = New SqlConnection(ConnectionString)
+    '    Dim cnn02 = New SqlConnection(ConnectionString)
+    '    Dim Command = cnn02.CreateCommand
+    '    'データベース接続を開く
+    '    cnn.Open()
+    '    cnn02.Open()
+
+    '    strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY_NO FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY <= '" & Format(dt1, "yyyy/MM/dd") & "' "
+    '    strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+    '    'ＳＱＬコマンド作成
+    '    dbcmd = New SqlCommand(strSQL, cnn)
+    '    'ＳＱＬ文実行
+    '    dataread = dbcmd.ExecuteReader()
+    '    '結果を取り出す
+    '    While (dataread.Read())
+    '        WDAYNO00 = dataread("WORKDAY_NO")
+    '    End While
+
+    '    'クローズ処理
+    '    dataread.Close()
+    '    dbcmd.Dispose()
+
+
+    '    strSQL = ""
+    '    strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 1 & "' "
+    '    strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+    '    'ＳＱＬコマンド作成
+    '    dbcmd = New SqlCommand(strSQL, cnn)
+    '    'ＳＱＬ文実行
+    '    dataread = dbcmd.ExecuteReader()
+    '    '結果を取り出す
+    '    While (dataread.Read())
+    '        WDAY00 = dataread("WORKDAY")
+    '    End While
+
+    '    'クローズ処理
+    '    dataread.Close()
+    '    dbcmd.Dispose()
+
+    '    strSQL = ""
+    '    strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 2 & "' "
+    '    strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+    '    'ＳＱＬコマンド作成
+    '    dbcmd = New SqlCommand(strSQL, cnn)
+    '    'ＳＱＬ文実行
+    '    dataread = dbcmd.ExecuteReader()
+    '    '結果を取り出す
+    '    While (dataread.Read())
+    '        WDAY01 = dataread("WORKDAY")
+    '    End While
+
+    '    'クローズ処理
+    '    dataread.Close()
+    '    dbcmd.Dispose()
+
+    '    strSQL = ""
+    '    strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 3 & "' "
+    '    strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+    '    'ＳＱＬコマンド作成
+    '    dbcmd = New SqlCommand(strSQL, cnn)
+    '    'ＳＱＬ文実行
+    '    dataread = dbcmd.ExecuteReader()
+    '    '結果を取り出す
+    '    While (dataread.Read())
+    '        WDAY02 = dataread("WORKDAY")
+    '    End While
+
+    '    'クローズ処理
+    '    dataread.Close()
+    '    dbcmd.Dispose()
+
+
+
+
+
+
+
+    '    strSQL = ""
+    '    strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 1 + DropDownList6.SelectedValue & "' "
+    '    strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+    '    'ＳＱＬコマンド作成
+    '    dbcmd = New SqlCommand(strSQL, cnn)
+    '    'ＳＱＬ文実行
+    '    dataread = dbcmd.ExecuteReader()
+    '    '結果を取り出す
+    '    While (dataread.Read())
+    '        WDAY03 = dataread("WORKDAY")
+    '    End While
+
+    '    'クローズ処理
+    '    dataread.Close()
+    '    dbcmd.Dispose()
+
+    '    strSQL = ""
+    '    strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 2 + DropDownList6.SelectedValue & "' "
+    '    strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+    '    'ＳＱＬコマンド作成
+    '    dbcmd = New SqlCommand(strSQL, cnn)
+    '    'ＳＱＬ文実行
+    '    dataread = dbcmd.ExecuteReader()
+    '    '結果を取り出す
+    '    While (dataread.Read())
+    '        WDAY04 = dataread("WORKDAY")
+    '    End While
+
+    '    'クローズ処理
+    '    dataread.Close()
+    '    dbcmd.Dispose()
+
+
+    '    strSQL = ""
+    '    strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 3 + DropDownList6.SelectedValue & "' "
+    '    strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+    '    'ＳＱＬコマンド作成
+    '    dbcmd = New SqlCommand(strSQL, cnn)
+    '    'ＳＱＬ文実行
+    '    dataread = dbcmd.ExecuteReader()
+    '    '結果を取り出す
+    '    While (dataread.Read())
+    '        WDAY05 = dataread("WORKDAY")
+    '    End While
+
+    '    'クローズ処理
+    '    dataread.Close()
+    '    dbcmd.Dispose()
+
+
+    '    strSQL = ""
+    '    strSQL = "SELECT T_EXL_CSANKEN.FORWARDER, T_EXL_CSANKEN.FORWARDER02, T_EXL_CSANKEN.CUST, T_EXL_CSANKEN.INVOICE, T_EXL_CSANKEN.CUT_DATE, T_EXL_CSANKEN.BOOKING_NO "
+    '    strSQL = strSQL & "FROM T_EXL_CSANKEN "
+
+
+    '    'ＳＱＬコマンド作成
+    '    dbcmd = New SqlCommand(strSQL, cnn)
+    '    'ＳＱＬ文実行
+    '    dataread = dbcmd.ExecuteReader()
+    '    '結果を取り出す
+    '    While (dataread.Read())
+
+
+    '        STRFORWARDER = dataread("FORWARDER")
+    '        STRFORWARDER02 = dataread("FORWARDER02")
+    '        strcust = dataread("CUST")
+    '        STRCUT_DATE = dataread("CUT_DATE")
+    '        STRINVOICE = dataread("INVOICE")
+    '        STRBOOKING_NO = dataread("BOOKING_NO")
+
+
+    '        If Trim(STRFORWARDER) = "近鉄" And DateValue(STRCUT_DATE) >= DateValue(WDAY01) And DateValue(STRCUT_DATE) < DateValue(WDAY04) Then
+    '            STRFLG01 = 1
+    '        ElseIf Trim(STRFORWARDER) = "日ト" And DateValue(STRCUT_DATE) >= DateValue(WDAY01) And DateValue(STRCUT_DATE) < DateValue(WDAY04) Then
+    '            STRFLG01 = 1
+    '        ElseIf Trim(STRFORWARDER) = "日通" And DateValue(STRCUT_DATE) >= DateValue(WDAY01) And DateValue(STRCUT_DATE) < DateValue(WDAY04) Then
+    '            STRFLG01 = 1
+    '        ElseIf Trim(STRFORWARDER) = "郵船" And DateValue(STRCUT_DATE) >= DateValue(WDAY00) And DateValue(STRCUT_DATE) < DateValue(WDAY03) Then
+    '            STRFLG01 = 1
+    '        ElseIf Trim(STRFORWARDER) = "上野" And Trim(STRFORWARDER02) = "近鉄エクスプレス" And DateValue(STRCUT_DATE) >= DateValue(WDAY04) And DateValue(STRCUT_DATE) < DateValue(WDAY05) Then  '変更AAA
+    '            STRFLG01 = 1
+    '        ElseIf Trim(STRFORWARDER) = "上野" And DateValue(STRCUT_DATE) >= DateValue(WDAY00) And DateValue(STRCUT_DATE) < DateValue(WDAY03) Then
+    '            STRFLG01 = 1
+    '        ElseIf Trim(STRFORWARDER) = "その他" And DateValue(STRCUT_DATE) >= DateValue(WDAY00) And DateValue(STRCUT_DATE) < DateValue(WDAY03) Then
+    '            STRFLG01 = 1
+    '        End If
+
+    '        If STRFLG01 = "1" Then
+
+    '            strSQL = ""
+    '            strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG01 = '" & STRFLG01 & "' "
+    '            strSQL = strSQL & "WHERE T_EXL_CSANKEN.BOOKING_NO = '" & STRBOOKING_NO & "'"
+    '            strSQL = strSQL & "AND T_EXL_CSANKEN.CUST  = '" & strcust & "'"
+    '            strSQL = strSQL & "AND T_EXL_CSANKEN.INVOICE = '" & STRINVOICE & "' "
+
+    '            Command.CommandText = strSQL
+    '            ' SQLの実行
+    '            Command.ExecuteNonQuery()
+
+    '            STRFLG01 = ""
+
+    '        Else
+    '            strSQL = ""
+    '            strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG01 = '' "
+    '            strSQL = strSQL & "WHERE T_EXL_CSANKEN.BOOKING_NO = '" & STRBOOKING_NO & "'"
+    '            strSQL = strSQL & "AND T_EXL_CSANKEN.CUST  = '" & strcust & "'"
+    '            strSQL = strSQL & "AND T_EXL_CSANKEN.INVOICE = '" & STRINVOICE & "' "
+
+    '            Command.CommandText = strSQL
+    '            ' SQLの実行
+    '            Command.ExecuteNonQuery()
+
+    '        End If
+
+    '    End While
+
+    '    GridView1.DataBind()
+
+
+    '    'クローズ処理
+    '    dataread.Close()
+    '    dbcmd.Dispose()
+
+    '    cnn.Close()
+    '    cnn.Dispose()
+
+    '    cnn02.Close()
+    '    cnn02.Dispose()
+
+
+    'End Sub
+
+    Private Sub DropDownList6_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList6.SelectedIndexChanged
+
+
+
+        '最終更新年月日取得
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strSQL As String = ""
+        Dim strinv As String = ""
+        Dim strbkg As String = ""
+
+
+        Dim wday As String = ""
+        Dim wday2 As String = ""
+        Dim wday3 As String = ""
+        Dim dt1 As DateTime = DateTime.Now
+        Dim Kaika00 As String = ""
+
+
+
+        Dim ts1 As New TimeSpan(80, 0, 0, 0)
+        Dim ts2 As New TimeSpan(80, 0, 0, 0)
+        Dim dt2 As DateTime = dt1 + ts1
+        Dim dt3 As DateTime = dt1 - ts1
+
+
+        Dim WDAY00 As String = ""
+        Dim WDAY01 As String = ""
+        Dim WDAY02 As String = ""
+        Dim WDAY03 As String = ""
+        Dim WDAY04 As String = ""
+        Dim WDAY05 As String = ""
+
+        Dim WDAYNO00 As String = ""
+
+        Dim STRFORWARDER As String = ""
+        Dim STRFORWARDER02 As String = ""
+        Dim strcust As String = ""
+        Dim STRCUT_DATE As String = ""
+        Dim STRBOOKING_NO As String = ""
+        Dim STRINVOICE As String = ""
+
+        Dim STRFLG01 As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim cnn02 = New SqlConnection(ConnectionString)
+        Dim Command = cnn02.CreateCommand
+        'データベース接続を開く
+        cnn.Open()
+        cnn02.Open()
+
+        Dim a As String = ""
+        a = DropDownList6.SelectedValue
+
+        strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY_NO FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY <= '" & Format(dt1, "yyyy/MM/dd") & "' "
+        strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+        'ＳＱＬコマンド作成
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行
+        dataread = dbcmd.ExecuteReader()
+        '結果を取り出す
+        While (dataread.Read())
+            WDAYNO00 = dataread("WORKDAY_NO")
+        End While
+
+        'クローズ処理
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        strSQL = ""
+        strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 1 & "' "
+        strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+        'ＳＱＬコマンド作成
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行
+        dataread = dbcmd.ExecuteReader()
+        '結果を取り出す
+        While (dataread.Read())
+            WDAY00 = dataread("WORKDAY")
+        End While
+
+        'クローズ処理
+        dataread.Close()
+        dbcmd.Dispose()
+
+        strSQL = ""
+        strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 2 & "' "
+        strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+        'ＳＱＬコマンド作成
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行
+        dataread = dbcmd.ExecuteReader()
+        '結果を取り出す
+        While (dataread.Read())
+            WDAY01 = dataread("WORKDAY")
+        End While
+
+        'クローズ処理
+        dataread.Close()
+        dbcmd.Dispose()
+
+        strSQL = ""
+        strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 3 & "' "
+        strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+        'ＳＱＬコマンド作成
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行
+        dataread = dbcmd.ExecuteReader()
+        '結果を取り出す
+        While (dataread.Read())
+            WDAY02 = dataread("WORKDAY")
+        End While
+
+        'クローズ処理
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+
+
+        strSQL = ""
+        strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 1 + DropDownList6.SelectedValue & "' "
+        strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+        'ＳＱＬコマンド作成
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行
+        dataread = dbcmd.ExecuteReader()
+        '結果を取り出す
+        While (dataread.Read())
+            WDAY03 = dataread("WORKDAY")
+        End While
+
+        'クローズ処理
+        dataread.Close()
+        dbcmd.Dispose()
+
+        strSQL = ""
+        strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 2 + DropDownList6.SelectedValue & "' "
+        strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+        'ＳＱＬコマンド作成
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行
+        dataread = dbcmd.ExecuteReader()
+        '結果を取り出す
+        While (dataread.Read())
+            WDAY04 = dataread("WORKDAY")
+        End While
+
+        'クローズ処理
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        strSQL = ""
+        strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 3 + DropDownList6.SelectedValue & "' "
+        strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+        'ＳＱＬコマンド作成
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行
+        dataread = dbcmd.ExecuteReader()
+        '結果を取り出す
+        While (dataread.Read())
+            WDAY05 = dataread("WORKDAY")
+        End While
+
+        'クローズ処理
+        dataread.Close()
+        dbcmd.Dispose()
+
+
+        strSQL = ""
+        strSQL = "SELECT T_EXL_CSANKEN.FORWARDER, T_EXL_CSANKEN.FORWARDER02, T_EXL_CSANKEN.CUST, T_EXL_CSANKEN.INVOICE, T_EXL_CSANKEN.CUT_DATE, T_EXL_CSANKEN.BOOKING_NO "
+        strSQL = strSQL & "FROM T_EXL_CSANKEN "
+
+
+        'ＳＱＬコマンド作成
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行
+        dataread = dbcmd.ExecuteReader()
+        '結果を取り出す
+        While (dataread.Read())
+
+
+            STRFORWARDER = dataread("FORWARDER")
+            STRFORWARDER02 = dataread("FORWARDER02")
+            strcust = dataread("CUST")
+            STRCUT_DATE = dataread("CUT_DATE")
+            STRINVOICE = dataread("INVOICE")
+            STRBOOKING_NO = dataread("BOOKING_NO")
+
+
+            If Trim(STRFORWARDER) = "近鉄" And DateValue(STRCUT_DATE) >= DateValue(WDAY01) And DateValue(STRCUT_DATE) < DateValue(WDAY04) Then
+                STRFLG01 = 1
+            ElseIf Trim(STRFORWARDER) = "日ト" And DateValue(STRCUT_DATE) >= DateValue(WDAY01) And DateValue(STRCUT_DATE) < DateValue(WDAY04) Then
+                STRFLG01 = 1
+            ElseIf Trim(STRFORWARDER) = "日通" And DateValue(STRCUT_DATE) >= DateValue(WDAY01) And DateValue(STRCUT_DATE) < DateValue(WDAY04) Then
+                STRFLG01 = 1
+            ElseIf Trim(STRFORWARDER) = "郵船" And DateValue(STRCUT_DATE) >= DateValue(WDAY00) And DateValue(STRCUT_DATE) < DateValue(WDAY03) Then
+                STRFLG01 = 1
+            ElseIf Trim(STRFORWARDER) = "上野" And Trim(STRFORWARDER02) = "近鉄エクスプレス" And DateValue(STRCUT_DATE) >= DateValue(WDAY04) And DateValue(STRCUT_DATE) < DateValue(WDAY05) Then  '変更AAA
+                STRFLG01 = 1
+            ElseIf Trim(STRFORWARDER) = "上野" And DateValue(STRCUT_DATE) >= DateValue(WDAY00) And DateValue(STRCUT_DATE) < DateValue(WDAY03) Then
+                STRFLG01 = 1
+            ElseIf Trim(STRFORWARDER) = "その他" And DateValue(STRCUT_DATE) >= DateValue(WDAY00) And DateValue(STRCUT_DATE) < DateValue(WDAY03) Then
+                STRFLG01 = 1
+            End If
+
+            If STRFLG01 = "1" Then
+
+                strSQL = ""
+                strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG01 = '" & STRFLG01 & "' "
+                strSQL = strSQL & "WHERE T_EXL_CSANKEN.BOOKING_NO = '" & STRBOOKING_NO & "'"
+                strSQL = strSQL & "AND T_EXL_CSANKEN.CUST  = '" & strcust & "'"
+                strSQL = strSQL & "AND T_EXL_CSANKEN.INVOICE = '" & STRINVOICE & "' "
+
+                Command.CommandText = strSQL
+                ' SQLの実行
+                Command.ExecuteNonQuery()
+
+                STRFLG01 = ""
+
+            Else
+                strSQL = ""
+                strSQL = strSQL & "UPDATE T_EXL_CSANKEN SET FLG01 = '' "
+                strSQL = strSQL & "WHERE T_EXL_CSANKEN.BOOKING_NO = '" & STRBOOKING_NO & "'"
+                strSQL = strSQL & "AND T_EXL_CSANKEN.CUST  = '" & strcust & "'"
+                strSQL = strSQL & "AND T_EXL_CSANKEN.INVOICE = '" & STRINVOICE & "' "
+
+                Command.CommandText = strSQL
+                ' SQLの実行
+                Command.ExecuteNonQuery()
+
+            End If
+
+        End While
+
+
+        strSQL = ""
+        strSQL = strSQL & "UPDATE M_EXL_KAIKA_CHANGE SET NAME_EG = '" & DropDownList6.SelectedValue & "' "
+        strSQL = strSQL & "WHERE M_EXL_KAIKA_CHANGE.NAME_JPN = 'DAYS'"
+
+
+        Command.CommandText = strSQL
+        ' SQLの実行
+        Command.ExecuteNonQuery()
+
+        GridView1.DataBind()
+
+
+        'クローズ処理
+        dataread.Close()
+        dbcmd.Dispose()
+
+        cnn.Close()
+        cnn.Dispose()
+
+        cnn02.Close()
+        cnn02.Dispose()
+
+    End Sub
 End Class
