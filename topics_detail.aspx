@@ -216,12 +216,12 @@ FROM
 
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT *
 FROM M_EXL_CS_MEMBER
-WHERE PLACE LIKE '%H%'
+WHERE (PLACE LIKE '%H%' OR PLACE LIKE '%A%')
 AND CODE LIKE 'T%'
 UNION
 SELECT *
 FROM M_EXL_CS_MEMBER
-WHERE PLACE LIKE '%H%'
+WHERE (PLACE LIKE '%H%' OR PLACE LIKE '%A%')
 AND CODE LIKE 'E%'
 AND TEAM = 'CSチーム'"></asp:SqlDataSource>
 
