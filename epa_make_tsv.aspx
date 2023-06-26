@@ -187,6 +187,12 @@
                 <asp:TextBox ID="TextBox3" runat="server" Width ="400px" Height="60px" TextMode="MultiLine" Class ="txtb"></asp:TextBox>
             </td>
         </tr>
+        <tr>
+            <th>第三国インボイス　国コード<br/>デフォルトはシンガポール</th>
+            <td>
+                <asp:TextBox ID="TextBox4" runat="server" Width ="400px" Class ="txtb"></asp:TextBox>
+            </td>
+        </tr>
     </table>
         <table class="ta3" style="width:60%">
         <tr>
