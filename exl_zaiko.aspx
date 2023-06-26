@@ -169,7 +169,7 @@
                 <h2>ＥＸＬ本社在庫状況</h2> 
             </td>
             <td class="second-cell">
-                ※単位：拠点は間口数<%-- 、外部倉庫はパレット数--%>
+                ※単位：間口数<%-- 、外部倉庫はパレット数--%>
             </td>
             <td class="fourth-cell">
                 データ取得：<span id="view_time"></span></td>
