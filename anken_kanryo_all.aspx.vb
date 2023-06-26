@@ -1040,6 +1040,7 @@ Partial Class yuusen
             'kokonituika
             Call Update_vandate(data9)
 
+
             TextBox1.Text = ""
 
         ElseIf e.CommandName = "edt2" Then
@@ -1638,7 +1639,7 @@ Partial Class yuusen
                 GridView1.DataSource = ds
                 GridView1.DataBind()
             End If
-        ElseIf DropDownList1.SelectedValue = "ＦＣＬ" Then
+        ElseIf DropDownList1.SelectedValue = "コンテナ" Then
             Dim ds As DataSet = Dataobj.GET_KANRYO_FCL
             If ds.Tables.Count > 0 Then
                 GridView1.DataSourceID = ""
@@ -2538,6 +2539,7 @@ Partial Class yuusen
 
         'データベース接続を開く
         cnn.Open()
+
 
         '表示ボタン　FLG03は表示
         Dim I As Integer
