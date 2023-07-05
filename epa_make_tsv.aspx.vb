@@ -481,6 +481,7 @@ Partial Class cs_home
         Dim strShip As String = ""
         Dim strCust As String = ""
         Dim strPrt As String = ""
+        Dim strPrt2 As String = ""
         Dim strVoyNo As String = ""
 
         '接続文字列の作成
@@ -503,7 +504,7 @@ Partial Class cs_home
         strSQL = strSQL & "  , IVH.SHIPPEDPER  "
         strSQL = strSQL & "  , IVH.CUSTCODE  "
         strSQL = strSQL & "  , IVH.ALLOUTSTAMP　"
-        '        strSQL = strSQL & "  , IVH.INVPRTDATE　"
+        strSQL = strSQL & "  , IVH.INVPRTDATE　"
         strSQL = strSQL & "  , IVH.VOYAGENO　"
         strSQL = strSQL & "FROM "
         strSQL = strSQL & "  V_T_INV_HD_TB IVH  "
@@ -536,7 +537,7 @@ Partial Class cs_home
             strShip = StrConv(Trim(dataread("SHIPPEDPER")), VbStrConv.Narrow)
             strCust = Trim(dataread("CUSTCODE"))
             strPrt = Replace(Left(Trim(dataread("ALLOUTSTAMP")), 10), "/", "")
-            '            strPrt = Replace(Left(Trim(dataread("INVPRTDATE")), 10), "/", "")
+            strPrt2 = Replace(Left(Trim(dataread("INVPRTDATE")), 10), "/", "")
             strVoyNo = StrConv(Trim(dataread("VOYAGENO")), VbStrConv.Narrow)
         End While
 
@@ -766,7 +767,7 @@ Partial Class cs_home
                 str.Append(vbTab)
                 str.Append("IV-" & strIVNO & "-" & strIVNOFull)  'No6
                 str.Append(vbTab)
-                str.Append(strPrt)                          'No7
+                str.Append(strPrt2)                          'No7
                 str.Append(vbTab)
                 str.Append("")          'No8
                 str.Append(vbTab)
@@ -802,7 +803,7 @@ Partial Class cs_home
                     str.Append(vbCrLf)
                 Else
                     '上記以外
-                    str.Append(strPrt)                          'No8
+                    str.Append(strPrt2)                          'No8
                     str.Append(vbTab)
                     str.Append("")                              'No9
                     str.Append(vbTab)
