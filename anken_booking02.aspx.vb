@@ -1099,6 +1099,7 @@ Partial Class yuusen
         Dim WDAYNO00 As String
         Dim WDAY00 As String
         Dim WDAY01 As String
+        Dim WDAY03 As String
 
         Dim dt1 As DateTime = DateTime.Now
 
@@ -1188,6 +1189,24 @@ Partial Class yuusen
         dataread.Close()
         dbcmd.Dispose()
 
+        strSQL = ""
+        strSQL = "SELECT T_EXL_CSWORKDAY.WORKDAY FROM T_EXL_CSWORKDAY WHERE T_EXL_CSWORKDAY.WORKDAY_NO = '" & Val(WDAYNO00) + 4 & "' "
+        strSQL = strSQL & "ORDER BY T_EXL_CSWORKDAY.WORKDAY_NO "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            WDAY03 = dataread("WORKDAY")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
         cnn.Close()
         cnn.Dispose()
 
@@ -1198,10 +1217,10 @@ Partial Class yuusen
 
         Dim struid As String = Session("UsrId")
         Call Mail01(WDAY00, WDAY01, yusen, struid)
-        Call Mail02(WDAY00, WDAY01, kin, struid)
-        Call Mail03(WDAY00, WDAY01, nihontoran, struid)
-        Call Mail04(WDAY00, WDAY01, nitsu, struid)
-        Call Mail05(WDAY00, WDAY02, kin, struid)
+        Call Mail02(WDAY01, WDAY02, kin, struid)
+        Call Mail03(WDAY01, WDAY02, nihontoran, struid)
+        Call Mail04(WDAY01, WDAY02, nitsu, struid)
+        Call Mail05(WDAY02, WDAY03, kin, struid)
 
 
         Dim mailmsg As String = ""
@@ -1243,30 +1262,21 @@ Partial Class yuusen
         ' メールの内容
 
         Dim strfrom As String = GET_from(struid)
-        'Dim strto As String = GET_from(struid)
-        'Dim strcc As String = GET_from(struid) + "," + "r-fukao@exedy.com"
-
-        'Dim strto As String = GET_ToAddress(2, 1)
         Dim strto As String = GET_ToAddress2("01", 1)
         strto = Left(strto, Len(strto) - 1)
 
         Dim strcc As String = GET_ToAddress2("01", 2) + GET_from(struid)
 
-        'strto = GET_from(struid)
-        'strcc = GET_from(struid)
 
         Dim strsyomei As String = GET_syomei(struid)
 
         Dim f As String = ""
 
-        'メールの件名
-        'Dim strIrai As String = "" '"<通知>LCL案件展開　変更・追加・連絡"
-
-        Dim s01 As String = ""
-        s01 = mailsub(WDAY00)
+        'Dim s01 As String = ""
+        's01 = mailsub(WDAY00)
 
         'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & s01 & "分"
+        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY00 & "分"
         'message.Subject = ConvertBase64Subject(System.Text.Encoding.GetEncoding("csISO2022JP"), _MailTitle)
 
 
@@ -1376,11 +1386,11 @@ Partial Class yuusen
         Dim f As String = ""
 
 
-        Dim s01 As String = ""
-        s01 = mailsub(WDAY01)
+        'Dim s01 As String = ""
+        's01 = mailsub(WDAY01)
 
         'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & s01 & "分"
+        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
 
         'メールの本文
         Dim body As String = ""
@@ -1481,11 +1491,11 @@ Partial Class yuusen
 
         Dim f As String = ""
 
-        Dim s01 As String = ""
-        s01 = mailsub(WDAY01)
+        'Dim s01 As String = ""
+        's01 = mailsub(WDAY01)
 
         'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & s01 & "分"
+        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
 
 
         'メールの本文
@@ -1586,11 +1596,11 @@ Partial Class yuusen
 
         Dim f As String = ""
 
-        Dim s01 As String = ""
-        s01 = mailsub(WDAY01)
+        'Dim s01 As String = ""
+        's01 = mailsub(WDAY01)
 
         'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & s01 & "分"
+        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
 
 
         'メールの本文
@@ -1700,11 +1710,11 @@ Partial Class yuusen
         Dim f As String = ""
 
 
-        Dim s01 As String = ""
-        s01 = mailsub(WDAY01)
+        'Dim s01 As String = ""
+        's01 = mailsub(WDAY01)
 
         'メールの件名
-        Dim subject As String = "【ご連絡】EXD通関委託　" & s01 & "分"
+        Dim subject As String = "【ご連絡】EXD通関委託　" & WDAY01 & "分"
 
         'メールの本文
         Dim body As String = ""
@@ -1838,7 +1848,7 @@ Partial Class yuusen
             CUST = Convert.ToString(dataread("CUST"))
             INVOICE = Convert.ToString(dataread("INVOICE"))
 
-            If A = "近鉄" Then
+            If A = "近鉄" Or A = "上近" Then
                 BOOKING_NO = Convert.ToString(dataread("FLG05"))
             Else
                 BOOKING_NO = Convert.ToString(dataread("BOOKING_NO"))
@@ -1892,7 +1902,8 @@ Partial Class yuusen
         strSQL = strSQL & "WHERE T_EXL_CSANKEN.FLG01 ='1' "
         strSQL = strSQL & "AND T_EXL_CSANKEN.FLG02 ='1' "
         strSQL = strSQL & "AND T_EXL_CSANKEN.LCL_QTY <>'LCL' "
-        strSQL = strSQL & "AND T_EXL_CSANKEN.FORWARDER like'" & A & "*' "
+        strSQL = strSQL & "AND T_EXL_CSANKEN.FORWARDER IN ('" & A & "') "
+
 
         'ＳＱＬコマンド作成 
         dbcmd = New SqlCommand(strSQL, cnn)
