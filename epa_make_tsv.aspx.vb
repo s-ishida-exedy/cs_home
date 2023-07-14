@@ -16,8 +16,10 @@ Partial Class cs_home
             TextBox1.Text = ""
             TextBox2.Text = ""
             TextBox3.Text = ""
+            TextBox4.Text = ""
             TextBox2.Enabled = False
             TextBox3.Enabled = False
+            TextBox4.Enabled = False
 
         End If
 
@@ -42,6 +44,7 @@ Partial Class cs_home
                 TextBox3.Enabled = False
                 TextBox2.Text = ""
                 TextBox3.Text = ""
+                TextBox4.Text = ""
                 Return
             End If
 
@@ -91,8 +94,10 @@ Partial Class cs_home
                 RadioButton2.Checked = False
                 TextBox2.Enabled = True
                 TextBox3.Enabled = True
+                TextBox4.Enabled = True
                 TextBox2.Text = "EXEDY SINGAPORE PTE. LTD."
                 TextBox3.Text = "45 UBI ROAD 1, #02-01, SINGAPORE 408696"
+                TextBox4.Text = "SG"
                 Label1.Text = ""
             Else
                 Label1.Text = "第三国インボイスはESPのみ選択可能です。"
@@ -100,8 +105,10 @@ Partial Class cs_home
                 RadioButton2.Checked = True
                 TextBox2.Enabled = False
                 TextBox3.Enabled = False
+                TextBox4.Enabled = False
                 TextBox2.Text = ""
                 TextBox3.Text = ""
+                TextBox4.Text = ""
             End If
         End If
     End Sub
@@ -112,8 +119,10 @@ Partial Class cs_home
             RadioButton1.Checked = False
             TextBox2.Enabled = False
             TextBox3.Enabled = False
+            TextBox4.Enabled = False
             TextBox2.Text = ""
             TextBox3.Text = ""
+            TextBox4.Text = ""
         End If
     End Sub
 
@@ -149,10 +158,13 @@ Partial Class cs_home
         Dim strNi As String = Get_Nisugata(strIVno, strAgree)
 
         'ヘッダ,明細情報取得、TSVﾌｧｲﾙ書き込み
-        Call Make_Tsv(strIVno, strNi, strCase, strAgree)
-
-
-
+        If strAgree <> "05" Then
+            'インドネシア以外
+            Call Make_Tsv(strIVno, strNi, strCase, strAgree)
+        Else
+            'インドネシア用
+            Call Make_Tsv_for_Indonesia(strIVno, strNi, strCase, strAgree)
+        End If
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -163,8 +175,10 @@ Partial Class cs_home
         TextBox1.Text = ""
         TextBox2.Text = ""
         TextBox3.Text = ""
+        TextBox4.Text = ""
         TextBox2.Enabled = False
         TextBox3.Enabled = False
+        TextBox4.Enabled = False
 
     End Sub
 
@@ -467,6 +481,7 @@ Partial Class cs_home
         Dim strShip As String = ""
         Dim strCust As String = ""
         Dim strPrt As String = ""
+        Dim strPrt2 As String = ""
         Dim strVoyNo As String = ""
 
         '接続文字列の作成
@@ -489,7 +504,7 @@ Partial Class cs_home
         strSQL = strSQL & "  , IVH.SHIPPEDPER  "
         strSQL = strSQL & "  , IVH.CUSTCODE  "
         strSQL = strSQL & "  , IVH.ALLOUTSTAMP　"
-        '        strSQL = strSQL & "  , IVH.INVPRTDATE　"
+        strSQL = strSQL & "  , IVH.INVPRTDATE　"
         strSQL = strSQL & "  , IVH.VOYAGENO　"
         strSQL = strSQL & "FROM "
         strSQL = strSQL & "  V_T_INV_HD_TB IVH  "
@@ -522,7 +537,7 @@ Partial Class cs_home
             strShip = StrConv(Trim(dataread("SHIPPEDPER")), VbStrConv.Narrow)
             strCust = Trim(dataread("CUSTCODE"))
             strPrt = Replace(Left(Trim(dataread("ALLOUTSTAMP")), 10), "/", "")
-            '            strPrt = Replace(Left(Trim(dataread("INVPRTDATE")), 10), "/", "")
+            strPrt2 = Replace(Left(Trim(dataread("INVPRTDATE")), 10), "/", "")
             strVoyNo = StrConv(Trim(dataread("VOYAGENO")), VbStrConv.Narrow)
         End While
 
@@ -752,7 +767,7 @@ Partial Class cs_home
                 str.Append(vbTab)
                 str.Append("IV-" & strIVNO & "-" & strIVNOFull)  'No6
                 str.Append(vbTab)
-                str.Append(strPrt)                          'No7
+                str.Append(strPrt2)                          'No7
                 str.Append(vbTab)
                 str.Append("")          'No8
                 str.Append(vbTab)
@@ -788,7 +803,7 @@ Partial Class cs_home
                     str.Append(vbCrLf)
                 Else
                     '上記以外
-                    str.Append(strPrt)                          'No8
+                    str.Append(strPrt2)                          'No8
                     str.Append(vbTab)
                     str.Append("")                              'No9
                     str.Append(vbTab)
@@ -1193,5 +1208,377 @@ Partial Class cs_home
                 End If
         End Select
 
+    End Function
+
+    Private Sub Make_Tsv_for_Indonesia(strIVNO As String, strNisu As String, strCase As String, strAgree As String)
+        'インドネシア用のTSV作成(2023/06/26～用)ヘッダ,明細情報の取得と書き出し
+        Dim strSQL As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim strCneeNM As String = ""
+        Dim strCneeAD As String = ""
+        Dim strBLDATE As String = ""
+        Dim strINVFrom As String = ""
+        Dim strINVTo As String = ""
+        Dim strShip As String = ""
+        Dim strCust As String = ""
+        Dim strPrt As String = ""
+        Dim strVoyNo As String = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT "
+        strSQL = strSQL & "  IVH.CONSIGNEENAME "
+        strSQL = strSQL & "  , IVH.CONSIGNEEADDRESS "
+        strSQL = strSQL & "  , IVH.BLDATE2 "
+        strSQL = strSQL & "  , IVH.INVFROM "
+        strSQL = strSQL & "  , IVH.INVTO "
+        strSQL = strSQL & "  , IVH.SHIPPEDPER  "
+        strSQL = strSQL & "  , IVH.CUSTCODE  "
+        strSQL = strSQL & "  , IVH.ALLOUTSTAMP　"
+        strSQL = strSQL & "  , IVH.VOYAGENO　"
+        strSQL = strSQL & "FROM "
+        strSQL = strSQL & "  V_T_INV_HD_TB IVH  "
+        strSQL = strSQL & "WHERE "
+        strSQL = strSQL & "  IVH.INVOICENO =   "
+        strSQL = strSQL & "    (Select "
+        strSQL = strSQL & "      MAX(a.INVOICENO) As IVNO  "
+        strSQL = strSQL & "    FROM "
+        strSQL = strSQL & "      V_T_INV_HD_TB a  "
+        strSQL = strSQL & "    WHERE "
+        strSQL = strSQL & "      a.OLD_INVNO = '" & strIVNO & "') "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            If dataread("ALLOUTSTAMP") Is DBNull.Value Then
+                Label1.Text = "一括出力されていません。処理を中止します。"
+                Return
+            End If
+
+            strCneeNM = Trim(dataread("CONSIGNEENAME"))
+            strCneeAD = StrConv(Replace(Replace(Trim(dataread("CONSIGNEEADDRESS")), vbCrLf, " "), "　", " "), VbStrConv.Narrow)
+            strBLDATE = Trim(dataread("BLDATE2"))
+            strINVFrom = StrConv(Trim(dataread("INVFROM")), VbStrConv.Narrow)
+            strINVTo = Trim(dataread("INVTO"))
+            strShip = StrConv(Trim(dataread("SHIPPEDPER")), VbStrConv.Narrow)
+            strCust = Trim(dataread("CUSTCODE"))
+            strPrt = Replace(Left(Trim(dataread("ALLOUTSTAMP")), 10), "/", "")
+            strVoyNo = StrConv(Trim(dataread("VOYAGENO")), VbStrConv.Narrow)
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        '客先名を取得
+        Dim strCstNm As String = GET_CUST_INFO(strCust)
+
+        '客先名から住所取得
+        Select Case strCstNm
+            Case "EDM", "EXM", "EXT", "EMI", "EDS", "EXC"
+                strCneeAD = Get_CST_ADD("", strCstNm)
+            Case "ELA", "ESP"
+                If Get_CST_ADD(strCust, "") <> "" Then
+                    strCneeAD = Get_CST_ADD(strCust, "")
+                End If
+        End Select
+
+        'インドネシアの場合、本船名＋VoｙNo
+        If strAgree = "05" Then
+            strShip = strShip & " " & strVoyNo
+        End If
+
+        'TSVファイル（ヘッダ）
+        Dim str As StringBuilder = New StringBuilder
+
+        str.Append("1")         'No1
+        str.Append(vbTab)
+        str.Append("")          'No2
+        str.Append(vbTab)
+        str.Append("A00004143") 'No3
+        str.Append(vbTab)
+        str.Append(strCneeNM)   'No4
+        str.Append(vbTab)
+        str.Append("")          'No5
+        str.Append(vbTab)
+        str.Append(strCneeAD)   'No6
+        str.Append(vbTab)
+        str.Append("")          'No7
+        str.Append(vbTab)
+        str.Append("")          'No8
+        str.Append(vbTab)
+        str.Append(strBLDATE)   'No9
+        str.Append(vbTab)
+        str.Append("")          'No10
+        str.Append(vbTab)
+        str.Append(strINVFrom)  'No11
+        str.Append(vbTab)
+        str.Append("")          'No12
+        str.Append(vbTab)
+        str.Append("")          'No13
+        str.Append(vbTab)
+        str.Append("IDJKT")     'No14
+        str.Append(vbTab)
+        str.Append(strINVTo)    'No15
+        str.Append(vbTab)
+        str.Append(strShip)     'No16
+        str.Append(vbTab)
+        str.Append("")          'No17
+        str.Append(vbTab)
+        str.Append("")          'No18
+        str.Append(vbTab)
+
+        '第三国インボイス有無
+        If RadioButton1.Checked = True Then
+            str.Append(TextBox2.Text)          'No19
+            str.Append(vbTab)
+            str.Append(TextBox4.Text)          'No20
+            str.Append(vbTab)
+            str.Append(TextBox3.Text)          'No21
+            str.Append(vbTab)
+        Else
+            str.Append("")          'No19
+            str.Append(vbTab)
+            str.Append("")          'No20
+            str.Append(vbTab)
+            str.Append("")          'No21
+            str.Append(vbTab)
+        End If
+
+        str.Append(strCase)     'No22
+        str.Append(vbTab)
+        str.Append(Get_Nisugata_for_Indonesia(strIVNO, strAgree))     'No23
+        str.Append(vbTab)
+        str.Append("D97")       'No24
+        str.Append(vbTab)
+        str.Append("PB")        'No25
+        str.Append(vbTab)
+        str.Append("")          'No26
+        str.Append(vbTab)
+        str.Append("2701")      'No27
+        str.Append(vbTab)
+        str.Append("E")         'No28
+        str.Append(vbCrLf)
+
+        'TSVファイル（明細）
+
+        '明細取得用のＳＱＬ作成
+        If Get_Search_Method(strAgree) <> "03" Then
+            '品番　ＯＲ　品名
+            Call Make_SQL(strIVNO, strSQL, strAgree)
+        Else
+            '品番　＆　品名
+            Call Make_SQL_Name(strIVNO, strSQL, strAgree)
+        End If
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        Dim strIVNOFull As String = Mid(strBLDATE, 3, 2) & Mid(strBLDATE, 6, 2) & Mid(strBLDATE, 9, 2)
+        Dim strETD As String = Replace(strBLDATE, "/", "")
+
+
+        '結果を取り出す 
+        While (dataread.Read())
+
+            str.Append("3")         'No1
+            str.Append(vbTab)
+            str.Append("")          'No2
+            str.Append(vbTab)
+            str.Append(Trim(dataread("ORI_JDG_NO")))    'No3
+            str.Append(vbTab)
+            str.Append("1")                             'No4
+            str.Append(vbTab)
+            str.Append(Trim(dataread("ITM_QTY")))       'No5
+            str.Append(vbTab)
+            str.Append("H87")                           'No6
+            str.Append(vbTab)
+            str.Append("IV-" & strIVNO & "-" & strIVNOFull)  'No7
+            str.Append(vbTab)
+            str.Append(strPrt)                          'No8
+            str.Append(vbTab)
+            str.Append("")                              'No9
+            str.Append(vbTab)
+            str.Append("")                              'No10
+            str.Append(vbTab)
+            str.Append("")                              'No11
+            str.Append(vbTab)
+            str.Append("")                              'No12
+            str.Append(vbTab)
+            str.Append("")                              'No13
+            str.Append(vbTab)
+            str.Append("")                              'No14
+            str.Append(vbTab)
+            str.Append("")                              'No15
+            str.Append(vbTab)
+            str.Append("")                              'No16
+            str.Append(vbTab)
+            str.Append("")                              'No17
+            str.Append(vbTab)
+            str.Append("")                              'No18
+            str.Append(vbTab)
+            str.Append("")                              'No19
+            str.Append(vbTab)
+            str.Append("")                              'No20
+            str.Append(vbTab)
+            str.Append("")                              'No21
+            str.Append(vbTab)
+            str.Append(Trim(dataread("ORI_ITM_NAME")))  'No22
+            str.Append(vbTab)
+            str.Append("E")                             'No23
+            str.Append(vbCrLf)
+
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
+
+        'Contentをクリア
+        Response.ClearContent()
+
+        'Contentを設定
+        'Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")  'Shift-JISで出力したい場合
+        Response.ContentEncoding = System.Text.Encoding.UTF8  'UTF-8で出力したい場合
+        'Response.ContentType = "text/csv"
+        Response.ContentType = "application/octet-stream"
+
+        Dim strFile As String = strCust & "_" & strBLDATE & "_" & strIVNO
+
+        '表示ファイル名を指定
+        Dim viewFileName As String = HttpUtility.UrlEncode(strFile & ".tsv")
+        Response.AddHeader("Content-Disposition", "attachment;filename=" + viewFileName)
+
+        'BOMを送信
+        Dim bom As Byte() = System.Text.Encoding.UTF8.GetPreamble()
+        Response.BinaryWrite(bom)
+
+        'CSVデータを書き込み
+        Response.BinaryWrite(Encoding.UTF8.GetBytes(str.ToString))
+        'Response.Write(str.ToString)
+
+        'ダウンロード実行
+        Response.Flush()
+        Response.End()
+
+    End Sub
+
+    Private Function Get_Nisugata_for_Indonesia(strIVno As String, strCountry As String) As String
+        '荷姿情報の取得
+        Dim strSQL As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+        Dim strAgree As String = ""
+        Dim intCnt As Integer = 0
+
+        Get_Nisugata_for_Indonesia = ""
+
+        '接続文字列の作成
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+
+        'データベース接続を開く
+        cnn.Open()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT "
+        strSQL = strSQL & " COUNT(SEL.PACKNAMES) as qty "
+        strSQL = strSQL & "FROM "
+        strSQL = strSQL & "  (Select DISTINCT "
+        strSQL = strSQL & "      PA.PACKNAMES "
+        strSQL = strSQL & "      , PA.PACKPLURAL "
+        strSQL = strSQL & "      , AAA.PACKINGCD "
+        strSQL = strSQL & "      , AAA.CASENO "
+        strSQL = strSQL & "      , KON.SHIPPL  "
+        strSQL = strSQL & "    FROM "
+        strSQL = strSQL & "      (Select DISTINCT "
+        strSQL = strSQL & "          AA.*  "
+        strSQL = strSQL & "        FROM "
+        strSQL = strSQL & "          (Select "
+        strSQL = strSQL & "              MAX(a.INVOICENO) As IVNO "
+        strSQL = strSQL & "              , a.SERIALNO "
+        strSQL = strSQL & "              , a.CUSTMPN "
+        strSQL = strSQL & "              , a.PACKINGCD "
+        strSQL = strSQL & "              , a.CASENO "
+        strSQL = strSQL & "              , a.ORDNO "
+        strSQL = strSQL & "              , a.PRODNAME "
+        strSQL = strSQL & "              , a.PACKAGENO  "
+        strSQL = strSQL & "            FROM "
+        strSQL = strSQL & "              V_T_INV_HD_TB b  "
+        strSQL = strSQL & "              INNER JOIN V_T_INV_BD_TB a  "
+        strSQL = strSQL & "                On a.INVOICENO = b.INVOICENO  "
+        strSQL = strSQL & "            WHERE "
+        strSQL = strSQL & "              b.OLD_INVNO = '" & strIVno & "'  "
+        strSQL = strSQL & "              AND a.QTY > 0  "
+        strSQL = strSQL & "            GROUP BY "
+        strSQL = strSQL & "              a.SERIALNO "
+        strSQL = strSQL & "              , a.CUSTMPN "
+        strSQL = strSQL & "              , a.PACKINGCD "
+        strSQL = strSQL & "              , a.CASENO "
+        strSQL = strSQL & "              , a.ORDNO "
+        strSQL = strSQL & "              , a.PRODNAME "
+        strSQL = strSQL & "              , a.PACKAGENO) AA  "
+
+        'JOINする時の条件　01:品番、02:品名、03：両方
+        Select Case Get_Search_Method(strCountry)
+            Case "01"
+                strSQL = strSQL & "      LEFT JOIN M_EXL_ORIGIN_ITM c  "
+                strSQL = strSQL & "        On AA.CUSTMPN = c.CST_ITM_CODE  "
+            Case "02"
+                strSQL = strSQL & "      LEFT JOIN M_EXL_ORIGIN_ITM c  "
+                strSQL = strSQL & "        On AA.PRODNAME = c.ITM_NAME  "
+            Case "03"
+                strSQL = strSQL & "      LEFT JOIN M_EXL_ORIGIN_ITM c  "
+                strSQL = strSQL & "        On AA.CUSTMPN = c.CST_ITM_CODE OR AA.PRODNAME = c.ITM_NAME "
+        End Select
+
+        strSQL = strSQL & "        WHERE "
+        strSQL = strSQL & "          c.CODE = '" & strCountry & "') AAA  "
+        strSQL = strSQL & "      INNER JOIN V_M_PACK_TB PA  "
+        strSQL = strSQL & "        ON AAA.PACKINGCD = PA.PACKINGCD  "
+        strSQL = strSQL & "      INNER JOIN V_T_KONPO_TB KON  "
+        strSQL = strSQL & "        ON AAA.PACKAGENO = KON.KONPONO) SEL  "
+        strSQL = strSQL & "GROUP BY "
+        strSQL = strSQL & "  SEL.PACKNAMES, SEL.PACKPLURAL "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        '結果を取り出す 
+        While (dataread.Read())
+            intCnt += Integer.Parse(Trim(dataread("qty")))
+        End While
+
+        Get_Nisugata_for_Indonesia = intCnt
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+        cnn.Close()
+        cnn.Dispose()
     End Function
 End Class
