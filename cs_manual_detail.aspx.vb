@@ -63,6 +63,7 @@ Partial Class cs_home
                 DropDownList15.SelectedValue = dataread("CERTIFICATE_OF_CONFORMITY").ToString
                 DropDownList16.SelectedValue = dataread("DOC_OF_EGYPT").ToString
 
+
                 If strMode = "01" Then
                     '更新モード
 
@@ -85,6 +86,7 @@ Partial Class cs_home
 
 
                 End If
+                TextBox1.Text = dataread("SALES_STAFF").ToString & " " & dataread("SALES_STAFF1").ToString
                 TextBox2.Text = dataread("OLD_CODE").ToString
                 TextBox3.Text = dataread("CUST_NM").ToString
                 TextBox4.Text = dataread("CUST_AB").ToString
@@ -607,7 +609,7 @@ Partial Class cs_home
         '画面入力情報をテーブルへ登録
         Dim strSQL As String
         Dim strVal As String = ""
-
+        Dim dt1 As DateTime = DateTime.Now
         'パラメータ取得
         Dim strCust As String = Session("strCust")
         Dim strMode As String = Session("strMode")
@@ -652,7 +654,7 @@ Partial Class cs_home
             strSQL = strSQL & "  , ERL_NECE =  '" & DropDownList9.SelectedValue & "' "
             strSQL = strSQL & "  , VESS_NECE =  '" & DropDownList10.SelectedValue & "' "
             strSQL = strSQL & "  , SALES_STAFF =  '" & Session("UsrId") & "' "
-            strSQL = strSQL & "  , SALES_STAFF1 =  '" & Replace(LTrim(RTrim(TextBox15.Text)), "'", "''") & "' "
+            strSQL = strSQL & "  , SALES_STAFF1 =  '" & dt1.ToString("yyyy/MM/dd") & "' "
             strSQL = strSQL & "  , SALES_STAFF2 =  '" & Replace(LTrim(RTrim(TextBox16.Text)), "'", "''") & "' "
             strSQL = strSQL & "  , SALES_STAFF3 =  '" & Replace(LTrim(RTrim(TextBox17.Text)), "'", "''") & "' "
             strSQL = strSQL & "  , SALES_STAFF4 =  '" & Replace(LTrim(RTrim(TextBox18.Text)), "'", "''") & "' "
@@ -729,7 +731,7 @@ Partial Class cs_home
             strSQL = strSQL & "  , '" & DropDownList8.SelectedValue & "' "
             strSQL = strSQL & "  , '" & DropDownList9.SelectedValue & "' "
             strSQL = strSQL & "  , '" & Session("UsrId") & "' "
-            strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox14.Text)) & "' "
+            strSQL = strSQL & "  , '" & dt1.ToString("yyyy/MM/dd") & "' "
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox15.Text)) & "' "
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox16.Text)) & "' "
             strSQL = strSQL & "  , '" & LTrim(RTrim(TextBox17.Text)) & "' "

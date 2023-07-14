@@ -385,9 +385,9 @@
 <%--            <td style="width:80px;" >
                 <asp:Button ID="Button6"  CssClass ="btn00" runat="server" Text="期間変更" Width="75px" Height="40px" AutoPostBack="True" Font-Size="13px" />
             </td>--%>
-            <td style="width:30px;text-align:center;" >
+<%--            <td style="width:30px;text-align:center;" >
 <%--                <asp:TextBox ID="TextBox6" runat="server" Height="20px" Width="20px" Class ="txtb" ></asp:TextBox>--%>
-                <asp:DropDownList ID="DropDownList6" runat="server" Width ="50px" AutoPostBack="true">
+<%--                <asp:DropDownList ID="DropDownList6" runat="server" Width ="50px" AutoPostBack="true">
                     <asp:ListItem Value="1">1</asp:ListItem>
                     <asp:ListItem Value="2">2</asp:ListItem>
                     <asp:ListItem Value="3">3</asp:ListItem>
@@ -406,7 +406,7 @@
             </td>
             <td style="width:70px; font-size:12px;" >
                 <asp:Label ID="Label23" runat="server" Text="稼働日先まで"></asp:Label>
-            </td>
+            </td>--%>
         </tr>
     </table>
 
