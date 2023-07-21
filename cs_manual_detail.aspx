@@ -182,6 +182,10 @@
                 <td colspan="3">
                     <asp:TextBox ID="TextBox3" runat="server" Height="15px" Width="600px" Class ="txtb"></asp:TextBox>
                 </td>
+                <th>最終更新者</th>
+                <td>
+                    <asp:TextBox ID="TextBox1" runat="server" Height="20px" Width="233px" Class ="txtb" disabled></asp:TextBox>
+                </td>
             </tr>
         </table>
 
