@@ -63,7 +63,7 @@
 
         .wrapper {
             overflow: scroll;
-            height: 400px;
+            height: 150px;
         }
 
 
@@ -1101,107 +1101,107 @@ var config5 = {
                     ctx2.fillText('当日:' + dt, left, top + 40);
                 }
 
-                var ctx2 = $("#myChart2").get(0).getContext("2d");
+                //var ctx2 = $("#myChart2").get(0).getContext("2d");
 
-                var config2 = {
-                    type: 'line',
-                    data: {
+                //var config2 = {
+                //    type: 'line',
+                //    data: {
 
-                        datasets: [{
-                            data: dataarr17,// エリア下端データセット
-                            label: "A",
-                            pointRadius: false,
-                            pointHitRadius: false,
-                            fill: false,// エリア下端はfalseにしておくと良い
-                        }, {
-                            data: dataarr13,//エリア上端データセット
-                            label: "溢れパレット枚数",
-                            pointRadius: 1,
-                            pointHitRadius: 2,
-                            //上端は下端の位置を設定する
-                            //以下の場合は1つ前を意味する
-                            fill: "-1",
-                            backgroundColor: 'rgba(255, 0, 0, 0.5)',// エリアの色はこちらで指定する
-                        }],
-                        labels: Labelarr
-                    },
-                    plugins: [{
-                        afterDraw: drawBackground2 // ★
+                //        datasets: [{
+                //            data: dataarr17,// エリア下端データセット
+                //            label: "A",
+                //            pointRadius: false,
+                //            pointHitRadius: false,
+                //            fill: false,// エリア下端はfalseにしておくと良い
+                //        }, {
+                //            data: dataarr13,//エリア上端データセット
+                //            label: "溢れパレット枚数",
+                //            pointRadius: 1,
+                //            pointHitRadius: 2,
+                //            //上端は下端の位置を設定する
+                //            //以下の場合は1つ前を意味する
+                //            fill: "-1",
+                //            backgroundColor: 'rgba(255, 0, 0, 0.5)',// エリアの色はこちらで指定する
+                //        }],
+                //        labels: Labelarr
+                //    },
+                //    plugins: [{
+                //        afterDraw: drawBackground2 // ★
 
-                    }],
-                    options: {
-                        legend: {
-                            labels: {
+                //    }],
+                //    options: {
+                //        legend: {
+                //            labels: {
 
-                                filter: function (items) {
-                                    return items.text != 'A';
-                                    // return items.datasetIndex != 2;
-                                }
-                            }
-                        },
-                        title: {
-                            display: true, // タイトルを表示する
-                            text: '概算溢れパレット枚数（実績と予測）', // タイトルのテキスト
-                            fontSize: 20
-                        },
-                        responsive: false,
-                        scales: {                          // 軸設定
-                            xAxes: [                           // Ｘ軸設定
-                                {
-                                    stacked: false, //積み上げ棒グラフにする設定
-                                    scaleLabel: {                 // 軸ラベル
-                                        display: false,                // 表示設定
-                                        //labelString: '',    // ラベル
-                                        //fontSize: 10                  // フォントサイズ
-                                    },
-                                    gridLines: {                   // 補助線
-                                        display: false,                // 表示設定
-                                        //color: "rgba(255, 0, 0, 0.2)", // 補助線の色
-                                    },
-                                    ticks: {                      // 目盛り
-                                        //fontColor: "red",             // 目盛りの色
+                //                filter: function (items) {
+                //                    return items.text != 'A';
+                //                    // return items.datasetIndex != 2;
+                //                }
+                //            }
+                //        },
+                //        title: {
+                //            display: true, // タイトルを表示する
+                //            text: '概算溢れパレット枚数（実績と予測）', // タイトルのテキスト
+                //            fontSize: 20
+                //        },
+                //        responsive: false,
+                //        scales: {                          // 軸設定
+                //            xAxes: [                           // Ｘ軸設定
+                //                {
+                //                    stacked: false, //積み上げ棒グラフにする設定
+                //                    scaleLabel: {                 // 軸ラベル
+                //                        display: false,                // 表示設定
+                //                        //labelString: '',    // ラベル
+                //                        //fontSize: 10                  // フォントサイズ
+                //                    },
+                //                    gridLines: {                   // 補助線
+                //                        display: false,                // 表示設定
+                //                        //color: "rgba(255, 0, 0, 0.2)", // 補助線の色
+                //                    },
+                //                    ticks: {                      // 目盛り
+                //                        //fontColor: "red",             // 目盛りの色
 
-                                        //stepSize: 10,                   // 軸間隔
-                                        fontSize: 14                  // フォントサイズ
-                                    }
-                                }
-                            ],
-                            yAxes: [                           // Ｙ軸設定
-                                  {
-                                      stacked: true, //積み上げ棒グラフにする設定
-                                      scaleLabel: {                  // 軸ラベル
-                                          display: true,                 // 表示の有無
-                                          labelString: '単位：枚',     // ラベル
-                                          fontFamily: "sans-serif",
-                                          fontColor: "black",             // 文字の色
-                                          fontFamily: "sans-serif",
-                                          fontSize: 18                   // フォントサイズ
-                                      },
-                                      gridLines: {                   // 補助線
-                                          color: "rgba(0, 0, 0, 0.2)", // 補助線の色
-                                          //zeroLineColor: "black"         // y=0（Ｘ軸の色）
-                                      },
-                                      ticks: {                       // 目盛り
-                                          min: 0,                        // 最小値
-                                          //max: 20,                       // 最大値
-                                          stepSize: 100,                   // 軸間隔
-                                          //callback: function(label, index, labels) { /* ここです */
-                                          //    return label.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ;
-                                          //},
+                //                        //stepSize: 10,                   // 軸間隔
+                //                        fontSize: 14                  // フォントサイズ
+                //                    }
+                //                }
+                //            ],
+                //            yAxes: [                           // Ｙ軸設定
+                //                  {
+                //                      stacked: true, //積み上げ棒グラフにする設定
+                //                      scaleLabel: {                  // 軸ラベル
+                //                          display: true,                 // 表示の有無
+                //                          labelString: '単位：枚',     // ラベル
+                //                          fontFamily: "sans-serif",
+                //                          fontColor: "black",             // 文字の色
+                //                          fontFamily: "sans-serif",
+                //                          fontSize: 18                   // フォントサイズ
+                //                      },
+                //                      gridLines: {                   // 補助線
+                //                          color: "rgba(0, 0, 0, 0.2)", // 補助線の色
+                //                          //zeroLineColor: "black"         // y=0（Ｘ軸の色）
+                //                      },
+                //                      ticks: {                       // 目盛り
+                //                          min: 0,                        // 最小値
+                //                          //max: 20,                       // 最大値
+                //                          stepSize: 100,                   // 軸間隔
+                //                          //callback: function(label, index, labels) { /* ここです */
+                //                          //    return label.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ;
+                //                          //},
 
-                                          fontColor: "rgba(0, 0, 0, 0.8)",             // 目盛りの色
-                                          fontSize: 15                   // フォントサイズ
-                                      }
-                                  }
-                            ]
-                        }
-                    }
-                };
+                //                          fontColor: "rgba(0, 0, 0, 0.8)",             // 目盛りの色
+                //                          fontSize: 15                   // フォントサイズ
+                //                      }
+                //                  }
+                //            ]
+                //        }
+                //    }
+                //};
 
                 ctx.canvas.height = 500;
                 ctx.canvas.width = 1250;
-                ctx2.canvas.height = 300;
-                ctx2.canvas.width = 1250;
+                //ctx2.canvas.height = 300;
+                //ctx2.canvas.width = 1250;
                 ctx3.canvas.height = 300;
                 ctx3.canvas.width = 1250;
                 ctx4.canvas.height = 300;
@@ -1210,7 +1210,7 @@ var config5 = {
                 ctx5.canvas.width = 1250;
 
                 var myPieChart = new Chart(ctx, config);
-                var myPieChart2 = new Chart(ctx2, config2);
+                //var myPieChart2 = new Chart(ctx2, config2);
                 var myPieChart3 = new Chart(ctx3, config3);
                 var myPieChart4 = new Chart(ctx4, config4);
                 var myPieChart5 = new Chart(ctx5, config5);
@@ -1247,7 +1247,8 @@ var config5 = {
         
     <table border ="1" class ="BB">
         <tr>
-            <asp:Button ID="Button1" runat="server" Text="明細ダウンロード" Visible="true" />
+            <asp:Button ID="Button1" runat="server" Text="明細ダウンロード" Visible="false" />
+            <a href="./m_graph_stock_detail.aspx">案件管理表へ</a>
         </tr>
     </table>
 
@@ -1264,7 +1265,52 @@ var config5 = {
                 </tr>
             </table>   
         </div>  
+
+        <div class="wrapper">
+        <table class="sticky" >
+        <thead class="fixed">
+
+        </thead>
+
+        <tbody>
+
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width = "1270px" DataSourceID="SqlDataSource4" DataKeyNames="PLACE" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+        <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
+        <Columns>
+
+        <asp:BoundField DataField="INS_DATE" HeaderText="追加日" SortExpression="INS_DATE"　>
+            <HeaderStyle Width="70px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="PLACE" HeaderText="区分" SortExpression="PLACE" ReadOnly="true" >
+            <HeaderStyle Width="30px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="COMMENT" HeaderText="コメント" SortExpression="COMMENT" ReadOnly="true" >
+            <HeaderStyle Width="1000px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+
+        </Columns>
+        <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+        <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+        <RowStyle BackColor="#FFFFFF" ForeColor="Black" />
+        <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+        <SortedAscendingCellStyle BackColor="#F1F1F1" />
+        <SortedAscendingHeaderStyle BackColor="#0000A9" />
+        <SortedDescendingCellStyle BackColor="#CAC9C9" />
+        <SortedDescendingHeaderStyle BackColor="#000065" />
+        </asp:GridView>
+
+        </tbody>
+        </table>
+        </div>
+
     </asp:Panel>
+
+</div>
+
+<div id="contents2" class="inner2">
 
     <table style="height:50px">
     </table>  
@@ -1282,7 +1328,54 @@ var config5 = {
                 </tr>
             </table>  
         </div>     
+
+
+
+        <div class="wrapper">
+        <table class="sticky" >
+        <thead class="fixed">
+
+        </thead>
+
+        <tbody>
+
+        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" Width = "1270px" DataSourceID="SqlDataSource1" DataKeyNames="PLACE" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+        <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
+        <Columns>
+
+        <asp:BoundField DataField="INS_DATE" HeaderText="追加日" SortExpression="INS_DATE"　>
+            <HeaderStyle Width="70px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="PLACE" HeaderText="区分" SortExpression="PLACE" ReadOnly="true" >
+            <HeaderStyle Width="30px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="COMMENT" HeaderText="コメント" SortExpression="COMMENT" ReadOnly="true" >
+            <HeaderStyle Width="1000px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+
+        </Columns>
+        <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+        <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+        <RowStyle BackColor="#FFFFFF" ForeColor="Black" />
+        <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+        <SortedAscendingCellStyle BackColor="#F1F1F1" />
+        <SortedAscendingHeaderStyle BackColor="#0000A9" />
+        <SortedDescendingCellStyle BackColor="#CAC9C9" />
+        <SortedDescendingHeaderStyle BackColor="#000065" />
+        </asp:GridView>
+
+        </tbody>
+        </table>
+        </div>
+
     </asp:Panel>
+
+</div>
+
+<div id="contents2" class="inner2">
 
     <table style="height:50px">
     </table>  
@@ -1299,8 +1392,55 @@ var config5 = {
                         <asp:Label ID="Label3" runat="server" Text="aaa" style="background:red;font-size:18px;color:white" ></asp:Label>
                 </tr>
             </table>   
-        </div>      
+        </div>     
+        
+        
+
+        <div class="wrapper">
+        <table class="sticky" >
+        <thead class="fixed">
+
+        </thead>
+
+        <tbody>
+
+        <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" Width = "1270px" DataSourceID="SqlDataSource2" DataKeyNames="PLACE" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+        <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
+        <Columns>
+
+        <asp:BoundField DataField="INS_DATE" HeaderText="追加日" SortExpression="INS_DATE"　>
+            <HeaderStyle Width="70px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="PLACE" HeaderText="区分" SortExpression="PLACE" ReadOnly="true" >
+            <HeaderStyle Width="30px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="COMMENT" HeaderText="コメント" SortExpression="COMMENT" ReadOnly="true" >
+            <HeaderStyle Width="1000px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+
+        </Columns>
+        <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+        <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+        <RowStyle BackColor="#FFFFFF" ForeColor="Black" />
+        <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+        <SortedAscendingCellStyle BackColor="#F1F1F1" />
+        <SortedAscendingHeaderStyle BackColor="#0000A9" />
+        <SortedDescendingCellStyle BackColor="#CAC9C9" />
+        <SortedDescendingHeaderStyle BackColor="#000065" />
+        </asp:GridView>
+
+        </tbody>
+        </table>
+        </div>
+         
     </asp:Panel>
+
+</div>
+
+<div id="contents2" class="inner2">
 
     <table style="height:50px">
     </table>  
@@ -1318,19 +1458,74 @@ var config5 = {
                 </tr>
             </table>   
         </div>      
+
+
+
+        <div class="wrapper">
+        <table class="sticky" >
+        <thead class="fixed">
+
+        </thead>
+
+        <tbody>
+
+        <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="False" Width = "1270px" DataSourceID="SqlDataSource3" DataKeyNames="PLACE" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+        <HeaderStyle BackColor="#326DB6" Font-Bold="True" ForeColor="BLACK"> </HeaderStyle>
+        <Columns>
+
+        <asp:BoundField DataField="INS_DATE" HeaderText="追加日" SortExpression="INS_DATE"　>
+            <HeaderStyle Width="70px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="PLACE" HeaderText="区分" SortExpression="PLACE" ReadOnly="true" >
+            <HeaderStyle Width="30px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+        <asp:BoundField DataField="COMMENT" HeaderText="コメント" SortExpression="COMMENT" ReadOnly="true" >
+            <HeaderStyle Width="1000px" />
+<%--            <ItemStyle HorizontalAlign="Center" />--%>
+            </asp:BoundField>
+
+        </Columns>
+        <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+        <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+        <RowStyle BackColor="#FFFFFF" ForeColor="Black" />
+        <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+        <SortedAscendingCellStyle BackColor="#F1F1F1" />
+        <SortedAscendingHeaderStyle BackColor="#0000A9" />
+        <SortedDescendingCellStyle BackColor="#CAC9C9" />
+        <SortedDescendingHeaderStyle BackColor="#000065" />
+        </asp:GridView>
+
+        </tbody>
+        </table>
+        </div>
+
     </asp:Panel>
 
     <table style="height:50px">
     </table>  
 
-    <asp:Panel ID="Panel2" runat="server"  Font-Size="12px">
+
+<%--    <asp:Panel ID="Panel2" runat="server"  Font-Size="12px">
         <table>
             <tr>
                 <canvas id="myChart2" ></canvas>
             </tr>
-        </table>     
-    </asp:Panel>
+        </table>  
+       
+    </asp:Panel>--%>
+
 </div>
+
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [INS_DATE], [PLACE], [COMMENT] FROM [T_EXL_GRAPH_STOCK_COM] WHERE PLACE = '1F' ORDER BY INS_DATE DESC "
+    ></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [INS_DATE], [PLACE], [COMMENT] FROM [T_EXL_GRAPH_STOCK_COM] WHERE PLACE = '3F' ORDER BY INS_DATE DESC"
+    ></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [INS_DATE], [PLACE], [COMMENT] FROM [T_EXL_GRAPH_STOCK_COM] WHERE PLACE = '4F' ORDER BY INS_DATE DESC"
+    ></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT [INS_DATE], [PLACE], [COMMENT] FROM [T_EXL_GRAPH_STOCK_COM] WHERE PLACE = '全' ORDER BY INS_DATE DESC"
+    ></asp:SqlDataSource>
 
     <!--/#contents2-->
 
