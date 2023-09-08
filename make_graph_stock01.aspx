@@ -1248,7 +1248,7 @@ var config5 = {
     <table border ="1" class ="BB">
         <tr>
             <asp:Button ID="Button1" runat="server" Text="明細ダウンロード" Visible="false" />
-            <a href="./m_graph_stock_detail.aspx">案件管理表へ</a>
+            <a href="./m_graph_stock_detail.aspx">コメント追加</a>
         </tr>
     </table>
 
