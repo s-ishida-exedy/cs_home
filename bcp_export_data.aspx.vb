@@ -645,9 +645,14 @@ Partial Class yuusen
                     '結果を取り出す
                     While (dataread.Read())
                         '書類作成状況
+                        a = row(13)
                         If row(13) = "1" Or row(13) = "" Then
                             If row(1) = dataread("FORWAEDER") Then
                                 row(13) = Replace(row(13), "1", "")
+                                If IsDBNull(row(13)) Then
+                                    row(13) = ""
+                                Else
+                                End If
                             Else
                                 row(13) = dataread("FORWAEDER")
                             End If
