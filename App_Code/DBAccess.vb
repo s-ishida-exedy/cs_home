@@ -1530,4 +1530,31 @@ Public Class DBAccess
         Da.Fill(Ds)
         Return Ds
     End Function
+
+
+    Public Function GET_CS_RESULT_BCP_ANKEN(strst As String, stred As String, strpt As String) As DataSet
+        'シッピングメモデータ取得時
+        Conn = Me.Dbconnect
+        Cmd = Conn.CreateCommand
+
+        StrSQL = StrSQL & ""
+        StrSQL = StrSQL & "SELECT "
+        StrSQL = StrSQL & "  * "
+        StrSQL = StrSQL & "FROM "
+        StrSQL = StrSQL & "  [T_EXL_CSANKEN] "
+
+        StrSQL = StrSQL & "WHERE ETD BETWEEN '" & strst & "' AND '" & stred & "' "
+        StrSQL = StrSQL & "AND PLACE_OF_RECEIPT = '" & strpt & "' "
+        StrSQL = StrSQL & "ORDER BY ETD "
+
+        Cmd.CommandText = StrSQL
+
+        Da = Factroy.CreateDataAdapter()
+        Da.SelectCommand = Cmd
+        Ds = New DataSet
+        Da.Fill(Ds)
+        Return Ds
+    End Function
+
+
 End Class

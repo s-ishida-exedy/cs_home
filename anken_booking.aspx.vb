@@ -1411,67 +1411,6 @@ Step00:
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
-
-        'Dim strFile As String = Format(Now, "yyyyMMdd") & "_出荷管理表.xlsx"
-        'Dim strPath As String = "C:\exp\cs_home\files\"
-        'Dim strChanged As String    'サーバー上のフルパス
-        'Dim strFileNm As String     'ファイル名
-
-        'Dim a
-
-        'Dim dt As New DataTable("SHIP")
-        'For Each cell As TableCell In GridView1.HeaderRow.Cells
-
-        '    If cell.Text = "FLG01" Or cell.Text = "FLG02" Or cell.Text = "FLG0" Or cell.Text = "FLG04" Then
-        '        'dt.Columns.Add(cell.Text)
-        '    ElseIf cell.Text = "CUT" Or cell.Text = "ETD" Or cell.Text = "ETA" Or cell.Text = "書類作成予定日" Or cell.Text = "VAN01" Or cell.Text = "VAN02" Or cell.Text = "VAN03" Or cell.Text = "VAN04" Or cell.Text = "VAN05" Or cell.Text = "VAN06" Or cell.Text = "VAN07" Or cell.Text = "VAN08" Or cell.Text = "VAN09" Or cell.Text = "VAN10" Or cell.Text = "VAN11" Then
-        '        dt.Columns.Add(cell.Text, Type.GetType("System.DateTime"))
-        '    ElseIf cell.Text = "20Ft" Or cell.Text = "40Ft" Or cell.Text = "LCL/40Ft" Or cell.Text = "コンテナ" Then
-        '        dt.Columns.Add(cell.Text)
-        '    Else
-        '        dt.Columns.Add(cell.Text)
-        '    End If
-
-        'Next
-
-        'For Each row As GridViewRow In GridView1.Rows
-        '    dt.Rows.Add()
-        '    For i As Integer = 0 To row.Cells.Count - 5
-        '        a = Replace(row.Cells(i).Text, "&nbsp;", "")
-        '        If a = "" Then
-        '            a = DBNull.Value
-        '        End If
-        '        dt.Rows(dt.Rows.Count - 1)(i) = a
-        '    Next
-        'Next
-        'Using workbook As New XLWorkbook()
-        '    workbook.Worksheets.Add(dt)
-        '    workbook.SaveAs(strPath & strFile)
-
-        'End Using
-
-        ''ファイル名を取得する
-        'strChanged = strPath & Format(Now, "yyyyMMdd") & "_出荷管理表.xlsx"
-        'strFileNm = Path.GetFileName(strChanged)
-
-        ''Contentをクリア
-        'Response.ClearContent()
-
-        ''Contentを設定
-        'Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
-        'Response.ContentType = "application/vnd.ms-excel"
-
-        ''表示ファイル名を指定
-        'Dim fn As String = HttpUtility.UrlEncode(strFileNm)
-        'Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
-
-        ''ダウンロード対象ファイルを指定
-        'Response.WriteFile(strChanged)
-
-        ''ダウンロード実行
-        'Response.Flush()
-        'Response.End()
-
         '前月分ダウンロードボタン押下
         Dim strFile As String = Format(Now, "yyyyMMdd") & "_出荷管理表.xlsx"
         Dim strPath As String = "C:\exp\cs_home\files\"
