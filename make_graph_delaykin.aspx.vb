@@ -307,7 +307,54 @@ Partial Class yuusen
     Private Sub GridView2_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView2.RowDataBound
 
 
+
+        Dim ConnectionString As String = String.Empty
+        'SQL Server認証
+        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        'SqlConnectionクラスの新しいインスタンスを初期化
+        Dim cnn = New SqlConnection(ConnectionString)
+        Dim Command = cnn.CreateCommand
+        Dim strSQL As String = ""
+        Dim ivno As String = ""
+        Dim dataread As SqlDataReader
+        Dim dbcmd As SqlCommand
+
+        Dim cnt01 As Long
+        cnt01 = 0
+
+
+
         If e.Row.RowType = DataControlRowType.DataRow Then
+
+
+            'データベース接続を開く
+            cnn.Open()
+
+            strSQL = ""
+            strSQL = strSQL & "SELECT COUNT(T_EXL_SHIPPINGMEMOLIST.REV_STATUS) AS CNT "
+            strSQL = strSQL & "FROM T_EXL_SHIPPINGMEMOLIST "
+            strSQL = strSQL & "WHERE T_EXL_SHIPPINGMEMOLIST.BOOKING_NO = '" & Trim(e.Row.Cells(10).Text) & "' "
+            strSQL = strSQL & "AND T_EXL_SHIPPINGMEMOLIST.REV_STATUS IN ('月またぎ','月またぎP') "
+
+
+            'ＳＱＬコマンド作成 
+            dbcmd = New SqlCommand(strSQL, cnn)
+            'ＳＱＬ文実行 
+            dataread = dbcmd.ExecuteReader()
+
+            While (dataread.Read())
+                cnt01 = dataread("CNT")
+            End While
+
+            'クローズ処理 
+            dataread.Close()
+            dbcmd.Dispose()
+
+            If cnt01 > 0 Then
+
+                e.Row.Cells(0).BackColor = Drawing.Color.Red
+
+            End If
 
 
             e.Row.Cells(9).Text = Double.Parse(e.Row.Cells(9).Text).ToString("#,0")

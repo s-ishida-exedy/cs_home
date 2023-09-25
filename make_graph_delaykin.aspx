@@ -419,7 +419,7 @@
     <table >
         <tr>
             <td style="width:450px;Font-Size:15px;" align="left" >
-                ●案件一覧
+                ●案件一覧 (実績 区分：赤)
             </td>
         </tr>
     </table>
@@ -485,6 +485,13 @@
         </div>
     </asp:Panel>  
 
+</div>
+
+
+<div id="contents2" class="inner2" >
+
+
+    <asp:Panel ID="Panel1" runat="server"  Font-Size="12px" class ="AA">
 
     <table >
         <tr>
@@ -502,7 +509,7 @@
     </table>
 
 
-    <asp:Panel ID="Panel1" runat="server"  Font-Size="12px" class ="AA">
+
 
         <div class="wrapper" id="main2" >
         <table class="sticky"   >
