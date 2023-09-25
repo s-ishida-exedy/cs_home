@@ -52,6 +52,19 @@ Partial Class yuusen
 
     End Function
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim posted As HttpPostedFile = userfile00.PostedFile
+
+        If Not posted.FileName = "" Then
+            'posted.SaveAs("C:\exp\cs_home\upload\" & System.IO.Path.GetFileName(posted.FileName)
+            posted.SaveAs("C:\Users\T43529\Source\Repos\s-ishida-exedy\cs_home\upload\" & System.IO.Path.GetFileName(posted.FileName))
+
+            Session("strFile") = System.IO.Path.GetFileName(posted.FileName)
+        End If
+
+    End Sub
+
     'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
     '    '四日市
 

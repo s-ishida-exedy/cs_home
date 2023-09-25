@@ -211,7 +211,7 @@
                 <asp:TextBox ID="TextBox2" runat="server" Width="500px" Height="200px" TextMode="MultiLine" CssClass="" Font-Size="13px" AutoPostBack="True"  AppendDataBoundItems="true" ></asp:TextBox>
                 </td>
              </tr>
-<%--             <tr>
+             <tr>
                 <th>添付ファイル<br/>(PDFのみ)</th>
                 <td colspan="2">
                     <input id="file_input" type="file" multiple="multiple" name="userfile" accept="application/pdf" onchange=checkfile() />
@@ -222,7 +222,7 @@
                 <td colspan="2">
                     <input id="selectfile" type="text" name="selectFile" value="" size="60" disabled="disabled"/>
                 </td>
-            </tr>--%>
+            </tr>
 
 
         </table>

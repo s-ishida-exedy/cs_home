@@ -139,9 +139,6 @@ Partial Class yuusen
 
     Private Sub form1_Load(sender As Object, e As EventArgs) Handles form1.Load
 
-
-
-
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
         ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
@@ -174,18 +171,7 @@ Partial Class yuusen
         Dim sumval2 As Double
         Dim sumval3 As Double
         Dim sumval4 As Double
-        Dim sumval5 As Integer
-        Dim sumval6 As Integer
-        Dim sumval7 As Integer
-        Dim sumval8 As Integer
-        Dim sumval9 As Integer
-        Dim sumval10 As Integer
-        Dim sumval11 As Integer
-        Dim sumval12 As Integer
-        Dim sumval13 As Integer
-        Dim sumval14 As Integer
-        Dim sumval15 As Integer
-        Dim sumval16 As Integer
+
 
 
 
@@ -196,41 +182,75 @@ Partial Class yuusen
         Dim dt2 As DateTime = dt1 + ts1
         Dim dt3 As DateTime = dt1 - ts1
 
-        ''データベース接続を開く
-        'cnn.Open()
+        'データベース接続を開く
+        cnn.Open()
 
-        'strSQL = ""
-        'strSQL = strSQL & "SELECT * FROM T_EXL_GRAPH_MINOU_AM WHERE "
-        'strSQL = strSQL & "CUSTCODE = '合計' "
-
-
-        ''ＳＱＬコマンド作成 
-        'dbcmd = New SqlCommand(strSQL, cnn)
-        ''ＳＱＬ文実行 
-        'dataread = dbcmd.ExecuteReader()
-
-        'While (dataread.Read())
+        strSQL = ""
+        strSQL = strSQL & "SELECT T_EXL_DELAY_FORCAST.KBN, Sum(T_EXL_DELAY_FORCAST.KIN) AS KIN01 "
+        strSQL = strSQL & "FROM T_EXL_DELAY_FORCAST "
+        strSQL = strSQL & "WHERE T_EXL_DELAY_FORCAST.KBN = 'MT' "
+        strSQL = strSQL & "GROUP BY T_EXL_DELAY_FORCAST.KBN "
 
 
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
 
-        '    Label1.Text = Double.Parse(Double.Parse(dataread("MINOU")) / 1000000).ToString("#,0.0")
-        '    Label2.Text = Double.Parse(Double.Parse(dataread("RED")) / 1000000).ToString("#,0.0")
-        '    Label3.Text = Double.Parse((Double.Parse(dataread("MINOU")) + Double.Parse(dataread("RED")) + Double.Parse(dataread("ADJ")) + Double.Parse(dataread("DELAY"))) / 1000000).ToString("#,0.0")
-        '    Label4.Text = Double.Parse(Double.Parse(dataread("ADJ")) / 1000000).ToString("#,0.0")
-        '    Label5.Text = Double.Parse(Double.Parse(dataread("DELAY")) / 1000000).ToString("#,0.0")
+        While (dataread.Read())
+            Label4.Text = Double.Parse(Double.Parse(dataread("KIN01"))).ToString("#,0")
+            sumval1 = Double.Parse(Double.Parse(dataread("KIN01"))).ToString("#,0")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        strSQL = ""
+        strSQL = strSQL & "SELECT T_EXL_DELAY_FORCAST.KBN, Sum(T_EXL_DELAY_FORCAST.KIN) AS KIN01 "
+        strSQL = strSQL & "FROM T_EXL_DELAY_FORCAST "
+        strSQL = strSQL & "WHERE T_EXL_DELAY_FORCAST.KBN = 'TS' "
+        strSQL = strSQL & "GROUP BY T_EXL_DELAY_FORCAST.KBN "
 
 
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
 
-        'End While
+        While (dataread.Read())
+            Label6.Text = Double.Parse(Double.Parse(dataread("KIN01"))).ToString("#,0")
+            sumval2 = Double.Parse(Double.Parse(dataread("KIN01"))).ToString("#,0")
 
-        ''クローズ処理 
-        'dataread.Close()
-        'dbcmd.Dispose()
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
 
 
+        strSQL = ""
+        strSQL = strSQL & "SELECT T_EXL_DELAY_FORCAST.KBN, Sum(T_EXL_DELAY_FORCAST.KIN) AS KIN01 "
+        strSQL = strSQL & "FROM T_EXL_DELAY_FORCAST "
+        strSQL = strSQL & "WHERE T_EXL_DELAY_FORCAST.KBN = 'AT' "
+        strSQL = strSQL & "GROUP BY T_EXL_DELAY_FORCAST.KBN "
 
 
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
 
+        While (dataread.Read())
+            Label8.Text = Double.Parse(Double.Parse(dataread("KIN01"))).ToString("#,0")
+            sumval3 = Double.Parse(Double.Parse(dataread("KIN01"))).ToString("#,0")
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        Label10.Text = Double.Parse(Double.Parse(sumval1 + sumval2 + sumval3)).ToString("#,0")
 
 
 
@@ -284,12 +304,71 @@ Partial Class yuusen
 
     End Sub
 
+    Private Sub GridView2_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView2.RowDataBound
+
+
+        If e.Row.RowType = DataControlRowType.DataRow Then
+
+
+            e.Row.Cells(9).Text = Double.Parse(e.Row.Cells(9).Text).ToString("#,0")
+
+            If e.Row.Cells(0).Text = "MT" Then
+                e.Row.BackColor = Drawing.Color.LightGreen
+            ElseIf e.Row.Cells(0).Text = "AT" Then
+                e.Row.BackColor = Drawing.Color.LightPink
+            ElseIf e.Row.Cells(0).Text = "TS" Then
+                e.Row.BackColor = Drawing.Color.LightBlue
+            End If
+
+        End If
+
+    End Sub
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         '前月分ダウンロードボタン押下
         Dim strFile As String = "月またぎ明細.xls"
+        Dim strPath As String = "C:\exp\cs_home\files\"
+        Dim strChanged As String    'サーバー上のフルパス
+        Dim strFileNm As String     'ファイル名
+
+        Dim dtToday As DateTime = DateTime.Today
+
+
+
+        'ファイル名を取得する
+        Dim strTxtFiles() As String = System.IO.Directory.GetFiles(strPath, strFile)
+
+        strChanged = strTxtFiles(0)
+        strFileNm = Path.GetFileName(strChanged)
+
+        'Contentをクリア
+        Response.ClearContent()
+
+        'Contentを設定
+        'Response.ContentEncoding = System.Text.Encoding.GetEncoding("shift-jis")
+        Response.ContentType = "application/vnd.ms-excel"
+
+        '表示ファイル名を指定
+        Dim fn As String = HttpUtility.UrlEncode(strFileNm)
+        Response.AddHeader("Content-Disposition", "attachment;filename=" + fn)
+
+        'ダウンロード対象ファイルを指定
+        Response.WriteFile(strChanged)
+
+        'ダウンロード実行
+        Response.Flush()
+        Response.End()
+
+
+    End Sub
+
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        '前月分ダウンロードボタン押下
+        Dim strFile As String = "遅延予測（実績）明細.xls"
         Dim strPath As String = "C:\exp\cs_home\files\"
         Dim strChanged As String    'サーバー上のフルパス
         Dim strFileNm As String     'ファイル名

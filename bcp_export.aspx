@@ -293,9 +293,8 @@
       }
 
 
-
-
     </style>
+
     <script>
     $(document).ready(function () {
         var text = getParam('id');
@@ -369,6 +368,26 @@
         });
     </script>
 
+<%--    <script>
+
+    function checkfile() {
+        //getElementByIdで上記のhtmlのID id="file_input"　から選択されたファイルの情報を読み込む。
+        var file_name = document.getElementById("file_input").files;
+        //変数定義
+        var list = "";
+        window.alert(file_name);
+        window.alert(file_name.length);
+        //for文で入っているファイルの文だけファイル名を取得する
+        for (var i = 0; i < file_name.length; i++) {
+            list += file_name[i].name + " ,"
+        }
+        //list の文字列の末尾の一文字を削除する
+        var result = list.substr(0, list.length - 1);
+        //document.getElementByIdで idを selectfile に指定してdocument.getElementById("selectfile").valueで中身を変数resultで指定する
+        document.getElementById("selectfile").value = result;
+    }
+
+</script>--%>
 
 
 </head>
@@ -391,6 +410,14 @@
         </tr>
     </table>
 
+    <table>
+        <tr>
+            <td style="width:400px;Font-Size:15px;" >
+            <input type="file" name="userfile" id="userfile00" accept=".xls,.xlsx,.xlsm" runat="server" />
+                <asp:Button ID="Button1" runat="server" Text="ﾏｽﾀ更新" />
+            </td>
+        </tr>
+    </table>
 
     <table>
         <tr>

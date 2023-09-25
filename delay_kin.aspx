@@ -1,11 +1,11 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="booking.aspx.vb" Inherits="cs_home" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="delay_kin.aspx.vb" Inherits="cs_home" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>ポータルサイト(BOOKING SHEET)</title>
+<title>ポータルサイト(月またぎ出港遅延)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="js/openclose.js"></script>
@@ -150,7 +150,7 @@
     }
 </script>
 
-    <script type="text/javascript">
+<%--    <script type="text/javascript">
       function LinkClick() {
           var url = 'm_booking_colorkbn.aspx?q='
           var result = confirm('別ウインドウでを開きます');
@@ -161,7 +161,7 @@
           else {
           }
       }
-    </script>
+    </script>--%>
 
 </head>
 <body class="c2">
@@ -179,10 +179,10 @@
     <table class="header-ta" >
         <tr>
             <td class="first-cell">
-                <h2>Booking Sheet</h2> 
+                <h2>月またぎ出港遅延による未納金額</h2> 
             </td>
             <td class="second-cell">
-                <asp:DropDownList ID="DropDownList1" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource3" DataTextField="STATUS" DataValueField="STATUS" AutoPostBack ="True" Width ="100px"></asp:DropDownList> 
+<%--                <asp:DropDownList ID="DropDownList1" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource3" DataTextField="STATUS" DataValueField="STATUS" AutoPostBack ="True" Width ="100px"></asp:DropDownList> 
                 <asp:DropDownList ID="DropDownList2" class="DropDownList" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource2" DataTextField="Forwarder" DataValueField="Forwarder" AutoPostBack ="true" Width ="200px"></asp:DropDownList> 
                 &nbsp;
                 <asp:Label ID="Label1" runat="server" Text="客先CD:"></asp:Label>
@@ -191,12 +191,12 @@
                 <asp:TextBox ID="TextBox2" runat="server" Class ="txtb"></asp:TextBox>
                 <br />
                 <asp:Button ID="Button1" runat="server" Text=" 絞込 " Font-Size="Small" Width ="80" />
-                <asp:Button ID="Button2" runat="server" Text=" ﾘｾｯﾄ " Font-Size="Small" Width ="80" />
+                <asp:Button ID="Button2" runat="server" Text=" ﾘｾｯﾄ " Font-Size="Small" Width ="80" />--%>
                 <asp:Button class="button01"  ID="Button4" runat="server" Text="ｴｸｾﾙ出力" Width="80" AutoPostBack="True" Font-Size="Small" /> 
             </td>
             <td class="third-cell">
-                <asp:Label ID="Label2" runat="server" Text="Labe2" ></asp:Label>
-                <a href="javascript:void(0);" onclick="LinkClick()">BS色ﾏｽﾀ</a>  
+<%--                <asp:Label ID="Label2" runat="server" Text="Labe2" ></asp:Label>
+                <a href="javascript:void(0);" onclick="LinkClick()">BS色ﾏｽﾀ</a>  --%>
             </td>
         </tr>
     </table>
@@ -213,40 +213,18 @@
 <%--<div id="main2" style="width:100%;height:500px;overflow:scroll;-webkit-overflow-scrolling:touch;border:None;">--%>
 
 
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" width="2980px" DataKeyNames="SEQ_NO02,CUST_CD" DataSourceID="SqlDataSource1" 
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" width="1500px" DataSourceID="SqlDataSource1" 
             BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" AllowColSizing="True">
             <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
             <AlternatingRowStyle BackColor="#DCDCDC" />
             <Columns>
-                <asp:BoundField DataField="STATUS" SortExpression="STATUS" HeaderText="ｽﾃｰﾀｽ" >
-                <HeaderStyle Width="100px" />
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="Forwarder" HeaderText="海貨業者" SortExpression="Forwarder" >
-                <ItemStyle Font-Size="Small"  />
-                </asp:BoundField>
-                <asp:BoundField DataField="CUST_CD" HeaderText="客先" SortExpression="CUST_CD" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="CONSIGNEE" HeaderText="荷受先名" SortExpression="CONSIGNEE" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="DESTINATION" HeaderText="仕向地" SortExpression="DESTINATION" >
+                <asp:BoundField DataField="CUST_CD02" HeaderText="客先" SortExpression="CUST_CD02" >
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="INVOICE_NO" HeaderText="IVNO" SortExpression="INVOICE_NO" >
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
-                <asp:BoundField DataField="CUT_DATE" HeaderText="ｶｯﾄ日" SortExpression="CUT_DATE" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
                 <asp:BoundField DataField="ETD" HeaderText="出港日" SortExpression="ETD" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="ETA" HeaderText="到着日" SortExpression="ETA" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="FINAL_VAN" HeaderText="最終VAN">
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
                 <asp:BoundField DataField="TWENTY_FEET" HeaderText="20FT" SortExpression="TWENTY_FEET" >
@@ -264,24 +242,12 @@
                 <asp:BoundField DataField="BOOKING_NO" HeaderText="ﾌﾞｯｷﾝｸﾞNO" SortExpression="BOOKING_NO" >
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
-                <asp:BoundField DataField="VESSEL_NAME" HeaderText="船名" SortExpression="VESSEL_NAME" >
-                <HeaderStyle Width="200px" />
+                <asp:BoundField DataField="PODATE" HeaderText="PODATE" SortExpression="PODATE" >
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
-                <asp:BoundField DataField="VOYAGE_NO" HeaderText="VoyNo" SortExpression="VOYAGE_NO" >
-                <HeaderStyle Width="100px" />
+                <asp:BoundField DataField="PONO" HeaderText="PONO" SortExpression="PONO" >
                 <ItemStyle Font-Size="Small" />
                 </asp:BoundField>
-                <asp:BoundField DataField="SEQ_NO02" HeaderText="近鉄はHBLNO" SortExpression="SEQ_NO02" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="PONO" HeaderText="PONO" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-                <asp:BoundField DataField="ROW_KBN" HeaderText="ROW_KBN" >
-                <ItemStyle Font-Size="Small" />
-                </asp:BoundField>
-
             </Columns>
             <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
@@ -293,60 +259,13 @@
 </table>
 </div>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT 
-    a.STATUS
-  , a.Forwarder
-  , a.CUST_CD 
-  , a.CONSIGNEE
-  , a.DESTINATION
-  , a.INVOICE_NO 
-  , a.CUT_DATE
-  , a.ETD
-  , a.ETA
-  , a.TWENTY_FEET
-  , a.FOURTY_FEET
-  , a.LCL_QTY
-  , a.BOOKING_NO
-  , a.VESSEL_NAME
-  , a.VOYAGE_NO
-  , a.SEQ_NO02
-  , a.PONO
-  , MAX(TBL.VAN_DATE) AS FINAL_VAN 
-  , a.ROW_KBN
-FROM T_BOOKING a
-INNER JOIN
-  ( SELECT CUST_CD, INVOICE_NO, DAY01 AS VAN_DATE FROM T_BOOKING  
-    UNION ALL  
-    SELECT CUST_CD, INVOICE_NO, DAY02 AS VAN_DATE FROM T_BOOKING  
-    UNION ALL  
-    SELECT CUST_CD, INVOICE_NO, DAY03 AS VAN_DATE FROM T_BOOKING 
-    UNION ALL  
-    SELECT CUST_CD, INVOICE_NO, DAY04 AS VAN_DATE FROM T_BOOKING 
-    UNION ALL  
-    SELECT CUST_CD, INVOICE_NO, DAY05 AS VAN_DATE FROM T_BOOKING 
-    UNION ALL  
-    SELECT CUST_CD, INVOICE_NO, DAY06 AS VAN_DATE FROM T_BOOKING 
-    UNION ALL  
-    SELECT CUST_CD, INVOICE_NO, DAY07 AS VAN_DATE FROM T_BOOKING 
-    UNION ALL  
-    SELECT CUST_CD, INVOICE_NO, DAY08 AS VAN_DATE FROM T_BOOKING 
-    UNION ALL  
-    SELECT CUST_CD, INVOICE_NO, DAY09 AS VAN_DATE FROM T_BOOKING 
-    UNION ALL  
-    SELECT CUST_CD, INVOICE_NO, DAY10 AS VAN_DATE FROM T_BOOKING 
-    UNION ALL  
-    SELECT CUST_CD, INVOICE_NO, DAY11 AS VAN_DATE FROM T_BOOKING) AS TBL  
-	ON a.CUST_CD = TBL.CUST_CD AND a.INVOICE_NO = TBL.INVOICE_NO
-WHERE 
-  a.INVOICE_NO &lt;&gt; ''  
-  AND TBL.VAN_DATE &lt;&gt; '' 
-GROUP BY 
-      a.STATUS  , a.Forwarder , a.CUST_CD , a.CONSIGNEE , a.DESTINATION
-  , a.INVOICE_NO  , a.CUT_DATE , a.ETD , a.ETA , a.TWENTY_FEET
-  , a.FOURTY_FEET , a.LCL_QTY , a.BOOKING_NO , a.VESSEL_NAME
-  , a.VOYAGE_NO , a.SEQ_NO02 , a.PONO,ROW_KBN
+CUST_CD02,INVOICE_NO,ETD,TWENTY_FEET,FOURTY_FEET,LCL_QTY,BOOKING_NO,PODATE,PONO
+FROM T_BOOKING 
+WHERE ETD between DATEADD(day,1,EOMONTH(GETDATE(), -1)) and DATEADD(day,0,EOMONTH(GETDATE(),0)) 
+ORDER BY ETD
 "></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [Forwarder] FROM [T_BOOKING]"></asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT STATUS FROM T_BOOKING"></asp:SqlDataSource>
+<%--        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT [Forwarder] FROM [T_BOOKING]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT DISTINCT STATUS FROM T_BOOKING"></asp:SqlDataSource>--%>
 <%--</div>--%>
 <!--/#main2-->
 
