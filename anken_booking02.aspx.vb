@@ -1207,8 +1207,7 @@ Partial Class yuusen
         dataread.Close()
         dbcmd.Dispose()
 
-        cnn.Close()
-        cnn.Dispose()
+
 
         Dim yusen As String = ""
         Dim kin As String = ""
@@ -1240,7 +1239,36 @@ Partial Class yuusen
             mailmsg = mailmsg & "," & "日通"
         End If
 
+        Dim strupddate02 As Date
 
+        strSQL = ""
+        strSQL = strSQL & "SELECT T_EXL_DATA_UPD.DATA_UPD FROM T_EXL_DATA_UPD "
+        strSQL = strSQL & "WHERE T_EXL_DATA_UPD.DATA_CD ='013' "
+
+        'ＳＱＬコマンド作成 
+        dbcmd = New SqlCommand(strSQL, cnn)
+        'ＳＱＬ文実行 
+        dataread = dbcmd.ExecuteReader()
+
+        While (dataread.Read())
+            strupddate02 = Trim(dataread("DATA_UPD"))
+        End While
+
+        'クローズ処理 
+        dataread.Close()
+        dbcmd.Dispose()
+
+        Dim dt00 As String = dt1.ToShortDateString
+        Dim dt03 As String = strupddate02.ToShortDateString
+
+        If dt00 = dt03 Then
+            Label22.Text = "済"
+        Else
+            Label22.Text = "未"
+        End If
+
+        cnn.Close()
+        cnn.Dispose()
 
         If mailmsg = "" Then
             Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "確認", "<script language='JavaScript'>confirm('対象なしです。');</script>", False)
