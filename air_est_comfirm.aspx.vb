@@ -137,10 +137,10 @@ Partial Class cs_home
         Bdy = Bdy + "下記条件を元にお見積りをお願い申し上げます。<BR><BR>"
 
         '出荷場所
-        If Session("strPlac") = "本社" Then
+        If Session("strPlac") = "0" Then
             Bdy = Bdy + "集荷場所：〒572-0822　(株)エクセディ物流 1F<BR>"
             Bdy = Bdy + "住所: 大阪府寝屋川市木田元宮1 -30 - 1<BR><BR>"
-        Else
+        ElseIf Session("strPlac") = "1" Then
             Bdy = Bdy + "集荷場所：〒518-0825　(株)エクセディ物流 上野出張所<BR>"
             Bdy = Bdy + "住所: 三重県伊賀市小田町2500番地<BR><BR>"
         End If
