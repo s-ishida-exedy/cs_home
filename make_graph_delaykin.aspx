@@ -433,7 +433,7 @@
     
         <tbody >
 
-        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" Width = "1100px" DataSourceID="SqlDataSource2" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
+        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" Width = "1120px" DataSourceID="SqlDataSource2" BackColor="White" BorderColor="#555555" BorderStyle="None" BorderWidth="3px" CellPadding="3" ShowHeaderWhenEmpty="True" >
 
         <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White"  />
         <AlternatingRowStyle BackColor="#ffffff" />
@@ -446,7 +446,7 @@
         <HeaderStyle Width="80px" />
         </asp:BoundField>
         <asp:BoundField DataField="DISTINATION" HeaderText="仕向地" SortExpression="DISTINATION" HtmlEncode="False" >
-        <HeaderStyle Width="100px" />
+        <HeaderStyle Width="120px" />
         </asp:BoundField>
         <asp:BoundField DataField="CUSTCODE" HeaderText="客先コード" SortExpression="CUSTCODE" HtmlEncode="False" >
         <HeaderStyle Width="60px" />
@@ -478,7 +478,7 @@
 
         </asp:GridView>
 
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_DELAY_FORCAST] "></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EXPDBConnectionString %>" SelectCommand="SELECT * FROM [T_EXL_DELAY_FORCAST] WHERE CUSTCODE<>'対象外' "></asp:SqlDataSource>
 
         </tbody>
         </table>
