@@ -283,6 +283,8 @@ Partial Class cs_home
                 Button7.Attributes.Add("onclick", "return confirm('登録します。よろしいですか？');")
             End If
 
+            Session("strCust") = DropDownList100.SelectedValue
+
         End If
 
     End Sub
@@ -702,7 +704,7 @@ Partial Class cs_home
             strSQL = strSQL & "  , CERTIFICATE_OF_CONFORMITY =  '" & DropDownList15.SelectedValue & "' "
             strSQL = strSQL & "  , DOC_OF_EGYPT =  '" & DropDownList16.SelectedValue & "' "
             strSQL = strSQL & "WHERE "
-            strSQL = strSQL & "  NEW_CODE =  '" & strCust & "' "
+            strSQL = strSQL & "  NEW_CODE =  '" & LTrim(RTrim(DropDownList100.Text)) & "' "
         Else
             strSQL = ""
             strSQL = strSQL & "INSERT INTO T_EXL_CSMANUAL "
