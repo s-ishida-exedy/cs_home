@@ -49,7 +49,7 @@ Partial Class yuusen
         Dim t As List(Of trafficSourceData) = New List(Of trafficSourceData)()
         Dim arrColor As String() = New String() {"#231F20", "#FFC200", "#F44937", "#16F27E", "#FC9775", "#5A69A6"}
 
-        Using cn As SqlConnection = New SqlConnection("Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
+        Using cn As SqlConnection = New SqlConnection("Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
             Dim myQuery As String = "select CUSTCODE,MINOU,RED,DELAY,ADJ,ACM from T_EXL_GRAPH_MINOU_KD WHERE CUSTCODE <>'' AND CUSTCODE <>'合計' "
             Dim cmd As SqlCommand = New SqlCommand()
             cmd.CommandText = myQuery
@@ -140,7 +140,7 @@ Partial Class yuusen
 
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
         Dim Command = cnn.CreateCommand

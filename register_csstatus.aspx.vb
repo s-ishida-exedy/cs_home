@@ -229,7 +229,7 @@ Partial Class yuusen
         Dim ConnectionString As String = String.Empty
         Dim ConnectionString2 As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
 
@@ -544,7 +544,7 @@ Partial Class yuusen
             strinv = Convert.ToString(dataread("OLD_INVNO"))        'ETD(計上日)
             If flg = "1" Then
                 Call INS_ITK(strinv, bkgno)
-            ElseIf flg = "2"
+            ElseIf flg = "2" Then
                 Call DEL_ITKIVNO(strinv, bkgno)
             End If
         End While
@@ -562,7 +562,7 @@ Partial Class yuusen
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
         Dim Command = cnn.CreateCommand
@@ -639,7 +639,7 @@ Partial Class yuusen
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
         Dim Command = cnn.CreateCommand
@@ -676,7 +676,7 @@ Partial Class yuusen
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
         Dim Command = cnn.CreateCommand
@@ -736,7 +736,7 @@ Partial Class yuusen
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
         Dim Command = cnn.CreateCommand
@@ -798,7 +798,7 @@ Partial Class yuusen
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
         Dim Command = cnn.CreateCommand
@@ -839,7 +839,7 @@ Partial Class yuusen
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
         Dim Command = cnn.CreateCommand

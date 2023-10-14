@@ -28,7 +28,7 @@
         Dim strSQL As String = ""
 
         Dim ConnectionString As String = String.Empty
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
 
         Dim objDb As New SqlConnection(ConnectionString)
         objDb.Open()

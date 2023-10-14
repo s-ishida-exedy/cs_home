@@ -151,7 +151,7 @@
         </tr>
     </table>
 <div id="main2" style="width:100%;">
-    <img src="http://kbhwpm01/exp/display/4f_floor.jpg" />
+    <img src="http://k3hwpm01/exp/display/4f_floor.jpg" />
 </div>
 <!--/#main2-->
 

@@ -248,7 +248,7 @@ Partial Class yuusen
 
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
 
         Dim dt = New DataTable("T_EXL_DOC_BOX")
 

@@ -22,7 +22,7 @@ Partial Class cs_home
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
 
@@ -80,7 +80,7 @@ Partial Class cs_home
         'クリックされたリンクボタンを取得
         Dim lnkbutton = CType(sender, LinkButton)
 
-        'WEBサーバーの「\\kbhwpm01\exp\cs_home\manual」に配置されたファイルのみ起動可能
+        'WEBサーバーの「\\k3hwpm01\exp\cs_home\manual」に配置されたファイルのみ起動可能
         Response.Redirect("./manual/" & lnkbutton.ID)       'フルパス指定
 
         'ID（ファイル名）を引数にファイルオープン処理

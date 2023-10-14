@@ -128,7 +128,7 @@
         </tr>
     </table>
 <div id="main2" style="width:100%;">
-    <img class="imgJpg" src="http://kbhwpm01/exp/display/3f_konpo.jpg"/>
+    <img class="imgJpg" src="http://k3hwpm01/exp/display/3f_konpo.jpg"/>
 </div>
 <!--/#main2-->
 

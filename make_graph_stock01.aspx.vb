@@ -65,7 +65,7 @@ Partial Class yuusen
         Dim t As List(Of trafficSourceData) = New List(Of trafficSourceData)()
         Dim arrColor As String() = New String() {"#231F20", "#FFC200", "#F44937", "#16F27E", "#FC9775"}
 
-        Using cn As SqlConnection = New SqlConnection("Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
+        Using cn As SqlConnection = New SqlConnection("Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
             Dim myQuery As String = "select * from T_EXL_GRAPH_STOCK WHERE DATE01 >= '2022/12/01' ORDER BY DATE01 "
             Dim cmd As SqlCommand = New SqlCommand()
             cmd.CommandText = myQuery
@@ -248,7 +248,7 @@ Partial Class yuusen
 
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
 
         Dim dt = New DataTable("T_EXL_GRAPH_STOCK")
 
@@ -280,7 +280,7 @@ Partial Class yuusen
     '    Dim t As List(Of trafficSourceData) = New List(Of trafficSourceData)()
     '    Dim arrColor As String() = New String() {"#231F20", "#FFC200", "#F44937", "#16F27E", "#FC9775"}
 
-    '    Using cn As SqlConnection = New SqlConnection("Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
+    '    Using cn As SqlConnection = New SqlConnection("Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
     '        Dim myQuery As String = "Select DATE01, firfloor, trdfloor, fourfloor, ew, cap, ovrpallet from T_EXL_GRAPH_STOCK "
     '        Dim cmd As SqlCommand = New SqlCommand()
     '        cmd.CommandText = myQuery

@@ -78,7 +78,7 @@ Partial Class yuusen
         Dim t As List(Of trafficSourceData) = New List(Of trafficSourceData)()
         Dim arrColor As String() = New String() {"#231F20", "#FFC200", "#F44937", "#16F27E", "#FC9775", "#5A69A6"}
 
-        Using cn As SqlConnection = New SqlConnection("Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
+        Using cn As SqlConnection = New SqlConnection("Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
 
             Dim myQuery As String = "select TITLE,ZENSEN,TOUTYOU,TOUORI,ZAN,SENYOKU,TYOUYOKU from T_EXL_SINTYOKU "
             Dim cmd As SqlCommand = New SqlCommand()
@@ -123,7 +123,7 @@ Partial Class yuusen
         Dim tt As List(Of trafficSourceData) = New List(Of trafficSourceData)()
 
         Dim arrColor As String() = New String() {"#0068B7", "#F39800", "#FFF100", "#009944", "#E60012", "#1D2088", "#920783", "#16F27E", "#FC9775", "#5A69A6"} '
-        Using cn2 As SqlConnection = New SqlConnection("Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
+        Using cn2 As SqlConnection = New SqlConnection("Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
 
             Dim myQuery2 As String = "select KBN,ZANKIN from T_EXL_GRAPH_KDSINTYOKU "
             Dim cmd2 As SqlCommand = New SqlCommand()
@@ -164,7 +164,7 @@ Partial Class yuusen
         Dim ttt As List(Of trafficSourceData) = New List(Of trafficSourceData)()
 
         Dim arrColor2 As String() = New String() {"#0068B7", "#F39800", "#FFF100", "#009944", "#E60012", "#1D2088", "#920783", "#16F27E", "#FC9775", "#5A69A6"} '
-        Using cn3 As SqlConnection = New SqlConnection("Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
+        Using cn3 As SqlConnection = New SqlConnection("Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
 
             Dim myQuery3 As String = "select KBN,ZANKIN from T_EXL_GRAPH_AMSINTYOKU "
             Dim cmd3 As SqlCommand = New SqlCommand()
@@ -202,7 +202,7 @@ Partial Class yuusen
 
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=KBHWPM02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
         Dim Command = cnn.CreateCommand

@@ -4,7 +4,7 @@
         <a href="#" class="init-bottom">情報一覧<span>Information</span></a>
         <ul class="menu__second-level">
             <!-- 第一階層 -->
-<%--            <li data-id='["","http://kbhwpm01/exp/display/quantity_of_order.htm"]'><a href="#">受注台数</a></li>--%>
+<%--            <li data-id='["","http://k3hwpm01/exp/display/quantity_of_order.htm"]'><a href="#">受注台数</a></li>--%>
             <li data-id='["home","make_graph_odr.aspx"]'><a href="#">受注台数</a></li>
 <%--            <li data-id='["home","make_graph_con.aspx"]'><a href="#">コンテナ本数(AF)</a></li>--%>
             <li data-id='["home","booking.aspx"]'><a href="#">ブッキングシート</a></li>
@@ -14,14 +14,14 @@
                 <a href="#" class="init-right">バンニング</a>
                 <ul class="menu__third-level">
                     <!-- 第二階層 -->
-                    <li data-id='["","http://kbhwpm01/exp/display/60days_van.htm"]'><a href="#">60日先バンニング本数推移</a></li>
+                    <li data-id='["","http://k3hwpm01/exp/display/60days_van.htm"]'><a href="#">60日先バンニング本数推移</a></li>
                     <li data-id='["home","van_sche.aspx"]'><a href="#">バンニングスケジュール</a></li>
                     <li data-id='["home","van_result.aspx"]'><a href="#">本社バンニング結果</a></li>
                 </ul>
             </li>
-<%--            <li data-id='["","http://kbhwpm01/exp/display/deliverly_status.htm"]'><a href="#">出荷進捗</a></li>--%>
+<%--            <li data-id='["","http://k3hwpm01/exp/display/deliverly_status.htm"]'><a href="#">出荷進捗</a></li>--%>
             <li data-id='["home","make_graph_sintyoku.aspx"]'><a href="#">出荷進捗</a></li>
-            <li data-id='["","http://kbhwpm01/exp/display/loading_efficiency_and_co2_emission.htm"]'><a href="#">本社_CO2排出量・積載率</a></li>
+            <li data-id='["","http://k3hwpm01/exp/display/loading_efficiency_and_co2_emission.htm"]'><a href="#">本社_CO2排出量・積載率</a></li>
             <li data-id='["aaa",""]'>
 <%--                <a href="#" class="init-right">未納</a>--%>
 <%--                <ul class="menu__third-level">

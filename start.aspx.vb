@@ -37,7 +37,7 @@ Partial Class cs_home
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
 
@@ -103,7 +103,7 @@ Partial Class cs_home
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
 
@@ -124,13 +124,13 @@ Partial Class cs_home
                     If strTody = dataread("VAN_DATE") And Left(Right(Trim(dataread("CUST_NM")), 5), 1) = "K" Then
                         '当日　本社　AF
                         lngHAf += 1
-                    ElseIf strTody = dataread("VAN_DATE") And Left(Right(trim(dataread("CUST_NM")), 5), 1) <> "K" Then
+                    ElseIf strTody = dataread("VAN_DATE") And Left(Right(Trim(dataread("CUST_NM")), 5), 1) <> "K" Then
                         '当日　本社　KD
                         lngHKd += 1
-                    ElseIf strTomm = dataread("VAN_DATE") And Left(Right(trim(dataread("CUST_NM")), 5), 1) = "K" Then
+                    ElseIf strTomm = dataread("VAN_DATE") And Left(Right(Trim(dataread("CUST_NM")), 5), 1) = "K" Then
                         '翌日　本社　AF
                         lngHAf2 += 1
-                    ElseIf strTomm = dataread("VAN_DATE") And Left(Right(trim(dataread("CUST_NM")), 5), 1) <> "K" Then
+                    ElseIf strTomm = dataread("VAN_DATE") And Left(Right(Trim(dataread("CUST_NM")), 5), 1) <> "K" Then
                         '翌日　本社　KD
                         lngHKd2 += 1
                     End If
@@ -464,7 +464,7 @@ Partial Class cs_home
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
 

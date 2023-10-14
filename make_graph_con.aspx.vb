@@ -41,7 +41,7 @@ Partial Class yuusen
         Dim t As List(Of trafficSourceData) = New List(Of trafficSourceData)()
         Dim arrColor As String() = New String() {"#231F20", "#FFC200", "#F44937", "#16F27E", "#FC9775", "#5A69A6"}
 
-        Using cn As SqlConnection = New SqlConnection("Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
+        Using cn As SqlConnection = New SqlConnection("Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager")
             Dim myQuery As String = "select ETD,AM,BORDER from T_EXL_GRAPH_CONNO "
             Dim cmd As SqlCommand = New SqlCommand()
             cmd.CommandText = myQuery

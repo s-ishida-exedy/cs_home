@@ -198,7 +198,7 @@
                 <asp:Button ID="Button5" runat="server" Text="前月分ﾀﾞｳﾝﾛｰﾄﾞ" Font-Size="Small" Width="100px" />&nbsp;
                 <asp:Button ID="Button4" runat="server" Text="新規登録" Font-Size="Small" Width="100px" />
                 &nbsp;
-                <asp:Label ID="Label1" runat="server" Text="DLﾌｧｲﾙﾊﾟｽ：\\kbhwpm01\exp\cs_home\files" Font-Size ="X-Small" ></asp:Label>
+                <asp:Label ID="Label1" runat="server" Text="DLﾌｧｲﾙﾊﾟｽ：\\k3hwpm01\exp\cs_home\files" Font-Size ="X-Small" ></asp:Label>
             </td>
             <td class="third-cell">
                 <a href="./start.aspx">ホームへ戻る</a>

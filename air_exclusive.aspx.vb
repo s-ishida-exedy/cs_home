@@ -68,10 +68,10 @@ Partial Class cs_home
         ConnectionString = "Data Source=KBHWPA85;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
         Dim cnn = New SqlConnection(ConnectionString)
 
-        'KBHWPM02用
+        'k3hwpm02用
         Dim ConnectionString2 As String = String.Empty
         'SQL Server認証
-        ConnectionString2 = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString2 = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         Dim cnn2 = New SqlConnection(ConnectionString2)
         Dim Command = cnn2.CreateCommand
 
@@ -192,7 +192,7 @@ Partial Class cs_home
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
 
@@ -375,7 +375,7 @@ Partial Class cs_home
 
         'SQL Server認証
         Dim ConnectionString As String = String.Empty
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         Dim cnn = New SqlConnection(ConnectionString)
         Dim Command = cnn.CreateCommand
 
@@ -509,10 +509,10 @@ Partial Class cs_home
             strValue = TextBox1.Text
         End If
 
-        'KBHWPM02用
+        'k3hwpm02用
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         Dim cnn = New SqlConnection(ConnectionString)
         Dim Command = cnn.CreateCommand
 
@@ -546,10 +546,10 @@ Partial Class cs_home
 
         strValue = DropDownList2.SelectedValue
 
-        'KBHWPM02用
+        'k3hwpm02用
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         Dim cnn = New SqlConnection(ConnectionString)
         Dim Command = cnn.CreateCommand
 
@@ -622,7 +622,7 @@ Partial Class cs_home
         '接続文字列の作成
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         'SqlConnectionクラスの新しいインスタンスを初期化
         Dim cnn = New SqlConnection(ConnectionString)
 

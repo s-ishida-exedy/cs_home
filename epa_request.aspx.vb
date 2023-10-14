@@ -28,7 +28,7 @@ Partial Class cs_home
             ' そうでない時処理
         Else
             Dim strUPrevUrl As String = Request.ServerVariables("HTTP_REFERER")
-            If strUPrevUrl = "http://kbhwpm01/EXP/cs_home/epa_request_detail.aspx" Or strUPrevUrl = "http://kbhwpm01/EXP/cs_home/epa_request_detail_ins.aspx" Then
+            If strUPrevUrl = "http://k3hwpm01/EXP/cs_home/epa_request_detail.aspx" Or strUPrevUrl = "http://k3hwpm01/EXP/cs_home/epa_request_detail_ins.aspx" Then
                 '遷移元ページがEPA発給申請管理明細の場合、セッションからチェック状況を取得する。
                 If Session("strEpaChk") = "True" Then
                     CheckBox1.Checked = True
@@ -142,10 +142,10 @@ Partial Class cs_home
         ConnectionString = "Data Source=KBHWPA85;Initial Catalog=BPTB001;User Id=ado_bptb001;Password=ado_bptb001"
         Dim cnn = New SqlConnection(ConnectionString)
 
-        'KBHWPM02用
+        'k3hwpm02用
         Dim ConnectionString2 As String = String.Empty
         'SQL Server認証
-        ConnectionString2 = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString2 = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         Dim cnn2 = New SqlConnection(ConnectionString2)
         Dim Command = cnn2.CreateCommand
 
@@ -300,7 +300,7 @@ Partial Class cs_home
 
         Dim ConnectionString As String = String.Empty
         'SQL Server認証
-        ConnectionString = "Data Source=kbhwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
+        ConnectionString = "Data Source=k3hwpm02;Initial Catalog=EXPDB;User Id=sa;Password=expdb-manager"
         Dim cnn = New SqlConnection(ConnectionString)
         Dim Command = cnn.CreateCommand
 

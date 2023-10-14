@@ -152,7 +152,7 @@
         </tr>
     </table>
 <div id="main2" style="width:100%;">
-    <img src="http://kbhwpm01/exp/display/booking_st.jpg" />
+    <img src="http://k3hwpm01/exp/display/booking_st.jpg" />
 </div>
 <!--/#main2-->
 
