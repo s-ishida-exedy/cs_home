@@ -1071,6 +1071,7 @@ Public Class DBAccess
         StrSQL = StrSQL & "  , CASE REMARKS "
         StrSQL = StrSQL & "     WHEN '01' THEN '対象' "
         StrSQL = StrSQL & "  END REMARKS "
+        StrSQL = StrSQL & "  , VACTC "
         StrSQL = StrSQL & "FROM M_EXL_ORIGIN_ITM ITM "
         StrSQL = StrSQL & "WHERE ITM.CODE LIKE @CODE "
         StrSQL = StrSQL & "AND CST_ITM_CODE LIKE @CST_ITM_CODE "

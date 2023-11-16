@@ -58,6 +58,7 @@ Partial Class cs_home
                 strSQL = strSQL & " ,ORI_JDG_NO  "
                 strSQL = strSQL & " ,HS_CODE  "
                 strSQL = strSQL & " ,REMARKS  "
+                strSQL = strSQL & " ,VACTC  "
                 strSQL = strSQL & "FROM M_EXL_ORIGIN_ITM ITM "
                 strSQL = strSQL & "WHERE UNF_CODE= " & strCode & " "
 
@@ -74,6 +75,7 @@ Partial Class cs_home
                     TextBox3.Text = dataread("ORI_ITM_NAME")
                     TextBox4.Text = dataread("ORI_JDG_NO")
                     TextBox5.Text = dataread("HS_CODE")
+                    TextBox6.Text = dataread("VACTC")
                     If dataread("REMARKS") = "" Then
                         DropDownList3.SelectedIndex = 0
                     Else
@@ -129,6 +131,7 @@ Partial Class cs_home
         Dim strEpaNm As String = Replace(TextBox3.Text, "'", "''")
         Dim strOriNo As String = TextBox4.Text
         Dim strHsCd As String = TextBox5.Text
+        Dim strVactc As String = TextBox6.Text
         Dim strRema As String = ""
         If DropDownList3.SelectedIndex = 1 Then
             strRema = "01"
@@ -144,6 +147,7 @@ Partial Class cs_home
             strSQL = strSQL & ",ORI_JDG_NO = '" & strOriNo & "' "
             strSQL = strSQL & ",HS_CODE = '" & strHsCd & "' "
             strSQL = strSQL & ",REMARKS = '" & strRema & "' "
+            strSQL = strSQL & ",VACTC = '" & strVactc & "' "
             strSQL = strSQL & "WHERE UNF_CODE = '" & strCode & "' "
 
         ElseIf strExecMode = "02" Then
@@ -164,7 +168,8 @@ Partial Class cs_home
             strSQL = strSQL & ",'" & strEpaNm & "' "
             strSQL = strSQL & ",'" & strOriNo & "' "
             strSQL = strSQL & ",'" & strHsCd & "' "
-            strSQL = strSQL & ",'" & strRema & "') "
+            strSQL = strSQL & ",'" & strRema & "' "
+            strSQL = strSQL & ",'" & strVactc & "') "
 
         End If
 

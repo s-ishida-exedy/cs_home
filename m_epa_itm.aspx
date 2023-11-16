@@ -219,6 +219,10 @@
             <HeaderStyle Width="100px" />
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
+            <asp:BoundField DataField="VACTC" HeaderText="VA/CTC" SortExpression="VACTC">
+            <HeaderStyle Width="100px" />
+            <ItemStyle HorizontalAlign="Center" />
+            </asp:BoundField>
         </Columns>
         <FooterStyle BackColor="#CCCC99" />
         <HeaderStyle BackColor="#ffffff" Font-Bold="True" ForeColor="White" />
@@ -264,6 +268,7 @@
   , CASE REMARKS
      WHEN '01' THEN '対象'
   END REMARKS
+  , VACTC
 FROM M_EXL_ORIGIN_ITM ITM
 ORDER BY ITM.CODE "></asp:SqlDataSource>
     

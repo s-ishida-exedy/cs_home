@@ -220,6 +220,10 @@
                         <asp:ListItem Value="01">対象</asp:ListItem>
                     </asp:DropDownList>
                 </td>
+                <th>VA/CTC</th>
+                <td>
+                    <asp:TextBox ID="TextBox6" runat="server" style="width:300px" class="txtb"></asp:TextBox>
+                </td>
             </tr>
 
         </table>
