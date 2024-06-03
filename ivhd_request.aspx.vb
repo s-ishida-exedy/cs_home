@@ -566,6 +566,7 @@ Partial Class cs_home
         strSQL = strSQL & "SELECT COUNT(*) AS RECCNT "
         strSQL = strSQL & "FROM T_EXL_IVHD_REQ "
         strSQL = strSQL & "WHERE IVNO = '" & strIV & "' "
+        strSQL = strSQL & "AND SNNO = '" & strSN & "' "
         strSQL = strSQL & "AND STATUS <> '9' "
 
         dbcmd = New SqlCommand(strSQL, cnn)
