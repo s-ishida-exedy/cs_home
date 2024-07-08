@@ -123,7 +123,7 @@ Partial Class cs_home
                 strSQL = strSQL & "            FROM V_T_INV_HD_TB b "
                 strSQL = strSQL & "         WHERE b.OLD_INVNO = '" & c & "' "
                 strSQL = strSQL & "         AND b.ORG_INVOICENO IS NULL  "
-                strSQL = strSQL & "         AND b.ALLOUTSTAMP IS NULL "
+                'strSQL = strSQL & "         AND b.ALLOUTSTAMP IS NULL "        '2024/07/08 深尾さんの依頼でコメント化
                 strSQL = strSQL & ")) IV "
 
                 'strSQL = strSQL & "SELECT "
