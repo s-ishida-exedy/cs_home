@@ -9,11 +9,11 @@ Partial Class cs_home
     Inherits System.Web.UI.Page
 
     '依頼時
-    Const strToAddressI As String = "r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
+    Const strToAddressI As String = "m-sonoda@exedy.com,n-takada@exedy.com,kz-yamashita@exedy.com,sa-sakamoto@exedy.com"
     Const strCcAddressI As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com,r-tsunaki@exedy.com"
     '回答時
     Const strToAddressK As String = "y-tanabe@exedy.com,j-amasaki@exedy.com,r-uchida@exedy.com,te-fujimoto@exedy.com,mt-hamada@exedy.com,d-fujikawa@exedy.com,r-tsunaki@exedy.com"
-    Const strCcAddressK As String = "r-fukao@exedy.com,y-nishiura@exedy.com,sa-sakamoto@exedy.com,k-tagawa@exedy.com"
+    Const strCcAddressK As String = "m-sonoda@exedy.com,n-takada@exedy.com,kz-yamashita@exedy.com,sa-sakamoto@exedy.com"
 
 
     'Const strToAddressI As String = "s-ishida@exedy.com"
